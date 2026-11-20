@@ -17,10 +17,10 @@ import type { CanonicalBuildingModel } from '@buildapp/model'
 import type { ElevationSketch } from '../../appearance/elevation-sketch.js'
 import { iou, isRaked } from './source-gate.js'
 import type { Box, Shape } from './source-gate.js'
-import { kindOfOpening, openingBoxes, shapeOfOpening, sideOfFacade } from './execute.js'
-import type { BindView, CorrectionProposal } from './execute.js'
+import { kindOfOpening, openingBoxes, OVERHANG_MIN_CHANGE_M, preferredView, shapeOfOpening, sideOfFacade, sideRoof } from './execute.js'
+import type { BindView, CorrectionProposal, Side } from './execute.js'
 
-export const SKETCH_PROPOSALS_VERSION = '1.1.0' as const
+export const SKETCH_PROPOSALS_VERSION = '1.3.0' as const
 /** Below this overlap a model opening and a sketch opening are two different openings. */
 export const PAIR_MIN_IOU = 0.1
 /** At or above this overlap (and the same kind) a pair agrees: nothing to propose. */
@@ -52,9 +52,10 @@ const KIND: Record<string, 'WINDOW' | 'DOOR' | 'GLAZED_DOOR' | 'GARAGE_DOOR' | u
 
 export type SketchProposalAccount = { sketchId: string; frameId: string; side?: string; proposals: CorrectionProposal[]; agreed: Array<{ sketchId: string; modelId: string; iou: number }>; skipped: Array<{ sketchId: string; why: string }> }
 
-export function proposalsFromSketch(s: ElevationSketch, facade: string, model: CanonicalBuildingModel, views: readonly BindView[], baseRevision: string): SketchProposalAccount {
-  const side = sideOfFacade(facade)
-  const view = views.find((v) => v.frameId === s.frameId && v.side === side) ?? views.find((v) => v.frameId === s.frameId)
+/** `sideOf` (v3.54.17 R3): the side this elevation shows when the orientation hypothesis says it is not its label's. */
+export function proposalsFromSketch(s: ElevationSketch, facade: string, model: CanonicalBuildingModel, views: readonly BindView[], baseRevision: string, sideOf?: Side): SketchProposalAccount {
+  const side = sideOf ?? sideOfFacade(facade)
+  const view = preferredView(views, s.frameId, side) ?? (sideOf ? undefined : preferredView(views, s.frameId))
   const out: SketchProposalAccount = { sketchId: s.sketchId, frameId: s.frameId, ...(side ? { side } : {}), proposals: [], agreed: [], skipped: [] }
   if (!view) {
     out.skipped.push({ sketchId: s.sketchId, why: 'its elevation is not registered to a side: nothing of it can be placed (an ASSIGN_VIEW could register it)' })
@@ -111,6 +112,18 @@ export function proposalsFromSketch(s: ElevationSketch, facade: string, model: C
   })
   for (const e of s.elements.filter((x) => x.kind === 'CHIMNEY')) {
     out.proposals.push({ proposalId: pid('chimney', e.id), baseRevision, operation: 'ADD_CHIMNEY', targetId: view.side, frameId: s.frameId, patch: { box: bbox(e.polygon) }, origin: 'SKETCH', uncertainty: 'MEDIUM', justification: `the sketch of this elevation draws a chimney (${e.id})` })
+  }
+  // v3.54.17 R3: the main roof's overhang — the drawn roof's ends past the drawn walls' outer corners, through the same
+  // registration (SET_ROOF_OVERHANG; the binder reads both ends, checks them and the walls against the side's)
+  const roof = sideRoof(model, view.side)
+  if (roof && s.roofs.length > 0 && s.walls.length > 0) {
+    const area = (poly: ReadonlyArray<readonly [number, number]>): number => Math.abs(poly.reduce((a, q, i) => a + q[0] * poly[(i + 1) % poly.length][1] - poly[(i + 1) % poly.length][0] * q[1], 0)) / 2
+    const main = [...s.roofs].sort((a, b) => area(b.polygon) - area(a.polygon))[0].polygon
+    const rx = main.map((q) => q[0])
+    const wx = s.walls.flatMap((w) => w.polygon.map((q) => q[0]))
+    const [roofLeftX, roofRightX, wallLeftX, wallRightX] = [Math.min(...rx), Math.max(...rx), Math.min(...wx), Math.max(...wx)]
+    const drawn = ((wallLeftX - roofLeftX + roofRightX - wallRightX) / 2) * view.projection.mpp
+    if (Math.abs(drawn - roof.overhang) >= OVERHANG_MIN_CHANGE_M) out.proposals.push({ proposalId: pid('overhang', roof.id), baseRevision, operation: 'SET_ROOF_OVERHANG', targetId: roof.id, frameId: s.frameId, patch: { roofLeftX, roofRightX, wallLeftX, wallRightX }, origin: 'SKETCH', uncertainty: 'MEDIUM', justification: `the sketch of this elevation draws the roof ${(((wallLeftX - roofLeftX) * view.projection.mpp)).toFixed(2)} / ${(((roofRightX - wallRightX) * view.projection.mpp)).toFixed(2)} m past the walls; the model's ${roof.id} has ${roof.overhang.toFixed(2)} m` })
   }
   for (const e of s.elements.filter((x) => x.kind !== 'CHIMNEY' && x.kind !== 'GUTTER_DOWNPIPE')) out.skipped.push({ sketchId: e.id, why: `${e.kind}: UNSUPPORTED_OPERATION — no consumer of this element in registry 1.0.0 (named, not corrected)` })
   return out

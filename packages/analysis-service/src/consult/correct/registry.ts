@@ -7,9 +7,9 @@
  * change is NOT offered as an operation: the reviewer may still report it as a defect (`UNSUPPORTED_FAMILIES`), and the
  * record says so with the reason — it never reads as something the system can correct.
  */
-export const CORRECTION_REGISTRY_VERSION = '1.2.0' as const
+export const CORRECTION_REGISTRY_VERSION = '1.3.0' as const
 
-export const PATCH_OPERATIONS = ['ASSIGN_VIEW', 'SET_PARAMETER', 'ADD_OPENING', 'UPDATE_OPENING', 'REMOVE_OPENING', 'ADD_CHIMNEY', 'UPDATE_CHIMNEY', 'SET_FINISH', 'ROOF_FEATURE', 'BUILD_MASSING', 'SET_ROOF', 'SET_OUTLINE'] as const
+export const PATCH_OPERATIONS = ['ASSIGN_VIEW', 'SET_PARAMETER', 'ADD_OPENING', 'UPDATE_OPENING', 'REMOVE_OPENING', 'ADD_CHIMNEY', 'UPDATE_CHIMNEY', 'SET_FINISH', 'ROOF_FEATURE', 'BUILD_MASSING', 'SET_ROOF', 'SET_OUTLINE', 'SET_ROOF_OVERHANG'] as const
 export type PatchOperation = (typeof PATCH_OPERATIONS)[number]
 
 export const OPENING_PATCH_KINDS = ['WINDOW', 'DOOR', 'GLAZED_DOOR', 'GARAGE_DOOR'] as const
@@ -135,6 +135,14 @@ export const CAPABILITIES: Record<PatchOperation, Capability> = {
     params: ['picture', 'wallLeftX', 'wallRightX'],
     prompt: "SET_OUTLINE — a body is longer or shorter along one side than the source elevation draws it: targetId (a wall of that body from the MODEL ELEMENT INDEX), picture (a SOURCE elevation of that side), wallLeftX and wallRightX (where that body's walls end in the picture).",
   },
+  SET_ROOF_OVERHANG: {
+    op: 'SET_ROOF_OVERHANG',
+    family: 'ROOF_FORM',
+    consumer: "commands/setProperty on the roof's overhang (the eaves and the verges stand that far past the walls)",
+    measure: "the overhang each end of the drawn roof stands past the drawn walls at the elevation's registration (both ends, ≤ 1.0 m, within 0.4 m of each other); the walls at that registration on the side's walls; the roof's overhang set to their mean",
+    params: ['picture', 'roofLeftX', 'roofRightX', 'wallLeftX', 'wallRightX'],
+    prompt: "SET_ROOF_OVERHANG — the roof stands past the walls in the SOURCE elevation (eaves or verges) by a different amount than in the model: targetId (the roof id from the MODEL ELEMENT INDEX), picture (a SOURCE elevation), roofLeftX/roofRightX (the drawn roof's two ends) and wallLeftX/wallRightX (the walls' two outer corners under it)."
+  },
 }
 
 export const isPatchOperation = (op: string): op is PatchOperation => (PATCH_OPERATIONS as readonly string[]).includes(op)
@@ -177,6 +185,8 @@ export const PATCH_SCHEMA = {
     host: { type: 'string' },
     material: { type: 'string', enum: [...FINISH_CLASSES] },
     roofKind: { type: 'string', enum: ['GABLE', 'FLAT'] },
+    roofLeftX: { type: 'number' },
+    roofRightX: { type: 'number' },
     roofPolygon: { type: 'array', items: { type: 'array', items: { type: 'number' } } },
   },
   additionalProperties: false,
@@ -206,6 +216,9 @@ export const DEFECT_SCHEMA = {
 } as const
 
 export type PatchFields = {
+  /** v3.54.17 R3: SET_ROOF_OVERHANG — the drawn roof's two ends, in the picture's pixels. */
+  roofLeftX?: number
+  roofRightX?: number
   /** v3.54.17 R2: SET_ROOF — the wall ends are the body's (BODY) or the whole house's on that side (HOUSE). */
   extent?: 'BODY' | 'HOUSE'
   picture?: number

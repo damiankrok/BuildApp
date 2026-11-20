@@ -20,7 +20,7 @@ import type { ModelViewPicture } from './model-views.js'
 
 export const ELEMENT_INDEX_VERSION = '1.0.0' as const
 /** The operations whose targetId must be a listed element (or a side / WHOLE where the registry says so). */
-export const LISTED_TARGET_OPERATIONS = ['UPDATE_OPENING', 'REMOVE_OPENING', 'UPDATE_CHIMNEY', 'SET_PARAMETER', 'SET_ROOF', 'SET_OUTLINE'] as const
+export const LISTED_TARGET_OPERATIONS = ['UPDATE_OPENING', 'REMOVE_OPENING', 'UPDATE_CHIMNEY', 'SET_PARAMETER', 'SET_ROOF', 'SET_OUTLINE', 'SET_ROOF_OVERHANG'] as const
 
 export type IndexedElement = {
   id: string

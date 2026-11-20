@@ -36,10 +36,10 @@ import type { PatchFields, PatchOperation } from './registry.js'
 import { compareFill, compareHypotheses, iou, isRaked, supportOf, SOURCE_GATE_VERSION } from './source-gate.js'
 import type { Box, FillVerdict, HypothesisVerdict, Shape } from './source-gate.js'
 import { resolveWitness, WITNESS_RESOLVER_VERSION } from './resolve.js'
-import { bindBuildMassing, bindSetOutline, bindSetRoof } from '../massing/ops.js'
+import { bindBuildMassing, bindSetOutline, bindSetRoof, MAX_OVERHANG_M } from '../massing/ops.js'
 import type { MassingObservations } from '../massing/ops.js'
 
-export const CORRECTION_EXECUTOR_VERSION = '1.2.0' as const
+export const CORRECTION_EXECUTOR_VERSION = '1.3.0' as const
 
 export type Side = 'FRONT' | 'RIGHT' | 'REAR' | 'LEFT'
 export const SIDES: readonly Side[] = ['FRONT', 'RIGHT', 'REAR', 'LEFT']
@@ -53,7 +53,9 @@ export type BindView = {
   heights: boolean
   /** v3.54.16: the vertical is anchored at the apex on the ridge datum — heights near the roof (a stack's top) are read even where low ones were refused. */
   roofAnchored?: boolean
-  origin: 'ANALYZER' | 'ASSIGNED'
+  /** v3.54.17 R3: SKETCH — registered from the provider's sketch of that elevation (its wall ends against the plan's side, its
+   *  ground row behind whatever stands in front of the house), accepted only when the model's eaves land on the sketch's. */
+  origin: 'ANALYZER' | 'ASSIGNED' | 'SKETCH'
   alongErrorM: number
   heightErrorM: number
 }
@@ -310,7 +312,14 @@ const finiteBox = (b: Box | undefined): b is Box => !!b && [b.x0, b.y0, b.x1, b.
 const inPicture = (pic: BindPicture, b: Box): boolean => b.x0 >= -2 && b.y0 >= -2 && b.x1 <= pic.raster.width + 2 && b.y1 <= pic.raster.height + 2
 
 export function viewOf(ctx: Ctx, pic: BindPicture): BindView | undefined {
-  return ctx.views.find((v) => v.frameId === pic.frameId && v.origin === 'ASSIGNED') ?? ctx.views.find((v) => v.frameId === pic.frameId)
+  // a transaction's own registration first; then the analyzer's when its vertical passed the analyzer's own check; then
+  // the sketch's (checked by the eaves); the analyzer's without heights last (it failed its own vertical check)
+  return preferredView(ctx.views, pic.frameId)
+}
+/** v3.54.17 R3: the registration a frame is placed through, by rank (optionally on one side only). */
+export function preferredView(views: readonly BindView[], frameId: string, side?: Side): BindView | undefined {
+  const of = views.filter((v) => v.frameId === frameId && (!side || v.side === side))
+  return of.find((v) => v.origin === 'ASSIGNED') ?? of.find((v) => v.origin === 'ANALYZER' && v.heights) ?? of.find((v) => v.origin === 'SKETCH') ?? of[0]
 }
 
 /** A source elevation picture and the registration that places it, or why the proposal cannot be placed through it. */
@@ -669,6 +678,156 @@ function bindParameter(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
   return { commands: [{ type: 'setProperty', targetId: roof.id, property: 'pitchDeg', value: r6(v) }], allowed: [`roofs:${roof.id}`], expect: { kind: 'PARAM', targetId: roof.id, property: 'pitchDeg', value: r6(v) }, record: { witness: bw.resolution, bound: { frameId: witness.frameId, ids: [roof.id], values: { pitchDeg: r6(v) } }, source } }
 }
 
+/**
+ * v3.54.17 R3: the height of the eaves seen on `side` — where the main pitched roof over that side's walls begins (the
+ * lowest edge of its slopes, the same height at a gable end's corners). Before R3 this was the tallest wall on the side,
+ * which on a gable-walled storey is the gable's top: a single-storey house with a 5.9 m gable wall then "had" its eaves at
+ * 5.9 m and every registration of its true 2.8 m eaves was refused as the other axis. Flat roofs only: the walls' tops.
+ */
+export function sideEavesM(m: CanonicalBuildingModel, side: Side, range?: { lo: number; hi: number }): number {
+  const r = range ?? sideRange(m, side)
+  const ax = alongAxis(side)
+  const pitched = m.roofs.filter((x) => x.kind !== 'FLAT' && x.pitchDeg > 0)
+  const over = pitched.map((x) => {
+    const f = x.footprint
+    const [lo, hi] = ax === 'x' ? [f.minX, f.maxX] : [f.minZ, f.maxZ]
+    const share = r ? Math.max(0, Math.min(hi, r.hi) - Math.max(lo, r.lo)) : hi - lo
+    return { x, share, area: (f.maxX - f.minX) * (f.maxZ - f.minZ) }
+  }).filter((o) => o.share > 0).sort((a, b) => b.share - a.share || b.area - a.area)[0]
+  if (over) return levelOf(m, over.x.levelId).elevation + over.x.eaveOffset
+  const walls = exteriorWalls(m).filter((w) => sideOfWall(m, w) === side)
+  return Math.max(...walls.map((w) => { const lv = levelOf(m, w.levelId); return lv.elevation + w.baseOffset + (w.topProfile ? lv.height : w.height) }))
+}
+
+/** v3.54.17 R3: the pitched roof over `side`'s walls (the most of its run, then the largest) — the main roof seen there. */
+export function sideRoof(m: CanonicalBuildingModel, side: Side, range?: { lo: number; hi: number }): CanonicalBuildingModel['roofs'][number] | undefined {
+  const r = range ?? sideRange(m, side)
+  const ax = alongAxis(side)
+  return m.roofs.filter((x) => x.kind !== 'FLAT' && x.pitchDeg > 0).map((x) => {
+    const f = x.footprint
+    const [lo, hi] = ax === 'x' ? [f.minX, f.maxX] : [f.minZ, f.maxZ]
+    return { x, share: r ? Math.max(0, Math.min(hi, r.hi) - Math.max(lo, r.lo)) : hi - lo, area: (f.maxX - f.minX) * (f.maxZ - f.minZ) }
+  }).filter((o) => o.share > 0).sort((a, b) => b.share - a.share || b.area - a.area)[0]?.x
+}
+
+/** v3.54.17 R3: the most the two ends of one drawn roof may differ in overhang before it is not read as one overhang. */
+export const OVERHANG_END_SPREAD_M = 0.4
+/** A difference from the model's overhang below this is the drawing's resolution, not a correction. */
+export const OVERHANG_MIN_CHANGE_M = 0.1
+
+/**
+ * SET_ROOF_OVERHANG: how far the roof stands past the walls, read on a source elevation through its registration — the
+ * drawn roof's two ends against the drawn walls' two outer corners. Before R3 every roof the analyzer built or set had no
+ * overhang at all (createRoof overhang 0): the eaves and verges ended flush with the walls, where the drawings show the
+ * roof standing out. Both ends are read; each must be ≥ 0 (a drawn roof narrower than its walls is not an overhang) and
+ * ≤ MAX_OVERHANG_M, and they must agree within OVERHANG_END_SPREAD_M; the walls must land on the side's walls at that
+ * registration (the drawing's walls are the model's). The roof takes their mean (one overhang per roof in the model).
+ */
+function bindOverhang(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
+  const m = ctx.model
+  const f = p.patch ?? {}
+  const roof = m.roofs.find((r) => r.id === p.targetId)
+  if (!roof) return { status: 'INVALID', code: 'UNKNOWN_TARGET', why: `${p.targetId} is not a roof of this revision` }
+  const xs = [f.roofLeftX, f.roofRightX, f.wallLeftX, f.wallRightX]
+  if (!xs.every((v) => typeof v === 'number' && Number.isFinite(v))) return { status: 'INVALID', code: 'NO_ANCHORS', why: 'SET_ROOF_OVERHANG states roofLeftX, roofRightX, wallLeftX and wallRightX' }
+  const at = elevationOf(ctx, p, f.picture, 'ALONG')
+  if ('status' in at) return at
+  const { pic, view } = at
+  const [rl, rr, wl, wr] = (xs as number[]).map((x) => toFrameX(pic, p, x))
+  if (!(rr > rl && wr > wl)) return { status: 'INVALID', code: 'NO_ANCHORS', why: 'the roof\'s and the walls\' ends are not left before right' }
+  const pr = view.projection
+  const range = sideRange(m, view.side)
+  if (!range) return { status: 'INVALID', code: 'NO_SUCH_SIDE', why: `the model has no exterior wall on the ${view.side.toLowerCase()} side` }
+  const wa = [alongOf(pr, wl), alongOf(pr, wr)].sort((a, b) => a - b)
+  const tolWall = Math.max(0.15, 3 * view.alongErrorM)
+  if (Math.abs(wa[0] - range.lo) > tolWall || Math.abs(wa[1] - range.hi) > tolWall) return { status: 'REJECTED_BY_SOURCE', code: 'WALLS_NOT_THE_SIDE', why: `at this registration the drawn walls stand ${wa[0].toFixed(2)}..${wa[1].toFixed(2)} m along the ${view.side.toLowerCase()} side, the model's ${range.lo.toFixed(2)}..${range.hi.toFixed(2)} m (tolerance ${tolWall.toFixed(2)} m): the overhang would be measured from other walls` }
+  const left = (wl - rl) * pr.mpp
+  const right = (rr - wr) * pr.mpp
+  const record = { bound: { frameId: pic.frameId, ids: [roof.id], values: { leftM: r6(left), rightM: r6(right) } }, source: { frameId: pic.frameId, sourceByteHash: pic.sourceByteHash } }
+  // a drawn end a pixel or two inside the wall corner is the drawing's line width, not a negative overhang
+  const noise = Math.max(0.03, 2 * pr.mpp)
+  if (left < -noise || right < -noise) return { status: 'REJECTED_BY_SOURCE', code: 'ROOF_NARROWER_THAN_WALLS', why: `the drawn roof ends ${left.toFixed(2)} / ${right.toFixed(2)} m past the walls: narrower than the walls is not an overhang`, record }
+  if (Math.max(left, right) > MAX_OVERHANG_M) return { status: 'NEEDS_EVIDENCE', code: 'IMPLAUSIBLE_OVERHANG', why: `the drawn roof stands ${left.toFixed(2)} / ${right.toFixed(2)} m past the walls; more than ${MAX_OVERHANG_M} m is a canopy or another body's roof, not this roof's overhang`, record }
+  const cm = (v: number): number => Math.round(Math.max(0, v) * 100) / 100
+  const ax = alongAxis(view.side)
+  const ridgeAx = roof.ridgeAxis === 'Z' ? 'z' : 'x'
+  const f0 = roof.footprint
+  const [fLo, fHi] = ax === 'x' ? [f0.minX, f0.maxX] : [f0.minZ, f0.maxZ]
+  if (roof.kind !== 'FLAT' && ax === ridgeAx) {
+    // an eaves-side elevation: the roof's two ends past the walls are its VERGES, read end by end (they may differ). The
+    // roof is lengthened along its ridge to them (its eaves, ridge and slopes are unchanged by a longer ridge); the
+    // all-round overhang already in the model counts towards them.
+    const tolEnd = Math.max(0.15, 3 * view.alongErrorM)
+    if (fLo > range.lo + tolEnd) return { status: 'NEEDS_EVIDENCE', code: 'ROOF_NOT_AT_SIDE_ENDS', why: `${roof.id} does not reach the ${view.side.toLowerCase()} side's ends (${fLo.toFixed(2)}..${fHi.toFixed(2)} vs ${range.lo.toFixed(2)}..${range.hi.toFixed(2)} m): its verges are not the drawn roof's ends`, record }
+    if (fHi < range.hi - tolEnd) return { status: 'NEEDS_EVIDENCE', code: 'ROOF_NOT_AT_SIDE_ENDS', why: `${roof.id} does not reach the ${view.side.toLowerCase()} side's ends (${fLo.toFixed(2)}..${fHi.toFixed(2)} vs ${range.lo.toFixed(2)}..${range.hi.toFixed(2)} m): its verges are not the drawn roof's ends`, record }
+    // which drawn end is the low end of the axis: the registration's own sign
+    const [vLo, vHi] = pr.alongSign > 0 ? [left, right] : [right, left]
+    const lo = r6(range.lo - Math.max(0, cm(vLo) - roof.overhang))
+    const hi = r6(range.hi + Math.max(0, cm(vHi) - roof.overhang))
+    if (Math.abs(lo - fLo) < OVERHANG_MIN_CHANGE_M && Math.abs(hi - fHi) < OVERHANG_MIN_CHANGE_M) return { status: 'NO_EFFECT', code: 'OVERHANG_AGREES', why: `the drawn verges ${cm(vLo).toFixed(2)} / ${cm(vHi).toFixed(2)} m and the model's agree within ${OVERHANG_MIN_CHANGE_M} m`, record }
+    const footprint = ax === 'x' ? { ...f0, minX: lo, maxX: hi } : { ...f0, minZ: lo, maxZ: hi }
+    const measure = (working: CanonicalBuildingModel): { failure?: string; measure: NonNullable<PatchRecord['measure']> } => {
+      const r = working.roofs.find((x) => x.id === roof.id)
+      const got = r ? (ax === 'x' ? [r.footprint.minX, r.footprint.maxX] : [r.footprint.minZ, r.footprint.maxZ]) : undefined
+      const ok = !!got && Math.abs(got[0] - lo) < 0.005 && Math.abs(got[1] - hi) < 0.005
+      return { ...(ok ? {} : { failure: `${roof.id}'s ends are not at ${lo}..${hi}` }), measure: { sourceVerified: null, why: `verges ${cm(vLo).toFixed(2)} / ${cm(vHi).toFixed(2)} m past the ${view.side.toLowerCase()} side's walls: ${roof.id} runs ${lo.toFixed(2)}..${hi.toFixed(2)} m along its ridge` } }
+    }
+    return { commands: [{ type: 'resizeFeature', targetId: roof.id, footprint }], allowed: [`roofs:${roof.id}`], expect: { kind: 'CUSTOM', measure }, record: { ...record, bound: { ...record.bound, values: { ...record.bound.values, vergeLowM: cm(vLo), vergeHighM: cm(vHi), footprintLo: lo, footprintHi: hi } } } }
+  }
+  // a gable-end elevation (or a flat roof): the two ends past the walls are the EAVES overhang, one value for the roof
+  if (Math.abs(left - right) > OVERHANG_END_SPREAD_M) return { status: 'NEEDS_EVIDENCE', code: 'ASYMMETRIC_OVERHANG', why: `the two eaves stand ${left.toFixed(2)} and ${right.toFixed(2)} m past the walls: more than ${OVERHANG_END_SPREAD_M} m apart, not one overhang (named, not averaged)`, record }
+  const v = cm((left + right) / 2)
+  if (Math.abs(v - roof.overhang) < OVERHANG_MIN_CHANGE_M) return { status: 'NO_EFFECT', code: 'OVERHANG_AGREES', why: `the drawing's ${v.toFixed(2)} m and the model's ${roof.overhang.toFixed(2)} m agree within ${OVERHANG_MIN_CHANGE_M} m`, record }
+  // the overhang is all round: verges a lengthened ridge already gives keep their reach (the ridge shortened by the change)
+  const cmds: BuildingCommand[] = [{ type: 'setProperty', targetId: roof.id, property: 'overhang', value: v }]
+  if (roof.kind !== 'FLAT') {
+    const rr0 = sideRange(m, ridgeAx === 'x' ? 'FRONT' : 'RIGHT')
+    const [gLo, gHi] = ridgeAx === 'x' ? [f0.minX, f0.maxX] : [f0.minZ, f0.maxZ]
+    if (rr0 && (gLo < rr0.lo - 1e-6 || gHi > rr0.hi + 1e-6)) {
+      const lo = r6(Math.min(rr0.lo, gLo + (v - roof.overhang)))
+      const hi = r6(Math.max(rr0.hi, gHi - (v - roof.overhang)))
+      cmds.push({ type: 'resizeFeature', targetId: roof.id, footprint: ridgeAx === 'x' ? { ...f0, minX: lo, maxX: hi } : { ...f0, minZ: lo, maxZ: hi } })
+    }
+  }
+  return { commands: cmds, allowed: [`roofs:${roof.id}`], expect: { kind: 'PARAM', targetId: roof.id, property: 'overhang', value: v }, record: { ...record, bound: { ...record.bound, values: { ...record.bound.values, overhangM: v } } } }
+}
+
+/** The sketch's anchors of one elevation, in that elevation's frame pixels (the provider's typed contours). */
+export type SketchAnchors = { frameId: string; side: Side; wallLeftX: number; wallRightX: number; groundY: number; eavesY: number; /** the drawn roof's top row (its ridge or apex) */ ridgeY?: number }
+
+/**
+ * v3.54.17 R3: a source elevation registered from the provider's sketch of it — the same ASSIGN_VIEW binder, checks and
+ * refusals as a reviewer's (mirror gate, axis by the eaves), labelled SKETCH. The sketch's ground row is drawn behind what
+ * stands in front of the house (pots, bins, furniture hide the drawn ground in the original, which is what fails the
+ * analyzer's own vertical check), and its wall ends span the side the plan measures; the vertical is the horizontal scale
+ * (isotropic drawing). The model's eaves must land on the sketch's eaves row or nothing is registered.
+ */
+export function registerFromSketch(ctx: Ctx, a: SketchAnchors): { view: BindView; why: string } | Refusal {
+  const p: CorrectionProposal = { proposalId: `sketch-view:${a.frameId}`, baseRevision: modelRevision(ctx.model), operation: 'ASSIGN_VIEW', targetId: a.side, frameId: a.frameId, patch: { side: a.side, wallLeftX: a.wallLeftX, wallRightX: a.wallRightX, groundY: a.groundY, eavesY: a.eavesY }, origin: 'SKETCH', uncertainty: 'MEDIUM', justification: 'the sketch of this elevation: wall ends, ground row and eaves row' }
+  const b = bindView(ctx, p)
+  if (!('status' in b)) return { view: { ...b.view, origin: 'SKETCH' }, why: `${b.why}; model eaves on the sketch's eaves row (${String(b.record.bound?.values?.eavesRowModel)} vs ${String(b.record.bound?.values?.eavesRowDrawn)})` }
+  // an overhang hides the top of the walls under its soffit and fascia: the drawn walls then stop below the model's eaves.
+  // The ridge is hidden by nothing — the registration stands when the model's ridge lands on the drawn roof's top instead
+  if (b.code !== 'AXIS_MISMATCH' || a.ridgeY === undefined) return b
+  const ridgeM = sideRidgeM(ctx.model, a.side)
+  if (ridgeM === undefined) return b
+  const noEaves = bindView(ctx, { ...p, patch: { ...p.patch, eavesY: undefined } })
+  if ('status' in noEaves) return noEaves
+  const got = pyOf(noEaves.view.projection, ridgeM)
+  const tol = Math.max(3, 0.05 * Math.abs(a.groundY - a.ridgeY))
+  if (Math.abs(got - a.ridgeY) > tol) return { ...b, why: `${b.why}; nor does the model's ridge at ${ridgeM.toFixed(2)} m (row ${got.toFixed(0)}) land on the drawn roof's top (row ${a.ridgeY.toFixed(0)}, tolerance ${tol.toFixed(0)} px)` }
+  return { view: { ...noEaves.view, origin: 'SKETCH' }, why: `${noEaves.why}; the model's ridge on the drawn roof's top (row ${got.toFixed(0)} vs ${a.ridgeY.toFixed(0)}) — its eaves row was not (an overhang hides the walls' top): ${b.why}`.slice(0, 600) }
+}
+
+/** v3.54.17 R3: the top of the main pitched roof over `side` (its ridge, the slope's top surface), above ±0.00. */
+export function sideRidgeM(m: CanonicalBuildingModel, side: Side): number | undefined {
+  const r = sideRoof(m, side)
+  if (!r || r.kind !== 'GABLE') return undefined
+  const f = r.footprint
+  const half = (r.ridgeAxis === 'Z' ? f.maxX - f.minX : f.maxZ - f.minZ) / 2
+  return levelOf(m, r.levelId).elevation + r.eaveOffset + half * Math.tan((r.pitchDeg * Math.PI) / 180)
+}
+
 /** ASSIGN_VIEW: a registration of a source elevation for one side, checked against the side's walls before it is used. */
 function bindView(ctx: Ctx, p: CorrectionProposal): { view: BindView; record: Pick<PatchRecord, 'bound' | 'source' | 'gate'>; why: string } | Refusal {
   const m = ctx.model
@@ -713,15 +872,16 @@ function bindView(ctx: Ctx, p: CorrectionProposal): { view: BindView; record: Pi
   // the axis, measured: at the scale this side's walled length gives the picture, the model's eaves (the side walls'
   // storey top) must land on the eaves row the proposal names — a drawing of the other axis has the other length
   if (typeof f.eavesY === 'number') {
-    const sideWalls = exteriorWalls(m).filter((w) => sideOfWall(m, w) === side)
-    const eavesM = Math.max(...sideWalls.map((w) => { const lv = levelOf(m, w.levelId); return lv.elevation + w.baseOffset + (w.topProfile ? lv.height : w.height) }))
+    const eavesM = sideEavesM(m, side, range)
     const want = toFrameY(pic, p, f.eavesY)
     const got = pyOf(projection, eavesM)
     const tol = Math.max(3, 0.05 * Math.abs(ground - want))
     record.bound.values = { ...record.bound.values, eavesRowModel: r6(got), eavesRowDrawn: r6(want) }
     if (Math.abs(got - want) > tol) return { status: 'REJECTED_BY_SOURCE', code: 'AXIS_MISMATCH', why: `at ${mpp.toFixed(5)} m/px (the ${side.toLowerCase()} side's ${(range.hi - range.lo).toFixed(2)} m across the drawn walls) the model's eaves at ${eavesM.toFixed(2)} m land on row ${got.toFixed(0)}, the drawing's on row ${want.toFixed(0)} (tolerance ${tol.toFixed(0)} px): the picture is not that side at that scale`, record: { ...record, gate } }
   }
-  if (held && held.side !== side && held.origin === 'ANALYZER' && gate.winner !== 'PROPOSED') return { status: 'NEEDS_EVIDENCE', code: 'VIEW_CONFLICT', why: `the analyzer registered picture ${pic.n} as the ${held.side.toLowerCase()} side; the source does not show the proposed side better (${gate.why})`, record: { ...record, gate } }
+  // v3.54.17 R3: the analyzer's registration outranks another side only when its own vertical check passed — one whose
+  // ground missed the terrain datum (heights: false) is the registration that failed, not a contrary witness
+  if (held && held.side !== side && held.origin === 'ANALYZER' && held.heights && gate.winner !== 'PROPOSED') return { status: 'NEEDS_EVIDENCE', code: 'VIEW_CONFLICT', why: `the analyzer registered picture ${pic.n} as the ${held.side.toLowerCase()} side; the source does not show the proposed side better (${gate.why})`, record: { ...record, gate } }
   return { view, record: { ...record, gate }, why: `picture ${pic.n} registered as the ${side.toLowerCase()} side at ${mpp.toFixed(5)} m/px${f.mirrored ? ', mirrored' : ''}; ${gate.why}` }
 }
 
@@ -745,21 +905,28 @@ export type ExecuteInput = {
    * as STALE_TARGET, not as a made-up id.
    */
   retiredIds?: ReadonlyMap<string, string>
+  /**
+   * v3.54.17 R3: registrations that are a function of the model (the sketch's, checked by the model's eaves): derived again
+   * on the working model before each transaction, so a roof committed earlier in the same run registers the views the
+   * openings and stacks after it are placed through. `held` are the other registrations at that moment.
+   */
+  derivedViews?: (model: CanonicalBuildingModel, held: readonly BindView[]) => BindView[]
 }
 
 /** v3.54.17 R2: the operations whose targetId must name an element of the model (the element index's ids). */
-const LISTED_TARGET_OPS = new Set(['UPDATE_OPENING', 'REMOVE_OPENING', 'UPDATE_CHIMNEY', 'SET_PARAMETER', 'SET_ROOF', 'SET_OUTLINE'])
+const LISTED_TARGET_OPS = new Set(['UPDATE_OPENING', 'REMOVE_OPENING', 'UPDATE_CHIMNEY', 'SET_PARAMETER', 'SET_ROOF', 'SET_OUTLINE', 'SET_ROOF_OVERHANG'])
 /** Any element of the model by its id (collections the operations edit, and the wall rings a body is named by). */
 export function elementExists(m: CanonicalBuildingModel, id: string): boolean {
   const colls = [m.levels, m.walls, m.wallRings, m.openings, m.roofs, m.roofPlanes, m.chimneys] as ReadonlyArray<ReadonlyArray<{ id: string }>>
   return colls.some((c) => c.some((x) => x.id === id))
 }
 
-const closureErrors = (model: CanonicalBuildingModel): { n: number; scene?: ReturnType<typeof compileBuilding>; failed?: string } => {
+const closureErrors = (model: CanonicalBuildingModel): { n: number; scene?: ReturnType<typeof compileBuilding>; failed?: string; named?: string[] } => {
   try {
     const scene = compileBuilding(model)
     const c = geometryClosureAudit(model, scene)
-    return { n: c.findings.filter((x) => x.scope === 'EXTERIOR' && x.severity === 'ERROR').length, scene }
+    const errs = c.findings.filter((x) => x.scope === 'EXTERIOR' && x.severity === 'ERROR')
+    return { n: errs.length, scene, named: errs.map((x) => { return `${x.code} ${x.objects.join('+')}` }) }
   } catch (e) {
     return { n: Number.POSITIVE_INFINITY, failed: (e as Error).message.slice(0, 200) }
   }
@@ -824,7 +991,8 @@ export function executeCorrections(input: ExecuteInput): CorrectionOutcome {
     const before = closureErrors(model)
     const digestsBefore = objectDigests(model)
     let working = model
-    let workingViews = views
+    const heldNow = input.derivedViews ? views.filter((v) => v.origin !== 'SKETCH') : views
+    let workingViews = input.derivedViews ? [...heldNow, ...input.derivedViews(model, heldNow)] : views
     const pending: Array<{ p: CorrectionProposal; bound?: Bound; view?: BindView; extra: Partial<PatchRecord> }> = []
     let refusal: { p: CorrectionProposal; r: Refusal } | undefined
     for (const p of ordered) {
@@ -840,7 +1008,7 @@ export function executeCorrections(input: ExecuteInput): CorrectionOutcome {
         continue
       }
       const op = p.operation as PatchOperation
-      const b = op === 'SET_FINISH' ? bindFinish(ctx, p) : op === 'SET_PARAMETER' ? bindParameter(ctx, p) : op === 'ADD_CHIMNEY' || op === 'UPDATE_CHIMNEY' ? bindChimney(ctx, p) : op === 'BUILD_MASSING' ? bindBuildMassing(ctx, p) : op === 'SET_ROOF' ? bindSetRoof(ctx, p) : op === 'SET_OUTLINE' ? bindSetOutline(ctx, p) : bindOpening(ctx, p)
+      const b = op === 'SET_FINISH' ? bindFinish(ctx, p) : op === 'SET_PARAMETER' ? bindParameter(ctx, p) : op === 'ADD_CHIMNEY' || op === 'UPDATE_CHIMNEY' ? bindChimney(ctx, p) : op === 'BUILD_MASSING' ? bindBuildMassing(ctx, p) : op === 'SET_ROOF' ? bindSetRoof(ctx, p) : op === 'SET_OUTLINE' ? bindSetOutline(ctx, p) : op === 'SET_ROOF_OVERHANG' ? bindOverhang(ctx, p) : bindOpening(ctx, p)
       if ('status' in b) {
         refusal = { p, r: b }
         break
@@ -896,7 +1064,7 @@ export function executeCorrections(input: ExecuteInput): CorrectionOutcome {
     const measures = new Map<string, PatchRecord['measure']>()
     let failure: string | undefined
     if (after.failed) failure = `the candidate does not compile: ${after.failed}`
-    else if (after.n > before.n) failure = `the candidate has ${after.n - before.n} more exterior joint error(s) than the model before`
+    else if (after.n > before.n) failure = `the candidate has ${after.n - before.n} more exterior joint error(s) than the model before: ${(after.named ?? []).filter((x) => !(before.named ?? []).includes(x)).slice(0, 4).join('; ')}`
     else if (collateral.length > 0) failure = `the transaction changed ${collateral.slice(0, 6).join(', ')}, which it is not about`
     for (const x of pending) {
       if (failure || !x.bound) continue
@@ -975,3 +1143,6 @@ export function viewsOfRun(views: ReadonlyArray<{ facade: string; frameId: strin
     return side ? [{ side, frameId: v.frameId, projection: { ...v.projection }, heights: v.heights, ...(v.registration === 'SILHOUETTE' ? { roofAnchored: true } : {}), origin: 'ANALYZER' as const, alongErrorM: v.alongErrorM, heightErrorM: v.heightErrorM }] : []
   })
 }
+
+/** v3.54.17 R3: the projection helpers the chimney fusion of two perpendicular sketches reads through (`chimney-fusion.ts`). */
+export { alongAxis, alongOf, outward, yOf }

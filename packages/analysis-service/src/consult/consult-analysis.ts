@@ -50,11 +50,13 @@ import type { CanonicalBuildingModel } from '@buildapp/model'
 import { sha256Hex } from '@buildapp/source-common'
 import { renderStoreyCut } from './model-views.js'
 import { CORRECTION_REGISTRY_VERSION } from './correct/registry.js'
-import { CORRECTION_EXECUTOR_VERSION, elementExists, executeCorrections, modelRevision, sideOfFacade, viewsOfRun } from './correct/execute.js'
+import { CORRECTION_EXECUTOR_VERSION, elementExists, executeCorrections, modelRevision, preferredView, registerFromSketch, sideOfFacade, viewsOfRun } from './correct/execute.js'
+import { CHIMNEY_FUSION_VERSION, fuseChimneys } from './correct/chimney-fusion.js'
+import type { FusionRecord, SketchedStack } from './correct/chimney-fusion.js'
 import { elementIndexOf } from './element-index.js'
 import type { ElementIndex } from './element-index.js'
 import { identityOf } from '../identity.js'
-import type { BindPicture, BindView, CorrectionOutcome, CorrectionProposal, PatchRecord, PrintedWitness, TransactionRecord } from './correct/execute.js'
+import type { BindPicture, BindView, CorrectionOutcome, CorrectionProposal, PatchRecord, PrintedWitness, Side, SketchAnchors, TransactionRecord } from './correct/execute.js'
 import { SOURCE_GATE_VERSION } from './correct/source-gate.js'
 import { SKETCH_PROPOSALS_VERSION, proposalsFromSketch } from './correct/from-sketch.js'
 import type { SketchProposalAccount } from './correct/from-sketch.js'
@@ -134,7 +136,7 @@ export type ConsultantWiring = {
 /** v3.54.14: what the sketch step read, accepted and changed (the rasters are not kept: they are redrawn from the sketches). */
 export type SketchSummary = { reading: Omit<SketchReading, 'elevationSketches'>; form: { decision: 'ACCEPT' | 'ROLLBACK' | 'NOT_RUN'; why: string; measuredBefore?: BuiltMeasure; measuredAfter?: BuiltMeasure }; finish: { decision: 'ACCEPT' | 'ROLLBACK' | 'NOT_RUN'; why: string }; usd: number
   /** v3.54.16: the sketches' elements as proposals of the correction registry, and what the executor did with each. */
-  semantic?: { version: string; decision: 'APPLIED' | 'NONE_KEPT' | 'NOT_RUN'; why: string; accounts: Array<{ frameId: string; side?: string; proposals: number; agreed: number; skipped: Array<{ sketchId: string; why: string }> }>; records: PatchRecord[]; transactions: TransactionRecord[]; /** v3.54.17: each sketch held against each body's roof (SET_ROOF proposals or why not), and the side assignment it was read under. */ massing?: MassingProposalAccount[]; orientation?: OrientationHypothesis } }
+  semantic?: { version: string; decision: 'APPLIED' | 'NONE_KEPT' | 'NOT_RUN'; why: string; accounts: Array<{ frameId: string; side?: string; proposals: number; agreed: number; skipped: Array<{ sketchId: string; why: string }> }>; records: PatchRecord[]; transactions: TransactionRecord[]; /** v3.54.17: each sketch held against each body's roof (SET_ROOF proposals or why not), and the side assignment it was read under. */ massing?: MassingProposalAccount[]; orientation?: OrientationHypothesis; /** v3.54.17 R3: stacks of perpendicular sketches paired into one stack with both plan coordinates. */ chimneyFusion?: FusionRecord & { version: string } } }
 
 /** v3.54.17: the no-model path's delivery: a mass built from the source, or the anchors it lacks. */
 export type MassingDelivery = {
@@ -1062,12 +1064,45 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
       ...(metricRead?.reads ?? []).flatMap((r) => r.observations.filter((o) => (o.kind === 'LEVEL' || o.kind === 'ANGLE') && typeof o.value === 'number').map((o) => ({ valueM: o.value as number, unit: o.kind === 'ANGLE' ? ('deg' as const) : ('m' as const), frameId: r.frameId, by: 'METRIC_READ' as const, literal: o.literal, ...(o.role ? { role: o.role } : {}), ...(o.hostHint ? { host: o.hostHint } : {}), ...(hashOf(r.frameId) ? { sourceByteHash: hashOf(r.frameId) } : {}), ...(o.id ? { observationId: o.id } : {}), box: { x0: o.labelBox[0], y0: o.labelBox[1], x1: o.labelBox[2], y1: o.labelBox[3] }, ...(o.reference ? { datum: o.reference } : {}) }))),
     ]
   }
+  // v3.54.17 R3: every sketched elevation registered from its own sketch (wall ends against the plan's side, the ground
+  // row drawn behind pots and bins, checked by the model's eaves) — a function of the model, so a moved outline
+  // re-registers it; under a TURNED_90 hypothesis on the side the orientation reads, not the label's
+  let sketchSideOf: Record<string, Side> | undefined
+  const registrationsSeen = new Set<string>()
+  const sketchAnchors = (): SketchAnchors[] =>
+    (sketchSummary?.reading.sketches ?? []).flatMap((x) => {
+      const sk = x.sketch
+      const side = sketchSideOf?.[x.frameId] ?? sideOfFacade(x.facade)
+      if (!sk || !side || typeof sk.groundRow !== 'number' || sk.walls.length === 0 || sk.roofs.length === 0) return []
+      const pts = sk.walls.flatMap((w) => w.polygon as Array<[number, number]>)
+      const x0 = Math.min(...pts.map((q) => q[0]))
+      const x1 = Math.max(...pts.map((q) => q[0]))
+      // the eaves row is where the walls meet the roof at their outer corners (the top of the drawn walls there): not the
+      // roof's lowest edge, which an overhang carries lower by its reach times the slope
+      const near = Math.max(2, 0.02 * (x1 - x0))
+      const ground = sk.groundRow
+      const corners = pts.filter((q) => q[0] <= x0 + near || q[0] >= x1 - near).map((q) => q[1]).filter((y) => y < ground - 2)
+      if (corners.length === 0) return []
+      const ridgeY = Math.min(...sk.roofs.flatMap((r) => (r.polygon as Array<[number, number]>).map((q) => q[1])))
+      return [{ frameId: x.frameId, side, wallLeftX: x0, wallRightX: x1, groundY: ground, eavesY: Math.min(...corners), ridgeY }]
+    })
+  const sketchViewsOf = (model: CanonicalBuildingModel, pictures: readonly BindPicture[], held: readonly BindView[]): BindView[] =>
+    sketchAnchors().flatMap((a) => {
+      const r = registerFromSketch({ model, views: [...held], pictures, witnesses: [] }, a)
+      const key = `${modelRevision(model)}:${a.frameId}:${a.side}`
+      if (!registrationsSeen.has(key)) {
+        registrationsSeen.add(key)
+        record({ at: now().toISOString(), kind: 'SKETCH_REGISTRATION', revision: modelRevision(model), frameId: a.frameId, side: a.side, anchors: a, ...('status' in r ? { status: r.status, code: r.code, why: r.why } : { status: 'REGISTERED', projection: r.view.projection, why: r.why }) })
+      }
+      return 'status' in r ? [] : [r.view]
+    })
   const executeOn = async (l: Local, proposals: readonly CorrectionProposal[], stage: string, seen: Set<string> = seenPatch): Promise<CorrectionOutcome | undefined> => {
     if (!l.run) return undefined
     const pictures = await allPicturesOf(l)
     const m0 = l.run.reconstruction.model
     const retiredIds = new Map([...listedAt].filter(([id]) => !elementExists(m0, id)))
-    const out = executeCorrections({ model: m0, views: massingOf.get(l)?.views ?? viewsOfRun(l.run.reconstruction.facadeAlignment.views), pictures, proposals, witnesses: witnessesOf(l), seen, ...(retiredIds.size > 0 ? { retiredIds } : {}) })
+    const held = viewsOfRun(l.run.reconstruction.facadeAlignment.views)
+    const out = executeCorrections({ model: m0, views: massingOf.get(l)?.views ?? held, ...(massingOf.get(l) ? {} : { derivedViews: (m: CanonicalBuildingModel, h: readonly BindView[]) => sketchViewsOf(m, pictures, h) }), pictures, proposals, witnesses: witnessesOf(l), seen, ...(retiredIds.size > 0 ? { retiredIds } : {}) })
     correctionRuns.push({ stage, baseRevision: out.baseRevision, revision: out.revision, delivered: false, records: out.records, transactions: out.transactions })
     record({ at: now().toISOString(), kind: 'CORRECTIONS', stage, baseRevision: out.baseRevision, revision: out.revision, records: out.records.map((r) => ({ proposalId: r.proposalId, operation: r.operation, status: r.status, code: r.code ?? null })), transactions: out.transactions.map((t) => ({ txId: t.txId, decision: t.decision, why: t.why })) })
     return out
@@ -1118,34 +1153,72 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
   if ((wiring.sketchCorrections ?? 'ON') === 'ON' && wiring.variant !== 'R' && sketchSummary && good.run) {
     const run = good.run
     const rev = modelRevision(run.reconstruction.model)
-    const views = viewsOfRun(run.reconstruction.facadeAlignment.views)
+    const held = viewsOfRun(run.reconstruction.facadeAlignment.views)
     // v3.54.17: the bodies' roofs first — a roof the sketches draw and the model lacks (or has wrong) is a SET_ROOF
-    const roofs = roofProposalsFromSketches(sketchSummary.reading.sketches.filter((x) => x.sketch).map((x) => ({ facade: x.facade, frameId: x.frameId, groundRow: x.sketch?.groundRow ?? null, walls: (x.sketch?.walls ?? []).map((w) => w.polygon as Array<[number, number]>), roofs: (x.sketch?.roofs ?? []).map((r) => r.polygon as Array<[number, number]>) })), run.reconstruction.model, views, rev, sideOfFacade)
+    const sketchInputs = () => sketchSummary.reading.sketches.filter((x) => x.sketch).map((x) => ({ facade: x.facade, frameId: x.frameId, groundRow: x.sketch?.groundRow ?? null, walls: (x.sketch?.walls ?? []).map((w) => w.polygon as Array<[number, number]>), roofs: (x.sketch?.roofs ?? []).map((r) => r.polygon as Array<[number, number]>) }))
+    const roofs = roofProposalsFromSketches(sketchInputs(), run.reconstruction.model, held, rev, sideOfFacade)
     // v3.54.17 R2: ONE side mapping for every consumer of the sketches — under a TURNED_90 hypothesis the openings are not
     // bound through the analyzer's registrations made as labelled (that would bind them to the other side)
     const turnedSides = roofs.orientation.assignment === 'TURNED_90'
-    const accounts = sketchSummary.reading.sketches.filter((x) => x.sketch).map((x) => (turnedSides ? ({ sketchId: x.frameId, frameId: x.frameId, side: roofs.orientation.sideOf?.[x.frameId], proposals: [] as CorrectionProposal[], agreed: [], skipped: [{ sketchId: x.frameId, why: `ORIENTATION_TURNED_90: ${roofs.orientation.why} — this elevation is read as the model's ${(roofs.orientation.sideOf?.[x.frameId] ?? '?').toLowerCase()} side; its openings are not bound through a registration made as labelled` }] }) as SketchProposalAccount : proposalsFromSketch(x.sketch as NonNullable<typeof x.sketch>, x.facade, run.reconstruction.model, views, rev)))
-    const proposals = [...roofs.proposals, ...accounts.flatMap((a) => a.proposals)]
-    const sem: NonNullable<SketchSummary['semantic']> = { version: `${SKETCH_PROPOSALS_VERSION}+massing-${MASSING_OPS_VERSION}`, decision: 'NOT_RUN', why: '', accounts: accounts.map((a) => ({ frameId: a.frameId, ...(a.side ? { side: a.side } : {}), proposals: a.proposals.length, agreed: a.agreed.length, skipped: a.skipped })), records: [], transactions: [], massing: roofs.accounts, orientation: roofs.orientation }
+    // v3.54.17 R3: under TURNED_90 each elevation is registered (from its sketch) on the side the orientation reads, and its
+    // openings and stacks are bound through that registration — no longer skipped
+    sketchSideOf = turnedSides ? (roofs.orientation.sideOf as Record<string, Side> | undefined) : undefined
+    const sem: NonNullable<SketchSummary['semantic']> = { version: `${SKETCH_PROPOSALS_VERSION}+massing-${MASSING_OPS_VERSION}`, decision: 'NOT_RUN', why: '', accounts: [], records: [], transactions: [], massing: roofs.accounts, orientation: roofs.orientation }
     sketchSummary.semantic = sem
-    if (proposals.length === 0) sem.why = 'every sketch element agrees with the model, or none has a registry operation'
-    else {
-      const out = await executeOn(good, proposals, 'SKETCH')
-      sem.records = out?.records ?? []
-      sem.transactions = out?.transactions ?? []
-      const kept = (out?.records ?? []).filter((r) => r.status === 'COMMITTED')
-      const m = out && kept.length > 0 ? await materialize(good, out.model) : undefined
-      if (m && out) {
-        base = good
-        good = m
-        goodState = stateOf(m)
-        committed = proposals.filter((p) => kept.some((r) => r.proposalId === p.proposalId))
-        sem.decision = 'APPLIED'
-        sem.why = `${kept.length} of ${proposals.length} sketch proposal(s) kept, each against the original elevation; revision ${out.baseRevision} → ${out.revision}`
-      } else {
-        sem.decision = 'NONE_KEPT'
-        sem.why = kept.length > 0 ? 'the kept patches could not be delivered through the run (the base did not rebuild byte for byte)' : `none of ${proposals.length} sketch proposal(s) passed the source gate and the measure`
-      }
+    // v3.54.17 R3: two phases. The bodies' roofs first: a wrong eaves height in the model (two full storeys where the
+    // drawing has one and an attic) is what keeps every elevation from registering. Then, on the model that now stands,
+    // each elevation is registered from its sketch and its openings and stacks are proposed and bound through it.
+    let stood: Local = good
+    const kept: CorrectionProposal[] = []
+    let asked = 0
+    const phase = async (stage: string, ps: CorrectionProposal[]): Promise<void> => {
+      if (ps.length === 0) return
+      asked += ps.length
+      const out = await executeOn(stood, ps, stage)
+      sem.records = [...sem.records, ...(out?.records ?? [])]
+      sem.transactions = [...sem.transactions, ...(out?.transactions ?? [])]
+      const ok = (out?.records ?? []).filter((r) => r.status === 'COMMITTED')
+      // delivered on the run the sketches started from: a patched model is always laid on LOCAL's own rebuild
+      const m = out && ok.length > 0 ? await materialize(good, out.model) : undefined
+      if (m) {
+        stood = m
+        kept.push(...ps.filter((p) => ok.some((r) => r.proposalId === p.proposalId)))
+      } else if (ok.length > 0) sem.why = 'the kept patches could not be delivered through the run (the base did not rebuild byte for byte)'
+    }
+    await phase('SKETCH_ROOF', roofs.proposals)
+    const m2 = stood.run?.reconstruction.model ?? run.reconstruction.model
+    const held2 = stood.run ? viewsOfRun(stood.run.reconstruction.facadeAlignment.views) : held
+    const pictures2 = await allPicturesOf(stood)
+    const views = [...held2, ...sketchViewsOf(m2, pictures2, held2)]
+    const sketched = sketchSummary.reading.sketches.filter((x) => x.sketch)
+    const accounts = sketched.map((x) => proposalsFromSketch(x.sketch as NonNullable<typeof x.sketch>, x.facade, m2, views, modelRevision(m2), sketchSideOf?.[x.frameId]))
+    sem.accounts = accounts.map((a) => ({ frameId: a.frameId, ...(a.side ? { side: a.side } : {}), proposals: a.proposals.length, agreed: a.agreed.length, skipped: a.skipped }))
+    // v3.54.17 R3: a stack seen from the eaves side and from a gable end is one stack with both coordinates
+    const stacks: SketchedStack[] = sketched.flatMap((x) => {
+      const sk = x.sketch as NonNullable<typeof x.sketch>
+      const side = sketchSideOf?.[x.frameId] ?? sideOfFacade(x.facade)
+      const view = side ? preferredView(views, x.frameId, side) : undefined
+      if (!side || !view || sk.roofs.length === 0) return []
+      const roofTopRow = Math.min(...sk.roofs.flatMap((r) => (r.polygon as Array<[number, number]>).map((q) => q[1])))
+      return sk.elements.filter((e) => e.kind === 'CHIMNEY').map((e) => {
+        const ps = e.polygon as Array<[number, number]>
+        return { proposalId: `sk:${x.frameId.slice(-10)}:chimney:${e.id}`, frameId: x.frameId, side, view, roofTopRow, box: { x0: Math.min(...ps.map((q) => q[0])), y0: Math.min(...ps.map((q) => q[1])), x1: Math.max(...ps.map((q) => q[0])), y1: Math.max(...ps.map((q) => q[1])) } }
+      })
+    })
+    const fusion = fuseChimneys(m2, stacks, accounts.flatMap((a) => a.proposals), pictures2)
+    sem.chimneyFusion = { version: CHIMNEY_FUSION_VERSION, ...fusion.record }
+    await phase('SKETCH', fusion.proposals)
+    if (asked === 0) sem.why = 'every sketch element agrees with the model, or none has a registry operation'
+    else if (kept.length > 0 && stood !== good) {
+      base = good
+      good = stood
+      goodState = stateOf(stood)
+      committed = kept
+      sem.decision = 'APPLIED'
+      sem.why = `${kept.length} of ${asked} sketch proposal(s) kept, each against the original elevation; revision ${rev} → ${modelRevision(m2)}${stood.run && modelRevision(stood.run.reconstruction.model) !== modelRevision(m2) ? ` → ${modelRevision(stood.run.reconstruction.model)}` : ''}`
+    } else {
+      sem.decision = 'NONE_KEPT'
+      if (!sem.why) sem.why = `none of ${asked} sketch proposal(s) passed the source gate and the measure`
     }
   }
 
