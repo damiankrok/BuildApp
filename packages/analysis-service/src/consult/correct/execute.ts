@@ -35,8 +35,9 @@ import { CAPABILITIES, CORRECTION_REGISTRY_VERSION, isPatchOperation } from './r
 import type { PatchFields, PatchOperation } from './registry.js'
 import { compareFill, compareHypotheses, iou, isRaked, supportOf, SOURCE_GATE_VERSION } from './source-gate.js'
 import type { Box, FillVerdict, HypothesisVerdict, Shape } from './source-gate.js'
+import { resolveWitness, WITNESS_RESOLVER_VERSION } from './resolve.js'
 
-export const CORRECTION_EXECUTOR_VERSION = '1.1.0' as const
+export const CORRECTION_EXECUTOR_VERSION = '1.2.0' as const
 
 export type Side = 'FRONT' | 'RIGHT' | 'REAR' | 'LEFT'
 export const SIDES: readonly Side[] = ['FRONT', 'RIGHT', 'REAR', 'LEFT']
@@ -67,8 +68,10 @@ export type PrintedWitness = {
   role?: string
   /** The body or element the mark belongs to, as the source names it (absent = not named). */
   host?: string
-  /** The datum the level is measured from (±0,00 of the drawing, when known). */
+  /** The datum the level is measured from (the reader's reference: FINISHED_LEVEL, STRUCTURAL_LEVEL, TERRAIN, UNKNOWN). */
   datum?: string
+  /** v3.54.17: where the mark is printed, in its frame's pixels (the text box): what puts it on a body. */
+  box?: Box
   /** The source variant the mark was read on. */
   sourceByteHash?: string
   observationId?: string
@@ -108,7 +111,10 @@ export type PatchRecord = {
   gate?: { winner: HypothesisVerdict['winner']; proposedZ: number | null; currentZ?: number | null; nullBoxes: number; why: string; /** 1.1.0: BOX, POLYGON (a raked head on either side) or FILL (a change of kind on the same shape). */ measure?: 'BOX' | 'POLYGON' | 'FILL'; fill?: Pick<FillVerdict, 'observed' | 'features'> }
   measure?: { builtBox?: Box; iouWithProposal?: number; builtSupportZ?: number | null; headErrorPx?: number; builtKind?: string; sourceVerified: boolean | null; why: string }
   commands?: BuildingCommand[]
+  /** v3.54.17: how a printed witness was bound to the target (its observation, the body both stand on, the datum). */
+  witness?: WitnessResolution
 }
+export type WitnessResolution = { observationId?: string; frameId: string; bodyId?: string; alongM?: number; targetBodyIds?: string[]; datum: string; resolver: string; why: string }
 
 export type TransactionRecord = { txId: string; patches: string[]; group?: string; decision: 'COMMITTED' | 'ROLLED_BACK' | 'REFUSED'; why: string; changed: string[]; allowed: string[]; collateral: string[]; closureBefore: number; closureAfter?: number; revisionBefore: string; revisionAfter?: string }
 
@@ -280,7 +286,7 @@ type Expect =
   | { kind: 'PARAM'; targetId: string; property: string; value: number }
   | { kind: 'VIEW'; view: BindView }
 
-type Bound = { commands: BuildingCommand[]; appearance?: { obs: AppearanceObservation; projection: Projection }; allowed: string[]; expect: Expect; record: Pick<PatchRecord, 'bound' | 'source' | 'gate'> }
+type Bound = { commands: BuildingCommand[]; appearance?: { obs: AppearanceObservation; projection: Projection }; allowed: string[]; expect: Expect; record: Pick<PatchRecord, 'bound' | 'source' | 'gate' | 'witness'> }
 type Refusal = { status: PatchStatus; code: string; why: string; record?: Pick<PatchRecord, 'bound' | 'source' | 'gate'> }
 
 type Ctx = { model: CanonicalBuildingModel; views: BindView[]; pictures: readonly BindPicture[]; witnesses: readonly PrintedWitness[] }
@@ -576,7 +582,6 @@ function bindFinish(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
 
 /** A3: which printed roles state each property (a ceiling mark is never a floor, a ridge never a wall top). */
 export const WITNESS_ROLES: Record<NonNullable<PatchFields['property']>, readonly string[]> = { LEVEL_ELEVATION: ['FLOOR'], WALL_HEIGHT: ['EAVES', 'CEILING'], CHIMNEY_HEIGHT: ['CHIMNEY'], ROOF_PITCH: ['ROOF_PITCH'] }
-const normHost = (h: string | undefined): string => (h ?? '').toLowerCase().normalize('NFD').replace(/[^a-z0-9]+/g, ' ').trim()
 
 /**
  * A3: the one printed observation that witnesses `v` for this property, or why there is none: the role must state
@@ -584,7 +589,7 @@ const normHost = (h: string | undefined): string => (h ?? '').toLowerCase().norm
  * mark must be on that picture's frame; in a model of more than one body the mark and the proposal must name the same
  * body; and two candidates that remain on different bodies or pictures are ambiguous — neither is chosen.
  */
-function bindWitness(ctx: Ctx, f: PatchFields, v: number): { witness: PrintedWitness } | Refusal {
+function bindWitness(ctx: Ctx, f: PatchFields, v: number, targetId: string): { witness: PrintedWitness; resolution: WitnessResolution } | Refusal {
   const prop = f.property as NonNullable<PatchFields['property']>
   const unit = prop === 'ROOF_PITCH' ? 'deg' : 'm'
   const tol = unit === 'deg' ? 0.5 : 0.005
@@ -601,16 +606,10 @@ function bindWitness(ctx: Ctx, f: PatchFields, v: number): { witness: PrintedWit
     cand = pic ? anchored.filter((w) => w.frameId === pic.frameId) : []
     if (cand.length === 0) return { status: 'NEEDS_EVIDENCE', code: 'WITNESS_NOT_ON_PICTURE', why: `the proposal reads ${v} ${unit} on picture ${f.sourcePicture}${pic ? ` (${pic.frameId})` : ', which is not a source picture of this check'}; the matching mark is on ${anchored.map((w) => w.frameId).join(', ')}` }
   }
-  const multiBody = ctx.model.roofs.length > 1 || (ctx.model.roofs.length > 0 && ctx.model.roofPlanes.length > 0)
-  if (multiBody) {
-    const ph = normHost(f.host)
-    if (!ph) return { status: 'NEEDS_EVIDENCE', code: 'HOST_NOT_NAMED', why: `the model has more than one body: the proposal must name the body ${v} ${unit} belongs to` }
-    cand = cand.filter((w) => normHost(w.host) !== '' && (normHost(w.host).includes(ph) || ph.includes(normHost(w.host))))
-    if (cand.length === 0) return { status: 'NEEDS_EVIDENCE', code: 'HOST_NOT_BOUND', why: `no ${roles.join(' / ')} mark of ${v} ${unit} names the body "${f.host}": a value printed for another body does not witness this one` }
-  }
-  const distinct = new Set(cand.map((w) => `${w.frameId}|${normHost(w.host)}`))
-  if (distinct.size > 1) return { status: 'NEEDS_EVIDENCE', code: 'AMBIGUOUS_WITNESS', why: `${v} ${unit} is printed as ${roles.join(' / ')} on ${[...distinct].map((d) => d.replace('|', ' for ') || '?').join(' and ')}: two marks on different bodies or pictures do not confirm each other, and neither is chosen` }
-  return { witness: cand[0] }
+  // v3.54.17: the witness and the target must stand on the same body of the model, by place, never by name
+  const res = resolveWitness(ctx.model, ctx.views, targetId, prop, cand)
+  if (!res.ok) return { status: 'NEEDS_EVIDENCE', code: res.code, why: res.why }
+  return { witness: res.witness, resolution: { observationId: res.witness.observationId, frameId: res.witness.frameId, ...(res.located ? { bodyId: res.located.bodyId, alongM: res.located.alongM } : {}), ...(res.targetBodyIds ? { targetBodyIds: res.targetBodyIds } : {}), datum: res.datum, resolver: WITNESS_RESOLVER_VERSION, why: res.why } }
 }
 
 function bindParameter(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
@@ -625,7 +624,7 @@ function bindParameter(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
     if (!Number.isFinite(num) || Math.abs(num - f.value) > 1e-6) return { status: 'INVALID', code: 'LITERAL_MISMATCH', why: `the literal "${f.literal}" does not state the value ${f.value}` }
   }
   // A3: a witness is a bound observation someone other than the proposer read — the same value is only one condition
-  const bw = bindWitness(ctx, f, v)
+  const bw = bindWitness(ctx, f, v, p.targetId)
   if ('status' in bw) return bw
   const witness = bw.witness
   const allowed: string[] = []
@@ -647,7 +646,7 @@ function bindParameter(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
         allowed.push(`walls:${w.id}`)
       }
     }
-    return { commands, allowed, expect: { kind: 'PARAM', targetId: lv.id, property: 'elevation', value: r6(v) }, record: { bound: { frameId: witness.frameId, ids: allowed.map((a) => a.split(':')[1]), values: { valueM: r6(v) } }, source } }
+    return { commands, allowed, expect: { kind: 'PARAM', targetId: lv.id, property: 'elevation', value: r6(v) }, record: { witness: bw.resolution, bound: { frameId: witness.frameId, ids: allowed.map((a) => a.split(':')[1]), values: { valueM: r6(v) } }, source } }
   }
   if (f.property === 'WALL_HEIGHT' || f.property === 'CHIMNEY_HEIGHT') {
     const obj = f.property === 'WALL_HEIGHT' ? m.walls.find((w) => w.id === p.targetId) : m.chimneys.find((c) => c.id === p.targetId)
@@ -657,11 +656,11 @@ function bindParameter(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
     const h = r6(v - base)
     if (!(h > 0.3)) return { status: 'INVALID', code: 'IMPOSSIBLE_HEIGHT', why: `the printed level ${v} m is ${h} m above ${obj.id}'s base` }
     const coll = f.property === 'WALL_HEIGHT' ? 'walls' : 'chimneys'
-    return { commands: [{ type: 'setProperty', targetId: obj.id, property: 'height', value: h }], allowed: [`${coll}:${obj.id}`], expect: { kind: 'PARAM', targetId: obj.id, property: 'height', value: h }, record: { bound: { frameId: witness.frameId, ids: [obj.id], values: { valueM: r6(v), height: h } }, source } }
+    return { commands: [{ type: 'setProperty', targetId: obj.id, property: 'height', value: h }], allowed: [`${coll}:${obj.id}`], expect: { kind: 'PARAM', targetId: obj.id, property: 'height', value: h }, record: { witness: bw.resolution, bound: { frameId: witness.frameId, ids: [obj.id], values: { valueM: r6(v), height: h } }, source } }
   }
   const roof = m.roofs.find((r) => r.id === p.targetId)
   if (!roof) return { status: 'UNSUPPORTED_OPERATION', code: m.roofPlanes.some((r) => r.id === p.targetId) ? 'PLANE_ROOF_PITCH' : 'UNKNOWN_TARGET', why: m.roofPlanes.some((r) => r.id === p.targetId) ? `${p.targetId} is a roof plane: its pitch follows from the planes meeting at the ridge; a single plane is not re-pitched in this version` : `${p.targetId} is not a roof` }
-  return { commands: [{ type: 'setProperty', targetId: roof.id, property: 'pitchDeg', value: r6(v) }], allowed: [`roofs:${roof.id}`], expect: { kind: 'PARAM', targetId: roof.id, property: 'pitchDeg', value: r6(v) }, record: { bound: { frameId: witness.frameId, ids: [roof.id], values: { pitchDeg: r6(v) } }, source } }
+  return { commands: [{ type: 'setProperty', targetId: roof.id, property: 'pitchDeg', value: r6(v) }], allowed: [`roofs:${roof.id}`], expect: { kind: 'PARAM', targetId: roof.id, property: 'pitchDeg', value: r6(v) }, record: { witness: bw.resolution, bound: { frameId: witness.frameId, ids: [roof.id], values: { pitchDeg: r6(v) } }, source } }
 }
 
 /** ASSIGN_VIEW: a registration of a source elevation for one side, checked against the side's walls before it is used. */

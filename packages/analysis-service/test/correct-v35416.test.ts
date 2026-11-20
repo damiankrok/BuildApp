@@ -552,9 +552,12 @@ describe('v3.54.16 audit A3: a number is a witness only as a bound observation o
     expect(run(m, [lv()], { witnesses: [{ ...w, frameId: 'section-a', role: 'FLOOR', sourceByteHash: S, host: 'garage' }, { ...w, frameId: 'section-b', role: 'FLOOR', sourceByteHash: S, host: 'main house' }] }).records[0].code).toBe('AMBIGUOUS_WITNESS')
     const twoBodies = inject(m, [{ type: 'createRoof', id: 'r-main', levelId: 'l1', kind: 'GABLE', footprint: { minX: 0, maxX: 6, minZ: 0, maxZ: 8 }, eaveOffset: 0, pitchDeg: 35, ridgeAxis: 'Z', thickness: 0.2 }, { type: 'createRoof', id: 'r-garage', levelId: 'l1', kind: 'GABLE', footprint: { minX: 6, maxX: 10, minZ: 0, maxZ: 8 }, eaveOffset: 0, pitchDeg: 35, ridgeAxis: 'Z', thickness: 0.2 }] as BuildingCommand[])
     const tb = executeCorrections({ model: twoBodies, views: [view], pictures: [picture], proposals: [propose(twoBodies, { operation: 'SET_PARAMETER', targetId: 'l1', patch: { property: 'LEVEL_ELEVATION', value: 2.95, unit: 'm', literal: '+2.95' } })], witnesses: [{ ...w, role: 'FLOOR', sourceByteHash: S, host: 'garage' }] })
-    expect(tb.records[0].code).toBe('HOST_NOT_NAMED')
+    // v3.54.17: two roofs over ONE wall ring are one body — the count of roofs no longer makes a second body, and the
+    // names the proposer and the reader give decide nothing (the two-body cases are in resolve-v35417.test.ts)
+    expect(tb.records[0].status).toBe('COMMITTED')
+    expect(tb.records[0].witness?.why).toMatch(/one body/)
     const tb2 = executeCorrections({ model: twoBodies, views: [view], pictures: [picture], proposals: [propose(twoBodies, { operation: 'SET_PARAMETER', targetId: 'l1', patch: { property: 'LEVEL_ELEVATION', value: 2.95, unit: 'm', literal: '+2.95', host: 'main house' } })], witnesses: [{ ...w, role: 'FLOOR', sourceByteHash: S, host: 'garage' }] })
-    expect(tb2.records[0].code).toBe('HOST_NOT_BOUND')
+    expect(tb2.records[0].status).toBe('COMMITTED')
   })
   it('counterpart: the FLOOR mark on the proposal\'s own picture, anchored, binds — and its source record names the bytes', () => {
     const m = build(program())
