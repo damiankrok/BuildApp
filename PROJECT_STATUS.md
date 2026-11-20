@@ -12,6 +12,23 @@
 
 ## Current summary (read first)
 
+- **v3.54.17 (2026-11-20): body, roof and source binding — APK 1348** (Master Plan v3.54.17, on `9759c07`). Report
+  `stage-reports/SOURCE_TO_MODEL_V35417.md`, index `stage-reports/README_V35417.md`, ADR
+  `docs/ADR-V35417-MASSING-ROOF-WITNESS.md`, hand-off `research/source-to-model/v35417/HANDOFF.md`. Registry 1.1.0 adds
+  BUILD_MASSING / SET_ROOF / SET_OUTLINE on the same executor (1.2.0) and commands: body from the plan outline and
+  elevations registered by the plan (no registration↔correction loop), roof form/axis/heights from the drawn roof
+  (wrong flat → gable), outline moved as one validated edit with its dependants; region gate (source-gate 1.2.0,
+  11.7 ms CPU); witness → target resolver 1.0.0 by body and place (names and roof counts decide nothing; the checkpoint
+  probe is refused); orientation hypothesis apart from the vertical; plan-outline read (`plan-outline/1`) for the
+  no-model path. Proofs §8 offline with counter-trials (31 tests). DEV: Alaska `roofs: []` → gable (7.48 m vs 7.68 m
+  published), live reviewer CLOSED_VERIFIED; Layla: outline read, 3 rectangles → UNSUPPORTED_FORM (named). Ballina
+  10-decision replay identical. Host on `14a34bf`: Alaska SET_ROOF delivered (ridge 7.84 m), repeat 0 requests, no
+  token 0 requests; trial (Studio Atrium, frozen rule, 3 pre-analysis corrections recorded): Aurora-maxi-ii-bis-sz no
+  patch kept, Aurora-midi-ii failed after the metric read (named). Named gaps: ≥ 3 rectangles, hip roofs, host delivery
+  of a no-LOCAL model, binder pitch plausibility, failed-job answer recording, live `continues`/`resolved`. Stage
+  0.7305 USD; books 28.542857 / 28.854612. Scenes `alaska-host-v35417` (ODDANY), `alaska-dev-v35417` (ROZWÓJ),
+  `aurora-maxi-trial-v35417` (PRÓBA) first.
+
 - **v3.54.16 audit fixes (2026-11-20): A1–A4 from the read-only audit of `2de3525`, 0 USD.** A defect keeps one
   identity across looks and closes only by a verified closure or an explicit statement (omission is carried, a
   disagreement between looks is DISPUTED); opening hypotheses are shapes (raked head ends) with exact kinds, judged by a

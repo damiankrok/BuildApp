@@ -94,7 +94,21 @@ rodziny (Aurora-maxi-ii-sz to wariant Aurora-maxi-ii-bis-sz). Wybrane: **Aurora-
 
 ## 6. Host (jeden końcowy commit `14a34bf`)
 
-_(uzupełniane z pierwszego wyniku — patrz `results/host-e2e.json`)_
+Zbudowany z `14a34bf` (`apps/analyzer-api/dist/server.mjs`), pilot z kluczem z sekretu hosta, strict + fallback, cache
+5 min; księgi hosta otwarte 27,877317 USD pod pułapem 28,854612 USD; 18 żądań, 0,66554 USD (`results/host-e2e.json`,
+`results/host-e2e.log`).
+
+| Zadanie | Wynik | Mechanizm bryły/dachu | Jakość |
+|---|---|---|---|
+| Alaska (token) | COMPLETED, model `f0c3b54b…` | **SET_ROOF** bryły głównej ZATWIERDZONY i DOSTARCZONY: GABLE X, 42,7°, okap 4,19 m, kalenica **7,84 m** (strona 7,68 m, 40° — nieczytane przez mechanizm; +0,16 m w tolerancji 0,25 m); bramka REGION PROPOSED (78 %), zbudowana bryła 97 % materii rysunku. Dobudówka: propozycja 87,1° (rejestracja własną wąską szerokością) odrzucona przez jądro (pochylenie ≤ 85°) i wycofana — **brak sprawdzenia wiarygodności w bindzie (nazwane)** | NEEDS_EVIDENCE: 9 różnic otwartych (1 KEY), 1 zamknięta na zweryfikowanej rewizji |
+| Alaska (powtórka) | REUSED, 8 odpowiedzi odtworzonych | ten sam model i scena bajt w bajt | **0 USD, 0 żądań**; stan jakości i lista defektów zachowane |
+| bez tokenu | RECONSTRUCTION_FAILED (sam LOCAL odmawia Alaski) | — | **0 USD, 0 żądań** |
+| **PRÓBA** Aurora-maxi-ii-bis-sz | COMPLETED, model `01e6b86d…` | żadna propozycja bryły/dachu nie została zachowana (dwuspad LOCAL stał; szkice PARTIAL) | UNSUPPORTED_OPERATION: 8 różnic otwartych (1 KEY) |
+| **PRÓBA** Aurora-midi-ii | FAILED `ANALYSIS_FAILED` po 1 żądaniu (odczyt metryczny, 0,034858 USD) | — | łańcuch: źródło TAK; odczyt TAK (1 odpowiedź); potem niesklasyfikowany wyjątek ścieżki konsultanta przed jakimkolwiek żądaniem szkicu; LOCAL sam buduje model offline (17,35 × 7,735 m, kalenica 5,03 m), ścieżka konsultanta bez transportu kończy się offline — awaria wymaga odpowiedzi na żywo, której host nie zapisuje (**luka: zapis odpowiedzi konsultanta nieudanego zadania**) |
+
+Uprząż: 4 linie FAIL — 3 to skopiowane z v3.54.16 oczekiwanie `registry === '1.0.0'` (host podaje 1.1.0 = poprawnie;
+uprząż poprawiona po biegu, tylko skrypt badawczy), 1 to brak zatwierdzonego patcha w próbie Aurora-maxi (prawdziwy
+pierwszy wynik). Wyniki próby nie były strojone.
 
 ## 7. Koszty
 
@@ -105,7 +119,10 @@ Plan żądań z kosztem maksymalnym zapisany przed biegiem (`research/source-to-
 |---|---|---|
 | odczyt obrysu Layli (Opus 5.5) | 1 | 0,015928 |
 | recenzent na żywo, Alaska (Sonnet 5.5) | 1 | 0,049032 |
-| host (próba + Alaska) | zob. §6 | zob. §6 |
+| host (Alaska, powtórka, bez tokenu, 2 rodziny próby) | 18 | 0,665540 |
+| **razem etap** | **20** | **0,730500** |
+
+Księgi po etapie: **28,542857 USD** pod pułapem 28,854612 USD (pozostało 0,311755 USD).
 
 Uwaga: dwa równoległe przebiegi zapisały księgi każdy ze swojej kopii; wpis recenzenta został odtworzony z
 `check-turns.json` (koszt policzony z cennika = 0,049032 USD), a `ledger.ts` scala teraz przy każdym zapisie i sprawdza
@@ -124,4 +141,19 @@ a sam przechodzi 3/3); baza 4396 / 16 (`results/matrix-freeze.txt`). Typecheck c
   wiąże wartość drukowaną z właściwą bryłą po miejscu znaku, nie po nazwie.
 - **Brakuje danych**: elewacji z linią gruntu (bez niej nic się nie buduje), skali rzutu (bez niej obrys zostaje w pikselach).
 - **Brakuje funkcji**: bryły z ≥ 3 prostokątów (Layla), dachu kopertowego/mansardowego, rejestracji przekroju jako strony,
-  oddania przez host modelu zbudowanego bez LOCAL (koperta wyniku), sprawdzenia `continues`/`resolved` na żywo.
+  oddania przez host modelu zbudowanego bez LOCAL (koperta wyniku), sprawdzenia `continues`/`resolved` na żywo,
+  sprawdzenia wiarygodności pochylenia w bindzie `SET_ROOF` przed komendą (host: 87°, odrzucone dopiero przez jądro),
+  zapisu odpowiedzi konsultanta dla nieudanego zadania hosta (Aurora-midi-ii nieodtwarzalna offline).
+
+## 10. Werdykt
+
+- **Minimum §5 działa** w zadeklarowanym zakresie: utworzenie bryły z pustego modelu, zmiana zasięgu, dach na wskazanej
+  bryle (także płaski→dwuspad), z zależnymi (profile ścian, otwory, regiony, obrys dachu, stropy, pomieszczenia),
+  atomowo i z bramką źródła; dowody §8 z kontrpróbami przechodzą offline.
+- **Host z jednego commita pokazał mechanizm**: Alaska `roofs: []` → dwuspad bryły głównej, oddany przez publiczne
+  wejście; powtórka 0 żądań; brak tokenu 0 żądań. MINIATURA: rozpoznawalna (kalenica wzdłuż długości, wysokość
+  w tolerancji); METRYKA: nie twierdzimy dokładności (pion z założenia izotropii rysunku, sprawdzany zgodnością widoków);
+  WNĘTRZE: bez zmian.
+- **Próba**: 2 rodziny Studio Atrium — jedna z modelem bez zatwierdzonej korekty, jedna z awarią po odczycie metrycznym
+  (nazwaną); żadnej poprawy w próbie, którą można by przypisać nowemu mechanizmowi. Layla (DEV) — nazwany brak funkcji.
+- **Akceptacja**: minimum §5 i dowody §8 — tak; ogólność na nowych rodzinach — niepokazana.
