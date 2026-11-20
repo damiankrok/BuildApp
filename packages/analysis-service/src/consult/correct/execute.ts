@@ -20,10 +20,18 @@
  *    anchored to a source frame with a byte hash, it is on the picture the proposal names, and in a model of several
  *    bodies it names the same body as the proposal. A number that merely equals the proposed one is not a witness;
  *    two equal numbers on different bodies are ambiguous, never mutual confirmation.
+ *
+ * v3.54.17 R3 (executor 1.4.0):
+ *  - an opening removed or re-cut takes its own relationships with it (an alignment with an opening round the corner);
+ *  - a stack's depth without a second view is read on the parametric roofs too (a massing/LOCAL model has no roof
+ *    planes: every stack stood mid-depth, one drawn behind the ridge in front of it); a stack whose plan footprint
+ *    overlaps one standing is that stack seen again (DUPLICATE), whatever view it was read from;
+ *  - the eaves overhang read on a gable view is capped at the reach that clears other bodies' roofs and walls (an
+ *    annex's parapet) — named with both values, never built into them.
  */
 import { applyCommands } from '@buildapp/commands'
 import type { BuildingCommand } from '@buildapp/commands'
-import { compileBuilding, geometryClosureAudit } from '@buildapp/geometry'
+import { compileBuilding, geometryClosureAudit, roofGeometry } from '@buildapp/geometry'
 import { serializeModel, validateModel } from '@buildapp/model'
 import type { CanonicalBuildingModel, Opening, Wall } from '@buildapp/model'
 import { sha256Hex, stableJson } from '@buildapp/source-common'
@@ -39,7 +47,7 @@ import { resolveWitness, WITNESS_RESOLVER_VERSION } from './resolve.js'
 import { bindBuildMassing, bindSetOutline, bindSetRoof, MAX_OVERHANG_M } from '../massing/ops.js'
 import type { MassingObservations } from '../massing/ops.js'
 
-export const CORRECTION_EXECUTOR_VERSION = '1.3.0' as const
+export const CORRECTION_EXECUTOR_VERSION = '1.4.0' as const
 
 export type Side = 'FRONT' | 'RIGHT' | 'REAR' | 'LEFT'
 export const SIDES: readonly Side[] = ['FRONT', 'RIGHT', 'REAR', 'LEFT']
@@ -300,7 +308,9 @@ export type Refusal = { status: PatchStatus; code: string; why: string; record?:
 
 /** v3.54.17 R3: a registered plan sheet (pixels → world metres), for a printed dimension's line. */
 export type BindPlan = { frameId: string; toWorld: (px: number, py: number) => { x: number; z: number } }
-export type Ctx = { model: CanonicalBuildingModel; views: BindView[]; pictures: readonly BindPicture[]; witnesses: readonly PrintedWitness[]; massing?: MassingObservations; plans?: readonly BindPlan[] }
+/** v3.54.17 R3: facts the publisher's page states in words (not printed on a drawing): the roof's pitch. */
+export type PageFacts = { roofPitchDeg?: number }
+export type Ctx = { model: CanonicalBuildingModel; views: BindView[]; pictures: readonly BindPicture[]; witnesses: readonly PrintedWitness[]; massing?: MassingObservations; plans?: readonly BindPlan[]; facts?: PageFacts }
 
 const short = (s: string): string => sha256Hex(s).slice(0, 6)
 
@@ -387,7 +397,10 @@ function bindOpening(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
     if (gate.winner === 'CURRENT') return { status: 'REJECTED_BY_SOURCE', code: 'SOURCE_SHOWS_OPENING', why: gate.why, record }
     if (gate.winner === 'UNDECIDED') return { status: 'NEEDS_EVIDENCE', code: 'SOURCE_UNDECIDED', why: gate.why, record }
     const fills = [...m.windows.filter((w) => w.openingId === target.id).map((w) => `windows:${w.id}`), ...m.doors.filter((d) => d.openingId === target.id).map((d) => `doors:${d.id}`)]
-    return { commands: [{ type: 'removeFeature', targetId: target.id, cascade: true }], allowed: [`openings:${target.id}`, ...fills], expect: { kind: 'REMOVED', id: target.id }, record }
+    // the cascade takes the opening's own relationships with it (an alignment with an opening round the corner is about
+    // the removed opening, not about the other one)
+    const rels = m.relationships.filter((r) => r.from === target.id || r.to === target.id).map((r) => `relationships:${r.id}`)
+    return { commands: [{ type: 'removeFeature', targetId: target.id, cascade: true }], allowed: [`openings:${target.id}`, ...fills, ...rels], expect: { kind: 'REMOVED', id: target.id }, record }
   }
   if (!finiteBox(f.box)) return { status: 'INVALID', code: 'NO_BOX', why: `${p.operation} states the opening's box in a source picture (x0 < x1, y0 < y1); this one does not` }
   const currentKind = existing ? kindOfOpening(m, existing.id) : undefined
@@ -408,8 +421,21 @@ function bindOpening(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
   if (!(a1 - a0 >= 0.2) || !(y1 - y0 >= 0.25)) return { status: 'INVALID', code: 'TOO_SMALL', why: `the box is ${(a1 - a0).toFixed(2)} × ${(y1 - y0).toFixed(2)} m at the registration: not an opening` }
   const host = hostWall(m, view.side, a0, a1, y0, y1)
   if (!host) return { status: 'INVALID', code: 'NO_HOST_WALL', why: `no exterior wall of the ${view.side.toLowerCase()} side holds ${a0.toFixed(2)}..${a1.toFixed(2)} m along it from ${y0.toFixed(2)} to ${y1.toFixed(2)} m` }
+  // v3.54.17 R3: an update may absorb other openings of the same wall that its new shape covers (the source's one
+  // opening is several in the model): each must exist, stand on the host wall, and lie within the new shape along it
+  const absorbed: Opening[] = []
+  for (const aid of f.absorbs ?? []) {
+    if (!existing) return { status: 'INVALID', code: 'ABSORB_WITHOUT_TARGET', why: 'only an update of an opening the model has absorbs others' }
+    const o = m.openings.find((x) => x.id === aid)
+    if (!o || o.id === existing.id) return { status: 'INVALID', code: 'UNKNOWN_TARGET', why: `${aid} is not another opening of this revision` }
+    const sp = openingSpan(m, o)
+    if (!sp || o.wallId !== host.id) return { status: 'INVALID', code: 'ABSORB_OTHER_WALL', why: `${aid} does not stand on ${host.id}, the wall the new shape is cut in` }
+    const tolA = Math.max(0.15, 3 * view.alongErrorM)
+    if (sp.a0 < a0 - tolA || sp.a1 > a1 + tolA || sp.y0 < y0 - tolA || sp.y1 > y1 + tolA) return { status: 'INVALID', code: 'ABSORB_OUTSIDE_SHAPE', why: `${aid} stands ${sp.a0.toFixed(2)}..${sp.a1.toFixed(2)} m along, ${sp.y0.toFixed(2)}..${sp.y1.toFixed(2)} m high: not within the new shape ${a0.toFixed(2)}..${a1.toFixed(2)} × ${y0.toFixed(2)}..${y1.toFixed(2)} m` }
+    absorbed.push(o)
+  }
   // the source gate: the proposal and the model's element (for an update) against the original picture
-  const others = openingBoxes(m, view).filter((o) => o.id !== existing?.id)
+  const others = openingBoxes(m, view).filter((o) => o.id !== existing?.id && !absorbed.some((x) => x.id === o.id))
   const duplicate = others.find((o) => iou(o.box, box) > 0.3)
   if (duplicate) return { status: 'DUPLICATE', code: 'OPENING_ALREADY_THERE', why: `${duplicate.id} already stands there (overlap ${iou(duplicate.box, box).toFixed(2)}): an opening is updated, never doubled` }
   // A2: both hypotheses as full shapes (a raked head's two ends), and the kinds as their own measure
@@ -457,11 +483,16 @@ function bindOpening(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
   const oldFills = existing ? [...m.windows.filter((w) => w.openingId === existing.id).map((w) => ({ coll: 'windows', id: w.id })), ...m.doors.filter((d) => d.openingId === existing.id).map((d) => ({ coll: 'doors', id: d.id }))] : []
   const fillId = oldFills[0] && ((oldFills[0].coll === 'windows') === (kind === 'WINDOW')) ? oldFills[0].id : `${id}-${kind === 'WINDOW' ? 'unit' : 'leaf'}`
   const commands: BuildingCommand[] = [
+    ...absorbed.map((o) => ({ type: 'removeFeature' as const, targetId: o.id, cascade: true })),
     ...(existing ? [{ type: 'removeFeature' as const, targetId: existing.id, cascade: true }] : []),
     { type: 'cutOpening', id, wallId: host.id, kind: kind === 'WINDOW' ? 'WINDOW' : 'DOOR', offset: Math.max(0, u0), sill, width, height, ...(head ? { head } : {}) },
     ...fillCommands(m, id, kind, fillId, host.thickness),
   ]
-  return { commands, allowed: [`openings:${id}`, ...oldFills.map((x) => `${x.coll}:${x.id}`), `${kind === 'WINDOW' ? 'windows' : 'doors'}:${fillId}`], expect: { kind: 'OPENING', id, view, box, shape: head ? proposedShape : box, levelId: host.levelId, openingKind: kind as OpeningPatchKindExact, ...(fillFrom ? { fillChangeFrom: fillFrom } : {}) }, record }
+  // the re-cut opening's own relationships (an alignment LOCAL drew with an opening round the corner) go with the old cut
+  const gone = [...(existing ? [existing.id] : []), ...absorbed.map((o) => o.id)]
+  const oldRels = m.relationships.filter((r) => gone.includes(r.from) || gone.includes(r.to)).map((r) => `relationships:${r.id}`)
+  const absorbedKeys = absorbed.flatMap((o) => [`openings:${o.id}`, ...m.windows.filter((w) => w.openingId === o.id).map((w) => `windows:${w.id}`), ...m.doors.filter((d) => d.openingId === o.id).map((d) => `doors:${d.id}`)])
+  return { commands, allowed: [`openings:${id}`, ...oldFills.map((x) => `${x.coll}:${x.id}`), `${kind === 'WINDOW' ? 'windows' : 'doors'}:${fillId}`, ...oldRels, ...absorbedKeys], expect: { kind: 'OPENING', id, view, box, shape: head ? proposedShape : box, levelId: host.levelId, openingKind: kind as OpeningPatchKindExact, ...(fillFrom ? { fillChangeFrom: fillFrom } : {}) }, record }
 }
 
 /** Where a stack meets the roof, across the side: the roof planes' height along the line at `along`. */
@@ -477,6 +508,7 @@ function roofMeet(m: CanonicalBuildingModel, side: Side, along: number, yMeet: n
     for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) if ((poly[i].z > pt.z) !== (poly[j].z > pt.z) && pt.x < ((poly[j].x - poly[i].x) * (pt.z - poly[i].z)) / (poly[j].z - poly[i].z) + poly[i].x) ins = !ins
     return ins
   }
+  const roofGeoms = m.roofs.flatMap((r) => { const l = m.levels.find((x) => x.id === r.levelId); return l && r.kind !== 'FLAT' ? [roofGeometry(r, l)] : [] })
   const top = (c: number): number => {
     const pt = ax === 'x' ? { x: along, z: c } : { x: c, z: along }
     let best = -Infinity
@@ -485,6 +517,9 @@ function roofMeet(m: CanonicalBuildingModel, side: Side, along: number, yMeet: n
       const d = (pt.x - pl.datum.x) * pl.downslope.x + (pt.z - pl.datum.z) * pl.downslope.z
       best = Math.max(best, pl.datum.y - Math.tan((pl.pitchDeg * Math.PI) / 180) * d)
     }
+    // v3.54.17 R3: the parametric roofs too (a massing or LOCAL model has no roof planes: without them every stack stood
+    // at the middle of the walls' depth, a FAR stack in front of the ridge it is drawn behind)
+    for (const g of roofGeoms) if (g.covers(pt.x, pt.z)) best = Math.max(best, g.topAt(pt.x, pt.z))
     return best
   }
   const N = 80
@@ -550,7 +585,10 @@ function bindChimney(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
   const clash = m.chimneys.find((c) => {
     if (c.id === existing?.id) return false
     const [c0a, c1a] = alongOfChimney(c)
-    return Math.min(c1a, a1) - Math.max(c0a, a0) > 0.5 * Math.min(c1a - c0a, a1 - a0)
+    if (Math.min(c1a, a1) - Math.max(c0a, a0) > 0.5 * Math.min(c1a - c0a, a1 - a0)) return true
+    // whatever the axis: a stack whose plan footprint overlaps one standing is that stack seen again (two stacks do not
+    // share masonry), not a second one to build into it
+    return Math.min(c.footprint.maxX, footprint.maxX) > Math.max(c.footprint.minX, footprint.minX) && Math.min(c.footprint.maxZ, footprint.maxZ) > Math.max(c.footprint.minZ, footprint.minZ)
   })
   if (clash) return { status: 'DUPLICATE', code: 'CHIMNEY_ALREADY_THERE', why: `${clash.id} already stands there: a chimney is updated, never doubled` }
   const others = openingBoxes(m, view).map((o) => o.box)
@@ -792,7 +830,78 @@ function bindOverhang(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
       cmds.push({ type: 'resizeFeature', targetId: roof.id, footprint: ridgeAx === 'x' ? { ...f0, minX: lo, maxX: hi } : { ...f0, minZ: lo, maxZ: hi } })
     }
   }
-  return { commands: cmds, allowed: [`roofs:${roof.id}`], expect: { kind: 'PARAM', targetId: roof.id, property: 'overhang', value: v }, record: { ...record, bound: { ...record.bound, values: { ...record.bound.values, overhangM: v } } } }
+  // the overhang is all round in the model: where another body's roof stands under a side's reach (a lower annex against
+  // the eaves), the eaves' underside must pass over it — the overhang is capped at the reach that clears it (named), never
+  // built into it. (A plate trimmed back on one side is not used: the walls following the roof then cut into it.)
+  const levelFull = (id: string) => m.levels.find((l) => l.id === id) as CanonicalBuildingModel['levels'][number]
+  const main = roofGeometry({ ...roof, overhang: v }, levelFull(roof.levelId))
+  const E = 0.02
+  const sides = ['minX', 'maxX', 'minZ', 'maxZ'] as const
+  const strip = (k: (typeof sides)[number]): { minX: number; maxX: number; minZ: number; maxZ: number } => k === 'minX' ? { minX: f0.minX - v, maxX: f0.minX - E, minZ: f0.minZ - v, maxZ: f0.maxZ + v } : k === 'maxX' ? { minX: f0.maxX + E, maxX: f0.maxX + v, minZ: f0.minZ - v, maxZ: f0.maxZ + v } : k === 'minZ' ? { minX: f0.minX - v, maxX: f0.maxX + v, minZ: f0.minZ - v, maxZ: f0.minZ - E } : { minX: f0.minX - v, maxX: f0.maxX + v, minZ: f0.maxZ + E, maxZ: f0.maxZ + v }
+  const dist = (k: (typeof sides)[number], x: number, z: number): number => (k === 'minX' ? f0.minX - x : k === 'maxX' ? x - f0.maxX : k === 'minZ' ? f0.minZ - z : z - f0.maxZ)
+  let cap = v
+  const blockers: string[] = []
+  for (const o of m.roofs.filter((r) => r.id !== roof.id)) {
+    const og = roofGeometry(o, levelFull(o.levelId))
+    for (const k of sides) {
+      const st = strip(k)
+      const ix = { minX: Math.max(st.minX, og.covered.minX), maxX: Math.min(st.maxX, og.covered.maxX), minZ: Math.max(st.minZ, og.covered.minZ), maxZ: Math.min(st.maxZ, og.covered.maxZ) }
+      if (!(ix.maxX - ix.minX > E && ix.maxZ - ix.minZ > E)) continue
+      for (let i = 0; i <= 6; i += 1) for (let j = 0; j <= 6; j += 1) {
+        const x = ix.minX + ((ix.maxX - ix.minX) * i) / 6
+        const z = ix.minZ + ((ix.maxZ - ix.minZ) * j) / 6
+        if (!main.covers(x, z) || !og.covers(x, z)) continue
+        if (main.undersideAt(x, z) >= og.topAt(x, z) + E) continue
+        // this point of the reach meets the other roof: the overhang stops short of it
+        const d = dist(k, x, z)
+        if (d < cap) {
+          cap = Math.max(0, d - E)
+          if (!blockers.includes(o.id)) blockers.push(o.id)
+        }
+      }
+    }
+  }
+  // and the walls of other bodies standing in that reach (an annex's parapet): their tops are fixed heights
+  for (const w of exteriorWalls(m)) {
+    if (w.topProfile?.kind === 'FOLLOW_ROOF' && w.topProfile.roofId === roof.id) continue
+    const wl = levelFull(w.levelId)
+    if (!wl) continue
+    const topY = wl.elevation + w.baseOffset + (w.topProfile?.kind === 'POLYLINE' ? Math.max(...w.topProfile.points.map((q) => q.height)) : w.height)
+    const dx = w.end.x - w.start.x
+    const dz = w.end.z - w.start.z
+    const len = Math.hypot(dx, dz)
+    if (len < 1e-6) continue
+    const nx = -dz / len
+    const nz = dx / len
+    for (let i = 0; i <= 10; i += 1) for (const off of [-w.thickness, 0, w.thickness]) {
+      const x = w.start.x + (dx * i) / 10 + nx * off
+      const z = w.start.z + (dz * i) / 10 + nz * off
+      for (const k of sides) {
+        const d = dist(k, x, z)
+        if (!(d > E && d <= v) || !main.covers(x, z)) continue
+        if (main.undersideAt(x, z) >= topY + E) continue
+        if (d < cap) {
+          cap = Math.max(0, d - E)
+          if (!blockers.includes(w.id)) blockers.push(w.id)
+        }
+      }
+    }
+  }
+  const vc = cm(Math.min(v, cap))
+  if (blockers.length > 0 && Math.abs(vc - roof.overhang) < OVERHANG_MIN_CHANGE_M) return { status: 'NEEDS_EVIDENCE', code: 'OVERHANG_BLOCKED', why: `the drawn ${v.toFixed(2)} m eaves overhang would run into ${blockers.join(', ')}; the most that clears it (${vc.toFixed(2)} m) is no change from the model's ${roof.overhang.toFixed(2)} m (one overhang all round in the model: named, not built)`, record: { ...record, bound: { ...record.bound, values: { ...record.bound.values, overhangM: v, clearsM: vc } } } }
+  if (vc !== v) {
+    cmds[0] = { type: 'setProperty', targetId: roof.id, property: 'overhang', value: vc }
+    if (cmds[1] && cmds[1].type === 'resizeFeature') {
+      const rr0 = sideRange(m, ridgeAx === 'x' ? 'FRONT' : 'RIGHT')
+      const [gLo, gHi] = ridgeAx === 'x' ? [f0.minX, f0.maxX] : [f0.minZ, f0.maxZ]
+      if (rr0) {
+        const lo = r6(Math.min(rr0.lo, gLo + (vc - roof.overhang)))
+        const hi = r6(Math.max(rr0.hi, gHi - (vc - roof.overhang)))
+        cmds[1] = { type: 'resizeFeature', targetId: roof.id, footprint: ridgeAx === 'x' ? { ...f0, minX: lo, maxX: hi } : { ...f0, minZ: lo, maxZ: hi } }
+      }
+    }
+  }
+  return { commands: cmds, allowed: [`roofs:${roof.id}`], expect: { kind: 'PARAM', targetId: roof.id, property: 'overhang', value: vc }, record: { ...record, bound: { ...record.bound, values: { ...record.bound.values, overhangM: vc, ...(vc !== v ? { drawnOverhangM: v } : {}) } } } }
 }
 
 /** The sketch's anchors of one elevation, in that elevation's frame pixels (the provider's typed contours). */
@@ -916,6 +1025,8 @@ export type ExecuteInput = {
   derivedViews?: (model: CanonicalBuildingModel, held: readonly BindView[]) => BindView[]
   /** v3.54.17 R3: the run's registered plan sheets (SET_OUTLINE from a printed dimension). */
   plans?: readonly BindPlan[]
+  /** v3.54.17 R3: facts of the project page (SET_ROOF reads the stated pitch). */
+  facts?: PageFacts
 }
 
 /** v3.54.17 R2: the operations whose targetId must name an element of the model (the element index's ids). */
@@ -1001,7 +1112,7 @@ export function executeCorrections(input: ExecuteInput): CorrectionOutcome {
     const pending: Array<{ p: CorrectionProposal; bound?: Bound; view?: BindView; extra: Partial<PatchRecord> }> = []
     let refusal: { p: CorrectionProposal; r: Refusal } | undefined
     for (const p of ordered) {
-      const ctx: Ctx = { model: working, views: workingViews, pictures: input.pictures, witnesses: input.witnesses ?? [], ...(input.massing ? { massing: input.massing } : {}), ...(input.plans ? { plans: input.plans } : {}) }
+      const ctx: Ctx = { model: working, views: workingViews, pictures: input.pictures, witnesses: input.witnesses ?? [], ...(input.massing ? { massing: input.massing } : {}), ...(input.plans ? { plans: input.plans } : {}), ...(input.facts ? { facts: input.facts } : {}) }
       if (p.operation === 'ASSIGN_VIEW') {
         const b = bindView(ctx, p)
         if ('status' in b) {

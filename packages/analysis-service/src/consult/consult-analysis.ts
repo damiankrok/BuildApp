@@ -1108,7 +1108,8 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
     const retiredIds = new Map([...listedAt].filter(([id]) => !elementExists(m0, id)))
     const held = viewsOfRun(l.run.reconstruction.facadeAlignment.views)
     const plans = (l.run.reconstruction.registrations.plans ?? []).map((q) => ({ frameId: q.frameId, toWorld: q.toWorld }))
-    const out = executeCorrections({ model: m0, views: massingOf.get(l)?.views ?? held, ...(massingOf.get(l) ? {} : { derivedViews: (m: CanonicalBuildingModel, h: readonly BindView[]) => sketchViewsOf(m, pictures, h) }), ...(plans.length > 0 ? { plans } : {}), pictures, proposals, witnesses: witnessesOf(l), seen, ...(retiredIds.size > 0 ? { retiredIds } : {}) })
+    const pitch = (l.pkg ?? l.run.pkg)?.publishedFacts.find((f) => f.key === 'roof_pitch' && f.unit === 'deg')?.value
+    const out = executeCorrections({ model: m0, views: massingOf.get(l)?.views ?? held, ...(massingOf.get(l) ? {} : { derivedViews: (m: CanonicalBuildingModel, h: readonly BindView[]) => sketchViewsOf(m, pictures, h) }), ...(plans.length > 0 ? { plans } : {}), ...(typeof pitch === 'number' ? { facts: { roofPitchDeg: pitch } } : {}), pictures, proposals, witnesses: witnessesOf(l), seen, ...(retiredIds.size > 0 ? { retiredIds } : {}) })
     correctionRuns.push({ stage, baseRevision: out.baseRevision, revision: out.revision, delivered: false, records: out.records, transactions: out.transactions })
     record({ at: now().toISOString(), kind: 'CORRECTIONS', stage, baseRevision: out.baseRevision, revision: out.revision, records: out.records.map((r) => ({ proposalId: r.proposalId, operation: r.operation, status: r.status, code: r.code ?? null })), transactions: out.transactions.map((t) => ({ txId: t.txId, decision: t.decision, why: t.why })) })
     return out
@@ -1172,16 +1173,16 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
     // v3.54.17 R3: the elevations no caption tells apart ("side" twice): each is tried on every model side no other
     // elevation shows, all of them at once; a permutation is taken only when it is the only one that registers, or its
     // drawn openings support it by a clear margin (z ≥ 1 over the next) — otherwise they stay unassigned, by name
-    {
-      const unspecified = sketchSummary.reading.sketches.filter((x) => x.sketch && x.facade === 'SIDE_UNSPECIFIED')
-      const taken = new Set(sketchSummary.reading.sketches.filter((x) => x.facade !== 'SIDE_UNSPECIFIED').map((x) => sketchSideOf?.[x.frameId] ?? sideOfFacade(x.facade)).filter((v): v is Side => !!v))
+    const decideSides = async (model: CanonicalBuildingModel, heldViews: readonly BindView[], from: Local): Promise<void> => {
+      const unspecified = (sketchSummary?.reading.sketches ?? []).filter((x) => x.sketch && x.facade === 'SIDE_UNSPECIFIED' && !sketchSideOf?.[x.frameId])
+      const taken = new Set((sketchSummary?.reading.sketches ?? []).filter((x) => x.facade !== 'SIDE_UNSPECIFIED' || sketchSideOf?.[x.frameId]).map((x) => sketchSideOf?.[x.frameId] ?? sideOfFacade(x.facade)).filter((v): v is Side => !!v))
       const free = (['FRONT', 'RIGHT', 'REAR', 'LEFT'] as Side[]).filter((sd) => !taken.has(sd))
       if (unspecified.length > 0 && unspecified.length <= free.length && unspecified.length <= 2) {
-        const pics = await allPicturesOf(good)
+        const pics = await allPicturesOf(from)
         const perms: Side[][] = unspecified.length === 1 ? free.map((f) => [f]) : free.flatMap((f1) => free.filter((f2) => f2 !== f1).map((f2) => [f1, f2]))
         const anchorsFor = (frameId: string, side: Side): SketchAnchors | undefined => { const sv = sketchSideOf; sketchSideOf = { ...(sv ?? {}), [frameId]: side }; const a = sketchAnchors().find((q) => q.frameId === frameId); sketchSideOf = sv; return a }
         const scored = perms.map((perm) => {
-          const regs = unspecified.map((x, i) => { const a = anchorsFor(x.frameId, perm[i]); return a ? registerFromSketch({ model: run.reconstruction.model, views: [...held], pictures: pics, witnesses: [] }, a) : undefined })
+          const regs = unspecified.map((x, i) => { const a = anchorsFor(x.frameId, perm[i]); return a ? registerFromSketch({ model, views: [...heldViews], pictures: pics, witnesses: [] }, a) : undefined })
           const ok = regs.every((r) => r && !('status' in r))
           return { perm, ok, score: regs.reduce((t, r) => t + (r && !('status' in r) ? r.support ?? 0 : 0), 0) }
         }).filter((q) => q.ok).sort((a, b) => b.score - a.score)
@@ -1190,6 +1191,7 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
         if (pick) sketchSideOf = { ...(sketchSideOf ?? {}), ...Object.fromEntries(unspecified.map((x, i) => [x.frameId, pick.perm[i]])) }
       }
     }
+    await decideSides(run.reconstruction.model, held, good)
     const sem: NonNullable<SketchSummary['semantic']> = { version: `${SKETCH_PROPOSALS_VERSION}+massing-${MASSING_OPS_VERSION}`, decision: 'NOT_RUN', why: '', accounts: [], records: [], transactions: [], massing: roofs.accounts, orientation: roofs.orientation }
     sketchSummary.semantic = sem
     // v3.54.17 R3: two phases. The bodies' roofs first: a wrong eaves height in the model (two full storeys where the
@@ -1225,7 +1227,10 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
     if (stood !== good && stood.run) roofs = roofProposalsFromSketches(sketchInputs(), stood.run.reconstruction.model, viewsOfRun(stood.run.reconstruction.facadeAlignment.views), modelRevision(stood.run.reconstruction.model), sideOfFacade)
     sem.massing = roofs.accounts
     sem.orientation = roofs.orientation
+    record({ at: now().toISOString(), kind: 'SKETCH_ROOFS', orientation: roofs.orientation.assignment, proposals: roofs.proposals.map((x) => x.proposalId), accounts: roofs.accounts.map((a) => ({ frameId: a.frameId, side: a.side ?? null, proposed: a.proposed.length, skipped: a.skipped.map((k) => k.why.slice(0, 220)) })) })
     await phase('SKETCH_ROOF', roofs.proposals)
+    // the heights the roof phase corrected may let an unlabelled elevation register now
+    if (stood !== good && stood.run) await decideSides(stood.run.reconstruction.model, viewsOfRun(stood.run.reconstruction.facadeAlignment.views), stood)
     const m2 = stood.run?.reconstruction.model ?? run.reconstruction.model
     const held2 = stood.run ? viewsOfRun(stood.run.reconstruction.facadeAlignment.views) : held
     const pictures2 = await allPicturesOf(stood)

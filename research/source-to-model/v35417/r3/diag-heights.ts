@@ -49,6 +49,7 @@ const out = {
   finalChimneys: run?.reconstruction.model.chimneys.map((c) => ({ id: c.id, height: c.height, footprint: c.footprint })) ?? [],
   printedOutline: events.filter((e) => e.kind === 'PRINTED_OUTLINE'),
   corrections: events.filter((e) => e.kind === 'CORRECTIONS').map((e) => ({ stage: e.stage, records: e.records })),
+  facts: (r.run?.pkg.publishedFacts ?? []).map((f) => [f.key, f.value, f.unit, String((f as unknown as { label?: string }).label ?? '').slice(0, 60)]),
   metric: (r.metricRead?.reads ?? []).map((x) => ({ frameId: x.frameId, obs: x.observations.map((o) => [o.kind, o.literal, o.scope, o.reference, o.status, o.axis, !!o.ends]) })),
   sketchDecision: { decision: r.sketches?.semantic?.decision, why: r.sketches?.semantic?.why, fusion: r.sketches?.semantic?.chimneyFusion },
   delivered: events.filter((e) => e.kind === "CORRECTIONS_DELIVERED"),

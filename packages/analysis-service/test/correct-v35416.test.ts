@@ -634,3 +634,71 @@ describe('v3.54.17 R2 §3: the reviewer binds a defect to a listed id; made-up, 
     expect(d3?.carriedFrom).toBe(1)
   })
 })
+
+describe('v3.54.17 R3 the sketch channel: what the sketch leaves out, and what it draws on the roof', () => {
+  const poly = (b: { x0: number; y0: number; x1: number; y1: number }): Array<[number, number]> => [[b.x0, b.y0], [b.x1, b.y0], [b.x1, b.y1], [b.x0, b.y1]]
+  const wallZone = { id: 'w', class: 'LIGHT_RENDER', polygon: poly(boxOf(0, 10, 0, 5.6)), host: 'main', visibility: 'VISIBLE' }
+  const roofZone = { id: 'r', polygon: poly(boxOf(-0.4, 10.4, 5.6, 8.4)) }
+  const sk = (openings: Array<{ id: string; kind: string; polygon: Array<[number, number]> }>, walls: unknown[] = [wallZone]) => ({ sketchId: 's', frameId: FRAME, openings, elements: [], walls, roofs: [roofZone] }) as unknown as ElevationSketch
+  const drawnFive = [['sA', boxOf(1.0, 2.2, 0.9, 2.1)], ['sB', boxOf(6.0, 7.2, 0.9, 2.1)], ['sC', boxOf(4.0, 4.8, 0.9, 2.1)], ['sD', boxOf(6.0, 7.2, 3.7, 4.9)], ['sE', boxOf(8.2, 9.4, 3.7, 4.9)]] as const
+  const withF = (): CanonicalBuildingModel => inject(build(program()), [{ type: 'cutOpening', id: 'F', wallId: 'g-w0', kind: 'WINDOW', offset: 8.2, sill: 0.9, width: 1.2, height: 1.2 }, { type: 'placeWindow', id: 'F-unit', openingId: 'F' }] as BuildingCommand[])
+  it('an opening the sketch leaves out on a wall it sees is put to the picture: removed where the source shows plain wall', () => {
+    const m = withF()
+    const acc = proposalsFromSketch(sk(drawnFive.map(([id, b]) => ({ id, kind: 'WINDOW', polygon: poly(b) }))), 'FRONT', m, [view], modelRevision(m))
+    const rem = acc.proposals.filter((p) => p.operation === 'REMOVE_OPENING')
+    expect(rem.map((p) => p.targetId)).toEqual(['F'])
+    const out = run(m, [rem[0]])
+    expect(out.records[0].status, out.records[0].why).toBe('COMMITTED')
+    expect(out.model.openings.some((o) => o.id === 'F')).toBe(false)
+  })
+  it('counter-trial: the sketch leaves out D and E, which the source shows — proposed, and the picture refuses both', () => {
+    const m = build(program())
+    const acc = proposalsFromSketch(sk(drawnFive.slice(0, 3).map(([id, b]) => ({ id, kind: 'WINDOW', polygon: poly(b) }))), 'FRONT', m, [view], modelRevision(m))
+    const rem = acc.proposals.filter((p) => p.operation === 'REMOVE_OPENING')
+    expect(rem.map((p) => p.targetId).sort()).toEqual(['D', 'E'])
+    const out = run(m, rem)
+    expect(out.records.every((r) => r.status !== 'COMMITTED')).toBe(true)
+    expect(out.model.openings.map((o) => o.id).sort()).toEqual(m.openings.map((o) => o.id).sort())
+  })
+  it('counter-trial: no wall zone drawn as VISIBLE over the opening (a partial or occluded reading) proposes no removal, by name', () => {
+    const m = withF()
+    const drawn = drawnFive.map(([id, b]) => ({ id, kind: 'WINDOW', polygon: poly(b) }))
+    for (const walls of [[], [{ ...wallZone, visibility: 'INFERRED' }]]) {
+      const acc = proposalsFromSketch(sk(drawn, walls), 'FRONT', m, [view], modelRevision(m))
+      expect(acc.proposals.filter((p) => p.operation === 'REMOVE_OPENING')).toEqual([])
+      expect(acc.skipped.find((x) => x.sketchId === 'F')?.why).toMatch(/no visible wall/)
+    }
+  })
+  it('one opening of the source over two of the model: one update that absorbs the other, committed in one transaction', () => {
+    const m = inject(build(program()), [
+      { type: 'cutOpening', id: 'P', wallId: 'g-w0', kind: 'WINDOW', offset: 3.95, sill: 0.9, width: 0.4, height: 1.2 }, { type: 'placeWindow', id: 'P-unit', openingId: 'P' },
+      { type: 'cutOpening', id: 'Q', wallId: 'g-w0', kind: 'WINDOW', offset: 4.45, sill: 0.9, width: 0.4, height: 1.2 }, { type: 'placeWindow', id: 'Q-unit', openingId: 'Q' },
+    ] as BuildingCommand[])
+    const acc = proposalsFromSketch(sk(drawnFive.map(([id, b]) => ({ id, kind: 'WINDOW', polygon: poly(b) }))), 'FRONT', m, [view], modelRevision(m))
+    const upd = acc.proposals.filter((p) => p.operation === 'UPDATE_OPENING')
+    expect(upd.length, JSON.stringify(acc.proposals.map((p) => [p.operation, p.targetId, p.patch]))).toBe(1)
+    expect([upd[0].targetId, ...((upd[0].patch?.absorbs as string[]) ?? [])].sort()).toEqual(['P', 'Q'])
+    expect(acc.proposals.filter((p) => p.operation === 'REMOVE_OPENING' || p.operation === 'ADD_OPENING')).toEqual([])
+    const out = run(m, upd)
+    expect(out.records[0].status, out.records[0].why).toBe('COMMITTED')
+    const ids = out.model.openings.map((o) => o.id)
+    expect(ids.filter((x) => x === 'P' || x === 'Q').length).toBe(1)
+    const kept = out.model.openings.find((o) => o.id === upd[0].targetId)
+    expect(kept?.width).toBeGreaterThan(0.7)
+  })
+  it('counter-trial: absorbing an opening of another wall, or one outside the new shape, is refused by name', () => {
+    const m = inject(build(program()), [{ type: 'cutOpening', id: 'P', wallId: 'g-w0', kind: 'WINDOW', offset: 3.95, sill: 0.9, width: 0.4, height: 1.2 }, { type: 'placeWindow', id: 'P-unit', openingId: 'P' }] as BuildingCommand[])
+    const box = boxOf(4.0, 4.8, 0.9, 2.1)
+    const p = (absorbs: string[]) => propose(m, { proposalId: `abs-${absorbs.join('')}`, operation: 'UPDATE_OPENING', targetId: 'P', patch: { box, kind: 'WINDOW', absorbs } })
+    expect(run(m, [p(['D'])]).records[0].code).toBe('ABSORB_OTHER_WALL')
+    expect(run(m, [p(['A'])]).records[0].code).toBe('ABSORB_OUTSIDE_SHAPE')
+  })
+  it('an opening drawn on the roof and on no wall zone is a roof window, not a wall opening; one in the wall zone stays one', () => {
+    const m = build(program())
+    const drawn = [...drawnFive.map(([id, b]) => ({ id, kind: 'WINDOW', polygon: poly(b) })), { id: 'sR', kind: 'WINDOW', polygon: poly(boxOf(3.0, 3.8, 6.4, 7.2)) }]
+    const acc = proposalsFromSketch(sk(drawn), 'FRONT', m, [view], modelRevision(m))
+    expect(acc.skipped.find((x) => x.sketchId === 'sR')?.why).toMatch(/roof window/)
+    expect(acc.proposals.some((p) => p.proposalId.includes('sR'))).toBe(false)
+    expect(acc.proposals.filter((p) => p.operation === 'ADD_OPENING').map((p) => p.proposalId)).toEqual([expect.stringContaining('sC')])
+  })
+})

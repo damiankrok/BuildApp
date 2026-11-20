@@ -24,7 +24,7 @@ import { targetBodies } from '../correct/resolve.js'
 import { area, bodiesOf, bodyCommands, extentOn, MASSING_TOLERANCES, MASSING_VERSION, massingCommands, MINIATURE_CONVENTIONS, profileOver, readableStretch, registerByPlan, solveMassing } from './massing.js'
 import type { BodySpec, Fidelity, MassingHypothesis, ModelBody, OutlineObservation, Rect, RoofSpec, SilhouetteObservation } from './massing.js'
 
-export const MASSING_OPS_VERSION = '1.1.0' as const
+export const MASSING_OPS_VERSION = '1.2.0' as const
 /** v3.54.17 R2: the most overhang a drawn roof may have past its body on a side, and the steepest pitch the kernel builds. */
 export const MAX_OVERHANG_M = 1.0
 export const MAX_PITCH_DEG = 85
@@ -96,6 +96,15 @@ export function specSilhouette(spec: RoofSpec, rect: Rect, view: BindView, overh
   return [[a0, yE], [a1, yE], [(a0 + a1) / 2, yR]]
 }
 
+/**
+ * v3.54.17 R3: a gable with an overhang as an elevation along its ridge draws it: the slope runs on past the walls by the
+ * overhang and its lower edge (the fascia) stands that reach times the slope below the eaves at the wall.
+ */
+function withOverhang(spec: RoofSpec, rect: Rect, view: BindView, oh: number): Poly {
+  const drop = oh * Math.tan(((spec.pitchDeg ?? 0) * Math.PI) / 180)
+  return specSilhouette({ ...spec, eavesM: spec.eavesM - drop }, rect, view, oh)
+}
+
 /** The roofs and roof planes over a body, as the elevation of `side` draws them: one hull, or none. */
 export function bodyRoofSilhouette(m: CanonicalBuildingModel, b: ModelBody, view: BindView): Poly | undefined {
   const p = view.projection
@@ -140,13 +149,13 @@ function bodyWallSilhouette(m: CanonicalBuildingModel, b: ModelBody, view: BindV
 }
 
 /** A body's whole silhouette as an elevation draws it: its walls from the ground to the eaves, and its roof. */
-function specBody(rect: Rect, spec: RoofSpec, view: BindView, floorM: number): Poly[] {
+function specBody(rect: Rect, spec: RoofSpec, view: BindView, floorM: number, overhang = 0): Poly[] {
   const p = view.projection
   const e = extentOn(rect, view.side)
   const a0 = pxOf(p, e.lo)
   const a1 = pxOf(p, e.hi)
   const top = spec.kind === 'FLAT' ? spec.eavesM : spec.eavesM
-  return [[[a0, pyOf(p, floorM)], [a1, pyOf(p, floorM)], [a1, pyOf(p, top)], [a0, pyOf(p, top)]], ...(spec.kind === 'GABLE' ? [specSilhouette(spec, rect, view)] : [])]
+  return [[[a0, pyOf(p, floorM)], [a1, pyOf(p, floorM)], [a1, pyOf(p, top)], [a0, pyOf(p, top)]], ...(spec.kind === 'GABLE' ? [overhang > 0 ? withOverhang(spec, rect, view, overhang) : specSilhouette(spec, rect, view)] : [])]
 }
 function modelBody(m: CanonicalBuildingModel, b: ModelBody, view: BindView, rect: Rect = b.rect): Poly[] {
   const w = bodyWallSilhouette(m, b, view, rect)
@@ -170,7 +179,8 @@ function oneBody(m: CanonicalBuildingModel, targetId: string): { body: ModelBody
   if (tb.ids.length !== 1) return { status: 'NEEDS_EVIDENCE', code: 'AMBIGUOUS_BODY', why: `${targetId} belongs to ${tb.ids.join(' and ')}: name one body (its wall ring or its roof)` }
   return { body: bodies.find((b) => b.id === tb.ids[0]) as ModelBody, bodies }
 }
-const rectangular = (m: CanonicalBuildingModel, b: ModelBody): boolean => b.ringIds.every((id) => (m.wallRings.find((r) => r.id === id)?.wallIds.length ?? 0) === 4)
+// v3.54.17 R3: a body of walls without a ring record (bodiesOf) is rectangular when every wall of it is square to the plan
+const rectangular = (m: CanonicalBuildingModel, b: ModelBody): boolean => (b.ringIds.length > 0 ? b.ringIds.every((id) => (m.wallRings.find((r) => r.id === id)?.wallIds.length ?? 0) === 4) : b.wallIds.length >= 3 && m.walls.filter((w) => b.wallIds.includes(w.id)).every((w) => Math.abs(w.start.x - w.end.x) < 1e-3 || Math.abs(w.start.z - w.end.z) < 1e-3))
 const topLevelOf = (m: CanonicalBuildingModel, b: ModelBody): { id: string; elevation: number } | undefined => b.levelIds.map((id) => ({ id, elevation: levelOf(m, id).elevation })).sort((x, y) => y.elevation - x.elevation)[0]
 
 /** The registration a roof is read through: the analyzer's with heights, or one made by the body's own plan extent. */
@@ -203,7 +213,7 @@ export function bindSetRoof(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
   const ob = oneBody(m, p.targetId)
   if ('status' in ob) return ob
   const { body, bodies } = ob
-  if (body.ringIds.length === 0) return { status: 'UNSUPPORTED_OPERATION', code: 'NO_WALLS', why: `${body.id} has no walls: a roof is set on a body; build the body first (BUILD_MASSING)` }
+  if (body.wallIds.length === 0) return { status: 'UNSUPPORTED_OPERATION', code: 'NO_WALLS', why: `${body.id} has no walls: a roof is set on a body; build the body first (BUILD_MASSING)` }
   if (!rectangular(m, body)) return { status: 'UNSUPPORTED_OPERATION', code: 'NOT_RECTANGULAR', why: `${body.id}'s rings are not four-walled: a roof over a non-rectangular body is beyond this version` }
   const pic = pictureOf(ctx, p, f.picture)
   if (!pic) return { status: 'INVALID', code: 'NOT_A_SOURCE_PICTURE', why: `picture ${String(f.picture ?? p.frameId)} is not a source picture of this check` }
@@ -221,8 +231,8 @@ export function bindSetRoof(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
   }
   // (b) the body's own stretch on this side: where another body is projected too, what is drawn there is not only this one
   const e = extentOn(body.rect, view.side)
-  const shared = bodies.some((q) => q !== body && q.ringIds.length > 0 && Math.min(e.hi, extentOn(q.rect, view.side).hi) - Math.max(e.lo, extentOn(q.rect, view.side).lo) > 1e-6)
-  const st = shared ? readableStretch(body.rect, bodies.filter((q) => q !== body && q.ringIds.length > 0).map((q) => q.rect), view.side) : e
+  const shared = bodies.some((q) => q !== body && q.wallIds.length > 0 && Math.min(e.hi, extentOn(q.rect, view.side).hi) - Math.max(e.lo, extentOn(q.rect, view.side).lo) > 1e-6)
+  const st = shared ? readableStretch(body.rect, bodies.filter((q) => q !== body && q.wallIds.length > 0).map((q) => q.rect), view.side) : e
   if (!st) return { status: 'NEEDS_EVIDENCE', code: 'BODY_HIDDEN_ON_SIDE', why: `on the ${view.side.toLowerCase()} side ${body.id}'s whole stretch is shared with another body: what is drawn over it may be the other's roof` }
   const prof = profileOver(view, st.lo, st.hi, { walls: [], roofs: [poly] })
   if (!prof) return { status: 'INVALID', code: 'ROOF_NOT_OVER_BODY', why: `the drawn roof does not stand over ${body.id}'s ${(e.hi - e.lo).toFixed(2)} m on the ${view.side.toLowerCase()} side` }
@@ -238,22 +248,51 @@ export function bindSetRoof(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
   if ((f.roofKind === 'FLAT') !== (rise < MASSING_TOLERANCES.flatRiseM)) return { status: 'INVALID', code: 'KIND_CONTRADICTS_SHAPE', why: `${f.roofKind} proposed, but the drawn roof rises ${rise.toFixed(2)} m over its eaves (flat below ${MASSING_TOLERANCES.flatRiseM} m)` }
   const top = topLevelOf(m, body) as { id: string; elevation: number }
   let spec: RoofSpec
+  let overhangM = 0
+  let pitchFrom: string | undefined
   if (f.roofKind === 'GABLE') {
     if (prof.shape === 'TRAPEZOID') return { status: 'UNSUPPORTED_OPERATION', code: 'HIP_ROOF', why: `the drawn roof is a trapezoid on the ${view.side.toLowerCase()} side: a hip roof, beyond gable and flat` }
     const axis: 'X' | 'Z' = prof.shape === 'TRIANGLE' ? (along(view.side) === 'x' ? 'Z' : 'X') : along(view.side) === 'x' ? 'X' : 'Z'
     const span = axis === 'X' ? body.rect.maxZ - body.rect.minZ : body.rect.maxX - body.rect.minX
     spec = { kind: 'GABLE', ridgeAxis: axis, pitchDeg: Math.round(((Math.atan2(rise, span / 2) * 180) / Math.PI) * 10) / 10, eavesM: r6(prof.eavesM), ridgeM: r6(prof.topM) }
+    // v3.54.17 R3: seen along its ridge, a gable's lowest drawn edge is its fascia — past the wall by the overhang and
+    // lower than the eaves at the wall. With the pitch the page states, the eaves at the wall follow from the drawn ridge
+    // (ridge − half the span × tan pitch) and the overhang from the drawn fascia; both must be possible (0..MAX), or the
+    // pitch and the drawing disagree and the page's pitch is not used (named)
+    const pagePitch = ctx.facts?.roofPitchDeg
+    if (prof.shape !== 'TRIANGLE' && pagePitch !== undefined && pagePitch >= 10 && pagePitch <= 60) {
+      const tan = Math.tan((pagePitch * Math.PI) / 180)
+      const eavesWall = prof.topM - (span / 2) * tan
+      const oh = (eavesWall - prof.eavesM) / tan
+      if (oh >= -0.05 && oh <= MAX_OVERHANG_M) {
+        spec = { kind: 'GABLE', ridgeAxis: axis, pitchDeg: pagePitch, eavesM: r6(eavesWall), ridgeM: r6(prof.topM) }
+        overhangM = Math.round(Math.max(0, oh) * 100) / 100
+        // the model builds one overhang all round: where another body stands against an eaves side within that reach,
+        // the eaves overhang would run into it — the heights and the pitch are kept, the overhang is not built (named)
+        const eavesSides = axis === 'X' ? (['minZ', 'maxZ'] as const) : (['minX', 'maxX'] as const)
+        const against = bodies.find((q) => q.id !== body.id && eavesSides.some((k) => {
+          const gap = k === 'minZ' ? body.rect.minZ - q.rect.maxZ : k === 'maxZ' ? q.rect.minZ - body.rect.maxZ : k === 'minX' ? body.rect.minX - q.rect.maxX : q.rect.minX - body.rect.maxX
+          const ov = axis === 'X' ? Math.min(q.rect.maxX, body.rect.maxX) - Math.max(q.rect.minX, body.rect.minX) : Math.min(q.rect.maxZ, body.rect.maxZ) - Math.max(q.rect.minZ, body.rect.minZ)
+          return gap > -0.05 && gap < overhangM + 0.05 && ov > 0.05
+        }))
+        if (against && overhangM > 0) {
+          pitchFrom = `the page's ${pagePitch}° with the drawn ridge: eaves at the wall ${eavesWall.toFixed(2)} m; the drawn ${overhangM.toFixed(2)} m eaves overhang is NOT built — ${against.id} stands against an eaves side (one overhang all round in the model)`
+          overhangM = 0
+        }
+        pitchFrom = `the page's ${pagePitch}° with the drawn ridge ${prof.topM.toFixed(2)} m: eaves at the wall ${eavesWall.toFixed(2)} m, fascia ${prof.eavesM.toFixed(2)} m → overhang ${overhangM.toFixed(2)} m`
+      } else pitchFrom = `the page's ${pagePitch}° would put the overhang at ${oh.toFixed(2)} m from the drawn ridge and fascia: not used, the drawn eaves taken`
+    }
   } else spec = { kind: 'FLAT', eavesM: r6(prof.topM) }
   // (d) a pitch the kernel cannot build is named here, with its inputs — never clamped to a buildable one
   if (spec.kind === 'GABLE' && !((spec.pitchDeg ?? 0) <= MAX_PITCH_DEG)) return { status: 'NEEDS_EVIDENCE', code: 'IMPLAUSIBLE_PITCH', why: `${(spec.pitchDeg ?? 0).toFixed(1)}° from a rise of ${rise.toFixed(2)} m over half of ${(spec.ridgeAxis === 'X' ? body.rect.maxZ - body.rect.minZ : body.rect.maxX - body.rect.minX).toFixed(2)} m through ${hv.how}: beyond ${MAX_PITCH_DEG}°, the registration or the drawn roof is not this body's` }
   if (!(spec.eavesM - top.elevation > 0.3)) return { status: 'INVALID', code: 'IMPOSSIBLE_EAVES', why: `the drawn eaves at ${spec.eavesM.toFixed(2)} m are not above ${top.id} (${top.elevation.toFixed(2)} m)` }
   // the source decides between the model's roof and the proposal on the original picture
-  const proposed = specSilhouette(spec, body.rect, view)
+  const proposed = overhangM > 0 ? withOverhang(spec, body.rect, view, overhangM) : specSilhouette(spec, body.rect, view)
   const floorM = Math.min(...body.levelIds.map((id) => levelOf(m, id).elevation))
   const occupied = others(m, bodies, body, view)
-  const gate = compareRegions(pic.raster, specBody(body.rect, spec, view, floorM), modelBody(m, body, view), occupied, view.projection.zeroRow)
+  const gate = compareRegions(pic.raster, specBody(body.rect, spec, view, floorM, overhangM), modelBody(m, body, view), occupied, view.projection.zeroRow)
   const gateRec = regionRecord(gate)
-  const record = { bound: { frameId: pic.frameId, side: view.side, hostId: body.id, ids: [body.id], values: { eavesM: spec.eavesM, ...(spec.ridgeM ? { ridgeM: spec.ridgeM } : {}), ...(spec.pitchDeg ? { pitchDeg: spec.pitchDeg } : {}) } }, source: { frameId: pic.frameId, sourceByteHash: pic.sourceByteHash }, gate: gateRec, massing: { version: MASSING_OPS_VERSION, body: body.id, spec, registration: hv.how, profile: prof.why } }
+  const record = { bound: { frameId: pic.frameId, side: view.side, hostId: body.id, ids: [body.id], values: { eavesM: spec.eavesM, ...(overhangM > 0 ? { overhangM } : {}), ...(spec.ridgeM ? { ridgeM: spec.ridgeM } : {}), ...(spec.pitchDeg ? { pitchDeg: spec.pitchDeg } : {}) } }, source: { frameId: pic.frameId, sourceByteHash: pic.sourceByteHash }, gate: gateRec, massing: { version: MASSING_OPS_VERSION, body: body.id, spec, registration: hv.how, profile: prof.why } }
   if (gate.winner === 'CURRENT') return { status: 'REJECTED_BY_SOURCE', code: 'SOURCE_SUPPORTS_MODEL', why: `the picture supports the model's roof over the proposal: ${gate.why}`, record }
   if (gate.winner !== 'PROPOSED') return { status: 'NEEDS_EVIDENCE', code: 'SOURCE_UNDECIDED', why: `the picture does not decide between the model's roof and the proposal: ${gate.why}`, record }
   // dependants: the walls of the top storey take the new top; an opening that would rise above it refuses the patch
@@ -272,10 +311,12 @@ export function bindSetRoof(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
   }
   const others2 = bodies.filter((b) => b.id !== body.id).map((b) => b.rect)
   const built = bodyCommands({ id: body.id, rect: body.rect, roof: spec, provenance: {} }, top.id, top.elevation, others2, 0.3).filter((c) => c.type === 'createRoof') as Array<Extract<BuildingCommand, { type: 'createRoof' }>>
-  const roofCmd = { ...built[0], id: keepId, ...(spec.kind === 'GABLE' ? { capWallIds: topWalls.map((w) => w.id) } : {}), evidence: { status: 'SOURCE_DERIVED' as const, source: pic.frameId, locator: `roof polygon on ${pic.frameId}`, interpretation: `${spec.kind}${spec.ridgeAxis ? ` along ${spec.ridgeAxis}` : ''} read from the source elevation through ${hv.how}` } }
+  const roofCmd = { ...built[0], id: keepId, ...(overhangM > 0 ? { overhang: overhangM } : {}), ...(spec.kind === 'GABLE' ? { capWallIds: topWalls.map((w) => w.id) } : {}), evidence: { status: 'SOURCE_DERIVED' as const, source: pic.frameId, locator: `roof polygon on ${pic.frameId}`, interpretation: `${spec.kind}${spec.ridgeAxis ? ` along ${spec.ridgeAxis}` : ''} read from the source elevation through ${hv.how}` } }
   cmds.push(roofCmd as BuildingCommand)
   const removedDeps = m.roofOpenings.filter((o) => removedRoofs.includes(o.roofId) || body.planeIds.includes(o.roofId)).map((o) => o.id)
-  const allowed = [...removedRoofs.map((id) => `roofs:${id}`), `roofs:${keepId}`, ...body.planeIds.map((id) => `roofPlanes:${id}`), ...topWalls.map((w) => `walls:${w.id}`), ...removedDeps.map((id) => `roofOpenings:${id}`), 'rooflights:*', 'roofEdges:*']
+  // v3.54.17 R3: interior walls under the roof follow its new underside (their tops are capped by it), nothing else of them
+  const underRoof = m.walls.filter((w) => w.kind !== 'EXTERIOR' && body.levelIds.includes(w.levelId) && [w.start, w.end].every((q) => q.x >= body.rect.minX - 0.05 && q.x <= body.rect.maxX + 0.05 && q.z >= body.rect.minZ - 0.05 && q.z <= body.rect.maxZ + 0.05)).map((w) => `walls:${w.id}`)
+  const allowed = [...underRoof, ...removedRoofs.map((id) => `roofs:${id}`), `roofs:${keepId}`, ...body.planeIds.map((id) => `roofPlanes:${id}`), ...topWalls.map((w) => `walls:${w.id}`), ...removedDeps.map((id) => `roofOpenings:${id}`), 'rooflights:*', 'roofEdges:*']
   const measure = (working: CanonicalBuildingModel, _before: CanonicalBuildingModel, pictures: readonly BindPicture[]): { failure?: string; measure: { sourceVerified: boolean | null; why: string; iouWithProposal?: number; builtSupportZ?: number | null } } => {
     const nb = bodiesOf(working).find((b) => b.id === body.id)
     const sil = nb ? bodyRoofSilhouette(working, nb, view) : undefined
@@ -686,7 +727,7 @@ export function orientationOf(sketches: readonly SketchForMassing[], m: Canonica
  * One proposal per body (the elevation that shows its roof form most clearly), never two on one body.
  */
 export function roofProposalsFromSketches(sketches: readonly SketchForMassing[], m: CanonicalBuildingModel, views: readonly BindView[], rev: string, sideOf: (facade: string) => Side | undefined): { proposals: CorrectionProposal[]; accounts: MassingProposalAccount[]; orientation: OrientationHypothesis } {
-  const bodies = bodiesOf(m).filter((b) => b.ringIds.length > 0 && rectangular(m, b))
+  const bodies = bodiesOf(m).filter((b) => b.wallIds.length > 0 && rectangular(m, b))
   const best = new Map<string, { score: number; p: CorrectionProposal }>()
   const accounts: MassingProposalAccount[] = []
   const orientation = orientationOf(sketches, m, sideOf)
@@ -734,10 +775,15 @@ export function roofProposalsFromSketches(sketches: readonly SketchForMassing[],
       const x0 = Math.min(pxOf(view.projection, e.lo), pxOf(view.projection, e.hi))
       const x1 = Math.max(pxOf(view.projection, e.lo), pxOf(view.projection, e.hi))
       // the sketch's roof surfaces over this body: the one that covers most of its stretch
+      // v3.54.17 R3: the roof's width is held against the body's WHOLE extent on this side (the readable stretch is only
+      // the part no other body stands before; a main roof over a porch is not "twice as wide" as its body)
+      const full = extentOn(b.rect, side)
+      const f0 = Math.min(pxOf(view.projection, full.lo), pxOf(view.projection, full.hi))
+      const f1 = Math.max(pxOf(view.projection, full.lo), pxOf(view.projection, full.hi))
       const over = s.roofs.map((r) => {
         const rx = r.map((q) => q[0])
         const inter = Math.max(0, Math.min(x1, Math.max(...rx)) - Math.max(x0, Math.min(...rx)))
-        return { r, share: inter / Math.max(1, x1 - x0), union: (Math.max(x1, Math.max(...rx)) - Math.min(x0, Math.min(...rx))) / Math.max(1, x1 - x0) }
+        return { r, share: inter / Math.max(1, x1 - x0), union: (Math.max(f1, Math.max(...rx)) - Math.min(f0, Math.min(...rx))) / Math.max(1, f1 - f0) }
       }).filter((q) => q.share > 0.6 && q.union < 1.4).sort((a, c) => c.share - a.share)
       if (over.length === 0) {
         acc.skipped.push({ bodyId: b.id, why: 'no roof surface of the sketch spans this body on this side' })
@@ -753,7 +799,13 @@ export function roofProposalsFromSketches(sketches: readonly SketchForMassing[],
       const current = bodyRoofSilhouette(m, b, view)
       const curKind = m.roofs.find((r) => b.roofIds.includes(r.id))?.kind ?? (b.planeIds.length > 0 ? 'PLANES' : 'NONE')
       const ov = current ? polygonIou(current, poly) : 0
-      const disagree = !current ? 'the body has no roof' : curKind !== kind && curKind !== 'PLANES' ? `the model's roof is ${curKind}, the sketch draws ${kind}` : ov < 0.6 ? `the model's roof and the drawn one overlap ${ov.toFixed(2)}` : undefined
+      // v3.54.17 R3: the roof's top is a height of its own — a ridge drawn 0.6 m above the model's is a different roof even
+      // where the two outlines overlap well (the shared tolerance of two views on one height decides)
+      const topOf = (q: Poly): number => (view.projection.zeroRow - Math.min(...q.map((t) => t[1]))) * (view.projection.mppV ?? view.projection.mpp)
+      const modelTop = current ? topOf(current) : undefined
+      const topGap = modelTop !== undefined && kind === 'GABLE' ? prof.topM - modelTop : 0
+      const topDisagrees = Math.abs(topGap) > Math.max(MASSING_TOLERANCES.heightAgreeM, MASSING_TOLERANCES.heightAgreeShare * prof.topM)
+      const disagree = !current ? 'the body has no roof' : curKind !== kind && curKind !== 'PLANES' ? `the model's roof is ${curKind}, the sketch draws ${kind}` : topDisagrees ? `the drawn roof's top is ${prof.topM.toFixed(2)} m, the model's ${(modelTop as number).toFixed(2)} m (${topGap > 0 ? '+' : ''}${topGap.toFixed(2)} m)` : ov < 0.6 ? `the model's roof and the drawn one overlap ${ov.toFixed(2)}` : undefined
       if (!disagree) {
         acc.skipped.push({ bodyId: b.id, why: `the drawn roof agrees with the model's (${kind}, overlap ${ov.toFixed(2)})` })
         continue

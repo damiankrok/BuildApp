@@ -7,7 +7,7 @@
  * change is NOT offered as an operation: the reviewer may still report it as a defect (`UNSUPPORTED_FAMILIES`), and the
  * record says so with the reason — it never reads as something the system can correct.
  */
-export const CORRECTION_REGISTRY_VERSION = '1.3.0' as const
+export const CORRECTION_REGISTRY_VERSION = '1.4.0' as const
 
 export const PATCH_OPERATIONS = ['ASSIGN_VIEW', 'SET_PARAMETER', 'ADD_OPENING', 'UPDATE_OPENING', 'REMOVE_OPENING', 'ADD_CHIMNEY', 'UPDATE_CHIMNEY', 'SET_FINISH', 'ROOF_FEATURE', 'BUILD_MASSING', 'SET_ROOF', 'SET_OUTLINE', 'SET_ROOF_OVERHANG'] as const
 export type PatchOperation = (typeof PATCH_OPERATIONS)[number]
@@ -68,8 +68,8 @@ export const CAPABILITIES: Record<PatchOperation, Capability> = {
     family: 'OPENING',
     consumer: 'commands/removeFeature + cutOpening + the same fill, under the SAME id (moved, resized, retyped or re-hosted)',
     measure: "both hypotheses — the model's opening and the proposal — held against the source picture's edges; the proposal is taken only when the source supports it clearly better",
-    params: ['picture', 'box', 'kind', 'headLeftY', 'headRightY'],
-    prompt: "UPDATE_OPENING — an opening of the MODEL ELEMENT INDEX (targetId: its id there) stands at the wrong place, size, height or kind: picture, box and kind as for ADD_OPENING. Never add a second opening where the index lists one.",
+    params: ['picture', 'box', 'kind', 'headLeftY', 'headRightY', 'absorbs'],
+    prompt: "UPDATE_OPENING — an opening of the MODEL ELEMENT INDEX (targetId: its id there) stands at the wrong place, size, height or kind: picture, box and kind as for ADD_OPENING. Never add a second opening where the index lists one. Where the source shows ONE opening over two or more of the index's openings, update one of them to the source's shape and list the others in absorbs.",
   },
   REMOVE_OPENING: {
     op: 'REMOVE_OPENING',
@@ -188,6 +188,7 @@ export const PATCH_SCHEMA = {
     roofLeftX: { type: 'number' },
     roofRightX: { type: 'number' },
     roofPolygon: { type: 'array', items: { type: 'array', items: { type: 'number' } } },
+    absorbs: { type: 'array', items: { type: 'string' }, description: 'UPDATE_OPENING: ids of other index openings on the same wall that the new shape covers (two openings of the model that are one in the source); they are removed in the same transaction' },
   },
   additionalProperties: false,
 } as const
@@ -216,6 +217,8 @@ export const DEFECT_SCHEMA = {
 } as const
 
 export type PatchFields = {
+  /** v3.54.17 R3: UPDATE_OPENING — openings of the same wall the new shape covers (the source's one opening is several in the model). */
+  absorbs?: string[]
   /** v3.54.17 R3: SET_OUTLINE from a printed overall dimension of a registered plan (analyzer-made from the metric read). */
   printed?: { valueM: number; literal: string; planFrameId: string; from: [number, number]; to: [number, number]; sourceByteHash: string }
   /** v3.54.17 R3: SET_ROOF_OVERHANG — the drawn roof's two ends, in the picture's pixels. */

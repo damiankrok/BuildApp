@@ -36,7 +36,7 @@ import type { ConsultSpend, ConsultantModel, ModelTurn, Price } from './loop.js'
 
 export const DIMENSION_OBSERVATION_SCHEMA = 'buildapp.dimension-observation' as const
 export const DIMENSION_OBSERVATION_VERSION = '1.2.0' as const
-export const METRIC_READ_PROMPT_VERSION = 'metric-read/3' as const
+export const METRIC_READ_PROMPT_VERSION = 'metric-read/4' as const
 export const METRIC_VERIFY_PROMPT_VERSION = 'metric-verify/2' as const
 export const METRIC_RESOLVER_VERSION = '1.2.0' as const
 export const VERIFY_MAX_ITEMS = 40
@@ -154,10 +154,10 @@ const READ_TOOL = {
 
 export const METRIC_READ_SYSTEM = `You read printed dimensions from one architectural drawing (a floor plan or a section of a house), literally. You do not see and are not told what anyone else read.
 
-Report, with report_dimensions, every dimension line with its number, every level mark (for example ±0,00, +2,80, +5,54, −0,30), and every printed angle. For each:
+Report, with report_dimensions, every dimension line with its number — the overall ones, every piece of every chain along the walls, opening widths, room sizes — every level mark (for example ±0,00, +2,80, +5,54, −0,30), and every printed angle. For each:
 - literal: exactly as printed (digits, sign, decimal comma or point). Never round, never convert in the literal, never complete a digit you cannot see. Illegible: status UNKNOWN, value null.
 - value: the same number in metres (centimetre labels like 1365 → 13.65; 4,50 → 4.5; a level +5,54 → 5.54; feet and inches 45'-6" → 13.8684, unit ft-in; an angle → degrees).
-- labelBox: the box of the TEXT, and ends: the two ends of its dimension line, both in pixels of the picture you were sent (x right, y down). Point at where the line meets its extension lines or ticks, not at the walls.
+- labelBox: the box of the TEXT, and ends: the two ends of its dimension line, both in pixels of the picture you were sent (x right, y down). Point at where the line meets its extension lines or ticks, not at the walls. Every LENGTH has its ends: a number you can read sits on a line you can see — ends is null only for a level mark, an angle or an area. Where the dimension stands (which wall, which room, which opening) is as important as its number.
 - scope: WHOLE_HOUSE only for the outermost overall dimension of the building; a chain's pieces are SEGMENT; a room's inside size ROOM; an opening's width OPENING; a section's height between two levels HEIGHT; a level mark LEVEL.
 - reference: OUTER_FACE when the line runs from outer wall face to outer wall face; INNER_FACE for inside sizes; AXIS for axis-to-axis; for levels FINISHED_LEVEL / STRUCTURAL_LEVEL / TERRAIN.
 - status PRINTED unless you computed it (DERIVED, say how) or guessed (ESTIMATED). A sum of other numbers is DERIVED, never PRINTED.

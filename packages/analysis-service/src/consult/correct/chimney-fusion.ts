@@ -12,19 +12,23 @@
  * with the second view as its depth (`depthPicture` / `depthBox`, bound by the executor's SECOND_VIEW path), and the gable
  * view's proposal of it takes the eaves view as its depth: whichever passes the source gate first places it, the other is
  * its duplicate.
+ * 1.1.0: the two eaves sides see the same stacks from opposite sides (the front's far slope is the rear's near one): an
+ * eaves stack and one of the opposite elevation over the same stretch of the ridge, with the same top and not both on
+ * their near slope, are one stack seen twice — not a second candidate that makes the gable view's pairing ambiguous. Both
+ * readings take the gable view as their depth; the first through the gate places it, the other is its duplicate.
  */
 import type { CanonicalBuildingModel } from '@buildapp/model'
 import type { Box } from './source-gate.js'
 import { alongAxis, alongOf, outward, yOf } from './execute.js'
 import type { BindPicture, BindView, CorrectionProposal, Side } from './execute.js'
 
-export const CHIMNEY_FUSION_VERSION = '1.0.0' as const
+export const CHIMNEY_FUSION_VERSION = '1.1.0' as const
 /** Two drawings of one stack give its top within this (≈ three pixels at the drawings' 1–2 cm/px). */
 export const TOP_TOLERANCE_M = 0.3
 
 export type SketchedStack = { proposalId: string; frameId: string; side: Side; view: BindView; box: Box; roofTopRow: number }
 type Read = SketchedStack & { a0: number; a1: number; top: number; slope?: 'NEAR' | 'FAR' }
-export type FusionRecord = { fused: Array<{ eaves: string; gable: string; why: string }>; left: Array<{ proposalId: string; why: string }> }
+export type FusionRecord = { fused: Array<{ eaves: string; gable: string; why: string }>; left: Array<{ proposalId: string; why: string }>; /** every stack as read through its registration: side, along the side's axis, top, slope */ reads?: Array<{ proposalId: string; side: Side; a0: number; a1: number; top: number; slope?: 'NEAR' | 'FAR' }> }
 
 export function fuseChimneys(model: CanonicalBuildingModel, stacks: readonly SketchedStack[], proposals: readonly CorrectionProposal[], pictures: readonly BindPicture[]): { proposals: CorrectionProposal[]; record: FusionRecord } {
   const record: FusionRecord = { fused: [], left: [] }
@@ -40,6 +44,8 @@ export function fuseChimneys(model: CanonicalBuildingModel, stacks: readonly Ske
     const slope = eavesView ? (s.box.y1 <= s.roofTopRow + 3 ? 'FAR' : 'NEAR') : undefined
     return { ...s, a0: Math.min(...xs), a1: Math.max(...xs), top: yOf(p, s.box.y0), ...(slope ? { slope } : {}) }
   })
+  const r3 = (v: number): number => Math.round(v * 1000) / 1000
+  record.reads = reads.map((r) => ({ proposalId: r.proposalId, side: r.side, a0: r3(r.a0), a1: r3(r.a1), top: r3(r.top), ...(r.slope ? { slope: r.slope } : {}) }))
   const eaves = reads.filter((r) => r.slope)
   const gables = reads.filter((r) => !r.slope)
   // the side of the ridge a gable view's stack stands on, as seen from each eaves side: NEAR to that side, or FAR
@@ -48,6 +54,9 @@ export function fuseChimneys(model: CanonicalBuildingModel, stacks: readonly Ske
     return Math.sign(c - ridgeAt) === outward(e.side) ? 'NEAR' : 'FAR'
   }
   const fits = (e: Read, g: Read): boolean => Math.abs(e.top - g.top) <= TOP_TOLERANCE_M && slopeFrom(g, e) === e.slope
+  // the same stack seen from the opposite eaves side: the same stretch of the ridge, the same top, not both near
+  const overlap = (a: Read, b: Read): number => Math.min(a.a1, b.a1) - Math.max(a.a0, b.a0)
+  const twin = (a: Read, b: Read): boolean => a !== b && outward(a.side) !== outward(b.side) && overlap(a, b) > 0.5 * Math.min(a.a1 - a.a0, b.a1 - b.a0) && Math.abs(a.top - b.top) <= TOP_TOLERANCE_M && !(a.slope === 'NEAR' && b.slope === 'NEAR')
   // gable views of the two ends see the same stacks: pair each eaves stack with the stacks of ONE gable frame at a time
   const out = [...proposals]
   const gableFrames = [...new Set(gables.map((g) => g.frameId))]
@@ -59,7 +68,7 @@ export function fuseChimneys(model: CanonicalBuildingModel, stacks: readonly Ske
       continue
     }
     // one to one: no other eaves stack fits that gable stack
-    if (eaves.some((o) => o !== e && fits(o, pick))) {
+    if (eaves.some((o) => o !== e && !twin(e, o) && fits(o, pick))) {
       record.left.push({ proposalId: e.proposalId, why: `${pick.proposalId} fits two stacks of the eaves view: left unpaired` })
       continue
     }
@@ -74,7 +83,8 @@ export function fuseChimneys(model: CanonicalBuildingModel, stacks: readonly Ske
       const k = out.findIndex((p) => p.proposalId === g.proposalId)
       if (k >= 0 && epic) out[k] = { ...out[k], patch: { ...(out[k].patch ?? {}), depthPicture: epic.n, depthBox: e.box }, justification: `${out[k].justification}; its depth from ${e.proposalId} (the ${e.side.toLowerCase()} elevation)` }
     }
-    record.fused.push({ eaves: e.proposalId, gable: pick.proposalId, why: `top ${e.top.toFixed(2)} / ${pick.top.toFixed(2)} m, ${e.slope === 'FAR' ? 'behind the ridge' : 'on the near slope'}` })
+    const twins = eaves.filter((o) => twin(e, o)).map((o) => o.proposalId)
+    record.fused.push({ eaves: e.proposalId, gable: pick.proposalId, why: `top ${e.top.toFixed(2)} / ${pick.top.toFixed(2)} m, ${e.slope === 'FAR' ? 'behind the ridge' : 'on the near slope'}${twins.length ? `; the same stack as ${twins.join(', ')} seen from the opposite side` : ''}` })
   }
   return { proposals: out, record }
 }

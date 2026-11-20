@@ -18,7 +18,7 @@ import { kindOfOpening, modelRevision, openingSpan, sideOfWall } from './correct
 import type { Side } from './correct/execute.js'
 import type { ModelViewPicture } from './model-views.js'
 
-export const ELEMENT_INDEX_VERSION = '1.0.0' as const
+export const ELEMENT_INDEX_VERSION = '1.0.1' as const
 /** The operations whose targetId must be a listed element (or a side / WHOLE where the registry says so). */
 export const LISTED_TARGET_OPERATIONS = ['UPDATE_OPENING', 'REMOVE_OPENING', 'UPDATE_CHIMNEY', 'SET_PARAMETER', 'SET_ROOF', 'SET_OUTLINE', 'SET_ROOF_OVERHANG'] as const
 
@@ -113,8 +113,9 @@ export function elementIndexOf(m: CanonicalBuildingModel, sides?: Pick<ModelView
   for (const p of m.roofPlanes) out.push({ id: p.id, type: 'ROOF_PLANE', ...(bodyOfRoof.get(p.id) ? { body: bodyOfRoof.get(p.id) } : {}), level: p.levelId, note: `pitch ${r2(p.pitchDeg)}°` })
   for (const c of m.chimneys) {
     const base = (levelElevation.get(c.levelId) ?? 0) + c.baseOffset
-    const fp = c.footprint as unknown as { x: number; z: number; width: number; depth: number }
-    out.push({ id: c.id, type: 'CHIMNEY', level: c.levelId, heights: [r2(base), r2(base + c.height)], note: `plan ${r2(fp.x)}..${r2(fp.x + fp.width)} × ${r2(fp.z)}..${r2(fp.z + fp.depth)} m` })
+    // v3.54.17 R3: a stack's footprint is a plan rectangle (minX..maxX × minZ..maxZ); R2 read it as x/width and printed NaN
+    const fp = c.footprint
+    out.push({ id: c.id, type: 'CHIMNEY', level: c.levelId, heights: [r2(base), r2(base + c.height)], note: `plan ${r2(fp.minX)}..${r2(fp.maxX)} × ${r2(fp.minZ)}..${r2(fp.maxZ)} m` })
   }
   const revision = modelRevision(m)
   return { version: ELEMENT_INDEX_VERSION, revision, elements: out, sha256: createHash('sha256').update(JSON.stringify({ revision, out })).digest('hex') }

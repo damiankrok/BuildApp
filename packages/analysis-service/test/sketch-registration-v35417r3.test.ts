@@ -210,6 +210,27 @@ describe('v3.54.17 R3 — the roof\'s overhang read on the source (SET_ROOF_OVER
     expect(out.records[0].status, out.records[0].why).toBe('COMMITTED')
     expect(out.model.roofs[0].overhang).toBeCloseTo(0.5, 2)
   })
+  it('a lower annex roof against an eaves side caps the eaves overhang at the reach that clears it (named, both values kept)', () => {
+    const annex: BodySpec = { id: 'mass-annex', rect: { minX: 1, maxX: 4, minZ: -2, maxZ: 0 }, roof: { kind: 'FLAT', eavesM: 2.7 }, provenance: {} }
+    const r = applyCommands(empty(), [{ type: 'createBuilding', id: 'building' }, { type: 'createLevel', id: 'lvl-0', index: 0, elevation: 0, height: 6 }, ...bodyCommands(spec, 'lvl-0', 0, [annex.rect], 0.3), ...bodyCommands(annex, 'lvl-0', 0, [spec.rect], 0.3)] as BuildingCommand[])
+    if (r.failedAt !== undefined) throw new Error(JSON.stringify(r.results[r.failedAt]).slice(0, 300))
+    const m = r.model
+    const main = m.roofs.find((x) => x.id === 'roof-mass-main') ?? m.roofs[0]
+    const pics = pictures({ RIGHT: { left: 0.6, right: 0.6 } })
+    // the right end registered at the drawing's own scale (the annex stands in front of the house, not at this end)
+    const rightView: BindView = { side: 'RIGHT', frameId: frameOf('RIGHT'), projection: { mpp: MPP, alongAtPx0: ORIGIN.RIGHT.a0, alongSign: 1, zeroRow: ZERO }, heights: true, origin: 'ASSIGNED', alongErrorM: 0.02, heightErrorM: 0.02 }
+    const d = drawn('RIGHT', { left: 0.6, right: 0.6 })
+    const patch = { roofLeftX: Math.min(...d.roof.map((q) => q[0])), roofRightX: Math.max(...d.roof.map((q) => q[0])), wallLeftX: Math.min(...d.walls.map((q) => q[0])), wallRightX: Math.max(...d.walls.map((q) => q[0])) }
+    const got = executeCorrections({ model: m, views: [rightView], pictures: pics, proposals: [propose(m, { proposalId: 'oh-cap', operation: 'SET_ROOF_OVERHANG', targetId: main.id, frameId: frameOf('RIGHT'), patch })] })
+    const rec = got.records[0]
+    expect(rec.status, rec.why).toBe('COMMITTED')
+    const oh = got.model.roofs.find((x) => x.id === main.id)?.overhang ?? 0
+    expect(oh).toBeGreaterThan(0.05)
+    expect(oh).toBeLessThan(0.6)
+    expect(rec.bound?.values).toMatchObject({ drawnOverhangM: 0.6, overhangM: oh })
+    // counterpart: no annex, the drawn overhang is built as drawn
+    expect(run(house(), 'RIGHT', { left: 0.6, right: 0.6 }).model.roofs[0].overhang).toBeCloseTo(0.6, 2)
+  })
   it('counter-trials: narrower than the walls, more than 1 m, two different eaves, walls that are not the side\'s', () => {
     const m = house()
     expect(run(m, 'FRONT', { left: -0.4, right: -0.4 }).records[0].code).toBe('ROOF_NARROWER_THAN_WALLS')
@@ -243,6 +264,26 @@ describe('v3.54.17 R3 — one stack seen in two perpendicular views is one stack
       expect(c, JSON.stringify(out.model.chimneys.map((x) => x.footprint))).toBeDefined()
       if (c) expect(Math.abs((c.footprint.minZ + c.footprint.maxZ) / 2 - (st.z0 + st.z1) / 2)).toBeLessThanOrEqual(0.3)
     }
+  })
+  it('the front and the rear see the same stacks from opposite sides: one stack each, not an ambiguity; each placed once', () => {
+    const stacks = [stack('FRONT', 0), stack('FRONT', 1), stack('REAR', 0), stack('REAR', 1), stack('RIGHT', 0), stack('RIGHT', 1)]
+    const f = fuseChimneys(m, stacks, stacks.map((x) => prop(x.side, Number(x.proposalId.slice(-1)))), pics)
+    expect(f.record.fused.length, JSON.stringify(f.record.left)).toBe(4)
+    expect(f.record.fused.map((x) => x.why).join(' ')).toContain('seen from the opposite side')
+    const derived = (model: CanonicalBuildingModel, held: readonly BindView[]): BindView[] => SIDES.flatMap((s) => { const r = registerFromSketch({ model, views: [...held], pictures: pics, witnesses: [] }, anchors(s)); return 'view' in r ? [r.view] : [] })
+    const out = executeCorrections({ model: m, views: [], pictures: pics, proposals: f.proposals, derivedViews: derived })
+    expect(out.model.chimneys.length, JSON.stringify(out.records.map((r) => [r.proposalId, r.status, r.code]))).toBe(2)
+    expect(out.records.filter((r) => r.status === 'DUPLICATE').length).toBeGreaterThanOrEqual(2)
+  })
+  it('a stack drawn from the front with its foot on the ridge, and no second view, stands behind the ridge (not mid-depth)', () => {
+    const derived = (model: CanonicalBuildingModel, held: readonly BindView[]): BindView[] => SIDES.flatMap((s) => { const r = registerFromSketch({ model, views: [...held], pictures: pics, witnesses: [] }, anchors(s)); return 'view' in r ? [r.view] : [] })
+    const out = executeCorrections({ model: m, views: [], pictures: pics, proposals: [prop('FRONT', 1)], derivedViews: derived })
+    expect(out.records[0].status, out.records[0].why).toBe('COMMITTED')
+    const c = out.model.chimneys[0]
+    expect(c.footprint.minZ).toBeGreaterThanOrEqual((HOUSE.minZ + HOUSE.maxZ) / 2 - 0.05)
+    // and one on the near slope stands in front of it
+    const near = executeCorrections({ model: m, views: [], pictures: pics, proposals: [prop('FRONT', 0)], derivedViews: derived })
+    expect(near.model.chimneys[0].footprint.maxZ).toBeLessThanOrEqual((HOUSE.minZ + HOUSE.maxZ) / 2 + 0.05)
   })
   it('counter-trial: two stacks of one height on one slope in the gable view are not paired (named, left single-view)', () => {
     // the right view's second stack moved onto the front slope beside the first: which is which is not told
