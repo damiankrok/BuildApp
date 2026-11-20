@@ -163,3 +163,14 @@ pierwsze w indeksie i bajt w bajt równe plikom w repozytorium (sprawdzone po ro
 - **Próba**: 2 rodziny Studio Atrium — jedna z modelem bez zatwierdzonej korekty, jedna z awarią po odczycie metrycznym
   (nazwaną); żadnej poprawy w próbie, którą można by przypisać nowemu mechanizmowi. Layla (DEV) — nazwany brak funkcji.
 - **Akceptacja**: minimum §5 i dowody §8 — tak; ogólność na nowych rodzinach — niepokazana.
+
+## 11. Dostawa
+
+- APK 1348: `BuildPlan-Model-Preview-1348-arm64-v8a.apk`, sha256 `c959d6739a64789f8fcf704c57b3f1b606379e100e46cd0e3bf20b60fbe1e324`.
+- Prywatny ZIP (poza Gitem, nie do publikacji — rysunki wydawców): `BuildPlan-V35417-PRIVATE.zip`, 744 pliki, sha256
+  `49285af52321109e0870dd72cae68e925d52970e4283d23285eb53d5c2d7cb97`; `MANIFEST.sha256` zweryfikowany po odczycie
+  (0 rozbieżności), skan klucza 0 trafień. Zawiera: zamrożone bajty (461 plików: strony, rzuty, przekroje, elewacje),
+  odpowiedzi surowe i kanoniczne (nagrania tur), rekordy wykonawcy (hipotezy, komendy, miary), modele i sceny
+  przed/po/oddane, rekordy hosta, pierwsze wyniki próby, logi testów, księgę, raporty, APK, szkice 4 stron (Alaska; Layla
+  z nagrań v3.54.16), galerię i planszę przed/po Alaski. Szkiców rodzin próby nie ma: host nie zapisuje plików szkiców
+  (nazwane).
