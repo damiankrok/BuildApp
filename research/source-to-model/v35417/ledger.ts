@@ -26,7 +26,11 @@ export function ledgerSpend(context: { phase: string; house: string; variant: st
   const ledger = loadLedger()
   const open = new Map<string, { usd: number; model: string; note: string }>()
   let n = 0
+  // v3.54.17: another process may have booked since this one loaded the books — merge on every write, never overwrite
   const save = (): void => {
+    const onDisk = loadLedger()
+    const mine = new Set(ledger.entries.map((e) => `${e.at}|${e.note}|${e.costUsd}`))
+    ledger.entries = [...onDisk.entries.filter((e) => !mine.has(`${e.at}|${e.note}|${e.costUsd}`)), ...ledger.entries].sort((a, b) => (a.at < b.at ? -1 : a.at > b.at ? 1 : 0))
     ledger.totalUsd = Math.round((OPENING_USD + ledger.entries.reduce((s, e) => s + e.costUsd, 0)) * 1e6) / 1e6
     ledger.stageSpentUsd = Math.round((ledger.totalUsd - OPENING_USD) * 1e6) / 1e6
     ledger.requests = ledger.entries.filter((e) => e.status !== 'NOT_SENT').length
@@ -36,7 +40,8 @@ export function ledgerSpend(context: { phase: string; house: string; variant: st
     open: () => [...open.values()].reduce((s, r) => s + r.usd, 0),
     reserve(model, usd, note) {
       const reserved = [...open.values()].reduce((s, r) => s + r.usd, 0)
-      if (ledger.totalUsd + reserved + usd > CEILING_USD + 1e-9) throw new Error(`a reservation of ${usd.toFixed(4)} USD would pass the stage ceiling ${CEILING_USD} (books ${ledger.totalUsd}, open ${reserved.toFixed(4)}): not sent`)
+      const books = Math.max(ledger.totalUsd, loadLedger().totalUsd)
+      if (books + reserved + usd > CEILING_USD + 1e-9) throw new Error(`a reservation of ${usd.toFixed(4)} USD would pass the stage ceiling ${CEILING_USD} (books ${books}, open ${reserved.toFixed(4)}): not sent`)
       const id = `r${++n}`
       open.set(id, { usd, model, note })
       return { id, usd }

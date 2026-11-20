@@ -49,6 +49,17 @@ export type SceneSpec = { key: string; title: string; subtitle: string; build: (
  * hash — `bundle.test.ts` holds that.
  */
 export const SCENES: readonly SceneSpec[] = [
+  // v3.54.17 (Alaska, Studio Atrium, DEV: the v3.54.16 trial's recorded answers replayed, the reviewer live once): the
+  // body had no roof; the sketch channel's SET_ROOF built the gable the elevations draw (read under the 90° turn their
+  // heights agree on), gated on the original picture and closed by the look at the delivered revision (CLOSED_VERIFIED).
+  // Measured against the publisher's facts it never read: ridge 7.48 vs 7.68 m, pitch 41.4 vs 40°. Open, named: the
+  // window rhythm and roof windows, the chimneys (unsupported).
+  {
+    key: 'alaska-dev-v35417',
+    title: 'Alaska — v3.54.17: dach dwuspadowy ze źródła (DEV)',
+    subtitle: 'ROZWÓJ: SET_ROOF z elewacji, kalenica 7,48 m (strona: 7,68), 41,4° (strona: 40°); CLOSED_VERIFIED; otwarte: rytm okien, okna dachowe, kominy',
+    build: () => sealedOwnerModel('alaska-dev-v35417', 'fa9be01e4aa56d56023990da4146212d65b599cd2d310f3ca26fe76c9b8c06c1', 'owner-v35417'),
+  },
   // v3.54.16 (Ballina, delivered by the final host job on f75d205): the correction executor's patches from the sketches —
   // five front openings and one on the right moved/resized against the source, the missing left window added — each
   // gated on the original picture, built, measured back, and closed by a look at the delivered revision (7 CLOSED_VERIFIED).

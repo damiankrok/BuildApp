@@ -15,7 +15,7 @@ class OwnerCheckpointV35410ScenesTest {
         // v3.54.14: corrected Marcówki, Bakopy (DEV) and Ballina (new, partial) come first
         // v3.54.15: Ballina with its roof from the section's levels (delivered) and the control Murcja (first result) come first
         // v3.54.16: Ballina delivered by the final host, the Murcja replay (DEV), the controlled TEST pair and the trial's first result come first
-        assertEquals(listOf("ballina-v35416", "murcja-v35416", "ballina-test-after-v35416", "ballina-test-before-v35416", "alaska-trial-v35416"), TestScenes.index.subList(0, 5).map { it.key })
+        assertEquals(listOf("ballina-v35416", "murcja-v35416", "ballina-test-after-v35416", "ballina-test-before-v35416", "alaska-trial-v35416"), TestScenes.index.subList(1, 6).map { it.key })
         assertTrue(TestScenes.index[0].subtitle.contains("ODDANY"))
         assertTrue(TestScenes.index[2].subtitle.contains("TEST"))
         assertTrue(TestScenes.index[3].subtitle.contains("TEST"))

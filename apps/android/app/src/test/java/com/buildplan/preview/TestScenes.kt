@@ -78,7 +78,7 @@ object TestScenes {
         // (v3.54.8, v3.54.10); the H candidate of v3.54.10 carries LOCAL's interior partitions under their LOCAL ids
         // (kept on purpose when the interior is placed, D51) — so it shares that vocabulary too
         // and the two 005T development houses the same analyzer built (other pages: the same naming, other sets)
-        setOf("marcowki-auto-v2", "marcowki-auto-v3", "marcowki-local-v3548", "marcowki-local-v35410", "marcowki-h-v35410", "marcowki-h-v35411", "marcowki-h-v35412", "marcowki-local-szkice-v35412", "marcowki-c-v35413", "marcowki-c-live-v35413", "marcowki-c-v35414", "jarzmianki-005t-visual", "gozdzikowce-005t-visual", "bakopy-v35414", "ballina-v35414", "ballina-v35415", "murcja-v35415", "ballina-v35416", "murcja-v35416", "ballina-test-after-v35416", "ballina-test-before-v35416", "alaska-trial-v35416"),
+        setOf("marcowki-auto-v2", "marcowki-auto-v3", "marcowki-local-v3548", "marcowki-local-v35410", "marcowki-h-v35410", "marcowki-h-v35411", "marcowki-h-v35412", "marcowki-local-szkice-v35412", "marcowki-c-v35413", "marcowki-c-live-v35413", "marcowki-c-v35414", "jarzmianki-005t-visual", "gozdzikowce-005t-visual", "bakopy-v35414", "ballina-v35414", "ballina-v35415", "murcja-v35415", "ballina-v35416", "murcja-v35416", "ballina-test-after-v35416", "ballina-test-before-v35416", "alaska-trial-v35416", "alaska-dev-v35417"),
     )
 
     fun sameAnalyzer(a: String, b: String): Boolean = analyzerLineages.any { a in it && b in it }
