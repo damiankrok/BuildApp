@@ -20,3 +20,16 @@
 - Prywatny ZIP (poza Gitem): zamrożone bajty rzutów/przekrojów/elewacji, odpowiedzi surowe i kanoniczne, obserwacje,
   hipotezy, komendy, modele i sceny przed/po/oddane, pierwsze wyniki, księga, raporty, APK, szkice 4 stron, galeria,
   plansze, manifest
+
+## R2 — domknięcie audytu
+
+- Raport: `stage-reports/SOURCE_TO_MODEL_V35417_R2.md` (tabela R2, koszt na żywo, luki otwarte)
+- Kod: `consult/exchange-log.ts`, `apps/analyzer-api/src/file-lock.ts`, `programmed-result.ts`,
+  `consult/massing-result.ts`, `consult/element-index.ts`, `consult/massing/{massing,ops}.ts`
+- Testy: `apps/analyzer-api/test/{exchange-record,research-ledger,massing-delivery}-v35417.test.ts`,
+  `packages/analysis-service/test/{correct-v35416,massing-v35417,metric-read-v35414}.test.ts`
+- Dowody: `research/source-to-model/v35417/r2/` — `index-proof.ts`/`-results.json`, wychodzące indeksy Aurora i Alaska,
+  `orientation-probe-r2.*`, `alaska-replay-s4-semantic.json`, `sketch-delivery.ts`, `boards-gallery.py`,
+  `sketch-delivery-status.json`, `gallery-link-check.json`
+- Macierz: `stage-reports/artifacts/v35417-r2/matrix-r2-summary.json`
+- Prywatny ZIP R2 (poza Gitem): części < 30 MB, `MANIFEST-R2.txt` z sumami SHA-256

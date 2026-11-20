@@ -21,3 +21,20 @@ show `continues`/`resolved`.
 [--outline-replay <outline-turns.json>]`; Ballina's frozen bytes are `rd/v35414/ballina-cache`. Proofs: `npx vitest run
 packages/analysis-service/test/{massing,resolve,plan-outline}-v35417.test.ts`. Gate CPU: `gate-cpu.ts`. Live runs only
 one at a time (the ledger now merges on write, but the host books are separate). Recorded answers in the private ZIP.
+
+## R2 (audit closure, 2026-11-20)
+
+**Done.** Exchange record at receipt for every job (host `<ANALYZER_DATA_DIR>/consult-exchanges/<jobId>`, runner
+`out/exchanges`); research ledger 2.0.0 atomic on the host's file lock; a body built without LOCAL delivered as an
+ordinary `LinkAnalysisResult` (controlled host test); element index 1.0.0 in the reviewer's message (contract 0.6.0 /
+prompt 0.7.0, registry 1.2.0); orientation and roof measure per body with occlusion (ops 1.1.0) — gaps 1, 2 and 4 of
+the list above are closed, gap 5 stays open. Sketch delivery and gallery from retained reads (`r2/`).
+
+**Still open, in order.** 1) Positive §3 path on a real house: analyzer views carry no heights
+(VIEW_WITHOUT_HEIGHTS) and sketch-number registration gives AXIS_MISMATCH — register view heights, do not loosen the
+gate. 2) Live `continues`/`resolved` (needs ≥ 1.5 USD worst case at host configuration; 0.311755 left). 3) Outlines of
+≥ 3 rectangles. 4) Remap sketch openings under TURNED_90 through `sideOf` (now refused by name).
+
+**Rerun at 0 USD.** `npx vite-node research/source-to-model/v35417/r2/index-proof.ts`, `.../r2/sketch-delivery.ts`
+(replays retained answers), `/usr/bin/python3 -I .../r2/boards-gallery.py <delivery dir>`; replay a recorded failed job
+with `readExchangeRecord(dir)` → `replayModel(..., rec.answers)`.

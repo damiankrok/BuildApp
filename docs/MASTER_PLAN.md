@@ -871,3 +871,12 @@ OWNER zatwierdził domknięcie pętli korekt po audycie kodu/danych v35415. Uzgo
 ### Uzgodnienie v3.54.16 i wejście v3.54.17 — 20.11.2026
 
 Po audycie dostawy (573 pliki manifestu, prawdziwy host i APK) wykonawca wdrożył A1–A4 w 9759c07, koszt 0 USD, APK nadal 1347 bez nowego hosta. Dodatek dostarczył 65 plików, w tym brakujące zamrożone rzuty i przekroje. Koordynator zweryfikował manifest, kod i podstawowe próby A1/A4; nie uruchamiał pełnej macierzy ani aplikacji na urządzeniu. Wykazał kontrolowaną, wąską szczelinę wiązania target-host, włączoną do nowego zlecenia. Ogólny start i korekta bryły/dachu są kolejną pracą, nie wykonanym już rezultatem. Pełen katalog §3 zachowany bajtowo: 19595 B, SHA-256 8c67c7ada43eae728ff7438178c869af7d853d6f2b7973b85944b0651ccc6890. Zachowano historię wcześniejszych zleceń; §2, §7.6 i aktywny odbiór §8 określają aktualny priorytet.
+
+## Punkt kontrolny v3.54.17 R2 (20.11.2026)
+
+Domknięcie audytu bez nowej puli i bez nowych wywołań API (księgi 28,542857 / 28,854612 USD). Dostarczone: zapis
+wymiany przy odbiorze z odtworzeniem porażki offline; atomowa księga badań; dostawa hosta bryły bez LOCAL jako zwykły
+wynik (test kontrolowany); indeks elementów w wiadomości recenzenta z kontr-próbami; orientacja i pomiar per bryła
+z wiarygodnością przed komendą; szkice i galeria 4 stron. Otwarte: pozytywna ścieżka indeksu na prawdziwym domu
+(rejestracja wysokości widoku), dowód na żywo `continues`/`resolved`, obrysy ≥ 3 prostokątów, otwory przy TURNED_90.
+Raport: `stage-reports/SOURCE_TO_MODEL_V35417_R2.md`. Plan v3.54.17 powyżej pozostaje bez zmian.

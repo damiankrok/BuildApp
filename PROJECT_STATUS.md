@@ -12,6 +12,15 @@
 
 ## Current summary (read first)
 
+- **v3.54.17 R2 (2026-11-20): audit closure — no new API, no new APK.** Report
+  `stage-reports/SOURCE_TO_MODEL_V35417_R2.md`. Exchange record at receipt (also FAILED jobs; raw ≠ canonical; no
+  secret) with offline replay of the first loss; research ledger 2.0.0 atomic on the host lock (multi-process test);
+  a body built without LOCAL delivered as an ordinary `LinkAnalysisResult` through the host (controlled test, interior
+  NOT_CHECKED); element index 1.0.0 in the reviewer's outgoing message with id binding and counter-trials;
+  orientation/measure per body (audit probe AS_LABELLED, Alaska 87° annex no longer proposed, plausibility before the
+  command); sketches/gallery of 4 houses × 4 sides, link check 56/0. Open: positive §3 path on a real house
+  (views without heights, AXIS_MISMATCH), live `continues`/`resolved` (budget), ≥ 3 rectangles, openings under
+  TURNED_90. Books unchanged 28.542857 / 28.854612. Android app untouched → APK 1348 stays the delivered one.
 - **v3.54.17 (2026-11-20): body, roof and source binding — APK 1348** (Master Plan v3.54.17, on `9759c07`). Report
   `stage-reports/SOURCE_TO_MODEL_V35417.md`, index `stage-reports/README_V35417.md`, ADR
   `docs/ADR-V35417-MASSING-ROOF-WITNESS.md`, hand-off `research/source-to-model/v35417/HANDOFF.md`. Registry 1.1.0 adds

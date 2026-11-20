@@ -61,3 +61,19 @@ Prostokątna/ortogonalna bryła z rzutu; jeden dwuspad o stałej osi; dwie poł�
 - Ścieżka bez modelu daje `ConsultedAnalysis.massing` (model + scena + rekord); host nie dostaje jeszcze pełnej koperty
   `LinkAnalysisResult` dla takiego modelu — luka nazwana w raporcie.
 - Kontrakt recenzenta 0.5.0 / prompt 0.6.0 (nowe operacje w liście generowanej z rejestru).
+
+## R2 (domknięcie audytu, 2026-11-20)
+
+- **Zapis wymiany przy odbiorze.** Każde żądanie i odpowiedź konsultanta jest zapisywane w chwili odbioru
+  (`consult/exchange-log.ts`, `buildapp.consult-exchange` 1.0.0), także dla zadań FAILED/CANCELLED. Kopia surowa
+  i kanoniczna są osobne. Zapis zawiera etap przyczyny po sanityzacji i nigdy sekretu ani nagłówka Authorization.
+  Odtworzenie offline daje tę samą pierwszą stratę.
+- **Księga badań atomowa** na istniejącym mechanizmie blokady hosta (`apps/analyzer-api/src/file-lock.ts`): rezerwacja
+  jest wpisem na dysku, a rozliczenie jest idempotentne po `attemptId`.
+- **Bryła bez LOCAL jest zwykłym wynikiem.** Wspólny adapter `programmed-result.ts` → `LinkAnalysisResult`. Recenzja
+  końcowa widzi dostarczoną rewizję. Wnętrze NOT_CHECKED, ilości ≤ LIMITED. Konsekwencja „host nie dostaje koperty”
+  z wersji pierwotnej przestaje obowiązywać.
+- **Indeks elementów w wiadomości recenzenta** (`consult/element-index.ts` 1.0.0; kontrakt 0.6.0 / prompt 0.7.0,
+  rejestr 1.2.0). `targetId` musi być id z indeksu. Brak wiązania i brak prymitywu to różne blokery.
+- **Orientacja i pomiar per bryła** z przesłonięciem (`ops.ts` 1.1.0). Mapowanie TURNED_90 jest jedno i wspólne. Przy
+  TURNED_90 otwory ze szkiców są pomijane z nazwą. Wiarygodność SET_ROOF jest sprawdzana przed komendą, bez przycinania.
