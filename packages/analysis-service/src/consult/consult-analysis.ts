@@ -52,6 +52,7 @@ import { renderStoreyCut } from './model-views.js'
 import { CORRECTION_REGISTRY_VERSION } from './correct/registry.js'
 import { CORRECTION_EXECUTOR_VERSION, elementExists, executeCorrections, modelRevision, preferredView, registerFromSketch, sideOfFacade, viewsOfRun } from './correct/execute.js'
 import { CHIMNEY_FUSION_VERSION, fuseChimneys } from './correct/chimney-fusion.js'
+import { bodiesOf } from './massing/massing.js'
 import type { FusionRecord, SketchedStack } from './correct/chimney-fusion.js'
 import { elementIndexOf } from './element-index.js'
 import type { ElementIndex } from './element-index.js'
@@ -1102,7 +1103,8 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
     const m0 = l.run.reconstruction.model
     const retiredIds = new Map([...listedAt].filter(([id]) => !elementExists(m0, id)))
     const held = viewsOfRun(l.run.reconstruction.facadeAlignment.views)
-    const out = executeCorrections({ model: m0, views: massingOf.get(l)?.views ?? held, ...(massingOf.get(l) ? {} : { derivedViews: (m: CanonicalBuildingModel, h: readonly BindView[]) => sketchViewsOf(m, pictures, h) }), pictures, proposals, witnesses: witnessesOf(l), seen, ...(retiredIds.size > 0 ? { retiredIds } : {}) })
+    const plans = (l.run.reconstruction.registrations.plans ?? []).map((q) => ({ frameId: q.frameId, toWorld: q.toWorld }))
+    const out = executeCorrections({ model: m0, views: massingOf.get(l)?.views ?? held, ...(massingOf.get(l) ? {} : { derivedViews: (m: CanonicalBuildingModel, h: readonly BindView[]) => sketchViewsOf(m, pictures, h) }), ...(plans.length > 0 ? { plans } : {}), pictures, proposals, witnesses: witnessesOf(l), seen, ...(retiredIds.size > 0 ? { retiredIds } : {}) })
     correctionRuns.push({ stage, baseRevision: out.baseRevision, revision: out.revision, delivered: false, records: out.records, transactions: out.transactions })
     record({ at: now().toISOString(), kind: 'CORRECTIONS', stage, baseRevision: out.baseRevision, revision: out.revision, records: out.records.map((r) => ({ proposalId: r.proposalId, operation: r.operation, status: r.status, code: r.code ?? null })), transactions: out.transactions.map((t) => ({ txId: t.txId, decision: t.decision, why: t.why })) })
     return out
@@ -1156,7 +1158,7 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
     const held = viewsOfRun(run.reconstruction.facadeAlignment.views)
     // v3.54.17: the bodies' roofs first — a roof the sketches draw and the model lacks (or has wrong) is a SET_ROOF
     const sketchInputs = () => sketchSummary.reading.sketches.filter((x) => x.sketch).map((x) => ({ facade: x.facade, frameId: x.frameId, groundRow: x.sketch?.groundRow ?? null, walls: (x.sketch?.walls ?? []).map((w) => w.polygon as Array<[number, number]>), roofs: (x.sketch?.roofs ?? []).map((r) => r.polygon as Array<[number, number]>) }))
-    const roofs = roofProposalsFromSketches(sketchInputs(), run.reconstruction.model, held, rev, sideOfFacade)
+    let roofs = roofProposalsFromSketches(sketchInputs(), run.reconstruction.model, held, rev, sideOfFacade)
     // v3.54.17 R2: ONE side mapping for every consumer of the sketches — under a TURNED_90 hypothesis the openings are not
     // bound through the analyzer's registrations made as labelled (that would bind them to the other side)
     const turnedSides = roofs.orientation.assignment === 'TURNED_90'
@@ -1185,6 +1187,19 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
         kept.push(...ps.filter((p) => ok.some((r) => r.proposalId === p.proposalId)))
       } else if (ok.length > 0) sem.why = 'the kept patches could not be delivered through the run (the base did not rebuild byte for byte)'
     }
+    // v3.54.17 R3: first the outline against the plan's PRINTED overall dimensions (the metric read's whole-house, outer-face
+    // lengths with their dimension lines): a wall face the trace missed makes every registration by the walls wrong too
+    const mainWall = (() => {
+      const bs = bodiesOf(run.reconstruction.model).sort((a, b) => (b.rect.maxX - b.rect.minX) * (b.rect.maxZ - b.rect.minZ) - (a.rect.maxX - a.rect.minX) * (a.rect.maxZ - a.rect.minZ))
+      return bs[0]?.wallIds[0]
+    })()
+    const frameHash = new Map((good.graph?.coordinateFrames ?? []).map((f) => [f.id, f.variantByteHash]))
+    const printed: CorrectionProposal[] = mainWall ? (metricRead?.reads ?? []).flatMap((r) => r.observations.filter((o) => o.kind === 'LENGTH' && o.scope === 'WHOLE_HOUSE' && o.reference === 'OUTER_FACE' && o.status === 'PRINTED' && typeof o.value === 'number' && o.ends).map((o) => ({ proposalId: `printed:${o.id}`, baseRevision: rev, operation: 'SET_OUTLINE', targetId: mainWall, patch: { printed: { valueM: o.value as number, literal: o.literal, planFrameId: r.frameId, from: (o.ends as NonNullable<typeof o.ends>).from, to: (o.ends as NonNullable<typeof o.ends>).to, sourceByteHash: frameHash.get(r.frameId) ?? '' } }, origin: 'METRIC' as const, uncertainty: 'LOW' as const, justification: `the plan prints "${o.literal}" as the house's overall ${o.axis === 'HORIZONTAL' ? 'width' : 'depth'} to the outer faces${o.hostHint ? ` (${o.hostHint})` : ''}` }))) : []
+    record({ at: now().toISOString(), kind: 'PRINTED_OUTLINE', mainWall: mainWall ?? null, proposals: printed.map((x) => x.proposalId), dimensions: (metricRead?.reads ?? []).reduce((n, r) => n + r.observations.length, 0) })
+    await phase('PRINTED_OUTLINE', printed)
+    if (stood !== good && stood.run) roofs = roofProposalsFromSketches(sketchInputs(), stood.run.reconstruction.model, viewsOfRun(stood.run.reconstruction.facadeAlignment.views), modelRevision(stood.run.reconstruction.model), sideOfFacade)
+    sem.massing = roofs.accounts
+    sem.orientation = roofs.orientation
     await phase('SKETCH_ROOF', roofs.proposals)
     const m2 = stood.run?.reconstruction.model ?? run.reconstruction.model
     const held2 = stood.run ? viewsOfRun(stood.run.reconstruction.facadeAlignment.views) : held

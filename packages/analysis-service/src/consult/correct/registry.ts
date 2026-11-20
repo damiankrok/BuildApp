@@ -216,6 +216,8 @@ export const DEFECT_SCHEMA = {
 } as const
 
 export type PatchFields = {
+  /** v3.54.17 R3: SET_OUTLINE from a printed overall dimension of a registered plan (analyzer-made from the metric read). */
+  printed?: { valueM: number; literal: string; planFrameId: string; from: [number, number]; to: [number, number]; sourceByteHash: string }
   /** v3.54.17 R3: SET_ROOF_OVERHANG — the drawn roof's two ends, in the picture's pixels. */
   roofLeftX?: number
   roofRightX?: number

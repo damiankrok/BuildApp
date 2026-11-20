@@ -253,3 +253,31 @@ describe('v3.54.17 R3 — one stack seen in two perpendicular views is one stack
     expect(f.record.left[0].why).toContain('two stacks of one height')
   })
 })
+
+describe('v3.54.17 R3 — the outline against the plan\'s printed overall dimension (SET_OUTLINE, printed)', () => {
+  // the plan sheet: x = (px − 100) × 0.02, z = (500 − py) × 0.02 (FRONT at the bottom)
+  const plan = { frameId: 'frame-plan', toWorld: (px: number, py: number) => ({ x: (px - 100) * 0.02, z: (500 - py) * 0.02 }) }
+  const pxOfX = (x: number): number => 100 + x / 0.02
+  const ringless = (): CanonicalBuildingModel => ({ ...house(), wallRings: [] }) as CanonicalBuildingModel
+  const printed = (m: CanonicalBuildingModel, valueM: number, x0: number, x1: number, literal = String(valueM)) => propose(m, { proposalId: `printed-${literal}`, operation: 'SET_OUTLINE', targetId: m.walls.find((w) => w.kind === 'EXTERIOR')?.id ?? 'x', origin: 'METRIC', patch: { printed: { valueM, literal, planFrameId: 'frame-plan', from: [pxOfX(x0), 520], to: [pxOfX(x1), 520], sourceByteHash: 'p'.repeat(64) } } })
+  const run = (m: CanonicalBuildingModel, p: CorrectionProposal, plans = [plan]) => executeCorrections({ model: m, views: [], pictures: pictures(), proposals: [p], plans })
+  for (const [name, mk] of [['a ringed body', house], ['a body built without a WallRing record', ringless]] as const) {
+    it(`${name}: the printed 10.40 m moves both ends to the line (0.2 m each side), roof and walls with it`, () => {
+      const m = mk()
+      const out = run(m, printed(m, 10.4, -0.2, 10.2, '10,40'))
+      expect(out.records[0].status, out.records[0].why).toBe('COMMITTED')
+      const xs = out.model.walls.filter((w) => w.kind === 'EXTERIOR').flatMap((w) => [w.start.x, w.end.x])
+      expect(Math.min(...xs)).toBeCloseTo(-0.2, 3)
+      expect(Math.max(...xs)).toBeCloseTo(10.2, 3)
+      expect(out.model.roofs[0].footprint.minX).toBeCloseTo(-0.2, 3)
+      expect(out.model.roofs[0].footprint.maxX).toBeCloseTo(10.2, 3)
+    })
+  }
+  it('agreement and counter-trials: the same length; a line that is not that length at the plan\'s scale; a length far from the trace; no registered plan', () => {
+    const m = house()
+    expect(run(m, printed(m, 10.0, 0, 10, '10,00')).records[0].code).toBe('OUTLINE_AGREES')
+    expect(run(m, printed(m, 11.5, -0.2, 10.2, '11,50')).records[0].code).toBe('DIMENSION_OFF_SCALE')
+    expect(run(m, printed(m, 12.0, -1.0, 11.0, '12,00')).records[0].code).toBe('PRINTED_TOO_FAR')
+    expect(run(m, printed(m, 10.4, -0.2, 10.2, '10,40'), []).records[0].code).toBe('PLAN_NOT_REGISTERED')
+  })
+})

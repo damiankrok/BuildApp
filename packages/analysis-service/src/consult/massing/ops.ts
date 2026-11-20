@@ -297,12 +297,19 @@ export function bindSetRoof(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
 export function bindSetOutline(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
   const m = ctx.model
   const f = p.patch ?? {}
-  if (typeof f.wallLeftX !== 'number' || typeof f.wallRightX !== 'number') return { status: 'INVALID', code: 'NO_EXTENT', why: "SET_OUTLINE states wallLeftX and wallRightX: the body's wall ends as the picture draws them" }
   const ob = oneBody(m, p.targetId)
   if ('status' in ob) return ob
   const { body, bodies } = ob
-  if (body.ringIds.length === 0 || !rectangular(m, body)) return { status: 'UNSUPPORTED_OPERATION', code: 'NOT_RECTANGULAR', why: `${body.id} is not a four-walled body: its outline is changed by rebuilding it (BUILD_MASSING)` }
   if (body.planeIds.length > 0) return { status: 'UNSUPPORTED_OPERATION', code: 'PLANE_ROOF_OUTLINE', why: `${body.id}'s roof is made of planes: a plane roof does not follow a moved outline in this version (SET_ROOF it first)` }
+  // v3.54.17 R3: a printed overall dimension moves the walls standing on the house's ends, ring or no ring, as long as
+  // the body's walls are square to the plan (each along x or along z)
+  if (f.printed) {
+    const ws = m.walls.filter((w) => body.wallIds.includes(w.id))
+    if (ws.length < 3 || ws.some((w) => Math.abs(w.start.x - w.end.x) > 1e-3 && Math.abs(w.start.z - w.end.z) > 1e-3)) return { status: 'UNSUPPORTED_OPERATION', code: 'NOT_RECTANGULAR', why: `${body.id}'s walls are not square to the plan: its outline is not moved by a printed length` }
+    return bindOutlineByPrinted(ctx, p, body, bodies)
+  }
+  if (body.ringIds.length === 0 || !rectangular(m, body)) return { status: 'UNSUPPORTED_OPERATION', code: 'NOT_RECTANGULAR', why: `${body.id} is not a four-walled body: its outline is changed by rebuilding it (BUILD_MASSING)` }
+  if (typeof f.wallLeftX !== 'number' || typeof f.wallRightX !== 'number') return { status: 'INVALID', code: 'NO_EXTENT', why: "SET_OUTLINE states wallLeftX and wallRightX: the body's wall ends as the picture draws them" }
   const pic = pictureOf(ctx, p, f.picture)
   if (!pic || pic.projection !== 'ORTHOGRAPHIC_ELEVATION') return { status: 'INVALID', code: 'NOT_ORTHOGRAPHIC', why: 'SET_OUTLINE reads the wall ends on a source orthographic elevation' }
   const view = viewOf(ctx, pic)
@@ -340,6 +347,25 @@ export function bindSetOutline(ctx: Ctx, p: CorrectionProposal): Bound | Refusal
   const record = { bound: { frameId: pic.frameId, side: view.side, hostId: body.id, ids: [body.id], values: { lo, hi, dLo, dHi } }, source: { frameId: pic.frameId, sourceByteHash: pic.sourceByteHash }, gate: regionRecord(gate), massing: { version: MASSING_OPS_VERSION, body: body.id, from: old, to: { lo, hi }, axis: ax } }
   if (gate.winner === 'CURRENT') return { status: 'REJECTED_BY_SOURCE', code: 'SOURCE_SUPPORTS_MODEL', why: `the picture supports ${body.id}'s present extent: ${gate.why}`, record }
   if (gate.winner !== 'PROPOSED') return { status: 'NEEDS_EVIDENCE', code: 'SOURCE_UNDECIDED', why: `the picture does not decide the extent: ${gate.why}`, record }
+  const e = outlineEdit(m, body, old, lo, hi, ax, newRect, record)
+  if ('status' in e) return e
+  const { cmds, transform, allowed } = e
+  const measure = (working: CanonicalBuildingModel, _b: CanonicalBuildingModel, pictures: readonly BindPicture[]): { failure?: string; measure: { sourceVerified: boolean | null; why: string; builtSupportZ?: number | null } } => {
+    const nb = bodiesOf(working).find((b) => b.id === body.id)
+    const e = nb ? extentOn(nb.rect, view.side) : undefined
+    if (!e || Math.abs(e.lo - lo) > 0.01 || Math.abs(e.hi - hi) > 0.01) return { failure: `${body.id} was not built to ${lo.toFixed(2)}–${hi.toFixed(2)} m`, measure: { sourceVerified: false, why: `built extent ${e ? `${e.lo.toFixed(2)}–${e.hi.toFixed(2)}` : 'none'}` } }
+    const src = pictures.find((q) => q.frameId === pic.frameId)
+    const sil = nb ? bodyWallSilhouette(working, nb, view) : undefined
+    const back = src && sil ? drawnBack(src.raster, [sil], occupied, view.projection.zeroRow) : undefined
+    return { measure: { sourceVerified: back ? back.verified : null, why: `${body.id} now ${lo.toFixed(2)}–${hi.toFixed(2)} m along ${ax}; its walls drawn back into ${pic.frameId} cover ${back?.why ?? '—'}` } }
+  }
+  return { commands: cmds, transform, allowed, expect: { kind: 'CUSTOM', measure }, record }
+}
+
+/** v3.54.17 R3: a body's walls moved to `lo`..`hi` along `ax`, with their dependants (openings, regions, roofs, slabs, rooms) — shared by SET_OUTLINE read on an elevation and SET_OUTLINE from a printed overall dimension. */
+function outlineEdit(m: CanonicalBuildingModel, body: ModelBody, old: { lo: number; hi: number }, lo: number, hi: number, ax: 'x' | 'z', newRect: Rect, record: NonNullable<Refusal['record']>): { cmds: BuildingCommand[]; transform: (x: CanonicalBuildingModel) => CanonicalBuildingModel; allowed: string[] } | Refusal {
+  const dLo = r6(lo - old.lo)
+  const dHi = r6(hi - old.hi)
   // dependants: wall ends on the moved lines, openings and regions re-measured from their wall's new start
   const key = ax
   const mv = (v: number): number => (Math.abs(v - old.lo) < 1e-3 ? lo : Math.abs(v - old.hi) < 1e-3 ? hi : v)
@@ -414,15 +440,6 @@ export function bindSetOutline(ctx: Ctx, p: CorrectionProposal): Bound | Refusal
     }
   }
   for (const rid of body.ringIds) allowed.push(`wallRings:${rid}`, `wallJunctions:${rid}*`)
-  const measure = (working: CanonicalBuildingModel, _b: CanonicalBuildingModel, pictures: readonly BindPicture[]): { failure?: string; measure: { sourceVerified: boolean | null; why: string; builtSupportZ?: number | null } } => {
-    const nb = bodiesOf(working).find((b) => b.id === body.id)
-    const e = nb ? extentOn(nb.rect, view.side) : undefined
-    if (!e || Math.abs(e.lo - lo) > 0.01 || Math.abs(e.hi - hi) > 0.01) return { failure: `${body.id} was not built to ${lo.toFixed(2)}–${hi.toFixed(2)} m`, measure: { sourceVerified: false, why: `built extent ${e ? `${e.lo.toFixed(2)}–${e.hi.toFixed(2)}` : 'none'}` } }
-    const src = pictures.find((q) => q.frameId === pic.frameId)
-    const sil = nb ? bodyWallSilhouette(working, nb, view) : undefined
-    const back = src && sil ? drawnBack(src.raster, [sil], occupied, view.projection.zeroRow) : undefined
-    return { measure: { sourceVerified: back ? back.verified : null, why: `${body.id} now ${lo.toFixed(2)}–${hi.toFixed(2)} m along ${ax}; its walls drawn back into ${pic.frameId} cover ${back?.why ?? '—'}` } }
-  }
   const transform = (x: CanonicalBuildingModel): CanonicalBuildingModel => {
     const out = structuredClone(x) as unknown as Record<string, unknown>
     for (const v of Object.values(out)) if (Array.isArray(v)) for (const o of v as Array<Record<string, unknown>>) {
@@ -435,7 +452,67 @@ export function bindSetOutline(ctx: Ctx, p: CorrectionProposal): Bound | Refusal
     }
     return out as unknown as CanonicalBuildingModel
   }
-  return { commands: cmds, transform, allowed, expect: { kind: 'CUSTOM', measure }, record }
+  return { cmds, transform, allowed }
+}
+
+/**
+ * v3.54.17 R3: SET_OUTLINE from a PRINTED overall dimension of the plan (the metric read's WHOLE_HOUSE, OUTER_FACE
+ * length with its dimension line's two ends). The line's ends are put in metres through the plan's own registration; the
+ * line must be the printed length at the plan's scale (within 1.5 % or 0.1 m), or it is not that dimension. The body
+ * standing at both ends of the house on that axis takes the printed length, centred on the drawn line (the residual of
+ * the plan's scale split evenly), an end that already agrees staying where it is. An elevation registered by the
+ * model's own walls cannot show that the walls are too short or too long — the printed dimension can.
+ */
+function bindOutlineByPrinted(ctx: Ctx, p: CorrectionProposal, body: ModelBody, bodies: readonly ModelBody[]): Bound | Refusal {
+  const m = ctx.model
+  const pr = (p.patch ?? {}).printed
+  if (!pr || !(pr.valueM > 0)) return { status: 'INVALID', code: 'NO_PRINTED_VALUE', why: 'SET_OUTLINE from a printed dimension states its value and the dimension line\'s ends' }
+  const plan = ctx.plans?.find((q) => q.frameId === pr.planFrameId)
+  if (!plan) return { status: 'NEEDS_EVIDENCE', code: 'PLAN_NOT_REGISTERED', why: `the plan ${pr.planFrameId} is not registered: the dimension line cannot be put in metres` }
+  const w0 = plan.toWorld(pr.from[0], pr.from[1])
+  const w1 = plan.toWorld(pr.to[0], pr.to[1])
+  const ax: 'x' | 'z' = Math.abs(w1.x - w0.x) >= Math.abs(w1.z - w0.z) ? 'x' : 'z'
+  const side: Side = ax === 'x' ? 'FRONT' : 'RIGHT'
+  const a = [w0[ax], w1[ax]].sort((x, y) => x - y)
+  const measured = a[1] - a[0]
+  const record = { bound: { frameId: pr.planFrameId, ids: [body.id], values: { printedM: pr.valueM, measuredM: r6(measured), lineLo: r6(a[0]), lineHi: r6(a[1]) } }, source: { frameId: pr.planFrameId, sourceByteHash: pr.sourceByteHash } }
+  if (Math.abs(measured - pr.valueM) > Math.max(0.1, 0.015 * pr.valueM)) return { status: 'REJECTED_BY_SOURCE', code: 'DIMENSION_OFF_SCALE', why: `the dimension line "${pr.literal}" spans ${measured.toFixed(2)} m at the plan's scale, not the printed ${pr.valueM} m: it is not that dimension at this registration`, record }
+  const c = (a[0] + a[1]) / 2
+  const lo0 = r6(c - pr.valueM / 2)
+  const hi0 = r6(c + pr.valueM / 2)
+  const ext = bodies.map((b) => ({ b, e: extentOn(b.rect, side) }))
+  const hLo = Math.min(...ext.map((x) => x.e.lo))
+  const hHi = Math.max(...ext.map((x) => x.e.hi))
+  // the house as it stands already measures the printed length at both ends: nothing to move, whoever stands there
+  const tolH = Math.max(0.05, 0.005 * pr.valueM)
+  // a body that already runs between the line's two ends is what the line measures (a main body beside a porch)
+  const same = ext.find((x) => Math.abs(x.e.lo - lo0) < tolH && Math.abs(x.e.hi - hi0) < tolH)
+  if (same) return { status: 'NO_EFFECT', code: 'OUTLINE_AGREES', why: `${same.b.id} runs ${same.e.lo.toFixed(2)}–${same.e.hi.toFixed(2)} m along ${ax}, between the printed "${pr.literal}" line's ends`, record }
+  if (Math.abs(hLo - lo0) < tolH && Math.abs(hHi - hi0) < tolH) return { status: 'NO_EFFECT', code: 'OUTLINE_AGREES', why: `the house runs ${hLo.toFixed(2)}–${hHi.toFixed(2)} m along ${ax}; the printed "${pr.literal}" agrees within ${tolH.toFixed(2)} m at each end`, record }
+  const atLo = ext.filter((x) => Math.abs(x.e.lo - hLo) < 0.05)
+  const atHi = ext.filter((x) => Math.abs(x.e.hi - hHi) < 0.05)
+  if (atLo.length !== 1 || atHi.length !== 1 || atLo[0].b.id !== body.id || atHi[0].b.id !== body.id) return { status: 'NEEDS_EVIDENCE', code: 'NOT_ONE_BODY_AT_ENDS', why: `the house's ends along ${ax} are not both ${body.id}'s alone (${atLo.map((x) => x.b.id).join('+')} / ${atHi.map((x) => x.b.id).join('+')}): which body takes the printed length is not told`, record }
+  const old = extentOn(body.rect, side)
+  const tol = Math.max(0.05, 0.005 * pr.valueM)
+  const dLo = lo0 - old.lo
+  const dHi = hi0 - old.hi
+  if (Math.abs(dLo) < tol && Math.abs(dHi) < tol) return { status: 'NO_EFFECT', code: 'OUTLINE_AGREES', why: `${body.id} is ${(old.hi - old.lo).toFixed(2)} m along ${ax}; the printed "${pr.literal}" agrees within ${tol.toFixed(2)} m at each end`, record }
+  if (Math.max(Math.abs(dLo), Math.abs(dHi)) > Math.max(0.6, 0.05 * pr.valueM)) return { status: 'NEEDS_EVIDENCE', code: 'PRINTED_TOO_FAR', why: `the printed "${pr.literal}" would move ${body.id}'s ends by ${dLo.toFixed(2)} / ${dHi.toFixed(2)} m: more than a traced wall face misses by — another part of the house, not this outline`, record }
+  const lo = Math.abs(dLo) < tol ? old.lo : lo0
+  const hi = Math.abs(dHi) < tol ? old.hi : hi0
+  const newRect: Rect = ax === 'x' ? { ...body.rect, minX: lo, maxX: hi } : { ...body.rect, minZ: lo, maxZ: hi }
+  const overlap = bodies.filter((b) => b.id !== body.id).find((b) => Math.min(b.rect.maxX, newRect.maxX) - Math.max(b.rect.minX, newRect.minX) > 0.05 && Math.min(b.rect.maxZ, newRect.maxZ) - Math.max(b.rect.minZ, newRect.minZ) > 0.05 && !(Math.min(b.rect.maxX, body.rect.maxX) - Math.max(b.rect.minX, body.rect.minX) > 0.05 && Math.min(b.rect.maxZ, body.rect.maxZ) - Math.max(b.rect.minZ, body.rect.minZ) > 0.05))
+  if (overlap) return { status: 'INVALID', code: 'OVERLAPS_BODY', why: `the new extent of ${body.id} runs into ${overlap.id}`, record }
+  const rec = { ...record, bound: { ...record.bound, values: { ...record.bound.values, lo, hi, dLo: r6(lo - old.lo), dHi: r6(hi - old.hi) } } }
+  const e = outlineEdit(m, body, old, lo, hi, ax, newRect, rec)
+  if ('status' in e) return e
+  const measure = (working: CanonicalBuildingModel): { failure?: string; measure: { sourceVerified: boolean | null; why: string } } => {
+    const nb = bodiesOf(working).find((b) => b.id === body.id)
+    const got = nb ? extentOn(nb.rect, side) : undefined
+    if (!got || Math.abs(got.lo - lo) > 0.01 || Math.abs(got.hi - hi) > 0.01) return { failure: `${body.id} was not built to ${lo.toFixed(2)}–${hi.toFixed(2)} m`, measure: { sourceVerified: false, why: 'built extent differs' } }
+    return { measure: { sourceVerified: true, why: `${body.id} now ${lo.toFixed(2)}–${hi.toFixed(2)} m along ${ax} = the printed "${pr.literal}" (its line ${a[0].toFixed(2)}–${a[1].toFixed(2)} m on the plan)` } }
+  }
+  return { commands: e.cmds, transform: e.transform, allowed: e.allowed, expect: { kind: 'CUSTOM', measure }, record: rec }
 }
 
 // ---- BUILD_MASSING ----------------------------------------------------------------------------------------------

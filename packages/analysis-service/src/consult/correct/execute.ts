@@ -93,7 +93,8 @@ export type CorrectionProposal = {
   frameId?: string
   uncertainty?: 'LOW' | 'MEDIUM' | 'HIGH'
   justification?: string
-  origin: 'REVIEW' | 'SKETCH' | 'CONTROL'
+  /** METRIC (v3.54.17 R3): made by the analyzer from the independent metric read's printed dimensions. */
+  origin: 'REVIEW' | 'SKETCH' | 'CONTROL' | 'METRIC'
 }
 
 export type PatchStatus = 'COMMITTED' | 'REJECTED_BY_SOURCE' | 'NEEDS_EVIDENCE' | 'UNSUPPORTED_OPERATION' | 'INVALID' | 'STALE_REVISION' | 'DUPLICATE' | 'HELD' | 'ROLLED_BACK' | 'GROUP_ROLLED_BACK' | 'DEFERRED_ROOF_FEATURE' | 'NO_EFFECT'
@@ -297,7 +298,9 @@ export type Expect =
 export type Bound = { commands: BuildingCommand[]; appearance?: { obs: AppearanceObservation; projection: Projection }; allowed: string[]; expect: Expect; record: Pick<PatchRecord, 'bound' | 'source' | 'gate' | 'witness' | 'massing'>; /** v3.54.17: registrations the patch made (by the plan), kept with it. */ views?: BindView[]; /** v3.54.17: one edit of several objects at once (a moved ring), validated as a whole after the commands. */ transform?: (m: CanonicalBuildingModel) => CanonicalBuildingModel }
 export type Refusal = { status: PatchStatus; code: string; why: string; record?: Pick<PatchRecord, 'bound' | 'source' | 'gate' | 'massing'> }
 
-export type Ctx = { model: CanonicalBuildingModel; views: BindView[]; pictures: readonly BindPicture[]; witnesses: readonly PrintedWitness[]; massing?: MassingObservations }
+/** v3.54.17 R3: a registered plan sheet (pixels → world metres), for a printed dimension's line. */
+export type BindPlan = { frameId: string; toWorld: (px: number, py: number) => { x: number; z: number } }
+export type Ctx = { model: CanonicalBuildingModel; views: BindView[]; pictures: readonly BindPicture[]; witnesses: readonly PrintedWitness[]; massing?: MassingObservations; plans?: readonly BindPlan[] }
 
 const short = (s: string): string => sha256Hex(s).slice(0, 6)
 
@@ -911,6 +914,8 @@ export type ExecuteInput = {
    * openings and stacks after it are placed through. `held` are the other registrations at that moment.
    */
   derivedViews?: (model: CanonicalBuildingModel, held: readonly BindView[]) => BindView[]
+  /** v3.54.17 R3: the run's registered plan sheets (SET_OUTLINE from a printed dimension). */
+  plans?: readonly BindPlan[]
 }
 
 /** v3.54.17 R2: the operations whose targetId must name an element of the model (the element index's ids). */
@@ -996,7 +1001,7 @@ export function executeCorrections(input: ExecuteInput): CorrectionOutcome {
     const pending: Array<{ p: CorrectionProposal; bound?: Bound; view?: BindView; extra: Partial<PatchRecord> }> = []
     let refusal: { p: CorrectionProposal; r: Refusal } | undefined
     for (const p of ordered) {
-      const ctx: Ctx = { model: working, views: workingViews, pictures: input.pictures, witnesses: input.witnesses ?? [], ...(input.massing ? { massing: input.massing } : {}) }
+      const ctx: Ctx = { model: working, views: workingViews, pictures: input.pictures, witnesses: input.witnesses ?? [], ...(input.massing ? { massing: input.massing } : {}), ...(input.plans ? { plans: input.plans } : {}) }
       if (p.operation === 'ASSIGN_VIEW') {
         const b = bindView(ctx, p)
         if ('status' in b) {

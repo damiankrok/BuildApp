@@ -428,6 +428,28 @@ export function bodiesOf(m: CanonicalBuildingModel): ModelBody[] {
       same.wallIds.push(...r.walls.map((w) => w.id))
     } else bodies.push({ id: r.id, ringIds: [r.id], levelIds: [r.levelId], wallIds: r.walls.map((w) => w.id), rect, roofIds: [], planeIds: [] })
   }
+  // v3.54.17 R3: exterior walls a reconstruction built without a WallRing record (its envelope walls named <body>-w<n>,
+  // split walls <body>-w<n>-<k>) are that body's walls: grouped by the name and storey, never left for a roof to stand
+  // over nothing (a body counted from its roof's footprint is as wide as the roof's overhang, not as its walls)
+  const inRing = new Set(rings.flatMap((r) => r.walls.map((w) => w.id)))
+  const envelopes = new Map<string, Wall[]>()
+  for (const w of m.walls) {
+    if (w.kind !== 'EXTERIOR' || inRing.has(w.id)) continue
+    const k = /^(.+)-w\d+(?:-\d+)?$/.exec(w.id)
+    if (!k) continue
+    const key = `${k[1]}|${w.levelId}`
+    envelopes.set(key, [...(envelopes.get(key) ?? []), w])
+  }
+  for (const [key, ws] of [...envelopes].sort((x, y) => x[0].localeCompare(y[0]))) {
+    if (ws.length < 3) continue
+    const rect = rectOf(ws)
+    const id = key.split('|')[0]
+    const same = bodies.find((b) => Math.abs(b.rect.minX - rect.minX) < 0.15 && Math.abs(b.rect.maxX - rect.maxX) < 0.15 && Math.abs(b.rect.minZ - rect.minZ) < 0.15 && Math.abs(b.rect.maxZ - rect.maxZ) < 0.15)
+    if (same) {
+      same.levelIds.push(ws[0].levelId)
+      same.wallIds.push(...ws.map((w) => w.id))
+    } else bodies.push({ id, ringIds: [], levelIds: [ws[0].levelId], wallIds: ws.map((w) => w.id), rect, roofIds: [], planeIds: [] })
+  }
   const contains = (b: Rect, x: number, z: number): boolean => x >= b.minX - 0.05 && x <= b.maxX + 0.05 && z >= b.minZ - 0.05 && z <= b.maxZ + 0.05
   const smallest = (x: number, z: number): ModelBody | undefined => bodies.filter((b) => contains(b.rect, x, z)).sort((a, b) => area(a.rect) - area(b.rect))[0]
   // a roof or a group of touching planes over no ring is a body of its own (a model of roofs without walls still has
