@@ -181,6 +181,7 @@ async function stepWith(input: ConsultInput, messages: unknown[], n: number, lim
   const now = input.now ?? (() => new Date())
   let evidenceRequests = 0
   let usd = 0
+  let reasked = false
   for (let turn = 1; turn <= limits.maxTurnsPerStep; turn += 1) {
     const reply = await send(input, messages, tools, limits, `step ${n} turn ${turn}`, system)
     usd += reply.usd
@@ -190,6 +191,16 @@ async function stepWith(input: ConsultInput, messages: unknown[], n: number, lim
     if (review) {
       const parsed = parseReview(review.input)
       input.record({ at: now().toISOString(), kind: 'REVIEW', step: n, turn, ...('review' in parsed ? { review: parsed.review } : { refused: parsed.refused, raw: review.input }) })
+      // v3.54.18 (after the trial's measurement; three of nine live looks ended here): a review the contract cannot read
+      // — a list sent as text, its items spilled into the top level — is asked for ONCE more, with the reason, before
+      // the look is given up. The malformed answer is never repaired or half-read; a second one ends the step as before.
+      if (!('review' in parsed) && !reasked && turn < limits.maxTurnsPerStep) {
+        reasked = true
+        input.record({ at: now().toISOString(), kind: 'REVIEW_REASKED', step: n, turn, why: parsed.refused })
+        const others = uses.filter((u) => u !== review).map((u) => ({ type: 'tool_result', tool_use_id: u.id, content: 'not executed: the review was submitted in the same turn', is_error: true }))
+        messages.push({ role: 'user', content: [{ type: 'tool_result', tool_use_id: review.id, content: `NOT RECORDED: ${parsed.refused}. Call ${REVIEW_TOOL_NAME} once more with the same findings: every list field (observations, requestedEvidence, proposedCorrections, checked, notChecked) must be a JSON array, each observation or correction an object inside its array — never text, never fields at the top level.`, is_error: true }, ...others] })
+        continue
+      }
       // close the tool call so the conversation stays well-formed for a next step
       const others = uses.filter((u) => u !== review).map((u) => ({ type: 'tool_result', tool_use_id: u.id, content: 'not executed: the review was submitted in the same turn', is_error: true }))
       messages.push({ role: 'user', content: [{ type: 'tool_result', tool_use_id: review.id, content: 'recorded' }, ...others] })

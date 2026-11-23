@@ -107,6 +107,26 @@ describe('v3.54.2 transport counter-trials (consultLabels with a scripted model)
     expect(spend.filter((s) => s.startsWith('R'))).toHaveLength(3)
     expect(spend.filter((s) => s.startsWith('S'))).toHaveLength(2)
   })
+  // v3.54.18 — reproduced from three live looks (Alberto twice, Dom pod sakurą E): the reviewer's tool call came with its
+  // lists as text and their items spilled into the top level; the look was given up at once and the model went NOT_REVIEWED
+  const malformed = (id: string): ModelTurn => ({ ...review(id), content: [{ type: 'tool_use', id, name: 'submit_review', input: { status: 'ISSUE_FOUND', observations: '\n<parameter name="about">Front elevation', seen: 'a door is missing', certainty: 'LIKELY' } }] } as ModelTurn)
+  it('v3.54.18: a review the contract cannot read is asked for once more, with the reason; the readable answer is the review', async () => {
+    const events: ConsultEvent[] = []
+    const out = await run(scripted([malformed('bad'), review('s1'), review('s2')]), events)
+    expect(out.literal.review?.proposedCorrections[0].proposalId).toBe('s1')
+    expect(out.literal.turns).toBe(2)
+    expect(events.filter((e) => e.kind === 'REVIEW_REASKED')).toHaveLength(1)
+    expect(events.filter((e) => e.kind === 'REVIEW' && (e as { refused?: string }).refused)).toHaveLength(1)
+  })
+  it('v3.54.18 counter-trial: a second unreadable review ends the step refused — never repaired, never asked for a third time', async () => {
+    const events: ConsultEvent[] = []
+    const out = await run(scripted([malformed('bad1'), malformed('bad2'), review('never')]), events)
+    expect(out.literal.review).toBeUndefined()
+    expect(out.literal.refused).toMatch(/observations is not a list/)
+    expect(out.literal.turns).toBe(2)
+    expect(out.final).toBeUndefined()
+    expect(events.filter((e) => e.kind === 'REVIEW_REASKED')).toHaveLength(1)
+  })
   it('two transport failures in a row (no network) throw: the caller keeps the LOCAL result', async () => {
     await expect(run(scripted([new ConsultantUnavailable('TIMEOUT', 'timeout'), new ConsultantUnavailable('TRANSPORT', 'down')]), [])).rejects.toThrow()
   })

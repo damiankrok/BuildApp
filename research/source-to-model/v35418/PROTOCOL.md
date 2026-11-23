@@ -110,3 +110,13 @@ Decyzja: **jeden dodatkowy cykl (piąty i ostatni)**, ograniczony do tych przycz
 
 Pomiar cyklu 5 jest zarazem biegiem końcowym DEV: nagrane odczyty (0 USD) + recenzent NA ŻYWO oglądający faktyczną
 rewizję. Po nim kod jest zamrażany bez względu na wynik; dopiero wtedy otwieram NEW-C.
+
+## 9. Poprawka PO pomiarze próby (nie jest częścią mierzonego kodu) — 2026-11-23
+
+Pomiar DEV (cykl 5) i ślepy pierwszy bieg NEW-C wykonano na kodzie `bc57767`. W trzech z dziewięciu spojrzeń recenzenta
+na żywo (Alberto dwukrotnie, Dom pod sakurą E) odpowiedź narzędzia przyszła nieczytelna dla kontraktu (listy jako tekst,
+pola rozsypane na najwyższym poziomie) i model został `NOT_REVIEWED`. To awaria transportu odpowiedzi, nie jakości
+modelu. Po zakończeniu pomiaru dodałem **jedno** ponowienie pytania z podaniem powodu (`REVIEW_REASKED`; druga nieczytelna
+odpowiedź kończy krok jak dotąd, nic nie jest naprawiane ani zgadywane). Wyniki próby w raporcie pochodzą z `bc57767`;
+biegi z tą poprawką (ponowne spojrzenie Alberto i Sakury, host końcowy) są oznaczone osobno i nie zastępują pierwszych
+wyników, które zostają w dostawie jako niepowodzenia.
