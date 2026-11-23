@@ -80,7 +80,7 @@ for h in man['houses']:
 
 # ---- the gallery ------------------------------------------------------------------------------------------------------
 E = html.escape
-def a(href, text): return f'<a href="{E(href)}">{E(text)}</a>' if href else '<span class="none">brak</span>'
+def a(href, text): return f'<a href="{E(href)}">{E(text)}</a>' if href and (href.startswith('http') or os.path.exists(os.path.join(out, href))) else f'<span class="none">{E(text)}: brak (ten bieg go nie zapisał)</span>'
 def img(href, alt, cls='thumb'): return f'<a href="{E(href)}"><img class="{cls}" src="{E(href)}" alt="{E(alt)}" loading="lazy"></a>' if href and os.path.exists(os.path.join(out, href)) else '<div class="none box">brak</div>'
 css = """body{font-family:system-ui,Segoe UI,Arial,sans-serif;margin:0;background:#f4f3f0;color:#1d1d1b}header{background:#22313f;color:#fff;padding:18px 24px}
 main{padding:16px 24px;max-width:1500px;margin:auto}h2{margin:28px 0 6px}section.house{background:#fff;border:1px solid #d9d6cf;border-radius:8px;padding:14px 18px;margin:18px 0}
@@ -116,6 +116,28 @@ for c in cards:
     for t in ('AXO-front-right', 'AXO-front-left', 'AXO-rear-left', 'AXO-rear-right', 'TOP', 'STOREY-0'):
         doc.append('<tr>' + ''.join(f'<td>{img(f"tiles/{name}/{v["key"]}-{t}.png", t)}<br><small>{t}</small></td>' for v in c['variants']) + '</tr>')
     doc.append('</table></section>')
+# ---- the host's jobs and what stands beside the houses (given in the manifest as `extras`) -----------------------------
+ex = man.get('extras') or {}
+if ex.get('host'):
+    doc.append('<section class="house" id="host"><h2>Publiczny host na commicie końcowym</h2><table><tr><th>Zadanie</th><th>Wynik</th><th>USD / żądania</th><th>Pliki</th><th>Render (jeżeli model)</th></tr>')
+    for j in ex['host']:
+        dst = os.path.join(out, 'host', j['key'])
+        shutil.copytree(j['dir'], dst, dirs_exist_ok=True)
+        rec = jload(os.path.join(dst, 'record.json'), {}) or {}
+        files = ' · '.join(a(f"host/{j['key']}/{f}", f) for f in ('record.json', 'status.json', 'result.json', 'model.json', 'scene.json') if os.path.exists(os.path.join(dst, f)))
+        ren = ''
+        if os.path.exists(os.path.join(dst, 'model.json')):
+            subprocess.run(['npx', 'vite-node', 'research/source-to-model/v35418/render.ts', '--', '--model', os.path.join(dst, 'model.json'), '--out', dst, '--name', 'render', '--tile', '700'], cwd=root, check=True, capture_output=True)
+            ren = img(f"host/{j['key']}/render-SIDES.png", 'elewacje', 'board') + img(f"host/{j['key']}/render-AROUND.png", 'aksonometrie', 'board')
+        doc.append(f'<tr><td><b>{E(j["label"])}</b><br><small>{E(j.get("url", ""))}</small></td><td><span class="tag HOST">HOST</span> {E(str(rec.get("status")))}{(" — " + E(str((rec.get("error") or {}).get("code")))) if rec.get("error") else ""}<br><small>{E(str(rec.get("seconds")))} s</small></td><td>{E(str(rec.get("booksDeltaUsd")))} / {E(str(rec.get("booksDeltaRequests")))}</td><td>{files}</td><td>{ren}</td></tr>')
+    doc.append('</table>')
+    for f in ex.get('hostFiles', []):
+        os.makedirs(os.path.join(out, 'host'), exist_ok=True); shutil.copy2(f['from'], os.path.join(out, 'host', f['to']))
+    doc.append('<p>' + ' · '.join(a(f"host/{f['to']}", f['to']) for f in ex.get('hostFiles', [])) + '</p></section>')
+for d in ex.get('dirs', []):
+    shutil.copytree(d['from'], os.path.join(out, d['to']), dirs_exist_ok=True)
+if ex.get('dirs'):
+    doc.append('<section class="house" id="extra"><h2>Oceny i protokół</h2><ul>' + ''.join(f'<li>{a(d["to"] + "/" + d["index"], d["label"])}</li>' for d in ex['dirs'] if d.get('index')) + '</ul></section>')
 doc.append('</main></body></html>')
 open(os.path.join(out, 'gallery.html'), 'w').write('\n'.join(doc))
 # link check

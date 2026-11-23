@@ -5,7 +5,8 @@ wall clip, colour planes), per-property rule (`crossWitness: PLAN_SPAN`), facade
 replacing body must be uncontradicted), one facade consumer with or without LOCAL (roof windows, finishes, palette),
 observation-fate 1.0.0, wall top = roof underside (ops 1.6.0, massing 1.2.0), executor 1.6.0 (no transaction may leave
 an opening the compiler does not cut), one re-ask of an unreadable review. Measured code `bc57767`; the re-ask came
-after the measurement (PROTOCOL §9). Books 33.17+ of 68.542857 USD (see the report §11 for the closing figure).
+after the measurement (PROTOCOL §9). Books 34.452762 of 68.542857 USD (stage 4.951829; 34.090095 left; no open reservation). APK 1349 from `ba41dbe`
+(build directory in RAM: the session's disk allowance is full of earlier stages' deliveries, which were not touched).
 
 **Result to carry.** Pre-registered goal NOT met (useful miniatures: author 2 → 2 of 6, blind grader 1 → 2; blind set
 0 → 0 of 3). Blind grader: final closer to the source in 7 of 9, same in 2, worse in none; large openings DEV-K 4/14 →

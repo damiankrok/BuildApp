@@ -47,13 +47,13 @@ sama zależała od błędnego modelu.
    (`ADD_ROOF_WINDOW`, rejestr 1.5.0), strefy wykończenia (`SET_FINISH` z obrysem strefy), paleta miniatury.
 6. **Los każdego faktu** — `buildapp.observation-fate` 1.0.0: jeden wiersz na element każdego odczytu (współrzędne w
    pikselach oryginału, producent, strona i jej podstawa, operacja, cel, status weryfikacji, powód).
+7. **Nazwane konwencje miniatury** (nigdy status wymiaru): bok bez etykiety przypisany kolejnością źródła, gdy dowody
+   nie rozstrzygają; uproszczenie obrysu o małe uskoki (≤ 6 % / krok, ≤ 12 % łącznie); paleta bez odczytu tonu.
 8. **Model i widok mówią to samo o otworach** (cykl 5). Narysowany wierzch ściany to spód dachu przy ścianie; górna
    powierzchnia (`eaveOffset`) stoi nad nim o t / cos(kąt). Korekta dachu sprawdza otwory względem wierzchu ściany, który
    zbuduje kompilator; wysokość otworu ZAŁOŻONA ustępuje dachowi ze źródła, odczytana odrzuca poprawkę. Transakcja, która
    zostawiłaby nowy otwór niewycięty przez kompilator, jest wycofywana (`OPENING_NOT_CUT`); niewycięte otwory oddanego
    modelu są nazwane (`DELIVERED_OPENINGS_NOT_CUT`).
-7. **Nazwane konwencje miniatury** (nigdy status wymiaru): bok bez etykiety przypisany kolejnością źródła, gdy dowody
-   nie rozstrzygają; uproszczenie obrysu o małe uskoki (≤ 6 % / krok, ≤ 12 % łącznie); paleta bez odczytu tonu.
 
 ## Konsekwencje
 
@@ -61,5 +61,8 @@ sama zależała od błędnego modelu.
   pomiarem i wycofaniem; renderer i aplikacja czytają ten sam model.
 - Zmieniają się wersje: bramka 1.3.0, rejestr 1.5.0, wykonawca 1.6.0, propozycje ze szkicu 1.6.0, ops 1.6.0,
   massing 1.2.0, arbitraż bryły 1.1.0 — wszystkie w kluczu przyjętej rewizji (stary cache nie jest odtwarzany).
-- Otwarte (nazwane w raporcie): formy poza dwuspadem/płaskim, obrysy o trzech realnych skrzydłach, daszki/tarasy/
-  pergole (brak operacji), ton dachu ze źródła na bryle bez LOCAL, przeniesienie wnętrza na bryłę ze źródeł.
+- Otwarte (nazwane w raporcie §12): drzwi wejściowe na ciemnym lub zatłoczonym tle, widma LOCAL „wspierane" przez
+  obraz, bryły o dwóch–trzech skrzydłach, dach czterospadowy, obrót modelu do stron źródła, przeniesienie wnętrza na
+  bryłę ze źródeł, ton ściany bazowej, daszki/tarasy/pergole (brak operacji).
+- Wynik próby (cel zapisany z góry nieosiągnięty; liczby w raporcie §0 i §7) nie zmienia decyzji: wariant C usuwa
+  nazwane straty, a pozostałe blokady leżą w reprezentacji (formy brył i dachów) i w drugim świadku dla drzwi.

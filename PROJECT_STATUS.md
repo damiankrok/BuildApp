@@ -12,6 +12,21 @@
 
 ## Current summary (read first)
 
+- **v3.54.18 (2026-11-23): facade and body arbitration — APK 1349** (Master Plan v3.54.18). Report
+  `stage-reports/SOURCE_TO_MODEL_V35418.md`, owner note `stage-reports/README_V35418.md`, ADR
+  `docs/ADR-V35418-FACADE-AND-BODY-ARBITRATION.md`, protocol / references / scores / hand-off under
+  `research/source-to-model/v35418/`. LOCAL and the API reading are two hypotheses the source picture arbitrates at
+  three levels (element: gate 1.3.0; property: plan-witnessed span; facade adoption; body arbitration 1.1.0), one
+  facade consumer with or without LOCAL (roof windows, finishes, palette), observation-fate 1.0.0, wall top = roof
+  underside (14 openings of Alberto were in the model and in no view, in the baseline too), executor 1.6.0. Frozen
+  trial of 9 houses, 4 publishers (3 known, 3 new with the base code first, 3 blind): **pre-registered goal NOT met**
+  (useful miniatures 2 → 2 of 6 by the author, 1 → 2 by the blind grader; blind set 0 → 0 of 3); blind grader: final
+  closer to the source in 7 of 9, worse in none; large openings 4/14 → 12/14 (known), 8/17 → 11/17 (new), 4/14 → 8/14
+  (blind); one NO_MODEL became a model. Kept failures: Medulin, Mindelo (multi-wing bodies), G6 and Sakura (hip
+  roofs), Alberto (crowded front), entrance doors of Alaska and Aurora; interior lost where the body was replaced.
+  Host on the final commit: all checks passed (reuse 0 USD / 0 requests; no token → 0 requests), one job FAILED on a
+  fresh read (kept). Stage cost 4.951829 USD (books 34.452762 of 68.542857). Matrix 4536: 16 failures, the same 16 as the R3 base list (none new). APK 1349 from `ba41dbe`
+  (same signer as 1348; ANDROID_UI_NOT_VERIFIED — no device in the session).
 - **v3.54.17 R3 (2026-11-20): overhang, chimneys, heights behind pots, full dimensions — OWNER +40 USD.** Report
   `stage-reports/SOURCE_TO_MODEL_V35417_R3.md`. Elevations registered from the sketch (ground behind pots; eaves or
   ridge checked); SET_ROOF_OVERHANG (verges, eaves capped to clear another body); chimneys fused across views (front/

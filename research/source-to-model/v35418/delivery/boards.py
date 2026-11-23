@@ -56,7 +56,13 @@ src_index = {i['asset']: i for i in json.load(open(os.path.join(spec['sources'],
 fac_path = os.path.join(spec['sketchRun'], 'facades.json')
 facades = json.load(open(fac_path))['facades'] if os.path.exists(fac_path) else []
 
+# frame → asset as the run's own observation graph states it (a frame id is not always its asset id plus a suffix)
+_og = os.path.join(spec['sketchRun'], 'observation-graph.json')
+FRAME_ASSET = {f['id']: f['assetId'] for f in (json.load(open(_og)).get('coordinateFrames') or [])} if os.path.exists(_og) else {}
+
 def source_of(frame_id):
+    hit = src_index.get(FRAME_ASSET.get(frame_id, ''))
+    if hit: return os.path.join(spec['sources'], hit['file'])
     stem = frame_id.replace('frame-', '')
     best = None
     for k, v in src_index.items():
@@ -73,13 +79,15 @@ H = HEAD + 40 + len(rows) * (CH + 56) + n_extra * (CH + 56) + 60
 board = Image.new('RGB', (W, H), 'white')
 d = ImageDraw.Draw(board)
 d.text((PAD, 10), f"{spec['title']} — {spec['publisher']} — zbiór {spec['set']}", fill='black', font=BIG)
+import textwrap
 for i, c in enumerate(cols):
-    d.text((PAD + i * (CW + PAD), HEAD), c, fill='black', font=SMALL)
+    for k, line in enumerate(textwrap.wrap(c, 62)[:2]):
+        d.text((PAD + i * (CW + PAD), HEAD - 6 + k * 17), line, fill='black', font=SMALL)
 
-def paste(im, x, y):
+def paste(im, x, y, why='brak'):
     if im is None:
         d.rectangle((x, y, x + CW, y + CH), fill=(236, 236, 236))
-        d.text((x + 10, y + 10), 'brak', fill=(90, 90, 90), font=FONT)
+        d.text((x + 10, y + 10), why, fill=(150, 40, 40) if 'NO_MODEL' in why else (90, 90, 90), font=FONT)
         return
     t = im.copy(); t.thumbnail((CW, CH))
     board.paste(t, (x + (CW - t.width) // 2, y + (CH - t.height) // 2))
@@ -104,7 +112,7 @@ for f in rows:
     if sk: sk.save(os.path.join(tiles_dir, f"sketch-{tail}.png"))
     paste(sk, PAD + (CW + PAD), yy)
     for j, v in enumerate(variants):
-        paste(tiles[v['key']].get(side) if side else None, PAD + (2 + j) * (CW + PAD), yy)
+        paste(tiles[v['key']].get(side) if side else None, PAD + (2 + j) * (CW + PAD), yy, 'NO_MODEL — brak modelu' if not tiles[v['key']] else ('strona nieprzypisana' if not side else 'brak'))
     index['rows'].append({'frame': tail, 'label': f['label'], 'side': side, 'verdict': f.get('verdict'), 'source': f"tiles/{house}/source-{tail}.png" if s_im else None, 'sketch': f"tiles/{house}/sketch-{tail}.png" if sk else None})
     y += CH + 56
 # axonometric row and storey row
@@ -116,7 +124,7 @@ for title, pick in (('perspektywa (aksonometria od frontu z prawej)', 'AXO-front
         else:
             im = load(os.path.join(v['render'], f"{v['name']}-STOREY-0.png"))
             if im: im.save(os.path.join(tiles_dir, f"{v['key']}-STOREY-0.png"))
-        paste(im, PAD + (2 + j) * (CW + PAD), yy)
+        paste(im, PAD + (2 + j) * (CW + PAD), yy, 'NO_MODEL — brak modelu' if not tiles[v['key']] else 'brak')
     y += CH + 56
 os.makedirs(os.path.join(out, 'boards'), exist_ok=True)
 board.save(os.path.join(out, 'boards', f'{house}-board.png'))
