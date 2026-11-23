@@ -60,6 +60,8 @@ import { identityOf } from '../identity.js'
 import type { BindPicture, BindView, CorrectionOutcome, CorrectionProposal, PatchRecord, PrintedWitness, Side, SketchAnchors, TransactionRecord } from './correct/execute.js'
 import { SOURCE_GATE_VERSION } from './correct/source-gate.js'
 import { SKETCH_PROPOSALS_VERSION, facadeAdoption, finishProposalsFromSketch, proposalsFromSketch } from './correct/from-sketch.js'
+import { observationFates } from './correct/fates.js'
+import type { ObservationFates } from './correct/fates.js'
 import type { SketchProposalAccount } from './correct/from-sketch.js'
 import { MASSING_OPS_VERSION, roofProposalsFromSketches } from './massing/ops.js'
 import { PLAN_OUTLINE_VERSION, readPlanOutline } from './plan-outline.js'
@@ -140,7 +142,7 @@ export type ConsultantWiring = {
 /** v3.54.14: what the sketch step read, accepted and changed (the rasters are not kept: they are redrawn from the sketches). */
 export type SketchSummary = { reading: Omit<SketchReading, 'elevationSketches'>; form: { decision: 'ACCEPT' | 'ROLLBACK' | 'NOT_RUN'; why: string; measuredBefore?: BuiltMeasure; measuredAfter?: BuiltMeasure }; finish: { decision: 'ACCEPT' | 'ROLLBACK' | 'NOT_RUN'; why: string }; usd: number
   /** v3.54.16: the sketches' elements as proposals of the correction registry, and what the executor did with each. */
-  semantic?: { version: string; decision: 'APPLIED' | 'NONE_KEPT' | 'NOT_RUN'; why: string; /** v3.54.18: per sketched elevation, whether its reading was adopted as a whole facade, on what counts. */ adoption?: Array<{ frameId: string; side?: string; drawn: number; supported: number; refuted: number; pending: number; decision: string; why: string; proposed: number }>; /** v3.54.18: the sketches' finish zones proposed as SET_FINISH (sides without regions). */ finishes?: { proposed: number; skipped: Array<{ sketchId: string; why: string }> }; /** v3.54.18: sides taken by the named miniature convention (source order), not read. */ sidesByConvention?: Array<{ frameId: string; side: string | null; basis: 'MINIATURE_CONVENTION_SOURCE_ORDER' }>; accounts: Array<{ frameId: string; side?: string; proposals: number; agreed: number; skipped: Array<{ sketchId: string; why: string }> }>; records: PatchRecord[]; transactions: TransactionRecord[]; /** v3.54.17: each sketch held against each body's roof (SET_ROOF proposals or why not), and the side assignment it was read under. */ massing?: MassingProposalAccount[]; orientation?: OrientationHypothesis; /** v3.54.17 R3: stacks of perpendicular sketches paired into one stack with both plan coordinates. */ chimneyFusion?: FusionRecord & { version: string } } }
+  semantic?: { version: string; decision: 'APPLIED' | 'NONE_KEPT' | 'NOT_RUN'; why: string; /** v3.54.18: per sketched elevation, whether its reading was adopted as a whole facade, on what counts. */ adoption?: Array<{ frameId: string; side?: string; drawn: number; supported: number; refuted: number; pending: number; decision: string; why: string; proposed: number }>; /** v3.54.18: the sketches' finish zones proposed as SET_FINISH (sides without regions). */ finishes?: { proposed: number; skipped: Array<{ sketchId: string; why: string }> }; /** v3.54.18: sides taken by the named miniature convention (source order), not read. */ sidesByConvention?: Array<{ frameId: string; side: string | null; basis: 'MINIATURE_CONVENTION_SOURCE_ORDER' }>; accounts: Array<{ frameId: string; side?: string; proposals: number; agreed: number; agreedIds?: Array<{ sketchId: string; modelId: string }>; skipped: Array<{ sketchId: string; why: string }> }>; /** v3.54.18: one row per element of every reading — what became of it (`buildapp.observation-fate` 1.0.0). */ fates?: ObservationFates; records: PatchRecord[]; transactions: TransactionRecord[]; /** v3.54.17: each sketch held against each body's roof (SET_ROOF proposals or why not), and the side assignment it was read under. */ massing?: MassingProposalAccount[]; orientation?: OrientationHypothesis; /** v3.54.17 R3: stacks of perpendicular sketches paired into one stack with both plan coordinates. */ chimneyFusion?: FusionRecord & { version: string } } }
 
 /** v3.54.18: tolerances of the body arbitration, fixed before any result (a printed dimension, a published height). */
 export const BODY_ARBITRATION = { version: '1.0.0', dimAgreeM: 0.3, dimAgreeShare: 0.04, heightAgreeM: 0.6, heightAgreeShare: 0.1 } as const
@@ -1361,7 +1363,7 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
     const views = [...held2, ...sketchViewsOf(m2, pictures2, held2)]
     const sketched = sketchSummary.reading.sketches.filter((x) => x.sketch)
     const accounts = sketched.map((x) => proposalsFromSketch(x.sketch as NonNullable<typeof x.sketch>, x.facade, m2, views, modelRevision(m2), sketchSideOf?.[x.frameId]))
-    sem.accounts = accounts.map((a) => ({ frameId: a.frameId, ...(a.side ? { side: a.side } : {}), proposals: a.proposals.length, agreed: a.agreed.length, skipped: a.skipped }))
+    sem.accounts = accounts.map((a) => ({ frameId: a.frameId, ...(a.side ? { side: a.side } : {}), proposals: a.proposals.length, agreed: a.agreed.length, agreedIds: a.agreed.map((g) => ({ sketchId: g.sketchId, modelId: g.modelId })), skipped: a.skipped }))
     if (sidesByConvention.size > 0) sem.sidesByConvention = [...sidesByConvention].map((frameId) => ({ frameId, side: sketchSideOf?.[frameId] ?? null, basis: 'MINIATURE_CONVENTION_SOURCE_ORDER' as const }))
     // v3.54.17 R3: a stack seen from the eaves side and from a gable end is one stack with both coordinates
     const stacks: SketchedStack[] = sketched.flatMap((x) => {
@@ -1424,6 +1426,20 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
       const fin = sketched.map((x) => finishProposalsFromSketch(x.sketch as NonNullable<typeof x.sketch>, x.facade, m3, views3, modelRevision(m3), sketchSideOf?.[x.frameId]))
       sem.finishes = { proposed: fin.reduce((n, f) => n + f.proposals.length, 0), skipped: fin.flatMap((f) => f.skipped) }
       await phase('SKETCH_FINISH', fin.flatMap((f) => f.proposals))
+    }
+    // v3.54.18: the fate of every element the readings state, on the model that now stands (agreements recomputed on it)
+    {
+      const mF = stood.run?.reconstruction.model ?? m2
+      const heldF = massingOf.get(stood)?.views ?? (stood.run ? viewsOfRun(stood.run.reconstruction.facadeAlignment.views) : held)
+      const viewsF = [...heldF, ...sketchViewsOf(mF, await allPicturesOf(stood), heldF)]
+      const accF = sketched.map((x) => proposalsFromSketch(x.sketch as NonNullable<typeof x.sketch>, x.facade, mF, viewsF, modelRevision(mF), sketchSideOf?.[x.frameId]))
+      sem.fates = observationFates({
+        sketches: sketchSummary.reading.sketches,
+        records: sem.records,
+        accounts: accF.map((a) => ({ frameId: a.frameId, ...(a.side ? { side: a.side } : {}), agreedIds: a.agreed.map((g) => ({ sketchId: g.sketchId, modelId: g.modelId })), skipped: [...a.skipped, ...(sem.accounts.find((q) => q.frameId === a.frameId)?.skipped ?? [])] })),
+        sideBasis: (frameId) => (sidesByConvention.has(frameId) ? 'MINIATURE_CONVENTION_SOURCE_ORDER' : sketched.find((x) => x.frameId === frameId)?.facade === 'SIDE_UNSPECIFIED' ? 'EVIDENCE' : turnedSides ? 'ORIENTATION_TURNED_90' : 'LABEL'),
+        ...(sem.finishes ? { finishSkipped: sem.finishes.skipped } : {}),
+      })
     }
     if (asked === 0) sem.why = 'every sketch element agrees with the model, or none has a registry operation'
     else if (kept.length > 0 && stood !== good) {

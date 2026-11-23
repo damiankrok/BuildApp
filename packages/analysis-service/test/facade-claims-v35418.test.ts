@@ -21,6 +21,8 @@ import type { BindPicture, BindView, CorrectionProposal } from '../src/consult/c
 import { SOURCE_GATE_VERSION, supportOf } from '../src/consult/correct/source-gate.js'
 import { FACADE_ADOPTION, facadeAdoption } from '../src/consult/correct/from-sketch.js'
 import type { ElevationSketch } from '../src/appearance/elevation-sketch.js'
+import { OBSERVATION_FATE_VERSION, observationFates } from '../src/consult/correct/fates.js'
+import type { PatchRecord } from '../src/consult/correct/execute.js'
 
 const MPP = 0.025
 const ALONG0 = -1.25
@@ -368,5 +370,49 @@ describe('v3.54.18 per-property arbitration: the plan keeps the span, the readin
     expect((moved.records[0].gate as { crossWitness?: string } | undefined)?.crossWitness).toBeUndefined()
     expect(moved.records[0].status).not.toBe('COMMITTED')
     expect(a.records[0].status).toBe('REJECTED_BY_SOURCE') // the printed 120/120 box stands where the picture scores it higher
+  })
+})
+
+// ---- v3.54.18: the fate of every fact a reading states ----------------------------------------------------------------
+describe('v3.54.18 observation fates: nothing a reading states disappears silently', () => {
+  const poly = (b: { x0: number; y0: number; x1: number; y1: number }): Array<[number, number]> => [[b.x0, b.y0], [b.x1, b.y0], [b.x1, b.y1], [b.x0, b.y1]]
+  const tail = FRAME.slice(-10)
+  const sketch = { sketchId: 's', frameId: FRAME, groundRow: ZERO, source: { imageSha256: 'e'.repeat(64), width: W, height: H, scale: 1 }, producer: { kind: 'API_CONTOUR_READING', model: 'm', promptVersion: 'elevation-sketch/2' },
+    roofs: [{ id: 'r1', polygon: poly(boxOf(0, 10, 2.8, 5.6)) }],
+    walls: [{ id: 'w1', class: 'TIMBER', polygon: poly(boxOf(0, 10, 0, 2.8)), host: 'main', visibility: 'VISIBLE' }],
+    openings: [{ id: 'oA', kind: 'WINDOW', polygon: poly(b4(REAL.A)) }, { id: 'oC', kind: 'WINDOW', polygon: poly(b4(REAL.C)) }, { id: 'oD', kind: 'DOOR', polygon: poly(b4(REAL.DOOR)) }, { id: 'oX', kind: 'WINDOW', polygon: poly(boxOf(2.6, 3.8, 0.9, 2.1)) }, { id: 'oG', kind: 'GLAZED_WALL', polygon: poly(boxOf(8.8, 9.8, 0, 2.4)) }],
+    elements: [{ id: 'eK', kind: 'CHIMNEY', polygon: poly(boxOf(7, 7.5, 5.6, 6.4)) }, { id: 'eC', kind: 'CANOPY', polygon: poly(boxOf(4.2, 5.8, 2.2, 2.4)) }] } as unknown as ElevationSketch
+  const rec = (proposalId: string, operation: string, status: string, extra: Partial<PatchRecord> = {}): PatchRecord => ({ proposalId, operation, targetId: 'FRONT', origin: 'SKETCH', status, why: `${status} for ${proposalId}`, ...extra }) as PatchRecord
+  const records = [
+    rec(`sk:${tail}:upd:oA`, 'UPDATE_OPENING', 'COMMITTED', { measure: { sourceVerified: true, why: 'built' }, gate: { winner: 'PROPOSED', proposedZ: 5, nullBoxes: 20, why: 'supported' } }),
+    rec(`sk:${tail}:upd:oC`, 'UPDATE_OPENING', 'NEEDS_EVIDENCE', { code: 'SOURCE_UNDECIDED' }),
+    rec(`sk:${tail}:upd:oC@adopt`, 'UPDATE_OPENING', 'COMMITTED', { measure: { sourceVerified: false, why: 'built' }, gate: { winner: 'UNDECIDED', proposedZ: 1.5, nullBoxes: 20, why: 'adopted', adopted: true } }),
+    rec(`sk:${tail}:add:oX`, 'ADD_OPENING', 'REJECTED_BY_SOURCE', { code: 'SOURCE_SHOWS_NO_OPENING' }),
+    rec(`sk:${tail}:chimney:eK`, 'ADD_CHIMNEY', 'COMMITTED', { measure: { sourceVerified: null, why: 'built' } }),
+    rec(`sk:${tail}:finish:w1`, 'SET_FINISH', 'COMMITTED', { measure: { sourceVerified: null, why: '1 region' } }),
+  ]
+  const fates = observationFates({ sketches: [{ facade: 'FRONT', frameId: FRAME, sketch }, { facade: 'SIDE_UNSPECIFIED', frameId: 'frame-other-0123456789', sketch: { ...sketch, frameId: 'frame-other-0123456789' } as ElevationSketch }], records, accounts: [{ frameId: FRAME, side: 'FRONT', agreedIds: [{ sketchId: 'oD', modelId: 'door-1' }], skipped: [{ sketchId: 'oG', why: 'GLAZED_WALL: no opening kind of the registry takes it' }, { sketchId: 'eC', why: 'CANOPY: UNSUPPORTED_OPERATION' }] }, { frameId: 'frame-other-0123456789', skipped: [] }], sideBasis: () => 'LABEL' })
+  const by = new Map(fates.rows.map((r) => [r.id, r]))
+
+  it('one row per element of every reading, in the reading\'s own coordinates', () => {
+    expect(fates.version).toBe(OBSERVATION_FATE_VERSION)
+    expect(fates.rows.length).toBe(2 * (5 + 2 + 1 + 1))
+    expect(fates.rows.every((r) => r.coordinateSystem === 'FRAME_PIXELS_X_RIGHT_Y_DOWN' && r.unit === 'px' && r.producer.promptVersion === 'elevation-sketch/2')).toBe(true)
+  })
+  it('built and verified, built with an adopted facade, agreeing, refused, without a consumer — each named apart', () => {
+    expect([by.get(`${tail}:oA`)?.fate, by.get(`${tail}:oA`)?.verification]).toEqual(['BUILT', 'SOURCE_VERIFIED'])
+    expect([by.get(`${tail}:oC`)?.fate, by.get(`${tail}:oC`)?.verification]).toEqual(['BUILT', 'ADOPTED_WITH_FACADE'])
+    expect([by.get(`${tail}:oD`)?.fate, by.get(`${tail}:oD`)?.verification]).toEqual(['AGREES_WITH_MODEL', 'TWO_READERS_AGREE'])
+    expect(by.get(`${tail}:oX`)?.fate).toBe('REFUSED_BY_SOURCE')
+    expect(by.get(`${tail}:oG`)?.fate).toBe('NO_CONSUMER')
+    expect(by.get(`${tail}:eC`)?.fate).toBe('NO_CONSUMER')
+    expect(by.get(`${tail}:eK`)?.fate).toBe('BUILT')
+    expect(by.get(`${tail}:w1`)?.fate).toBe('BUILT')
+  })
+  it('a reading whose picture is registered to no side: every element NOT_REGISTERED, none dropped', () => {
+    const other = fates.rows.filter((r) => r.frameId === 'frame-other-0123456789')
+    expect(other.length).toBe(9)
+    expect(other.every((r) => r.fate === 'NOT_REGISTERED')).toBe(true)
+    expect(fates.summary.NOT_REGISTERED).toBe(9)
   })
 })

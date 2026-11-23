@@ -195,6 +195,7 @@ if (r.bodyArbitration) writeFileSync(join(out, 'body-arbitration.json'), `${stab
       verdict: !s.sketch ? 'NOT_READ' : !acc?.side ? 'READ_NOT_USED (not registered to a side)' : mine.some((q) => q.status === 'COMMITTED') || (r.sketches?.finish.decision === 'ACCEPT' && s.check?.properties.finish === 'ACCEPTED') ? 'USED' : 'READ_NOTHING_KEPT',
     }
   })
+  if (sem?.fates) writeFileSync(join(out, 'observation-fates.json'), `${stableJson(sem.fates)}\n`)
   writeFileSync(join(out, 'facades.json'), `${stableJson({ facades, orientation: sem?.orientation?.assignment ?? null, bodyArbitration: r.bodyArbitration ? { decision: r.bodyArbitration.decision, why: r.bodyArbitration.why } : null })}\n`)
 }
 if (r.sketchesWithoutModel) writeFileSync(join(out, 'sketches-without-model.json'), `${stableJson(r.sketchesWithoutModel)}\n`)
