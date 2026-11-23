@@ -48,8 +48,9 @@ correct the outline; metric-read/5 (`ends` required); sketch prompt 2; reviewer 
 sketches; SET_ROOF keeps partitions and material. Live: Aurora 3 chimneys verified + overhangs; Alaska scale and 2
 chimneys; 0.958076 USD spent (books 29.500933 of 68.542857).
 
-**Still open, in order.** 1) Ballina live: orientation check compared the eaves view's fascia with the gable view's
-band over the walls (ops 1.4.0 reads the gable at its roof's ends — confirm on the live turns). 2) Source gate on
+**Still open, in order.** 1) Ballina live: orientation check — gable and eaves views disagree by 0.4 m; reading the
+gable at its roof's ends was tried on the live turns, changed nothing and was reverted; look at the gable's
+registration by the plan. 2) Source gate on
 crowded facades (Aurora front, Alaska) leaves window fixes NEEDS_EVIDENCE — do not loosen. 3) Alaska entrance and
 terrace doors. 4) Roof material of a body built without LOCAL. 5) ≥ 3 rectangles.
 

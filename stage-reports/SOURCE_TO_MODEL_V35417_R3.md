@@ -49,10 +49,11 @@ Plansze (źródło | szkic z prawdziwego odczytu | LOCAL przed | dostarczony) s�
 Ballina na żywo dała okap 0, a powtórka ze starymi szkicami v1 daje 0,79 m. Szkic v2 rysuje szczyt jako cienką opaskę
 wzdłuż połaci, przedłużoną poza ściany. Kontrola orientacji (`orientationOf`) czyta na widokach szczytowych okap 3,26 /
 3,28 m, a na okapowych 2,91 / 2,86 m, czyli rozjazd większy niż tolerancja 0,35 m. Wynik: UNDECIDED, faza dachu ze szkicu
-nie startuje, a dach ustawia recenzent (SET_ROOF bez okapu). Przyczyna: na widoku okapowym odczyt bierze dolną krawędź
-okapu (niżej o okap × tan spadku), a na szczytowym spód opaski nad narożnikiem ściany. To dwa różne punkty, a rozjazd
-0,4 m ≈ 0,6 m × tan 34° pasuje do okapu Balliny. Kontroli nie poluzowałem. Poprawka to porównanie tych samych punktów
-(narożnik okapu na obu widokach). Zostaje otwarta. Model Balliny bez LOCAL ma też
+nie startuje, a dach ustawia recenzent (SET_ROOF bez okapu). Pierwsza hipoteza zakładała, że widok okapowy czyta
+dolną krawędź okapu, a szczytowy spód opaski nad ścianą. Sprawdziłem ją: czytanie szczytu na końcach własnego dachu
+(próba „ops 1.4.0”) w powtórce tur na żywo nie zmieniło odczytów (2,91 / 3,26 / 3,28 / 2,86), więc zmianę cofnąłem.
+Rozjazd zależy też od skali rejestracji widoku szczytowego według planu. Kontroli nie poluzowałem. Przyczyna nie jest
+domknięta i zostaje otwarta. Model Balliny bez LOCAL ma też
 dach bez materiału (jasny) i za mało okien na froncie.
 
 ## Zapytania do API (co zmieniono)
@@ -83,10 +84,13 @@ dach bez materiału (jasny) i za mało okien na froncie.
 - Ballina (powtórka v1): okap 0,79 m, rzędne bez zmian.
 - Alaska (powtórka tur v3.54.16): 2 kominy w tych samych miejscach, obrys zgodny z wymiarami drukowanymi.
 - Aurora (powtórka tur na żywo): 3 kominy, okap boczny 0,53 m, kalenica 6,62 m.
+- Powtórki tur na żywo Aurory 2, Alaski 2 i Balliny 1 na kodzie końcowym: wyniki jak na żywo (Aurora: 3 kominy, okap
+  0,45 m, ściany wewnętrzne pod dachem i materiał dachu poprawne; Alaska: 2 kominy; Ballina: okap 0).
 
 ## Otwarte (nazwane)
 
-1. Ballina na żywo: kontrola orientacji przy szczycie rysowanym jako opaska (wyżej).
+1. Ballina na żywo: kontrola orientacji (okap widoków szczytowych i okapowych rozjeżdża się o 0,4 m; przyczyna nie
+   domknięta, próba z czytaniem końców dachu cofnięta — wyżej).
 2. Bramka źródłowa na zatłoczonych elewacjach (front Aurory, Alaska): za mało wolnych miejsc → poprawki okien
    NEEDS_EVIDENCE.
 3. Alaska: drzwi wejściowe z daszkiem i drzwi tarasowe brakują (recenzent: 2 KEY).

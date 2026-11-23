@@ -96,6 +96,6 @@ Prostokątna/ortogonalna bryła z rzutu; jeden dwuspad o stałej osi; dwie poł�
   pole było pomijane na żywo i plan nie dostawał skali). Wymiar drukowany koryguje obrys.
 - **Otwory ze szkicu:** usunięcie tylko tam, gdzie szkic widzi ścianę, rozstrzyga oryginał; jedno okno źródła nad kilkoma
   modelu → `absorbs` w jednej transakcji; relacje usuwanego otworu idą z nim.
-- **SET_ROOF** zachowuje ściany wewnętrzne idące za dachem i materiał dachu; widok szczytowy czyta okap na końcach
-  własnego dachu (ops 1.4.0).
+- **SET_ROOF** zachowuje ściany wewnętrzne idące za dachem i materiał dachu (ops 1.3.0). Próba czytania okapu widoku
+  szczytowego na końcach dachu (ops 1.4.0) nie zmieniła odczytów Balliny i została cofnięta.
 - Konsekwencja: bramki źródłowej nie luzuję — na zatłoczonych elewacjach poprawki okien zostają NEEDS_EVIDENCE.

@@ -18,7 +18,7 @@
   rear twins); metric-read/5 (`ends` required — live /4 left Alaska without scale); sketch prompt 2; reviewer prompt
   0.8.0; REMOVE/`absorbs` from sketches; SET_ROOF keeps partitions and roof material. Live (0.958076 USD, books
   29.500933 of 68.542857): Aurora 3 chimneys verified + overhangs ~0.7/0.45 m; Alaska scale SUPPORTED, 2 chimneys,
-  windows still wrong (2 KEY); Ballina overhang lost (orientation check; ops 1.4.0 pending confirmation). Matrix 4499:
+  windows still wrong (2 KEY); Ballina overhang lost (orientation check, cause open). Matrix 4499:
   16 failures, all in base files. Android app untouched → APK 1348 stays the delivered one.
 - **v3.54.17 R2 (2026-11-20): audit closure — no new API, no new APK.** Report
   `stage-reports/SOURCE_TO_MODEL_V35417_R2.md`. Exchange record at receipt (also FAILED jobs; raw ≠ canonical; no
