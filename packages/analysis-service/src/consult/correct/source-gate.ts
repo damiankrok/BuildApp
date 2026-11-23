@@ -62,9 +62,41 @@ const lumOf = (r: Raster): Float32Array => {
 
 const clampBox = (b: Box, r: Raster): Box => ({ x0: Math.max(0, Math.min(r.width - 1, Math.round(b.x0))), y0: Math.max(0, Math.min(r.height - 1, Math.round(b.y0))), x1: Math.max(0, Math.min(r.width - 1, Math.round(b.x1))), y1: Math.max(0, Math.min(r.height - 1, Math.round(b.y1))) })
 
-/** The raw support of one box: mean border edge strength and inside/outside contrast, both on 0..1. */
+/**
+ * v3.54.18 (1.3.0): the picture's two colour-difference planes, each on the 0..255 scale of the luminance plane — red
+ * against green, and blue against their mean. A red door in dark timber cladding, a frame painted another hue than a wall
+ * of the same lightness: an element the luminance plane alone does not see (Alaska's entrance door scored z 1.99, its
+ * rear gable window z −1.1, on walls of their own lightness).
+ */
+const chromaCache = new WeakMap<Raster, [Float32Array, Float32Array]>()
+const chromaOf = (r: Raster): [Float32Array, Float32Array] => {
+  let c = chromaCache.get(r)
+  if (!c) {
+    const n = r.width * r.height
+    const rg = new Float32Array(n)
+    const by = new Float32Array(n)
+    for (let i = 0; i < n; i += 1) {
+      const R = r.data[i * 4], G = r.data[i * 4 + 1], B = r.data[i * 4 + 2]
+      rg[i] = 127.5 + (R - G) / 2
+      by[i] = 127.5 + (B - (R + G) / 2) / 2
+    }
+    c = [rg, by]
+    chromaCache.set(r, c)
+  }
+  return c
+}
+
+/**
+ * The raw support of one box: mean border edge strength and inside/outside contrast, both on 0..1. With `clip` (a
+ * reading's claims: gate 1.3.0) the support is the strongest of the luminance plane and the two colour-difference planes —
+ * for the hypothesis and for every band place alike, so the z stays a comparison of like with like.
+ */
 export function rawSupport(r: Raster, box: Box, clip?: { x0: number; x1: number; y0?: number; y1?: number }): number {
-  const L = lumOf(r)
+  if (!clip) return rawSupportOn(lumOf(r), r, box)
+  const [rg, by] = chromaOf(r)
+  return Math.max(rawSupportOn(lumOf(r), r, box, clip), rawSupportOn(rg, r, box, clip), rawSupportOn(by, r, box, clip))
+}
+function rawSupportOn(L: Float32Array, r: Raster, box: Box, clip?: { x0: number; x1: number; y0?: number; y1?: number }): number {
   const b = clampBox(box, r)
   const w = b.x1 - b.x0
   const h = b.y1 - b.y0

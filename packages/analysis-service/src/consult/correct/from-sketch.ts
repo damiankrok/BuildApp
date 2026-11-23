@@ -152,7 +152,16 @@ export function facadeAdoption(s: ElevationSketch, facade: string, model: Canoni
       seen.set(key, (seen.get(key) ?? 0) + 1)
     }
     const parts = [...seen.entries()].filter(([, n]) => n >= 3)
-    return parts.length >= 2 ? `its box lies across what the reading draws as ${parts.map(([k]) => k).join(' and ')}` : undefined
+    if (parts.length >= 2) return `its box lies across what the reading draws as ${parts.map(([k]) => k).join(' and ')}`
+    // or another element the reading draws stands in the box (a downpipe at a wall end, a post, a canopy, steps): the
+    // picture's edges there are that element's — not a stack, which stands on the roof
+    const hit = s.elements.filter((e) => e.kind !== 'CHIMNEY').find((e) => {
+      const q = bbox(e.polygon)
+      const ix = Math.min(q.x1, b.x1) - Math.max(q.x0, b.x0)
+      const iy = Math.min(q.y1, b.y1) - Math.max(q.y0, b.y0)
+      return ix > 0 && iy > 0 && (iy >= 0.5 * (b.y1 - b.y0) || ix >= 0.5 * (b.x1 - b.x0))
+    })
+    return hit ? `the reading draws ${hit.kind} (${hit.id}) through its box` : undefined
   }
   const out: CorrectionProposal[] = []
   for (const q of open) {

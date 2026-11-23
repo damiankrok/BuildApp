@@ -1089,6 +1089,10 @@ function bindView(ctx: Ctx, p: CorrectionProposal): { view: BindView; record: Pi
   const held = ctx.views.find((v) => v.frameId === pic.frameId)
   // the mirror and the side: the model's own openings on that side, drawn through this registration and through its mirror,
   // against the picture — the orientation the source supports better is the one that may be assigned
+  // v3.54.18: a drawing is called mirrored only on evidence — the mirror must itself be SUPPORTED by the picture (mean
+  // z ≥ 2 over the side's openings), not merely score a little less badly. The openings this test draws are the MODEL's,
+  // and on a side LOCAL filled with phantoms both orientations score as noise (Medulin: −0.14 against 0.98, Alberto:
+  // 0.67 against 1.80): a registration was then refused by the very errors the reading had come to correct.
   const probe = (pr: Projection): number | null => {
     const v2 = { ...view, projection: pr }
     const boxes = openingBoxes(m, v2).map((o) => o.box).filter((b) => b.x0 >= 0 && b.x1 <= pic.raster.width && b.y0 >= 0 && b.y1 <= pic.raster.height)
@@ -1099,7 +1103,7 @@ function bindView(ctx: Ctx, p: CorrectionProposal): { view: BindView; record: Pi
   const asDeclared = probe(projection)
   const flipped: Projection = { ...projection, alongSign: (-sign) as 1 | -1, alongAtPx0: r6(-sign > 0 ? range.lo - mpp * left : range.hi + mpp * left) }
   const asMirror = probe(flipped)
-  const gate = { winner: (asDeclared === null || asMirror === null ? 'UNDECIDED' : asDeclared - asMirror >= 1 ? 'PROPOSED' : asMirror - asDeclared >= 1 ? 'CURRENT' : 'UNDECIDED') as HypothesisVerdict['winner'], proposedZ: asDeclared, currentZ: asMirror, nullBoxes: 0, why: asDeclared === null ? 'the model has no opening on that side to test the orientation with' : `the side's openings drawn through the declared orientation score z ${asDeclared?.toFixed(2)}, through its mirror z ${asMirror?.toFixed(2)}` }
+  const gate = { winner: (asDeclared === null || asMirror === null ? 'UNDECIDED' : asDeclared - asMirror >= 1 ? 'PROPOSED' : asMirror - asDeclared >= 1 && asMirror >= SUPPORT_Z_MIN ? 'CURRENT' : 'UNDECIDED') as HypothesisVerdict['winner'], proposedZ: asDeclared, currentZ: asMirror, nullBoxes: 0, why: asDeclared === null ? 'the model has no opening on that side to test the orientation with' : `the side's openings drawn through the declared orientation score z ${asDeclared?.toFixed(2)}, through its mirror z ${asMirror?.toFixed(2)}` }
   if (gate.winner === 'CURRENT') return { status: 'REJECTED_BY_SOURCE', code: 'MIRROR_CONTRADICTED', why: `the picture supports the other orientation: ${gate.why}`, record: { ...record, gate } }
   if (tops.length > 0 && view.heights) {
     const drawnTop = pyOf(projection, Math.max(...tops))

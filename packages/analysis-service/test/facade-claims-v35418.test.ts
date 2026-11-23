@@ -416,3 +416,34 @@ describe('v3.54.18 observation fates: nothing a reading states disappears silent
     expect(fates.summary.NOT_REGISTERED).toBe(9)
   })
 })
+
+// ---- v3.54.18: colour-difference planes -----------------------------------------------------------------------------
+describe('v3.54.18 gate 1.3.0: an element of the wall\'s own lightness', () => {
+  // a wall and a door of the SAME luminance (0.299 R + 0.587 G + 0.114 B ≈ 110) but another hue: grey timber, red leaf
+  const sameLightness = (): BindPicture['raster'] => {
+    const data = new Uint8ClampedArray(W * H * 4)
+    let seed = 3
+    const rnd = (): number => ((seed = (seed * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff)
+    for (let y = 0; y < H; y += 1) for (let x = 0; x < W; x += 1) {
+      const n = Math.round((rnd() - 0.5) * 10)
+      const inWall = x >= col(0) && x <= col(10) && y <= row(0) && y >= row(2.8)
+      const inDoor = x >= col(4.5) && x <= col(5.5) && y <= row(0) && y >= row(2.1)
+      const c = inDoor ? [200 + n, 72 + n, 70 + n] : inWall ? [110 + n, 110 + n, 110 + n] : [225, 235, 245]
+      data.set([c[0], c[1], c[2], 255], (y * W + x) * 4)
+    }
+    return { width: W, height: H, data }
+  }
+  const raster = sameLightness()
+  const facade = { x0: col(0), x1: col(10), y0: row(2.8), y1: row(0) }
+  const door = boxOf(4.5, 5.5, 0, 2.1)
+  it('is not seen on the luminance plane alone, and is with the colour-difference planes (a reading\'s claims given)', () => {
+    const lumOnly = supportOf(raster, door, facade, [door], 2, false)
+    expect(lumOnly.supported).not.toBe(true)
+    const withColour = supportOf(raster, door, facade, [door], 2, false, [door])
+    expect(withColour.supported).toBe(true)
+  })
+  it('COUNTER-TRIAL: plain wall of that picture is still not an element', () => {
+    const plain = boxOf(1.5, 2.5, 0, 2.1)
+    expect(supportOf(raster, plain, facade, [plain, door], 2, false, [plain, door]).supported).not.toBe(true)
+  })
+})
