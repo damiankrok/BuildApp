@@ -21,14 +21,20 @@ for a in p['assets']:
     if not path:
         index.append({'asset': a['id'], 'roles': r, 'missing': True}); continue
     try:
-        im = Image.open(path); im.load(); im = im.convert('RGB')
+        im = Image.open(path); im.load(); fmt = im.format; im = im.convert('RGB')
     except Exception as e:
         index.append({'asset': a['id'], 'roles': r, 'undecodable': str(e)[:80]}); continue
-    name = f"{r['document']}-{r['view']}-{r['storey']}-{a['id'][-10:]}.png".replace('NOT_APPLICABLE', 'na').replace('UNKNOWN', 'unk')
-    im.save(os.path.join(out, name))
-    index.append({'asset': a['id'], 'file': name, 'roles': r, 'size': im.size, 'caption': a.get('caption', '')[:80], 'byteHash': v.get('byteHash')})
     t = im.copy(); t.thumbnail((620, 460))
     tiles.append((f"{r['document']} {r['view']} {r['storey']} {im.size[0]}x{im.size[1]}", t))
+    # the drawings the analysis reads (elevations, plans, sections) are exported as the publisher's own bytes (same file
+    # format, byte for byte); perspective renders and site plans are listed and shown on the contact sheet only
+    if r['document'] not in ('ELEVATION', 'FLOOR_PLAN', 'SECTION'):
+        index.append({'asset': a['id'], 'roles': r, 'size': im.size, 'notExported': 'on the contact sheet only (not a drawing the analysis reads)', 'byteHash': v.get('byteHash')}); continue
+    ext = {'JPEG': 'jpg', 'PNG': 'png', 'WEBP': 'webp', 'GIF': 'gif'}.get(fmt or '', 'png')
+    name = f"{r['document']}-{r['view']}-{r['storey']}-{a['id'][-10:]}.{ext}".replace('NOT_APPLICABLE', 'na').replace('UNKNOWN', 'unk')
+    if ext == 'png' and fmt != 'PNG': im.save(os.path.join(out, name))
+    else: open(os.path.join(out, name), 'wb').write(open(path, 'rb').read())
+    index.append({'asset': a['id'], 'file': name, 'roles': r, 'size': im.size, 'caption': a.get('caption', '')[:80], 'byteHash': v.get('byteHash'), 'originalBytes': not (ext == 'png' and fmt != 'PNG')})
 json.dump(index, open(os.path.join(out, 'index.json'), 'w'), indent=1)
 cols = 3
 rows = (len(tiles) + cols - 1) // cols
@@ -38,5 +44,5 @@ for i, (label, t) in enumerate(tiles):
     x, y = (i % cols) * 640 + 10, (i // cols) * 490 + 8
     d.text((x, y), label, fill='black')
     sheet.paste(t, (x, y + 16))
-sheet.save(os.path.join(out, 'contact.png'))
+sheet.save(os.path.join(out, 'contact.jpg'), quality=85)
 print(len(tiles), 'tiles', [i for i in index if i.get('missing') or i.get('undecodable')][:3])

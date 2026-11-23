@@ -4,6 +4,7 @@
  */
 import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
+// v3.54.18: the eleven v3.54.18 scenes are listed first — every position below moved down by 11
 import { describe, expect, it } from 'vitest'
 import { ASSET_DIR, sealedOwnerModel } from '../scripts/scenes.js'
 
@@ -35,8 +36,8 @@ describe('v3.54.15 scenes', () => {
   })
   it('the two scenes follow v3.54.16\'s five: Ballina delivered, then the control labelled as such', () => {
     const index = JSON.parse(readFileSync(join(ASSET_DIR, 'index.json'), 'utf8')) as Array<{ key: string; subtitle: string }>
-    expect(index.slice(8, 10).map((e) => e.key)).toEqual(['ballina-v35415', 'murcja-v35415'])
-    expect(index[8].subtitle).toContain('ODDANY')
-    expect(index[9].subtitle).toContain('KONTROLA')
+    expect(index.slice(19, 21).map((e) => e.key)).toEqual(['ballina-v35415', 'murcja-v35415'])
+    expect(index[19].subtitle).toContain('ODDANY')
+    expect(index[20].subtitle).toContain('KONTROLA')
   })
 })

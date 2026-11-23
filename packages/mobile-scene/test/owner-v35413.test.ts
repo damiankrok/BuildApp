@@ -5,6 +5,7 @@
  */
 import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
+// v3.54.18: the eleven v3.54.18 scenes are listed first — every position below moved down by 11
 import { describe, expect, it } from 'vitest'
 import { ASSET_DIR, sealedOwnerModel } from '../scripts/scenes.js'
 import { usableGeometryFingerprint } from '../../analysis-service/src/appearance/index.js'
@@ -36,9 +37,9 @@ describe('v3.54.13 scenes', () => {
   })
   it('the scenes draw the outlines as finish skins, listed first, labelled as delivered and as an experiment', () => {
     const index = JSON.parse(readFileSync(join(ASSET_DIR, 'index.json'), 'utf8')) as Array<{ key: string; title: string; subtitle: string }>
-    expect(index.slice(13, 15).map((e) => e.key)).toEqual(['marcowki-c-v35413', 'marcowki-c-live-v35413'])
-    expect(index[13].subtitle).toContain('ODDANY')
-    expect(index[14].subtitle).toContain('EKSPERYMENT')
+    expect(index.slice(24, 26).map((e) => e.key)).toEqual(['marcowki-c-v35413', 'marcowki-c-live-v35413'])
+    expect(index[24].subtitle).toContain('ODDANY')
+    expect(index[25].subtitle).toContain('EKSPERYMENT')
     const scene = JSON.parse(readFileSync(join(ASSET_DIR, 'marcowki-c-v35413.scene.json'), 'utf8')) as { scene: { meshes: Array<{ objectId: string }> } }
     expect(scene.scene.meshes.some((m) => m.objectId === 'appearance-front-ring-main-1-w0-timber-0')).toBe(true)
   })

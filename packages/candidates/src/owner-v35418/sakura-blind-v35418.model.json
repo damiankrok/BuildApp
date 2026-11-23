@@ -1,0 +1,1018 @@
+{
+  "assemblies": [],
+  "balconies": [],
+  "building": {
+    "id": "building",
+    "name": "massing"
+  },
+  "chimneys": [
+    {
+      "baseOffset": 0,
+      "footprint": {
+        "maxX": 6.060939,
+        "maxZ": 7.985589,
+        "minX": 5.41155,
+        "minZ": 7.3362
+      },
+      "height": 7.043373,
+      "id": "chimney-fix-front-71cbff",
+      "levelId": "lvl-0",
+      "materialId": "mat-chimney"
+    },
+    {
+      "baseOffset": 0,
+      "footprint": {
+        "maxX": 9.491045,
+        "maxZ": 7.333975,
+        "minX": 8.874958,
+        "minZ": 6.717888
+      },
+      "height": 7.043373,
+      "id": "chimney-fix-front-b2d441",
+      "levelId": "lvl-0",
+      "materialId": "mat-chimney"
+    },
+    {
+      "baseOffset": 0,
+      "footprint": {
+        "maxX": 0,
+        "maxZ": 5.769237,
+        "minX": -1.190232,
+        "minZ": 4.579005
+      },
+      "height": 6.992613,
+      "id": "chimney-fix-right-598406",
+      "levelId": "lvl-0",
+      "materialId": "mat-chimney"
+    }
+  ],
+  "constraints": [],
+  "doors": [
+    {
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-front-515eef-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "op-fix-front-515eef",
+      "swing": "IN"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "glazing": "FULL",
+            "hinge": "LEFT",
+            "kind": "LEAF"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-rear-30be86-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-glass",
+      "openAngle": 0,
+      "openingId": "op-fix-rear-30be86",
+      "swing": "IN"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "glazing": "FULL",
+            "hinge": "LEFT",
+            "kind": "LEAF"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-rear-4d3bd6-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-glass",
+      "openAngle": 0,
+      "openingId": "op-fix-rear-4d3bd6",
+      "swing": "IN"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "glazing": "FULL",
+            "hinge": "LEFT",
+            "kind": "LEAF"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-rear-fa430b-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-glass",
+      "openAngle": 0,
+      "openingId": "op-fix-rear-fa430b",
+      "swing": "IN"
+    }
+  ],
+  "evidenceSources": [
+    {
+      "id": "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-2c43fda48e",
+      "kind": "DRAWING",
+      "label": "frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-2c43fda48e",
+      "note": "frame frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-2c43fda48e"
+    },
+    {
+      "id": "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-e0a839cd59",
+      "kind": "DRAWING",
+      "label": "frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-e0a839cd59",
+      "note": "frame frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-e0a839cd59"
+    },
+    {
+      "id": "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-f-cfcd2a763e",
+      "kind": "DRAWING",
+      "label": "frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-f-cfcd2a763e",
+      "note": "frame frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-f-cfcd2a763e"
+    },
+    {
+      "id": "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-o-935b97bf81",
+      "kind": "DRAWING",
+      "label": "frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-o-935b97bf81",
+      "note": "frame frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-o-935b97bf81"
+    },
+    {
+      "id": "src-frame-asset-rzut-517a301bc4-b6b68d3555",
+      "kind": "DRAWING",
+      "label": "frame-asset-rzut-517a301bc4-b6b68d3555",
+      "note": "frame frame-asset-rzut-517a301bc4-b6b68d3555"
+    }
+  ],
+  "frame": {
+    "handedness": "LEFT_HANDED_AS_SPECIFIED",
+    "origin": "finished ground-floor level is y = 0; the front facade outer face is z = 0",
+    "viewerNote": "renderers working in a right-handed frame mirror z when building their scene",
+    "wallConvention": "a wall runs from start to end along its OUTER face at its base; its outward normal is up x u, so exterior rings are traversed counter-clockwise on a plan drawn with the front facade at the bottom and material lies to the left of the direction of travel",
+    "x": "right when looking at the front facade",
+    "y": "up (vertical)",
+    "z": "away from the front facade, into the building"
+  },
+  "id": "m-analysis-m92728cdae273a",
+  "levels": [
+    {
+      "buildingId": "building",
+      "elevation": 0,
+      "height": 6.735672,
+      "id": "lvl-0",
+      "index": 0,
+      "name": "Massing"
+    }
+  ],
+  "linearSolids": [],
+  "materials": [
+    {
+      "color": "#6d6a66",
+      "id": "mat-chimney",
+      "name": "Chimney"
+    },
+    {
+      "color": "#55585c",
+      "id": "mat-gate",
+      "name": "Garage door"
+    },
+    {
+      "color": "#9fc3d8",
+      "id": "mat-glass",
+      "name": "Glazing",
+      "opacity": 0.35
+    },
+    {
+      "color": "#3a3a3c",
+      "id": "mat-render-dark",
+      "name": "Dark render"
+    },
+    {
+      "color": "#5a5550",
+      "id": "mat-roof",
+      "name": "Roof covering (tone not read: miniature convention)"
+    },
+    {
+      "color": "#b07a4a",
+      "id": "mat-timber",
+      "name": "Timber (door leaf, cladding)"
+    },
+    {
+      "color": "#e8e4dc",
+      "id": "mat-wall",
+      "name": "Rendered wall (tone not read: miniature convention)"
+    }
+  ],
+  "meta": {
+    "createdWith": "buildapp",
+    "notes": []
+  },
+  "name": "Dom pod sakurą (E) Opis projektu (analysis)",
+  "openings": [
+    {
+      "height": 2.181281,
+      "id": "op-fix-front-0270ca",
+      "kind": "WINDOW",
+      "offset": 13.120963,
+      "sill": 0.083255,
+      "wallId": "ring-mass-main-w0",
+      "width": 0.616087
+    },
+    {
+      "height": 2.281187,
+      "id": "op-fix-front-515eef",
+      "kind": "DOOR",
+      "offset": 7.442972,
+      "sill": 0.033302,
+      "wallId": "ring-mass-main-w0",
+      "width": 1.032362
+    },
+    {
+      "height": 1.265476,
+      "id": "op-fix-front-96b57b",
+      "kind": "WINDOW",
+      "offset": 1.265451,
+      "sill": 0.99906,
+      "wallId": "ring-mass-main-w0",
+      "width": 2.947227
+    },
+    {
+      "height": 2.181281,
+      "id": "op-fix-front-c0e4ba",
+      "kind": "WINDOW",
+      "offset": 10.023877,
+      "sill": 0.083255,
+      "wallId": "ring-mass-main-w0",
+      "width": 0.582785
+    },
+    {
+      "height": 2.147979,
+      "id": "op-fix-front-ed574a",
+      "kind": "WINDOW",
+      "offset": 14.669506,
+      "sill": 0.116557,
+      "wallId": "ring-mass-main-w0",
+      "width": 1.698402
+    },
+    {
+      "height": 2.21234,
+      "id": "op-fix-rear-30be86",
+      "kind": "DOOR",
+      "offset": 5.530824,
+      "sill": 0.09906,
+      "wallId": "ring-mass-main-w2",
+      "width": 1.68402
+    },
+    {
+      "height": 2.21234,
+      "id": "op-fix-rear-4d3bd6",
+      "kind": "DOOR",
+      "offset": 1.502384,
+      "sill": 0.09906,
+      "wallId": "ring-mass-main-w2",
+      "width": 1.73355
+    },
+    {
+      "height": 2.21234,
+      "id": "op-fix-rear-fa430b",
+      "kind": "DOOR",
+      "offset": 9.493224,
+      "sill": 0.09906,
+      "wallId": "ring-mass-main-w2",
+      "width": 1.68402
+    },
+    {
+      "height": 2.215154,
+      "id": "op-fix-right-557f3b",
+      "kind": "WINDOW",
+      "offset": 6.669206,
+      "sill": 0.066124,
+      "wallId": "ring-mass-main-w1",
+      "width": 1.719224
+    },
+    {
+      "height": 2.215154,
+      "id": "op-fix-right-a97a92",
+      "kind": "WINDOW",
+      "offset": 4.024246,
+      "sill": 0.066124,
+      "wallId": "ring-mass-main-w1",
+      "width": 1.752286
+    }
+  ],
+  "platforms": [],
+  "railings": [],
+  "relationships": [],
+  "roofEdges": [],
+  "roofOpenings": [],
+  "roofPlanes": [],
+  "rooflights": [],
+  "roofs": [
+    {
+      "eaveOffset": 3.120201,
+      "evidence": {
+        "interpretation": "ridge along X (slopes seen on the sides along it, the gable end across it); pitch 36.2° from a 3.62 m rise over half of 9.89 m",
+        "properties": {
+          "eaveOffset": "SOURCE_DERIVED",
+          "pitchDeg": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-517a301bc4-b6b68d3555 + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-f-cfcd2a763e + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-o-935b97bf81 + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-2c43fda48e + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-e0a839cd59",
+        "sourceIds": [
+          "src-frame-asset-rzut-517a301bc4-b6b68d3555",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-f-cfcd2a763e",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-o-935b97bf81",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-2c43fda48e",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-e0a839cd59"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "footprint": {
+        "maxX": 18.4704,
+        "maxZ": 12.2827,
+        "minX": -0.78,
+        "minZ": 2.3897
+      },
+      "id": "roof-mass-main",
+      "kind": "GABLE",
+      "levelId": "lvl-0",
+      "materialId": "mat-roof",
+      "overhang": 0,
+      "pitchDeg": 36.2,
+      "ridgeAxis": "X",
+      "thickness": 0.25
+    }
+  ],
+  "rooms": [],
+  "schema": "buildapp.canonical-building-model",
+  "schemaVersion": "1.9.0",
+  "slabs": [],
+  "stairs": [],
+  "stepRuns": [],
+  "surfaceRegions": [
+    {
+      "evidence": {
+        "interpretation": "a timber outline from finish-28dd81 (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-mass-main-w1",
+      "id": "appearance-east-ring-mass-main-w1-timber-0",
+      "materialId": "mat-timber",
+      "outline": [
+        {
+          "a": 5.8,
+          "b": 2.343373
+        },
+        {
+          "a": 6.64,
+          "b": 2.343373
+        },
+        {
+          "a": 6.64,
+          "b": 2.323373
+        },
+        {
+          "a": 6.66,
+          "b": 2.323373
+        },
+        {
+          "a": 6.66,
+          "b": 0.023373
+        },
+        {
+          "a": 6.64,
+          "b": 0.023373
+        },
+        {
+          "a": 6.64,
+          "b": 0.003373
+        },
+        {
+          "a": 5.8,
+          "b": 0.003373
+        },
+        {
+          "a": 5.8,
+          "b": 0.023373
+        },
+        {
+          "a": 5.78,
+          "b": 0.023373
+        },
+        {
+          "a": 5.78,
+          "b": 2.323373
+        },
+        {
+          "a": 5.8,
+          "b": 2.323373
+        }
+      ],
+      "rect": {
+        "a0": 5.78,
+        "a1": 6.66,
+        "b0": 0.003373,
+        "b1": 2.343373
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a timber outline from finish-5f91c2 (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-mass-main-w0",
+      "id": "appearance-front-ring-mass-main-w0-timber-0",
+      "materialId": "mat-timber",
+      "outline": [
+        {
+          "a": 13.809768,
+          "b": 2.343373
+        },
+        {
+          "a": 14.609768,
+          "b": 2.343373
+        },
+        {
+          "a": 14.609768,
+          "b": 2.323373
+        },
+        {
+          "a": 14.629768,
+          "b": 2.323373
+        },
+        {
+          "a": 14.629768,
+          "b": 0.023373
+        },
+        {
+          "a": 14.609768,
+          "b": 0.023373
+        },
+        {
+          "a": 14.609768,
+          "b": 0.003373
+        },
+        {
+          "a": 13.809768,
+          "b": 0.003373
+        },
+        {
+          "a": 13.809768,
+          "b": 0.023373
+        },
+        {
+          "a": 13.789768,
+          "b": 0.023373
+        },
+        {
+          "a": 13.789768,
+          "b": 2.323373
+        },
+        {
+          "a": 13.809768,
+          "b": 2.323373
+        }
+      ],
+      "rect": {
+        "a0": 13.789768,
+        "a1": 14.629768,
+        "b0": 0.003373,
+        "b1": 2.343373
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a timber outline from finish-0e66c2 (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-mass-main-w2",
+      "id": "appearance-rear-ring-mass-main-w2-timber-0",
+      "materialId": "mat-timber",
+      "outline": [
+        {
+          "a": 16.980632,
+          "b": 2.343373
+        },
+        {
+          "a": 16.600632,
+          "b": 2.343373
+        },
+        {
+          "a": 16.600632,
+          "b": 2.323373
+        },
+        {
+          "a": 16.580632,
+          "b": 2.323373
+        },
+        {
+          "a": 16.580632,
+          "b": 0.043373
+        },
+        {
+          "a": 16.600632,
+          "b": 0.043373
+        },
+        {
+          "a": 16.600632,
+          "b": 0.023373
+        },
+        {
+          "a": 16.980632,
+          "b": 0.023373
+        },
+        {
+          "a": 16.980632,
+          "b": 0.043373
+        },
+        {
+          "a": 17.000632,
+          "b": 0.043373
+        },
+        {
+          "a": 17.000632,
+          "b": 2.323373
+        },
+        {
+          "a": 16.980632,
+          "b": 2.323373
+        }
+      ],
+      "rect": {
+        "a0": 16.580632,
+        "a1": 17.000632,
+        "b0": 0.023373,
+        "b1": 2.343373
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a timber outline from finish-5eb1de (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-mass-main-w3",
+      "id": "appearance-west-ring-mass-main-w3-timber-0",
+      "materialId": "mat-timber",
+      "outline": [
+        {
+          "a": 2.273,
+          "b": 2.343373
+        },
+        {
+          "a": 0.593,
+          "b": 2.343373
+        },
+        {
+          "a": 0.593,
+          "b": 2.323373
+        },
+        {
+          "a": 0.573,
+          "b": 2.323373
+        },
+        {
+          "a": 0.573,
+          "b": 0.023373
+        },
+        {
+          "a": 0.593,
+          "b": 0.023373
+        },
+        {
+          "a": 0.593,
+          "b": 0.003373
+        },
+        {
+          "a": 2.273,
+          "b": 0.003373
+        },
+        {
+          "a": 2.273,
+          "b": 0.023373
+        },
+        {
+          "a": 2.293,
+          "b": 0.023373
+        },
+        {
+          "a": 2.293,
+          "b": 2.323373
+        },
+        {
+          "a": 2.273,
+          "b": 2.323373
+        }
+      ],
+      "rect": {
+        "a0": 0.573,
+        "a1": 2.293,
+        "b0": 0.003373,
+        "b1": 2.343373
+      }
+    }
+  ],
+  "terraces": [],
+  "units": {
+    "angle": "deg",
+    "length": "m"
+  },
+  "wallJunctions": [
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w3"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w0"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-517a301bc4-b6b68d3555 (MAIN), at the analyzer's own scale: 2.5696 cm/px, STRONG / CONFIRMED with 5 independent witnesses; heights: 4 registered elevation(s) give eaves 3.13 / 3.14 / 3.12 / 3.09 m and top 6.76 / 6.74 / 6.74 / 6.73 m (they agree)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-517a301bc4-b6b68d3555 + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-f-cfcd2a763e + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-o-935b97bf81 + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-2c43fda48e + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-e0a839cd59",
+        "sourceIds": [
+          "src-frame-asset-rzut-517a301bc4-b6b68d3555",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-f-cfcd2a763e",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-o-935b97bf81",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-2c43fda48e",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-e0a839cd59"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j0",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w0"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w1"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-517a301bc4-b6b68d3555 (MAIN), at the analyzer's own scale: 2.5696 cm/px, STRONG / CONFIRMED with 5 independent witnesses; heights: 4 registered elevation(s) give eaves 3.13 / 3.14 / 3.12 / 3.09 m and top 6.76 / 6.74 / 6.74 / 6.73 m (they agree)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-517a301bc4-b6b68d3555 + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-f-cfcd2a763e + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-o-935b97bf81 + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-2c43fda48e + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-e0a839cd59",
+        "sourceIds": [
+          "src-frame-asset-rzut-517a301bc4-b6b68d3555",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-f-cfcd2a763e",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-o-935b97bf81",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-2c43fda48e",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-e0a839cd59"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j1",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w1"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w2"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-517a301bc4-b6b68d3555 (MAIN), at the analyzer's own scale: 2.5696 cm/px, STRONG / CONFIRMED with 5 independent witnesses; heights: 4 registered elevation(s) give eaves 3.13 / 3.14 / 3.12 / 3.09 m and top 6.76 / 6.74 / 6.74 / 6.73 m (they agree)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-517a301bc4-b6b68d3555 + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-f-cfcd2a763e + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-o-935b97bf81 + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-2c43fda48e + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-e0a839cd59",
+        "sourceIds": [
+          "src-frame-asset-rzut-517a301bc4-b6b68d3555",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-f-cfcd2a763e",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-o-935b97bf81",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-2c43fda48e",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-e0a839cd59"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j2",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w2",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w2"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w3"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-517a301bc4-b6b68d3555 (MAIN), at the analyzer's own scale: 2.5696 cm/px, STRONG / CONFIRMED with 5 independent witnesses; heights: 4 registered elevation(s) give eaves 3.13 / 3.14 / 3.12 / 3.09 m and top 6.76 / 6.74 / 6.74 / 6.73 m (they agree)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-517a301bc4-b6b68d3555 + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-f-cfcd2a763e + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-o-935b97bf81 + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-2c43fda48e + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-e0a839cd59",
+        "sourceIds": [
+          "src-frame-asset-rzut-517a301bc4-b6b68d3555",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-f-cfcd2a763e",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-o-935b97bf81",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-2c43fda48e",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-e0a839cd59"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j3",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w2",
+      "tolerance": 0.001
+    }
+  ],
+  "wallPanels": [],
+  "wallRings": [
+    {
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-517a301bc4-b6b68d3555 (MAIN), at the analyzer's own scale: 2.5696 cm/px, STRONG / CONFIRMED with 5 independent witnesses; heights: 4 registered elevation(s) give eaves 3.13 / 3.14 / 3.12 / 3.09 m and top 6.76 / 6.74 / 6.74 / 6.73 m (they agree)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-517a301bc4-b6b68d3555 + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-f-cfcd2a763e + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-o-935b97bf81 + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-2c43fda48e + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-e0a839cd59",
+        "sourceIds": [
+          "src-frame-asset-rzut-517a301bc4-b6b68d3555",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-f-cfcd2a763e",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-o-935b97bf81",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-2c43fda48e",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-e0a839cd59"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main",
+      "junctionIds": [
+        "ring-mass-main-j0",
+        "ring-mass-main-j1",
+        "ring-mass-main-j2",
+        "ring-mass-main-j3"
+      ],
+      "levelId": "lvl-0",
+      "wallIds": [
+        "ring-mass-main-w0",
+        "ring-mass-main-w1",
+        "ring-mass-main-w2",
+        "ring-mass-main-w3"
+      ]
+    }
+  ],
+  "walls": [
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 17.5504,
+        "z": 2.3897
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-517a301bc4-b6b68d3555 (MAIN), at the analyzer's own scale: 2.5696 cm/px, STRONG / CONFIRMED with 5 independent witnesses; heights: 4 registered elevation(s) give eaves 3.13 / 3.14 / 3.12 / 3.09 m and top 6.76 / 6.74 / 6.74 / 6.73 m (they agree)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-517a301bc4-b6b68d3555 + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-f-cfcd2a763e + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-o-935b97bf81 + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-2c43fda48e + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-e0a839cd59",
+        "sourceIds": [
+          "src-frame-asset-rzut-517a301bc4-b6b68d3555",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-f-cfcd2a763e",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-o-935b97bf81",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-2c43fda48e",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-e0a839cd59"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 6.735672,
+      "id": "ring-mass-main-w0",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 0,
+        "z": 2.3897
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-mass-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 17.5504,
+        "z": 12.2827
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-517a301bc4-b6b68d3555 (MAIN), at the analyzer's own scale: 2.5696 cm/px, STRONG / CONFIRMED with 5 independent witnesses; heights: 4 registered elevation(s) give eaves 3.13 / 3.14 / 3.12 / 3.09 m and top 6.76 / 6.74 / 6.74 / 6.73 m (they agree)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-517a301bc4-b6b68d3555 + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-f-cfcd2a763e + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-o-935b97bf81 + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-2c43fda48e + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-e0a839cd59",
+        "sourceIds": [
+          "src-frame-asset-rzut-517a301bc4-b6b68d3555",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-f-cfcd2a763e",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-o-935b97bf81",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-2c43fda48e",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-e0a839cd59"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 6.735672,
+      "id": "ring-mass-main-w1",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 17.5504,
+        "z": 2.3897
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-mass-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0,
+        "z": 12.2827
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-517a301bc4-b6b68d3555 (MAIN), at the analyzer's own scale: 2.5696 cm/px, STRONG / CONFIRMED with 5 independent witnesses; heights: 4 registered elevation(s) give eaves 3.13 / 3.14 / 3.12 / 3.09 m and top 6.76 / 6.74 / 6.74 / 6.73 m (they agree)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-517a301bc4-b6b68d3555 + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-f-cfcd2a763e + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-o-935b97bf81 + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-2c43fda48e + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-e0a839cd59",
+        "sourceIds": [
+          "src-frame-asset-rzut-517a301bc4-b6b68d3555",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-f-cfcd2a763e",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-o-935b97bf81",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-2c43fda48e",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-e0a839cd59"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 6.735672,
+      "id": "ring-mass-main-w2",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 17.5504,
+        "z": 12.2827
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-mass-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0,
+        "z": 2.3897
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-517a301bc4-b6b68d3555 (MAIN), at the analyzer's own scale: 2.5696 cm/px, STRONG / CONFIRMED with 5 independent witnesses; heights: 4 registered elevation(s) give eaves 3.13 / 3.14 / 3.12 / 3.09 m and top 6.76 / 6.74 / 6.74 / 6.73 m (they agree)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-517a301bc4-b6b68d3555 + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-f-cfcd2a763e + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-o-935b97bf81 + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-2c43fda48e + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-e0a839cd59",
+        "sourceIds": [
+          "src-frame-asset-rzut-517a301bc4-b6b68d3555",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-f-cfcd2a763e",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-o-935b97bf81",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-2c43fda48e",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-e0a839cd59"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 6.735672,
+      "id": "ring-mass-main-w3",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 0,
+        "z": 12.2827
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-mass-main"
+      }
+    }
+  ],
+  "windows": [
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-front-0270ca-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-front-0270ca"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-front-96b57b-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-front-96b57b"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-front-c0e4ba-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-front-c0e4ba"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-front-ed574a-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-front-ed574a"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-right-557f3b-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-right-557f3b"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-right-a97a92-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-right-a97a92"
+    }
+  ]
+}

@@ -5,6 +5,7 @@
  */
 import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
+// v3.54.18: the eleven v3.54.18 scenes are listed first — every position below moved down by 11
 import { describe, expect, it } from 'vitest'
 import { ASSET_DIR, sealedOwnerModel } from '../scripts/scenes.js'
 import { usableGeometryFingerprint } from '../../analysis-service/src/appearance/index.js'
@@ -42,9 +43,9 @@ describe('v3.54.14 scenes', () => {
   })
   it('the three scenes come first: the two delivered, then Ballina labelled as partial', () => {
     const index = JSON.parse(readFileSync(join(ASSET_DIR, 'index.json'), 'utf8')) as Array<{ key: string; title: string; subtitle: string }>
-    expect(index.slice(10, 13).map((e) => e.key)).toEqual(['marcowki-c-v35414', 'bakopy-v35414', 'ballina-v35414'])
-    expect(index[10].subtitle).toContain('ODDANY')
-    expect(index[11].subtitle).toContain('ODDANY')
-    expect(index[12].subtitle).toContain('CZĘŚCIOWY')
+    expect(index.slice(21, 24).map((e) => e.key)).toEqual(['marcowki-c-v35414', 'bakopy-v35414', 'ballina-v35414'])
+    expect(index[21].subtitle).toContain('ODDANY')
+    expect(index[22].subtitle).toContain('ODDANY')
+    expect(index[23].subtitle).toContain('CZĘŚCIOWY')
   })
 })

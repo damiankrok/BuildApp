@@ -43,13 +43,17 @@ for h in man['houses']:
     for v in h['variants']:
         rd = os.path.join(hd, 'runs', v['key'])
         os.makedirs(rd, exist_ok=True)
-        for f in ('model.json', 'scene.json', 'result.json', 'corrections.json', 'quality.json', 'facades.json', 'events.json', 'metric-read.json', 'body-arbitration.json', 'sketches.json', 'local-model.json', 'turns.json', 'sketch-turns.json', 'check-turns.json', 'outline-turns.json', 'fact-trace.json'):
+        for f in ('model.json', 'scene.json', 'result.json', 'corrections.json', 'quality.json', 'facades.json', 'events.json', 'metric-read.json', 'body-arbitration.json', 'sketches.json', 'local-model.json', 'turns.json', 'sketch-turns.json', 'check-turns.json', 'outline-turns.json', 'fact-trace.json', 'observation-fates.json', 'massing.json', 'massing-model.json', 'record.json', 'status.json'):
             p = os.path.join(v['run'], f)
             if os.path.exists(p): shutil.copy2(p, os.path.join(rd, f))
         ex = os.path.join(v['run'], 'exchanges')
-        if os.path.isdir(ex): shutil.copytree(ex, os.path.join(rd, 'exchanges'), dirs_exist_ok=True)
+        # the pictures sent with each request are the sources and renders already in this delivery: kept once, for the
+        # final / host variants (the request JSON names each by its hash); the answers are kept for every variant
+        if os.path.isdir(ex): shutil.copytree(ex, os.path.join(rd, 'exchanges'), dirs_exist_ok=True, ignore=(None if v['key'] != 'baseline' else shutil.ignore_patterns('img')))
         ren = os.path.join(hd, 'renders')
-        subprocess.run(['npx', 'vite-node', 'research/source-to-model/v35418/render.ts', '--', '--model', os.path.join(v['run'], 'model.json'), '--out', ren, '--name', v['key'], '--tile', '900'], cwd=root, check=True, capture_output=True)
+        os.makedirs(ren, exist_ok=True)
+        if os.path.exists(os.path.join(v['run'], 'model.json')):
+            subprocess.run(['npx', 'vite-node', 'research/source-to-model/v35418/render.ts', '--', '--model', os.path.join(v['run'], 'model.json'), '--out', ren, '--name', v['key'], '--tile', '900'], cwd=root, check=True, capture_output=True)
         res = jload(os.path.join(v['run'], 'result.json'), {}) or {}
         q = (jload(os.path.join(v['run'], 'quality.json'), {}) or {}).get('quality') or {}
         info = jload(os.path.join(ren, f"{v['key']}.json"), {}) or {}

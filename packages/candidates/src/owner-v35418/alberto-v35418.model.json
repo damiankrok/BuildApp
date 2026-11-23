@@ -1,0 +1,6257 @@
+{
+  "assemblies": [],
+  "balconies": [],
+  "building": {
+    "id": "bld-auto-v2",
+    "name": "Alberto (analysis)"
+  },
+  "chimneys": [
+    {
+      "baseOffset": 0,
+      "footprint": {
+        "maxX": 10.063114,
+        "maxZ": 4.547632,
+        "minX": 9.590482,
+        "minZ": 4.075
+      },
+      "height": 5.829128,
+      "id": "chimney-fix-front-1963ce",
+      "levelId": "lvl-0",
+      "materialId": "mat-brick"
+    },
+    {
+      "baseOffset": 0,
+      "footprint": {
+        "maxX": 12.189958,
+        "maxZ": 4.756668,
+        "minX": 10.69329,
+        "minZ": 3.26
+      },
+      "height": 5.809435,
+      "id": "chimney-fix-front-37c3a7",
+      "levelId": "lvl-0",
+      "materialId": "mat-brick"
+    }
+  ],
+  "constraints": [],
+  "doors": [
+    {
+      "frameDepth": 0.016924,
+      "frameInset": 0.01,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "main-idoor-0-0-leaf",
+      "leafThickness": 0.008462,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "main-idoor-0-0",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.025385,
+      "frameInset": 0.01,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "main-idoor-0-1-leaf",
+      "leafThickness": 0.012693,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "main-idoor-0-1",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.042309,
+      "frameInset": 0.01,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "main-idoor-0-10-leaf",
+      "leafThickness": 0.021154,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "main-idoor-0-10",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.025385,
+      "frameInset": 0.01,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "main-idoor-0-11-leaf",
+      "leafThickness": 0.012693,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "main-idoor-0-11",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.025385,
+      "frameInset": 0.01,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "main-idoor-0-12-leaf",
+      "leafThickness": 0.012693,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "main-idoor-0-12",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.025385,
+      "frameInset": 0.01,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "main-idoor-0-2-leaf",
+      "leafThickness": 0.012693,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "main-idoor-0-2",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.025385,
+      "frameInset": 0.01,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "main-idoor-0-3-leaf",
+      "leafThickness": 0.012693,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "main-idoor-0-3",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.025385,
+      "frameInset": 0.01,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "main-idoor-0-4-leaf",
+      "leafThickness": 0.012693,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "main-idoor-0-4",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.025385,
+      "frameInset": 0.01,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "main-idoor-0-5-leaf",
+      "leafThickness": 0.012693,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "main-idoor-0-5",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.025385,
+      "frameInset": 0.01,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "main-idoor-0-6-leaf",
+      "leafThickness": 0.012693,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "main-idoor-0-6",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.016924,
+      "frameInset": 0.01,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "main-idoor-0-7-leaf",
+      "leafThickness": 0.008462,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "main-idoor-0-7",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.042309,
+      "frameInset": 0.01,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "main-idoor-0-9-leaf",
+      "leafThickness": 0.021154,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "main-idoor-0-9",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "opening-0-front-0-7-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "opening-0-front-0-7",
+      "swing": "IN"
+    }
+  ],
+  "evidenceSources": [],
+  "frame": {
+    "handedness": "LEFT_HANDED_AS_SPECIFIED",
+    "origin": "finished ground-floor level is y = 0; the front facade outer face is z = 0",
+    "viewerNote": "renderers working in a right-handed frame mirror z when building their scene",
+    "wallConvention": "a wall runs from start to end along its OUTER face at its base; its outward normal is up x u, so exterior rings are traversed counter-clockwise on a plan drawn with the front facade at the bottom and material lies to the left of the direction of travel",
+    "x": "right when looking at the front facade",
+    "y": "up (vertical)",
+    "z": "away from the front facade, into the building"
+  },
+  "id": "m-analysis-uc82c607d67d6",
+  "levels": [
+    {
+      "buildingId": "bld-auto-v2",
+      "elevation": 0,
+      "height": 4.700204,
+      "id": "lvl-0",
+      "index": 0,
+      "name": "Ground"
+    }
+  ],
+  "linearSolids": [],
+  "materials": [
+    {
+      "color": "#9a7b66",
+      "id": "mat-brick",
+      "name": "Facing brick"
+    },
+    {
+      "color": "#6d6a66",
+      "id": "mat-chimney",
+      "name": "Chimney"
+    },
+    {
+      "color": "#55585c",
+      "id": "mat-gate",
+      "name": "Garage door"
+    },
+    {
+      "color": "#9fc3d8",
+      "id": "mat-glass",
+      "name": "Glazing",
+      "opacity": 0.35
+    },
+    {
+      "color": "#ece9e2",
+      "id": "mat-member",
+      "name": "Facade member"
+    },
+    {
+      "color": "#d9d5cc",
+      "id": "mat-partition",
+      "name": "Partition"
+    },
+    {
+      "color": "#3a3a3c",
+      "id": "mat-render-dark",
+      "name": "Dark render"
+    },
+    {
+      "color": "#8e8983",
+      "id": "mat-render-mid",
+      "name": "Grey render"
+    },
+    {
+      "color": "#5a5550",
+      "id": "mat-roof",
+      "name": "Roof covering"
+    },
+    {
+      "color": "#c9c6c0",
+      "id": "mat-slab",
+      "name": "Concrete slab"
+    },
+    {
+      "color": "#a49c92",
+      "id": "mat-terrace",
+      "name": "Terrace paving"
+    },
+    {
+      "color": "#b07a4a",
+      "id": "mat-timber",
+      "name": "Timber cladding"
+    },
+    {
+      "color": "#e8e4dc",
+      "id": "mat-wall",
+      "name": "Rendered wall"
+    }
+  ],
+  "meta": {
+    "createdWith": "buildapp",
+    "notes": []
+  },
+  "name": "Alberto (analysis)",
+  "openings": [
+    {
+      "evidence": {
+        "interpretation": "a 0.61 m break between two pieces of the same partition",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.1,
+      "id": "main-idoor-0-0",
+      "kind": "DOOR",
+      "offset": 0.06,
+      "sill": 0,
+      "wallId": "main-iwall-0-z-10",
+      "width": 0.60842
+    },
+    {
+      "evidence": {
+        "interpretation": "a 1.00 m break between two pieces of the same partition",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.1,
+      "id": "main-idoor-0-1",
+      "kind": "DOOR",
+      "offset": 0.990452,
+      "sill": 0,
+      "wallId": "main-iwall-0-z-35",
+      "width": 1.0046
+    },
+    {
+      "evidence": {
+        "interpretation": "a 0.81 m gap between the end of a partition and the wall across its line, its swing drawn: a door, the wall across its far jamb",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.1,
+      "id": "main-idoor-0-10",
+      "kind": "DOOR",
+      "offset": 1.398715,
+      "sill": 0,
+      "wallId": "main-iwall-0-x-42",
+      "width": 0.752424
+    },
+    {
+      "evidence": {
+        "interpretation": "a 1.02 m gap between the end of a partition and the wall across its line, its swing drawn: a door, the wall across its far jamb",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.1,
+      "id": "main-idoor-0-11",
+      "kind": "DOOR",
+      "offset": 0.755037,
+      "sill": 0,
+      "wallId": "main-iwall-0-x-40",
+      "width": 0.949351
+    },
+    {
+      "evidence": {
+        "interpretation": "a 0.97 m gap between the end of a partition and the face of the wall across its line, its swing drawn (100 % of its arc a drawn line, a 0.88 m leaf): a door, the wall across its far jamb",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.1,
+      "id": "main-idoor-0-12",
+      "kind": "DOOR",
+      "offset": 0.06,
+      "sill": 0,
+      "wallId": "main-iwall-0-x-18",
+      "width": 0.967835
+    },
+    {
+      "evidence": {
+        "interpretation": "a 0.76 m break between two pieces of the same partition",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.1,
+      "id": "main-idoor-0-2",
+      "kind": "DOOR",
+      "offset": 0.925998,
+      "sill": 0,
+      "wallId": "main-iwall-0-z-37",
+      "width": 0.764062
+    },
+    {
+      "evidence": {
+        "interpretation": "a 0.76 m break between two pieces of the same partition",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.1,
+      "id": "main-idoor-0-3",
+      "kind": "DOOR",
+      "offset": 0.147515,
+      "sill": 0,
+      "wallId": "main-iwall-0-x-21",
+      "width": 0.762936
+    },
+    {
+      "evidence": {
+        "interpretation": "a 0.76 m break between two pieces of the same partition",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.1,
+      "id": "main-idoor-0-4",
+      "kind": "DOOR",
+      "offset": 3.227515,
+      "sill": 0,
+      "wallId": "main-iwall-0-x-21",
+      "width": 0.762936
+    },
+    {
+      "evidence": {
+        "interpretation": "a 0.76 m break between two pieces of the same partition",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.1,
+      "id": "main-idoor-0-5",
+      "kind": "DOOR",
+      "offset": 5.050084,
+      "sill": 0,
+      "wallId": "main-iwall-0-x-21",
+      "width": 0.762936
+    },
+    {
+      "evidence": {
+        "interpretation": "a 0.88 m break between two pieces of the same partition",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.1,
+      "id": "main-idoor-0-6",
+      "kind": "DOOR",
+      "offset": 0.90422,
+      "sill": 0,
+      "wallId": "main-iwall-0-x-28",
+      "width": 0.875963
+    },
+    {
+      "evidence": {
+        "interpretation": "a 0.88 m break between two pieces of the same partition",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.1,
+      "id": "main-idoor-0-7",
+      "kind": "DOOR",
+      "offset": 0.627883,
+      "sill": 0,
+      "wallId": "main-iwall-0-x-33",
+      "width": 0.875963
+    },
+    {
+      "evidence": {
+        "interpretation": "a 0.61 m break between two pieces of the same partition",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.1,
+      "id": "main-idoor-0-9",
+      "kind": "DOOR",
+      "offset": 0.480367,
+      "sill": 0,
+      "wallId": "main-iwall-0-x-42",
+      "width": 0.607522
+    },
+    {
+      "evidence": {
+        "interpretation": "a 3.11 m gap in the east wall of main on storey 0, no callout read, not read on an elevation",
+        "properties": {
+          "head": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "kind": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "sill": "ASSUMED",
+          "width": "SOURCE_DERIVED"
+        },
+        "status": "ASSUMED"
+      },
+      "height": 1.3,
+      "id": "opening-0-east-1-0",
+      "kind": "WINDOW",
+      "offset": 4.839062,
+      "openEnd": "END",
+      "sill": 0.9,
+      "wallId": "ring-main-0-w1",
+      "width": 3.03529
+    },
+    {
+      "evidence": {
+        "interpretation": "a 1.49 m gap in the east wall of main on storey 0, no callout read, not read on an elevation",
+        "properties": {
+          "head": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "kind": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "sill": "ASSUMED",
+          "width": "SOURCE_DERIVED"
+        },
+        "status": "ASSUMED"
+      },
+      "height": 1.3,
+      "id": "opening-0-east-1-1",
+      "kind": "WINDOW",
+      "offset": 3.325087,
+      "sill": 0.9,
+      "wallId": "ring-main-0-w1",
+      "width": 1.485677
+    },
+    {
+      "evidence": {
+        "interpretation": "a 3.11 m gap in the east wall of main on storey 0, no callout read, not read on an elevation",
+        "properties": {
+          "head": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "kind": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "sill": "ASSUMED",
+          "width": "SOURCE_DERIVED"
+        },
+        "status": "ASSUMED"
+      },
+      "height": 1.3,
+      "id": "opening-0-east-1-2",
+      "kind": "WINDOW",
+      "offset": 0.275648,
+      "sill": 0.9,
+      "wallId": "ring-main-0-w1",
+      "width": 3.021141
+    },
+    {
+      "evidence": {
+        "interpretation": "a 1.48 m gap in the front wall of main on storey 0, no callout read, not read on an elevation",
+        "properties": {
+          "head": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "kind": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "sill": "ASSUMED",
+          "width": "SOURCE_DERIVED"
+        },
+        "status": "ASSUMED"
+      },
+      "height": 1.3,
+      "id": "opening-0-front-0-0",
+      "kind": "WINDOW",
+      "offset": 0.20345,
+      "sill": 0.9,
+      "wallId": "ring-main-0-w0",
+      "width": 1.484899
+    },
+    {
+      "height": 1.319431,
+      "id": "opening-0-front-0-2",
+      "kind": "WINDOW",
+      "offset": 1.713282,
+      "sill": 1.043729,
+      "wallId": "ring-main-0-w0",
+      "width": 4.686934
+    },
+    {
+      "evidence": {
+        "interpretation": "a 3.16 m gap in the front wall of main on storey 0, no callout read, not read on an elevation",
+        "properties": {
+          "head": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "kind": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "sill": "ASSUMED",
+          "width": "SOURCE_DERIVED"
+        },
+        "status": "ASSUMED"
+      },
+      "height": 1.3,
+      "id": "opening-0-front-0-4",
+      "kind": "WINDOW",
+      "offset": 6.520275,
+      "sill": 0.9,
+      "wallId": "ring-main-0-w0",
+      "width": 3.164771
+    },
+    {
+      "evidence": {
+        "interpretation": "a 2.05 m gap in the front wall of main on storey 0, no callout read, not read on an elevation",
+        "properties": {
+          "head": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "kind": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "sill": "ASSUMED",
+          "width": "SOURCE_DERIVED"
+        },
+        "status": "ASSUMED"
+      },
+      "height": 1.3,
+      "id": "opening-0-front-0-5",
+      "kind": "WINDOW",
+      "offset": 10.730551,
+      "sill": 0.9,
+      "wallId": "ring-main-0-w0",
+      "width": 2.048623
+    },
+    {
+      "height": 1.339124,
+      "id": "opening-0-front-0-6",
+      "kind": "WINDOW",
+      "offset": 12.800441,
+      "sill": 1.004343,
+      "wallId": "ring-main-0-w0",
+      "width": 1.417896
+    },
+    {
+      "evidence": {
+        "interpretation": "a 0.89 m gap in the front wall of main on storey 0, no callout read, not read on an elevation",
+        "properties": {
+          "head": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "kind": "SOURCE_DERIVED",
+          "offset": "SOURCE_DERIVED",
+          "sill": "ASSUMED",
+          "width": "SOURCE_DERIVED"
+        },
+        "status": "ASSUMED"
+      },
+      "height": 2.1,
+      "id": "opening-0-front-0-7",
+      "kind": "DOOR",
+      "offset": 14.319174,
+      "sill": 0,
+      "wallId": "ring-main-0-w0",
+      "width": 0.891505
+    },
+    {
+      "evidence": {
+        "interpretation": "a 1.48 m gap in the rear wall of main on storey 0, no callout read, not read on an elevation",
+        "properties": {
+          "head": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "kind": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "sill": "ASSUMED",
+          "width": "SOURCE_DERIVED"
+        },
+        "status": "ASSUMED"
+      },
+      "height": 1.3,
+      "id": "opening-0-rear-2-0",
+      "kind": "WINDOW",
+      "offset": 13.711651,
+      "sill": 0.9,
+      "wallId": "ring-main-0-w2",
+      "width": 1.484899
+    },
+    {
+      "evidence": {
+        "interpretation": "a 1.47 m gap in the rear wall of main on storey 0, no callout read, not read on an elevation",
+        "properties": {
+          "head": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "kind": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "sill": "ASSUMED",
+          "width": "SOURCE_DERIVED"
+        },
+        "status": "ASSUMED"
+      },
+      "height": 1.3,
+      "id": "opening-0-rear-2-1",
+      "kind": "WINDOW",
+      "offset": 12.214037,
+      "sill": 0.9,
+      "wallId": "ring-main-0-w2",
+      "width": 1.469357
+    },
+    {
+      "evidence": {
+        "interpretation": "a 1.41 m gap in the rear wall of main on storey 0, no callout read, not read on an elevation",
+        "properties": {
+          "head": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "kind": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "sill": "ASSUMED",
+          "width": "SOURCE_DERIVED"
+        },
+        "status": "ASSUMED"
+      },
+      "height": 1.3,
+      "id": "opening-0-rear-2-2",
+      "kind": "WINDOW",
+      "offset": 10.772936,
+      "sill": 0.9,
+      "wallId": "ring-main-0-w2",
+      "width": 1.412844
+    },
+    {
+      "height": 1.384957,
+      "id": "opening-0-rear-2-3",
+      "kind": "WINDOW",
+      "offset": 9.239912,
+      "sill": 1.136905,
+      "wallId": "ring-main-0-w2",
+      "width": 1.426299
+    },
+    {
+      "evidence": {
+        "interpretation": "a 1.61 m gap in the rear wall of main on storey 0, no callout read, not read on an elevation",
+        "properties": {
+          "head": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "kind": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "sill": "ASSUMED",
+          "width": "SOURCE_DERIVED"
+        },
+        "status": "ASSUMED"
+      },
+      "height": 1.3,
+      "id": "opening-0-rear-2-4",
+      "kind": "WINDOW",
+      "offset": 7.622294,
+      "sill": 0.9,
+      "wallId": "ring-main-0-w2",
+      "width": 1.610642
+    },
+    {
+      "height": 1.384957,
+      "id": "opening-0-rear-2-5",
+      "kind": "WINDOW",
+      "offset": 5.932552,
+      "sill": 1.136905,
+      "wallId": "ring-main-0-w2",
+      "width": 1.44697
+    },
+    {
+      "evidence": {
+        "interpretation": "a 0.62 m gap in the rear wall of main on storey 0, no callout read, not read on an elevation",
+        "properties": {
+          "head": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "kind": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "sill": "ASSUMED",
+          "width": "SOURCE_DERIVED"
+        },
+        "status": "ASSUMED"
+      },
+      "height": 1.3,
+      "id": "opening-0-rear-2-7",
+      "kind": "WINDOW",
+      "offset": 2.804496,
+      "sill": 0.9,
+      "wallId": "ring-main-0-w2",
+      "width": 0.621651
+    },
+    {
+      "evidence": {
+        "interpretation": "a 1.48 m gap in the rear wall of main on storey 0, no callout read, not read on an elevation",
+        "properties": {
+          "head": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "kind": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "sill": "ASSUMED",
+          "width": "SOURCE_DERIVED"
+        },
+        "status": "ASSUMED"
+      },
+      "height": 1.3,
+      "id": "opening-0-rear-2-8",
+      "kind": "WINDOW",
+      "offset": 0.189321,
+      "openEnd": "START",
+      "sill": 0.9,
+      "wallId": "ring-main-0-w2",
+      "width": 1.484899
+    },
+    {
+      "height": 1.283766,
+      "id": "opening-0-west-3-1",
+      "kind": "WINDOW",
+      "offset": 3.384451,
+      "sill": 1.186511,
+      "wallId": "ring-main-0-w3",
+      "width": 1.36157
+    }
+  ],
+  "platforms": [],
+  "railings": [],
+  "relationships": [
+    {
+      "from": "opening-0-east-1-0",
+      "id": "rel-opening-0-east-1-0-aligns-with-opening-0-rear-2-8",
+      "kind": "ALIGNS_WITH",
+      "note": "CORNER_GLAZING: one glazing round the corner of the body, in two walls; no pier drawn between the pieces; the corner block is open between their common sill and head",
+      "to": "opening-0-rear-2-8"
+    },
+    {
+      "from": "opening-0-east-1-2",
+      "id": "rel-opening-0-east-1-2-aligns-with-opening-0-front-0-7",
+      "kind": "ALIGNS_WITH",
+      "note": "CORNER_GLAZING: one glazing round the corner of the body, in two walls; no pier drawn between the pieces; the corner square stays wall (the pieces do not share one band)",
+      "to": "opening-0-front-0-7"
+    }
+  ],
+  "roofEdges": [],
+  "roofOpenings": [],
+  "roofPlanes": [],
+  "rooflights": [],
+  "roofs": [
+    {
+      "eaveOffset": 2.821222,
+      "evidence": {
+        "interpretation": "GABLE along X read from the source elevation through sketch registration of frame-asset-elewacja-frontowa-domu-alberto-aa1801b956-4de244b263 (front)",
+        "locator": "roof polygon on frame-asset-elewacja-frontowa-domu-alberto-aa1801b956-4de244b263",
+        "source": "frame-asset-elewacja-frontowa-domu-alberto-aa1801b956-4de244b263",
+        "status": "SOURCE_DERIVED"
+      },
+      "footprint": {
+        "maxX": 16.17,
+        "maxZ": 8.15,
+        "minX": -0.87,
+        "minZ": 0
+      },
+      "id": "roof-main",
+      "kind": "GABLE",
+      "levelId": "lvl-0",
+      "materialId": "mat-roof",
+      "overhang": 0,
+      "pitchDeg": 30.7,
+      "ridgeAxis": "X",
+      "thickness": 0.25
+    }
+  ],
+  "rooms": [
+    {
+      "evidence": {
+        "interpretation": "91.69 m² enclosed by 206 wall faces; several published rooms may share it (open plan); numbered 1 = przedsionek 3.35 m² published (2637 % off); numbered 1 = przedsionek 3.35 m² published (2637 % off); 8 published numbers are printed inside it (1 przedsionek, 11 w.c., 2 hall, 4 kuchnia, 5 pokój dzienny z jadalnią, 6 łazienka, 8 pokój, 9 pokój): several published rooms in one region, none of them its number",
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "main-room-0-0",
+      "levelId": "lvl-0",
+      "polygon": [
+        {
+          "x": 0.225648,
+          "z": 0.225648
+        },
+        {
+          "x": 9.625648,
+          "z": 0.225648
+        },
+        {
+          "x": 9.625648,
+          "z": 0.425648
+        },
+        {
+          "x": 6.475648,
+          "z": 0.425648
+        },
+        {
+          "x": 6.475648,
+          "z": 0.525648
+        },
+        {
+          "x": 7.525648,
+          "z": 0.525648
+        },
+        {
+          "x": 7.525648,
+          "z": 1.025648
+        },
+        {
+          "x": 6.625648,
+          "z": 1.025648
+        },
+        {
+          "x": 6.625648,
+          "z": 2.525648
+        },
+        {
+          "x": 7.525648,
+          "z": 2.525648
+        },
+        {
+          "x": 7.525648,
+          "z": 3.025648
+        },
+        {
+          "x": 5.575648,
+          "z": 3.025648
+        },
+        {
+          "x": 5.575648,
+          "z": 2.975648
+        },
+        {
+          "x": 4.675648,
+          "z": 2.975648
+        },
+        {
+          "x": 4.675648,
+          "z": 2.575648
+        },
+        {
+          "x": 4.575648,
+          "z": 2.575648
+        },
+        {
+          "x": 4.575648,
+          "z": 3.025648
+        },
+        {
+          "x": 4.075648,
+          "z": 3.025648
+        },
+        {
+          "x": 4.075648,
+          "z": 1.225648
+        },
+        {
+          "x": 4.625648,
+          "z": 1.225648
+        },
+        {
+          "x": 4.625648,
+          "z": 1.125648
+        },
+        {
+          "x": 4.675648,
+          "z": 1.125648
+        },
+        {
+          "x": 4.675648,
+          "z": 0.525648
+        },
+        {
+          "x": 5.025648,
+          "z": 0.525648
+        },
+        {
+          "x": 5.025648,
+          "z": 0.425648
+        },
+        {
+          "x": 3.175648,
+          "z": 0.425648
+        },
+        {
+          "x": 3.175648,
+          "z": 0.575648
+        },
+        {
+          "x": 3.875648,
+          "z": 0.575648
+        },
+        {
+          "x": 3.875648,
+          "z": 1.025648
+        },
+        {
+          "x": 3.775648,
+          "z": 1.025648
+        },
+        {
+          "x": 3.775648,
+          "z": 1.075648
+        },
+        {
+          "x": 3.525648,
+          "z": 1.075648
+        },
+        {
+          "x": 3.525648,
+          "z": 1.025648
+        },
+        {
+          "x": 2.825648,
+          "z": 1.025648
+        },
+        {
+          "x": 2.825648,
+          "z": 1.075648
+        },
+        {
+          "x": 2.725648,
+          "z": 1.075648
+        },
+        {
+          "x": 2.725648,
+          "z": 0.975648
+        },
+        {
+          "x": 2.625648,
+          "z": 0.975648
+        },
+        {
+          "x": 2.625648,
+          "z": 1.075648
+        },
+        {
+          "x": 2.375648,
+          "z": 1.075648
+        },
+        {
+          "x": 2.375648,
+          "z": 1.175648
+        },
+        {
+          "x": 2.625648,
+          "z": 1.175648
+        },
+        {
+          "x": 2.625648,
+          "z": 1.225648
+        },
+        {
+          "x": 2.725648,
+          "z": 1.225648
+        },
+        {
+          "x": 2.725648,
+          "z": 1.175648
+        },
+        {
+          "x": 2.825648,
+          "z": 1.175648
+        },
+        {
+          "x": 2.825648,
+          "z": 1.225648
+        },
+        {
+          "x": 3.525648,
+          "z": 1.225648
+        },
+        {
+          "x": 3.525648,
+          "z": 1.175648
+        },
+        {
+          "x": 3.775648,
+          "z": 1.175648
+        },
+        {
+          "x": 3.775648,
+          "z": 1.225648
+        },
+        {
+          "x": 3.875648,
+          "z": 1.225648
+        },
+        {
+          "x": 3.875648,
+          "z": 3.125648
+        },
+        {
+          "x": 3.775648,
+          "z": 3.125648
+        },
+        {
+          "x": 3.775648,
+          "z": 3.275648
+        },
+        {
+          "x": 7.775648,
+          "z": 3.275648
+        },
+        {
+          "x": 7.775648,
+          "z": 0.525648
+        },
+        {
+          "x": 8.775648,
+          "z": 0.525648
+        },
+        {
+          "x": 8.775648,
+          "z": 2.425648
+        },
+        {
+          "x": 8.675648,
+          "z": 2.425648
+        },
+        {
+          "x": 8.675648,
+          "z": 2.525648
+        },
+        {
+          "x": 9.775648,
+          "z": 2.525648
+        },
+        {
+          "x": 9.775648,
+          "z": 2.475648
+        },
+        {
+          "x": 10.725648,
+          "z": 2.475648
+        },
+        {
+          "x": 10.725648,
+          "z": 3.525648
+        },
+        {
+          "x": 12.275648,
+          "z": 3.525648
+        },
+        {
+          "x": 12.275648,
+          "z": 0.525648
+        },
+        {
+          "x": 12.825648,
+          "z": 0.525648
+        },
+        {
+          "x": 12.825648,
+          "z": 0.425648
+        },
+        {
+          "x": 10.725648,
+          "z": 0.425648
+        },
+        {
+          "x": 10.725648,
+          "z": 1.425648
+        },
+        {
+          "x": 10.675648,
+          "z": 1.425648
+        },
+        {
+          "x": 10.675648,
+          "z": 2.275648
+        },
+        {
+          "x": 9.725648,
+          "z": 2.275648
+        },
+        {
+          "x": 9.725648,
+          "z": 2.325648
+        },
+        {
+          "x": 9.575648,
+          "z": 2.325648
+        },
+        {
+          "x": 9.575648,
+          "z": 1.725648
+        },
+        {
+          "x": 9.475648,
+          "z": 1.725648
+        },
+        {
+          "x": 9.475648,
+          "z": 2.325648
+        },
+        {
+          "x": 8.975648,
+          "z": 2.325648
+        },
+        {
+          "x": 8.975648,
+          "z": 0.525648
+        },
+        {
+          "x": 9.775648,
+          "z": 0.525648
+        },
+        {
+          "x": 9.775648,
+          "z": 0.425648
+        },
+        {
+          "x": 9.725648,
+          "z": 0.425648
+        },
+        {
+          "x": 9.725648,
+          "z": 0.225648
+        },
+        {
+          "x": 15.175648,
+          "z": 0.225648
+        },
+        {
+          "x": 15.175648,
+          "z": 7.925648
+        },
+        {
+          "x": 4.675648,
+          "z": 7.925648
+        },
+        {
+          "x": 4.675648,
+          "z": 7.625648
+        },
+        {
+          "x": 4.725648,
+          "z": 7.625648
+        },
+        {
+          "x": 4.725648,
+          "z": 7.025648
+        },
+        {
+          "x": 6.075648,
+          "z": 7.025648
+        },
+        {
+          "x": 6.075648,
+          "z": 5.525648
+        },
+        {
+          "x": 4.575648,
+          "z": 5.525648
+        },
+        {
+          "x": 4.575648,
+          "z": 6.975648
+        },
+        {
+          "x": 4.525648,
+          "z": 6.975648
+        },
+        {
+          "x": 4.525648,
+          "z": 7.575648
+        },
+        {
+          "x": 4.075648,
+          "z": 7.575648
+        },
+        {
+          "x": 4.075648,
+          "z": 4.625648
+        },
+        {
+          "x": 6.075648,
+          "z": 4.625648
+        },
+        {
+          "x": 6.075648,
+          "z": 4.525648
+        },
+        {
+          "x": 6.875648,
+          "z": 4.525648
+        },
+        {
+          "x": 6.875648,
+          "z": 4.625648
+        },
+        {
+          "x": 6.975648,
+          "z": 4.625648
+        },
+        {
+          "x": 6.975648,
+          "z": 4.975648
+        },
+        {
+          "x": 7.075648,
+          "z": 4.975648
+        },
+        {
+          "x": 7.075648,
+          "z": 4.625648
+        },
+        {
+          "x": 7.525648,
+          "z": 4.625648
+        },
+        {
+          "x": 7.525648,
+          "z": 7.575648
+        },
+        {
+          "x": 7.075648,
+          "z": 7.575648
+        },
+        {
+          "x": 7.075648,
+          "z": 7.025648
+        },
+        {
+          "x": 6.925648,
+          "z": 7.025648
+        },
+        {
+          "x": 6.925648,
+          "z": 7.575648
+        },
+        {
+          "x": 6.125648,
+          "z": 7.575648
+        },
+        {
+          "x": 6.125648,
+          "z": 7.725648
+        },
+        {
+          "x": 7.625648,
+          "z": 7.725648
+        },
+        {
+          "x": 7.625648,
+          "z": 7.675648
+        },
+        {
+          "x": 7.775648,
+          "z": 7.675648
+        },
+        {
+          "x": 7.775648,
+          "z": 4.625648
+        },
+        {
+          "x": 9.625648,
+          "z": 4.625648
+        },
+        {
+          "x": 9.625648,
+          "z": 7.575648
+        },
+        {
+          "x": 9.275648,
+          "z": 7.575648
+        },
+        {
+          "x": 9.275648,
+          "z": 7.725648
+        },
+        {
+          "x": 9.725648,
+          "z": 7.725648
+        },
+        {
+          "x": 9.725648,
+          "z": 7.675648
+        },
+        {
+          "x": 9.775648,
+          "z": 7.675648
+        },
+        {
+          "x": 9.775648,
+          "z": 7.725648
+        },
+        {
+          "x": 11.075648,
+          "z": 7.725648
+        },
+        {
+          "x": 11.075648,
+          "z": 7.575648
+        },
+        {
+          "x": 9.875648,
+          "z": 7.575648
+        },
+        {
+          "x": 9.875648,
+          "z": 7.025648
+        },
+        {
+          "x": 10.125648,
+          "z": 7.025648
+        },
+        {
+          "x": 10.125648,
+          "z": 6.925648
+        },
+        {
+          "x": 9.875648,
+          "z": 6.925648
+        },
+        {
+          "x": 9.875648,
+          "z": 6.775648
+        },
+        {
+          "x": 10.125648,
+          "z": 6.775648
+        },
+        {
+          "x": 10.125648,
+          "z": 6.675648
+        },
+        {
+          "x": 9.875648,
+          "z": 6.675648
+        },
+        {
+          "x": 9.875648,
+          "z": 5.175648
+        },
+        {
+          "x": 9.725648,
+          "z": 5.175648
+        },
+        {
+          "x": 9.725648,
+          "z": 4.525648
+        },
+        {
+          "x": 8.725648,
+          "z": 4.525648
+        },
+        {
+          "x": 8.725648,
+          "z": 4.475648
+        },
+        {
+          "x": 10.025648,
+          "z": 4.475648
+        },
+        {
+          "x": 10.025648,
+          "z": 5.225648
+        },
+        {
+          "x": 10.125648,
+          "z": 5.225648
+        },
+        {
+          "x": 10.125648,
+          "z": 4.375648
+        },
+        {
+          "x": 8.675648,
+          "z": 4.375648
+        },
+        {
+          "x": 8.675648,
+          "z": 4.325648
+        },
+        {
+          "x": 7.875648,
+          "z": 4.325648
+        },
+        {
+          "x": 7.875648,
+          "z": 4.375648
+        },
+        {
+          "x": 6.875648,
+          "z": 4.375648
+        },
+        {
+          "x": 6.875648,
+          "z": 4.325648
+        },
+        {
+          "x": 6.025648,
+          "z": 4.325648
+        },
+        {
+          "x": 6.025648,
+          "z": 4.375648
+        },
+        {
+          "x": 2.875648,
+          "z": 4.375648
+        },
+        {
+          "x": 2.875648,
+          "z": 3.125648
+        },
+        {
+          "x": 2.975648,
+          "z": 3.125648
+        },
+        {
+          "x": 2.975648,
+          "z": 3.025648
+        },
+        {
+          "x": 2.625648,
+          "z": 3.025648
+        },
+        {
+          "x": 2.625648,
+          "z": 3.725648
+        },
+        {
+          "x": 0.575648,
+          "z": 3.725648
+        },
+        {
+          "x": 0.575648,
+          "z": 3.175648
+        },
+        {
+          "x": 1.175648,
+          "z": 3.175648
+        },
+        {
+          "x": 1.175648,
+          "z": 3.075648
+        },
+        {
+          "x": 0.575648,
+          "z": 3.075648
+        },
+        {
+          "x": 0.575648,
+          "z": 2.575648
+        },
+        {
+          "x": 1.475648,
+          "z": 2.575648
+        },
+        {
+          "x": 1.475648,
+          "z": 1.075648
+        },
+        {
+          "x": 0.575648,
+          "z": 1.075648
+        },
+        {
+          "x": 0.575648,
+          "z": 0.525648
+        },
+        {
+          "x": 1.725648,
+          "z": 0.525648
+        },
+        {
+          "x": 1.725648,
+          "z": 0.425648
+        },
+        {
+          "x": 0.425648,
+          "z": 0.425648
+        },
+        {
+          "x": 0.425648,
+          "z": 7.675648
+        },
+        {
+          "x": 0.475648,
+          "z": 7.675648
+        },
+        {
+          "x": 0.475648,
+          "z": 7.725648
+        },
+        {
+          "x": 1.725648,
+          "z": 7.725648
+        },
+        {
+          "x": 1.725648,
+          "z": 7.575648
+        },
+        {
+          "x": 0.575648,
+          "z": 7.575648
+        },
+        {
+          "x": 0.575648,
+          "z": 7.075648
+        },
+        {
+          "x": 1.475648,
+          "z": 7.075648
+        },
+        {
+          "x": 1.475648,
+          "z": 5.575648
+        },
+        {
+          "x": 0.575648,
+          "z": 5.575648
+        },
+        {
+          "x": 0.575648,
+          "z": 4.525648
+        },
+        {
+          "x": 1.175648,
+          "z": 4.525648
+        },
+        {
+          "x": 1.175648,
+          "z": 4.425648
+        },
+        {
+          "x": 0.575648,
+          "z": 4.425648
+        },
+        {
+          "x": 0.575648,
+          "z": 3.925648
+        },
+        {
+          "x": 2.625648,
+          "z": 3.925648
+        },
+        {
+          "x": 2.625648,
+          "z": 4.575648
+        },
+        {
+          "x": 2.675648,
+          "z": 4.575648
+        },
+        {
+          "x": 2.675648,
+          "z": 4.625648
+        },
+        {
+          "x": 2.975648,
+          "z": 4.625648
+        },
+        {
+          "x": 2.975648,
+          "z": 4.525648
+        },
+        {
+          "x": 3.775648,
+          "z": 4.525648
+        },
+        {
+          "x": 3.775648,
+          "z": 4.475648
+        },
+        {
+          "x": 6.025648,
+          "z": 4.475648
+        },
+        {
+          "x": 6.025648,
+          "z": 4.525648
+        },
+        {
+          "x": 3.875648,
+          "z": 4.525648
+        },
+        {
+          "x": 3.875648,
+          "z": 7.575648
+        },
+        {
+          "x": 3.175648,
+          "z": 7.575648
+        },
+        {
+          "x": 3.175648,
+          "z": 7.725648
+        },
+        {
+          "x": 4.575648,
+          "z": 7.725648
+        },
+        {
+          "x": 4.575648,
+          "z": 7.925648
+        },
+        {
+          "x": 0.225648,
+          "z": 7.925648
+        }
+      ]
+    },
+    {
+      "evidence": {
+        "interpretation": "2.57 m² enclosed by 8 wall faces; numbered 3 = kotłownia 2.95 m² published (-13 % off)",
+        "status": "SOURCE_CORROBORATED"
+      },
+      "id": "main-room-0-1",
+      "levelId": "lvl-0",
+      "polygon": [
+        {
+          "x": 10.975648,
+          "z": 0.525648
+        },
+        {
+          "x": 12.025648,
+          "z": 0.525648
+        },
+        {
+          "x": 12.025648,
+          "z": 3.025648
+        },
+        {
+          "x": 10.975648,
+          "z": 3.025648
+        },
+        {
+          "x": 10.975648,
+          "z": 1.175648
+        },
+        {
+          "x": 11.525648,
+          "z": 1.175648
+        },
+        {
+          "x": 11.525648,
+          "z": 1.075648
+        },
+        {
+          "x": 10.975648,
+          "z": 1.075648
+        }
+      ],
+      "usage": "kotłownia"
+    }
+  ],
+  "schema": "buildapp.canonical-building-model",
+  "schemaVersion": "1.9.0",
+  "slabs": [
+    {
+      "id": "slab-main-0",
+      "levelId": "lvl-0",
+      "materialId": "mat-slab",
+      "polygon": [
+        {
+          "x": 0,
+          "z": 0
+        },
+        {
+          "x": 15.4,
+          "z": 0
+        },
+        {
+          "x": 15.4,
+          "z": 8.15
+        },
+        {
+          "x": 0,
+          "z": 8.15
+        }
+      ],
+      "thickness": 0.28,
+      "topOffset": 0
+    }
+  ],
+  "stairs": [],
+  "stepRuns": [],
+  "surfaceRegions": [
+    {
+      "evidence": {
+        "interpretation": "a brick outline from sketch-93f41567-a65e1f11dc14-appearance (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-main-0-w0",
+      "id": "appearance-front-ring-main-0-w0-brick-0",
+      "materialId": "mat-brick",
+      "outline": [
+        {
+          "a": 2.44,
+          "b": 1.620204
+        },
+        {
+          "a": 3.04,
+          "b": 1.620204
+        },
+        {
+          "a": 3.04,
+          "b": 1.020204
+        },
+        {
+          "a": 3.06,
+          "b": 1.020204
+        },
+        {
+          "a": 3.06,
+          "b": 1.000204
+        },
+        {
+          "a": 3.08,
+          "b": 1.000204
+        },
+        {
+          "a": 3.08,
+          "b": 0.980204
+        },
+        {
+          "a": 3.1,
+          "b": 0.980204
+        },
+        {
+          "a": 3.1,
+          "b": 0.960204
+        },
+        {
+          "a": 3.12,
+          "b": 0.960204
+        },
+        {
+          "a": 3.12,
+          "b": 0.940204
+        },
+        {
+          "a": 3.28,
+          "b": 0.940204
+        },
+        {
+          "a": 3.28,
+          "b": 0.960204
+        },
+        {
+          "a": 3.3,
+          "b": 0.960204
+        },
+        {
+          "a": 3.3,
+          "b": 0.980204
+        },
+        {
+          "a": 3.32,
+          "b": 0.980204
+        },
+        {
+          "a": 3.32,
+          "b": 1.000204
+        },
+        {
+          "a": 3.34,
+          "b": 1.000204
+        },
+        {
+          "a": 3.34,
+          "b": 1.020204
+        },
+        {
+          "a": 3.36,
+          "b": 1.020204
+        },
+        {
+          "a": 3.36,
+          "b": 1.620204
+        },
+        {
+          "a": 4.84,
+          "b": 1.620204
+        },
+        {
+          "a": 4.84,
+          "b": 1.020204
+        },
+        {
+          "a": 4.86,
+          "b": 1.020204
+        },
+        {
+          "a": 4.86,
+          "b": 1.000204
+        },
+        {
+          "a": 4.88,
+          "b": 1.000204
+        },
+        {
+          "a": 4.88,
+          "b": 0.980204
+        },
+        {
+          "a": 4.9,
+          "b": 0.980204
+        },
+        {
+          "a": 4.9,
+          "b": 0.960204
+        },
+        {
+          "a": 4.92,
+          "b": 0.960204
+        },
+        {
+          "a": 4.92,
+          "b": 0.940204
+        },
+        {
+          "a": 5.08,
+          "b": 0.940204
+        },
+        {
+          "a": 5.08,
+          "b": 0.960204
+        },
+        {
+          "a": 5.1,
+          "b": 0.960204
+        },
+        {
+          "a": 5.1,
+          "b": 0.980204
+        },
+        {
+          "a": 5.12,
+          "b": 0.980204
+        },
+        {
+          "a": 5.12,
+          "b": 1.000204
+        },
+        {
+          "a": 5.14,
+          "b": 1.000204
+        },
+        {
+          "a": 5.14,
+          "b": 1.020204
+        },
+        {
+          "a": 5.16,
+          "b": 1.020204
+        },
+        {
+          "a": 5.16,
+          "b": 1.620204
+        },
+        {
+          "a": 5.78,
+          "b": 1.620204
+        },
+        {
+          "a": 5.78,
+          "b": 1.600204
+        },
+        {
+          "a": 5.8,
+          "b": 1.600204
+        },
+        {
+          "a": 5.8,
+          "b": 1.580204
+        },
+        {
+          "a": 5.82,
+          "b": 1.580204
+        },
+        {
+          "a": 5.82,
+          "b": 1.560204
+        },
+        {
+          "a": 5.84,
+          "b": 1.560204
+        },
+        {
+          "a": 5.84,
+          "b": 1.540204
+        },
+        {
+          "a": 5.86,
+          "b": 1.540204
+        },
+        {
+          "a": 5.86,
+          "b": 1.520204
+        },
+        {
+          "a": 5.88,
+          "b": 1.520204
+        },
+        {
+          "a": 5.88,
+          "b": 1.500204
+        },
+        {
+          "a": 5.9,
+          "b": 1.500204
+        },
+        {
+          "a": 5.9,
+          "b": 1.480204
+        },
+        {
+          "a": 5.92,
+          "b": 1.480204
+        },
+        {
+          "a": 5.92,
+          "b": 1.460204
+        },
+        {
+          "a": 5.94,
+          "b": 1.460204
+        },
+        {
+          "a": 5.94,
+          "b": 1.440204
+        },
+        {
+          "a": 5.96,
+          "b": 1.440204
+        },
+        {
+          "a": 5.96,
+          "b": 1.420204
+        },
+        {
+          "a": 5.98,
+          "b": 1.420204
+        },
+        {
+          "a": 5.98,
+          "b": 1.400204
+        },
+        {
+          "a": 6,
+          "b": 1.400204
+        },
+        {
+          "a": 6,
+          "b": 1.380204
+        },
+        {
+          "a": 6.02,
+          "b": 1.380204
+        },
+        {
+          "a": 6.02,
+          "b": 1.360204
+        },
+        {
+          "a": 6.04,
+          "b": 1.360204
+        },
+        {
+          "a": 6.04,
+          "b": 1.340204
+        },
+        {
+          "a": 6.06,
+          "b": 1.340204
+        },
+        {
+          "a": 6.06,
+          "b": 1.320204
+        },
+        {
+          "a": 6.08,
+          "b": 1.320204
+        },
+        {
+          "a": 6.08,
+          "b": 1.300204
+        },
+        {
+          "a": 6.1,
+          "b": 1.300204
+        },
+        {
+          "a": 6.1,
+          "b": 1.280204
+        },
+        {
+          "a": 6.12,
+          "b": 1.280204
+        },
+        {
+          "a": 6.12,
+          "b": 1.260204
+        },
+        {
+          "a": 6.14,
+          "b": 1.260204
+        },
+        {
+          "a": 6.14,
+          "b": 1.240204
+        },
+        {
+          "a": 6.16,
+          "b": 1.240204
+        },
+        {
+          "a": 6.16,
+          "b": 1.220204
+        },
+        {
+          "a": 6.18,
+          "b": 1.220204
+        },
+        {
+          "a": 6.18,
+          "b": 1.200204
+        },
+        {
+          "a": 6.2,
+          "b": 1.200204
+        },
+        {
+          "a": 6.2,
+          "b": 1.180204
+        },
+        {
+          "a": 6.22,
+          "b": 1.180204
+        },
+        {
+          "a": 6.22,
+          "b": 1.160204
+        },
+        {
+          "a": 6.24,
+          "b": 1.160204
+        },
+        {
+          "a": 6.24,
+          "b": 1.140204
+        },
+        {
+          "a": 6.26,
+          "b": 1.140204
+        },
+        {
+          "a": 6.26,
+          "b": 1.120204
+        },
+        {
+          "a": 6.28,
+          "b": 1.120204
+        },
+        {
+          "a": 6.28,
+          "b": 1.100204
+        },
+        {
+          "a": 6.3,
+          "b": 1.100204
+        },
+        {
+          "a": 6.3,
+          "b": 1.080204
+        },
+        {
+          "a": 6.32,
+          "b": 1.080204
+        },
+        {
+          "a": 6.32,
+          "b": 1.060204
+        },
+        {
+          "a": 6.34,
+          "b": 1.060204
+        },
+        {
+          "a": 6.34,
+          "b": 1.040204
+        },
+        {
+          "a": 6.36,
+          "b": 1.040204
+        },
+        {
+          "a": 6.36,
+          "b": 1.020204
+        },
+        {
+          "a": 6.38,
+          "b": 1.020204
+        },
+        {
+          "a": 6.38,
+          "b": 1.000204
+        },
+        {
+          "a": 6.4,
+          "b": 1.000204
+        },
+        {
+          "a": 6.4,
+          "b": 0.980204
+        },
+        {
+          "a": 6.42,
+          "b": 0.980204
+        },
+        {
+          "a": 6.42,
+          "b": 0.960204
+        },
+        {
+          "a": 6.44,
+          "b": 0.960204
+        },
+        {
+          "a": 6.44,
+          "b": 0.940204
+        },
+        {
+          "a": 6.46,
+          "b": 0.940204
+        },
+        {
+          "a": 6.46,
+          "b": 0.920204
+        },
+        {
+          "a": 6.48,
+          "b": 0.920204
+        },
+        {
+          "a": 6.48,
+          "b": 0.100204
+        },
+        {
+          "a": 1.68,
+          "b": 0.100204
+        },
+        {
+          "a": 1.68,
+          "b": 0.900204
+        },
+        {
+          "a": 1.66,
+          "b": 0.900204
+        },
+        {
+          "a": 1.66,
+          "b": 0.920204
+        },
+        {
+          "a": 1.64,
+          "b": 0.920204
+        },
+        {
+          "a": 1.64,
+          "b": 0.940204
+        },
+        {
+          "a": 1.78,
+          "b": 0.940204
+        },
+        {
+          "a": 1.78,
+          "b": 0.960204
+        },
+        {
+          "a": 1.8,
+          "b": 0.960204
+        },
+        {
+          "a": 1.8,
+          "b": 0.980204
+        },
+        {
+          "a": 1.82,
+          "b": 0.980204
+        },
+        {
+          "a": 1.82,
+          "b": 1.000204
+        },
+        {
+          "a": 1.84,
+          "b": 1.000204
+        },
+        {
+          "a": 1.84,
+          "b": 1.020204
+        },
+        {
+          "a": 1.86,
+          "b": 1.020204
+        },
+        {
+          "a": 1.86,
+          "b": 1.040204
+        },
+        {
+          "a": 1.88,
+          "b": 1.040204
+        },
+        {
+          "a": 1.88,
+          "b": 1.060204
+        },
+        {
+          "a": 1.9,
+          "b": 1.060204
+        },
+        {
+          "a": 1.9,
+          "b": 1.080204
+        },
+        {
+          "a": 1.92,
+          "b": 1.080204
+        },
+        {
+          "a": 1.92,
+          "b": 1.100204
+        },
+        {
+          "a": 1.94,
+          "b": 1.100204
+        },
+        {
+          "a": 1.94,
+          "b": 1.120204
+        },
+        {
+          "a": 1.96,
+          "b": 1.120204
+        },
+        {
+          "a": 1.96,
+          "b": 1.140204
+        },
+        {
+          "a": 1.98,
+          "b": 1.140204
+        },
+        {
+          "a": 1.98,
+          "b": 1.160204
+        },
+        {
+          "a": 2,
+          "b": 1.160204
+        },
+        {
+          "a": 2,
+          "b": 1.180204
+        },
+        {
+          "a": 2.02,
+          "b": 1.180204
+        },
+        {
+          "a": 2.02,
+          "b": 1.200204
+        },
+        {
+          "a": 2.04,
+          "b": 1.200204
+        },
+        {
+          "a": 2.04,
+          "b": 1.220204
+        },
+        {
+          "a": 2.06,
+          "b": 1.220204
+        },
+        {
+          "a": 2.06,
+          "b": 1.240204
+        },
+        {
+          "a": 2.08,
+          "b": 1.240204
+        },
+        {
+          "a": 2.08,
+          "b": 1.260204
+        },
+        {
+          "a": 2.1,
+          "b": 1.260204
+        },
+        {
+          "a": 2.1,
+          "b": 1.280204
+        },
+        {
+          "a": 2.12,
+          "b": 1.280204
+        },
+        {
+          "a": 2.12,
+          "b": 1.300204
+        },
+        {
+          "a": 2.14,
+          "b": 1.300204
+        },
+        {
+          "a": 2.14,
+          "b": 1.320204
+        },
+        {
+          "a": 2.16,
+          "b": 1.320204
+        },
+        {
+          "a": 2.16,
+          "b": 1.340204
+        },
+        {
+          "a": 2.18,
+          "b": 1.340204
+        },
+        {
+          "a": 2.18,
+          "b": 1.360204
+        },
+        {
+          "a": 2.2,
+          "b": 1.360204
+        },
+        {
+          "a": 2.2,
+          "b": 1.380204
+        },
+        {
+          "a": 2.22,
+          "b": 1.380204
+        },
+        {
+          "a": 2.22,
+          "b": 1.400204
+        },
+        {
+          "a": 2.24,
+          "b": 1.400204
+        },
+        {
+          "a": 2.24,
+          "b": 1.420204
+        },
+        {
+          "a": 2.26,
+          "b": 1.420204
+        },
+        {
+          "a": 2.26,
+          "b": 1.440204
+        },
+        {
+          "a": 2.28,
+          "b": 1.440204
+        },
+        {
+          "a": 2.28,
+          "b": 1.460204
+        },
+        {
+          "a": 2.3,
+          "b": 1.460204
+        },
+        {
+          "a": 2.3,
+          "b": 1.480204
+        },
+        {
+          "a": 2.32,
+          "b": 1.480204
+        },
+        {
+          "a": 2.32,
+          "b": 1.500204
+        },
+        {
+          "a": 2.34,
+          "b": 1.500204
+        },
+        {
+          "a": 2.34,
+          "b": 1.520204
+        },
+        {
+          "a": 2.36,
+          "b": 1.520204
+        },
+        {
+          "a": 2.36,
+          "b": 1.540204
+        },
+        {
+          "a": 2.38,
+          "b": 1.540204
+        },
+        {
+          "a": 2.38,
+          "b": 1.560204
+        },
+        {
+          "a": 2.4,
+          "b": 1.560204
+        },
+        {
+          "a": 2.4,
+          "b": 1.580204
+        },
+        {
+          "a": 2.42,
+          "b": 1.580204
+        },
+        {
+          "a": 2.42,
+          "b": 1.600204
+        },
+        {
+          "a": 2.44,
+          "b": 1.600204
+        }
+      ],
+      "rect": {
+        "a0": 1.64,
+        "a1": 6.48,
+        "b0": 0.100204,
+        "b1": 1.620204
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a brick outline from sketch-93f41567-a65e1f11dc14-appearance (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-main-0-w0",
+      "id": "appearance-front-ring-main-0-w0-brick-1",
+      "materialId": "mat-brick",
+      "outline": [
+        {
+          "a": 12.74,
+          "b": 2.400204
+        },
+        {
+          "a": 15.4,
+          "b": 2.400204
+        },
+        {
+          "a": 15.4,
+          "b": 0.200204
+        },
+        {
+          "a": 15.16,
+          "b": 0.200204
+        },
+        {
+          "a": 15.16,
+          "b": 0.220204
+        },
+        {
+          "a": 15.14,
+          "b": 0.220204
+        },
+        {
+          "a": 15.14,
+          "b": 0.200204
+        },
+        {
+          "a": 12.74,
+          "b": 0.200204
+        },
+        {
+          "a": 12.74,
+          "b": 0.940204
+        },
+        {
+          "a": 12.72,
+          "b": 0.940204
+        },
+        {
+          "a": 12.72,
+          "b": 0.960204
+        },
+        {
+          "a": 12.7,
+          "b": 0.960204
+        },
+        {
+          "a": 12.7,
+          "b": 0.980204
+        },
+        {
+          "a": 12.68,
+          "b": 0.980204
+        },
+        {
+          "a": 12.68,
+          "b": 1.000204
+        },
+        {
+          "a": 12.66,
+          "b": 1.000204
+        },
+        {
+          "a": 12.66,
+          "b": 1.020204
+        },
+        {
+          "a": 12.64,
+          "b": 1.020204
+        },
+        {
+          "a": 12.64,
+          "b": 1.040204
+        },
+        {
+          "a": 12.62,
+          "b": 1.040204
+        },
+        {
+          "a": 12.62,
+          "b": 1.060204
+        },
+        {
+          "a": 12.6,
+          "b": 1.060204
+        },
+        {
+          "a": 12.6,
+          "b": 1.080204
+        },
+        {
+          "a": 12.58,
+          "b": 1.080204
+        },
+        {
+          "a": 12.58,
+          "b": 1.100204
+        },
+        {
+          "a": 12.56,
+          "b": 1.100204
+        },
+        {
+          "a": 12.56,
+          "b": 1.120204
+        },
+        {
+          "a": 12.54,
+          "b": 1.120204
+        },
+        {
+          "a": 12.54,
+          "b": 1.140204
+        },
+        {
+          "a": 12.52,
+          "b": 1.140204
+        },
+        {
+          "a": 12.52,
+          "b": 1.160204
+        },
+        {
+          "a": 12.5,
+          "b": 1.160204
+        },
+        {
+          "a": 12.5,
+          "b": 1.180204
+        },
+        {
+          "a": 12.48,
+          "b": 1.180204
+        },
+        {
+          "a": 12.48,
+          "b": 1.200204
+        },
+        {
+          "a": 12.46,
+          "b": 1.200204
+        },
+        {
+          "a": 12.46,
+          "b": 1.220204
+        },
+        {
+          "a": 12.44,
+          "b": 1.220204
+        },
+        {
+          "a": 12.44,
+          "b": 1.240204
+        },
+        {
+          "a": 12.42,
+          "b": 1.240204
+        },
+        {
+          "a": 12.42,
+          "b": 1.260204
+        },
+        {
+          "a": 12.4,
+          "b": 1.260204
+        },
+        {
+          "a": 12.4,
+          "b": 1.280204
+        },
+        {
+          "a": 12.38,
+          "b": 1.280204
+        },
+        {
+          "a": 12.38,
+          "b": 1.300204
+        },
+        {
+          "a": 12.36,
+          "b": 1.300204
+        },
+        {
+          "a": 12.36,
+          "b": 1.320204
+        },
+        {
+          "a": 12.34,
+          "b": 1.320204
+        },
+        {
+          "a": 12.34,
+          "b": 1.340204
+        },
+        {
+          "a": 12.32,
+          "b": 1.340204
+        },
+        {
+          "a": 12.32,
+          "b": 1.360204
+        },
+        {
+          "a": 12.3,
+          "b": 1.360204
+        },
+        {
+          "a": 12.3,
+          "b": 1.380204
+        },
+        {
+          "a": 12.28,
+          "b": 1.380204
+        },
+        {
+          "a": 12.28,
+          "b": 1.400204
+        },
+        {
+          "a": 12.26,
+          "b": 1.400204
+        },
+        {
+          "a": 12.26,
+          "b": 1.420204
+        },
+        {
+          "a": 12.24,
+          "b": 1.420204
+        },
+        {
+          "a": 12.24,
+          "b": 1.440204
+        },
+        {
+          "a": 12.22,
+          "b": 1.440204
+        },
+        {
+          "a": 12.22,
+          "b": 1.460204
+        },
+        {
+          "a": 12.2,
+          "b": 1.460204
+        },
+        {
+          "a": 12.2,
+          "b": 1.480204
+        },
+        {
+          "a": 12.18,
+          "b": 1.480204
+        },
+        {
+          "a": 12.18,
+          "b": 1.500204
+        },
+        {
+          "a": 12.16,
+          "b": 1.500204
+        },
+        {
+          "a": 12.16,
+          "b": 1.520204
+        },
+        {
+          "a": 12.14,
+          "b": 1.520204
+        },
+        {
+          "a": 12.14,
+          "b": 1.560204
+        },
+        {
+          "a": 12.16,
+          "b": 1.560204
+        },
+        {
+          "a": 12.16,
+          "b": 1.580204
+        },
+        {
+          "a": 12.18,
+          "b": 1.580204
+        },
+        {
+          "a": 12.18,
+          "b": 1.600204
+        },
+        {
+          "a": 12.2,
+          "b": 1.600204
+        },
+        {
+          "a": 12.2,
+          "b": 1.620204
+        },
+        {
+          "a": 12.22,
+          "b": 1.620204
+        },
+        {
+          "a": 12.22,
+          "b": 1.640204
+        },
+        {
+          "a": 12.24,
+          "b": 1.640204
+        },
+        {
+          "a": 12.24,
+          "b": 1.660204
+        },
+        {
+          "a": 12.26,
+          "b": 1.660204
+        },
+        {
+          "a": 12.26,
+          "b": 1.680204
+        },
+        {
+          "a": 12.28,
+          "b": 1.680204
+        },
+        {
+          "a": 12.28,
+          "b": 1.700204
+        },
+        {
+          "a": 12.3,
+          "b": 1.700204
+        },
+        {
+          "a": 12.3,
+          "b": 1.720204
+        },
+        {
+          "a": 12.32,
+          "b": 1.720204
+        },
+        {
+          "a": 12.32,
+          "b": 1.740204
+        },
+        {
+          "a": 12.34,
+          "b": 1.740204
+        },
+        {
+          "a": 12.34,
+          "b": 1.760204
+        },
+        {
+          "a": 12.36,
+          "b": 1.760204
+        },
+        {
+          "a": 12.36,
+          "b": 1.780204
+        },
+        {
+          "a": 12.38,
+          "b": 1.780204
+        },
+        {
+          "a": 12.38,
+          "b": 1.800204
+        },
+        {
+          "a": 12.4,
+          "b": 1.800204
+        },
+        {
+          "a": 12.4,
+          "b": 1.820204
+        },
+        {
+          "a": 12.42,
+          "b": 1.820204
+        },
+        {
+          "a": 12.42,
+          "b": 1.840204
+        },
+        {
+          "a": 12.44,
+          "b": 1.840204
+        },
+        {
+          "a": 12.44,
+          "b": 1.860204
+        },
+        {
+          "a": 12.46,
+          "b": 1.860204
+        },
+        {
+          "a": 12.46,
+          "b": 1.880204
+        },
+        {
+          "a": 12.48,
+          "b": 1.880204
+        },
+        {
+          "a": 12.48,
+          "b": 1.900204
+        },
+        {
+          "a": 12.5,
+          "b": 1.900204
+        },
+        {
+          "a": 12.5,
+          "b": 1.920204
+        },
+        {
+          "a": 12.52,
+          "b": 1.920204
+        },
+        {
+          "a": 12.52,
+          "b": 1.940204
+        },
+        {
+          "a": 12.54,
+          "b": 1.940204
+        },
+        {
+          "a": 12.54,
+          "b": 1.960204
+        },
+        {
+          "a": 12.56,
+          "b": 1.960204
+        },
+        {
+          "a": 12.56,
+          "b": 1.980204
+        },
+        {
+          "a": 12.58,
+          "b": 1.980204
+        },
+        {
+          "a": 12.58,
+          "b": 2.000204
+        },
+        {
+          "a": 12.6,
+          "b": 2.000204
+        },
+        {
+          "a": 12.6,
+          "b": 2.020204
+        },
+        {
+          "a": 12.62,
+          "b": 2.020204
+        },
+        {
+          "a": 12.62,
+          "b": 2.040204
+        },
+        {
+          "a": 12.64,
+          "b": 2.040204
+        },
+        {
+          "a": 12.64,
+          "b": 2.060204
+        },
+        {
+          "a": 12.66,
+          "b": 2.060204
+        },
+        {
+          "a": 12.66,
+          "b": 2.080204
+        },
+        {
+          "a": 12.68,
+          "b": 2.080204
+        },
+        {
+          "a": 12.68,
+          "b": 2.100204
+        },
+        {
+          "a": 12.7,
+          "b": 2.100204
+        },
+        {
+          "a": 12.7,
+          "b": 2.120204
+        },
+        {
+          "a": 12.72,
+          "b": 2.120204
+        },
+        {
+          "a": 12.72,
+          "b": 2.140204
+        },
+        {
+          "a": 12.74,
+          "b": 2.140204
+        }
+      ],
+      "rect": {
+        "a0": 12.14,
+        "a1": 15.4,
+        "b0": 0.200204,
+        "b1": 2.400204
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a timber outline from sketch-93f41567-a65e1f11dc14-appearance (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-main-0-w0",
+      "id": "appearance-front-ring-main-0-w0-timber-0",
+      "materialId": "mat-timber",
+      "outline": [
+        {
+          "a": 8.4,
+          "b": 2.400204
+        },
+        {
+          "a": 12.74,
+          "b": 2.400204
+        },
+        {
+          "a": 12.74,
+          "b": 2.140204
+        },
+        {
+          "a": 12.72,
+          "b": 2.140204
+        },
+        {
+          "a": 12.72,
+          "b": 2.120204
+        },
+        {
+          "a": 12.7,
+          "b": 2.120204
+        },
+        {
+          "a": 12.7,
+          "b": 2.100204
+        },
+        {
+          "a": 12.68,
+          "b": 2.100204
+        },
+        {
+          "a": 12.68,
+          "b": 2.080204
+        },
+        {
+          "a": 12.66,
+          "b": 2.080204
+        },
+        {
+          "a": 12.66,
+          "b": 2.060204
+        },
+        {
+          "a": 12.64,
+          "b": 2.060204
+        },
+        {
+          "a": 12.64,
+          "b": 2.040204
+        },
+        {
+          "a": 12.62,
+          "b": 2.040204
+        },
+        {
+          "a": 12.62,
+          "b": 2.020204
+        },
+        {
+          "a": 12.6,
+          "b": 2.020204
+        },
+        {
+          "a": 12.6,
+          "b": 2.000204
+        },
+        {
+          "a": 12.58,
+          "b": 2.000204
+        },
+        {
+          "a": 12.58,
+          "b": 1.980204
+        },
+        {
+          "a": 12.56,
+          "b": 1.980204
+        },
+        {
+          "a": 12.56,
+          "b": 1.960204
+        },
+        {
+          "a": 12.54,
+          "b": 1.960204
+        },
+        {
+          "a": 12.54,
+          "b": 1.940204
+        },
+        {
+          "a": 12.52,
+          "b": 1.940204
+        },
+        {
+          "a": 12.52,
+          "b": 1.920204
+        },
+        {
+          "a": 12.5,
+          "b": 1.920204
+        },
+        {
+          "a": 12.5,
+          "b": 1.900204
+        },
+        {
+          "a": 12.48,
+          "b": 1.900204
+        },
+        {
+          "a": 12.48,
+          "b": 1.880204
+        },
+        {
+          "a": 12.46,
+          "b": 1.880204
+        },
+        {
+          "a": 12.46,
+          "b": 1.860204
+        },
+        {
+          "a": 12.44,
+          "b": 1.860204
+        },
+        {
+          "a": 12.44,
+          "b": 1.840204
+        },
+        {
+          "a": 12.42,
+          "b": 1.840204
+        },
+        {
+          "a": 12.42,
+          "b": 1.820204
+        },
+        {
+          "a": 12.4,
+          "b": 1.820204
+        },
+        {
+          "a": 12.4,
+          "b": 1.800204
+        },
+        {
+          "a": 12.38,
+          "b": 1.800204
+        },
+        {
+          "a": 12.38,
+          "b": 1.780204
+        },
+        {
+          "a": 12.36,
+          "b": 1.780204
+        },
+        {
+          "a": 12.36,
+          "b": 1.760204
+        },
+        {
+          "a": 12.34,
+          "b": 1.760204
+        },
+        {
+          "a": 12.34,
+          "b": 1.740204
+        },
+        {
+          "a": 12.32,
+          "b": 1.740204
+        },
+        {
+          "a": 12.32,
+          "b": 1.720204
+        },
+        {
+          "a": 12.3,
+          "b": 1.720204
+        },
+        {
+          "a": 12.3,
+          "b": 1.700204
+        },
+        {
+          "a": 12.28,
+          "b": 1.700204
+        },
+        {
+          "a": 12.28,
+          "b": 1.680204
+        },
+        {
+          "a": 12.26,
+          "b": 1.680204
+        },
+        {
+          "a": 12.26,
+          "b": 1.660204
+        },
+        {
+          "a": 12.24,
+          "b": 1.660204
+        },
+        {
+          "a": 12.24,
+          "b": 1.640204
+        },
+        {
+          "a": 12.22,
+          "b": 1.640204
+        },
+        {
+          "a": 12.22,
+          "b": 1.620204
+        },
+        {
+          "a": 12.2,
+          "b": 1.620204
+        },
+        {
+          "a": 12.2,
+          "b": 1.600204
+        },
+        {
+          "a": 12.18,
+          "b": 1.600204
+        },
+        {
+          "a": 12.18,
+          "b": 1.580204
+        },
+        {
+          "a": 12.16,
+          "b": 1.580204
+        },
+        {
+          "a": 12.16,
+          "b": 1.560204
+        },
+        {
+          "a": 12.14,
+          "b": 1.560204
+        },
+        {
+          "a": 12.14,
+          "b": 1.520204
+        },
+        {
+          "a": 12.16,
+          "b": 1.520204
+        },
+        {
+          "a": 12.16,
+          "b": 1.500204
+        },
+        {
+          "a": 12.18,
+          "b": 1.500204
+        },
+        {
+          "a": 12.18,
+          "b": 1.480204
+        },
+        {
+          "a": 12.2,
+          "b": 1.480204
+        },
+        {
+          "a": 12.2,
+          "b": 1.460204
+        },
+        {
+          "a": 12.22,
+          "b": 1.460204
+        },
+        {
+          "a": 12.22,
+          "b": 1.440204
+        },
+        {
+          "a": 12.24,
+          "b": 1.440204
+        },
+        {
+          "a": 12.24,
+          "b": 1.420204
+        },
+        {
+          "a": 12.26,
+          "b": 1.420204
+        },
+        {
+          "a": 12.26,
+          "b": 1.400204
+        },
+        {
+          "a": 12.28,
+          "b": 1.400204
+        },
+        {
+          "a": 12.28,
+          "b": 1.380204
+        },
+        {
+          "a": 12.3,
+          "b": 1.380204
+        },
+        {
+          "a": 12.3,
+          "b": 1.360204
+        },
+        {
+          "a": 12.32,
+          "b": 1.360204
+        },
+        {
+          "a": 12.32,
+          "b": 1.340204
+        },
+        {
+          "a": 12.34,
+          "b": 1.340204
+        },
+        {
+          "a": 12.34,
+          "b": 1.320204
+        },
+        {
+          "a": 12.36,
+          "b": 1.320204
+        },
+        {
+          "a": 12.36,
+          "b": 1.300204
+        },
+        {
+          "a": 12.38,
+          "b": 1.300204
+        },
+        {
+          "a": 12.38,
+          "b": 1.280204
+        },
+        {
+          "a": 12.4,
+          "b": 1.280204
+        },
+        {
+          "a": 12.4,
+          "b": 1.260204
+        },
+        {
+          "a": 12.42,
+          "b": 1.260204
+        },
+        {
+          "a": 12.42,
+          "b": 1.240204
+        },
+        {
+          "a": 12.44,
+          "b": 1.240204
+        },
+        {
+          "a": 12.44,
+          "b": 1.220204
+        },
+        {
+          "a": 12.46,
+          "b": 1.220204
+        },
+        {
+          "a": 12.46,
+          "b": 1.200204
+        },
+        {
+          "a": 12.48,
+          "b": 1.200204
+        },
+        {
+          "a": 12.48,
+          "b": 1.180204
+        },
+        {
+          "a": 12.5,
+          "b": 1.180204
+        },
+        {
+          "a": 12.5,
+          "b": 1.160204
+        },
+        {
+          "a": 12.52,
+          "b": 1.160204
+        },
+        {
+          "a": 12.52,
+          "b": 1.140204
+        },
+        {
+          "a": 12.54,
+          "b": 1.140204
+        },
+        {
+          "a": 12.54,
+          "b": 1.120204
+        },
+        {
+          "a": 12.56,
+          "b": 1.120204
+        },
+        {
+          "a": 12.56,
+          "b": 1.100204
+        },
+        {
+          "a": 12.58,
+          "b": 1.100204
+        },
+        {
+          "a": 12.58,
+          "b": 1.080204
+        },
+        {
+          "a": 12.6,
+          "b": 1.080204
+        },
+        {
+          "a": 12.6,
+          "b": 1.060204
+        },
+        {
+          "a": 12.62,
+          "b": 1.060204
+        },
+        {
+          "a": 12.62,
+          "b": 1.040204
+        },
+        {
+          "a": 12.64,
+          "b": 1.040204
+        },
+        {
+          "a": 12.64,
+          "b": 1.020204
+        },
+        {
+          "a": 12.66,
+          "b": 1.020204
+        },
+        {
+          "a": 12.66,
+          "b": 1.000204
+        },
+        {
+          "a": 12.68,
+          "b": 1.000204
+        },
+        {
+          "a": 12.68,
+          "b": 0.980204
+        },
+        {
+          "a": 12.7,
+          "b": 0.980204
+        },
+        {
+          "a": 12.7,
+          "b": 0.960204
+        },
+        {
+          "a": 12.72,
+          "b": 0.960204
+        },
+        {
+          "a": 12.72,
+          "b": 0.940204
+        },
+        {
+          "a": 12.74,
+          "b": 0.940204
+        },
+        {
+          "a": 12.74,
+          "b": 0.220204
+        },
+        {
+          "a": 12.76,
+          "b": 0.220204
+        },
+        {
+          "a": 12.76,
+          "b": 0.120204
+        },
+        {
+          "a": 12.74,
+          "b": 0.120204
+        },
+        {
+          "a": 12.74,
+          "b": 0.100204
+        },
+        {
+          "a": 8.4,
+          "b": 0.100204
+        }
+      ],
+      "rect": {
+        "a0": 8.4,
+        "a1": 12.76,
+        "b0": 0.100204,
+        "b1": 2.400204
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a brick outline from sketch-d1580832-3b1693b2d7df-appearance (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-main-0-w2",
+      "id": "appearance-rear-ring-main-0-w2-brick-0",
+      "materialId": "mat-brick",
+      "outline": [
+        {
+          "a": 13.86,
+          "b": 1.540204
+        },
+        {
+          "a": 13.82,
+          "b": 1.540204
+        },
+        {
+          "a": 13.82,
+          "b": 1.060204
+        },
+        {
+          "a": 5.94,
+          "b": 1.060204
+        },
+        {
+          "a": 5.94,
+          "b": 1.040204
+        },
+        {
+          "a": 5.92,
+          "b": 1.040204
+        },
+        {
+          "a": 5.92,
+          "b": 0.000204
+        },
+        {
+          "a": 5.94,
+          "b": 0.000204
+        },
+        {
+          "a": 5.94,
+          "b": 0
+        },
+        {
+          "a": 13.84,
+          "b": 0
+        },
+        {
+          "a": 13.84,
+          "b": 1.020204
+        },
+        {
+          "a": 13.86,
+          "b": 1.020204
+        }
+      ],
+      "rect": {
+        "a0": 5.92,
+        "a1": 13.86,
+        "b0": 0,
+        "b1": 1.540204
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a timber outline from sketch-d1580832-3b1693b2d7df-appearance (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-main-0-w2",
+      "id": "appearance-rear-ring-main-0-w2-timber-0",
+      "materialId": "mat-timber",
+      "outline": [
+        {
+          "a": 5.36,
+          "b": 2.520204
+        },
+        {
+          "a": 4.04,
+          "b": 2.520204
+        },
+        {
+          "a": 4.04,
+          "b": 2.500204
+        },
+        {
+          "a": 4.02,
+          "b": 2.500204
+        },
+        {
+          "a": 4.02,
+          "b": 0.160204
+        },
+        {
+          "a": 4.04,
+          "b": 0.160204
+        },
+        {
+          "a": 4.04,
+          "b": 0.140204
+        },
+        {
+          "a": 5.36,
+          "b": 0.140204
+        },
+        {
+          "a": 5.36,
+          "b": 0.160204
+        },
+        {
+          "a": 5.38,
+          "b": 0.160204
+        },
+        {
+          "a": 5.38,
+          "b": 2.500204
+        },
+        {
+          "a": 5.36,
+          "b": 2.500204
+        }
+      ],
+      "rect": {
+        "a0": 4.02,
+        "a1": 5.38,
+        "b0": 0.140204,
+        "b1": 2.520204
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a timber outline from sketch-d1580832-3b1693b2d7df-appearance (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-main-0-w2",
+      "id": "appearance-rear-ring-main-0-w2-timber-1",
+      "materialId": "mat-timber",
+      "outline": [
+        {
+          "a": 1.3,
+          "b": 2.520204
+        },
+        {
+          "a": 0,
+          "b": 2.520204
+        },
+        {
+          "a": 0,
+          "b": 2.180204
+        },
+        {
+          "a": 0.1,
+          "b": 2.180204
+        },
+        {
+          "a": 0.1,
+          "b": 0.920204
+        },
+        {
+          "a": 0,
+          "b": 0.920204
+        },
+        {
+          "a": 0,
+          "b": 0.140204
+        },
+        {
+          "a": 1.3,
+          "b": 0.140204
+        },
+        {
+          "a": 1.3,
+          "b": 0.160204
+        },
+        {
+          "a": 1.32,
+          "b": 0.160204
+        },
+        {
+          "a": 1.32,
+          "b": 2.500204
+        },
+        {
+          "a": 1.3,
+          "b": 2.500204
+        }
+      ],
+      "rect": {
+        "a0": 0,
+        "a1": 1.32,
+        "b0": 0.140204,
+        "b1": 2.520204
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a timber outline from sketch-d1580832-3b1693b2d7df-appearance (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-main-0-w2",
+      "id": "appearance-rear-ring-main-0-w2-timber-2",
+      "materialId": "mat-timber",
+      "outline": [
+        {
+          "a": 9.2,
+          "b": 2.520204
+        },
+        {
+          "a": 7.4,
+          "b": 2.520204
+        },
+        {
+          "a": 7.4,
+          "b": 2.500204
+        },
+        {
+          "a": 7.38,
+          "b": 2.500204
+        },
+        {
+          "a": 7.38,
+          "b": 1.080204
+        },
+        {
+          "a": 7.4,
+          "b": 1.080204
+        },
+        {
+          "a": 7.4,
+          "b": 1.060204
+        },
+        {
+          "a": 9.2,
+          "b": 1.060204
+        },
+        {
+          "a": 9.2,
+          "b": 1.080204
+        },
+        {
+          "a": 9.22,
+          "b": 1.080204
+        },
+        {
+          "a": 9.22,
+          "b": 2.500204
+        },
+        {
+          "a": 9.2,
+          "b": 2.500204
+        }
+      ],
+      "rect": {
+        "a0": 7.38,
+        "a1": 9.22,
+        "b0": 1.060204,
+        "b1": 2.520204
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a timber outline from sketch-d1580832-3b1693b2d7df-appearance (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-main-0-w2",
+      "id": "appearance-rear-ring-main-0-w2-timber-3",
+      "materialId": "mat-timber",
+      "outline": [
+        {
+          "a": 12.3,
+          "b": 2.520204
+        },
+        {
+          "a": 10.7,
+          "b": 2.520204
+        },
+        {
+          "a": 10.7,
+          "b": 2.500204
+        },
+        {
+          "a": 10.68,
+          "b": 2.500204
+        },
+        {
+          "a": 10.68,
+          "b": 1.080204
+        },
+        {
+          "a": 10.7,
+          "b": 1.080204
+        },
+        {
+          "a": 10.7,
+          "b": 1.060204
+        },
+        {
+          "a": 12.3,
+          "b": 1.060204
+        },
+        {
+          "a": 12.3,
+          "b": 1.080204
+        },
+        {
+          "a": 12.32,
+          "b": 1.080204
+        },
+        {
+          "a": 12.32,
+          "b": 2.500204
+        },
+        {
+          "a": 12.3,
+          "b": 2.500204
+        }
+      ],
+      "rect": {
+        "a0": 10.68,
+        "a1": 12.32,
+        "b0": 1.060204,
+        "b1": 2.520204
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a brick outline from finish-078d6f (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-main-0-w3",
+      "id": "appearance-west-ring-main-0-w3-brick-0",
+      "materialId": "mat-brick",
+      "outline": [
+        {
+          "a": 7.93,
+          "b": 2.509128
+        },
+        {
+          "a": 7.59,
+          "b": 2.509128
+        },
+        {
+          "a": 7.59,
+          "b": 2.489128
+        },
+        {
+          "a": 7.57,
+          "b": 2.489128
+        },
+        {
+          "a": 7.57,
+          "b": 0.349128
+        },
+        {
+          "a": 7.59,
+          "b": 0.349128
+        },
+        {
+          "a": 7.59,
+          "b": 0.329128
+        },
+        {
+          "a": 7.93,
+          "b": 0.329128
+        },
+        {
+          "a": 7.93,
+          "b": 0.349128
+        },
+        {
+          "a": 7.95,
+          "b": 0.349128
+        },
+        {
+          "a": 7.95,
+          "b": 2.489128
+        },
+        {
+          "a": 7.93,
+          "b": 2.489128
+        }
+      ],
+      "rect": {
+        "a0": 7.57,
+        "a1": 7.95,
+        "b0": 0.329128,
+        "b1": 2.509128
+      }
+    }
+  ],
+  "terraces": [],
+  "units": {
+    "angle": "deg",
+    "length": "m"
+  },
+  "wallJunctions": [
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-main-0-w3"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-main-0-w0"
+      },
+      "id": "ring-main-0-j0",
+      "kind": "CORNER",
+      "owner": "ring-main-0-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-main-0-w0"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-main-0-w1"
+      },
+      "id": "ring-main-0-j1",
+      "kind": "CORNER",
+      "owner": "ring-main-0-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-main-0-w1"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-main-0-w2"
+      },
+      "id": "ring-main-0-j2",
+      "kind": "CORNER",
+      "owner": "ring-main-0-w2",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-main-0-w2"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-main-0-w3"
+      },
+      "id": "ring-main-0-j3",
+      "kind": "CORNER",
+      "owner": "ring-main-0-w2",
+      "tolerance": 0.001
+    }
+  ],
+  "wallPanels": [],
+  "wallRings": [
+    {
+      "evidence": {
+        "interpretation": "15.40 × 8.15 m body from the plan's printed chains and wall bands",
+        "status": "SOURCE_EXACT"
+      },
+      "id": "ring-main-0",
+      "junctionIds": [
+        "ring-main-0-j0",
+        "ring-main-0-j1",
+        "ring-main-0-j2",
+        "ring-main-0-j3"
+      ],
+      "levelId": "lvl-0",
+      "wallIds": [
+        "ring-main-0-w0",
+        "ring-main-0-w1",
+        "ring-main-0-w2",
+        "ring-main-0-w3"
+      ]
+    }
+  ],
+  "walls": [
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 1.716606,
+        "z": 7.63362
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-x-0",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 0.537715,
+        "z": 7.63362
+      },
+      "thickness": 0.042309,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 3.870359,
+        "z": 7.63362
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-x-1",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 3.185963,
+        "z": 7.63362
+      },
+      "thickness": 0.042309,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 14.819939,
+        "z": 6.685617
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-x-14",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 13.99422,
+        "z": 6.685617
+      },
+      "thickness": 0.042309,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 2.931651,
+        "z": 4.534922
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-x-15",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 2.713507,
+        "z": 4.534922
+      },
+      "thickness": 0.042309,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 6.02578,
+        "z": 4.534922
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-x-16",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 4.069823,
+        "z": 4.534922
+      },
+      "thickness": 0.042309,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 7.571998,
+        "z": 4.534922
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-x-17",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 6.887615,
+        "z": 4.534922
+      },
+      "thickness": 0.042309,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 9.634776,
+        "z": 4.534922
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan with 1 door gap",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-x-18",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 7.757348,
+        "z": 4.534922
+      },
+      "thickness": 0.042309,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 1.151468,
+        "z": 4.464175
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-x-19",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 0.537715,
+        "z": 4.464175
+      },
+      "thickness": 0.042309,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 4.605025,
+        "z": 7.63362
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-x-2",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 4.069823,
+        "z": 7.63362
+      },
+      "thickness": 0.042309,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 10.030347,
+        "z": 4.432339
+      },
+      "evidence": {
+        "interpretation": "4 pieces of partition ink on the plan with 3 door gaps",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-x-21",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 2.84065,
+        "z": 4.432339
+      },
+      "thickness": 0.042309,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 2.655301,
+        "z": 3.855756
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-x-25",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 0.537715,
+        "z": 3.855756
+      },
+      "thickness": 0.042309,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 2.655313,
+        "z": 3.74256
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-x-26",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 0.537715,
+        "z": 3.74256
+      },
+      "thickness": 0.042309,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 12.163754,
+        "z": 3.431276
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-x-27",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 10.809091,
+        "z": 3.431276
+      },
+      "thickness": 0.042309,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 7.670922,
+        "z": 3.176589
+      },
+      "evidence": {
+        "interpretation": "2 pieces of partition ink on the plan with 1 door gap",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-x-28",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 3.793486,
+        "z": 3.176589
+      },
+      "thickness": 0.042309,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 7.571998,
+        "z": 7.63362
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-x-3",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 6.138807,
+        "z": 7.63362
+      },
+      "thickness": 0.042309,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 1.151468,
+        "z": 3.119992
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-x-30",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 0.537715,
+        "z": 3.119992
+      },
+      "thickness": 0.042309,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 2.931651,
+        "z": 3.063395
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-x-32",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 2.727623,
+        "z": 3.063395
+      },
+      "thickness": 0.042309,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 7.557895,
+        "z": 3.063371
+      },
+      "evidence": {
+        "interpretation": "2 pieces of partition ink on the plan with 1 door gap",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-x-33",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 4.069823,
+        "z": 3.063371
+      },
+      "thickness": 0.028206,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 12.036598,
+        "z": 3.049268
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-x-35",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 10.936247,
+        "z": 3.049268
+      },
+      "thickness": 0.056412,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 9.755688,
+        "z": 2.469124
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-x-37",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 8.710183,
+        "z": 2.469124
+      },
+      "thickness": 0.042309,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 9.634776,
+        "z": 7.63362
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-x-4",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 9.28945,
+        "z": 7.63362
+      },
+      "thickness": 0.042309,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 10.736782,
+        "z": 2.35593
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan with 1 door gap",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-x-40",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 8.972394,
+        "z": 2.35593
+      },
+      "thickness": 0.042309,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 4.60591,
+        "z": 1.082538
+      },
+      "evidence": {
+        "interpretation": "2 pieces of partition ink on the plan with 2 door gaps",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-x-42",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 2.394771,
+        "z": 1.082538
+      },
+      "thickness": 0.070515,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 11.521743,
+        "z": 1.096687
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-x-46",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 10.936247,
+        "z": 1.096687
+      },
+      "thickness": 0.070515,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 1.716606,
+        "z": 0.474072
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-x-47",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 0.537715,
+        "z": 0.474072
+      },
+      "thickness": 0.042309,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 3.93477,
+        "z": 0.474118
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-x-48",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 3.185963,
+        "z": 0.474118
+      },
+      "thickness": 0.070515,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 5.02266,
+        "z": 0.474072
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-x-49",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 4.069823,
+        "z": 0.474072
+      },
+      "thickness": 0.042309,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 11.027248,
+        "z": 7.63362
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-x-5",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 9.834229,
+        "z": 7.63362
+      },
+      "thickness": 0.042309,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 7.557895,
+        "z": 0.474072
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-x-50",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 6.492018,
+        "z": 0.474072
+      },
+      "thickness": 0.042309,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 8.787057,
+        "z": 0.474072
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-x-51",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 7.757348,
+        "z": 0.474072
+      },
+      "thickness": 0.042309,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 9.663007,
+        "z": 0.474072
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-x-52",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 8.972394,
+        "z": 0.474072
+      },
+      "thickness": 0.042309,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 12.036598,
+        "z": 0.474072
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-x-53",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 10.936247,
+        "z": 0.474072
+      },
+      "thickness": 0.042309,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 12.821559,
+        "z": 0.474072
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-x-54",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 12.236063,
+        "z": 0.474072
+      },
+      "thickness": 0.042309,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 14.862286,
+        "z": 0.474072
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-x-55",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 14.290917,
+        "z": 0.474072
+      },
+      "thickness": 0.042309,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 14.819939,
+        "z": 7.63362
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-x-6",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 13.683394,
+        "z": 7.63362
+      },
+      "thickness": 0.042309,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0.522714,
+        "z": 7.61862
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-z-0",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 0.522714,
+        "z": 3.913065
+      },
+      "thickness": 0.042309,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0.522714,
+        "z": 3.72756
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-z-1",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 0.522714,
+        "z": 0.531381
+      },
+      "thickness": 0.042309,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 4.648231,
+        "z": 7.909352
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan with 1 door gap",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-z-10",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 4.648231,
+        "z": 6.989757
+      },
+      "thickness": 0.028206,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 4.634103,
+        "z": 3.048371
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-z-12",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 4.634103,
+        "z": 2.617622
+      },
+      "thickness": 0.028206,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 4.648219,
+        "z": 1.067538
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-z-14",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 4.648219,
+        "z": 0.531381
+      },
+      "thickness": 0.042309,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 7.021797,
+        "z": 7.61862
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-z-15",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 7.021797,
+        "z": 7.074653
+      },
+      "thickness": 0.042309,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 7.021809,
+        "z": 4.952257
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-z-18",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 7.021809,
+        "z": 4.59223
+      },
+      "thickness": 0.028206,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 2.698507,
+        "z": 4.519922
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-z-2",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 2.698507,
+        "z": 3.913065
+      },
+      "thickness": 0.028206,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 7.615204,
+        "z": 7.61862
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-z-20",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 7.615204,
+        "z": 4.59223
+      },
+      "thickness": 0.028206,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 7.629307,
+        "z": 3.048371
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-z-21",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 7.629307,
+        "z": 0.531381
+      },
+      "thickness": 0.056412,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 7.742348,
+        "z": 7.668923
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-z-22",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 7.742348,
+        "z": 4.59223
+      },
+      "thickness": 0.042309,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 7.742334,
+        "z": 3.161588
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-z-23",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 7.742334,
+        "z": 2.461979
+      },
+      "thickness": 0.056412,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 7.742348,
+        "z": 2.391233
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-z-24",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 7.742348,
+        "z": 0.531381
+      },
+      "thickness": 0.042309,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 8.844366,
+        "z": 2.391233
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-z-25",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 8.844366,
+        "z": 0.531381
+      },
+      "thickness": 0.042309,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 8.957394,
+        "z": 2.340929
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-z-26",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 8.957394,
+        "z": 0.531381
+      },
+      "thickness": 0.042309,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 9.564916,
+        "z": 2.340929
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-z-27",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 9.564916,
+        "z": 1.726215
+      },
+      "thickness": 0.042309,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 9.706188,
+        "z": 7.61862
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-z-29",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 9.706188,
+        "z": 4.59223
+      },
+      "thickness": 0.056412,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 2.712623,
+        "z": 3.72756
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-z-3",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 2.712623,
+        "z": 3.120704
+      },
+      "thickness": 0.042309,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 9.706213,
+        "z": 0.459071
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-z-30",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 9.706213,
+        "z": 0.240648
+      },
+      "thickness": 0.028206,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 9.819229,
+        "z": 7.61862
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-z-31",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 9.819229,
+        "z": 5.178646
+      },
+      "thickness": 0.042309,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 10.073553,
+        "z": 5.221094
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-z-33",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 10.073553,
+        "z": 4.489647
+      },
+      "thickness": 0.028206,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 10.794091,
+        "z": 3.416276
+      },
+      "evidence": {
+        "interpretation": "2 pieces of partition ink on the plan with 1 door gap",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-z-35",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 10.794091,
+        "z": 0.466927
+      },
+      "thickness": 0.042309,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 10.921247,
+        "z": 3.034268
+      },
+      "evidence": {
+        "interpretation": "2 pieces of partition ink on the plan with 1 door gap",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-z-37",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 10.921247,
+        "z": 0.531381
+      },
+      "thickness": 0.042309,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 12.093907,
+        "z": 3.034268
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-z-39",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 12.093907,
+        "z": 0.531381
+      },
+      "thickness": 0.042309,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 12.221063,
+        "z": 3.416276
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-z-40",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 12.221063,
+        "z": 0.531381
+      },
+      "thickness": 0.042309,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 14.919557,
+        "z": 7.61862
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-z-42",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 14.919557,
+        "z": 4.810764
+      },
+      "thickness": 0.084618,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 14.919595,
+        "z": 3.325087
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-z-43",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 14.919595,
+        "z": 0.531381
+      },
+      "thickness": 0.042309,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 2.82565,
+        "z": 4.417339
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-z-5",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 2.82565,
+        "z": 3.169445
+      },
+      "thickness": 0.042309,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 3.927669,
+        "z": 7.61862
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-z-6",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 3.927669,
+        "z": 4.489647
+      },
+      "thickness": 0.042309,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 3.927669,
+        "z": 1.067538
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-z-7-a",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 3.927669,
+        "z": 0.559633
+      },
+      "thickness": 0.042309,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 3.927669,
+        "z": 3.084549
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-z-7-b",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 3.927669,
+        "z": 1.168053
+      },
+      "thickness": 0.042309,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 4.054823,
+        "z": 7.61862
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-z-8",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 4.054823,
+        "z": 4.59223
+      },
+      "thickness": 0.042309,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 4.054823,
+        "z": 1.067538
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-z-9-a",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 4.054823,
+        "z": 0.531381
+      },
+      "thickness": 0.042309,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 4.054823,
+        "z": 3.048371
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.700204,
+      "id": "main-iwall-0-z-9-b",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 4.054823,
+        "z": 1.168053
+      },
+      "thickness": 0.042309,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 15.4,
+        "z": 0
+      },
+      "height": 5.238338,
+      "id": "ring-main-0-w0",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 0,
+        "z": 0
+      },
+      "thickness": 0.225648,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 15.4,
+        "z": 8.15
+      },
+      "height": 5.238338,
+      "id": "ring-main-0-w1",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 15.4,
+        "z": 0
+      },
+      "thickness": 0.225648,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0,
+        "z": 8.15
+      },
+      "height": 5.238338,
+      "id": "ring-main-0-w2",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 15.4,
+        "z": 8.15
+      },
+      "thickness": 0.225648,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0,
+        "z": 0
+      },
+      "height": 5.238338,
+      "id": "ring-main-0-w3",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 0,
+        "z": 8.15
+      },
+      "thickness": 0.225648,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    }
+  ],
+  "windows": [
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "opening-0-east-1-0-unit",
+      "materialId": "mat-glass",
+      "openingId": "opening-0-east-1-0"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "opening-0-east-1-1-unit",
+      "materialId": "mat-glass",
+      "openingId": "opening-0-east-1-1"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "opening-0-east-1-2-unit",
+      "materialId": "mat-glass",
+      "openingId": "opening-0-east-1-2"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "opening-0-front-0-0-unit",
+      "materialId": "mat-glass",
+      "openingId": "opening-0-front-0-0"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "opening-0-front-0-2-unit",
+      "materialId": "mat-glass",
+      "openingId": "opening-0-front-0-2"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "opening-0-front-0-4-unit",
+      "materialId": "mat-glass",
+      "openingId": "opening-0-front-0-4"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "opening-0-front-0-5-unit",
+      "materialId": "mat-glass",
+      "openingId": "opening-0-front-0-5"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "opening-0-front-0-6-unit",
+      "materialId": "mat-glass",
+      "openingId": "opening-0-front-0-6"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "opening-0-rear-2-0-unit",
+      "materialId": "mat-glass",
+      "openingId": "opening-0-rear-2-0"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "opening-0-rear-2-1-unit",
+      "materialId": "mat-glass",
+      "openingId": "opening-0-rear-2-1"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "opening-0-rear-2-2-unit",
+      "materialId": "mat-glass",
+      "openingId": "opening-0-rear-2-2"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "opening-0-rear-2-3-unit",
+      "materialId": "mat-glass",
+      "openingId": "opening-0-rear-2-3"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "opening-0-rear-2-4-unit",
+      "materialId": "mat-glass",
+      "openingId": "opening-0-rear-2-4"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "opening-0-rear-2-5-unit",
+      "materialId": "mat-glass",
+      "openingId": "opening-0-rear-2-5"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "opening-0-rear-2-7-unit",
+      "materialId": "mat-glass",
+      "openingId": "opening-0-rear-2-7"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "opening-0-rear-2-8-unit",
+      "materialId": "mat-glass",
+      "openingId": "opening-0-rear-2-8"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "opening-0-west-3-1-unit",
+      "materialId": "mat-glass",
+      "openingId": "opening-0-west-3-1"
+    }
+  ]
+}

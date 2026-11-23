@@ -1,0 +1,203 @@
+{
+ "alaska": {
+  "rows": 61,
+  "fate": {
+   "BUILT": 28,
+   "REFUSED_BY_SOURCE": 1,
+   "NO_CONSUMER": 7,
+   "AGREES_WITH_MODEL": 9,
+   "UNDECIDED": 1,
+   "NOT_REGISTERED": 15
+  },
+  "builtBy": {
+   "SOURCE_VERIFIED": 22,
+   "NOT_VERIFIED": 6
+  },
+  "facades": 5,
+  "assigned": 4,
+  "adoption": [
+   "NOTHING_PENDING",
+   "NOT_ADOPTED",
+   "NOTHING_PENDING",
+   "NOTHING_PENDING",
+   "NOT_REGISTERED"
+  ]
+ },
+ "aurora": {
+  "rows": 42,
+  "fate": {
+   "BUILT": 15,
+   "REFUSED_BY_SOURCE": 2,
+   "NO_CONSUMER": 6,
+   "NOT_PROPOSED": 11,
+   "UNDECIDED": 2,
+   "AGREES_WITH_MODEL": 4,
+   "NOT_BUILT": 2
+  },
+  "builtBy": {
+   "SOURCE_VERIFIED": 13,
+   "NOT_VERIFIED": 2
+  },
+  "facades": 3,
+  "assigned": 3,
+  "adoption": [
+   "NOT_ADOPTED",
+   "ADOPTED",
+   "NOT_ADOPTED"
+  ]
+ },
+ "ballina": {
+  "rows": 33,
+  "fate": {
+   "BUILT": 18,
+   "NO_CONSUMER": 9,
+   "AGREES_WITH_MODEL": 6
+  },
+  "builtBy": {
+   "SOURCE_VERIFIED": 11,
+   "NOT_VERIFIED": 7
+  },
+  "facades": 4,
+  "assigned": 4,
+  "adoption": [
+   "NOTHING_PENDING",
+   "NOTHING_PENDING",
+   "NOTHING_PENDING",
+   "NOTHING_PENDING"
+  ]
+ },
+ "alberto": {
+  "rows": 39,
+  "fate": {
+   "REFUSED_BY_SOURCE": 1,
+   "BUILT": 12,
+   "NO_CONSUMER": 7,
+   "NOT_PROPOSED": 10,
+   "UNDECIDED": 5,
+   "AGREES_WITH_MODEL": 4
+  },
+  "builtBy": {
+   "SOURCE_VERIFIED": 6,
+   "CROSS_WITNESS_PLAN": 2,
+   "NOT_VERIFIED": 4
+  },
+  "facades": 3,
+  "assigned": 3,
+  "adoption": [
+   "NOT_ADOPTED",
+   "NOT_ADOPTED",
+   "NOTHING_PENDING"
+  ]
+ },
+ "medulin": {
+  "rows": 56,
+  "fate": {
+   "UNDECIDED": 7,
+   "BUILT": 4,
+   "NOT_BUILT": 12,
+   "NO_CONSUMER": 10,
+   "NOT_PROPOSED": 14,
+   "AGREES_WITH_MODEL": 3,
+   "REFUSED_BY_SOURCE": 6
+  },
+  "builtBy": {
+   "SOURCE_VERIFIED": 4
+  },
+  "facades": 4,
+  "assigned": 4,
+  "adoption": [
+   "NOT_ADOPTED",
+   "NOT_ADOPTED",
+   "NOT_ADOPTED",
+   "NOTHING_PENDING"
+  ]
+ },
+ "jeziorko": {
+  "rows": 40,
+  "fate": {
+   "BUILT": 10,
+   "AGREES_WITH_MODEL": 13,
+   "NO_CONSUMER": 6,
+   "NOT_PROPOSED": 2,
+   "NOT_REGISTERED": 9
+  },
+  "builtBy": {
+   "ADOPTED_WITH_FACADE": 1,
+   "SOURCE_VERIFIED": 2,
+   "NOT_VERIFIED": 6,
+   "CROSS_WITNESS_PLAN": 1
+  },
+  "facades": 4,
+  "assigned": 3,
+  "adoption": [
+   "ADOPTED",
+   "NOTHING_PENDING",
+   "NOT_REGISTERED",
+   "NOTHING_PENDING"
+  ]
+ },
+ "mindelo": {
+  "rows": 52,
+  "fate": {
+   "NO_CONSUMER": 8,
+   "UNDECIDED": 4,
+   "NOT_BUILT": 9,
+   "BUILT": 2,
+   "NOT_PROPOSED": 12,
+   "REFUSED_BY_SOURCE": 5,
+   "AGREES_WITH_MODEL": 2,
+   "NOT_REGISTERED": 10
+  },
+  "builtBy": {
+   "SOURCE_VERIFIED": 2
+  },
+  "facades": 4,
+  "assigned": 3,
+  "adoption": [
+   "NOT_ADOPTED",
+   "NOT_ADOPTED",
+   "NOT_ADOPTED",
+   "NOT_REGISTERED"
+  ]
+ },
+ "sakura": {
+  "rows": 46,
+  "fate": {
+   "BUILT": 22,
+   "NO_CONSUMER": 4,
+   "AGREES_WITH_MODEL": 2,
+   "NOT_REGISTERED": 18
+  },
+  "builtBy": {
+   "SOURCE_VERIFIED": 9,
+   "ADOPTED_WITH_FACADE": 1,
+   "NOT_VERIFIED": 12
+  },
+  "facades": 4,
+  "assigned": 2,
+  "adoption": [
+   "ADOPTED",
+   "NOTHING_PENDING",
+   "NOTHING_PENDING",
+   "NOTHING_PENDING"
+  ]
+ },
+ "g6": {
+  "rows": 23,
+  "fate": {
+   "NOT_PROPOSED": 4,
+   "NO_CONSUMER": 3,
+   "AGREES_WITH_MODEL": 3,
+   "NOT_REGISTERED": 13
+  },
+  "builtBy": {},
+  "facades": 4,
+  "assigned": 2,
+  "adoption": [
+   "NOT_REGISTERED",
+   "NOT_REGISTERED",
+   "NOT_REGISTERED",
+   "NOT_REGISTERED"
+  ]
+ }
+}

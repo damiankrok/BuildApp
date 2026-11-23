@@ -49,6 +49,85 @@ export type SceneSpec = { key: string; title: string; subtitle: string; build: (
  * hash — `bundle.test.ts` holds that.
  */
 export const SCENES: readonly SceneSpec[] = [
+  // v3.54.18 final host job (Ballina, Lipińscy; fresh reads): LOCAL stood in the body arbitration (the other body contradicted too); sketch patches gated on the original picture, 6 CLOSED_VERIFIED by the look at the delivered revision; the repeat reused it at 0 USD.
+  {
+    key: 'ballina-host-v35418',
+    title: 'Ballina — v3.54.18: oddany przez host',
+    subtitle: 'ODDANY (host, świeży odczyt): LOCAL + 6 poprawek ze szkiców zamkniętych recenzją dostarczonej rewizji; okap ze źródła; otwarte: przeszklenie tylne do podłogi, cegła, panele PV',
+    build: () => sealedOwnerModel('ballina-host-v35418', '9f754fb1fd2119ba97d365d0f3bb2b78b77306ad8f72c0c220aed55fc37f632d', 'owner-v35418'),
+  },
+  // v3.54.18 host job on the final commit (Willa Layla G2 A, ARCHON; outside the scored trial): LOCAL refused organically
+  // (PLAN_LAYOUT_REJECTED); the body from the plan outline and the elevations, openings and chimneys from the sketches
+  // through the shared executor, the delivered revision looked at. 41 differences open (1 KEY); 1.28 USD, 18 requests.
+  {
+    key: 'layla-host-v35418',
+    title: 'Willa Layla G2 A (ARCHON) — v3.54.18: oddany przez host bez modelu LOCAL',
+    subtitle: 'ODDANY (host, poza próbą): LOCAL odmówił; bryła ze źródeł, otwory i kominy ze szkiców, recenzja dostarczonej rewizji; BUDGET_OR_ROUND_LIMIT, 41 różnic otwartych (1 KEY); wnętrze NOT_CHECKED',
+    build: () => sealedOwnerModel('layla-host-v35418', '909b7477c6116e7c36d5340dbd486a5fb9ef6412ded8f3d6e267d2417b62b73e', 'owner-v35418'),
+  },
+  // v3.54.18 DEV (Alaska, Studio Atrium; R3 reads replayed, reviewer live): the source gate with the reading's own claims let the sketch openings in (22 closed on a verified revision); the body arbitration replaced LOCAL's body by the one from the plan outline and elevations (interior NOT_CHECKED). Open, named: the entrance door, sides a quarter-turn round.
+  {
+    key: 'alaska-v35418',
+    title: 'Alaska — v3.54.18: elewacje ze szkiców',
+    subtitle: 'ROZWÓJ (odczyty nagrane R3, recenzja na żywo): 4 osobne okna, okna połaciowe, przeszklenie tylne; bryła ze źródeł (bez wnętrza); otwarte: drzwi wejściowe, strony o ćwierć obrotu',
+    build: () => sealedOwnerModel('alaska-v35418', '20b47a72b9537b63fe021775cd0ec7a7eeb48317d7aa08d6a352d9b2b9c0ba47', 'owner-v35418'),
+  },
+  // v3.54.18 DEV (Aurora maxi II bis sz; R3 reads replayed, reviewer live): front windows apart, roof clean; 18 differences open (0 KEY).
+  {
+    key: 'aurora-maxi-v35418',
+    title: 'Aurora maxi II bis — v3.54.18',
+    subtitle: 'ROZWÓJ (odczyty nagrane R3): okna frontu rozdzielone, dach czysty, 3 kominy; otwarte: drzwi w podcieniu, pas-widmo na szczycie',
+    build: () => sealedOwnerModel('aurora-maxi-v35418', '40c8482d15fe3925db6374fc9d47e9253ae63950034f4691efc1e8902f777ba0', 'owner-v35418'),
+  },
+  // v3.54.18 DEV (Ballina; R3 reads replayed, reviewer live): body arbitration REPLACED_BY_SOURCE_BODY (LOCAL contradicted twice, the other body never); every opening of four sides from the sketches; overhang from the wall-corner tops.
+  {
+    key: 'ballina-v35418',
+    title: 'Ballina — v3.54.18: bryła ze źródeł',
+    subtitle: 'ROZWÓJ (odczyty nagrane R3): komplet otworów czterech stron, okap 0,81 m; bryła ze źródeł (bez wnętrza); otwarte: cegła frontu',
+    build: () => sealedOwnerModel('ballina-v35418', '78a0e9791e218db4a90b61ab6733d030a6cda6ac395bc192b600bb4bf2abba22', 'owner-v35418'),
+  },
+  // v3.54.18 NEW-B (Alberto): the 14 openings the compiler did not cut are cut (wall top = roof underside); LOCAL's phantom glazing stays where the source gate would not remove it. A kept failure.
+  {
+    key: 'alberto-v35418',
+    title: 'Alberto (Studio Atrium) — v3.54.18',
+    subtitle: 'NOWY DOM (pierwszy wynik na kodzie bazowym zachowany w raporcie): otwory widoczne po naprawie wierzchu ściany; NIEUŻYTECZNA: front prawie ciągłe przeszklenie, drzwi na skraju',
+    build: () => sealedOwnerModel('alberto-v35418', '481efa0d862c09b84d7a1e2ae70624a22431904ade7e3da5303e18fd3bd1b741', 'owner-v35418'),
+  },
+  // v3.54.18 NEW-B (Medulin): LOCAL's four-mass body stands (the other body contradicted six times). A kept failure.
+  {
+    key: 'medulin-v35418',
+    title: 'Medulin (Lipińscy) — v3.54.18',
+    subtitle: 'NOWY DOM, NIEPOWODZENIE ZACHOWANE: bryła LOCAL z czterech członów zamiast jednej pod stromym dachem; arbitraż nie znalazł niesprzecznej bryły',
+    build: () => sealedOwnerModel('medulin-v35418', '79686056feef0f7d733519e891cf2776ef15edbbb60149edf9cdfa2326565c81', 'owner-v35418'),
+  },
+  // v3.54.18 NEW-B (Domek letniskowy nad jeziorkiem): LOCAL's body stands (arbitration 1.1.0: a contradicted body replaces nothing); finishes from the sketch zones.
+  {
+    key: 'jeziorko-v35418',
+    title: 'Domek letniskowy nad jeziorkiem (ARCHON) — v3.54.18',
+    subtitle: 'NOWY DOM: dobry już na kodzie bazowym; po zmianie strefy wykończenia (czarny panel tylny jest błędem), bryła LOCAL obroniona przed zastąpieniem',
+    build: () => sealedOwnerModel('jeziorko-v35418', 'b32f1417978904195d88b75475aa267f2c03b513f53c37d81fa256fc190f7f5d', 'owner-v35418'),
+  },
+  // v3.54.18 NEW-C blind first result (Mindelo): kept as is. Form beyond the supported scope (three wings).
+  {
+    key: 'mindelo-blind-v35418',
+    title: 'Mindelo (Lipińscy) — próba ślepa v3.54.18, pierwszy wynik',
+    subtitle: 'PRÓBA ŚLEPA, pierwszy wynik na kodzie końcowym: NIEUŻYTECZNA — pięć członów z płaskimi przybudówkami zamiast poprzecznych szczytów (forma poza zakresem)',
+    build: () => sealedOwnerModel('mindelo-blind-v35418', '9c649ebf2081fc4c1c3551a448c5f64a0fbf5658606772e46f32a4008fdbaca1', 'owner-v35418'),
+  },
+  // v3.54.18 NEW-C blind first result (Dom pod sakurą E): LOCAL refused; the body from the plan outline (simplified: a named miniature convention) and the elevations; 22 facts of the sketches built. Hip roof beyond scope.
+  {
+    key: 'sakura-blind-v35418',
+    title: 'Dom pod sakurą E (ARCHON) — próba ślepa v3.54.18, pierwszy wynik',
+    subtitle: 'PRÓBA ŚLEPA, pierwszy wynik: kod bazowy NO_MODEL → model ze źródeł z otworami frontu i tyłu; NIEUŻYTECZNA wg reguły: dwuspad zamiast czterospadowego, komin-widmo',
+    build: () => sealedOwnerModel('sakura-blind-v35418', 'f16755a867b8b6f6fedc70be435c4c2ee72545c150489a072f413057eae0c1b3', 'owner-v35418'),
+  },
+  // v3.54.18 NEW-C blind first result (G6): no elevation registered; identical to the base code's model. A kept failure.
+  {
+    key: 'g6-blind-v35418',
+    title: 'G6 (Dobre Domy) — próba ślepa v3.54.18, pierwszy wynik',
+    subtitle: 'PRÓBA ŚLEPA, NIEPOWODZENIE ZACHOWANE: dwuspad zamiast czterospadowego, strony obrócone, brak bramy i drzwi; identyczny z kodem bazowym',
+    build: () => sealedOwnerModel('g6-blind-v35418', '7834fd7893bde09c10edb82f7157e5084246368e5d6a5a47067c868ab87c2ac7', 'owner-v35418'),
+  },
   // v3.54.17 final host job on 14a34bf (Alaska, Studio Atrium): LOCAL + the live metric read built two bodies; the
   // sketch channel's SET_ROOF gave the main body the gable the elevations draw (region gate PROPOSED, 97 % drawn matter),
   // delivered and looked at. Publisher's facts (never read): ridge 7.84 vs 7.68 m, pitch 42.7 vs 40°. The annex's

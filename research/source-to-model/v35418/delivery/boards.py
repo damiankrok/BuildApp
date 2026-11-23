@@ -96,7 +96,9 @@ for f in rows:
     yy = y + 40
     src = source_of(f['frameId'])
     s_im = load(src)
-    if s_im: s_im.save(os.path.join(tiles_dir, f"source-{tail}.png"))
+    if s_im:
+        # the tile is a view copy (at most 1400 px wide); the publisher's own bytes are in houses/<house>/sources
+        tv = s_im.copy(); tv.thumbnail((1400, 1400)); tv.save(os.path.join(tiles_dir, f"source-{tail}.png"))
     paste(s_im, PAD, yy)
     sk = load(os.path.join(spec['sketchRun'], 'sketches', 'by-frame', f"{tail}.png"))
     if sk: sk.save(os.path.join(tiles_dir, f"sketch-{tail}.png"))

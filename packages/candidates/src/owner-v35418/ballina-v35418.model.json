@@ -1,0 +1,846 @@
+{
+  "assemblies": [],
+  "balconies": [],
+  "building": {
+    "id": "building",
+    "name": "massing"
+  },
+  "chimneys": [],
+  "constraints": [],
+  "doors": [
+    {
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-front-0019ed-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "op-fix-front-0019ed",
+      "swing": "IN"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "glazing": "FULL",
+            "hinge": "LEFT",
+            "kind": "LEAF"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-rear-c82754-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-glass",
+      "openAngle": 0,
+      "openingId": "op-fix-rear-c82754",
+      "swing": "IN"
+    }
+  ],
+  "evidenceSources": [
+    {
+      "id": "src-frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a",
+      "kind": "DRAWING",
+      "label": "frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a",
+      "note": "frame frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a"
+    },
+    {
+      "id": "src-frame-asset-projekt-domu-ballina-4ad8008b13-43667fe722",
+      "kind": "DRAWING",
+      "label": "frame-asset-projekt-domu-ballina-4ad8008b13-43667fe722",
+      "note": "frame frame-asset-projekt-domu-ballina-4ad8008b13-43667fe722"
+    },
+    {
+      "id": "src-frame-asset-projekt-domu-ballina-8bf1b53e8a-6edbd2ea62",
+      "kind": "DRAWING",
+      "label": "frame-asset-projekt-domu-ballina-8bf1b53e8a-6edbd2ea62",
+      "note": "frame frame-asset-projekt-domu-ballina-8bf1b53e8a-6edbd2ea62"
+    },
+    {
+      "id": "src-frame-asset-projekt-domu-ballina-9bc50ce570-4ec95ea616",
+      "kind": "DRAWING",
+      "label": "frame-asset-projekt-domu-ballina-9bc50ce570-4ec95ea616",
+      "note": "frame frame-asset-projekt-domu-ballina-9bc50ce570-4ec95ea616"
+    },
+    {
+      "id": "src-frame-asset-projekt-domu-ballina-dadaa064eb-f826ba3795",
+      "kind": "DRAWING",
+      "label": "frame-asset-projekt-domu-ballina-dadaa064eb-f826ba3795",
+      "note": "frame frame-asset-projekt-domu-ballina-dadaa064eb-f826ba3795"
+    }
+  ],
+  "frame": {
+    "handedness": "LEFT_HANDED_AS_SPECIFIED",
+    "origin": "finished ground-floor level is y = 0; the front facade outer face is z = 0",
+    "viewerNote": "renderers working in a right-handed frame mirror z when building their scene",
+    "wallConvention": "a wall runs from start to end along its OUTER face at its base; its outward normal is up x u, so exterior rings are traversed counter-clockwise on a plan drawn with the front facade at the bottom and material lies to the left of the direction of travel",
+    "x": "right when looking at the front facade",
+    "y": "up (vertical)",
+    "z": "away from the front facade, into the building"
+  },
+  "id": "m-analysis-dcb155",
+  "levels": [
+    {
+      "buildingId": "building",
+      "elevation": 0,
+      "height": 5.510811,
+      "id": "lvl-0",
+      "index": 0,
+      "name": "Massing"
+    }
+  ],
+  "linearSolids": [],
+  "materials": [
+    {
+      "color": "#9a7b66",
+      "id": "mat-brick",
+      "name": "Facing brick"
+    },
+    {
+      "color": "#6d6a66",
+      "id": "mat-chimney",
+      "name": "Chimney"
+    },
+    {
+      "color": "#55585c",
+      "id": "mat-gate",
+      "name": "Garage door"
+    },
+    {
+      "color": "#9fc3d8",
+      "id": "mat-glass",
+      "name": "Glazing",
+      "opacity": 0.35
+    },
+    {
+      "color": "#5a5550",
+      "id": "mat-roof",
+      "name": "Roof covering (tone not read: miniature convention)"
+    },
+    {
+      "color": "#b07a4a",
+      "id": "mat-timber",
+      "name": "Timber (door leaf, cladding)"
+    },
+    {
+      "color": "#e8e4dc",
+      "id": "mat-wall",
+      "name": "Rendered wall (tone not read: miniature convention)"
+    }
+  ],
+  "meta": {
+    "createdWith": "buildapp",
+    "notes": []
+  },
+  "name": "Ballina - Lipińscy Domy (analysis)",
+  "openings": [
+    {
+      "height": 2.002242,
+      "id": "op-fix-front-0019ed",
+      "kind": "DOOR",
+      "offset": 8.545789,
+      "sill": 0.29018,
+      "wallId": "ring-mass-main-w0",
+      "width": 0.899558
+    },
+    {
+      "height": 1.334828,
+      "id": "op-fix-front-0dfbf6",
+      "kind": "WINDOW",
+      "offset": 5.092647,
+      "sill": 1.218756,
+      "wallId": "ring-mass-main-w0",
+      "width": 0.754468
+    },
+    {
+      "height": 1.276792,
+      "id": "op-fix-front-7c312e",
+      "kind": "WINDOW",
+      "offset": 11.070355,
+      "sill": 1.247774,
+      "wallId": "ring-mass-main-w0",
+      "width": 1.291301
+    },
+    {
+      "height": 1.30581,
+      "id": "op-fix-front-943969",
+      "kind": "WINDOW",
+      "offset": 2.14732,
+      "sill": 1.247774,
+      "wallId": "ring-mass-main-w0",
+      "width": 1.30581
+    },
+    {
+      "height": 1.276792,
+      "id": "op-fix-front-aafbd7",
+      "kind": "WINDOW",
+      "offset": 7.181943,
+      "sill": 1.247774,
+      "wallId": "ring-mass-main-w0",
+      "width": 0.406252
+    },
+    {
+      "height": 1.39919,
+      "id": "op-fix-left-a1f43c",
+      "kind": "WINDOW",
+      "offset": 3.870077,
+      "sill": 0.95264,
+      "wallId": "ring-mass-main-w3",
+      "width": 0.491205
+    },
+    {
+      "height": 1.38738,
+      "id": "op-fix-rear-26b341",
+      "kind": "WINDOW",
+      "offset": 10.63172,
+      "sill": 1.197528,
+      "wallId": "ring-mass-main-w2",
+      "width": 1.328964
+    },
+    {
+      "height": 2.26362,
+      "id": "op-fix-rear-c82754",
+      "kind": "DOOR",
+      "offset": 1.548032,
+      "sill": 0.321288,
+      "wallId": "ring-mass-main-w2",
+      "width": 3.242088
+    },
+    {
+      "height": 1.38738,
+      "id": "op-fix-rear-ebbfac",
+      "kind": "WINDOW",
+      "offset": 7.024532,
+      "sill": 1.197528,
+      "wallId": "ring-mass-main-w2",
+      "width": 1.343568
+    },
+    {
+      "height": 1.33722,
+      "id": "op-fix-right-f69e16",
+      "kind": "WINDOW",
+      "offset": 3.476754,
+      "sill": 0.995486,
+      "wallId": "ring-mass-main-w1",
+      "width": 1.292646
+    }
+  ],
+  "platforms": [],
+  "railings": [],
+  "relationships": [],
+  "roofEdges": [],
+  "roofOpenings": [],
+  "roofPlanes": [],
+  "rooflights": [],
+  "roofs": [
+    {
+      "eaveOffset": 3.136654,
+      "evidence": {
+        "interpretation": "ridge along X (slopes seen on the sides along it, the gable end across it); pitch 30.1° from a 2.37 m rise over half of 8.20 m (the walls end at 2.85 m: the roof's underside there)",
+        "properties": {
+          "eaveOffset": "SOURCE_DERIVED",
+          "pitchDeg": "UNRESOLVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a + frame-asset-projekt-domu-ballina-4ad8008b13-43667fe722 + frame-asset-projekt-domu-ballina-8bf1b53e8a-6edbd2ea62 + frame-asset-projekt-domu-ballina-9bc50ce570-4ec95ea616 + frame-asset-projekt-domu-ballina-dadaa064eb-f826ba3795",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a",
+          "src-frame-asset-projekt-domu-ballina-4ad8008b13-43667fe722",
+          "src-frame-asset-projekt-domu-ballina-8bf1b53e8a-6edbd2ea62",
+          "src-frame-asset-projekt-domu-ballina-9bc50ce570-4ec95ea616",
+          "src-frame-asset-projekt-domu-ballina-dadaa064eb-f826ba3795"
+        ],
+        "status": "UNRESOLVED"
+      },
+      "footprint": {
+        "maxX": 13.4938,
+        "maxZ": 8.2017,
+        "minX": 0,
+        "minZ": 0
+      },
+      "id": "roof-mass-main",
+      "kind": "GABLE",
+      "levelId": "lvl-0",
+      "materialId": "mat-roof",
+      "overhang": 0.81,
+      "pitchDeg": 30.1,
+      "ridgeAxis": "X",
+      "thickness": 0.25
+    }
+  ],
+  "rooms": [],
+  "schema": "buildapp.canonical-building-model",
+  "schemaVersion": "1.9.0",
+  "slabs": [],
+  "stairs": [],
+  "stepRuns": [],
+  "surfaceRegions": [
+    {
+      "evidence": {
+        "interpretation": "a brick outline from finish-0dc2c8 (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-mass-main-w1",
+      "id": "appearance-east-ring-mass-main-w1-brick-0",
+      "materialId": "mat-brick",
+      "outline": [
+        {
+          "a": 0.31,
+          "b": 2.373834
+        },
+        {
+          "a": 4.79,
+          "b": 2.373834
+        },
+        {
+          "a": 4.79,
+          "b": 2.353834
+        },
+        {
+          "a": 4.81,
+          "b": 2.353834
+        },
+        {
+          "a": 4.81,
+          "b": 0
+        },
+        {
+          "a": 0.29,
+          "b": 0
+        },
+        {
+          "a": 0.29,
+          "b": 2.353834
+        },
+        {
+          "a": 0.31,
+          "b": 2.353834
+        }
+      ],
+      "rect": {
+        "a0": 0.29,
+        "a1": 4.81,
+        "b0": 0,
+        "b1": 2.373834
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a brick outline from finish-fbaaa4 (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-mass-main-w0",
+      "id": "appearance-front-ring-mass-main-w0-brick-0",
+      "materialId": "mat-brick",
+      "outline": [
+        {
+          "a": 0,
+          "b": 0.273834
+        },
+        {
+          "a": 5.07,
+          "b": 0.273834
+        },
+        {
+          "a": 5.07,
+          "b": 0.253834
+        },
+        {
+          "a": 5.09,
+          "b": 0.253834
+        },
+        {
+          "a": 5.09,
+          "b": 0
+        },
+        {
+          "a": 0,
+          "b": 0
+        }
+      ],
+      "rect": {
+        "a0": 0,
+        "a1": 5.09,
+        "b0": 0,
+        "b1": 0.273834
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a brick outline from finish-0c5ec7 (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-mass-main-w2",
+      "id": "appearance-rear-ring-mass-main-w2-brick-0",
+      "materialId": "mat-brick",
+      "outline": [
+        {
+          "a": 10.6038,
+          "b": 2.393834
+        },
+        {
+          "a": 8.3638,
+          "b": 2.393834
+        },
+        {
+          "a": 8.3638,
+          "b": 2.373834
+        },
+        {
+          "a": 8.3438,
+          "b": 2.373834
+        },
+        {
+          "a": 8.3438,
+          "b": 1.193834
+        },
+        {
+          "a": 8.3638,
+          "b": 1.193834
+        },
+        {
+          "a": 8.3638,
+          "b": 1.173834
+        },
+        {
+          "a": 10.6038,
+          "b": 1.173834
+        },
+        {
+          "a": 10.6038,
+          "b": 1.193834
+        },
+        {
+          "a": 10.6238,
+          "b": 1.193834
+        },
+        {
+          "a": 10.6238,
+          "b": 2.373834
+        },
+        {
+          "a": 10.6038,
+          "b": 2.373834
+        }
+      ],
+      "rect": {
+        "a0": 8.3438,
+        "a1": 10.6238,
+        "b0": 1.173834,
+        "b1": 2.393834
+      }
+    }
+  ],
+  "terraces": [],
+  "units": {
+    "angle": "deg",
+    "length": "m"
+  },
+  "wallJunctions": [
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w3"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w0"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a (MAIN), at the analyzer's own scale: 1.95279 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 4 registered elevation(s) give eaves (the walls' corner tops) 2.85 / 2.95 / 2.94 / 2.83 m and top 5.77 / 5.51 / 5.50 / 5.70 m (they agree)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a + frame-asset-projekt-domu-ballina-4ad8008b13-43667fe722 + frame-asset-projekt-domu-ballina-8bf1b53e8a-6edbd2ea62 + frame-asset-projekt-domu-ballina-9bc50ce570-4ec95ea616 + frame-asset-projekt-domu-ballina-dadaa064eb-f826ba3795",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a",
+          "src-frame-asset-projekt-domu-ballina-4ad8008b13-43667fe722",
+          "src-frame-asset-projekt-domu-ballina-8bf1b53e8a-6edbd2ea62",
+          "src-frame-asset-projekt-domu-ballina-9bc50ce570-4ec95ea616",
+          "src-frame-asset-projekt-domu-ballina-dadaa064eb-f826ba3795"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j0",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w0"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w1"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a (MAIN), at the analyzer's own scale: 1.95279 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 4 registered elevation(s) give eaves (the walls' corner tops) 2.85 / 2.95 / 2.94 / 2.83 m and top 5.77 / 5.51 / 5.50 / 5.70 m (they agree)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a + frame-asset-projekt-domu-ballina-4ad8008b13-43667fe722 + frame-asset-projekt-domu-ballina-8bf1b53e8a-6edbd2ea62 + frame-asset-projekt-domu-ballina-9bc50ce570-4ec95ea616 + frame-asset-projekt-domu-ballina-dadaa064eb-f826ba3795",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a",
+          "src-frame-asset-projekt-domu-ballina-4ad8008b13-43667fe722",
+          "src-frame-asset-projekt-domu-ballina-8bf1b53e8a-6edbd2ea62",
+          "src-frame-asset-projekt-domu-ballina-9bc50ce570-4ec95ea616",
+          "src-frame-asset-projekt-domu-ballina-dadaa064eb-f826ba3795"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j1",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w1"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w2"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a (MAIN), at the analyzer's own scale: 1.95279 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 4 registered elevation(s) give eaves (the walls' corner tops) 2.85 / 2.95 / 2.94 / 2.83 m and top 5.77 / 5.51 / 5.50 / 5.70 m (they agree)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a + frame-asset-projekt-domu-ballina-4ad8008b13-43667fe722 + frame-asset-projekt-domu-ballina-8bf1b53e8a-6edbd2ea62 + frame-asset-projekt-domu-ballina-9bc50ce570-4ec95ea616 + frame-asset-projekt-domu-ballina-dadaa064eb-f826ba3795",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a",
+          "src-frame-asset-projekt-domu-ballina-4ad8008b13-43667fe722",
+          "src-frame-asset-projekt-domu-ballina-8bf1b53e8a-6edbd2ea62",
+          "src-frame-asset-projekt-domu-ballina-9bc50ce570-4ec95ea616",
+          "src-frame-asset-projekt-domu-ballina-dadaa064eb-f826ba3795"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j2",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w2",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w2"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w3"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a (MAIN), at the analyzer's own scale: 1.95279 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 4 registered elevation(s) give eaves (the walls' corner tops) 2.85 / 2.95 / 2.94 / 2.83 m and top 5.77 / 5.51 / 5.50 / 5.70 m (they agree)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a + frame-asset-projekt-domu-ballina-4ad8008b13-43667fe722 + frame-asset-projekt-domu-ballina-8bf1b53e8a-6edbd2ea62 + frame-asset-projekt-domu-ballina-9bc50ce570-4ec95ea616 + frame-asset-projekt-domu-ballina-dadaa064eb-f826ba3795",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a",
+          "src-frame-asset-projekt-domu-ballina-4ad8008b13-43667fe722",
+          "src-frame-asset-projekt-domu-ballina-8bf1b53e8a-6edbd2ea62",
+          "src-frame-asset-projekt-domu-ballina-9bc50ce570-4ec95ea616",
+          "src-frame-asset-projekt-domu-ballina-dadaa064eb-f826ba3795"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j3",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w2",
+      "tolerance": 0.001
+    }
+  ],
+  "wallPanels": [],
+  "wallRings": [
+    {
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a (MAIN), at the analyzer's own scale: 1.95279 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 4 registered elevation(s) give eaves (the walls' corner tops) 2.85 / 2.95 / 2.94 / 2.83 m and top 5.77 / 5.51 / 5.50 / 5.70 m (they agree)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a + frame-asset-projekt-domu-ballina-4ad8008b13-43667fe722 + frame-asset-projekt-domu-ballina-8bf1b53e8a-6edbd2ea62 + frame-asset-projekt-domu-ballina-9bc50ce570-4ec95ea616 + frame-asset-projekt-domu-ballina-dadaa064eb-f826ba3795",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a",
+          "src-frame-asset-projekt-domu-ballina-4ad8008b13-43667fe722",
+          "src-frame-asset-projekt-domu-ballina-8bf1b53e8a-6edbd2ea62",
+          "src-frame-asset-projekt-domu-ballina-9bc50ce570-4ec95ea616",
+          "src-frame-asset-projekt-domu-ballina-dadaa064eb-f826ba3795"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main",
+      "junctionIds": [
+        "ring-mass-main-j0",
+        "ring-mass-main-j1",
+        "ring-mass-main-j2",
+        "ring-mass-main-j3"
+      ],
+      "levelId": "lvl-0",
+      "wallIds": [
+        "ring-mass-main-w0",
+        "ring-mass-main-w1",
+        "ring-mass-main-w2",
+        "ring-mass-main-w3"
+      ]
+    }
+  ],
+  "walls": [
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 13.4938,
+        "z": 0
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a (MAIN), at the analyzer's own scale: 1.95279 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 4 registered elevation(s) give eaves (the walls' corner tops) 2.85 / 2.95 / 2.94 / 2.83 m and top 5.77 / 5.51 / 5.50 / 5.70 m (they agree)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a + frame-asset-projekt-domu-ballina-4ad8008b13-43667fe722 + frame-asset-projekt-domu-ballina-8bf1b53e8a-6edbd2ea62 + frame-asset-projekt-domu-ballina-9bc50ce570-4ec95ea616 + frame-asset-projekt-domu-ballina-dadaa064eb-f826ba3795",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a",
+          "src-frame-asset-projekt-domu-ballina-4ad8008b13-43667fe722",
+          "src-frame-asset-projekt-domu-ballina-8bf1b53e8a-6edbd2ea62",
+          "src-frame-asset-projekt-domu-ballina-9bc50ce570-4ec95ea616",
+          "src-frame-asset-projekt-domu-ballina-dadaa064eb-f826ba3795"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 5.510811,
+      "id": "ring-mass-main-w0",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 0,
+        "z": 0
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-mass-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 13.4938,
+        "z": 8.2017
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a (MAIN), at the analyzer's own scale: 1.95279 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 4 registered elevation(s) give eaves (the walls' corner tops) 2.85 / 2.95 / 2.94 / 2.83 m and top 5.77 / 5.51 / 5.50 / 5.70 m (they agree)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a + frame-asset-projekt-domu-ballina-4ad8008b13-43667fe722 + frame-asset-projekt-domu-ballina-8bf1b53e8a-6edbd2ea62 + frame-asset-projekt-domu-ballina-9bc50ce570-4ec95ea616 + frame-asset-projekt-domu-ballina-dadaa064eb-f826ba3795",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a",
+          "src-frame-asset-projekt-domu-ballina-4ad8008b13-43667fe722",
+          "src-frame-asset-projekt-domu-ballina-8bf1b53e8a-6edbd2ea62",
+          "src-frame-asset-projekt-domu-ballina-9bc50ce570-4ec95ea616",
+          "src-frame-asset-projekt-domu-ballina-dadaa064eb-f826ba3795"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 5.510811,
+      "id": "ring-mass-main-w1",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 13.4938,
+        "z": 0
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-mass-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0,
+        "z": 8.2017
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a (MAIN), at the analyzer's own scale: 1.95279 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 4 registered elevation(s) give eaves (the walls' corner tops) 2.85 / 2.95 / 2.94 / 2.83 m and top 5.77 / 5.51 / 5.50 / 5.70 m (they agree)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a + frame-asset-projekt-domu-ballina-4ad8008b13-43667fe722 + frame-asset-projekt-domu-ballina-8bf1b53e8a-6edbd2ea62 + frame-asset-projekt-domu-ballina-9bc50ce570-4ec95ea616 + frame-asset-projekt-domu-ballina-dadaa064eb-f826ba3795",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a",
+          "src-frame-asset-projekt-domu-ballina-4ad8008b13-43667fe722",
+          "src-frame-asset-projekt-domu-ballina-8bf1b53e8a-6edbd2ea62",
+          "src-frame-asset-projekt-domu-ballina-9bc50ce570-4ec95ea616",
+          "src-frame-asset-projekt-domu-ballina-dadaa064eb-f826ba3795"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 5.510811,
+      "id": "ring-mass-main-w2",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 13.4938,
+        "z": 8.2017
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-mass-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0,
+        "z": 0
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a (MAIN), at the analyzer's own scale: 1.95279 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 4 registered elevation(s) give eaves (the walls' corner tops) 2.85 / 2.95 / 2.94 / 2.83 m and top 5.77 / 5.51 / 5.50 / 5.70 m (they agree)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a + frame-asset-projekt-domu-ballina-4ad8008b13-43667fe722 + frame-asset-projekt-domu-ballina-8bf1b53e8a-6edbd2ea62 + frame-asset-projekt-domu-ballina-9bc50ce570-4ec95ea616 + frame-asset-projekt-domu-ballina-dadaa064eb-f826ba3795",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a",
+          "src-frame-asset-projekt-domu-ballina-4ad8008b13-43667fe722",
+          "src-frame-asset-projekt-domu-ballina-8bf1b53e8a-6edbd2ea62",
+          "src-frame-asset-projekt-domu-ballina-9bc50ce570-4ec95ea616",
+          "src-frame-asset-projekt-domu-ballina-dadaa064eb-f826ba3795"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 5.510811,
+      "id": "ring-mass-main-w3",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 0,
+        "z": 8.2017
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-mass-main"
+      }
+    }
+  ],
+  "windows": [
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-front-0dfbf6-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-front-0dfbf6"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-front-7c312e-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-front-7c312e"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-front-943969-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-front-943969"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-front-aafbd7-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-front-aafbd7"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-left-a1f43c-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-left-a1f43c"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-rear-26b341-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-rear-26b341"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-rear-ebbfac-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-rear-ebbfac"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-right-f69e16-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-right-f69e16"
+    }
+  ]
+}

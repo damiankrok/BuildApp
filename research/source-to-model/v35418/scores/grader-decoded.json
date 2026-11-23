@@ -1,0 +1,284 @@
+{
+ "note": "Decoded from grader-blind-result.json with grader-key.json (the grader never saw the key).",
+ "rows": [
+  {
+   "house": "alaska",
+   "set": "DEV-K",
+   "baseline": {
+    "counts": {
+     "F": "2/4",
+     "S": "0/1",
+     "O": "1/5",
+     "C": "1/2",
+     "M": "0/2"
+    },
+    "useful": false,
+    "usefulIfRotationIgnored": false,
+    "phantoms": 13
+   },
+   "final": {
+    "counts": {
+     "F": "2/4",
+     "S": "0/1",
+     "O": "4/5",
+     "C": "1/2",
+     "M": "1/2"
+    },
+    "useful": false,
+    "usefulIfRotationIgnored": false,
+    "phantoms": 0,
+    "why": "Fails (1) F1/F2 and (2) S1 because the house is turned a quarter-turn, and (3) entrance door is missing."
+   },
+   "better": "final",
+   "betterWhy": "X reproduces separate windows, roof windows, terrace door and dark roof; Y is covered in phantom ribbon glazing and has a light roof."
+  },
+  {
+   "house": "aurora",
+   "set": "DEV-K",
+   "baseline": {
+    "counts": {
+     "F": "3/4",
+     "S": "1/1",
+     "O": "1/4",
+     "C": "1/1",
+     "M": "1/2"
+    },
+    "useful": false,
+    "usefulIfRotationIgnored": false,
+    "phantoms": 9
+   },
+   "final": {
+    "counts": {
+     "F": "4/4",
+     "S": "1/1",
+     "O": "3/4",
+     "C": "1/1",
+     "M": "2/2"
+    },
+    "useful": false,
+    "usefulIfRotationIgnored": false,
+    "phantoms": 6,
+    "why": "Fails (5) only: source gable is blank but model LEFT has a large phantom window and door-like leaf (2 phantoms > 0 correct)."
+   },
+   "better": "final",
+   "betterWhy": "X has the door at the porch, separate front windows and a clean dark roof; Y has ribbon glazing, no porch door and walls piercing a light roof."
+  },
+  {
+   "house": "ballina",
+   "set": "DEV-K",
+   "baseline": {
+    "counts": {
+     "F": "3/4",
+     "S": "1/1",
+     "O": "2/5",
+     "C": "0/0",
+     "M": "1/2"
+    },
+    "useful": false,
+    "usefulIfRotationIgnored": false,
+    "phantoms": 0
+   },
+   "final": {
+    "counts": {
+     "F": "4/4",
+     "S": "1/1",
+     "O": "5/5",
+     "C": "0/0",
+     "M": "1/2"
+    },
+    "useful": true,
+    "usefulIfRotationIgnored": true,
+    "phantoms": 0,
+    "why": "All five conditions met: F and S OK, door OK, all large openings correct, no phantoms."
+   },
+   "better": "final",
+   "betterWhy": "Y has every source opening in place, eaves and dark roof; X lacks most front and rear windows, though X shows the front brick zone."
+  },
+  {
+   "house": "alberto",
+   "set": "NEW-B",
+   "baseline": {
+    "counts": {
+     "F": "3/4",
+     "S": "1/1",
+     "O": "0/6",
+     "C": "1/2",
+     "M": "2/2"
+    },
+    "useful": false,
+    "usefulIfRotationIgnored": false,
+    "phantoms": 4
+   },
+   "final": {
+    "counts": {
+     "F": "3/4",
+     "S": "1/1",
+     "O": "3/6",
+     "C": "1/2",
+     "M": "2/2"
+    },
+    "useful": false,
+    "usefulIfRotationIgnored": false,
+    "phantoms": 8,
+    "why": "Fails (3) entrance door displaced to far-right end, and (5) RIGHT gable is all phantom glazing (3 > 0)."
+   },
+   "better": "final",
+   "betterWhy": "X at least has windows on front, rear and one gable; Y has no openings on front or rear at all."
+  },
+  {
+   "house": "medulin",
+   "set": "NEW-B",
+   "baseline": {
+    "counts": {
+     "F": "0/4",
+     "S": "1/1",
+     "O": "2/5",
+     "C": "0/1",
+     "M": "2/2"
+    },
+    "useful": false,
+    "usefulIfRotationIgnored": false,
+    "phantoms": 5
+   },
+   "final": {
+    "counts": {
+     "F": "0/4",
+     "S": "1/1",
+     "O": "2/5",
+     "C": "0/1",
+     "M": "2/2"
+    },
+    "useful": false,
+    "usefulIfRotationIgnored": false,
+    "phantoms": 5,
+    "why": "Fails (1): F1, F2, F3 wrong (gabled bar plus flat-roofed boxes, eave too high); (3) entrance door cannot be confirmed."
+   },
+   "better": "final",
+   "betterWhy": "Nearly identical; Y lacks X's ground-to-ridge pole artifact and its right-side brick-zone window matches the source."
+  },
+  {
+   "house": "jeziorko",
+   "set": "NEW-B",
+   "baseline": {
+    "counts": {
+     "F": "4/4",
+     "S": "1/1",
+     "O": "6/6",
+     "C": "1/1",
+     "M": "1/2"
+    },
+    "useful": true,
+    "usefulIfRotationIgnored": true,
+    "phantoms": 0
+   },
+   "final": {
+    "counts": {
+     "F": "4/4",
+     "S": "1/1",
+     "O": "6/6",
+     "C": "1/1",
+     "M": "1/2"
+    },
+    "useful": true,
+    "usefulIfRotationIgnored": true,
+    "phantoms": 1,
+    "why": "All five conditions met; the black full-height rear panel is counted as one phantom (1 <= 2 correct)."
+   },
+   "better": "SAME",
+   "betterWhy": "Form and all openings equal; X adds wood strips and full-height window but a misleading black rear panel, Y is clean but plain."
+  },
+  {
+   "house": "mindelo",
+   "set": "NEW-C",
+   "baseline": {
+    "counts": {
+     "F": "1/4",
+     "S": "1/1",
+     "O": "2/6",
+     "C": "2/2",
+     "M": "1/2"
+    },
+    "useful": false,
+    "usefulIfRotationIgnored": false,
+    "phantoms": 2
+   },
+   "final": {
+    "counts": {
+     "F": "1/4",
+     "S": "1/1",
+     "O": "3/6",
+     "C": "2/2",
+     "M": "1/2"
+    },
+    "useful": false,
+    "usefulIfRotationIgnored": false,
+    "phantoms": 3,
+    "why": "Fails (1): F1, F2, F4 wrong (no projecting garage wing, no cross gables); (3) entrance door at wrong end."
+   },
+   "better": "final",
+   "betterWhy": "Same body; X has the double garage door in the right part of the front and a dark opening in the rear recess, Y has neither."
+  },
+  {
+   "house": "sakura",
+   "set": "NEW-C",
+   "baseline": {
+    "counts": {
+     "F": "0/4",
+     "S": "0/1",
+     "O": "0/4",
+     "C": "0/1",
+     "M": "0/2"
+    },
+    "useful": false,
+    "usefulIfRotationIgnored": false,
+    "phantoms": 0
+   },
+   "final": {
+    "counts": {
+     "F": "2/4",
+     "S": "1/1",
+     "O": "3/4",
+     "C": "0/1",
+     "M": "1/2"
+    },
+    "useful": false,
+    "usefulIfRotationIgnored": false,
+    "phantoms": 0,
+    "why": "Fails (1) only: hipped roof rendered as gable (F2), recesses absent (F4); conditions 2-5 pass."
+   },
+   "better": "final",
+   "betterWhy": "X is a model with correct footprint, sides and nearly all openings; Y has no model."
+  },
+  {
+   "house": "g6",
+   "set": "NEW-C",
+   "baseline": {
+    "counts": {
+     "F": "2/4",
+     "S": "1/1",
+     "O": "2/4",
+     "C": "0/1",
+     "M": "1/2"
+    },
+    "useful": false,
+    "usefulIfRotationIgnored": false,
+    "phantoms": 0
+   },
+   "final": {
+    "counts": {
+     "F": "2/4",
+     "S": "1/1",
+     "O": "2/4",
+     "C": "0/1",
+     "M": "1/2"
+    },
+    "useful": false,
+    "usefulIfRotationIgnored": false,
+    "phantoms": 0,
+    "why": "Fails (1) F2 hip rendered as gable, (3) garage door missing and entrance door is a window, (4) front 0%."
+   },
+   "better": "SAME",
+   "betterWhy": "X and Y renders are pixel-identical."
+  }
+ ]
+}

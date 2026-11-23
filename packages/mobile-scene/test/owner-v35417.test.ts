@@ -3,14 +3,15 @@ import { describe, expect, it } from 'vitest'
 import { SCENES } from '../scripts/scenes.js'
 
 describe('v3.54.17 scenes', () => {
-  it('the three scenes come first: host delivery, DEV, trial', () => {
-    expect(SCENES.slice(0, 3).map((s) => s.key)).toEqual(['alaska-host-v35417', 'alaska-dev-v35417', 'aurora-maxi-trial-v35417'])
-    expect(SCENES[0].subtitle).toContain('ODDANY')
-    expect(SCENES[1].subtitle).toContain('ROZWÓJ')
-    expect(SCENES[2].subtitle).toContain('PRÓBA')
+  // v3.54.18: after the eleven v3.54.18 scenes
+  it('the three scenes follow v3.54.18\'s eleven: host delivery, DEV, trial', () => {
+    expect(SCENES.slice(11, 14).map((s) => s.key)).toEqual(['alaska-host-v35417', 'alaska-dev-v35417', 'aurora-maxi-trial-v35417'])
+    expect(SCENES[11].subtitle).toContain('ODDANY')
+    expect(SCENES[12].subtitle).toContain('ROZWÓJ')
+    expect(SCENES[13].subtitle).toContain('PRÓBA')
   })
   it('the host and DEV roofs are the gable the source draws, built from a model that had none', () => {
-    for (const s of SCENES.slice(0, 2)) {
+    for (const s of SCENES.slice(11, 13)) {
       const m = (s.build() as unknown as { model?: { roofs: Array<{ kind: string; ridgeAxis: string }> } }).model
       if (m) expect(m.roofs.some((r) => r.kind === 'GABLE' && r.ridgeAxis === 'X')).toBe(true)
     }

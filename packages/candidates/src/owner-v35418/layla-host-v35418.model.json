@@ -1,0 +1,1163 @@
+{
+  "assemblies": [],
+  "balconies": [],
+  "building": {
+    "id": "building",
+    "name": "massing"
+  },
+  "chimneys": [
+    {
+      "baseOffset": 0,
+      "footprint": {
+        "maxX": 6.735768,
+        "maxZ": 8.723268,
+        "minX": 5.8938,
+        "minZ": 7.8813
+      },
+      "height": 7.332138,
+      "id": "chimney-fix-front-2e9e10",
+      "levelId": "lvl-0",
+      "materialId": "mat-chimney"
+    },
+    {
+      "baseOffset": 0,
+      "footprint": {
+        "maxX": 3.683634,
+        "maxZ": 8.530317,
+        "minX": 3.034617,
+        "minZ": 7.8813
+      },
+      "height": 7.332138,
+      "id": "chimney-fix-front-37b7d0",
+      "levelId": "lvl-0",
+      "materialId": "mat-chimney"
+    }
+  ],
+  "constraints": [],
+  "doors": [
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "glazing": "FULL",
+            "hinge": "LEFT",
+            "kind": "LEAF"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-front-1a6f4d-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-glass",
+      "openAngle": 0,
+      "openingId": "op-fix-front-1a6f4d",
+      "swing": "IN"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "glazing": "FULL",
+            "hinge": "LEFT",
+            "kind": "LEAF"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-front-958b28-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-glass",
+      "openAngle": 0,
+      "openingId": "op-fix-front-958b28",
+      "swing": "IN"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "glazing": "FULL",
+            "hinge": "LEFT",
+            "kind": "LEAF"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-left-3a4fd6-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-glass",
+      "openAngle": 0,
+      "openingId": "op-fix-left-3a4fd6",
+      "swing": "IN"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "glazing": "FULL",
+            "hinge": "LEFT",
+            "kind": "LEAF"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-left-41e54c-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-glass",
+      "openAngle": 0,
+      "openingId": "op-fix-left-41e54c",
+      "swing": "IN"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "glazing": "FULL",
+            "hinge": "LEFT",
+            "kind": "LEAF"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-rear-015d19-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-glass",
+      "openAngle": 0,
+      "openingId": "op-fix-rear-015d19",
+      "swing": "IN"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "glazing": "FULL",
+            "hinge": "LEFT",
+            "kind": "LEAF"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-rear-307ded-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-glass",
+      "openAngle": 0,
+      "openingId": "op-fix-rear-307ded",
+      "swing": "IN"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "glazing": "FULL",
+            "hinge": "LEFT",
+            "kind": "LEAF"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-rear-5f4471-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-glass",
+      "openAngle": 0,
+      "openingId": "op-fix-rear-5f4471",
+      "swing": "IN"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "glazing": "FULL",
+            "hinge": "LEFT",
+            "kind": "LEAF"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-right-63b75c-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-glass",
+      "openAngle": 0,
+      "openingId": "op-fix-right-63b75c",
+      "swing": "IN"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "glazing": "FULL",
+            "hinge": "LEFT",
+            "kind": "LEAF"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-right-b68adf-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-glass",
+      "openAngle": 0,
+      "openingId": "op-fix-right-b68adf",
+      "swing": "IN"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "glazing": "FULL",
+            "hinge": "LEFT",
+            "kind": "LEAF"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-right-dddbe7-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-glass",
+      "openAngle": 0,
+      "openingId": "op-fix-right-dddbe7",
+      "swing": "IN"
+    }
+  ],
+  "evidenceSources": [
+    {
+      "id": "src-frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-b-7984749005",
+      "kind": "DRAWING",
+      "label": "frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-b-7984749005",
+      "note": "frame frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-b-7984749005"
+    },
+    {
+      "id": "src-frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-b-b7ec20cbb2",
+      "kind": "DRAWING",
+      "label": "frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-b-b7ec20cbb2",
+      "note": "frame frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-b-b7ec20cbb2"
+    },
+    {
+      "id": "src-frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-f-390764b28a",
+      "kind": "DRAWING",
+      "label": "frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-f-390764b28a",
+      "note": "frame frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-f-390764b28a"
+    },
+    {
+      "id": "src-frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-o-09639487a0",
+      "kind": "DRAWING",
+      "label": "frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-o-09639487a0",
+      "note": "frame frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-o-09639487a0"
+    },
+    {
+      "id": "src-frame-asset-rzut-a57fb9cc0c-f3cfd88f50",
+      "kind": "DRAWING",
+      "label": "frame-asset-rzut-a57fb9cc0c-f3cfd88f50",
+      "note": "frame frame-asset-rzut-a57fb9cc0c-f3cfd88f50"
+    }
+  ],
+  "frame": {
+    "handedness": "LEFT_HANDED_AS_SPECIFIED",
+    "origin": "finished ground-floor level is y = 0; the front facade outer face is z = 0",
+    "viewerNote": "renderers working in a right-handed frame mirror z when building their scene",
+    "wallConvention": "a wall runs from start to end along its OUTER face at its base; its outward normal is up x u, so exterior rings are traversed counter-clockwise on a plan drawn with the front facade at the bottom and material lies to the left of the direction of travel",
+    "x": "right when looking at the front facade",
+    "y": "up (vertical)",
+    "z": "away from the front facade, into the building"
+  },
+  "id": "m-analysis-m6a929b0c79fda",
+  "levels": [
+    {
+      "buildingId": "building",
+      "elevation": 0,
+      "height": 6.073614,
+      "id": "lvl-0",
+      "index": 0,
+      "name": "Massing"
+    }
+  ],
+  "linearSolids": [],
+  "materials": [
+    {
+      "color": "#6d6a66",
+      "id": "mat-chimney",
+      "name": "Chimney"
+    },
+    {
+      "color": "#55585c",
+      "id": "mat-gate",
+      "name": "Garage door"
+    },
+    {
+      "color": "#9fc3d8",
+      "id": "mat-glass",
+      "name": "Glazing",
+      "opacity": 0.35
+    },
+    {
+      "color": "#3a3a3c",
+      "id": "mat-render-dark",
+      "name": "Dark render"
+    },
+    {
+      "color": "#5a5550",
+      "id": "mat-roof",
+      "name": "Roof covering (tone not read: miniature convention)"
+    },
+    {
+      "color": "#b07a4a",
+      "id": "mat-timber",
+      "name": "Timber (door leaf, cladding)"
+    },
+    {
+      "color": "#e8e4dc",
+      "id": "mat-wall",
+      "name": "Rendered wall (tone not read: miniature convention)"
+    }
+  ],
+  "meta": {
+    "createdWith": "buildapp",
+    "notes": []
+  },
+  "name": "Willa Layla (G2AE) Opis projektu (analysis)",
+  "openings": [
+    {
+      "height": 2.350494,
+      "id": "op-fix-front-1a6f4d",
+      "kind": "DOOR",
+      "offset": 1.613796,
+      "sill": 3.174921,
+      "wallId": "ring-mass-main-w0",
+      "width": 2.385576
+    },
+    {
+      "height": 2.350494,
+      "id": "op-fix-front-958b28",
+      "kind": "DOOR",
+      "offset": 5.578062,
+      "sill": 3.174921,
+      "wallId": "ring-mass-main-w0",
+      "width": 2.403117
+    },
+    {
+      "height": 2.332953,
+      "id": "op-fix-front-b4d8ed",
+      "kind": "WINDOW",
+      "offset": 0.368385,
+      "sill": 0.070164,
+      "wallId": "ring-mass-main-w0",
+      "width": 1.315575
+    },
+    {
+      "height": 2.109114,
+      "id": "op-fix-left-3a4fd6",
+      "kind": "DOOR",
+      "offset": 8.452341,
+      "sill": 0.047574,
+      "wallId": "ring-mass-main-w3",
+      "width": 2.331126
+    },
+    {
+      "height": 2.362842,
+      "id": "op-fix-left-41e54c",
+      "kind": "DOOR",
+      "offset": 8.452341,
+      "sill": 2.806866,
+      "wallId": "ring-mass-main-w3",
+      "width": 2.331126
+    },
+    {
+      "height": 2.364162,
+      "id": "op-fix-rear-015d19",
+      "kind": "DOOR",
+      "offset": 3.872887,
+      "sill": 3.263955,
+      "wallId": "ring-mass-main-w2",
+      "width": 2.699379
+    },
+    {
+      "height": 2.328876,
+      "id": "op-fix-rear-307ded",
+      "kind": "DOOR",
+      "offset": 6.925126,
+      "sill": 0.158787,
+      "wallId": "ring-mass-main-w2",
+      "width": 1.446726
+    },
+    {
+      "height": 2.364162,
+      "id": "op-fix-rear-5f4471",
+      "kind": "DOOR",
+      "offset": 3.89053,
+      "sill": 0.123501,
+      "wallId": "ring-mass-main-w2",
+      "width": 2.64645
+    },
+    {
+      "height": 2.29359,
+      "id": "op-fix-rear-bf5fc7",
+      "kind": "WINDOW",
+      "offset": 0.503074,
+      "sill": 0.158787,
+      "wallId": "ring-mass-main-w2",
+      "width": 0.741006
+    },
+    {
+      "height": 2.16597,
+      "id": "op-fix-right-392448",
+      "kind": "WINDOW",
+      "offset": 11.509675,
+      "sill": 2.78256,
+      "wallId": "ring-mass-main-w1",
+      "width": 0.66402
+    },
+    {
+      "height": 1.2648,
+      "id": "op-fix-right-63b75c",
+      "kind": "DOOR",
+      "offset": 1.422895,
+      "sill": 3.65211,
+      "wallId": "ring-mass-main-w1",
+      "width": 0.82212
+    },
+    {
+      "height": 1.29642,
+      "id": "op-fix-right-833338",
+      "kind": "WINDOW",
+      "offset": 5.770645,
+      "sill": 0.83793,
+      "wallId": "ring-mass-main-w1",
+      "width": 1.78653
+    },
+    {
+      "height": 2.08692,
+      "id": "op-fix-right-b68adf",
+      "kind": "DOOR",
+      "offset": 12.315985,
+      "sill": 0.04743,
+      "wallId": "ring-mass-main-w1",
+      "width": 2.07111
+    },
+    {
+      "height": 2.08692,
+      "id": "op-fix-right-dddbe7",
+      "kind": "DOOR",
+      "offset": 1.422895,
+      "sill": 0.04743,
+      "wallId": "ring-mass-main-w1",
+      "width": 1.4229
+    },
+    {
+      "height": 2.16597,
+      "id": "op-fix-right-fe0b4d",
+      "kind": "WINDOW",
+      "offset": 7.731085,
+      "sill": 2.78256,
+      "wallId": "ring-mass-main-w1",
+      "width": 1.51776
+    }
+  ],
+  "platforms": [],
+  "railings": [],
+  "relationships": [],
+  "roofEdges": [],
+  "roofOpenings": [],
+  "roofPlanes": [],
+  "rooflights": [],
+  "roofs": [
+    {
+      "eaveOffset": 5.773614,
+      "evidence": {
+        "interpretation": "nothing rises more than 0.4 m above the walls: a flat roof, its parapet at 6.07 m (the plate 0.3 m below: DISPLAY_ASSUMPTION)",
+        "properties": {
+          "eaveOffset": "UNRESOLVED",
+          "pitchDeg": "UNRESOLVED"
+        },
+        "source": "frame-asset-rzut-a57fb9cc0c-f3cfd88f50 + frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-f-390764b28a + frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-o-09639487a0 + frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-b-7984749005 + frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-b-b7ec20cbb2",
+        "sourceIds": [
+          "src-frame-asset-rzut-a57fb9cc0c-f3cfd88f50",
+          "src-frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-f-390764b28a",
+          "src-frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-o-09639487a0",
+          "src-frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-b-7984749005",
+          "src-frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-b-b7ec20cbb2"
+        ],
+        "status": "UNRESOLVED"
+      },
+      "footprint": {
+        "maxX": 9.5712,
+        "maxZ": 15.7626,
+        "minX": 0,
+        "minZ": 0
+      },
+      "id": "roof-mass-main",
+      "kind": "FLAT",
+      "levelId": "lvl-0",
+      "materialId": "mat-roof",
+      "overhang": 0,
+      "pitchDeg": 0,
+      "plateInset": {
+        "maxX": 0.15,
+        "maxZ": 0.15,
+        "minX": 0.15,
+        "minZ": 0.15
+      },
+      "ridgeAxis": "X",
+      "thickness": 0.2
+    }
+  ],
+  "rooms": [],
+  "schema": "buildapp.canonical-building-model",
+  "schemaVersion": "1.9.0",
+  "slabs": [],
+  "stairs": [],
+  "stepRuns": [],
+  "surfaceRegions": [
+    {
+      "evidence": {
+        "interpretation": "a dark render outline from finish-0d6dd3 (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-mass-main-w1",
+      "id": "appearance-east-ring-mass-main-w1-dark-render-0",
+      "materialId": "mat-render-dark",
+      "outline": [
+        {
+          "a": 14.5,
+          "b": 2.192138
+        },
+        {
+          "a": 15.46,
+          "b": 2.192138
+        },
+        {
+          "a": 15.46,
+          "b": 2.172138
+        },
+        {
+          "a": 15.48,
+          "b": 2.172138
+        },
+        {
+          "a": 15.48,
+          "b": 0
+        },
+        {
+          "a": 14.48,
+          "b": 0
+        },
+        {
+          "a": 14.48,
+          "b": 2.172138
+        },
+        {
+          "a": 14.5,
+          "b": 2.172138
+        }
+      ],
+      "rect": {
+        "a0": 14.48,
+        "a1": 15.48,
+        "b0": 0,
+        "b1": 2.192138
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a timber outline from finish-5f31d2 (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-mass-main-w0",
+      "id": "appearance-front-ring-mass-main-w0-timber-0",
+      "materialId": "mat-timber",
+      "outline": [
+        {
+          "a": 0.68,
+          "b": 5.752138
+        },
+        {
+          "a": 1.6,
+          "b": 5.752138
+        },
+        {
+          "a": 1.6,
+          "b": 5.732138
+        },
+        {
+          "a": 1.62,
+          "b": 5.732138
+        },
+        {
+          "a": 1.62,
+          "b": 3.152138
+        },
+        {
+          "a": 1.6,
+          "b": 3.152138
+        },
+        {
+          "a": 1.6,
+          "b": 3.132138
+        },
+        {
+          "a": 0.68,
+          "b": 3.132138
+        },
+        {
+          "a": 0.68,
+          "b": 3.152138
+        },
+        {
+          "a": 0.66,
+          "b": 3.152138
+        },
+        {
+          "a": 0.66,
+          "b": 5.732138
+        },
+        {
+          "a": 0.68,
+          "b": 5.732138
+        }
+      ],
+      "rect": {
+        "a0": 0.66,
+        "a1": 1.62,
+        "b0": 3.132138,
+        "b1": 5.752138
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a timber outline from finish-73ba4d (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-mass-main-w2",
+      "id": "appearance-rear-ring-mass-main-w2-timber-0",
+      "materialId": "mat-timber",
+      "outline": [
+        {
+          "a": 9.5312,
+          "b": 5.872138
+        },
+        {
+          "a": 8.6912,
+          "b": 5.872138
+        },
+        {
+          "a": 8.6912,
+          "b": 5.852138
+        },
+        {
+          "a": 8.6712,
+          "b": 5.852138
+        },
+        {
+          "a": 8.6712,
+          "b": 3.232138
+        },
+        {
+          "a": 8.6912,
+          "b": 3.232138
+        },
+        {
+          "a": 8.6912,
+          "b": 3.212138
+        },
+        {
+          "a": 9.5312,
+          "b": 3.212138
+        },
+        {
+          "a": 9.5312,
+          "b": 3.232138
+        },
+        {
+          "a": 9.5512,
+          "b": 3.232138
+        },
+        {
+          "a": 9.5512,
+          "b": 5.852138
+        },
+        {
+          "a": 9.5312,
+          "b": 5.852138
+        }
+      ],
+      "rect": {
+        "a0": 8.6712,
+        "a1": 9.5512,
+        "b0": 3.212138,
+        "b1": 5.872138
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a timber outline from finish-27d15a (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-mass-main-w3",
+      "id": "appearance-west-ring-mass-main-w3-timber-0",
+      "materialId": "mat-timber",
+      "outline": [
+        {
+          "a": 3.5226,
+          "b": 5.212138
+        },
+        {
+          "a": 1.1026,
+          "b": 5.212138
+        },
+        {
+          "a": 1.1026,
+          "b": 5.192138
+        },
+        {
+          "a": 1.0826,
+          "b": 5.192138
+        },
+        {
+          "a": 1.0826,
+          "b": 2.872138
+        },
+        {
+          "a": 1.1026,
+          "b": 2.872138
+        },
+        {
+          "a": 1.1026,
+          "b": 2.852138
+        },
+        {
+          "a": 3.5226,
+          "b": 2.852138
+        },
+        {
+          "a": 3.5226,
+          "b": 2.872138
+        },
+        {
+          "a": 3.5426,
+          "b": 2.872138
+        },
+        {
+          "a": 3.5426,
+          "b": 5.192138
+        },
+        {
+          "a": 3.5226,
+          "b": 5.192138
+        }
+      ],
+      "rect": {
+        "a0": 1.0826,
+        "a1": 3.5426,
+        "b0": 2.852138,
+        "b1": 5.212138
+      }
+    }
+  ],
+  "terraces": [],
+  "units": {
+    "angle": "deg",
+    "length": "m"
+  },
+  "wallJunctions": [
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w3"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w0"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-a57fb9cc0c-f3cfd88f50 (MAIN, GARAGE), at the analyzer's own scale: 2.991 cm/px, STRONG / CONFIRMED with 7 independent witnesses; heights: 4 registered elevation(s) give eaves 6.60 / 6.69 / 5.95 / 5.90 m and top 6.60 / 6.69 / 6.07 / 6.04 m (they disagree by 0.79 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-a57fb9cc0c-f3cfd88f50 + frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-f-390764b28a + frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-o-09639487a0 + frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-b-7984749005 + frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-b-b7ec20cbb2",
+        "sourceIds": [
+          "src-frame-asset-rzut-a57fb9cc0c-f3cfd88f50",
+          "src-frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-f-390764b28a",
+          "src-frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-o-09639487a0",
+          "src-frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-b-7984749005",
+          "src-frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-b-b7ec20cbb2"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j0",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w0"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w1"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-a57fb9cc0c-f3cfd88f50 (MAIN, GARAGE), at the analyzer's own scale: 2.991 cm/px, STRONG / CONFIRMED with 7 independent witnesses; heights: 4 registered elevation(s) give eaves 6.60 / 6.69 / 5.95 / 5.90 m and top 6.60 / 6.69 / 6.07 / 6.04 m (they disagree by 0.79 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-a57fb9cc0c-f3cfd88f50 + frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-f-390764b28a + frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-o-09639487a0 + frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-b-7984749005 + frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-b-b7ec20cbb2",
+        "sourceIds": [
+          "src-frame-asset-rzut-a57fb9cc0c-f3cfd88f50",
+          "src-frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-f-390764b28a",
+          "src-frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-o-09639487a0",
+          "src-frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-b-7984749005",
+          "src-frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-b-b7ec20cbb2"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j1",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w1"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w2"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-a57fb9cc0c-f3cfd88f50 (MAIN, GARAGE), at the analyzer's own scale: 2.991 cm/px, STRONG / CONFIRMED with 7 independent witnesses; heights: 4 registered elevation(s) give eaves 6.60 / 6.69 / 5.95 / 5.90 m and top 6.60 / 6.69 / 6.07 / 6.04 m (they disagree by 0.79 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-a57fb9cc0c-f3cfd88f50 + frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-f-390764b28a + frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-o-09639487a0 + frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-b-7984749005 + frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-b-b7ec20cbb2",
+        "sourceIds": [
+          "src-frame-asset-rzut-a57fb9cc0c-f3cfd88f50",
+          "src-frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-f-390764b28a",
+          "src-frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-o-09639487a0",
+          "src-frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-b-7984749005",
+          "src-frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-b-b7ec20cbb2"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j2",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w2",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w2"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w3"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-a57fb9cc0c-f3cfd88f50 (MAIN, GARAGE), at the analyzer's own scale: 2.991 cm/px, STRONG / CONFIRMED with 7 independent witnesses; heights: 4 registered elevation(s) give eaves 6.60 / 6.69 / 5.95 / 5.90 m and top 6.60 / 6.69 / 6.07 / 6.04 m (they disagree by 0.79 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-a57fb9cc0c-f3cfd88f50 + frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-f-390764b28a + frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-o-09639487a0 + frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-b-7984749005 + frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-b-b7ec20cbb2",
+        "sourceIds": [
+          "src-frame-asset-rzut-a57fb9cc0c-f3cfd88f50",
+          "src-frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-f-390764b28a",
+          "src-frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-o-09639487a0",
+          "src-frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-b-7984749005",
+          "src-frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-b-b7ec20cbb2"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j3",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w2",
+      "tolerance": 0.001
+    }
+  ],
+  "wallPanels": [],
+  "wallRings": [
+    {
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-a57fb9cc0c-f3cfd88f50 (MAIN, GARAGE), at the analyzer's own scale: 2.991 cm/px, STRONG / CONFIRMED with 7 independent witnesses; heights: 4 registered elevation(s) give eaves 6.60 / 6.69 / 5.95 / 5.90 m and top 6.60 / 6.69 / 6.07 / 6.04 m (they disagree by 0.79 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-a57fb9cc0c-f3cfd88f50 + frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-f-390764b28a + frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-o-09639487a0 + frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-b-7984749005 + frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-b-b7ec20cbb2",
+        "sourceIds": [
+          "src-frame-asset-rzut-a57fb9cc0c-f3cfd88f50",
+          "src-frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-f-390764b28a",
+          "src-frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-o-09639487a0",
+          "src-frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-b-7984749005",
+          "src-frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-b-b7ec20cbb2"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main",
+      "junctionIds": [
+        "ring-mass-main-j0",
+        "ring-mass-main-j1",
+        "ring-mass-main-j2",
+        "ring-mass-main-j3"
+      ],
+      "levelId": "lvl-0",
+      "wallIds": [
+        "ring-mass-main-w0",
+        "ring-mass-main-w1",
+        "ring-mass-main-w2",
+        "ring-mass-main-w3"
+      ]
+    }
+  ],
+  "walls": [
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 9.5712,
+        "z": 0
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-a57fb9cc0c-f3cfd88f50 (MAIN, GARAGE), at the analyzer's own scale: 2.991 cm/px, STRONG / CONFIRMED with 7 independent witnesses; heights: 4 registered elevation(s) give eaves 6.60 / 6.69 / 5.95 / 5.90 m and top 6.60 / 6.69 / 6.07 / 6.04 m (they disagree by 0.79 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-a57fb9cc0c-f3cfd88f50 + frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-f-390764b28a + frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-o-09639487a0 + frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-b-7984749005 + frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-b-b7ec20cbb2",
+        "sourceIds": [
+          "src-frame-asset-rzut-a57fb9cc0c-f3cfd88f50",
+          "src-frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-f-390764b28a",
+          "src-frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-o-09639487a0",
+          "src-frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-b-7984749005",
+          "src-frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-b-b7ec20cbb2"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 6.073614,
+      "id": "ring-mass-main-w0",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 0,
+        "z": 0
+      },
+      "thickness": 0.3
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 9.5712,
+        "z": 15.7626
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-a57fb9cc0c-f3cfd88f50 (MAIN, GARAGE), at the analyzer's own scale: 2.991 cm/px, STRONG / CONFIRMED with 7 independent witnesses; heights: 4 registered elevation(s) give eaves 6.60 / 6.69 / 5.95 / 5.90 m and top 6.60 / 6.69 / 6.07 / 6.04 m (they disagree by 0.79 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-a57fb9cc0c-f3cfd88f50 + frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-f-390764b28a + frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-o-09639487a0 + frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-b-7984749005 + frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-b-b7ec20cbb2",
+        "sourceIds": [
+          "src-frame-asset-rzut-a57fb9cc0c-f3cfd88f50",
+          "src-frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-f-390764b28a",
+          "src-frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-o-09639487a0",
+          "src-frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-b-7984749005",
+          "src-frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-b-b7ec20cbb2"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 6.073614,
+      "id": "ring-mass-main-w1",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 9.5712,
+        "z": 0
+      },
+      "thickness": 0.3
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0,
+        "z": 15.7626
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-a57fb9cc0c-f3cfd88f50 (MAIN, GARAGE), at the analyzer's own scale: 2.991 cm/px, STRONG / CONFIRMED with 7 independent witnesses; heights: 4 registered elevation(s) give eaves 6.60 / 6.69 / 5.95 / 5.90 m and top 6.60 / 6.69 / 6.07 / 6.04 m (they disagree by 0.79 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-a57fb9cc0c-f3cfd88f50 + frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-f-390764b28a + frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-o-09639487a0 + frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-b-7984749005 + frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-b-b7ec20cbb2",
+        "sourceIds": [
+          "src-frame-asset-rzut-a57fb9cc0c-f3cfd88f50",
+          "src-frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-f-390764b28a",
+          "src-frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-o-09639487a0",
+          "src-frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-b-7984749005",
+          "src-frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-b-b7ec20cbb2"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 6.073614,
+      "id": "ring-mass-main-w2",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 9.5712,
+        "z": 15.7626
+      },
+      "thickness": 0.3
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0,
+        "z": 0
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-a57fb9cc0c-f3cfd88f50 (MAIN, GARAGE), at the analyzer's own scale: 2.991 cm/px, STRONG / CONFIRMED with 7 independent witnesses; heights: 4 registered elevation(s) give eaves 6.60 / 6.69 / 5.95 / 5.90 m and top 6.60 / 6.69 / 6.07 / 6.04 m (they disagree by 0.79 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-a57fb9cc0c-f3cfd88f50 + frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-f-390764b28a + frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-o-09639487a0 + frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-b-7984749005 + frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-b-b7ec20cbb2",
+        "sourceIds": [
+          "src-frame-asset-rzut-a57fb9cc0c-f3cfd88f50",
+          "src-frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-f-390764b28a",
+          "src-frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-o-09639487a0",
+          "src-frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-b-7984749005",
+          "src-frame-asset-gotowy-projekt-willa-layla-g2ae-elewacja-b-b7ec20cbb2"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 6.073614,
+      "id": "ring-mass-main-w3",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 0,
+        "z": 15.7626
+      },
+      "thickness": 0.3
+    }
+  ],
+  "windows": [
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-front-b4d8ed-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-front-b4d8ed"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-rear-bf5fc7-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-rear-bf5fc7"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-right-392448-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-right-392448"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-right-833338-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-right-833338"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-right-fe0b4d-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-right-fe0b4d"
+    }
+  ]
+}
