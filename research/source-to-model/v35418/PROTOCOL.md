@@ -86,3 +86,27 @@ Pierwsze przejście selekcji na commicie zamrożenia `37ad17c` (tylko pobranie p
    teraz sprawdzany jest też rdzeń nazwy. W pierwszym przejściu nie zmieniło to wyniku (kandydat i tak odpadł na elewacjach).
 
 Selekcja powtórzona z TYM SAMYM ziarnem (commit `37ad17c`). Żaden kandydat nie był analizowany ani oglądany jako model.
+
+## 8. Odstępstwo od §6 zapisane PRZED otwarciem NEW-C: piąty cykl DEV (2026-11-23)
+
+Limit z §6 to 4 cykle. Po czwartym cyklu (powtórki `*-i6`) znalazłem stratę, której nie widać w liczbach zapisów, tylko
+na renderze: **otwory istnieją w modelu, a kompilator ich nie wycina** (`OPENING_ABOVE_WALL_TOP`) — Alberto 14 otworów
+(tak samo w baseline), Ballina 3, Jeziorko 4, Alaska 2. Przyczyna: korekta dachu traktowała narysowany wierzch ściany jak
+górną powierzchnię dachu przy ścianie, a kompilator kończy ścianę na jego spodzie (0,3 m niżej); do tego szukanie
+naroży ścian na skróconym odcinku zamiast na boku bryły. W tym samym cyklu arbitraż bryły zastąpił dobry model Jeziorka
+bryłą, której źródła same przeczą (regresja względem baseline).
+
+Decyzja: **jeden dodatkowy cykl (piąty i ostatni)**, ograniczony do tych przyczyn. Uzasadnienie: (a) instrukcja OWNER-a
+„iteruj aż będzie dobrze"; (b) NEW-C nadal nie jest otwarty — żaden pakiet NEW-C nie był analizowany ani oglądany, więc
+ślepość próby transferu jest nienaruszona; (c) limit kosztu z §6 bez zmian. Zakres cyklu 5:
+
+1. naroża ścian szukane na pełnym boku bryły (`roofProposalsFromSketches`);
+2. narysowany wierzch ściany = spód dachu przy ścianie (SET_ROOF i bryła ze źródeł), górna powierzchnia = + t/cos(kąt);
+3. kontrola „otwór ponad okapem" względem wierzchu ściany, który zbuduje kompilator; wysokość otworu ZAŁOŻONA przez
+   model ustępuje dachowi ze źródła (zostaje ≥ 0,5 m), odczytana — odrzuca poprawkę;
+4. transakcja wykonawcy nie może zostawić nowego otworu, którego kompilator nie wytnie (`OPENING_NOT_CUT`); otwory
+   niewycięte w oddanym modelu są nazwane zdarzeniem `DELIVERED_OPENINGS_NOT_CUT`;
+5. arbitraż bryły 1.1.0: bryła zastępująca LOCAL musi być niesprzeczna ze źródłami (0 sprzeczności).
+
+Pomiar cyklu 5 jest zarazem biegiem końcowym DEV: nagrane odczyty (0 USD) + recenzent NA ŻYWO oglądający faktyczną
+rewizję. Po nim kod jest zamrażany bez względu na wynik; dopiero wtedy otwieram NEW-C.

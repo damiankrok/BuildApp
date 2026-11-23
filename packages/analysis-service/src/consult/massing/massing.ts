@@ -24,7 +24,7 @@ import type { CanonicalBuildingModel, Wall } from '@buildapp/model'
 import type { BindView, Projection, Side } from '../correct/execute.js'
 import type { Poly } from '../correct/source-gate.js'
 
-export const MASSING_VERSION = '1.1.0' as const
+export const MASSING_VERSION = '1.2.0' as const
 
 export type Rect = { minX: number; maxX: number; minZ: number; maxZ: number }
 export type Fidelity = 'SOURCE_EXACT' | 'SOURCE_DERIVED' | 'SOURCE_TRACED' | 'DISPLAY_ASSUMPTION' | 'TRACE_UNCERTAIN'
@@ -457,9 +457,15 @@ export function solveMassing(input: MassingInput): MassingHypothesis {
       }
       const axis: 'X' | 'Z' = vote.X >= vote.Z ? 'X' : 'Z'
       const span = axis === 'X' ? rect.maxZ - rect.minZ : rect.maxX - rect.minX
-      const pitch = (Math.atan2(rise, span / 2) * 180) / Math.PI
-      roof = { kind: 'GABLE', ridgeAxis: axis, pitchDeg: Math.round(pitch * 10) / 10, eavesM: r6(eaves), ridgeM: r6(top) }
-      roofProv = { fidelity: vote.X !== vote.Z && hProv.fidelity === 'SOURCE_DERIVED' ? 'SOURCE_DERIVED' : 'TRACE_UNCERTAIN', source: reads.map((r) => `${r.side}:${r.p.shape}`).join(' '), why: `ridge along ${axis} (slopes seen on the sides along it, the gable end across it); pitch ${roof.pitchDeg}° from a ${rise.toFixed(2)} m rise over half of ${span.toFixed(2)} m` }
+      // v3.54.18 (massing 1.2.0): eaves read from the walls' corner tops are the roof's UNDERSIDE at the wall; the roof's
+      // top surface there (`eavesM`, what createRoof takes) is the slab's vertical thickness above it, solved with the
+      // pitch it changes — so the built wall ends where the drawn one does and the openings under it are cut
+      let eavesTop = eaves
+      if (byWalls) for (let i = 0; i < 6; i += 1) eavesTop = eaves + MINIATURE_CONVENTIONS.roofThicknessM / Math.cos(Math.atan2(Math.max(0.01, top - eavesTop), span / 2))
+      if (top - eavesTop < MASSING_TOLERANCES.flatRiseM) eavesTop = eaves
+      const pitch = (Math.atan2(top - eavesTop, span / 2) * 180) / Math.PI
+      roof = { kind: 'GABLE', ridgeAxis: axis, pitchDeg: Math.round(pitch * 10) / 10, eavesM: r6(eavesTop), ridgeM: r6(top) }
+      roofProv = { fidelity: vote.X !== vote.Z && hProv.fidelity === 'SOURCE_DERIVED' ? 'SOURCE_DERIVED' : 'TRACE_UNCERTAIN', source: reads.map((r) => `${r.side}:${r.p.shape}`).join(' '), why: `ridge along ${axis} (slopes seen on the sides along it, the gable end across it); pitch ${roof.pitchDeg}° from a ${(top - eavesTop).toFixed(2)} m rise over half of ${span.toFixed(2)} m${byWalls ? ` (the walls end at ${eaves.toFixed(2)} m: the roof's underside there)` : ''}` }
     }
     bodies.push({ id, rect: { minX: r6(rect.minX), maxX: r6(rect.maxX), minZ: r6(rect.minZ), maxZ: r6(rect.maxZ) }, roof, provenance: { outline: { fidelity: input.outline.fidelity, source: input.outline.by, why: input.outline.why }, height: hProv, roof: roofProv, wallThickness: input.wallThicknessM?.prov ?? { fidelity: 'DISPLAY_ASSUMPTION', source: 'MINIATURE', why: `${MINIATURE_CONVENTIONS.wallThicknessM} m: no wall thickness was measured` } } })
   }

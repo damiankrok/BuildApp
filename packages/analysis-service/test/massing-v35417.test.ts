@@ -158,7 +158,10 @@ describe('v3.54.17 §8 no model: plan + elevations → bodies + roofs → mesh, 
     expect(near(main.rect.minX, 0, PLAN_TOL) && near(main.rect.maxX, 10, PLAN_TOL) && near(main.rect.maxZ, 8, PLAN_TOL)).toBe(true)
     expect(near(gar.rect.minX, 10, PLAN_TOL) && near(gar.rect.maxX, 16, PLAN_TOL) && near(gar.rect.maxZ, 6, PLAN_TOL)).toBe(true)
     expect(main.roof).toMatchObject({ kind: 'GABLE', ridgeAxis: 'X' })
-    expect(near(main.roof.eavesM, 3.2, HEIGHT_TOL) && near(main.roof.ridgeM as number, 6.0, HEIGHT_TOL)).toBe(true)
+    // v3.54.18 (massing 1.2.0): the walls are drawn up to 3.2 m — the roof's UNDERSIDE at the wall; `eavesM` is its top
+    // surface there, the slab's vertical thickness above (it was asserted as 3.2 while the built wall ended at 2.9)
+    const slab = 0.25 / Math.cos(((main.roof.pitchDeg ?? 0) * Math.PI) / 180)
+    expect(near(main.roof.eavesM - slab, 3.2, 0.05) && near(main.roof.ridgeM as number, 6.0, HEIGHT_TOL)).toBe(true)
     expect(gar.roof.kind).toBe('FLAT')
     expect(near(gar.roof.eavesM, 2.8, HEIGHT_TOL)).toBe(true)
     // the registrations were made by the plan: the same scale the drawing was painted at
@@ -466,7 +469,10 @@ describe('v3.54.17 R2 §4: per body, not one eaves for the whole house', () => {
   it('counter-trial: a very steep but well-documented roof on a small body is built (70°, below the kernel limit) — no clamp, no refusal of small bodies', async () => {
     const { roofProposalsFromSketches } = await import('../src/consult/massing/ops.js')
     const MAIN4: TrueBody = { id: 'm4', minX: 0, maxX: 10, minZ: 0, maxZ: 8, eaves: 3.2, ridge: 6.0, axis: 'X' }
-    const TOWER: TrueBody = { id: 't4', minX: 10, maxX: 13, minZ: 0, maxZ: 3, eaves: 3, ridge: 3 + 1.5 * Math.tan((70 * Math.PI) / 180), axis: 'X' }
+    // v3.54.18 (ops 1.6.0): the drawn wall top is the roof's UNDERSIDE at the wall, so a 70° roof 0.25 m thick has its
+    // ridge the slab's vertical thickness (0.25 / cos 70°) above the bare rise — the fixture now draws that roof (it drew
+    // a roof without thickness, which no drawing has; read as one, the same picture gives 66°)
+    const TOWER: TrueBody = { id: 't4', minX: 10, maxX: 13, minZ: 0, maxZ: 3, eaves: 3, ridge: 3 + 1.5 * Math.tan((70 * Math.PI) / 180) + 0.25 / Math.cos((70 * Math.PI) / 180), axis: 'X' }
     const m = modelOf([spec(MAIN4), spec(TOWER, { kind: 'FLAT', eavesM: 3, ridgeAxis: undefined, ridgeM: undefined, pitchDeg: undefined })])
     const sk = (['FRONT', 'RIGHT', 'REAR', 'LEFT'] as Side[]).map((s) => { const d = drawnOf(s, [MAIN4, TOWER]); return { facade: s, frameId: frameOf(s), groundRow: ZERO, walls: d.walls.map((w) => w.poly), roofs: d.roofs.map((r) => r.poly) } })
     const { proposals } = roofProposalsFromSketches(sk, m, [], modelRevision(m), side)
@@ -477,5 +483,67 @@ describe('v3.54.17 R2 §4: per body, not one eaves for the whole house', () => {
     const built = out.model.roofs.find((r) => r.footprint.minX >= 10 - 1e-6)
     expect(built).toMatchObject({ kind: 'GABLE', ridgeAxis: 'X' })
     expect(near(built?.pitchDeg ?? 0, 70, 3)).toBe(true)
+  })
+})
+
+/**
+ * v3.54.18 (ops 1.6.0, executor 1.6.0) — an opening the roof correction leaves uncut. Reproduced from Alberto (baseline
+ * and four iterations alike): SET_ROOF held the openings against the roof's TOP surface at the wall, the compiler builds
+ * the wall up to its UNDERSIDE; 14 openings between the two stood in the model and in no view. Three rules, each with its
+ * counter-trial: the check uses the compiled wall top; an ASSUMED height yields to the roof, a read one refuses it; a wall
+ * top drawn in the elevation is the roof's underside, so the built wall ends where the drawing's does.
+ */
+describe('v3.54.18 SET_ROOF and the openings under it: nothing is left that the compiler does not cut', () => {
+  const truth = [MAIN]
+  const pics = pictures(truth)
+  const front = silhouettes(truth).find((s) => s.side === 'FRONT') as SilhouetteObservation
+  const views = (['FRONT', 'RIGHT', 'REAR', 'LEFT'] as Side[]).map(viewOf)
+  // the head at 3.05 m: under the drawn eaves (3.2 m), above the wall the compiler builds under a 0.25 m slab (≈ 2.9 m)
+  const between = (assumed: boolean): BuildingCommand[] => [{ type: 'cutOpening', id: 'win-b', wallId: 'ring-mass-main-w0', kind: 'WINDOW', offset: 2, sill: 1.6, width: 1.2, height: 1.45, evidence: { status: 'SOURCE_DERIVED', interpretation: 'a gap of the plan', properties: assumed ? { offset: 'SOURCE_DERIVED', width: 'SOURCE_DERIVED', sill: 'ASSUMED', height: 'ASSUMED' } : { offset: 'SOURCE_DERIVED', width: 'SOURCE_DERIVED', sill: 'VISUAL_INFERRED', height: 'VISUAL_INFERRED' } } } as BuildingCommand, { type: 'placeWindow', id: 'win-b-unit', openingId: 'win-b' } as BuildingCommand]
+  const flat = (extra: BuildingCommand[]): CanonicalBuildingModel => modelOf([spec(MAIN, { kind: 'FLAT', eavesM: 3.2, ridgeAxis: undefined, ridgeM: undefined, pitchDeg: undefined })], extra)
+  const uncut = (m: CanonicalBuildingModel): string[] => compileBuilding(m).diagnostics.filter((d) => d.code === 'OPENING_ABOVE_WALL_TOP').map((d) => d.objectId ?? '')
+  const roofPatch = (m: CanonicalBuildingModel, more: Record<string, unknown> = {}): CorrectionProposal => propose(m, { operation: 'SET_ROOF', targetId: 'roof-mass-main', frameId: frameOf('FRONT'), patch: { roofKind: 'GABLE', roofPolygon: front.roofs[0] as Array<[number, number]>, ...more } })
+
+  it('a height the model only ASSUMED yields: the roof is built, the head comes down under the wall top, the opening is cut', () => {
+    const m = flat(between(true))
+    const out = executeCorrections({ model: m, views, pictures: pics, proposals: [roofPatch(m)] })
+    expect(out.records[0].status, out.records[0].why).toBe('COMMITTED')
+    const o = out.model.openings.find((q) => q.id === 'win-b')
+    expect(o).toBeDefined()
+    expect((o?.sill ?? 0) + (o?.height ?? 0)).toBeLessThan(3.05)
+    expect(o?.height ?? 0).toBeGreaterThanOrEqual(0.5)
+    expect(o?.offset).toBe(2)
+    expect(o?.width).toBe(1.2)
+    expect(uncut(out.model)).toEqual([])
+    expect(out.transactions[0].collateral).toEqual([])
+  })
+
+  it('counter-trial: a height that was READ does not yield — the patch is refused whole and nothing is left uncut', () => {
+    const m = flat(between(false))
+    const out = executeCorrections({ model: m, views, pictures: pics, proposals: [roofPatch(m)] })
+    expect(out.records[0].code).toBe('OPENING_ABOVE_EAVES')
+    expect(out.revision).toBe(out.baseRevision)
+    expect(uncut(out.model)).toEqual([])
+  })
+
+  it('counter-trial: an assumed opening with too little left under the wall top is not squeezed — refused, as before', () => {
+    const tall = [{ type: 'cutOpening', id: 'win-t', wallId: 'ring-mass-main-w0', kind: 'WINDOW', offset: 2, sill: 2.6, width: 1.2, height: 0.5, evidence: { status: 'SOURCE_DERIVED', interpretation: 'a gap of the plan', properties: { sill: 'ASSUMED', height: 'ASSUMED' } } } as BuildingCommand]
+    const m = flat(tall)
+    const out = executeCorrections({ model: m, views, pictures: pics, proposals: [roofPatch(m)] })
+    expect(out.records[0].code).toBe('OPENING_ABOVE_EAVES')
+    expect(out.revision).toBe(out.baseRevision)
+  })
+
+  it('the wall top the elevation draws is the roof\'s underside: the built wall ends there and a read opening under it is cut', () => {
+    const m = flat(between(false))
+    const out = executeCorrections({ model: m, views, pictures: pics, proposals: [roofPatch(m, { wallTopY: row(3.2) })] })
+    expect(out.records[0].status, out.records[0].why).toBe('COMMITTED')
+    const roof = out.model.roofs.find((r) => r.id === 'roof-mass-main')
+    const slab = 0.25 / Math.cos((((roof?.pitchDeg ?? 0)) * Math.PI) / 180)
+    // top surface at the wall = drawn wall top + the slab measured vertically; the ridge stays where it is drawn
+    expect(near((roof?.eaveOffset ?? 0) - slab, 3.2, 0.03)).toBe(true)
+    expect(near((roof?.eaveOffset ?? 0) + Math.tan(((roof?.pitchDeg ?? 0) * Math.PI) / 180) * 4, 6.0, HEIGHT_TOL)).toBe(true)
+    expect(out.model.openings.find((q) => q.id === 'win-b')).toMatchObject({ sill: 1.6, height: 1.45 })
+    expect(uncut(out.model)).toEqual([])
   })
 })

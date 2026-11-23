@@ -41,3 +41,20 @@ describe('v3.54.18 outline simplification', () => {
     expect(simplifyOutline(P([[0, 0], [10, 0], [11, 4], [10, 8], [6, 8], [6, 6], [3, 6], [3, 8], [0, 8]]))).toBeUndefined()
   })
 })
+
+// v3.54.18 — a change of anything that changes the delivered model must not silently reuse an accepted revision.
+import { readFileSync } from 'node:fs'
+import { fileURLToPath } from 'node:url'
+import { consultBinding } from '../src/consult/accepted-consult.js'
+
+describe('v3.54.18 accepted revision: the key names every version that changes the model', () => {
+  it('the consulted binding carries the gate, executor, registry, sketch-proposal, massing (ops and body) and body-arbitration versions', () => {
+    const src = readFileSync(fileURLToPath(new URL('../src/consult/consult-analysis.ts', import.meta.url)), 'utf8')
+    const line = src.split('\n').find((l) => l.includes('consultant: [CONSULTANT_CONTRACT_VERSION')) ?? ''
+    for (const part of ['`registry${CORRECTION_REGISTRY_VERSION}`', '`executor${CORRECTION_EXECUTOR_VERSION}`', '`gate${SOURCE_GATE_VERSION}`', '`sketchProposals${SKETCH_PROPOSALS_VERSION}`', '`massing${MASSING_OPS_VERSION}`', '`massingBody${MASSING_VERSION}`', '`bodyArbitration${BODY_ARBITRATION.version}`']) expect(line).toContain(part)
+  })
+  it('a different version string is a different key: the old revision is not found, so it cannot be replayed', () => {
+    const base = { sourcePackageHash: 'p'.repeat(64), analyzer: 'a', models: { ROUNDS: 'm' }, settings: 's' }
+    expect(consultBinding({ ...base, consultant: 'gate1.2.0,massingBody1.0.0' }).key).not.toBe(consultBinding({ ...base, consultant: 'gate1.3.0,massingBody1.1.0' }).key)
+  })
+})

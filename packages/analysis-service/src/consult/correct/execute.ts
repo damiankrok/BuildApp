@@ -47,7 +47,7 @@ import { resolveWitness, WITNESS_RESOLVER_VERSION } from './resolve.js'
 import { bindBuildMassing, bindSetOutline, bindSetRoof, MAX_OVERHANG_M } from '../massing/ops.js'
 import type { MassingObservations } from '../massing/ops.js'
 
-export const CORRECTION_EXECUTOR_VERSION = '1.5.0' as const
+export const CORRECTION_EXECUTOR_VERSION = '1.6.0' as const
 
 export type Side = 'FRONT' | 'RIGHT' | 'REAR' | 'LEFT'
 export const SIDES: readonly Side[] = ['FRONT', 'RIGHT', 'REAR', 'LEFT']
@@ -1169,12 +1169,17 @@ export function elementExists(m: CanonicalBuildingModel, id: string): boolean {
   return colls.some((c) => c.some((x) => x.id === id))
 }
 
-const closureErrors = (model: CanonicalBuildingModel): { n: number; scene?: ReturnType<typeof compileBuilding>; failed?: string; named?: string[] } => {
+/** Compile diagnostics that mean "this opening was not cut": the model holds it, every viewer shows a solid wall. */
+const UNCUT_CODES: ReadonlySet<string> = new Set(['OPENING_ABOVE_WALL_TOP', 'OPENING_OPEN_END_UNSUPPORTED'])
+
+const closureErrors = (model: CanonicalBuildingModel): { n: number; scene?: ReturnType<typeof compileBuilding>; failed?: string; named?: string[]; uncut?: string[] } => {
   try {
     const scene = compileBuilding(model)
     const c = geometryClosureAudit(model, scene)
     const errs = c.findings.filter((x) => x.scope === 'EXTERIOR' && x.severity === 'ERROR')
-    return { n: errs.length, scene, named: errs.map((x) => { return `${x.code} ${x.objects.join('+')}` }) }
+    // v3.54.18 (executor 1.6.0): an opening the compiler refuses to cut stands in the model and in no viewer
+    const uncut = scene.diagnostics.filter((d) => d.severity === 'ERROR' && UNCUT_CODES.has(d.code) && d.objectId).map((d) => d.objectId as string)
+    return { n: errs.length, scene, named: errs.map((x) => { return `${x.code} ${x.objects.join('+')}` }), uncut }
   } catch (e) {
     return { n: Number.POSITIVE_INFINITY, failed: (e as Error).message.slice(0, 200) }
   }
@@ -1313,6 +1318,7 @@ export function executeCorrections(input: ExecuteInput): CorrectionOutcome {
     let failure: string | undefined
     if (after.failed) failure = `the candidate does not compile: ${after.failed}`
     else if (after.n > before.n) failure = `the candidate has ${after.n - before.n} more exterior joint error(s) than the model before: ${(after.named ?? []).filter((x) => !(before.named ?? []).includes(x)).slice(0, 4).join('; ')}`
+    else if ((after.uncut ?? []).some((id) => !(before.uncut ?? []).includes(id))) failure = `OPENING_NOT_CUT: the candidate leaves ${(after.uncut ?? []).filter((id) => !(before.uncut ?? []).includes(id)).slice(0, 6).join(', ')} uncut by the compiler (above the top of its wall, or run through a skewed end): an opening no viewer shows is not a correction`
     else if (collateral.length > 0) failure = `the transaction changed ${collateral.slice(0, 6).join(', ')}, which it is not about`
     for (const x of pending) {
       if (failure || !x.bound) continue

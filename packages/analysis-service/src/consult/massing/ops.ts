@@ -14,7 +14,7 @@
  * orphaned and nothing unrelated changes (the executor's collateral check holds the rest of the model).
  */
 import type { BuildingCommand } from '@buildapp/commands'
-import type { CanonicalBuildingModel, Wall } from '@buildapp/model'
+import type { CanonicalBuildingModel, Opening, Wall } from '@buildapp/model'
 import type { Evidence } from '@buildapp/model'
 import { compareRegions } from '../correct/source-gate.js'
 import type { Poly } from '../correct/source-gate.js'
@@ -24,9 +24,12 @@ import { targetBodies } from '../correct/resolve.js'
 import { area, bodiesOf, bodyCommands, extentOn, MASSING_TOLERANCES, MASSING_VERSION, massingCommands, MINIATURE_CONVENTIONS, profileOver, readableStretch, registerByPlan, solveMassing, wallCornerTopM } from './massing.js'
 import type { BodySpec, Fidelity, MassingHypothesis, ModelBody, OutlineObservation, Rect, RoofSpec, SilhouetteObservation } from './massing.js'
 
-export const MASSING_OPS_VERSION = '1.5.0' as const
+export const MASSING_OPS_VERSION = '1.6.0' as const
 /** v3.54.17 R2: the most overhang a drawn roof may have past its body on a side, and the steepest pitch the kernel builds. */
 export const MAX_OVERHANG_M = 1.0
+/** v3.54.18 (ops 1.6.0): an opening whose height the model ASSUMED comes down under a roof the source draws — to this far under the wall top, and only while at least this much of it is left (else the roof patch is refused, as before). */
+export const HEAD_CLEARANCE_M = 0.1
+export const MIN_YIELDED_HEIGHT_M = 0.5
 export const MAX_PITCH_DEG = 85
 export type MassingObservations = { outline?: OutlineObservation; silhouettes: readonly SilhouetteObservation[] }
 
@@ -260,7 +263,18 @@ export function bindSetRoof(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
     // carried lower (Alberto: the lowest edge at 2.38 m gave a 35° roof for the page's 25°; the walls end at 2.87 m).
     const wallTopM = typeof f.wallTopY === 'number' && Number.isFinite(f.wallTopY) ? (view.projection.zeroRow - toFrameY(pic, p, f.wallTopY)) * (view.projection.mppV ?? view.projection.mpp) : undefined
     const wallTopOk = wallTopM !== undefined && wallTopM - top.elevation > 0.3 && prof.topM - wallTopM >= MASSING_TOLERANCES.flatRiseM
-    if (wallTopOk) spec = { kind: 'GABLE', ridgeAxis: axis, pitchDeg: Math.round(((Math.atan2(prof.topM - (wallTopM as number), span / 2) * 180) / Math.PI) * 10) / 10, eavesM: r6(wallTopM as number), ridgeM: r6(prof.topM) }
+    if (wallTopOk) {
+      // the drawn wall ends under the roof: that line is the roof's UNDERSIDE at the wall. The roof's top surface there
+      // (what `eaveOffset` states, and what the wall compiler takes the slab's thickness off) stands above it by the
+      // slab measured vertically, t / cos(pitch) — solved with the pitch it changes. Read as the top surface itself, the
+      // built wall ended 0.3 m under the drawn one and every opening whose head reached into that band was not cut
+      // (Alberto: 14 openings of two eaves walls in the model and in no view).
+      const t = MINIATURE_CONVENTIONS.roofThicknessM
+      let e = wallTopM as number
+      for (let i = 0; i < 6; i += 1) e = (wallTopM as number) + t / Math.cos(Math.atan2(Math.max(0.01, prof.topM - e), span / 2))
+      if (prof.topM - e >= MASSING_TOLERANCES.flatRiseM) spec = { kind: 'GABLE', ridgeAxis: axis, pitchDeg: Math.round(((Math.atan2(prof.topM - e, span / 2) * 180) / Math.PI) * 10) / 10, eavesM: r6(e), ridgeM: r6(prof.topM) }
+      else spec = { kind: 'GABLE', ridgeAxis: axis, pitchDeg: Math.round(((Math.atan2(prof.topM - (wallTopM as number), span / 2) * 180) / Math.PI) * 10) / 10, eavesM: r6(wallTopM as number), ridgeM: r6(prof.topM) }
+    }
     // v3.54.17 R3: seen along its ridge, a gable's lowest drawn edge is its fascia — past the wall by the overhang and
     // lower than the eaves at the wall. With the pitch the page states, the eaves at the wall follow from the drawn ridge
     // (ridge − half the span × tan pitch) and the overhang from the drawn fascia; both must be possible (0..MAX), or the
@@ -308,8 +322,18 @@ export function bindSetRoof(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
   const topWalls = m.walls.filter((w) => body.wallIds.includes(w.id) && w.levelId === top.id)
   const eavesRel = spec.eavesM - top.elevation
   const ridgeAlong = (w: Wall): boolean => (spec.kind === 'GABLE' ? Math.abs(spec.ridgeAxis === 'X' ? w.end.x - w.start.x : w.end.z - w.start.z) > 1e-6 : true)
-  const blocked = m.openings.filter((o) => topWalls.some((w) => w.id === o.wallId && ridgeAlong(w) && o.sill + o.height > eavesRel - w.baseOffset + 1e-3))
-  if (blocked.length > 0) return { status: 'NEEDS_EVIDENCE', code: 'OPENING_ABOVE_EAVES', why: `${blocked.map((o) => o.id).join(', ')} would rise above the new eaves at ${spec.eavesM.toFixed(2)} m: the opening and the roof disagree, and the patch does not move either`, record }
+  // v3.54.18 (ops 1.6.0): held against the wall top the compiler builds — the roof's underside at the wall, the slab's
+  // vertical thickness under `eaveOffset` — not against the roof's top surface (an opening between the two passed this
+  // check and was then not cut). An opening whose HEIGHT the model only assumed yields to the roof the source draws:
+  // its head comes down to the wall top in the same transaction (property-level rule: an assumption does not block a
+  // read fact); a height that was read or printed still refuses the patch, and neither is moved.
+  const slabM = spec.kind === 'GABLE' ? MINIATURE_CONVENTIONS.roofThicknessM / Math.cos(((spec.pitchDeg ?? 0) * Math.PI) / 180) : 0
+  const wallTopRel = eavesRel - slabM
+  const above = m.openings.filter((o) => topWalls.some((w) => w.id === o.wallId && ridgeAlong(w) && o.sill + o.height > wallTopRel - w.baseOffset + 1e-3))
+  const heightAssumed = (o: Opening): boolean => (o.evidence as { properties?: Record<string, string> } | undefined)?.properties?.height === 'ASSUMED'
+  const yields = above.filter((o) => heightAssumed(o) && wallTopRel - (topWalls.find((w) => w.id === o.wallId)?.baseOffset ?? 0) - HEAD_CLEARANCE_M - o.sill >= MIN_YIELDED_HEIGHT_M)
+  const blocked = above.filter((o) => !yields.includes(o))
+  if (blocked.length > 0) return { status: 'NEEDS_EVIDENCE', code: 'OPENING_ABOVE_EAVES', why: `${blocked.map((o) => o.id).join(', ')} would rise above the wall top under the new roof (${(top.elevation + wallTopRel).toFixed(2)} m; eaves ${spec.eavesM.toFixed(2)} m): the opening and the roof disagree, and the patch does not move either`, record }
   const removedRoofs = body.roofIds
   const keepId = removedRoofs.length === 1 ? removedRoofs[0] : `roof-${body.id}`
   const cmds: BuildingCommand[] = [...removedRoofs.map((id) => ({ type: 'removeFeature', targetId: id, cascade: true }) as BuildingCommand), ...body.planeIds.map((id) => ({ type: 'removeFeature', targetId: id, cascade: true }) as BuildingCommand)]
@@ -318,6 +342,7 @@ export function bindSetRoof(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
     cmds.push({ type: 'setProperty', targetId: w.id, property: 'height', value: r6(h) })
     if (w.topProfile) cmds.push({ type: 'setProperty', targetId: w.id, property: 'topProfile', value: undefined })
   }
+  for (const o of yields) cmds.push({ type: 'setProperty', targetId: o.id, property: 'height', value: r6(wallTopRel - (topWalls.find((w) => w.id === o.wallId)?.baseOffset ?? 0) - HEAD_CLEARANCE_M - o.sill) })
   const others2 = bodies.filter((b) => b.id !== body.id).map((b) => b.rect)
   const built = bodyCommands({ id: body.id, rect: body.rect, roof: spec, provenance: {} }, top.id, top.elevation, others2, 0.3).filter((c) => c.type === 'createRoof') as Array<Extract<BuildingCommand, { type: 'createRoof' }>>
   // v3.54.17 R3: every wall that followed a removed roof (interior partitions under it included) follows the new one —
@@ -330,7 +355,7 @@ export function bindSetRoof(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
   const removedDeps = m.roofOpenings.filter((o) => removedRoofs.includes(o.roofId) || body.planeIds.includes(o.roofId)).map((o) => o.id)
   // v3.54.17 R3: interior walls under the roof follow its new underside (their tops are capped by it), nothing else of them
   const underRoof = m.walls.filter((w) => w.kind !== 'EXTERIOR' && body.levelIds.includes(w.levelId) && [w.start, w.end].every((q) => q.x >= body.rect.minX - 0.05 && q.x <= body.rect.maxX + 0.05 && q.z >= body.rect.minZ - 0.05 && q.z <= body.rect.maxZ + 0.05)).map((w) => `walls:${w.id}`)
-  const allowed = [...underRoof, ...removedRoofs.map((id) => `roofs:${id}`), `roofs:${keepId}`, ...body.planeIds.map((id) => `roofPlanes:${id}`), ...topWalls.map((w) => `walls:${w.id}`), ...removedDeps.map((id) => `roofOpenings:${id}`), 'rooflights:*', 'roofEdges:*']
+  const allowed = [...underRoof, ...removedRoofs.map((id) => `roofs:${id}`), `roofs:${keepId}`, ...body.planeIds.map((id) => `roofPlanes:${id}`), ...topWalls.map((w) => `walls:${w.id}`), ...removedDeps.map((id) => `roofOpenings:${id}`), 'rooflights:*', 'roofEdges:*', ...yields.flatMap((o) => [`openings:${o.id}`, `windows:${o.id}-unit`, `doors:${o.id}-unit`])]
   const measure = (working: CanonicalBuildingModel, _before: CanonicalBuildingModel, pictures: readonly BindPicture[]): { failure?: string; measure: { sourceVerified: boolean | null; why: string; iouWithProposal?: number; builtSupportZ?: number | null } } => {
     const nb = bodiesOf(working).find((b) => b.id === body.id)
     const sil = nb ? bodyRoofSilhouette(working, nb, view) : undefined
@@ -834,7 +859,9 @@ export function roofProposalsFromSketches(sketches: readonly SketchForMassing[],
         continue
       }
       // v3.54.18: where the drawn walls end at this body's corners (the eaves at the wall), as a row of this frame
-      const wtM = wallCornerTopM(view, e.lo, e.hi, s.walls, s.groundRow)
+      // (the body's OWN ends — `full`; the readable stretch is drawn in from them by 5 % and holds no wall corner:
+      // read there, the wall top was never found and the roof's lowest edge — a fascia, a porch roof — stood in for it)
+      const wtM = wallCornerTopM(view, full.lo, full.hi, s.walls, s.groundRow)
       const wallTopRow = wtM !== undefined ? Math.round((view.projection.zeroRow - wtM / (view.projection.mppV ?? view.projection.mpp)) * 10) / 10 : undefined
       const p: CorrectionProposal = {
         proposalId: `sk-roof-${b.id}-${s.frameId.slice(-10)}`,
