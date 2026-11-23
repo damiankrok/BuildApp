@@ -24,7 +24,7 @@ import type { CanonicalBuildingModel, Wall } from '@buildapp/model'
 import type { BindView, Projection, Side } from '../correct/execute.js'
 import type { Poly } from '../correct/source-gate.js'
 
-export const MASSING_VERSION = '1.0.0' as const
+export const MASSING_VERSION = '1.1.0' as const
 
 export type Rect = { minX: number; maxX: number; minZ: number; maxZ: number }
 export type Fidelity = 'SOURCE_EXACT' | 'SOURCE_DERIVED' | 'SOURCE_TRACED' | 'DISPLAY_ASSUMPTION' | 'TRACE_UNCERTAIN'
@@ -71,7 +71,7 @@ export const MASSING_TOLERANCES = {
   minWingShare: 0.12,
 } as const
 /** Conventions of the miniature, named where they are used (never presented as read). */
-export const MINIATURE_CONVENTIONS = { wallThicknessM: 0.3, parapetM: 0.3, flatRoofThicknessM: 0.2, roofThicknessM: 0.25 } as const
+export const MINIATURE_CONVENTIONS = { wallThicknessM: 0.3, parapetM: 0.3, flatRoofThicknessM: 0.2, roofThicknessM: 0.25, roofMaterialId: 'mat-roof', roofColor: '#5a5550' } as const
 
 const r6 = (v: number): number => Math.round(v * 1e6) / 1e6
 const along = (s: Side): 'x' | 'z' => (s === 'FRONT' || s === 'REAR' ? 'x' : 'z')
@@ -407,7 +407,11 @@ export function massingCommands(h: MassingHypothesis, model: CanonicalBuildingMo
   const levelId = model.levels[0]?.id ?? 'lvl-0'
   if (model.levels.length === 0) cmds.push({ type: 'createLevel', id: levelId, name: 'Massing', index: 0, elevation: 0, height: r6(top) } as BuildingCommand)
   const rects = h.bodies.map((b) => b.rect)
-  for (const b of h.bodies) cmds.push(...bodyCommands(b, levelId, model.levels[0]?.elevation ?? 0, rects.filter((r) => r !== b.rect), h.wallThicknessM))
+  // v3.54.18 (massing 1.1.0): the roof covering's material, as the drawings' solver names it. Its tone is NOT read from
+  // the source here (the sketch contract carries no roof finish): a named miniature convention, so the roof is not left
+  // without a material (a pale roof on a body built without LOCAL — R3's open item 4).
+  if (!model.materials.some((x) => x.id === MINIATURE_CONVENTIONS.roofMaterialId)) cmds.push({ type: 'defineMaterial', id: MINIATURE_CONVENTIONS.roofMaterialId, name: 'Roof covering (tone not read: miniature convention)', color: MINIATURE_CONVENTIONS.roofColor } as BuildingCommand)
+  for (const b of h.bodies) cmds.push(...bodyCommands(b, levelId, model.levels[0]?.elevation ?? 0, rects.filter((r) => r !== b.rect), h.wallThicknessM).map((c) => (c.type === 'createRoof' ? ({ ...c, materialId: MINIATURE_CONVENTIONS.roofMaterialId } as BuildingCommand) : c)))
   return cmds
 }
 

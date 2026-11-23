@@ -17,10 +17,12 @@ import type { CanonicalBuildingModel } from '@buildapp/model'
 import type { ElevationSketch } from '../../appearance/elevation-sketch.js'
 import { iou, isRaked } from './source-gate.js'
 import type { Box, Shape } from './source-gate.js'
-import { kindOfOpening, openingBoxes, openingSpan, OVERHANG_MIN_CHANGE_M, preferredView, shapeOfOpening, sideOfFacade, sideRoof } from './execute.js'
+import { kindOfOpening, openingBoxes, openingSpan, OVERHANG_MIN_CHANGE_M, preferredView, shapeOfOpening, sideOfFacade, sideOfWall, sideRoof } from './execute.js'
+
+const openingSideWalls = (m: CanonicalBuildingModel, side: Side): string[] => m.walls.filter((w) => w.kind === 'EXTERIOR' && sideOfWall(m, w) === side).map((w) => w.id)
 import type { BindView, CorrectionProposal, Side } from './execute.js'
 
-export const SKETCH_PROPOSALS_VERSION = '1.5.0' as const
+export const SKETCH_PROPOSALS_VERSION = '1.6.0' as const
 /** Below this overlap a model opening and a sketch opening are two different openings. */
 export const PAIR_MIN_IOU = 0.1
 /** At or above this overlap (and the same kind) a pair agrees: nothing to propose. */
@@ -65,6 +67,36 @@ function occluded(m: CanonicalBuildingModel, sp: NonNullable<ReturnType<typeof o
 
 const KIND: Record<string, 'WINDOW' | 'DOOR' | 'GLAZED_DOOR' | 'GARAGE_DOOR' | undefined> = { WINDOW: 'WINDOW', DOOR: 'DOOR', GLAZED_DOOR: 'GLAZED_DOOR', GATE: 'GARAGE_DOOR' }
 
+/**
+ * v3.54.18: the sketch's wall finish zones as SET_FINISH proposals — for a side whose walls carry no finish region yet
+ * (a body built without LOCAL, a side the finish consumer did not reach): each visible zone of a known finish, by its own
+ * outline, through the registration of that frame. Largest first, so a small accent zone is laid over the wall it is on.
+ */
+export function finishProposalsFromSketch(s: ElevationSketch, facade: string, model: CanonicalBuildingModel, views: readonly BindView[], baseRevision: string, sideOf?: Side): { proposals: CorrectionProposal[]; skipped: Array<{ sketchId: string; why: string }> } {
+  const side = sideOf ?? sideOfFacade(facade)
+  const view = preferredView(views, s.frameId, side) ?? (sideOf ? undefined : preferredView(views, s.frameId))
+  if (!view) return { proposals: [], skipped: [] }
+  const wallIds = new Set(model.walls.filter((w) => w.kind === 'EXTERIOR').map((w) => w.id))
+  const onSide = new Set(openingSideWalls(model, view.side))
+  const has = model.surfaceRegions.some((r) => wallIds.has((r as { hostId?: string }).hostId ?? '') && onSide.has((r as { hostId?: string }).hostId ?? ''))
+  if (has) return { proposals: [], skipped: [{ sketchId: s.sketchId, why: `the ${view.side.toLowerCase()} side's walls already carry finish regions: the sketch's zones are not laid twice` }] }
+  const area = (poly: ReadonlyArray<readonly [number, number]>): number => Math.abs(poly.reduce((a, q, i) => a + q[0] * poly[(i + 1) % poly.length][1] - poly[(i + 1) % poly.length][0] * q[1], 0)) / 2
+  const out: CorrectionProposal[] = []
+  const skipped: Array<{ sketchId: string; why: string }> = []
+  for (const w of [...s.walls].sort((a, b) => area(b.polygon) - area(a.polygon))) {
+    if (!(['LIGHT_RENDER', 'DARK_RENDER', 'TIMBER', 'BRICK'] as string[]).includes(w.class)) {
+      skipped.push({ sketchId: w.id, why: `${w.class}: no finish class of the registry takes it (named, not painted)` })
+      continue
+    }
+    if (w.visibility !== 'VISIBLE' && w.visibility !== 'PARTLY_OCCLUDED') {
+      skipped.push({ sketchId: w.id, why: `${w.visibility}: a zone the drawing does not show is not painted from it` })
+      continue
+    }
+    out.push({ proposalId: `sk:${s.frameId.slice(-10)}:finish:${w.id}`, baseRevision, operation: 'SET_FINISH', targetId: view.side, frameId: s.frameId, patch: { box: bbox(w.polygon), outline: w.polygon.map((q) => [q[0], q[1]] as [number, number]), material: w.class as 'LIGHT_RENDER' }, origin: 'SKETCH', uncertainty: 'MEDIUM', justification: `the sketch of this elevation draws a ${w.class} zone (${w.id})` })
+  }
+  return { proposals: out, skipped }
+}
+
 export type SketchProposalAccount = { sketchId: string; frameId: string; side?: string; proposals: CorrectionProposal[]; agreed: Array<{ sketchId: string; modelId: string; iou: number }>; skipped: Array<{ sketchId: string; why: string }> }
 
 /** `sideOf` (v3.54.17 R3): the side this elevation shows when the orientation hypothesis says it is not its label's. */
@@ -90,7 +122,12 @@ export function proposalsFromSketch(s: ElevationSketch, facade: string, model: C
     const cy = (b.y0 + b.y1) / 2
     return s.roofs.some((r) => inside(r.polygon, cx, cy)) && !s.walls.some((w) => inside(w.polygon, cx, cy))
   }
-  for (const o of s.openings) if (inRoof(o)) out.skipped.push({ sketchId: o.id, why: 'drawn on the roof and on no wall (a roof window): not an opening of a wall' })
+  // v3.54.18: a window drawn on a roof surface is a roof window — its own operation (the slope seen face-on places it);
+  // any other kind drawn there (a door on a roof) is named and left
+  for (const o of s.openings) if (inRoof(o)) {
+    if (o.kind === 'WINDOW') out.proposals.push({ proposalId: `sk:${s.frameId.slice(-10)}:roofwin:${o.id}`, baseRevision, operation: 'ADD_ROOF_WINDOW', targetId: view.side, frameId: s.frameId, patch: { box: bbox(o.polygon) }, origin: 'SKETCH', uncertainty: 'MEDIUM', justification: `the sketch of this elevation draws ${o.id} on the roof and on no wall: a window in the slope` })
+    else out.skipped.push({ sketchId: o.id, why: `${o.kind} drawn on the roof and on no wall: not an opening of a wall, and not a roof window` })
+  }
   const sketchOpenings = s.openings.filter((o) => !inRoof(o)).map((o) => {
     const head = headOf(o.polygon)
     const box = bbox(o.polygon)
@@ -140,6 +177,13 @@ export function proposalsFromSketch(s: ElevationSketch, facade: string, model: C
     for (const c of covered) usedM.add(c.j)
     if (covered.length) absorbsOf.set(i, covered.map((c) => c.mb.id))
   })
+  // v3.54.18: model openings a sketch opening overlaps without being paired with or absorbed by it (the reading does not
+  // draw them): named on the proposal, so the executor can let a supported opening take the stretch they stand on
+  const displacesOf = (i: number, pairedJ?: number): string[] => {
+    const so = sketchOpenings[i]
+    const taken = new Set([...(pairedJ !== undefined ? [modelBoxes[pairedJ].id] : []), ...(absorbsOf.get(i) ?? [])])
+    return modelBoxes.filter((mb) => !taken.has(mb.id) && !chosen.some((c) => modelBoxes[c.j].id === mb.id) && area({ x0: Math.max(so.box.x0, mb.box.x0), y0: Math.max(so.box.y0, mb.box.y0), x1: Math.min(so.box.x1, mb.box.x1), y1: Math.min(so.box.y1, mb.box.y1) }) > 0).map((mb) => mb.id)
+  }
   for (const p of chosen) {
     const so = sketchOpenings[p.i]
     const mb = modelBoxes[p.j]
@@ -156,7 +200,7 @@ export function proposalsFromSketch(s: ElevationSketch, facade: string, model: C
       continue
     }
     const diffs = [...(p.v < AGREE_IOU ? [`overlap ${p.v.toFixed(2)}`] : []), ...(sameKind ? [] : [`kind ${modelKind ?? '?'} → ${so.kind}`]), ...(headAgrees ? [] : [so.head ? 'a raked head' : 'a level head']), ...(absorbs.length ? [`one opening over ${[mb.id, ...absorbs].join(' + ')}`] : [])]
-    out.proposals.push({ proposalId: pid('upd', so.o.id), baseRevision, operation: 'UPDATE_OPENING', targetId: mb.id, frameId: s.frameId, patch: { box: so.box, kind: so.kind, ...(so.head ?? {}), ...(absorbs.length ? { absorbs } : {}) }, origin: 'SKETCH', uncertainty: 'MEDIUM', justification: `the sketch of this elevation draws ${so.o.id} (${so.o.kind}) where the model's ${mb.id} stands differently (${diffs.join(', ')})` })
+    out.proposals.push({ proposalId: pid('upd', so.o.id), baseRevision, operation: 'UPDATE_OPENING', targetId: mb.id, frameId: s.frameId, patch: { box: so.box, kind: so.kind, ...(so.head ?? {}), ...(absorbs.length ? { absorbs } : {}), ...(displacesOf(p.i, p.j).length ? { displaces: displacesOf(p.i, p.j) } : {}) }, origin: 'SKETCH', uncertainty: 'MEDIUM', justification: `the sketch of this elevation draws ${so.o.id} (${so.o.kind}) where the model's ${mb.id} stands differently (${diffs.join(', ')})` })
   }
   // v3.54.17 R3: a model opening the sketch pairs with nothing is put to the ORIGINAL picture (REMOVE_OPENING: removed only
   // where the source shows nothing distinct in its box) — first, so the sketch's own openings are placed after it. Not
@@ -189,7 +233,7 @@ export function proposalsFromSketch(s: ElevationSketch, facade: string, model: C
       out.skipped.push({ sketchId: so.o.id, why: `${so.o.kind}: no opening kind of the registry takes it` })
       return
     }
-    out.proposals.push({ proposalId: pid('add', so.o.id), baseRevision, operation: 'ADD_OPENING', targetId: view.side, frameId: s.frameId, patch: { box: so.box, kind: so.kind, ...(so.head ?? {}) }, origin: 'SKETCH', uncertainty: 'MEDIUM', justification: `the sketch of this elevation draws ${so.o.id} (${so.o.kind}); the model has no opening there` })
+    out.proposals.push({ proposalId: pid('add', so.o.id), baseRevision, operation: 'ADD_OPENING', targetId: view.side, frameId: s.frameId, patch: { box: so.box, kind: so.kind, ...(so.head ?? {}), ...(displacesOf(i).length ? { displaces: displacesOf(i) } : {}) }, origin: 'SKETCH', uncertainty: 'MEDIUM', justification: `the sketch of this elevation draws ${so.o.id} (${so.o.kind}); the model has no opening there` })
   })
   for (const e of s.elements.filter((x) => x.kind === 'CHIMNEY')) {
     out.proposals.push({ proposalId: pid('chimney', e.id), baseRevision, operation: 'ADD_CHIMNEY', targetId: view.side, frameId: s.frameId, patch: { box: bbox(e.polygon) }, origin: 'SKETCH', uncertainty: 'MEDIUM', justification: `the sketch of this elevation draws a chimney (${e.id})` })

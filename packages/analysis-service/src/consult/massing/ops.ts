@@ -24,7 +24,7 @@ import { targetBodies } from '../correct/resolve.js'
 import { area, bodiesOf, bodyCommands, extentOn, MASSING_TOLERANCES, MASSING_VERSION, massingCommands, MINIATURE_CONVENTIONS, profileOver, readableStretch, registerByPlan, solveMassing } from './massing.js'
 import type { BodySpec, Fidelity, MassingHypothesis, ModelBody, OutlineObservation, Rect, RoofSpec, SilhouetteObservation } from './massing.js'
 
-export const MASSING_OPS_VERSION = '1.3.0' as const
+export const MASSING_OPS_VERSION = '1.5.0' as const
 /** v3.54.17 R2: the most overhang a drawn roof may have past its body on a side, and the steepest pitch the kernel builds. */
 export const MAX_OVERHANG_M = 1.0
 export const MAX_PITCH_DEG = 85
@@ -612,7 +612,7 @@ export function bindBuildMassing(ctx: Ctx, p: CorrectionProposal): Bound | Refus
     cmds = missing.flatMap((b) => withEvidence(bodyCommands(b, lv.id, lv.elevation, rects.filter((r) => r !== b.rect), h.wallThicknessM), b, frames))
   }
   cmds = [...sources, ...cmds]
-  const allowed = [...missing.flatMap((b) => [`walls:ring-${b.id}*`, `wallRings:ring-${b.id}`, `wallJunctions:ring-${b.id}*`, `roofs:roof-${b.id}`]), 'evidenceSources:src-*', 'levels:*', ...(m.building ? [] : ['building', 'building:*'])]
+  const allowed = [...missing.flatMap((b) => [`walls:ring-${b.id}*`, `wallRings:ring-${b.id}`, `wallJunctions:ring-${b.id}*`, `roofs:roof-${b.id}`]), 'evidenceSources:src-*', 'levels:*', `materials:${MINIATURE_CONVENTIONS.roofMaterialId}`, ...(m.building ? [] : ['building', 'building:*'])]
   const viewsUsed = h.views
   const measure = (working: CanonicalBuildingModel, _b: CanonicalBuildingModel, pictures: readonly BindPicture[]): { failure?: string; measure: { sourceVerified: boolean | null; why: string } } => {
     const built = bodiesOf(working)
@@ -650,7 +650,7 @@ export type OrientationHypothesis = {
   /** Every body's eaves as each view reads it over the body's own (exclusive) stretch, labelled and turned (R2). */
   labelled: { eavesM: number[]; spreadM: number | null }
   turned: { eavesM: number[]; spreadM: number | null }
-  perBody?: Array<{ bodyId: string; labelled: Array<{ frameId: string; side: Side; eavesM: number }>; turned: Array<{ frameId: string; side: Side; eavesM: number }>; hidden: Array<{ frameId: string; side: Side; why: string }>; agreesLabelled: boolean | null; agreesTurned: boolean | null }>
+  perBody?: Array<{ bodyId: string; labelled: Array<{ frameId: string; side: Side; eavesM: number; wallTopM?: number }>; turned: Array<{ frameId: string; side: Side; eavesM: number; wallTopM?: number }>; hidden: Array<{ frameId: string; side: Side; why: string }>; agreesLabelled: boolean | null; agreesTurned: boolean | null }>
   /** The bodies whose views agree under the assignment used (UNDECIDED: as labelled) — the only ones a roof proposal may touch. */
   confirmed?: string[]
   /** The side each elevation is read as, the ONE mapping every consumer of the sketches uses (roofs and openings). */
@@ -676,7 +676,7 @@ function inFront(r: Rect, others: readonly Rect[], s: Side): boolean {
  */
 export function orientationOf(sketches: readonly SketchForMassing[], m: CanonicalBuildingModel, sideOf: (facade: string) => Side | undefined): OrientationHypothesis {
   const bodies = bodiesOf(m).filter((b) => b.ringIds.length > 0)
-  type Read = { frameId: string; side: Side; eavesM: number }
+  type Read = { frameId: string; side: Side; eavesM: number; wallTopM?: number }
   const per = new Map(bodies.map((b) => [b.id, { labelled: [] as Read[], turned: [] as Read[], hidden: [] as Array<{ frameId: string; side: Side; why: string }> }]))
   for (const turn of [false, true]) {
     for (const s of sketches) {
@@ -700,13 +700,29 @@ export function orientationOf(sketches: readonly SketchForMassing[], m: Canonica
         }
         const roofs = front ? s.roofs.filter((poly) => { const xs = poly.map((q) => q[0]); const w = (Math.max(...xs) - Math.min(...xs)) * r.view.projection.mpp; return w <= st.hi - st.lo + 2 * MAX_OVERHANG_M }) : s.roofs
         const prof = profileOver(r.view, st.lo, st.hi, { walls: [], roofs })
-        if (prof && prof.shape !== 'NONE') per.get(b.id)?.[turn ? 'turned' : 'labelled'].push({ frameId: s.frameId, side, eavesM: Math.round(prof.eavesM * 100) / 100 })
+        // v3.54.18 (ops 1.5.0): the SAME physical line in every view — the top of the drawn walls at the body's outer
+        // corners (the wall plate under the soffit). The roof's own lower edge is not that line: a gable view draws the
+        // verge as a band along the slope, an eaves view draws the dripping edge an overhang carries lower, and the two
+        // differ by the band's thickness and the overhang's fall (Ballina live: 3.26 / 3.28 m against 2.91 / 2.86 m for
+        // walls that end at 2.9 m in all four drawings). Where a view draws no wall corner there, the roof's edge stays.
+        const own = extentOn(b.rect, side) // the body's own ends (the readable stretch is drawn in from them)
+        const px = [pxOf(r.view.projection, own.lo), pxOf(r.view.projection, own.hi)]
+        const [c0, c1] = [Math.min(...px), Math.max(...px)]
+        const near = Math.max(2, 0.03 * (c1 - c0))
+        const corner = (cx: number): number | undefined => {
+          const ys = s.walls.flatMap((poly) => poly.filter((q) => Math.abs(q[0] - cx) <= near && q[1] < (s.groundRow as number) - 2).map((q) => q[1]))
+          return ys.length > 0 ? Math.min(...ys) : undefined
+        }
+        const [k0, k1] = [corner(c0), corner(c1)]
+        const wallTopM = k0 !== undefined && k1 !== undefined ? Math.round(((((r.view.projection.zeroRow - k0) * (r.view.projection.mppV ?? r.view.projection.mpp)) + ((r.view.projection.zeroRow - k1) * (r.view.projection.mppV ?? r.view.projection.mpp))) / 2) * 100) / 100 : undefined
+        if (prof && prof.shape !== 'NONE') per.get(b.id)?.[turn ? 'turned' : 'labelled'].push({ frameId: s.frameId, side, eavesM: Math.round(prof.eavesM * 100) / 100, ...(wallTopM !== undefined ? { wallTopM } : {}) })
       }
     }
   }
   const agree = (v: Read[]): boolean | null => {
     if (v.length < 2) return null
-    const e = v.map((x) => x.eavesM)
+    // the walls' corner tops when every view of this body draws them (one line in all views); else the roofs' edges
+    const e = v.every((x) => x.wallTopM !== undefined) ? v.map((x) => x.wallTopM as number) : v.map((x) => x.eavesM)
     return Math.max(...e) - Math.min(...e) <= Math.max(MASSING_TOLERANCES.heightAgreeM, MASSING_TOLERANCES.heightAgreeShare * Math.max(...e))
   }
   const perBody = bodies.map((b) => { const q = per.get(b.id) as { labelled: Read[]; turned: Read[]; hidden: Array<{ frameId: string; side: Side; why: string }> }; return { bodyId: b.id, labelled: q.labelled, turned: q.turned, hidden: q.hidden, agreesLabelled: agree(q.labelled), agreesTurned: agree(q.turned) } })
@@ -714,7 +730,7 @@ export function orientationOf(sketches: readonly SketchForMassing[], m: Canonica
   const spread = (v: number[]): number | null => (v.length >= 2 ? Math.round((Math.max(...v) - Math.min(...v)) * 100) / 100 : null)
   const judged = (k: 'agreesLabelled' | 'agreesTurned') => perBody.filter((b) => b[k] !== null)
   const allAgree = (k: 'agreesLabelled' | 'agreesTurned'): boolean => judged(k).length > 0 && judged(k).every((b) => b[k] === true)
-  const describe = (k: 'labelled' | 'turned'): string => perBody.filter((b) => b[k].length > 0).map((b) => `${b.bodyId} ${b[k].map((x) => x.eavesM).join('/')} m`).join('; ') || 'none'
+  const describe = (k: 'labelled' | 'turned'): string => perBody.filter((b) => b[k].length > 0).map((b) => (b[k].every((x) => x.wallTopM !== undefined) ? `${b.bodyId} wall tops ${b[k].map((x) => x.wallTopM).join('/')} m` : `${b.bodyId} ${b[k].map((x) => x.eavesM).join('/')} m`)).join('; ') || 'none'
   const mapping = (turn: boolean): Record<string, Side> => Object.fromEntries(sketches.flatMap((s) => { const lab = sideOf(s.facade); return lab ? [[s.frameId, turn ? TURN[lab] : lab]] : [] }))
   const base = { labelled: { eavesM: flat('labelled'), spreadM: spread(flat('labelled')) }, turned: { eavesM: flat('turned'), spreadM: spread(flat('turned')) }, perBody }
   if (judged('agreesLabelled').length === 0) return { ...base, assignment: 'AS_LABELLED', confirmed: [], sideOf: mapping(false), why: `no body is read by two views (${describe('labelled')}): read as labelled, nothing confirmed by agreement` }

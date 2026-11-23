@@ -697,8 +697,10 @@ describe('v3.54.17 R3 the sketch channel: what the sketch leaves out, and what i
     const m = build(program())
     const drawn = [...drawnFive.map(([id, b]) => ({ id, kind: 'WINDOW', polygon: poly(b) })), { id: 'sR', kind: 'WINDOW', polygon: poly(boxOf(3.0, 3.8, 6.4, 7.2)) }]
     const acc = proposalsFromSketch(sk(drawn), 'FRONT', m, [view], modelRevision(m))
-    expect(acc.skipped.find((x) => x.sketchId === 'sR')?.why).toMatch(/roof window/)
-    expect(acc.proposals.some((p) => p.proposalId.includes('sR'))).toBe(false)
+    // v3.54.18: the invariant kept — it is never a WALL opening; the R3 expectation that it is skipped is replaced, because
+    // v3.54.18 gives the roof window its own consumer (ADD_ROOF_WINDOW): the reading no longer ends in "named, not built"
+    const forRoof = acc.proposals.filter((p) => p.proposalId.includes('sR'))
+    expect(forRoof.map((p) => p.operation)).toEqual(['ADD_ROOF_WINDOW'])
     expect(acc.proposals.filter((p) => p.operation === 'ADD_OPENING').map((p) => p.proposalId)).toEqual([expect.stringContaining('sC')])
   })
 })

@@ -63,7 +63,7 @@ const lumOf = (r: Raster): Float32Array => {
 const clampBox = (b: Box, r: Raster): Box => ({ x0: Math.max(0, Math.min(r.width - 1, Math.round(b.x0))), y0: Math.max(0, Math.min(r.height - 1, Math.round(b.y0))), x1: Math.max(0, Math.min(r.width - 1, Math.round(b.x1))), y1: Math.max(0, Math.min(r.height - 1, Math.round(b.y1))) })
 
 /** The raw support of one box: mean border edge strength and inside/outside contrast, both on 0..1. */
-export function rawSupport(r: Raster, box: Box): number {
+export function rawSupport(r: Raster, box: Box, clip?: { x0: number; x1: number; y0?: number; y1?: number }): number {
   const L = lumOf(r)
   const b = clampBox(box, r)
   const w = b.x1 - b.x0
@@ -94,7 +94,17 @@ export function rawSupport(r: Raster, box: Box): number {
   }
   const mx = Math.max(1, Math.round(w * 0.1))
   const my = Math.max(1, Math.round(h * 0.1))
-  const edge = (sideStep(true, b.y0, b.x0 + mx, b.x1 - mx, 1) + sideStep(true, b.y1, b.x0 + mx, b.x1 - mx, -1) + sideStep(false, b.x0, b.y0 + my, b.y1 - my, 1) + sideStep(false, b.x1, b.y0 + my, b.y1 - my, -1)) / 4 / 255
+  // 1.3.0 (`clip`: the wall's own area, given with a reading's claims): a border lying ON the wall's boundary is the
+  // wall's end, its top or the ground line — an edge the wall itself explains is not evidence of an element, so it is
+  // not counted; and the ring outside the box is read only on the wall (sky or ground beside a wall end is not "the
+  // wall around the element"). A box at the very end of a dark wall no longer scores as a framed opening.
+  const CLIP_NEAR = 3
+  const steps: number[] = []
+  if (!clip || clip.y0 === undefined || b.y0 > clip.y0 + CLIP_NEAR) steps.push(sideStep(true, b.y0, b.x0 + mx, b.x1 - mx, 1))
+  if (!clip || clip.y1 === undefined || b.y1 < clip.y1 - CLIP_NEAR) steps.push(sideStep(true, b.y1, b.x0 + mx, b.x1 - mx, -1))
+  if (!clip || b.x0 > clip.x0 + CLIP_NEAR) steps.push(sideStep(false, b.x0, b.y0 + my, b.y1 - my, 1))
+  if (!clip || b.x1 < clip.x1 - CLIP_NEAR) steps.push(sideStep(false, b.x1, b.y0 + my, b.y1 - my, -1))
+  const edge = steps.length > 0 ? steps.reduce((a, v) => a + v, 0) / steps.length / 255 : 0
   // contrast: the inside (shrunk by a fifth) against a ring a quarter of the box wide outside it
   const mean = (x0: number, y0: number, x1: number, y1: number, skip?: Box): number => {
     let s = 0
@@ -103,6 +113,7 @@ export function rawSupport(r: Raster, box: Box): number {
     const sy = Math.max(1, Math.floor((y1 - y0) / 32))
     for (let y = Math.max(0, y0); y <= Math.min(r.height - 1, y1); y += sy) for (let x = Math.max(0, x0); x <= Math.min(r.width - 1, x1); x += sx) {
       if (skip && x >= skip.x0 && x <= skip.x1 && y >= skip.y0 && y <= skip.y1) continue
+      if (skip && clip && (x < clip.x0 || x > clip.x1 || (clip.y0 !== undefined && y < clip.y0) || (clip.y1 !== undefined && y > clip.y1))) continue
       s += L[y * r.width + x]
       k += 1
     }
@@ -187,11 +198,11 @@ export function rawSupportPolygon(r: Raster, poly: ReadonlyArray<readonly [numbe
 }
 
 /** The best raw support within ±tol px of the box (the registration's own uncertainty), the box itself unchanged. */
-export function supportNear(r: Raster, box: Box, tolPx: number): number {
+export function supportNear(r: Raster, box: Box, tolPx: number, clip?: { x0: number; x1: number; y0?: number; y1?: number }): number {
   const t = Math.max(0, Math.round(tolPx))
   const step = Math.max(1, Math.round(t / 3))
-  let best = rawSupport(r, box)
-  for (let dx = -t; dx <= t; dx += step) for (let dy = -t; dy <= t; dy += step) if (dx !== 0 || dy !== 0) best = Math.max(best, rawSupport(r, { x0: box.x0 + dx, y0: box.y0 + dy, x1: box.x1 + dx, y1: box.y1 + dy }))
+  let best = rawSupport(r, box, clip)
+  for (let dx = -t; dx <= t; dx += step) for (let dy = -t; dy <= t; dy += step) if (dx !== 0 || dy !== 0) best = Math.max(best, rawSupport(r, { x0: box.x0 + dx, y0: box.y0 + dy, x1: box.x1 + dx, y1: box.y1 + dy }, clip))
   return best
 }
 
@@ -208,14 +219,15 @@ export function supportNearShape(r: Raster, shape: Shape, tolPx: number): number
 const overlaps = (a: Box, b: Box): boolean => Math.min(a.x1, b.x1) > Math.max(a.x0, b.x0) && Math.min(a.y1, b.y1) > Math.max(a.y0, b.y0)
 
 /** `mode` (1.3.0): JOINT — places free of both hypotheses' elements (mean / standard deviation, as 1.0.0); CLAIMS_ROBUST — the
- * places the proposing reading itself calls plain wall, when the joint band is too thin (median / scaled MAD). */
-export type NullBand = { mean: number; std: number; n: number; mode?: 'JOINT' | 'CLAIMS_ROBUST' }
+ * places the proposing reading itself calls plain wall, when the joint band is too thin (median / scaled MAD); DISPLACED —
+ * the same shape moved by 15–30 % of its size, when even that wall has no same-size place (a door on a small wall). */
+export type NullBand = { mean: number; std: number; n: number; mode?: 'JOINT' | 'CLAIMS_ROBUST' | 'DISPLACED' }
 
 /**
  * Same-size boxes on the same rows, across the facade's columns, none overlapping `exclude` (the element's own place
  * and every other element the model or the proposal holds there): the picture's own texture of "no element here".
  */
-export function nullBand(r: Raster, box: Shape, facade: { x0: number; x1: number; y0?: number; y1?: number }, exclude: readonly Box[], tolPx: number, asPolygon = false, robust = false): NullBand {
+export function nullBand(r: Raster, box: Shape, facade: { x0: number; x1: number; y0?: number; y1?: number }, exclude: readonly Box[], tolPx: number, asPolygon = false, robust = false, clip?: { x0: number; x1: number; y0?: number; y1?: number }): NullBand {
   const w = box.x1 - box.x0
   const h = box.y1 - box.y0
   const vals: number[] = []
@@ -230,7 +242,7 @@ export function nullBand(r: Raster, box: Shape, facade: { x0: number; x1: number
     const b = { x0: x, y0: y, x1: x + w, y1: y + h }
     const grown = { x0: b.x0 - tolPx, y0: b.y0 - tolPx, x1: b.x1 + tolPx, y1: b.y1 + tolPx }
     if (exclude.some((e) => overlaps(grown, e))) continue
-    vals.push(asPolygon ? supportNearShape(r, shift(box, x - box.x0, y - box.y0), tolPx) : supportNear(r, b, tolPx))
+    vals.push(asPolygon ? supportNearShape(r, shift(box, x - box.x0, y - box.y0), tolPx) : supportNear(r, b, tolPx, clip))
   }
   const n = vals.length
   if (robust) {
@@ -251,12 +263,29 @@ export type Support = { raw: number; z: number | null; null: NullBand; supported
 
 /** A box's support in standard deviations above its own picture's null band; null when the band is too thin to decide. */
 export function supportOf(r: Raster, box: Shape, facade: { x0: number; x1: number; y0?: number; y1?: number }, exclude: readonly Box[], tolPx: number, asPolygon = isRaked(box), claims?: readonly Box[]): Support {
-  const raw = asPolygon ? supportNearShape(r, box, tolPx) : supportNear(r, box, tolPx)
-  let band = nullBand(r, box, facade, exclude, tolPx, asPolygon)
+  // with a reading's claims every score of this call — the hypothesis and each band place — is read on the wall only
+  const clip = claims ? facade : undefined
+  const raw = asPolygon ? supportNearShape(r, box, tolPx) : supportNear(r, box, tolPx, clip)
+  let band = nullBand(r, box, facade, exclude, tolPx, asPolygon, false, clip)
   // 1.3.0: a wall the MODEL fills with openings (they may be the very error under test) leaves no joint place free. The
   // band is then taken where the proposing reading of this picture calls the wall plain — its own openings and the
   // hypotheses excluded, the model's other openings not — and read robustly. The measure is still the original picture.
-  if (band.n < MIN_NULL && claims) band = nullBand(r, box, facade, claims, tolPx, asPolygon, true)
+  if (band.n < MIN_NULL && claims) band = nullBand(r, box, facade, claims, tolPx, asPolygon, true, clip)
+  // A large element on a small wall (a door, a garage door, a glazed front) leaves no same-size place free even of the
+  // reading's own openings: its band is then the same shape displaced by 15–30 % of its size — how much better the drawn
+  // place is than a misplaced one (the rule body-scale outlines have had since 1.2.0). Only with a reading's claims.
+  if (band.n < MIN_NULL && claims) {
+    const w = box.x1 - box.x0
+    const h = box.y1 - box.y0
+    const vals: number[] = []
+    for (const fx of [-0.3, -0.15, 0, 0.15, 0.3]) for (const fy of [-0.3, -0.15, 0, 0.15, 0.3]) {
+      if (fx === 0 && fy === 0) continue
+      const q = shift(box, Math.round(fx * w), Math.round(fy * h))
+      vals.push(asPolygon ? supportNearShape(r, q, tolPx) : supportNear(r, q, tolPx, clip))
+    }
+    const mean = vals.reduce((a, v) => a + v, 0) / vals.length
+    band = { mean, std: Math.sqrt(vals.reduce((a, v) => a + (v - mean) ** 2, 0) / (vals.length - 1)), n: vals.length, mode: 'DISPLACED' }
+  }
   if (band.n < MIN_NULL) return { raw, z: null, null: band, supported: null }
   const z = (raw - band.mean) / Math.max(band.std, 0.01)
   return { raw, z: Math.round(z * 100) / 100, null: band, supported: z >= SUPPORT_Z_MIN }
@@ -280,7 +309,7 @@ function compareHypothesesOn(r: Raster, proposed: Shape, current: Shape | undefi
   // 1.3.0: both hypotheses are read against ONE band — the joint one, or (too thin) the proposing reading's plain wall
   const own = claims ? [proposed, ...(current ? [current] : []), ...claims] : undefined
   const p = supportOf(r, proposed, facade, exclude, tolPx, asPolygon, own)
-  const c = current ? supportOf(r, current, facade, p.null.mode === 'CLAIMS_ROBUST' && own ? own : exclude, tolPx, asPolygon, own) : undefined
+  const c = current ? supportOf(r, current, facade, p.null.mode && own ? own : exclude, tolPx, asPolygon, own) : undefined
   return decide(p, c)
 }
 

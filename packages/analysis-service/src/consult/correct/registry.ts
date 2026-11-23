@@ -7,9 +7,9 @@
  * change is NOT offered as an operation: the reviewer may still report it as a defect (`UNSUPPORTED_FAMILIES`), and the
  * record says so with the reason — it never reads as something the system can correct.
  */
-export const CORRECTION_REGISTRY_VERSION = '1.4.0' as const
+export const CORRECTION_REGISTRY_VERSION = '1.5.0' as const
 
-export const PATCH_OPERATIONS = ['ASSIGN_VIEW', 'SET_PARAMETER', 'ADD_OPENING', 'UPDATE_OPENING', 'REMOVE_OPENING', 'ADD_CHIMNEY', 'UPDATE_CHIMNEY', 'SET_FINISH', 'ROOF_FEATURE', 'BUILD_MASSING', 'SET_ROOF', 'SET_OUTLINE', 'SET_ROOF_OVERHANG'] as const
+export const PATCH_OPERATIONS = ['ASSIGN_VIEW', 'SET_PARAMETER', 'ADD_OPENING', 'UPDATE_OPENING', 'REMOVE_OPENING', 'ADD_CHIMNEY', 'UPDATE_CHIMNEY', 'SET_FINISH', 'ROOF_FEATURE', 'BUILD_MASSING', 'SET_ROOF', 'SET_OUTLINE', 'SET_ROOF_OVERHANG', 'ADD_ROOF_WINDOW'] as const
 export type PatchOperation = (typeof PATCH_OPERATIONS)[number]
 
 export const OPENING_PATCH_KINDS = ['WINDOW', 'DOOR', 'GLAZED_DOOR', 'GARAGE_DOOR'] as const
@@ -143,6 +143,14 @@ export const CAPABILITIES: Record<PatchOperation, Capability> = {
     params: ['picture', 'roofLeftX', 'roofRightX', 'wallLeftX', 'wallRightX'],
     prompt: "SET_ROOF_OVERHANG — the roof stands past the walls in the SOURCE elevation (eaves or verges) by a different amount than in the model: targetId (the roof id from the MODEL ELEMENT INDEX), picture (a SOURCE elevation), roofLeftX/roofRightX (the drawn roof's two ends) and wallLeftX/wallRightX (the walls' two outer corners under it)."
   },
+  ADD_ROOF_WINDOW: {
+    op: 'ADD_ROOF_WINDOW',
+    family: 'ROOF_FEATURE',
+    consumer: 'commands/cutRoofOpening (ROOFLIGHT) + placeRooflight on the pitched roof seen face-on from that side: the box placed up the slope by its height over the eaves and the roof\'s pitch (v3.54.18)',
+    measure: 'the box against the ORIGINAL elevation on the roof\'s own band (source gate, a framed element on the covering); the roof opening and its light built on the named roof, nothing else changed',
+    params: ['picture', 'box'],
+    prompt: 'ADD_ROOF_WINDOW — a roof window (a skylight in the plane of a slope, NOT a dormer) the source elevation draws on a roof slope seen face-on and the model lacks: picture, box (the window as drawn on the slope). targetId: the side.',
+  },
 }
 
 export const isPatchOperation = (op: string): op is PatchOperation => (PATCH_OPERATIONS as readonly string[]).includes(op)
@@ -217,8 +225,14 @@ export const DEFECT_SCHEMA = {
 } as const
 
 export type PatchFields = {
+  /** v3.54.18: SET_FINISH from a typed reading — the zone's own outline in the frame's pixels (analyzer-made; the reviewer states a box). */
+  outline?: Array<[number, number]>
   /** v3.54.17 R3: UPDATE_OPENING — openings of the same wall the new shape covers (the source's one opening is several in the model). */
   absorbs?: string[]
+  /** v3.54.18: ADD/UPDATE_OPENING from a typed reading — model openings of the same wall the new shape overlaps and the reading
+   * does not draw. Two openings cannot stand on one stretch of wall: one the picture does not itself support gives way in the
+   * same transaction; one the picture supports apart from the new shape refuses the proposal (analyzer-made, never the reviewer's). */
+  displaces?: string[]
   /** v3.54.17 R3: SET_OUTLINE from a printed overall dimension of a registered plan (analyzer-made from the metric read). */
   printed?: { valueM: number; literal: string; planFrameId: string; from: [number, number]; to: [number, number]; sourceByteHash: string }
   /** v3.54.17 R3: SET_ROOF_OVERHANG — the drawn roof's two ends, in the picture's pixels. */

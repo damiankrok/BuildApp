@@ -41,13 +41,13 @@ import { APPEARANCE_OBSERVATION_SCHEMA, APPEARANCE_OBSERVATION_VERSION } from '.
 import type { AppearanceObservation } from '../../appearance/contract.js'
 import { CAPABILITIES, CORRECTION_REGISTRY_VERSION, isPatchOperation } from './registry.js'
 import type { PatchFields, PatchOperation } from './registry.js'
-import { compareFill, compareHypotheses, iou, isRaked, supportOf, SOURCE_GATE_VERSION } from './source-gate.js'
+import { compareFill, compareHypotheses, HYPOTHESIS_Z_MARGIN, iou, isRaked, supportOf, SOURCE_GATE_VERSION, SUPPORT_Z_MIN } from './source-gate.js'
 import type { Box, FillVerdict, HypothesisVerdict, Shape } from './source-gate.js'
 import { resolveWitness, WITNESS_RESOLVER_VERSION } from './resolve.js'
 import { bindBuildMassing, bindSetOutline, bindSetRoof, MAX_OVERHANG_M } from '../massing/ops.js'
 import type { MassingObservations } from '../massing/ops.js'
 
-export const CORRECTION_EXECUTOR_VERSION = '1.4.0' as const
+export const CORRECTION_EXECUTOR_VERSION = '1.5.0' as const
 
 export type Side = 'FRONT' | 'RIGHT' | 'REAR' | 'LEFT'
 export const SIDES: readonly Side[] = ['FRONT', 'RIGHT', 'REAR', 'LEFT']
@@ -119,9 +119,9 @@ export type PatchRecord = {
   why: string
   txId?: string
   /** What the patch was bound to: the source frame and its pixels, the side, the host, the ids it creates or changes. */
-  bound?: { frameId: string; side?: Side; box?: Box; hostId?: string; ids: string[]; depth?: 'SECOND_VIEW' | 'ROOF_MEET_LINE' | 'DISPLAY_ASSUMPTION'; values?: Record<string, number> }
+  bound?: { frameId: string; side?: Side; box?: Box; hostId?: string; ids: string[]; /** v3.54.18: openings that gave way to this one, each with its own support z on the picture. */ displaced?: Record<string, number | null>; depth?: 'SECOND_VIEW' | 'ROOF_MEET_LINE' | 'DISPLAY_ASSUMPTION'; values?: Record<string, number> }
   source?: { frameId: string; sourceByteHash: string; crop?: Box }
-  gate?: { winner: HypothesisVerdict['winner']; proposedZ: number | null; currentZ?: number | null; nullBoxes: number; /** 1.3.0: the band the z was read against (absent: JOINT). */ nullMode?: 'JOINT' | 'CLAIMS_ROBUST'; why: string; /** 1.1.0: BOX, POLYGON (a raked head on either side) or FILL (a change of kind on the same shape). */ measure?: 'BOX' | 'POLYGON' | 'FILL' | 'REGION'; fill?: Pick<FillVerdict, 'observed' | 'features'> }
+  gate?: { winner: HypothesisVerdict['winner']; proposedZ: number | null; currentZ?: number | null; nullBoxes: number; /** 1.3.0: the band the z was read against (absent: JOINT). */ nullMode?: 'JOINT' | 'CLAIMS_ROBUST' | 'DISPLACED'; why: string; /** 1.1.0: BOX, POLYGON (a raked head on either side) or FILL (a change of kind on the same shape). */ measure?: 'BOX' | 'POLYGON' | 'FILL' | 'REGION'; fill?: Pick<FillVerdict, 'observed' | 'features'> }
   measure?: { builtBox?: Box; iouWithProposal?: number; builtSupportZ?: number | null; headErrorPx?: number; builtKind?: string; sourceVerified: boolean | null; why: string }
   commands?: BuildingCommand[]
   /** v3.54.17: how a printed witness was bound to the target (its observation, the body both stand on, the datum). */
@@ -437,8 +437,18 @@ function bindOpening(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
     if (sp.a0 < a0 - tolA || sp.a1 > a1 + tolA || sp.y0 < y0 - tolA || sp.y1 > y1 + tolA) return { status: 'INVALID', code: 'ABSORB_OUTSIDE_SHAPE', why: `${aid} stands ${sp.a0.toFixed(2)}..${sp.a1.toFixed(2)} m along, ${sp.y0.toFixed(2)}..${sp.y1.toFixed(2)} m high: not within the new shape ${a0.toFixed(2)}..${a1.toFixed(2)} × ${y0.toFixed(2)}..${y1.toFixed(2)} m` }
     absorbed.push(o)
   }
+  // v3.54.18: openings of the host wall the new shape overlaps and the proposing reading does not draw (named by it).
+  // One already gone (its own removal was kept earlier in this run) is simply no longer in the way.
+  const displaced: Opening[] = []
+  for (const did of f.displaces ?? []) {
+    const o = m.openings.find((x) => x.id === did)
+    if (!o || o.id === existing?.id || absorbed.some((x) => x.id === o.id) || o.wallId !== host.id) continue
+    const sp = openingSpan(m, o)
+    if (!sp || Math.min(sp.a1, a1) - Math.max(sp.a0, a0) <= 0.01 || Math.min(sp.y1, y1) - Math.max(sp.y0, y0) <= 0.01) continue
+    displaced.push(o)
+  }
   // the source gate: the proposal and the model's element (for an update) against the original picture
-  const others = openingBoxes(m, view).filter((o) => o.id !== existing?.id && !absorbed.some((x) => x.id === o.id))
+  const others = openingBoxes(m, view).filter((o) => o.id !== existing?.id && !absorbed.some((x) => x.id === o.id) && !displaced.some((x) => x.id === o.id))
   const duplicate = others.find((o) => iou(o.box, box) > 0.3)
   if (duplicate) return { status: 'DUPLICATE', code: 'OPENING_ALREADY_THERE', why: `${duplicate.id} already stands there (overlap ${iou(duplicate.box, box).toFixed(2)}): an opening is updated, never doubled` }
   // A2: both hypotheses as full shapes (a raked head's two ends), and the kinds as their own measure
@@ -484,19 +494,33 @@ function bindOpening(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
   const record = { bound: { frameId: view.frameId, side: view.side, box, hostId: host.id, ids: [id], values: { offset: u0, width, sill, height } }, source: { frameId: pic.frameId, sourceByteHash: pic.sourceByteHash, crop: box }, gate }
   if (g.winner === 'CURRENT') return { status: 'REJECTED_BY_SOURCE', code: fillRecord ? 'MODEL_FILL_BETTER_SUPPORTED' : existing ? 'MODEL_BETTER_SUPPORTED' : 'SOURCE_SHOWS_NO_OPENING', why: g.why, record }
   if (g.winner === 'UNDECIDED') return { status: 'NEEDS_EVIDENCE', code: fillRecord ? 'FILL_UNDECIDED' : 'SOURCE_UNDECIDED', why: g.why, record }
+  // v3.54.18: each opening in the way is held against the picture on its own. One the picture supports as a distinct
+  // element, most of which lies OUTSIDE the new shape, is another real opening: the proposal is refused, by name.
+  const displacedZ: Record<string, number | null> = {}
+  for (const o of displaced) {
+    const sp = openingSpan(m, o) as NonNullable<ReturnType<typeof openingSpan>>
+    const dbox = boxOfSpan(view, sp)
+    const ds = supportOf(pic.raster, dbox, facadePx(m, view), [dbox, box, ...others.map((q) => q.box)], tolPxOf(view), undefined, claimed ? [dbox, ...claimed] : undefined)
+    displacedZ[o.id] = ds.z
+    const inter = Math.max(0, Math.min(dbox.x1, box.x1) - Math.max(dbox.x0, box.x0)) * Math.max(0, Math.min(dbox.y1, box.y1) - Math.max(dbox.y0, box.y0))
+    const inside = inter / Math.max(1e-9, (dbox.x1 - dbox.x0) * (dbox.y1 - dbox.y0))
+    if (ds.supported === true && inside < 0.5) return { status: 'NEEDS_EVIDENCE', code: 'DISPLACES_SUPPORTED_OPENING', why: `the new shape overlaps ${o.id}, which the source draws as an element of its own (z ${ds.z}) and which lies mostly outside the new shape (${Math.round(inside * 100)} % inside): two openings the picture supports cannot share that stretch — neither is chosen`, record }
+  }
+  if (displaced.length > 0) (record.bound as { displaced?: Record<string, number | null> }).displaced = displacedZ
   if (u0 < -0.01 || u0 + width > L + 0.01) return { status: 'INVALID', code: 'HOST_TOO_SHORT', why: `${host.id} is ${L.toFixed(2)} m long; the opening would run ${u0.toFixed(2)}..${(u0 + width).toFixed(2)} m along it`, record }
   const oldFills = existing ? [...m.windows.filter((w) => w.openingId === existing.id).map((w) => ({ coll: 'windows', id: w.id })), ...m.doors.filter((d) => d.openingId === existing.id).map((d) => ({ coll: 'doors', id: d.id }))] : []
   const fillId = oldFills[0] && ((oldFills[0].coll === 'windows') === (kind === 'WINDOW')) ? oldFills[0].id : `${id}-${kind === 'WINDOW' ? 'unit' : 'leaf'}`
   const commands: BuildingCommand[] = [
     ...absorbed.map((o) => ({ type: 'removeFeature' as const, targetId: o.id, cascade: true })),
+    ...displaced.map((o) => ({ type: 'removeFeature' as const, targetId: o.id, cascade: true })),
     ...(existing ? [{ type: 'removeFeature' as const, targetId: existing.id, cascade: true }] : []),
     { type: 'cutOpening', id, wallId: host.id, kind: kind === 'WINDOW' ? 'WINDOW' : 'DOOR', offset: Math.max(0, u0), sill, width, height, ...(head ? { head } : {}) },
     ...fillCommands(m, id, kind, fillId, host.thickness),
   ]
   // the re-cut opening's own relationships (an alignment LOCAL drew with an opening round the corner) go with the old cut
-  const gone = [...(existing ? [existing.id] : []), ...absorbed.map((o) => o.id)]
+  const gone = [...(existing ? [existing.id] : []), ...absorbed.map((o) => o.id), ...displaced.map((o) => o.id)]
   const oldRels = m.relationships.filter((r) => gone.includes(r.from) || gone.includes(r.to)).map((r) => `relationships:${r.id}`)
-  const absorbedKeys = absorbed.flatMap((o) => [`openings:${o.id}`, ...m.windows.filter((w) => w.openingId === o.id).map((w) => `windows:${w.id}`), ...m.doors.filter((d) => d.openingId === o.id).map((d) => `doors:${d.id}`)])
+  const absorbedKeys = [...absorbed, ...displaced].flatMap((o) => [`openings:${o.id}`, ...m.windows.filter((w) => w.openingId === o.id).map((w) => `windows:${w.id}`), ...m.doors.filter((d) => d.openingId === o.id).map((d) => `doors:${d.id}`)])
   return { commands, allowed: [`openings:${id}`, ...oldFills.map((x) => `${x.coll}:${x.id}`), `${kind === 'WINDOW' ? 'windows' : 'doors'}:${fillId}`, ...oldRels, ...absorbedKeys], expect: { kind: 'OPENING', id, view, box, shape: head ? proposedShape : box, levelId: host.levelId, openingKind: kind as OpeningPatchKindExact, ...(fillFrom ? { fillChangeFrom: fillFrom } : {}) }, record }
 }
 
@@ -634,7 +658,7 @@ function bindFinish(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
     toSource: [[1, 0, 0], [0, 1, 0]],
     toSourceWhy: 'a box in the original elevation\'s own frame pixels',
     toSourceResidualPx: 0,
-    regions: [{ regionId: `finish-${short(p.proposalId)}-r`, class: f.material, outline: [[box.x0, box.y0], [box.x1, box.y0], [box.x1, box.y1], [box.x0, box.y1]], visibility: 'VISIBLE', uncertaintyPx: Math.max(2, tolPxOf(view)) }],
+    regions: [{ regionId: `finish-${short(p.proposalId)}-r`, class: f.material, outline: p.frameId && f.outline && f.outline.length >= 3 && f.outline.every((q) => Number.isFinite(q[0]) && Number.isFinite(q[1])) ? f.outline : [[box.x0, box.y0], [box.x1, box.y0], [box.x1, box.y1], [box.x0, box.y1]], visibility: 'VISIBLE', uncertaintyPx: Math.max(2, tolPxOf(view)) }],
     producer: { kind: p.origin === 'SKETCH' ? 'API_CONTOUR_READING' : 'MANUAL_DIAGNOSTIC', version: CORRECTION_EXECUTOR_VERSION },
   } as AppearanceObservation
   const hosts = exteriorWalls(ctx.model).filter((w) => sideOfWall(ctx.model, w) === view.side).map((w) => w.id)
@@ -754,6 +778,66 @@ export function sideRoof(m: CanonicalBuildingModel, side: Side, range?: { lo: nu
     const [lo, hi] = ax === 'x' ? [f.minX, f.maxX] : [f.minZ, f.maxZ]
     return { x, share: r ? Math.max(0, Math.min(hi, r.hi) - Math.max(lo, r.lo)) : hi - lo, area: (f.maxX - f.minX) * (f.maxZ - f.minZ) }
   }).filter((o) => o.share > 0).sort((a, b) => b.share - a.share || b.area - a.area)[0]?.x
+}
+
+/**
+ * v3.54.18 — ADD_ROOF_WINDOW: a window in the plane of a slope (a skylight), read on the elevation that sees that slope
+ * face-on. Before v3.54.18 such a window had no consumer: the sketch's opening "drawn on the roof and on no wall" was
+ * skipped by name, so a house with seven roof windows had none. The box is placed up the slope by plain geometry — a
+ * point h above the eaves lies h / tan(pitch) in from the eaves line — on the pitched roof over that stretch, and judged
+ * against the ORIGINAL picture on the roof's own band (a framed element on the covering), with the reading's other
+ * elements out of the band. Refused by name: a gable-side view (the slope is seen edge-on there), a view without heights,
+ * a box that is not on the slope (below the eaves, past the ridge), another roof opening already there.
+ */
+function bindRoofWindow(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
+  const m = ctx.model
+  const f = p.patch ?? {}
+  if (!finiteBox(f.box)) return { status: 'INVALID', code: 'NO_BOX', why: 'ADD_ROOF_WINDOW states the window\'s box in a source picture (x0 < x1, y0 < y1)' }
+  const at = elevationOf(ctx, p, f.picture, 'HEIGHTS')
+  if ('status' in at) return at
+  const { pic, view } = at
+  const box = toFrame(pic, p, f.box)
+  if (!inPicture(pic, box)) return { status: 'INVALID', code: 'OUT_OF_PICTURE', why: `the box lies outside picture ${pic.n}` }
+  const pr = view.projection
+  const xs = [alongOf(pr, box.x0), alongOf(pr, box.x1)]
+  const a0 = r6(Math.min(...xs))
+  const a1 = r6(Math.max(...xs))
+  const h0 = yOf(pr, box.y1)
+  const h1 = yOf(pr, box.y0)
+  const roof = sideRoof(m, view.side, { lo: a0, hi: a1 })
+  if (!roof) return { status: 'NEEDS_EVIDENCE', code: 'NO_PITCHED_ROOF', why: `the model has no pitched roof over ${a0.toFixed(2)}..${a1.toFixed(2)} m of the ${view.side.toLowerCase()} side` }
+  const ax = alongAxis(view.side)
+  if ((roof.ridgeAxis === 'X') !== (ax === 'x')) return { status: 'NEEDS_EVIDENCE', code: 'SLOPE_SEEN_EDGE_ON', why: `${roof.id}'s ridge runs across the ${view.side.toLowerCase()} side (a gable end): its slopes are seen edge-on there, and a window in a slope is placed from the elevation that sees the slope face-on` }
+  const eaves = levelOf(m, roof.levelId).elevation + roof.eaveOffset
+  const tan = Math.tan((roof.pitchDeg * Math.PI) / 180)
+  const fp = roof.footprint
+  const half = (ax === 'x' ? fp.maxZ - fp.minZ : fp.maxX - fp.minX) / 2
+  const t0 = r6((h0 - eaves) / tan)
+  const t1 = r6((h1 - eaves) / tan)
+  const [lo, hi] = ax === 'x' ? [fp.minX, fp.maxX] : [fp.minZ, fp.maxZ]
+  const record = { bound: { frameId: view.frameId, side: view.side, box, hostId: roof.id, ids: [] as string[], values: { alongFrom: a0, alongTo: a1, aboveEavesFrom: r6(h0 - eaves), aboveEavesTo: r6(h1 - eaves), inFromEavesFrom: t0, inFromEavesTo: t1 } }, source: { frameId: pic.frameId, sourceByteHash: pic.sourceByteHash, crop: box } }
+  if (!(a1 - a0 >= 0.3) || !(t1 - t0 >= 0.2) || t0 < -0.15 || t1 > half - 0.05 || a0 < lo - 0.05 || a1 > hi + 0.05) return { status: 'INVALID', code: 'NOT_ON_THE_SLOPE', why: `the box runs ${a0.toFixed(2)}..${a1.toFixed(2)} m along and ${(h0 - eaves).toFixed(2)}..${(h1 - eaves).toFixed(2)} m above the eaves of ${roof.id} (${t0.toFixed(2)}..${t1.toFixed(2)} m in from the eaves at ${roof.pitchDeg}°; the slope is ${half.toFixed(2)} m deep, ${lo.toFixed(2)}..${hi.toFixed(2)} m along): not a window on that slope`, record }
+  const u0 = Math.max(0, t0)
+  const near = view.side === 'FRONT' || view.side === 'LEFT'
+  const [p0, p1] = ax === 'x' ? (near ? [fp.minZ + u0, fp.minZ + t1] : [fp.maxZ - t1, fp.maxZ - u0]) : near ? [fp.minX + u0, fp.minX + t1] : [fp.maxX - t1, fp.maxX - u0]
+  const footprint = ax === 'x' ? { minX: a0, maxX: a1, minZ: r6(p0), maxZ: r6(p1) } : { minX: r6(p0), maxX: r6(p1), minZ: a0, maxZ: a1 }
+  const clash = m.roofOpenings.find((o) => { const q = (o as { footprint?: { minX: number; maxX: number; minZ: number; maxZ: number } }).footprint; return !!q && Math.min(q.maxX, footprint.maxX) - Math.max(q.minX, footprint.minX) > 0.02 && Math.min(q.maxZ, footprint.maxZ) - Math.max(q.minZ, footprint.minZ) > 0.02 })
+  if (clash) return { status: 'DUPLICATE', code: 'ROOF_OPENING_ALREADY_THERE', why: `${clash.id} already stands on that part of ${roof.id}: a roof opening is never doubled`, record }
+  // the source gate on the roof's own band: the slope's rows (eaves to ridge) across the roof's run on this side
+  const band = { x0: Math.min(pxOf(pr, lo), pxOf(pr, hi)), x1: Math.max(pxOf(pr, lo), pxOf(pr, hi)), y0: pyOf(pr, eaves + half * tan), y1: pyOf(pr, eaves) }
+  const claimed = ctx.claims?.get(pic.frameId) ?? []
+  const sup = supportOf(pic.raster, box, band, [box, ...claimed], tolPxOf(view), false, [box, ...claimed])
+  const gate = { winner: (sup.z === null ? 'UNDECIDED' : sup.supported ? 'PROPOSED' : sup.z < SUPPORT_Z_MIN - HYPOTHESIS_Z_MARGIN ? 'CURRENT' : 'UNDECIDED') as HypothesisVerdict['winner'], proposedZ: sup.z, nullBoxes: sup.null.n, ...(sup.null.mode ? { nullMode: sup.null.mode } : {}), why: sup.z === null ? 'too few same-size places on the roof band to judge' : sup.supported ? `the source draws a framed element on the slope in the proposed box (z ${sup.z})` : `the source draws nothing distinct enough on the slope there (z ${sup.z})`, measure: 'BOX' as const }
+  const id = `rw-fix-${view.side.toLowerCase()}-${short(p.proposalId)}`
+  const rec = { ...record, bound: { ...record.bound, ids: [id] }, gate }
+  if (gate.winner === 'CURRENT') return { status: 'REJECTED_BY_SOURCE', code: 'SOURCE_SHOWS_NO_ROOF_WINDOW', why: gate.why, record: rec }
+  if (gate.winner === 'UNDECIDED') return { status: 'NEEDS_EVIDENCE', code: 'SOURCE_UNDECIDED', why: gate.why, record: rec }
+  const measure = (working: CanonicalBuildingModel): { failure?: string; measure: NonNullable<PatchRecord['measure']> } => {
+    const built = working.roofOpenings.find((o) => o.id === id)
+    const lit = working.rooflights.some((l) => (l as { roofOpeningId?: string }).roofOpeningId === id)
+    return { ...(built && lit ? {} : { failure: `${id} was not built with its light on ${roof.id}` }), measure: { sourceVerified: built && lit ? true : null, builtSupportZ: sup.z, why: built && lit ? `${id} (ROOFLIGHT) cut in ${roof.id} ${t0.toFixed(2)}..${t1.toFixed(2)} m in from the eaves, with its light; the box is supported by the source (z ${sup.z})` : `${id} is not in the candidate` } }
+  }
+  return { commands: [{ type: 'cutRoofOpening', id, roofId: roof.id, kind: 'ROOFLIGHT', footprint }, { type: 'placeRooflight', id: `${id}-light`, roofOpeningId: id }] as BuildingCommand[], allowed: [`roofOpenings:${id}`, `rooflights:${id}-light`, `roofs:${roof.id}`], expect: { kind: 'CUSTOM', measure }, record: rec }
 }
 
 /** v3.54.17 R3: the most the two ends of one drawn roof may differ in overhang before it is not read as one overhang. */
@@ -1131,7 +1215,7 @@ export function executeCorrections(input: ExecuteInput): CorrectionOutcome {
         continue
       }
       const op = p.operation as PatchOperation
-      const b = op === 'SET_FINISH' ? bindFinish(ctx, p) : op === 'SET_PARAMETER' ? bindParameter(ctx, p) : op === 'ADD_CHIMNEY' || op === 'UPDATE_CHIMNEY' ? bindChimney(ctx, p) : op === 'BUILD_MASSING' ? bindBuildMassing(ctx, p) : op === 'SET_ROOF' ? bindSetRoof(ctx, p) : op === 'SET_OUTLINE' ? bindSetOutline(ctx, p) : op === 'SET_ROOF_OVERHANG' ? bindOverhang(ctx, p) : bindOpening(ctx, p)
+      const b = op === 'SET_FINISH' ? bindFinish(ctx, p) : op === 'SET_PARAMETER' ? bindParameter(ctx, p) : op === 'ADD_CHIMNEY' || op === 'UPDATE_CHIMNEY' ? bindChimney(ctx, p) : op === 'BUILD_MASSING' ? bindBuildMassing(ctx, p) : op === 'SET_ROOF' ? bindSetRoof(ctx, p) : op === 'SET_OUTLINE' ? bindSetOutline(ctx, p) : op === 'SET_ROOF_OVERHANG' ? bindOverhang(ctx, p) : op === 'ADD_ROOF_WINDOW' ? bindRoofWindow(ctx, p) : bindOpening(ctx, p)
       if ('status' in b) {
         refusal = { p, r: b }
         break

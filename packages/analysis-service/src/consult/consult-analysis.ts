@@ -59,7 +59,7 @@ import type { ElementIndex } from './element-index.js'
 import { identityOf } from '../identity.js'
 import type { BindPicture, BindView, CorrectionOutcome, CorrectionProposal, PatchRecord, PrintedWitness, Side, SketchAnchors, TransactionRecord } from './correct/execute.js'
 import { SOURCE_GATE_VERSION } from './correct/source-gate.js'
-import { SKETCH_PROPOSALS_VERSION, proposalsFromSketch } from './correct/from-sketch.js'
+import { SKETCH_PROPOSALS_VERSION, finishProposalsFromSketch, proposalsFromSketch } from './correct/from-sketch.js'
 import type { SketchProposalAccount } from './correct/from-sketch.js'
 import { MASSING_OPS_VERSION, roofProposalsFromSketches } from './massing/ops.js'
 import { PLAN_OUTLINE_VERSION, readPlanOutline } from './plan-outline.js'
@@ -137,7 +137,7 @@ export type ConsultantWiring = {
 /** v3.54.14: what the sketch step read, accepted and changed (the rasters are not kept: they are redrawn from the sketches). */
 export type SketchSummary = { reading: Omit<SketchReading, 'elevationSketches'>; form: { decision: 'ACCEPT' | 'ROLLBACK' | 'NOT_RUN'; why: string; measuredBefore?: BuiltMeasure; measuredAfter?: BuiltMeasure }; finish: { decision: 'ACCEPT' | 'ROLLBACK' | 'NOT_RUN'; why: string }; usd: number
   /** v3.54.16: the sketches' elements as proposals of the correction registry, and what the executor did with each. */
-  semantic?: { version: string; decision: 'APPLIED' | 'NONE_KEPT' | 'NOT_RUN'; why: string; /** v3.54.18: sides taken by the named miniature convention (source order), not read. */ sidesByConvention?: Array<{ frameId: string; side: string | null; basis: 'MINIATURE_CONVENTION_SOURCE_ORDER' }>; accounts: Array<{ frameId: string; side?: string; proposals: number; agreed: number; skipped: Array<{ sketchId: string; why: string }> }>; records: PatchRecord[]; transactions: TransactionRecord[]; /** v3.54.17: each sketch held against each body's roof (SET_ROOF proposals or why not), and the side assignment it was read under. */ massing?: MassingProposalAccount[]; orientation?: OrientationHypothesis; /** v3.54.17 R3: stacks of perpendicular sketches paired into one stack with both plan coordinates. */ chimneyFusion?: FusionRecord & { version: string } } }
+  semantic?: { version: string; decision: 'APPLIED' | 'NONE_KEPT' | 'NOT_RUN'; why: string; /** v3.54.18: the sketches' finish zones proposed as SET_FINISH (sides without regions). */ finishes?: { proposed: number; skipped: Array<{ sketchId: string; why: string }> }; /** v3.54.18: sides taken by the named miniature convention (source order), not read. */ sidesByConvention?: Array<{ frameId: string; side: string | null; basis: 'MINIATURE_CONVENTION_SOURCE_ORDER' }>; accounts: Array<{ frameId: string; side?: string; proposals: number; agreed: number; skipped: Array<{ sketchId: string; why: string }> }>; records: PatchRecord[]; transactions: TransactionRecord[]; /** v3.54.17: each sketch held against each body's roof (SET_ROOF proposals or why not), and the side assignment it was read under. */ massing?: MassingProposalAccount[]; orientation?: OrientationHypothesis; /** v3.54.17 R3: stacks of perpendicular sketches paired into one stack with both plan coordinates. */ chimneyFusion?: FusionRecord & { version: string } } }
 
 /** v3.54.17: the no-model path's delivery: a mass built from the source, or the anchors it lacks. */
 export type MassingDelivery = {
@@ -1271,6 +1271,34 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
     const fusion = fuseChimneys(m2, stacks, accounts.flatMap((a) => a.proposals), pictures2)
     sem.chimneyFusion = { version: CHIMNEY_FUSION_VERSION, ...fusion.record }
     await phase('SKETCH', fusion.proposals)
+    // v3.54.18: the openings again on the model that now stands, at most twice more. A correction is judged in the
+    // order it is given: a window whose place was still taken by an opening corrected after it (OPENINGS_OVERLAP), or
+    // whose band was still filled by phantoms removed after it, is proposed afresh from the same reading — pairing and
+    // band recomputed on the new revision. What the source refused stays refused; a pass that keeps nothing ends it.
+    for (let pass = 2; pass <= 3; pass += 1) {
+      const before = stood
+      if (!before.run || before === good) break
+      const mN = before.run.reconstruction.model
+      const heldN = massingOf.get(before)?.views ?? viewsOfRun(before.run.reconstruction.facadeAlignment.views)
+      const viewsN = [...heldN, ...sketchViewsOf(mN, await allPicturesOf(before), heldN)]
+      const settled = new Map(sem.records.map((r) => [r.proposalId.replace(/@p\d$/, ''), r.status]))
+      const again = sketched.flatMap((x) => proposalsFromSketch(x.sketch as NonNullable<typeof x.sketch>, x.facade, mN, viewsN, modelRevision(mN), sketchSideOf?.[x.frameId]).proposals)
+        .filter((q) => (q.operation === 'ADD_OPENING' || q.operation === 'UPDATE_OPENING' || q.operation === 'REMOVE_OPENING') && !['REJECTED_BY_SOURCE', 'INVALID'].includes(settled.get(q.proposalId) ?? ''))
+        .map((q) => ({ ...q, proposalId: `${q.proposalId}@p${pass}` }))
+      if (again.length === 0) break
+      await phase(`SKETCH_PASS_${pass}`, again)
+      if (stood === before) break
+    }
+    // v3.54.18: the finish zones of every side whose walls carry none yet (always so on a body built without LOCAL; with
+    // LOCAL, the sides its finish consumer did not reach) — through the same registry and the same registrations
+    {
+      const m3 = stood.run?.reconstruction.model ?? m2
+      const held3 = massingOf.get(stood)?.views ?? (stood.run ? viewsOfRun(stood.run.reconstruction.facadeAlignment.views) : held)
+      const views3 = [...held3, ...sketchViewsOf(m3, await allPicturesOf(stood), held3)]
+      const fin = sketched.map((x) => finishProposalsFromSketch(x.sketch as NonNullable<typeof x.sketch>, x.facade, m3, views3, modelRevision(m3), sketchSideOf?.[x.frameId]))
+      sem.finishes = { proposed: fin.reduce((n, f) => n + f.proposals.length, 0), skipped: fin.flatMap((f) => f.skipped) }
+      await phase('SKETCH_FINISH', fin.flatMap((f) => f.proposals))
+    }
     if (asked === 0) sem.why = 'every sketch element agrees with the model, or none has a registry operation'
     else if (kept.length > 0 && stood !== good) {
       base = good
