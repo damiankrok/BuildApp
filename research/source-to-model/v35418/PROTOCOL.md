@@ -75,3 +75,14 @@ oddzielona od algorytmu: tam, gdzie prompt odczytu się nie zmienił, kod końco
   + baseline 3 × ≤ 0,45; host końcowy + kontrola ≤ 3,00. Każde żądanie rezerwuje najgorszy przypadek w księdze.
 - **Stop bez celu:** wyczerpany limit iteracji albo kosztu, albo nazwana granica źródła/reprezentacji — wtedy wynik
   zostaje częściowy lub negatywny i tak jest raportowany; miernika nie podmieniam.
+
+## 7. Poprawki reguły selekcji PRZED jakąkolwiek analizą (zapisane jawnie)
+
+Pierwsze przejście selekcji na commicie zamrożenia `37ad17c` (tylko pobranie pakietów; `trial/selection-pass1.json`):
+
+1. Pula ARCHON dała jako drugą rodzinę projekt garażu (strona nie publikuje powierzchni użytkowej). §1 mówi o projekcie
+   DOMU, więc kandydat bez opublikowanej powierzchni użytkowej jest poza zakresem (kryterium z danych strony, nie z nazwy).
+2. Klucz „rodzina widziana wcześniej" nie zdejmował tokenu wariantu ze środka nazwy (`agawa-iv-sp` przy widzianej `agawa`);
+   teraz sprawdzany jest też rdzeń nazwy. W pierwszym przejściu nie zmieniło to wyniku (kandydat i tak odpadł na elewacjach).
+
+Selekcja powtórzona z TYM SAMYM ziarnem (commit `37ad17c`). Żaden kandydat nie był analizowany ani oglądany jako model.

@@ -30,7 +30,7 @@ for publisher, pool_file in (('studioatrium', 'studioatrium-pool.txt'), ('lipins
         if any(core(url) == core(a) for a in rec.get('accepted', [])):
             rec['opened'].append({'url': url, 'opened': False, 'refused': f'a variant of the accepted family {core(url)}'})
             continue
-        if family(url) in seen:
+        if family(url) in seen or core(url) in seen:
             rec['opened'].append({'url': url, 'opened': False, 'refused': f'family {family(url)} seen before'})
             continue
         if opened >= 12: break
@@ -47,6 +47,8 @@ for publisher, pool_file in (('studioatrium', 'studioatrium-pool.txt'), ('lipins
         why = []
         if not any(r['document'] == 'FLOOR_PLAN' and r.get('storey') == 'GROUND' for r in roles): why.append('no ground-floor plan')
         if len(views) < 3: why.append(f'{len(views)} labelled elevations')
+        # v3.54.18 pre-analysis correction 1: PROTOCOL §1 is a HOUSE project — a page that publishes no usable area (a garage, an outbuilding) is outside the scope
+        if not any(f.get('key') == 'usable_area' for f in p.get('publishedFacts', [])): why.append('no published usable area (not a dwelling: outside PROTOCOL §1)')
         size = sum(os.path.getsize(os.path.join(work, 'cache', f)) for f in os.listdir(os.path.join(work, 'cache'))) if os.path.isdir(os.path.join(work, 'cache')) else 0
         if size > 250e6: why.append('the cached package exceeds the disk budget')
         entry = {'url': url, 'opened': True, 'package': os.path.basename(pkg), 'elevations': views, 'plans': [r.get('storey') for r in roles if r['document'] == 'FLOOR_PLAN'], 'sections': sum(1 for r in roles if r['document'] == 'SECTION')}

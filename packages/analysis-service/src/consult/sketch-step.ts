@@ -41,7 +41,7 @@ export type SketchStepInput = {
 export type SketchReading = {
   version: string
   printedLevels: Array<{ literal: string; value: number; hint: string; role?: string; roleFrom?: string }>
-  sketches: Array<{ facade: Facade | 'SIDE_UNSPECIFIED'; frameId: string; sketch?: ElevationSketch; check?: ProportionCheck; raw?: unknown; usd: number; failed?: string; requestId?: string }>
+  sketches: Array<{ facade: Facade | 'SIDE_UNSPECIFIED'; frameId: string; sketch?: ElevationSketch; check?: ProportionCheck; raw?: unknown; usd: number; failed?: string; requestId?: string; /** v3.54.18: the source calls it only "a side elevation": `facade` is then the source order's, not a stated side. */ sideUnstated?: true }>
   /** For the shape reader: the accepted sketches drawn at their frames' size. */
   elevationSketches: Array<{ frameId: string; raster: Raster }>
   /** For the finish consumer: the accepted sketches' zones and each one's own registration, by source byte hash. */
@@ -219,8 +219,10 @@ export async function readUnregisteredSketches(input: UnregisteredSketchInput): 
   for (const [label, facade] of Object.entries(FACADE_OF_LABEL)) {
     let best = input.frames.filter((f) => f.projection === 'ORTHOGRAPHIC_ELEVATION' && f.view === label).sort((a, b) => b.width * b.height - a.width * a.height)[0]  as (typeof input.frames)[number] | undefined
     let sideNote = ''
+    let sideUnstated = false
     if (!best && (label === 'SIDE_LEFT' || label === 'SIDE_RIGHT') && unspecified.length > 0) {
       best = unspecified.shift()
+      sideUnstated = true
       sideNote = '; the source labels this drawing only as a side elevation — which side it is was not stated (taken in the source order)'
     }
     if (!best) {
@@ -233,7 +235,7 @@ export async function readUnregisteredSketches(input: UnregisteredSketchInput): 
       continue
     }
     const r = await readElevationSketch(input.ctx, { frameId: best.frameId, raster: fr.raster, caption: fr.caption })
-    sketches.push({ facade, frameId: best.frameId, ...(r.sketch ? { sketch: r.sketch } : {}), raw: r.raw, usd: r.usd, ...(r.failed ? { failed: r.failed } : {}), ...(r.requestId ? { requestId: r.requestId } : {}) })
+    sketches.push({ facade, frameId: best.frameId, ...(r.sketch ? { sketch: r.sketch } : {}), raw: r.raw, usd: r.usd, ...(r.failed ? { failed: r.failed } : {}), ...(r.requestId ? { requestId: r.requestId } : {}), ...(sideUnstated ? { sideUnstated: true as const } : {}) })
     sides.push({ facade, frameId: best.frameId, status: r.sketch ? 'READ' : 'FAILED', why: r.sketch ? `read UNCHECKED: nothing to check its proportions against (${input.missingAnchors.join(', ')})${sideNote}` : r.failed ?? 'no sketch' })
   }
   return { sketches, missingAnchors: [...input.missingAnchors], usd: Math.round(sketches.reduce((a, s) => a + s.usd, 0) * 1e6) / 1e6, sides }

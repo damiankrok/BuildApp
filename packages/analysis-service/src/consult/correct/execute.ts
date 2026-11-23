@@ -121,7 +121,7 @@ export type PatchRecord = {
   /** What the patch was bound to: the source frame and its pixels, the side, the host, the ids it creates or changes. */
   bound?: { frameId: string; side?: Side; box?: Box; hostId?: string; ids: string[]; depth?: 'SECOND_VIEW' | 'ROOF_MEET_LINE' | 'DISPLAY_ASSUMPTION'; values?: Record<string, number> }
   source?: { frameId: string; sourceByteHash: string; crop?: Box }
-  gate?: { winner: HypothesisVerdict['winner']; proposedZ: number | null; currentZ?: number | null; nullBoxes: number; why: string; /** 1.1.0: BOX, POLYGON (a raked head on either side) or FILL (a change of kind on the same shape). */ measure?: 'BOX' | 'POLYGON' | 'FILL' | 'REGION'; fill?: Pick<FillVerdict, 'observed' | 'features'> }
+  gate?: { winner: HypothesisVerdict['winner']; proposedZ: number | null; currentZ?: number | null; nullBoxes: number; /** 1.3.0: the band the z was read against (absent: JOINT). */ nullMode?: 'JOINT' | 'CLAIMS_ROBUST'; why: string; /** 1.1.0: BOX, POLYGON (a raked head on either side) or FILL (a change of kind on the same shape). */ measure?: 'BOX' | 'POLYGON' | 'FILL' | 'REGION'; fill?: Pick<FillVerdict, 'observed' | 'features'> }
   measure?: { builtBox?: Box; iouWithProposal?: number; builtSupportZ?: number | null; headErrorPx?: number; builtKind?: string; sourceVerified: boolean | null; why: string }
   commands?: BuildingCommand[]
   /** v3.54.17: how a printed witness was bound to the target (its observation, the body both stand on, the datum). */
@@ -310,7 +310,9 @@ export type Refusal = { status: PatchStatus; code: string; why: string; record?:
 export type BindPlan = { frameId: string; toWorld: (px: number, py: number) => { x: number; z: number } }
 /** v3.54.17 R3: facts the publisher's page states in words (not printed on a drawing): the roof's pitch. */
 export type PageFacts = { roofPitchDeg?: number }
-export type Ctx = { model: CanonicalBuildingModel; views: BindView[]; pictures: readonly BindPicture[]; witnesses: readonly PrintedWitness[]; massing?: MassingObservations; plans?: readonly BindPlan[]; facts?: PageFacts }
+export type Ctx = { model: CanonicalBuildingModel; views: BindView[]; pictures: readonly BindPicture[]; witnesses: readonly PrintedWitness[]; massing?: MassingObservations; plans?: readonly BindPlan[]; facts?: PageFacts; claims?: FacadeClaims }
+/** v3.54.18 (gate 1.3.0): per source frame, every opening box the reading of that picture draws (frame pixels) — the places it does NOT call plain wall. */
+export type FacadeClaims = ReadonlyMap<string, readonly Box[]>
 
 const short = (s: string): string => sha256Hex(s).slice(0, 6)
 
@@ -391,8 +393,9 @@ function bindOpening(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
     const src = ctx.pictures.find((x) => x.frameId === view.frameId) as BindPicture
     const box = boxOfSpan(view, ofExisting)
     const others = openingBoxes(m, view).filter((o) => o.id !== target.id).map((o) => o.box)
-    const s = supportOf(src.raster, box, facadePx(m, view), [box, ...others], tolPxOf(view))
-    const gate = { winner: (s.z === null ? 'UNDECIDED' : s.z < 1 ? 'PROPOSED' : s.supported ? 'CURRENT' : 'UNDECIDED') as HypothesisVerdict['winner'], proposedZ: null, currentZ: s.z, nullBoxes: s.null.n, why: s.z === null ? 'too few free places on the band to judge' : s.z < 1 ? `the source draws nothing distinct where ${target.id} stands (z ${s.z} < 1)` : s.supported ? `the source draws an opening where ${target.id} stands (z ${s.z}): it is not removed` : `the source is not clear at ${target.id} (z ${s.z})` }
+    const claimed = ctx.claims?.get(view.frameId)
+    const s = supportOf(src.raster, box, facadePx(m, view), [box, ...others], tolPxOf(view), undefined, claimed ? [box, ...claimed] : undefined)
+    const gate = { winner: (s.z === null ? 'UNDECIDED' : s.z < 1 ? 'PROPOSED' : s.supported ? 'CURRENT' : 'UNDECIDED') as HypothesisVerdict['winner'], proposedZ: null, currentZ: s.z, nullBoxes: s.null.n, ...(s.null.mode ? { nullMode: s.null.mode } : {}), why: s.z === null ? 'too few free places on the band to judge' : s.z < 1 ? `the source draws nothing distinct where ${target.id} stands (z ${s.z} < 1)` : s.supported ? `the source draws an opening where ${target.id} stands (z ${s.z}): it is not removed` : `the source is not clear at ${target.id} (z ${s.z})` }
     const record = { bound: { frameId: view.frameId, side: view.side, box, hostId: target.wallId, ids: [target.id] }, source: { frameId: src.frameId, sourceByteHash: src.sourceByteHash, crop: box }, gate }
     if (gate.winner === 'CURRENT') return { status: 'REJECTED_BY_SOURCE', code: 'SOURCE_SHOWS_OPENING', why: gate.why, record }
     if (gate.winner === 'UNDECIDED') return { status: 'NEEDS_EVIDENCE', code: 'SOURCE_UNDECIDED', why: gate.why, record }
@@ -442,6 +445,8 @@ function bindOpening(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
   const proposedShape: Shape = typeof f.headLeftY === 'number' && typeof f.headRightY === 'number' ? { ...box, headLeftY: toFrameY(pic, p, f.headLeftY), headRightY: toFrameY(pic, p, f.headRightY), y0: Math.min(box.y0, toFrameY(pic, p, f.headLeftY), toFrameY(pic, p, f.headRightY)) } : box
   const currentShape = existing ? shapeOfOpening(m, existing, view) : undefined
   let g: HypothesisVerdict
+  // v3.54.18: the openings the reading of THIS picture draws — where the joint band is too thin, the band is its plain wall
+  const claimed = ctx.claims?.get(pic.frameId)
   let fillFrom: OpeningPatchKindExact | undefined
   let fillRecord: Pick<FillVerdict, 'observed' | 'features'> | undefined
   if (existing && currentShape && sameShape(proposedShape, currentShape)) {
@@ -450,10 +455,10 @@ function bindOpening(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
     const fv = compareFill(pic.raster, proposedShape, kind as OpeningPatchKindExact, currentKind)
     fillFrom = currentKind
     fillRecord = { observed: fv.observed, features: fv.features }
-    const sup = supportOf(pic.raster, proposedShape, facadePx(m, view), [proposedShape, ...others.map((o) => o.box)], tolPxOf(view))
+    const sup = supportOf(pic.raster, proposedShape, facadePx(m, view), [proposedShape, ...others.map((o) => o.box)], tolPxOf(view), undefined, claimed ? [proposedShape, ...claimed] : undefined)
     g = { winner: fv.winner, proposed: sup, why: fv.why }
-  } else g = compareHypotheses(pic.raster, proposedShape, currentShape, facadePx(m, view), others.map((o) => o.box), tolPxOf(view))
-  const gate = { winner: g.winner, proposedZ: g.proposed.z, ...(g.current ? { currentZ: g.current.z } : {}), nullBoxes: g.proposed.null.n, why: g.why, measure: fillRecord ? ('FILL' as const) : (g.measure ?? 'BOX'), ...(fillRecord ? { fill: fillRecord } : {}) }
+  } else g = compareHypotheses(pic.raster, proposedShape, currentShape, facadePx(m, view), others.map((o) => o.box), tolPxOf(view), claimed)
+  const gate = { winner: g.winner, proposedZ: g.proposed.z, ...(g.current ? { currentZ: g.current.z } : {}), nullBoxes: g.proposed.null.n, ...(g.proposed.null.mode ? { nullMode: g.proposed.null.mode } : {}), why: g.why, measure: fillRecord ? ('FILL' as const) : (g.measure ?? 'BOX'), ...(fillRecord ? { fill: fillRecord } : {}) }
   const id = existing?.id ?? `op-fix-${view.side.toLowerCase()}-${short(p.proposalId)}`
   const L = wallLen(host)
   const ax = alongAxis(view.side)
@@ -1023,6 +1028,8 @@ export type ExecuteInput = {
    * openings and stacks after it are placed through. `held` are the other registrations at that moment.
    */
   derivedViews?: (model: CanonicalBuildingModel, held: readonly BindView[]) => BindView[]
+  /** v3.54.18: what each source picture's reading draws as openings (the gate's fallback band is that reading's plain wall). */
+  claims?: FacadeClaims
   /** v3.54.17 R3: the run's registered plan sheets (SET_OUTLINE from a printed dimension). */
   plans?: readonly BindPlan[]
   /** v3.54.17 R3: facts of the project page (SET_ROOF reads the stated pitch). */
@@ -1112,7 +1119,7 @@ export function executeCorrections(input: ExecuteInput): CorrectionOutcome {
     const pending: Array<{ p: CorrectionProposal; bound?: Bound; view?: BindView; extra: Partial<PatchRecord> }> = []
     let refusal: { p: CorrectionProposal; r: Refusal } | undefined
     for (const p of ordered) {
-      const ctx: Ctx = { model: working, views: workingViews, pictures: input.pictures, witnesses: input.witnesses ?? [], ...(input.massing ? { massing: input.massing } : {}), ...(input.plans ? { plans: input.plans } : {}), ...(input.facts ? { facts: input.facts } : {}) }
+      const ctx: Ctx = { model: working, views: workingViews, pictures: input.pictures, witnesses: input.witnesses ?? [], ...(input.massing ? { massing: input.massing } : {}), ...(input.plans ? { plans: input.plans } : {}), ...(input.facts ? { facts: input.facts } : {}), ...(input.claims ? { claims: input.claims } : {}) }
       if (p.operation === 'ASSIGN_VIEW') {
         const b = bindView(ctx, p)
         if ('status' in b) {
@@ -1194,7 +1201,8 @@ export function executeCorrections(input: ExecuteInput): CorrectionOutcome {
         const ov = built ? iou(built, e.box) : 0
         const others = openingBoxes(working, e.view).filter((q) => q.id !== e.id).map((q) => q.box)
         // A2: the built SHAPE (head ends) back in the source, and the built KIND — not the bounding box alone
-        const sup = builtShape && pic ? supportOf(pic.raster, builtShape, facadePx(working, e.view), [builtShape, ...others], tolPxOf(e.view)) : undefined
+        const claimedHere = input.claims?.get(e.view.frameId)
+        const sup = builtShape && pic ? supportOf(pic.raster, builtShape, facadePx(working, e.view), [builtShape, ...others], tolPxOf(e.view), undefined, claimedHere ? [builtShape, ...claimedHere] : undefined) : undefined
         const builtKind = o ? kindOfOpening(working, o.id) : undefined
         const fillOk = e.fillChangeFrom && builtShape && pic ? compareFill(pic.raster, builtShape, e.openingKind, e.fillChangeFrom).winner === 'PROPOSED' : true
         const hErr = builtShape ? headError(builtShape, e.shape) : Infinity

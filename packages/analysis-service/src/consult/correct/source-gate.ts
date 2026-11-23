@@ -20,7 +20,7 @@
  */
 import type { Raster } from '@buildapp/source-package'
 
-export const SOURCE_GATE_VERSION = '1.2.0' as const
+export const SOURCE_GATE_VERSION = '1.3.0' as const
 
 export type Box = { x0: number; y0: number; x1: number; y1: number }
 /** A box whose top edge may be raked: from (x0, headLeftY) to (x1, headRightY); y1 stays the bottom. */
@@ -207,13 +207,15 @@ export function supportNearShape(r: Raster, shape: Shape, tolPx: number): number
 
 const overlaps = (a: Box, b: Box): boolean => Math.min(a.x1, b.x1) > Math.max(a.x0, b.x0) && Math.min(a.y1, b.y1) > Math.max(a.y0, b.y0)
 
-export type NullBand = { mean: number; std: number; n: number }
+/** `mode` (1.3.0): JOINT — places free of both hypotheses' elements (mean / standard deviation, as 1.0.0); CLAIMS_ROBUST — the
+ * places the proposing reading itself calls plain wall, when the joint band is too thin (median / scaled MAD). */
+export type NullBand = { mean: number; std: number; n: number; mode?: 'JOINT' | 'CLAIMS_ROBUST' }
 
 /**
  * Same-size boxes on the same rows, across the facade's columns, none overlapping `exclude` (the element's own place
  * and every other element the model or the proposal holds there): the picture's own texture of "no element here".
  */
-export function nullBand(r: Raster, box: Shape, facade: { x0: number; x1: number; y0?: number; y1?: number }, exclude: readonly Box[], tolPx: number, asPolygon = false): NullBand {
+export function nullBand(r: Raster, box: Shape, facade: { x0: number; x1: number; y0?: number; y1?: number }, exclude: readonly Box[], tolPx: number, asPolygon = false, robust = false): NullBand {
   const w = box.x1 - box.x0
   const h = box.y1 - box.y0
   const vals: number[] = []
@@ -231,6 +233,15 @@ export function nullBand(r: Raster, box: Shape, facade: { x0: number; x1: number
     vals.push(asPolygon ? supportNearShape(r, shift(box, x - box.x0, y - box.y0), tolPx) : supportNear(r, b, tolPx))
   }
   const n = vals.length
+  if (robust) {
+    // the centre and spread of the band's bulk: a minority of places that do hold an element (one the proposing reading
+    // missed) moves neither, so such an element still stands out against the band instead of hiding in it
+    const sorted = [...vals].sort((a, b) => a - b)
+    const med = (v: number[]): number => (v.length === 0 ? 0 : v.length % 2 ? v[(v.length - 1) / 2] : (v[v.length / 2 - 1] + v[v.length / 2]) / 2)
+    const m0 = med(sorted)
+    const mad = med(sorted.map((v) => Math.abs(v - m0)).sort((a, b) => a - b))
+    return { mean: m0, std: 1.4826 * mad, n, mode: 'CLAIMS_ROBUST' }
+  }
   const mean = n > 0 ? vals.reduce((a, v) => a + v, 0) / n : 0
   const std = n > 1 ? Math.sqrt(vals.reduce((a, v) => a + (v - mean) ** 2, 0) / (n - 1)) : 0
   return { mean, std, n }
@@ -239,9 +250,13 @@ export function nullBand(r: Raster, box: Shape, facade: { x0: number; x1: number
 export type Support = { raw: number; z: number | null; null: NullBand; supported: boolean | null }
 
 /** A box's support in standard deviations above its own picture's null band; null when the band is too thin to decide. */
-export function supportOf(r: Raster, box: Shape, facade: { x0: number; x1: number; y0?: number; y1?: number }, exclude: readonly Box[], tolPx: number, asPolygon = isRaked(box)): Support {
+export function supportOf(r: Raster, box: Shape, facade: { x0: number; x1: number; y0?: number; y1?: number }, exclude: readonly Box[], tolPx: number, asPolygon = isRaked(box), claims?: readonly Box[]): Support {
   const raw = asPolygon ? supportNearShape(r, box, tolPx) : supportNear(r, box, tolPx)
-  const band = nullBand(r, box, facade, exclude, tolPx, asPolygon)
+  let band = nullBand(r, box, facade, exclude, tolPx, asPolygon)
+  // 1.3.0: a wall the MODEL fills with openings (they may be the very error under test) leaves no joint place free. The
+  // band is then taken where the proposing reading of this picture calls the wall plain — its own openings and the
+  // hypotheses excluded, the model's other openings not — and read robustly. The measure is still the original picture.
+  if (band.n < MIN_NULL && claims) band = nullBand(r, box, facade, claims, tolPx, asPolygon, true)
   if (band.n < MIN_NULL) return { raw, z: null, null: band, supported: null }
   const z = (raw - band.mean) / Math.max(band.std, 0.01)
   return { raw, z: Math.round(z * 100) / 100, null: band, supported: z >= SUPPORT_Z_MIN }
@@ -254,16 +269,18 @@ export type HypothesisVerdict = { winner: 'PROPOSED' | 'CURRENT' | 'UNDECIDED'; 
  * when the source supports it and it beats the current by HYPOTHESIS_Z_MARGIN (or the current is not supported at all);
  * the current wins when it beats the proposal by that margin; otherwise the picture does not decide.
  */
-export function compareHypotheses(r: Raster, proposed: Shape, current: Shape | undefined, facade: { x0: number; x1: number; y0?: number; y1?: number }, others: readonly Box[], tolPx: number): HypothesisVerdict {
-  const v = compareHypothesesOn(r, proposed, current, facade, others, tolPx)
+export function compareHypotheses(r: Raster, proposed: Shape, current: Shape | undefined, facade: { x0: number; x1: number; y0?: number; y1?: number }, others: readonly Box[], tolPx: number, claims?: readonly Box[]): HypothesisVerdict {
+  const v = compareHypothesesOn(r, proposed, current, facade, others, tolPx, claims)
   return { ...v, measure: isRaked(proposed) || isRaked(current) ? 'POLYGON' : 'BOX' }
 }
-function compareHypothesesOn(r: Raster, proposed: Shape, current: Shape | undefined, facade: { x0: number; x1: number; y0?: number; y1?: number }, others: readonly Box[], tolPx: number): HypothesisVerdict {
+function compareHypothesesOn(r: Raster, proposed: Shape, current: Shape | undefined, facade: { x0: number; x1: number; y0?: number; y1?: number }, others: readonly Box[], tolPx: number, claims?: readonly Box[]): HypothesisVerdict {
   // A2: a raked head on either side scores BOTH as polygons — one bounding box with two heads is two hypotheses
   const asPolygon = isRaked(proposed) || isRaked(current)
   const exclude = [proposed, ...(current ? [current] : []), ...others]
-  const p = supportOf(r, proposed, facade, exclude, tolPx, asPolygon)
-  const c = current ? supportOf(r, current, facade, exclude, tolPx, asPolygon) : undefined
+  // 1.3.0: both hypotheses are read against ONE band — the joint one, or (too thin) the proposing reading's plain wall
+  const own = claims ? [proposed, ...(current ? [current] : []), ...claims] : undefined
+  const p = supportOf(r, proposed, facade, exclude, tolPx, asPolygon, own)
+  const c = current ? supportOf(r, current, facade, p.null.mode === 'CLAIMS_ROBUST' && own ? own : exclude, tolPx, asPolygon, own) : undefined
   return decide(p, c)
 }
 
