@@ -230,10 +230,17 @@ export async function analyzeSourcePackage(pkg: SourcePackage, options: AnalyzeO
       continue
     }
     const verdict = verdicts.get(asset.id)
+    // v3.54.18 R2: a drawing the publisher captions an elevation and whose pixels show ANOTHER ORTHOGRAPHIC drawing (a
+    // plain gable wall under its roof reads as a "section": Alberto and Aurora each lost a whole gable elevation here,
+    // and the phantom windows of that side were never contradicted by anything) keeps its frame — it stays a source a
+    // later reader may look at — while this analyzer's own facade extractors and vision tasks still do not read it.
+    // A picture whose pixels are a photograph, a render or an interior is refused whole, as before.
+    let contentRefusedOrthographic = false
     if (verdict?.decision === 'VETOED') {
       builder.unresolved(`the ${document.toLowerCase().replace(/_/g, ' ')} reading of asset ${asset.id}`, verdict.why, 'NOT_ATTEMPTED', asset.id)
       skipped.push({ assetId: asset.id, reason: `content: ${verdict.why}` })
-      continue
+      if (!(verdict.claimedUse === 'FACADE' && verdict.projection === 'ORTHOGRAPHIC' && document === 'ELEVATION')) continue
+      contentRefusedOrthographic = true
     }
     const fetched = await options.bytes(variant.url)
     if (!fetched) {
@@ -289,6 +296,13 @@ export async function analyzeSourcePackage(pkg: SourcePackage, options: AnalyzeO
     // still declared, because a perspective camera is solved from its raster, and it is refused by name instead of
     // being read as a facade (`readsAsFacade`).
     const perspectiveRefused = document === 'PERSPECTIVE_RENDER' && !readsAsFacade(roles)
+    if (contentRefusedOrthographic) {
+      // the frame is declared, nothing is read from it here (named above, with the classifier's reason)
+      if (options.retainPrepared === false) delete analysis.prepared
+      tell({ step: 'DRAWING_READ', asset, observations: [], size: prepared.size })
+      assets.push(analysis)
+      continue
+    }
     if (perspectiveRefused) {
       builder.unresolved(`facade observations on the perspective render ${asset.id}`, `the facade extractors and the facade vision task read orthographic views only and this picture's projection is ${roles.projection}, so nothing on it was read as a facade`, 'NOT_ATTEMPTED', asset.id)
       skipped.push({ assetId: asset.id, reason: `facade extractors not run: projection ${roles.projection} is not orthographic` })

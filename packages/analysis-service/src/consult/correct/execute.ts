@@ -47,7 +47,7 @@ import { resolveWitness, WITNESS_RESOLVER_VERSION } from './resolve.js'
 import { bindBuildMassing, bindSetOutline, bindSetRoof, MAX_OVERHANG_M } from '../massing/ops.js'
 import type { MassingObservations } from '../massing/ops.js'
 
-export const CORRECTION_EXECUTOR_VERSION = '1.6.0' as const
+export const CORRECTION_EXECUTOR_VERSION = '1.7.0' as const
 
 export type Side = 'FRONT' | 'RIGHT' | 'REAR' | 'LEFT'
 export const SIDES: readonly Side[] = ['FRONT', 'RIGHT', 'REAR', 'LEFT']
@@ -214,6 +214,28 @@ const boxOfSpan = (v: BindView, s: { a0: number; a1: number; y0: number; y1: num
   return { x0: Math.min(...xs), x1: Math.max(...xs), y0: pyOf(v.projection, s.y1), y1: pyOf(v.projection, s.y0) }
 }
 /** v3.54.16: the model's EXTERIOR openings on one side, in metres along the side's axis and up (interior doors never). */
+/**
+ * v3.54.18 R2 — the gaps a LOCAL model traced on the PLAN, kept as evidence when its body is replaced. The place of an
+ * opening along its wall is read from one drawing (the plan), the elevation reading draws it on another: where the two
+ * give the same span, they are two drawings agreeing — whichever body stands. Only gaps whose place came from the plan
+ * are taken; the assumed sill and height of such an opening are no evidence and are not carried.
+ */
+export type PlanGap = { id: string; side: Side; a0: number; a1: number; storeyLo: number; storeyHi: number }
+export function planGapsOf(m: CanonicalBuildingModel): PlanGap[] {
+  const out: PlanGap[] = []
+  const fromPlan = (v: string | undefined): boolean => v === 'SOURCE_DERIVED' || v === 'SOURCE_EXACT'
+  for (const o of m.openings) {
+    const ev = (o as { evidence?: { properties?: Record<string, string> } }).evidence?.properties
+    if (!ev || !fromPlan(ev.offset) || !fromPlan(ev.width)) continue
+    const sp = openingSpan(m, o)
+    if (!sp || sp.wall.kind !== 'EXTERIOR') continue
+    const level = m.levels.find((l) => l.id === sp.wall.levelId)
+    if (!level) continue
+    out.push({ id: o.id, side: sp.side, a0: r6(sp.a0), a1: r6(sp.a1), storeyLo: level.elevation, storeyHi: level.elevation + level.height })
+  }
+  return out
+}
+
 export function sideOpeningSpans(m: CanonicalBuildingModel, side: Side): Array<{ id: string; a0: number; a1: number; b0: number; b1: number }> {
   return m.openings.flatMap((o) => {
     const s = openingSpan(m, o)
@@ -312,7 +334,7 @@ export type Refusal = { status: PatchStatus; code: string; why: string; record?:
 export type BindPlan = { frameId: string; toWorld: (px: number, py: number) => { x: number; z: number } }
 /** v3.54.17 R3: facts the publisher's page states in words (not printed on a drawing): the roof's pitch. */
 export type PageFacts = { roofPitchDeg?: number }
-export type Ctx = { model: CanonicalBuildingModel; views: BindView[]; pictures: readonly BindPicture[]; witnesses: readonly PrintedWitness[]; massing?: MassingObservations; plans?: readonly BindPlan[]; facts?: PageFacts; claims?: FacadeClaims; adopted?: ReadonlySet<string> }
+export type Ctx = { model: CanonicalBuildingModel; views: BindView[]; pictures: readonly BindPicture[]; witnesses: readonly PrintedWitness[]; planGaps?: readonly PlanGap[]; massing?: MassingObservations; plans?: readonly BindPlan[]; facts?: PageFacts; claims?: FacadeClaims; adopted?: ReadonlySet<string> }
 /** v3.54.18 (gate 1.3.0): per source frame, every opening box the reading of that picture draws (frame pixels) — the places it does NOT call plain wall. */
 export type FacadeClaims = ReadonlyMap<string, readonly Box[]>
 
@@ -517,8 +539,19 @@ function bindOpening(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
   const evp = (existing as { evidence?: { properties?: Record<string, string> } } | undefined)?.evidence?.properties
   const fromPlan = (v: string | undefined): boolean => v === 'SOURCE_DERIVED' || v === 'SOURCE_EXACT'
   const spanShare = existing && ofExisting ? (Math.min(a1, ofExisting.a1) - Math.max(a0, ofExisting.a0)) / Math.max(a1 - a0, ofExisting.a1 - ofExisting.a0) : 0
-  const crossWitness = (g.winner === 'UNDECIDED' || (g.winner === 'CURRENT' && g.proposed.supported === true)) && !fillRecord && !!existing && !!evp && fromPlan(evp.offset) && fromPlan(evp.width) && evp.sill === 'ASSUMED' && evp.height === 'ASSUMED' && spanShare >= PLAN_SPAN_AGREE && g.proposed.z !== null && g.proposed.z >= SUPPORT_Z_MIN - HYPOTHESIS_Z_MARGIN
-  if (crossWitness) {
+  // v3.54.18 R2 — the same rule where the body was REPLACED: the proposal adds an opening on a wall that has none there, and
+  // the replaced LOCAL model had traced a gap of that span on the plan (same side, same storey, ≥ 70 % of the longer span
+  // shared — a wall-wide gap witnesses nothing). The picture must not refute it. Never source-verified.
+  const yMid = (y0 + y1) / 2
+  const gapHit = !existing && ctx.planGaps ? ctx.planGaps.filter((w) => w.side === view.side && yMid >= w.storeyLo && yMid <= w.storeyHi).map((w) => ({ w, share: (Math.min(a1, w.a1) - Math.max(a0, w.a0)) / Math.max(a1 - a0, w.a1 - w.a0) })).sort((x, z) => z.share - x.share)[0] : undefined
+  const gapWitness = g.winner === 'UNDECIDED' && !fillRecord && !existing && !!gapHit && gapHit.share >= PLAN_SPAN_AGREE && g.proposed.z !== null && g.proposed.z >= SUPPORT_Z_MIN - HYPOTHESIS_Z_MARGIN
+  const spanWitness = (g.winner === 'UNDECIDED' || (g.winner === 'CURRENT' && g.proposed.supported === true)) && !fillRecord && !!existing && !!evp && fromPlan(evp.offset) && fromPlan(evp.width) && evp.sill === 'ASSUMED' && evp.height === 'ASSUMED' && spanShare >= PLAN_SPAN_AGREE && g.proposed.z !== null && g.proposed.z >= SUPPORT_Z_MIN - HYPOTHESIS_Z_MARGIN
+  const crossWitness = spanWitness || gapWitness
+  if (gapWitness && gapHit) {
+    ;(gate as { crossWitness?: string }).crossWitness = 'PLAN_GAP'
+    gate.why = `${g.why} — but the plan shows a gap of this span on this side (${gapHit.w.id} of the LOCAL model whose body was replaced: ${gapHit.w.a0.toFixed(2)}..${gapHit.w.a1.toFixed(2)} m, ${Math.round(gapHit.share * 100)} % shared with this elevation reading): two drawings give the same opening, and the picture does not refute it (z ${g.proposed.z})`
+  }
+  if (spanWitness) {
     ;(gate as { crossWitness?: string }).crossWitness = 'PLAN_SPAN'
     gate.why = `${g.why} — but the model's ${existing?.id} keeps its place from the plan (a traced gap; ${Math.round(spanShare * 100)} % of the span shared with this elevation reading) and its sill and height were ASSUMED, never read: the reading replaces the assumption, and the picture does not refute it (z ${g.proposed.z})`
   }
@@ -1153,6 +1186,8 @@ export type ExecuteInput = {
   derivedViews?: (model: CanonicalBuildingModel, held: readonly BindView[]) => BindView[]
   /** v3.54.18: what each source picture's reading draws as openings (the gate's fallback band is that reading's plain wall). */
   claims?: FacadeClaims
+  /** v3.54.18 R2: plan gaps of a LOCAL body that was replaced — a second drawing's witness for an added opening. */
+  planGaps?: readonly PlanGap[]
   /** v3.54.18: the frames whose reading the run adopted as a whole facade (supported on most openings, refuted on none). */
   adopted?: ReadonlySet<string>
   /** v3.54.17 R3: the run's registered plan sheets (SET_OUTLINE from a printed dimension). */
@@ -1249,7 +1284,7 @@ export function executeCorrections(input: ExecuteInput): CorrectionOutcome {
     const pending: Array<{ p: CorrectionProposal; bound?: Bound; view?: BindView; extra: Partial<PatchRecord> }> = []
     let refusal: { p: CorrectionProposal; r: Refusal } | undefined
     for (const p of ordered) {
-      const ctx: Ctx = { model: working, views: workingViews, pictures: input.pictures, witnesses: input.witnesses ?? [], ...(input.massing ? { massing: input.massing } : {}), ...(input.plans ? { plans: input.plans } : {}), ...(input.facts ? { facts: input.facts } : {}), ...(input.claims ? { claims: input.claims } : {}), ...(input.adopted ? { adopted: input.adopted } : {}) }
+      const ctx: Ctx = { model: working, views: workingViews, pictures: input.pictures, witnesses: input.witnesses ?? [], ...(input.planGaps ? { planGaps: input.planGaps } : {}), ...(input.massing ? { massing: input.massing } : {}), ...(input.plans ? { plans: input.plans } : {}), ...(input.facts ? { facts: input.facts } : {}), ...(input.claims ? { claims: input.claims } : {}), ...(input.adopted ? { adopted: input.adopted } : {}) }
       if (p.operation === 'ASSIGN_VIEW') {
         const b = bindView(ctx, p)
         if ('status' in b) {

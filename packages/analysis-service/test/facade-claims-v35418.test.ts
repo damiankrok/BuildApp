@@ -16,7 +16,7 @@ import { applyCommands } from '@buildapp/commands'
 import type { BuildingCommand } from '@buildapp/commands'
 import { createEmptyModel } from '@buildapp/model'
 import type { CanonicalBuildingModel } from '@buildapp/model'
-import { executeCorrections, modelRevision } from '../src/consult/correct/execute.js'
+import { executeCorrections, modelRevision, planGapsOf } from '../src/consult/correct/execute.js'
 import type { BindPicture, BindView, CorrectionProposal } from '../src/consult/correct/execute.js'
 import { SOURCE_GATE_VERSION, supportOf } from '../src/consult/correct/source-gate.js'
 import { FACADE_ADOPTION, facadeAdoption } from '../src/consult/correct/from-sketch.js'
@@ -445,5 +445,81 @@ describe('v3.54.18 gate 1.3.0: an element of the wall\'s own lightness', () => {
   it('COUNTER-TRIAL: plain wall of that picture is still not an element', () => {
     const plain = boxOf(1.5, 2.5, 0, 2.1)
     expect(supportOf(raster, plain, facade, [plain, door], 2, false, [plain, door]).supported).not.toBe(true)
+  })
+})
+
+// ---- v3.54.18 R2: the plan's gaps stay evidence when the body is replaced -------------------------------------------------
+/**
+ * Reproduced from Alberto (R2): the arbitration replaced LOCAL's body, and with it went the gaps LOCAL had traced on the
+ * plan — the second drawing that had let three elevation readings in. On the new body every opening of a crowded facade
+ * was "undecided" again. A gap of the replaced model is kept as a witness: same side, same storey, the same span.
+ */
+describe('v3.54.18 R2 plan gaps of a replaced body: two drawings agreeing on one opening', () => {
+  // a bare wall and a window drawn so faintly that the picture alone neither supports nor refutes it (z between 1 and 2)
+  const faintWindow = (darker: number): BindPicture => {
+    const data = new Uint8ClampedArray(W * H * 4)
+    let seed = 11
+    const rnd = (): number => ((seed = (seed * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff)
+    for (let y = 0; y < H; y += 1) for (let x = 0; x < W; x += 1) {
+      const n = Math.round((rnd() - 0.5) * 18)
+      const inWall = x >= col(0) && x <= col(10) && y <= row(0) && y >= row(2.8)
+      const inRoof = x >= col(-0.4) && x <= col(10.4) && y < row(2.8) && y >= row(5.4)
+      const inWin = x >= col(4.4) && x <= col(5.6) && y >= row(2.1) && y <= row(0.9)
+      const c = inWin ? [228 - darker + n, 218 - darker + n, 198 - darker + n] : inWall ? [228 + n, 218 + n, 198 + n] : inRoof ? [92 + n, 92 + n, 98 + n] : y > row(0) ? [120 + n, 150 + n, 100 + n] : [225, 235, 245]
+      data.set([c[0], c[1], c[2], 255], (y * W + x) * 4)
+    }
+    return { ...picture, raster: { width: W, height: H, data }, sourceByteHash: 'e'.repeat(64) }
+  }
+  const bare = (): CanonicalBuildingModel => {
+    const r = applyCommands(createEmptyModel('m-bare', 'bare'), [
+      { type: 'createBuilding', id: 'b', name: 'bare' },
+      { type: 'createLevel', id: 'l0', name: 'Ground', index: 0, elevation: 0, height: 2.8 },
+      { type: 'createWallRing', id: 'g', levelId: 'l0', polygon: [{ x: 0, z: 0 }, { x: 10, z: 0 }, { x: 10, z: 8 }, { x: 0, z: 8 }], thickness: 0.3, height: 2.8, baseOffset: 0, kind: 'EXTERIOR', cornerOwnership: 'ALTERNATE' },
+    ] as BuildingCommand[])
+    if (r.failedAt !== undefined) throw new Error(`fixture: ${JSON.stringify(r.results[r.failedAt])}`)
+    return r.model
+  }
+  // the replaced LOCAL model: the plan's gap at 4.4–5.6 m (assumed sill and height), and a wall-wide "gap" on the right side
+  const replaced = (): CanonicalBuildingModel => {
+    const ev = { status: 'ASSUMED', interpretation: 'a 1.20 m gap in the front wall', properties: { offset: 'SOURCE_DERIVED', width: 'SOURCE_DERIVED', sill: 'ASSUMED', height: 'ASSUMED' } }
+    const r = applyCommands(bare(), [
+      { type: 'cutOpening', id: 'gap-front', wallId: 'g-w0', kind: 'WINDOW', offset: 4.4, sill: 0.9, width: 1.2, height: 1.3, evidence: ev },
+      { type: 'cutOpening', id: 'assumed-only', wallId: 'g-w0', kind: 'WINDOW', offset: 7.5, sill: 0.9, width: 1.2, height: 1.3, evidence: { status: 'ASSUMED', interpretation: 'no plan gap', properties: { offset: 'ASSUMED', width: 'ASSUMED', sill: 'ASSUMED', height: 'ASSUMED' } } },
+    ] as BuildingCommand[])
+    if (r.failedAt !== undefined) throw new Error(`fixture: ${JSON.stringify(r.results[r.failedAt])}`)
+    return r.model
+  }
+  const add = (m: CanonicalBuildingModel, x0 = 4.4, x1 = 5.6): CorrectionProposal => prop(m, { proposalId: `gap-${x0}`, operation: 'ADD_OPENING', targetId: 'FRONT', patch: { box: boxOf(x0, x1, 0.9, 2.1), kind: 'WINDOW' } })
+
+  it('only gaps whose place came from the plan are witnesses', () => {
+    const gaps = planGapsOf(replaced())
+    expect(gaps.map((g) => g.id)).toEqual(['gap-front'])
+    expect(gaps[0]).toMatchObject({ side: 'FRONT', a0: 4.4, a1: 5.6, storeyLo: 0, storeyHi: 2.8 })
+  })
+
+  it('REPRODUCES the loss: without the gaps the faint window is undecided; with them it is built, as a cross-witness, never source-verified', () => {
+    const pic = faintWindow(33)
+    const m = bare()
+    const alone = executeCorrections({ model: m, views: [view], pictures: [pic], proposals: [add(m)] })
+    expect(alone.records[0].code).toBe('SOURCE_UNDECIDED')
+    const withGaps = executeCorrections({ model: m, views: [view], pictures: [pic], planGaps: planGapsOf(replaced()), proposals: [add(m)] })
+    expect(withGaps.records[0].status, withGaps.records[0].why).toBe('COMMITTED')
+    expect((withGaps.records[0].gate as { crossWitness?: string }).crossWitness).toBe('PLAN_GAP')
+    expect(withGaps.records[0].measure?.sourceVerified).not.toBe(true)
+    expect(withGaps.model.openings).toHaveLength(1)
+  })
+
+  it('COUNTER-TRIALS: the picture refuting it still wins; another stretch of wall has no witness; a wall-wide gap witnesses nothing', () => {
+    const m = bare()
+    const refuted = executeCorrections({ model: m, views: [view], pictures: [faintWindow(8)], planGaps: planGapsOf(replaced()), proposals: [add(m)] })
+    expect(refuted.records[0].status).toBe('REJECTED_BY_SOURCE')
+    const elsewhere = executeCorrections({ model: m, views: [view], pictures: [faintWindow(33)], planGaps: planGapsOf(replaced()), proposals: [add(m, 1.0, 2.2)] })
+    expect(elsewhere.records[0].status).not.toBe('COMMITTED')
+    const wide = [{ id: 'whole-wall', side: 'FRONT' as const, a0: 0.2, a1: 9.8, storeyLo: 0, storeyHi: 2.8 }]
+    const wall = executeCorrections({ model: m, views: [view], pictures: [faintWindow(33)], planGaps: wide, proposals: [add(m)] })
+    expect(wall.records[0].code).toBe('SOURCE_UNDECIDED')
+    // another storey's gap is not this opening's witness
+    const upstairs = [{ id: 'upper', side: 'FRONT' as const, a0: 4.4, a1: 5.6, storeyLo: 2.8, storeyHi: 5.6 }]
+    expect(executeCorrections({ model: m, views: [view], pictures: [faintWindow(33)], planGaps: upstairs, proposals: [add(m)] }).records[0].code).toBe('SOURCE_UNDECIDED')
   })
 })

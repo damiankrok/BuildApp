@@ -121,4 +121,37 @@ describe('SOURCE-01 the analyzer with an encoder', () => {
     expect(without.contentClassifier).toBeNull()
     expect(without.content.every((c) => c.decision === 'NOT_CLASSIFIED')).toBe(true)
   })
+
+  // v3.54.18 R2 — reproduced from Alberto and Aurora: the plain gable elevation of each was classified a "section" (98 %),
+  // got no frame, and no reader ever saw the side whose phantom windows it contradicts.
+  it('v3.54.18 R2: an elevation by caption whose pixels show another ORTHOGRAPHIC drawing keeps its frame, unread here', async () => {
+    const { pkg, bytes } = scene([
+      { slug: 'front', raster: facade(), roles: { document: 'ELEVATION', view: 'FRONT' } },
+      { slug: 'gable', raster: facade(), roles: { document: 'ELEVATION', view: 'SIDE_UNSPECIFIED' } },
+    ])
+    const ids = [...pkg.assets].sort((a, b) => a.id.localeCompare(b.id)).map((a) => a.id)
+    const kinds = ids.map((id) => (id.includes('gable') ? 'SECTION' : 'ELEVATION') as ContentClass)
+    const r = await analyzeSourcePackage(pkg, { bytes: async (u) => bytes.get(u) ?? null, content: stub(kinds) })
+    const gable = ids.find((id) => id.includes('gable')) as string
+    const frame = r.graph.coordinateFrames.find((f) => f.assetId === gable)
+    expect(frame?.roles).toMatchObject({ document: 'ELEVATION', projection: 'ORTHOGRAPHIC_ELEVATION' })
+    // the verdict stays VETOED, named; this analyzer read nothing from the frame
+    expect(r.content.find((c) => c.assetId === gable)).toMatchObject({ decision: 'VETOED', top: 'SECTION', projection: 'ORTHOGRAPHIC', claimedUse: 'FACADE' })
+    expect(r.skipped.find((x) => x.assetId === gable)?.reason).toMatch(/^content: .*section/)
+    expect(r.graph.observations.filter((o) => o.frameId === frame?.id)).toEqual([])
+    expect(r.graph.unresolved.some((u) => u.assetId === gable && u.status === 'NOT_ATTEMPTED')).toBe(true)
+  })
+
+  it('v3.54.18 R2 counter-trial: an elevation by caption whose pixels are a perspective picture still gets no frame', async () => {
+    const { pkg, bytes } = scene([
+      { slug: 'front', raster: facade(), roles: { document: 'ELEVATION', view: 'FRONT' } },
+      { slug: 'photo', raster: facade(), roles: { document: 'ELEVATION', view: 'SIDE_UNSPECIFIED' } },
+    ])
+    const ids = [...pkg.assets].sort((a, b) => a.id.localeCompare(b.id)).map((a) => a.id)
+    const kinds = ids.map((id) => (id.includes('photo') ? 'EXTERIOR_PERSPECTIVE' : 'ELEVATION') as ContentClass)
+    const r = await analyzeSourcePackage(pkg, { bytes: async (u) => bytes.get(u) ?? null, content: stub(kinds) })
+    const photo = ids.find((id) => id.includes('photo')) as string
+    expect(r.graph.coordinateFrames.some((f) => f.assetId === photo)).toBe(false)
+    expect(r.content.find((c) => c.assetId === photo)).toMatchObject({ decision: 'VETOED', projection: 'PERSPECTIVE' })
+  })
 })

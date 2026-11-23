@@ -50,14 +50,14 @@ import type { CanonicalBuildingModel } from '@buildapp/model'
 import { sha256Hex } from '@buildapp/source-common'
 import { renderStoreyCut } from './model-views.js'
 import { CORRECTION_REGISTRY_VERSION } from './correct/registry.js'
-import { CORRECTION_EXECUTOR_VERSION, elementExists, executeCorrections, modelRevision, preferredView, registerFromSketch, sideOfFacade, viewsOfRun } from './correct/execute.js'
+import { CORRECTION_EXECUTOR_VERSION, elementExists, executeCorrections, modelRevision, planGapsOf, preferredView, registerFromSketch, sideOfFacade, viewsOfRun } from './correct/execute.js'
 import { CHIMNEY_FUSION_VERSION, fuseChimneys } from './correct/chimney-fusion.js'
 import { MASSING_VERSION, bodiesOf } from './massing/massing.js'
 import type { FusionRecord, SketchedStack } from './correct/chimney-fusion.js'
 import { elementIndexOf } from './element-index.js'
 import type { ElementIndex } from './element-index.js'
 import { identityOf } from '../identity.js'
-import type { BindPicture, BindView, CorrectionOutcome, CorrectionProposal, PatchRecord, PrintedWitness, Side, SketchAnchors, TransactionRecord } from './correct/execute.js'
+import type { BindPicture, BindView, CorrectionOutcome, CorrectionProposal, PatchRecord, PlanGap, PrintedWitness, Side, SketchAnchors, TransactionRecord } from './correct/execute.js'
 import { SOURCE_GATE_VERSION } from './correct/source-gate.js'
 import { SKETCH_PROPOSALS_VERSION, facadeAdoption, finishProposalsFromSketch, proposalsFromSketch } from './correct/from-sketch.js'
 import { observationFates } from './correct/fates.js'
@@ -145,6 +145,8 @@ export type SketchSummary = { reading: Omit<SketchReading, 'elevationSketches'>;
   semantic?: { version: string; decision: 'APPLIED' | 'NONE_KEPT' | 'NOT_RUN'; why: string; /** v3.54.18: per sketched elevation, whether its reading was adopted as a whole facade, on what counts. */ adoption?: Array<{ frameId: string; side?: string; drawn: number; supported: number; refuted: number; pending: number; decision: string; why: string; proposed: number }>; /** v3.54.18: the sketches' finish zones proposed as SET_FINISH (sides without regions). */ finishes?: { proposed: number; skipped: Array<{ sketchId: string; why: string }> }; /** v3.54.18: sides taken by the named miniature convention (source order), not read. */ sidesByConvention?: Array<{ frameId: string; side: string | null; basis: 'MINIATURE_CONVENTION_SOURCE_ORDER' }>; accounts: Array<{ frameId: string; side?: string; proposals: number; agreed: number; agreedIds?: Array<{ sketchId: string; modelId: string }>; skipped: Array<{ sketchId: string; why: string }> }>; /** v3.54.18: one row per element of every reading — what became of it (`buildapp.observation-fate` 1.0.0). */ fates?: ObservationFates; records: PatchRecord[]; transactions: TransactionRecord[]; /** v3.54.17: each sketch held against each body's roof (SET_ROOF proposals or why not), and the side assignment it was read under. */ massing?: MassingProposalAccount[]; orientation?: OrientationHypothesis; /** v3.54.17 R3: stacks of perpendicular sketches paired into one stack with both plan coordinates. */ chimneyFusion?: FusionRecord & { version: string } } }
 
 /** v3.54.18: tolerances of the body arbitration, fixed before any result (a printed dimension, a published height). */
+/** v3.54.18 R2: which source pictures get a frame changed (a content-disputed orthographic elevation keeps its frame): part of the accepted-revision key. */
+export const SOURCE_FRAMES_RULE = 'frames2' as const
 export const BODY_ARBITRATION = { version: '1.1.0', dimAgreeM: 0.3, dimAgreeShare: 0.04, heightAgreeM: 0.6, heightAgreeShare: 0.1 } as const
 export type BodyEvidence = { bodies: number; registrations: Array<{ frameId: string; side: string; ok: boolean; code: string }>; printed: Array<{ literal: string; valueM: number; modelM: number; agrees: boolean }>; height?: { publishedM: number; modelRidgeM: number; agrees: boolean }; contradictions: number; supports: number }
 export type BodyArbitration = { version: string; local: BodyEvidence; /** LOCAL's body was judged with this many roof corrections from the same elevations applied (on a copy). */ localAfterRoofCorrections?: number; alternative?: BodyEvidence; massing?: { decision: string; why: string; usd: number }; decision: 'LOCAL_STANDS' | 'REPLACED_BY_SOURCE_BODY'; why: string }
@@ -659,7 +661,7 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
     const b = consultBinding({
       sourcePackageHash: local.pkg.contentHash,
       analyzer: `${ANALYSIS_SERVICE_VERSION}/${SOLVER_V2_VERSION}`,
-      consultant: [CONSULTANT_CONTRACT_VERSION, CONSULTANT_PROMPT_VERSION, METRIC_READ_PROMPT_VERSION, METRIC_VERIFY_PROMPT_VERSION, METRIC_RESOLVER_VERSION, ELEVATION_SKETCH_PROMPT_VERSION, `parser${ELEVATION_SKETCH_PARSER_VERSION}`, SKETCH_STEP_VERSION, CHOOSE_VERSION, ACCEPTED_CONSULT_VERSION, `registry${CORRECTION_REGISTRY_VERSION}`, `executor${CORRECTION_EXECUTOR_VERSION}`, `gate${SOURCE_GATE_VERSION}`, `sketchProposals${SKETCH_PROPOSALS_VERSION}`, `quality${QUALITY_VERSION}`, `massing${MASSING_OPS_VERSION}`, `massingBody${MASSING_VERSION}`, `bodyArbitration${BODY_ARBITRATION.version}`].join(','),
+      consultant: [CONSULTANT_CONTRACT_VERSION, CONSULTANT_PROMPT_VERSION, METRIC_READ_PROMPT_VERSION, METRIC_VERIFY_PROMPT_VERSION, METRIC_RESOLVER_VERSION, ELEVATION_SKETCH_PROMPT_VERSION, `parser${ELEVATION_SKETCH_PARSER_VERSION}`, SKETCH_STEP_VERSION, CHOOSE_VERSION, ACCEPTED_CONSULT_VERSION, `registry${CORRECTION_REGISTRY_VERSION}`, `executor${CORRECTION_EXECUTOR_VERSION}`, `gate${SOURCE_GATE_VERSION}`, `sketchProposals${SKETCH_PROPOSALS_VERSION}`, `quality${QUALITY_VERSION}`, `massing${MASSING_OPS_VERSION}`, `massingBody${MASSING_VERSION}`, `bodyArbitration${BODY_ARBITRATION.version}`, SOURCE_FRAMES_RULE].join(','),
       models: { ROUNDS: wiring.model.model, ...(wiring.metricRead === 'ON' ? { METRIC: (wiring.metricModel ?? wiring.model).model } : {}), ...(wiring.sketches === 'ON' ? { SKETCH: (wiring.sketchModel ?? wiring.model).model } : {}) },
       settings: `strict=${wiring.model.strict === true || wiring.metricModel?.strict === true || wiring.sketchModel?.strict === true ? 'on' : 'off'};variant=${wiring.variant};metric=${wiring.metricRead ?? 'OFF'};sketches=${wiring.sketches ?? 'OFF'};rounds=${maxRounds};geometryRounds=${wiring.maxGeometryRounds ?? '-'};check=${wiring.check ?? 'ON'};sketchCorrections=${wiring.sketchCorrections ?? 'ON'}`,
     })
@@ -915,6 +917,10 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
     const thumbnails = candidates.filter((f) => !legible(f))
     if (thumbnails.length > 0) record({ at: now().toISOString(), kind: 'ELEVATION_THUMBNAILS_NOT_READ', frames: thumbnails.map((f) => ({ frameId: f.id, width: f.size?.width ?? 0, height: f.size?.height ?? 0 })), min: MIN_SKETCH_FRAME_PX })
     const unregistered = candidates.filter(legible).map((f) => ({ frameId: f.id }))
+    // v3.54.18 R2: an elevation the local content classifier took for another orthographic drawing (a plain gable read as
+    // a "section") is read here all the same — named, by the typed verdict of the source inspection, never by its prose
+    const vetoedLocally = candidates.filter(legible).filter((f) => run0.result.sources?.sheets.find((x) => x.assetId === f.assetId)?.content?.decision === 'VETOED')
+    if (vetoedLocally.length > 0) record({ at: now().toISOString(), kind: 'ELEVATION_READ_DESPITE_LOCAL_CONTENT_VETO', frames: vetoedLocally.map((f) => ({ frameId: f.id, assetId: f.assetId, localVerdict: run0.result.sources?.sheets.find((x) => x.assetId === f.assetId)?.content ?? null })), why: 'the publisher captions these elevations and their pixels are an orthographic drawing; the local facade readers did not read them, the elevation reading does (its proposals pass the same source gate)' })
     const reading = await readSketches({ metrics: metrics0, model: run0.reconstruction.model, views: run0.reconstruction.facadeAlignment.views.map((v) => ({ facade: v.facade, frameId: v.frameId, projection: v.projection })), unregistered, ...(metricRead ? { metricReads: metricRead.reads } : {}), rasterOf, ctx: { model: wiring.sketchModel ?? wiring.model, price: wiring.sketchPrice ?? wiring.price, ...(wiring.spend ? { spend: wiring.spend } : {}), ...(options.signal ? { signal: options.signal } : {}) } })
     usd += reading.usd
     const { elevationSketches, ...kept } = reading
@@ -1171,6 +1177,8 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
   const allSketches = (): SketchReading['sketches'] => sketchSummary?.reading.sketches ?? []
   const facadeClaims = (): Map<string, Array<{ x0: number; y0: number; x1: number; y1: number }>> =>
     new Map(allSketches().filter((x) => x.sketch).map((x) => [x.frameId, (x.sketch?.openings ?? []).map((o) => { const ps = o.polygon as Array<[number, number]>; return { x0: Math.min(...ps.map((q) => q[0])), y0: Math.min(...ps.map((q) => q[1])), x1: Math.max(...ps.map((q) => q[0])), y1: Math.max(...ps.map((q) => q[1])) } })]))
+  // v3.54.18 R2: the plan gaps of a LOCAL body the arbitration replaced (a second drawing's witness for the elevation reading)
+  let replacedPlanGaps: PlanGap[] = []
   const executeOn = async (l: Local, proposals: readonly CorrectionProposal[], stage: string, seen: Set<string> = seenPatch): Promise<CorrectionOutcome | undefined> => {
     if (!l.run) return undefined
     const pictures = await allPicturesOf(l)
@@ -1179,7 +1187,7 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
     const held = viewsOfRun(l.run.reconstruction.facadeAlignment.views)
     const plans = (l.run.reconstruction.registrations.plans ?? []).map((q) => ({ frameId: q.frameId, toWorld: q.toWorld }))
     const pitch = (l.pkg ?? l.run.pkg)?.publishedFacts.find((f) => f.key === 'roof_pitch' && f.unit === 'deg')?.value
-    const out = executeCorrections({ model: m0, claims: facadeClaims(), adopted: adoptedFrames, views: massingOf.get(l)?.views ?? held, derivedViews: (m: CanonicalBuildingModel, h: readonly BindView[]) => sketchViewsOf(m, pictures, h), ...(plans.length > 0 ? { plans } : {}), ...(typeof pitch === 'number' ? { facts: { roofPitchDeg: pitch } } : {}), pictures, proposals, witnesses: witnessesOf(l), seen, ...(retiredIds.size > 0 ? { retiredIds } : {}) })
+    const out = executeCorrections({ model: m0, claims: facadeClaims(), adopted: adoptedFrames, ...(replacedPlanGaps.length > 0 ? { planGaps: replacedPlanGaps } : {}), views: massingOf.get(l)?.views ?? held, derivedViews: (m: CanonicalBuildingModel, h: readonly BindView[]) => sketchViewsOf(m, pictures, h), ...(plans.length > 0 ? { plans } : {}), ...(typeof pitch === 'number' ? { facts: { roofPitchDeg: pitch } } : {}), pictures, proposals, witnesses: witnessesOf(l), seen, ...(retiredIds.size > 0 ? { retiredIds } : {}) })
     correctionRuns.push({ stage, baseRevision: out.baseRevision, revision: out.revision, delivered: false, records: out.records, transactions: out.transactions })
     record({ at: now().toISOString(), kind: 'CORRECTIONS', stage, baseRevision: out.baseRevision, revision: out.revision, records: out.records.map((r) => ({ proposalId: r.proposalId, operation: r.operation, status: r.status, code: r.code ?? null })), transactions: out.transactions.map((t) => ({ txId: t.txId, decision: t.decision, why: t.why })) })
     return out
@@ -1287,6 +1295,8 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
           arb.decision = 'REPLACED_BY_SOURCE_BODY'
           arb.why = `the sources contradict LOCAL's body ${localEv.contradictions} time(s) and support it ${localEv.supports}; the body built from the plan outline and the elevations: ${altEv.contradictions} and ${altEv.supports}. The source body stands; LOCAL's interior is not carried over (NOT_CHECKED)`
           massingDelivery = mb.delivery
+          replacedPlanGaps = good.run ? planGapsOf(good.run.reconstruction.model) : []
+          if (replacedPlanGaps.length > 0) record({ at: now().toISOString(), kind: 'PLAN_GAPS_KEPT_AS_WITNESS', gaps: replacedPlanGaps.length, sides: [...new Set(replacedPlanGaps.map((g) => g.side))], why: 'the replaced LOCAL body traced these openings on the plan: where the elevation reading draws an opening of the same span on the same side and storey, two drawings agree (applied as a cross-witness, never source-verified)' })
           good = mb.built
           goodState = stateOf(mb.built)
           basis = mb.built

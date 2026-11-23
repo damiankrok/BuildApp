@@ -73,6 +73,8 @@ if (argv.includes('--sketch-live')) {
   // matched to the recorded sketch's imageSha256 in --sketch-map <sketches.json>), never by position: a run that
   // registers other views must not hand one side's answer to another
   const rec = JSON.parse(readFileSync(opt('sketch-replay') as string, 'utf8')) as Recorded[]
+  const hybridLive = argv.includes('--sketch-live-missing') ? anthropicConsultant({ model: 'claude-sonnet-5-5', maxOutputTokens: 6000, timeoutMs: 240_000, effort: 'medium', ...transportOpts }) : undefined
+  if (hybridLive && !hybridLive.available()) throw new Error('no API key in this process environment: --sketch-live-missing refused')
   const map = opt('sketch-map') ? (JSON.parse(readFileSync(opt('sketch-map') as string, 'utf8')) as { reading: { sketches: Array<{ sketch?: { source: { imageSha256: string } } }> } }).reading.sketches.map((x) => x.sketch?.source.imageSha256) : []
   const byPicture = new Map<string, Recorded>()
   rec.forEach((r, i) => { const h = map[i]; if (h) byPicture.set(h, r) })
@@ -81,7 +83,18 @@ if (argv.includes('--sketch-live')) {
     const img = JSON.stringify(req.messages).match(/"data":"([^"]+)"/)?.[1]
     const h = img ? createHash('sha256').update(Buffer.from(img, 'base64')).digest('hex') : undefined
     const r = map.length > 0 ? (h ? byPicture.get(h) : undefined) : rec[i++]
+    // v3.54.18 R2 `--sketch-live-missing`: a picture the recording does not hold (an elevation the recorded run never
+    // read) is read live, once, and booked; every recorded picture is still replayed at 0 USD. Both are written, in the
+    // order sent, to this run's own sketch-turns.json, so the run is itself a complete recording.
+    if (!r && hybridLive) {
+      const t0s = Date.now()
+      const t = await hybridLive.send(req)
+      sketchTurns.push({ request: { systemSha: req.system.slice(0, 40), note: 'live (not in the recording)', latencyMs: Date.now() - t0s, at: new Date(t0s).toISOString() }, turn: t })
+      writeFileSync(join(out, 'sketch-turns.json'), `${JSON.stringify(sketchTurns, null, 1)}\n`)
+      return t
+    }
     if (!r) throw new Error('sketch replay: no recorded answer for this picture (not sent)')
+    if (hybridLive) { sketchTurns.push({ request: { systemSha: req.system.slice(0, 40), note: 'replayed', latencyMs: 0, at: new Date().toISOString() }, turn: r.turn }); writeFileSync(join(out, 'sketch-turns.json'), `${JSON.stringify(sketchTurns, null, 1)}\n`) }
     return { ...r.turn, usage: { inputTokens: 0, outputTokens: 0 } }
   } }
 }
@@ -138,7 +151,7 @@ if (argv.includes('--outline-live')) {
   let i = 0
   outlineTransport = { id: 'replay', model: rec[0]?.turn.model ?? modelId, maxOutputTokens: 4000, send: async () => { const r = rec[i++]; if (!r) throw new Error('outline replay: no recorded turn left (not sent)'); return { ...r.turn, usage: { inputTokens: 0, outputTokens: 0 } } } }
 }
-const spend = argv.includes('--live') || argv.includes('--sketch-live') || argv.includes('--loop-live') || argv.includes('--check-live') || argv.includes('--outline-live') ? ledgerSpend({ phase: [argv.includes('--live') ? 'metric-read' : '', sketchTransport && argv.includes('--sketch-live') ? 'sketches' : '', checkTransport && argv.includes('--check-live') ? 'check' : '', argv.includes('--outline-live') ? 'plan-outline' : ''].filter(Boolean).join('+') || 'replay', house, variant: opt('variant-label') ?? (checkTransport ? 'L-MS-C' : sketchTransport ? 'L-MS' : 'L-M') }, { ...(opt('ledger') ? { path: opt('ledger') as string } : {}), ...(opt('opening') ? { openingUsd: Number(opt('opening')) } : {}), ...(opt('ceiling') ? { ceilingUsd: Number(opt('ceiling')) } : {}) }) : undefined
+const spend = argv.includes('--live') || argv.includes('--sketch-live') || argv.includes('--loop-live') || argv.includes('--check-live') || argv.includes('--outline-live') || argv.includes('--sketch-live-missing') ? ledgerSpend({ phase: [argv.includes('--live') ? 'metric-read' : '', sketchTransport && argv.includes('--sketch-live') ? 'sketches' : '', checkTransport && argv.includes('--check-live') ? 'check' : '', argv.includes('--outline-live') ? 'plan-outline' : ''].filter(Boolean).join('+') || 'replay', house, variant: opt('variant-label') ?? (checkTransport ? 'L-MS-C' : sketchTransport ? 'L-MS' : 'L-M') }, { ...(opt('ledger') ? { path: opt('ledger') as string } : {}), ...(opt('opening') ? { openingUsd: Number(opt('opening')) } : {}), ...(opt('ceiling') ? { ceilingUsd: Number(opt('ceiling')) } : {}) }) : undefined
 const t0 = Date.now()
 const r = await consultAnalysis(
   { kind: 'URL', url: opt('url') as string },

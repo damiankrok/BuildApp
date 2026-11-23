@@ -51,7 +51,7 @@ describe('v3.54.18 accepted revision: the key names every version that changes t
   it('the consulted binding carries the gate, executor, registry, sketch-proposal, massing (ops and body) and body-arbitration versions', () => {
     const src = readFileSync(fileURLToPath(new URL('../src/consult/consult-analysis.ts', import.meta.url)), 'utf8')
     const line = src.split('\n').find((l) => l.includes('consultant: [CONSULTANT_CONTRACT_VERSION')) ?? ''
-    for (const part of ['`registry${CORRECTION_REGISTRY_VERSION}`', '`executor${CORRECTION_EXECUTOR_VERSION}`', '`gate${SOURCE_GATE_VERSION}`', '`sketchProposals${SKETCH_PROPOSALS_VERSION}`', '`massing${MASSING_OPS_VERSION}`', '`massingBody${MASSING_VERSION}`', '`bodyArbitration${BODY_ARBITRATION.version}`']) expect(line).toContain(part)
+    for (const part of ['`registry${CORRECTION_REGISTRY_VERSION}`', '`executor${CORRECTION_EXECUTOR_VERSION}`', '`gate${SOURCE_GATE_VERSION}`', '`sketchProposals${SKETCH_PROPOSALS_VERSION}`', '`massing${MASSING_OPS_VERSION}`', '`massingBody${MASSING_VERSION}`', '`bodyArbitration${BODY_ARBITRATION.version}`', 'SOURCE_FRAMES_RULE']) expect(line).toContain(part)
   })
   it('a different version string is a different key: the old revision is not found, so it cannot be replayed', () => {
     const base = { sourcePackageHash: 'p'.repeat(64), analyzer: 'a', models: { ROUNDS: 'm' }, settings: 's' }
