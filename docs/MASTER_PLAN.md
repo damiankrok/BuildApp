@@ -1,6 +1,6 @@
-# PLANER KOSZTÓW BUDOWY / BuildPlan — MASTER PLAN v3.54.17
+# PLANER KOSZTÓW BUDOWY / BuildPlan — MASTER PLAN v3.54.18
 
-Data: 20.11.2026. **Aktywny etap v3.54.17: ogólny start modelu i korekta bryły oraz dachu ze źródeł, także przy częściowej lub nieudanej rekonstrukcji LOCAL. Zachować wykonawcę v3.54.16 i poprawki audytu 9759c07; domknąć fizyczne powiązanie świadek → host → target oraz sprawdzić nowy kontrakt recenzji na żywo w istniejącej puli. Kolorowe szkice i semantyczny JSON pozostają wspólnymi widokami odczytu. To plan i prompt do wdrożenia, nie twierdzenie o wykonaniu tych zmian.**
+Data: 23.11.2026. **Aktywny etap v3.54.18: autonomiczna diagnoza i wdrożenie skuteczniejszej współpracy aplikacji, analizatora i Claude API. Celem jest większy odsetek rozpoznawalnych miniatur na różnych źródłach, nie kolejna ręczna poprawka jednego domu. Wykonawca może zmienić architekturę po porównaniu wariantów; ma ją zintegrować, iterować i wykazać efekt na nowych projektach oraz dostarczyć raport z rzeczywistymi obrazami i APK. To zlecenie, nie deklaracja wykonania.**
 
 Pełny v3.47 pozostaje osobnym archiwum. Bieżącą kolejność prac określa § 2. Dawne NEXT/CURRENT i opisy konkretnej dostawy zachowują kontekst historyczny.
 
@@ -21,6 +21,18 @@ Dokumenty mają odrębne role:
 Nowsze jawne polecenie OWNER-a rozstrzyga sprzeczność starszego zlecenia. Brak rozstrzygnięcia należy nazwać. Nie dopisywać kolejnej kopii całego planu do aktualnego dokumentu.
 
 ## 2. Aktualny priorytet
+
+**Kierunek v3.54.18.** OWNER zleca wykonawcy Fable 5.2 samodzielnie przeanalizować kod, dane i ostatnie działania oraz wymyślić i wdrożyć skuteczniejszy mechanizm. Nie narzuca jedynej kolejności LOCAL/API/szkiców. Rozpoznawalna kolorowa miniatura jest celem wyglądu; wiarygodne wymiary, wnętrze i przydatność do ilości mają osobne dowody. Domy znane z rozwoju nie wystarczają do ogólności.
+
+**Checkpoint R2/R3.** Przypięta rewizja 3e395b7ff0586881b835f3177fa9d7837ba691a9. R2 raportuje zapis odpowiedzi nieudanych zadań, indeks elementów u recenzenta, adapter wyniku bez LOCAL i poprawki orientacji/księgi. R3 raportuje okap, fuzję kominów, wymagane końce linii wymiarowych i zachowanie ścian/materiału przy wymianie dachu. Plansze nadal pokazują brak drzwi Alaski i zły układ otworów Aurory mimo czytelniejszych szkiców; Ballina traci okap przy sporze rejestracji. Raporty nie dowodzą jeszcze ogólnego sukcesu.
+
+**Swoboda rozwiązania.** Zbadać pierwszą stratę informacji w pełnym przepływie URL→odczyt→kontrakt→wiązanie→konsument→kontrola→budowa→recenzja→dostawa. Porównać co najmniej dwa wiarygodne warianty i wdrożyć wybrany. Wolno przebudować algorytmy, kontrakty i ograniczenia dawnego minimum dwóch brył, gdy uzasadnia to wynik. Starsze zakazy konkretnych dróg implementacji nie blokują tej zmiany; jedna kanoniczna prawda, edytowalność, migracje, produkt §3, prywatność i uczciwość dowodów pozostają.
+
+**Próba i iteracja.** Minimum sześć projektów, w tym trzy nowe i dwóch wydawców, z zamrożonym pierwszym wynikiem i zachowanymi porażkami. Mierzyć odsetek użytecznych miniatur ze wszystkich zadeklarowanych URL-i, poprawność/pokrycie cech, metrykę, wnętrze i koszt osobno. Mała próba to ograniczony dowód transferu, nie uniwersalność. Iterować mechanizm, nie nazwy domów ani współrzędne referencji; nie kończyć na planie lub zielonym unit teście.
+
+**Dostawa i środki.** Pełny prompt v3.54.18 określa publiczny host, rzeczywistą korektę i ponowną recenzję finalnej rewizji, reuse i brak żądań bez tokena. Obszerny polski raport z czytelnymi porównaniami źródło/szkic/przed/po/oddany, galerią, wszystkimi szkicami i nowym APK. ZIP-y niezależne <30 000 000 B. Według R3 księga 29,500933 / pułap 68,542857 USD, nominalnie 39,041924 USD; uzgodnić późniejsze koszty/rezerwacje bez otwierania nowej puli. Gałąź claude/new-session-3kzcgh, [skip ci], bez merge/PR, ForgeShape read-only, prywatny H2 wyłączony.
+
+### Checkpoint v3.54.17 — historyczne zlecenie i zakres przed R2/R3
 
 **Kierunek.** Użytkownik chce rozpoznawalną kolorową miniaturę domu z oryginałów, rzutów i pomocy API. Dopuszcza drobne uproszczenia, ale główna bryła, dach, duże otwory, kondygnacje i relacje przestrzenne mają zachować tożsamość domu. Działający wynik Marcówek nie dowodzi ogólności. Nowe zlecenie dotyczy wspólnych brakujących funkcji, nie dopasowania kolejnej rodziny.
 
@@ -359,6 +371,14 @@ Ręcznie sprawdzony opis służy diagnostyce buildera przez te same interfejsy; 
 
 ### 7.6 Budżet i dostęp
 
+**Aktywny budżet v3.54.18.** Dostarczona księga R3: 29,500933 USD wydane, 68,542857 USD wspólnego pułapu po raportowanej wcześniejszej zgodzie OWNER-a +40 USD, nominalnie 39,041924 USD pozostaje. Sprawdzić późniejsze koszty i rezerwacje. To kontynuacja tej samej puli, bez jej odnowienia; historyczne niższe pułapy i panelowe saldo nie określają bieżącej zgody.
+
+Wykonawca sam planuje i wykonuje potrzebne wywołania w zatwierdzonym pozostałym limicie, bez ponownego pytania o autoryzowane prace. Zapisuje plan liczby żądań/retry i kosztów, zachowuje rezerwę na końcowy host, stosuje prompt cache i replay. Nie wydaje całej puli automatycznie. Jedna uzgodniona, trwała księga i bezpieczne rezerwacje współbieżne. Istniejący Claude API aplikacji, sekret wyłącznie ze środowiska; model wykonawczy Fable nie zmienia dostawcy aplikacji.
+
+Klucz nigdy w Git, APK, logach lub ZIP. Bez nowej usługi i zwiększania pułapu. Koordynator podczas przygotowania tego zlecenia nie wykonał płatnych wywołań ani implementacji produkcyjnej.
+
+**Historyczny zapis budżetowy v3.54.17 sprzed R3:**
+
 **Kontynuacja v3.54.17 bez nowej puli.** Po v35416 księga wynosi 27,812357 USD; poprawki A1–A4 z 9759c07 kosztowały 0 USD. Wspólny pułap nadal 28,854612 USD, zatem nominalnie pozostaje 1,042255 USD przed późniejszymi kosztami/rezerwacjami. Aktualny stan uzgodnić na wejściu. Dawne 24,11036 USD, wcześniejsze rezerwy i saldo 76,28 USD z panelu nie są aktywną zgodą na zwiększenie wydatków.
 
 Kod i zapisane dane najpierw. Przed płatnym biegiem plan maksymalnej liczby żądań i kosztu wraz z retry, cache/TTL, nowym schematem i rezerwą hosta. Rzeczywisty Claude API aplikacji przez istniejący sekret hosta, bez kupowania nowej usługi obrazowej. Nowe pola recenzji i operacje sprawdzić na tej samej konfiguracji strict/fallback/co-turn co finalny host. Przy rzeczywistym braku puli dokończyć możliwą lokalną pracę i dostawę, nazwać brakujące live/transfer zamiast podpisywać replay jako świeży bieg.
@@ -513,9 +533,27 @@ Mapa zależności określa, co przeliczyć i ponownie związać po zmianie obrys
 
 Layla oraz Alaska Studio Atrium to historyczne pierwsze porażki i DEV po ich obejrzeniu. Nowa próba ma inne rodziny wybrane przed wynikami w zadeklarowanym zakresie, tę samą konfigurację API co host, stałe kryteria i osobne pokrycie ocen. ZIP przechowuje rozstrzygające bajty wszystkich użytych planów, przekrojów i elewacji, nie tylko ich URL i plansze. Kolorowe obrazy i JSON dają człowiekowi i konsumentowi ten sam odczyt.
 
+### 7.33 Autonomiczny wybór i wdrożenie mechanizmu — v3.54.18
+
+Wykonawca sam rozważa alternatywne drogi odczytu i budowy, diagnozuje błędne ograniczenia i wdraża wybraną architekturę. Starsze minimum nie jest celem końcowym ani zakazem rozszerzenia. Ocena obejmuje faktyczną integrację aplikacji i zachowanie edytowalnego modelu, nie sam diagram lub eksperyment poza hostem.
+
+### 7.34 Źródło, obserwacja i wykonanie — v3.54.18
+
+Każdy istotny fakt ma źródło, rolę, współrzędne, target/host, niepewność i konsumenta. Brak metody dowodowej nie jest dowodem braku elementu. Zmiana kontroli wymaga kontrprób i niezależnej oceny; słowo API ani zgodność z własnym patchem nie stanowią same źródłowej weryfikacji. Poprawne źródło może podważyć LOCAL, a sprzeczny szkic może zostać odrzucony.
+
+### 7.35 Transfer i rzeczywisty odsetek modeli — v3.54.18
+
+Próba co najmniej sześciu projektów, trzech nowych, dwóch wydawców; pierwsze wyniki przed strojeniem zachowane. NO_MODEL pozostaje w mianowniku. Wygląd/tożsamość, pokrycie cech, metryka, wnętrze, koszt i integracja mają odrębne wyniki. Mała próba nie dowodzi uniwersalności. Prywatny H2 nie uczestniczy.
+
+### 7.36 Wizualny dowód i kompletna dostawa — v3.54.18
+
+Szkice czterech stron PNG/SVG/JSON także bez modelu, galeria offline, porównania tych samych kamer i skali oraz osobne czytelne zbliżenia. Tylko rzeczywiste rendery lub screeny; wynik generatywny nie udaje modelu. APK z końcowego kodu i zgodnymi scenami; UI tylko z rzeczywistego urządzenia/emulatora. Niezależne ZIP-y <30 000 000 B, sprawdzone manifesty i linki. Raport opisuje mechanizm i braki, nie listę deklaracji sukcesu.
+
 ## 8. Kryteria pomiaru i odbioru
 
-**Aktywny odbiór v3.54.17.** Wykonalne minimum: start brakującej bryły z dostatecznych źródeł bez wcześniejszego good.run; korekta ortogonalnego obrysu oraz dodanie/zmiana dwuspadu z właściwą osią i hostem; dwa połączone człony z osobnymi wysokościami i dachami dwuspadowymi lub płaskim dachem dobudówki. Rzeczywiste komendy, zależne profile ścian/otwory/rejestracje/regiony i zachowane niezwiązane części. Rozwiązana relacja świadek→rzeczywisty target, nie sam tekst hosta. Dowody §8 promptu i kontrpróby: brak modelu, błędna forma/oś, dwa hosty, błędny obrys, atomowość i niezależność. Zachowane A1–A4 i stare realne replay. Nowy kontrakt recenzji sprawdzony na żywo tym samym transportem co host; końcowa rewizja oceniana z właściwymi źródłami. Osobne statusy integracji, jakości miniatury, metryki, wnętrza i transferu. Zamrożona nowa mała próba w pozostałej puli; brak live/transfer jest jawnym brakiem dowodu. Techniczne powodzenie bez podstawowej formy nie zalicza jakości. Rzeczywisty APK oraz pełne źródła i cztery kolorowe szkice z JSON/SVG w ZIP-ie. Pułap księgi bez zmian: 28,854612 USD.
+**Aktywny odbiór v3.54.18.** Zdiagnozowany i wdrożony ogólny mechanizm zwiększający użyteczność modeli, z porównaniem wiarygodnych wariantów i pierwszą przyczyną strat danych. Jawne wyniki baseline/po dla co najmniej sześciu projektów, w tym trzech nowych i dwóch wydawców; wszystkie porażki zachowane. Osobno rozpoznawalność, geometria/metryka, wnętrze, koszt i ograniczenia. Finalny host sprawdza rzeczywistą propozycję API, zastosowanie, źródłową kontrolę i recenzję oddanej rewizji, continues/resolved, reuse oraz brak żądań bez tokena. Publiczny przepływ bez LOCAL oceniony osobno od kontrolowanej próby. Obszerny polski raport z prawdziwymi obrazami, kompletem szkiców/galerią i rzeczywistym APK. Gdy poprawy nie wykazano, wynik pozostaje negatywny lub częściowy — nie wolno ukryć go zmianą miernika. Budżet według §7.6, produkt §3 zachowany.
+
+**Historyczny odbiór v3.54.17 (przed R2/R3).** Wykonalne minimum: start brakującej bryły z dostatecznych źródeł bez wcześniejszego good.run; korekta ortogonalnego obrysu oraz dodanie/zmiana dwuspadu z właściwą osią i hostem; dwa połączone człony z osobnymi wysokościami i dachami dwuspadowymi lub płaskim dachem dobudówki. Rzeczywiste komendy, zależne profile ścian/otwory/rejestracje/regiony i zachowane niezwiązane części. Rozwiązana relacja świadek→rzeczywisty target, nie sam tekst hosta. Dowody §8 promptu i kontrpróby: brak modelu, błędna forma/oś, dwa hosty, błędny obrys, atomowość i niezależność. Zachowane A1–A4 i stare realne replay. Nowy kontrakt recenzji sprawdzony na żywo tym samym transportem co host; końcowa rewizja oceniana z właściwymi źródłami. Osobne statusy integracji, jakości miniatury, metryki, wnętrza i transferu. Zamrożona nowa mała próba w pozostałej puli; brak live/transfer jest jawnym brakiem dowodu. Techniczne powodzenie bez podstawowej formy nie zalicza jakości. Rzeczywisty APK oraz pełne źródła i cztery kolorowe szkice z JSON/SVG w ZIP-ie. Pułap księgi bez zmian: 28,854612 USD.
 
 **Historyczne kryteria v3.54.16 (odbiór częściowy opisany w §2).** Aktywny konsultant wykonuje zadeklarowane typowane korekty poprzez istniejący model/komendy i adapter bezstratny dla niezwiązanych części LOCAL. Działający pełny cykl dodania źródłowego okna, naprawy kontrolowanego złego otworu i niezależnego przyjęcia poprawnego komina przy odrzuceniu złego patcha okna; poprawne źródło może wygrać z błędną bazą. Istotne parametry/hosty mają rzeczywisty trace, ADMITTED i przyczynowość naprawione. Ekstrakcja obserwacji nie wymaga gotowego modelu; szkice pozostają osobną dostawą i nie gubią JSON-a. Końcowy recenzent i miernik sprawdzają nową rewizję w zadeklarowanym zakresie; statusy jakości, częściowości i reuse rozdzielone. Kontrolowane błędy/kontrpróby, różne realne dane, zamrożona niewielka nowa próba i finalny host na jednym kodzie. E2E integracji i test jakości osobne. Rzeczywisty APK oraz ZIP ze szkicami i źródłami. Brak jednej krytycznej operacji tego etapu albo brak dowodu finalnego efektu oznacza wynik częściowy, nie IMPLEMENTATION_COMPLETE. Pułap księgi nadal 28,854612 USD.
 
@@ -670,6 +708,12 @@ Zachowane dawne ID: **DEC-SOURCE-PROVIDER-AGNOSTIC-001** (§ 3.8), **DEC-SINGLE-
 | D80 | Korekta topologii przelicza i rozlicza zależności; chroni dobre niezwiązane fakty/wnętrza zamiast zamrażać błędną bazę albo regenerować cały H | Aktywna v3.54.17 |
 | D81 | Defekt nie znika przez pominięcie; nowe continues/resolved i reviewer-only wymagają sprawdzenia na żywo; zamknięcie recenzenckie nie udaje pomiaru źródła | Poprawki 9759c07, weryfikacja v3.54.17 |
 | D82 | Nowa próba poza znanym DEV i pełne zamrożone bajty źródeł w dostawie; Layla i Alaska Studio Atrium zachowują pierwsze wyniki porażek | Aktywna v3.54.17 |
+
+| D83 | Samodzielny wybór, wdrożenie i iteracja lepszej architektury w zakresie analizatora/API; stare minimum dwóch brył nie blokuje rozszerzenia | Aktywna v3.54.18 |
+| D84 | Źródłowe fakty mogą poprawiać LOCAL, a API ma rzeczywistych konsumentów i kontrolę skutków; żadna ze stron nie jest bezwarunkową prawdą | Aktywna v3.54.18 |
+| D85 | Odsetek rozpoznawalnych miniatur liczony po wszystkich zadeklarowanych URL-ach, z nowymi rodzinami i zachowanymi porażkami; metryka/wnętrze osobno | Aktywna v3.54.18 |
+| D86 | Kontynuacja pułapu R3 68,542857 USD, stan raportowany 29,500933 USD; bez odnowienia puli lub zmiany dostawcy przez nazwę wykonawcy | Aktywna v3.54.18 |
+| D87 | Obszerna wizualna dostawa: prawdziwe modele przed/po, szkice PNG/SVG/JSON, galeria, APK, niezależne ZIP-y poniżej 30 MB | Aktywna v3.54.18 |
 
 Etapy 1–4 dały plan i prompt; po nich wdrożono ograniczoneC1/C2 i rozszerzano źródła. Ostateczny wybór strategii inference nadal wymaga pomiaru. Przegląd 1327 nie wdraża nowego kodu. Lokalne sprzeczności podczas retencji rozstrzygnięto jawnie: brutto pozostaje zatwierdzone, paleta zastępuje dawny zakaz koloru, aktualne zlecenie zastępuje dawne NEXT i blokady technologii. Szczegóły w rejestrze retencji.
 
@@ -872,21 +916,6 @@ OWNER zatwierdził domknięcie pętli korekt po audycie kodu/danych v35415. Uzgo
 
 Po audycie dostawy (573 pliki manifestu, prawdziwy host i APK) wykonawca wdrożył A1–A4 w 9759c07, koszt 0 USD, APK nadal 1347 bez nowego hosta. Dodatek dostarczył 65 plików, w tym brakujące zamrożone rzuty i przekroje. Koordynator zweryfikował manifest, kod i podstawowe próby A1/A4; nie uruchamiał pełnej macierzy ani aplikacji na urządzeniu. Wykazał kontrolowaną, wąską szczelinę wiązania target-host, włączoną do nowego zlecenia. Ogólny start i korekta bryły/dachu są kolejną pracą, nie wykonanym już rezultatem. Pełen katalog §3 zachowany bajtowo: 19595 B, SHA-256 8c67c7ada43eae728ff7438178c869af7d853d6f2b7973b85944b0651ccc6890. Zachowano historię wcześniejszych zleceń; §2, §7.6 i aktywny odbiór §8 określają aktualny priorytet.
 
-## Punkt kontrolny v3.54.17 R2 (20.11.2026)
+### Uzgodnienie v3.54.18 — 23.11.2026
 
-Domknięcie audytu bez nowej puli i bez nowych wywołań API (księgi 28,542857 / 28,854612 USD). Dostarczone: zapis
-wymiany przy odbiorze z odtworzeniem porażki offline; atomowa księga badań; dostawa hosta bryły bez LOCAL jako zwykły
-wynik (test kontrolowany); indeks elementów w wiadomości recenzenta z kontr-próbami; orientacja i pomiar per bryła
-z wiarygodnością przed komendą; szkice i galeria 4 stron. Otwarte: pozytywna ścieżka indeksu na prawdziwym domu
-(rejestracja wysokości widoku), dowód na żywo `continues`/`resolved`, obrysy ≥ 3 prostokątów, otwory przy TURNED_90.
-Raport: `stage-reports/SOURCE_TO_MODEL_V35417_R2.md`. Plan v3.54.17 powyżej pozostaje bez zmian.
-
-## Punkt kontrolny v3.54.17 R3 (20.11.2026)
-
-Na pytanie OWNER-a o okap, kominy, wysokości za donicami i pełne wymiary, z dodatkowym pułapem +40 USD (księga 28,542857
-→ 29,500933 z 68,542857 USD). Dostarczone: rejestracja elewacji ze szkicu, operacja okapu z ograniczeniem do zasięgu
-mijającego inną bryłę, fuzja kominów z dwóch widoków, odczyt metryki z wymaganymi końcami linii (metric-read/5),
-prompt szkicu 2, prompt recenzenta 0.8.0, usuwanie i wchłanianie otworów ze szkicu z bramką oryginału. Na żywo: Aurora
-z trzema kominami i okapem, Alaska ze skalą i dwoma kominami. Otwarte: okap Balliny (kontrola orientacji), bramka na
-zatłoczonych elewacjach, drzwi Alaski, materiał dachu bez LOCAL, obrysy ≥ 3 prostokątów. Raport:
-`stage-reports/SOURCE_TO_MODEL_V35417_R3.md`. Plan v3.54.17 powyżej pozostaje bez zmian.
+Po dostawie R2/R3 i uwagach OWNER-a zlecono autonomiczną diagnozę, wybór i wdrożenie skuteczniejszego mechanizmu oraz obszerny raport z prawdziwymi porównaniami. Wykonawca może wyjść poza dawny minimalny zakres; ma wykazać zmianę na nowych projektach, nie dopasowywać kolejne domy. Uzgodniono aktywny §2, §7.6, §7.33–36, odbiór §8 i D83–87. Wcześniejsze priorytety/limity pozostają jawnie historyczne. Koordynator przeczytał raporty, obejrzał dwie plansze, sprawdził trzy hashe archiwów i wybrane trzy moduły na 3e395b7; nie wykonał pełnego nowego audytu, implementacji, hosta, testów ani płatnego API. Katalog produktu §3 zachowano bajtowo (19595 B; SHA-256 8c67c7ada43eae728ff7438178c869af7d853d6f2b7973b85944b0651ccc6890).
