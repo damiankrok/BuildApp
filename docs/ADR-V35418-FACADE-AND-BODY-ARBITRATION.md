@@ -36,16 +36,22 @@ sama zależała od błędnego modelu.
    na tej stronie (co najmniej 2), i żadnego nie obala, elementy nierozstrzygnięte idą za odczytem; otwór modelu, który
    obraz „wspiera”, znika tylko wtedy, gdy odczyt wyjaśnia te krawędzie (granica stref wykończenia albo inny element
    przechodzący przez jego pole). Elementy przyjęte są oznaczone `ADOPTED_WITH_FACADE` i nigdy `SOURCE_VERIFIED`.
-4. **Poziom bryły — `BODY_ARBITRATION` 1.0.0.** Bryła LOCAL (po korekcie dachu, którą sama może przyjąć z elewacji) jest
+4. **Poziom bryły — `BODY_ARBITRATION` 1.1.0.** Bryła LOCAL (po korekcie dachu, którą sama może przyjąć z elewacji) jest
    zestawiana z tym, co od niej nie pochodzi: rejestracją opisanych elewacji (końce ścian, grunt, okap/kalenica),
    wymiarami całkowitymi wydrukowanymi na rzucie, opublikowaną wysokością budynku. Dopiero gdy te dowody jej przeczą,
    budowana jest bryła z obrysu rzutu i elewacji (ścieżka domu bez modelu LOCAL) i zastępuje bryłę LOCAL wyłącznie, gdy
-   te same dowody przeczą jej mniej i wspierają co najmniej tak samo. Wnętrze LOCAL nie przechodzi (NOT_CHECKED, nazwane).
+   te same dowody nie przeczą jej wcale (1.1.0; w 1.0.0 wystarczało „mniej" — cofnięte po regresji) i wspierają co
+   najmniej tak samo. Wnętrze LOCAL nie przechodzi (NOT_CHECKED, nazwane).
 5. **Jedna ścieżka konsumpcji odczytów**, z modelem LOCAL lub bez: dach (`SET_ROOF`, okap przy ścianie = szczyt
    rysowanych ścian w narożach — ta sama linia w każdym widoku), okap, kominy, otwory, okna połaciowe
    (`ADD_ROOF_WINDOW`, rejestr 1.5.0), strefy wykończenia (`SET_FINISH` z obrysem strefy), paleta miniatury.
 6. **Los każdego faktu** — `buildapp.observation-fate` 1.0.0: jeden wiersz na element każdego odczytu (współrzędne w
    pikselach oryginału, producent, strona i jej podstawa, operacja, cel, status weryfikacji, powód).
+8. **Model i widok mówią to samo o otworach** (cykl 5). Narysowany wierzch ściany to spód dachu przy ścianie; górna
+   powierzchnia (`eaveOffset`) stoi nad nim o t / cos(kąt). Korekta dachu sprawdza otwory względem wierzchu ściany, który
+   zbuduje kompilator; wysokość otworu ZAŁOŻONA ustępuje dachowi ze źródła, odczytana odrzuca poprawkę. Transakcja, która
+   zostawiłaby nowy otwór niewycięty przez kompilator, jest wycofywana (`OPENING_NOT_CUT`); niewycięte otwory oddanego
+   modelu są nazwane (`DELIVERED_OPENINGS_NOT_CUT`).
 7. **Nazwane konwencje miniatury** (nigdy status wymiaru): bok bez etykiety przypisany kolejnością źródła, gdy dowody
    nie rozstrzygają; uproszczenie obrysu o małe uskoki (≤ 6 % / krok, ≤ 12 % łącznie); paleta bez odczytu tonu.
 
@@ -53,7 +59,7 @@ sama zależała od błędnego modelu.
 
 - Jedna kanoniczna prawda zostaje: wszystkie zmiany idą przez `@buildapp/commands` w jednym wykonawcy, z transakcją,
   pomiarem i wycofaniem; renderer i aplikacja czytają ten sam model.
-- Zmieniają się wersje: bramka 1.3.0, rejestr 1.5.0, wykonawca 1.5.0, propozycje ze szkicu 1.6.0, ops 1.5.0,
-  massing 1.1.0, arbitraż bryły 1.0.0 — wszystkie w kluczu przyjętej rewizji (stary cache nie jest odtwarzany).
+- Zmieniają się wersje: bramka 1.3.0, rejestr 1.5.0, wykonawca 1.6.0, propozycje ze szkicu 1.6.0, ops 1.6.0,
+  massing 1.2.0, arbitraż bryły 1.1.0 — wszystkie w kluczu przyjętej rewizji (stary cache nie jest odtwarzany).
 - Otwarte (nazwane w raporcie): formy poza dwuspadem/płaskim, obrysy o trzech realnych skrzydłach, daszki/tarasy/
   pergole (brak operacji), ton dachu ze źródła na bryle bez LOCAL, przeniesienie wnętrza na bryłę ze źródeł.
