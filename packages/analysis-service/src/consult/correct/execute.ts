@@ -368,16 +368,22 @@ function hostWall(m: CanonicalBuildingModel, side: Side, a0: number, a1: number,
 }
 
 function fillCommands(m: CanonicalBuildingModel, id: string, kind: 'WINDOW' | 'DOOR' | 'GLAZED_DOOR' | 'GARAGE_DOOR', fillId: string, hostT: number): BuildingCommand[] {
+  // v3.54.18: where the model holds no unit to copy from (the first opening of a body built without LOCAL), the fill takes
+  // the palette's material of its kind when the model defines it — glass in a window, a leaf in a door
+  const has = (mid: string): string | undefined => (m.materials.some((x) => x.id === mid) ? mid : undefined)
   if (kind === 'WINDOW') {
     const like = m.windows.find((w) => w.frameDepth <= hostT) ?? m.windows[0]
-    return [{ type: 'placeWindow', id: fillId, openingId: id, ...(like ? { frameWidth: like.frameWidth, frameDepth: Math.min(like.frameDepth, hostT * 0.9), frameInset: Math.min(like.frameInset, Math.max(0, hostT - like.frameDepth)), glassThickness: like.glassThickness, ...(like.materialId ? { materialId: like.materialId } : {}) } : {}) }]
+    const mat = like?.materialId ?? has('mat-glass')
+    return [{ type: 'placeWindow', id: fillId, openingId: id, ...(like ? { frameWidth: like.frameWidth, frameDepth: Math.min(like.frameDepth, hostT * 0.9), frameInset: Math.min(like.frameInset, Math.max(0, hostT - like.frameDepth)), glassThickness: like.glassThickness } : {}), ...(mat ? { materialId: mat } : {}) } as BuildingCommand]
   }
   const like = m.doors.find((d) => d.frameDepth <= hostT) ?? m.doors[0]
   const frame = like ? { frameWidth: like.frameWidth, frameDepth: Math.min(like.frameDepth, hostT * 0.9), frameInset: Math.min(like.frameInset, Math.max(0, hostT - like.frameDepth)), leafThickness: like.leafThickness } : {}
-  const glass = m.windows.find((w) => w.materialId)?.materialId
-  if (kind === 'GARAGE_DOOR') return [{ type: 'placeDoor', id: fillId, openingId: id, ...frame, assembly: { panels: [{ kind: 'PANEL', fraction: 1 }], mullionWidth: 0.04 }, usage: 'GARAGE', ...(like?.materialId ? { materialId: like.materialId } : {}) }]
-  if (kind === 'GLAZED_DOOR') return [{ type: 'placeDoor', id: fillId, openingId: id, ...frame, assembly: { panels: [{ kind: 'LEAF', fraction: 1, hinge: 'LEFT', glazing: 'FULL' }], mullionWidth: 0.04 }, ...(glass ? { materialId: glass } : like?.materialId ? { materialId: like.materialId } : {}) }]
-  return [{ type: 'placeDoor', id: fillId, openingId: id, ...frame, ...(like?.materialId ? { materialId: like.materialId } : {}) }]
+  const glass = m.windows.find((w) => w.materialId)?.materialId ?? has('mat-glass')
+  const solid = m.doors.find((d) => d.materialId && d.materialId !== glass && (d as { usage?: string }).usage !== 'GARAGE')?.materialId ?? has('mat-timber')
+  const gate = m.doors.find((d) => (d as { usage?: string }).usage === 'GARAGE' && d.materialId)?.materialId ?? has('mat-gate') ?? like?.materialId
+  if (kind === 'GARAGE_DOOR') return [{ type: 'placeDoor', id: fillId, openingId: id, ...frame, assembly: { panels: [{ kind: 'PANEL', fraction: 1 }], mullionWidth: 0.04 }, usage: 'GARAGE', ...(gate ? { materialId: gate } : {}) } as BuildingCommand]
+  if (kind === 'GLAZED_DOOR') return [{ type: 'placeDoor', id: fillId, openingId: id, ...frame, assembly: { panels: [{ kind: 'LEAF', fraction: 1, hinge: 'LEFT', glazing: 'FULL' }], mullionWidth: 0.04 }, ...(glass ? { materialId: glass } : like?.materialId ? { materialId: like.materialId } : {}) } as BuildingCommand]
+  return [{ type: 'placeDoor', id: fillId, openingId: id, ...frame, ...(solid ? { materialId: solid } : like?.materialId ? { materialId: like.materialId } : {}) } as BuildingCommand]
 }
 
 function bindOpening(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
@@ -500,21 +506,23 @@ function bindOpening(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
     }
   }
   const record = { bound: { frameId: view.frameId, side: view.side, box, hostId: host.id, ids: [id], values: { offset: u0, width, sill, height } }, source: { frameId: pic.frameId, sourceByteHash: pic.sourceByteHash, crop: box }, gate }
-  if (g.winner === 'CURRENT') return { status: 'REJECTED_BY_SOURCE', code: fillRecord ? 'MODEL_FILL_BETTER_SUPPORTED' : existing ? 'MODEL_BETTER_SUPPORTED' : 'SOURCE_SHOWS_NO_OPENING', why: g.why, record }
   // v3.54.18 — PER-PROPERTY ARBITRATION. LOCAL's openings say what each of their properties rests on: the place along the
   // wall is a gap traced on the PLAN, the sill and height mostly ASSUMED ("no callout read, not read on an elevation").
   // When an update keeps the plan's span (the elevation reading draws the same opening where the plan has its gap — two
   // drawings, two readers) and changes only what the model ASSUMED, the model's shape has no evidence to be beaten by a
-  // margin: the picture must only not refute the proposal (z at or above the "nothing distinct" bound). The printed or
+  // margin: the picture must only not refute the proposal (z at or above the "nothing distinct" bound) — and where the
+  // picture itself supports the proposal (z ≥ 2), a still higher score of the ASSUMED box does not keep it: a taller box
+  // that happens to end on other drawn edges (a spandrel panel, a cladding joint) is not thereby read. The printed or
   // elevation-read properties of an opening never fall under this rule.
   const evp = (existing as { evidence?: { properties?: Record<string, string> } } | undefined)?.evidence?.properties
   const fromPlan = (v: string | undefined): boolean => v === 'SOURCE_DERIVED' || v === 'SOURCE_EXACT'
   const spanShare = existing && ofExisting ? (Math.min(a1, ofExisting.a1) - Math.max(a0, ofExisting.a0)) / Math.max(a1 - a0, ofExisting.a1 - ofExisting.a0) : 0
-  const crossWitness = g.winner === 'UNDECIDED' && !fillRecord && !!existing && !!evp && fromPlan(evp.offset) && fromPlan(evp.width) && evp.sill === 'ASSUMED' && evp.height === 'ASSUMED' && spanShare >= PLAN_SPAN_AGREE && g.proposed.z !== null && g.proposed.z >= SUPPORT_Z_MIN - HYPOTHESIS_Z_MARGIN
+  const crossWitness = (g.winner === 'UNDECIDED' || (g.winner === 'CURRENT' && g.proposed.supported === true)) && !fillRecord && !!existing && !!evp && fromPlan(evp.offset) && fromPlan(evp.width) && evp.sill === 'ASSUMED' && evp.height === 'ASSUMED' && spanShare >= PLAN_SPAN_AGREE && g.proposed.z !== null && g.proposed.z >= SUPPORT_Z_MIN - HYPOTHESIS_Z_MARGIN
   if (crossWitness) {
     ;(gate as { crossWitness?: string }).crossWitness = 'PLAN_SPAN'
     gate.why = `${g.why} — but the model's ${existing?.id} keeps its place from the plan (a traced gap; ${Math.round(spanShare * 100)} % of the span shared with this elevation reading) and its sill and height were ASSUMED, never read: the reading replaces the assumption, and the picture does not refute it (z ${g.proposed.z})`
   }
+  if (g.winner === 'CURRENT' && !crossWitness) return { status: 'REJECTED_BY_SOURCE', code: fillRecord ? 'MODEL_FILL_BETTER_SUPPORTED' : existing ? 'MODEL_BETTER_SUPPORTED' : 'SOURCE_SHOWS_NO_OPENING', why: g.why, record }
   const followsReading = g.winner === 'UNDECIDED' && !crossWitness && !fillRecord && p.origin === 'SKETCH' && f.adopt === true && (ctx.adopted?.has(pic.frameId) ?? false)
   if (followsReading) {
     ;(gate as { adopted?: true }).adopted = true

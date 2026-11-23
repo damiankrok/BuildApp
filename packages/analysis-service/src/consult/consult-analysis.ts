@@ -145,7 +145,7 @@ export type SketchSummary = { reading: Omit<SketchReading, 'elevationSketches'>;
 /** v3.54.18: tolerances of the body arbitration, fixed before any result (a printed dimension, a published height). */
 export const BODY_ARBITRATION = { version: '1.0.0', dimAgreeM: 0.3, dimAgreeShare: 0.04, heightAgreeM: 0.6, heightAgreeShare: 0.1 } as const
 export type BodyEvidence = { bodies: number; registrations: Array<{ frameId: string; side: string; ok: boolean; code: string }>; printed: Array<{ literal: string; valueM: number; modelM: number; agrees: boolean }>; height?: { publishedM: number; modelRidgeM: number; agrees: boolean }; contradictions: number; supports: number }
-export type BodyArbitration = { version: string; local: BodyEvidence; alternative?: BodyEvidence; massing?: { decision: string; why: string; usd: number }; decision: 'LOCAL_STANDS' | 'REPLACED_BY_SOURCE_BODY'; why: string }
+export type BodyArbitration = { version: string; local: BodyEvidence; /** LOCAL's body was judged with this many roof corrections from the same elevations applied (on a copy). */ localAfterRoofCorrections?: number; alternative?: BodyEvidence; massing?: { decision: string; why: string; usd: number }; decision: 'LOCAL_STANDS' | 'REPLACED_BY_SOURCE_BODY'; why: string }
 
 /** v3.54.17: the no-model path's delivery: a mass built from the source, or the anchors it lacks. */
 export type MassingDelivery = {
@@ -1230,8 +1230,17 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
       const supports = regs.filter((q) => q.ok).length + dims.filter((d) => d.agrees).length + (height?.agrees ? 1 : 0)
       return { bodies: bodiesOf(model).length, registrations: regs, printed: dims, ...(height ? { height } : {}), contradictions, supports }
     }
-    const localEv = evidenceOf(good.run.reconstruction.model, viewsOfRun(good.run.reconstruction.facadeAlignment.views))
-    const arb: BodyArbitration = { version: BODY_ARBITRATION.version, local: localEv, decision: 'LOCAL_STANDS', why: '' }
+    // LOCAL's body is judged AFTER the roof correction it can take from the same elevations (a wrong eaves height that
+    // SET_ROOF repairs is not a wrong body): the roof proposals are tried on a copy, through the same executor and gate
+    const mL0 = good.run.reconstruction.model
+    const heldL = viewsOfRun(good.run.reconstruction.facadeAlignment.views)
+    const sketchInputs0 = sketchSummary.reading.sketches.filter((x) => x.sketch).map((x) => ({ facade: x.facade, frameId: x.frameId, groundRow: x.sketch?.groundRow ?? null, walls: (x.sketch?.walls ?? []).map((w) => w.polygon as Array<[number, number]>), roofs: (x.sketch?.roofs ?? []).map((r) => r.polygon as Array<[number, number]>) }))
+    const roofs0 = roofProposalsFromSketches(sketchInputs0, mL0, heldL, modelRevision(mL0), sideOfFacade)
+    const pitch0 = pkg0.publishedFacts.find((f) => f.key === 'roof_pitch' && f.unit === 'deg')?.value
+    const tried = roofs0.proposals.length > 0 ? executeCorrections({ model: mL0, views: heldL, derivedViews: (m: CanonicalBuildingModel, h: readonly BindView[]) => sketchViewsOf(m, pics, h), pictures: pics, proposals: roofs0.proposals.map((q) => ({ ...q, proposalId: `arb:${q.proposalId}` })), witnesses: witnessesOf(good), ...(typeof pitch0 === 'number' ? { facts: { roofPitchDeg: pitch0 } } : {}), seen: new Set<string>() }) : undefined
+    const roofFixed = (tried?.records ?? []).filter((r) => r.status === 'COMMITTED').length
+    const localEv = evidenceOf(tried && roofFixed > 0 ? tried.model : mL0, heldL)
+    const arb: BodyArbitration = { version: BODY_ARBITRATION.version, local: localEv, ...(roofFixed > 0 ? { localAfterRoofCorrections: roofFixed } : {}), decision: 'LOCAL_STANDS', why: '' }
     bodyArbitration = arb
     if (localEv.contradictions === 0) arb.why = `nothing the sources state contradicts LOCAL's body (${localEv.supports} agreement(s): elevations registered, printed dimensions, published height)`
     else {
@@ -1275,13 +1284,20 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
     // drawn openings support it by a clear margin (z ≥ 1 over the next) — otherwise they stay unassigned, by name
     const sidesByConvention = new Set<string>()
     const decideSides = async (model: CanonicalBuildingModel, heldViews: readonly BindView[], from: Local, final = false): Promise<void> => {
-      const unspecified = (sketchSummary?.reading.sketches ?? []).filter((x) => x.sketch && x.facade === 'SIDE_UNSPECIFIED' && !sketchSideOf?.[x.frameId])
+      const unlabelled = (sketchSummary?.reading.sketches ?? []).filter((x) => x.sketch && x.facade === 'SIDE_UNSPECIFIED' && !sketchSideOf?.[x.frameId])
       const taken = new Set((sketchSummary?.reading.sketches ?? []).filter((x) => x.facade !== 'SIDE_UNSPECIFIED' || sketchSideOf?.[x.frameId]).map((x) => sketchSideOf?.[x.frameId] ?? sideOfFacade(x.facade)).filter((v): v is Side => !!v))
       const free = (['FRONT', 'RIGHT', 'REAR', 'LEFT'] as Side[]).filter((sd) => !taken.has(sd))
+      const pics = unlabelled.length > 0 ? await allPicturesOf(from) : []
+      const anchorsFor = (frameId: string, side: Side): SketchAnchors | undefined => { const sv = sketchSideOf; sketchSideOf = { ...(sv ?? {}), [frameId]: side }; const a = sketchAnchors().find((q) => q.frameId === frameId); sketchSideOf = sv; return a }
+      // v3.54.18: an unlabelled picture that registers on NO free side is not an elevation of this house at this scale (a
+      // perspective the page files among the elevations, a detail) — it is set aside by name instead of blocking the
+      // others (Alaska: one such picture kept the fourth elevation from ever being assigned)
+      const registersOn = (x: (typeof unlabelled)[number], sd: Side): boolean => { const a = anchorsFor(x.frameId, sd); const r = a ? registerFromSketch({ model, views: [...heldViews], pictures: pics, witnesses: [] }, a) : undefined; return !!r && !('status' in r) }
+      const unspecified = unlabelled.filter((x) => free.some((sd) => registersOn(x, sd)))
+      const setAside = unlabelled.filter((x) => !unspecified.includes(x))
+      if (setAside.length > 0 && final) record({ at: now().toISOString(), kind: 'UNLABELLED_PICTURES_SET_ASIDE', frames: setAside.map((x) => x.frameId), free, why: 'registers on no free side of the model (wall ends, ground and eaves or ridge): not an elevation of this house at this scale — read, not used' })
       if (unspecified.length > 0 && unspecified.length <= free.length && unspecified.length <= 2) {
-        const pics = await allPicturesOf(from)
         const perms: Side[][] = unspecified.length === 1 ? free.map((f) => [f]) : free.flatMap((f1) => free.filter((f2) => f2 !== f1).map((f2) => [f1, f2]))
-        const anchorsFor = (frameId: string, side: Side): SketchAnchors | undefined => { const sv = sketchSideOf; sketchSideOf = { ...(sv ?? {}), [frameId]: side }; const a = sketchAnchors().find((q) => q.frameId === frameId); sketchSideOf = sv; return a }
         const scored = perms.map((perm) => {
           const regs = unspecified.map((x, i) => { const a = anchorsFor(x.frameId, perm[i]); return a ? registerFromSketch({ model, views: [...heldViews], pictures: pics, witnesses: [] }, a) : undefined })
           const ok = regs.every((r) => r && !('status' in r))

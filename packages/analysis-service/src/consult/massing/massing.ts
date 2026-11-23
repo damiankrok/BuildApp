@@ -72,6 +72,19 @@ export const MASSING_TOLERANCES = {
 } as const
 /** Conventions of the miniature, named where they are used (never presented as read). */
 export const MINIATURE_CONVENTIONS = { wallThicknessM: 0.3, parapetM: 0.3, flatRoofThicknessM: 0.2, roofThicknessM: 0.25, roofMaterialId: 'mat-roof', roofColor: '#5a5550' } as const
+/**
+ * v3.54.18 (massing 1.1.0): the miniature's palette on a body built without LOCAL — the ids and default tones the drawings'
+ * solver gives its own models, so an opening placed on such a body has glass, a door a leaf, a wall a render. NONE of these
+ * tones is read from the source here (finish zones are, later, through SET_FINISH): a named convention, DISPLAY_ASSUMPTION.
+ */
+export const MINIATURE_PALETTE = [
+  { id: 'mat-wall', name: 'Rendered wall (tone not read: miniature convention)', color: '#e8e4dc' },
+  { id: 'mat-roof', name: 'Roof covering (tone not read: miniature convention)', color: '#5a5550' },
+  { id: 'mat-glass', name: 'Glazing', color: '#9fc3d8', opacity: 0.35 },
+  { id: 'mat-timber', name: 'Timber (door leaf, cladding)', color: '#b07a4a' },
+  { id: 'mat-gate', name: 'Garage door', color: '#55585c' },
+  { id: 'mat-chimney', name: 'Chimney', color: '#6d6a66' },
+] as const
 
 const r6 = (v: number): number => Math.round(v * 1e6) / 1e6
 const along = (s: Side): 'x' | 'z' => (s === 'FRONT' || s === 'REAR' ? 'x' : 'z')
@@ -501,8 +514,8 @@ export function massingCommands(h: MassingHypothesis, model: CanonicalBuildingMo
   // v3.54.18 (massing 1.1.0): the roof covering's material, as the drawings' solver names it. Its tone is NOT read from
   // the source here (the sketch contract carries no roof finish): a named miniature convention, so the roof is not left
   // without a material (a pale roof on a body built without LOCAL — R3's open item 4).
-  if (!model.materials.some((x) => x.id === MINIATURE_CONVENTIONS.roofMaterialId)) cmds.push({ type: 'defineMaterial', id: MINIATURE_CONVENTIONS.roofMaterialId, name: 'Roof covering (tone not read: miniature convention)', color: MINIATURE_CONVENTIONS.roofColor } as BuildingCommand)
-  for (const b of h.bodies) cmds.push(...bodyCommands(b, levelId, model.levels[0]?.elevation ?? 0, rects.filter((r) => r !== b.rect), h.wallThicknessM).map((c) => (c.type === 'createRoof' ? ({ ...c, materialId: MINIATURE_CONVENTIONS.roofMaterialId } as BuildingCommand) : c)))
+  for (const mat of MINIATURE_PALETTE) if (!model.materials.some((x) => x.id === mat.id)) cmds.push({ type: 'defineMaterial', ...mat } as BuildingCommand)
+  for (const b of h.bodies) cmds.push(...bodyCommands(b, levelId, model.levels[0]?.elevation ?? 0, rects.filter((r) => r !== b.rect), h.wallThicknessM).map((c) => (c.type === 'createRoof' ? ({ ...c, materialId: MINIATURE_CONVENTIONS.roofMaterialId } as BuildingCommand) : c.type === 'createWallRing' ? ({ ...c, materialId: 'mat-wall' } as BuildingCommand) : c)))
   return cmds
 }
 

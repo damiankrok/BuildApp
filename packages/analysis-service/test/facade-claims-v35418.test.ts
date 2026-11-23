@@ -309,3 +309,64 @@ describe('v3.54.18 facade adoption: the picture supports most of a reading and r
     expect(adopted.records[0].measure?.sourceVerified).toBe(false)
   })
 })
+
+// ---- v3.54.18: per-property arbitration ---------------------------------------------------------------------------------
+describe('v3.54.18 per-property arbitration: the plan keeps the span, the reading replaces what was ASSUMED', () => {
+  const EV_ASSUMED = { status: 'ASSUMED', interpretation: 'a 1.20 m gap in the front wall, no callout read, not read on an elevation', properties: { offset: 'SOURCE_DERIVED', width: 'SOURCE_DERIVED', sill: 'ASSUMED', height: 'ASSUMED', head: 'SOURCE_DERIVED', kind: 'ASSUMED' } }
+  const EV_PRINTED = { status: 'SOURCE_CORROBORATED', interpretation: 'a 1.20 m gap in the front wall, printed 120/120', properties: { offset: 'SOURCE_DERIVED', width: 'SOURCE_EXACT', sill: 'SOURCE_DERIVED', height: 'SOURCE_EXACT', head: 'SOURCE_DERIVED', kind: 'VISUAL_INFERRED' } }
+  // the picture: window A with a framed panel of the same width directly above and below it (a spandrel) — the tall box
+  // the model assumed (0.5–2.4 m) and the window the reading draws (0.9–2.1 m) both sit on strong drawn edges
+  const faint = (): BindPicture => {
+    const data = new Uint8ClampedArray(RASTER.data)
+    const [x0, x1] = REAL.A
+    const panel = (y0: number, y1: number): void => {
+      for (let y = row(y1); y <= row(y0); y += 1) for (let x = col(x0); x <= col(x1); x += 1) {
+        const frame = x - col(x0) < 3 || col(x1) - x < 3 || y - row(y1) < 3 || row(y0) - y < 3
+        data.set(frame ? [250, 250, 250, 255] : [70, 80, 92, 255], (y * W + x) * 4)
+      }
+    }
+    panel(0.5, 0.9)
+    panel(2.1, 2.4)
+    return { ...picture, raster: { width: W, height: H, data }, sourceByteHash: 'd'.repeat(64) }
+  }
+  const house = (ev: unknown): CanonicalBuildingModel => {
+    const cmds = [
+      { type: 'createBuilding', id: 'b', name: 'pp' },
+      { type: 'createLevel', id: 'l0', name: 'Ground', index: 0, elevation: 0, height: 2.8 },
+      { type: 'createWallRing', id: 'g', levelId: 'l0', polygon: [{ x: 0, z: 0 }, { x: 10, z: 0 }, { x: 10, z: 8 }, { x: 0, z: 8 }], thickness: 0.3, height: 2.8, baseOffset: 0, kind: 'EXTERIOR', cornerOwnership: 'ALTERNATE' },
+      // the plan's gap where window A is; its sill and height are the default 0.9 / 1.3 → drawn 0.2 m too tall
+      { type: 'cutOpening', id: 'A', wallId: 'g-w0', kind: 'WINDOW', offset: 1.0, sill: 0.5, width: 1.2, height: 1.9, evidence: ev },
+      { type: 'placeWindow', id: 'A-unit', openingId: 'A' },
+    ] as BuildingCommand[]
+    const r = applyCommands(createEmptyModel('m-pp', 'pp'), cmds)
+    if (r.failedAt !== undefined) throw new Error(`fixture: ${JSON.stringify(r.results[r.failedAt])}`)
+    return r.model
+  }
+  const update = (m: CanonicalBuildingModel, box = b4(REAL.A)): CorrectionProposal => prop(m, { proposalId: `pp-${Math.round(box.x0)}`, operation: 'UPDATE_OPENING', targetId: 'A', patch: { box, kind: 'WINDOW' } })
+
+  it('an update that keeps the plan-traced span and changes only ASSUMED sill and height needs the picture not to refute it', () => {
+    const pic = faint()
+    const m = house(EV_ASSUMED)
+    const out = executeCorrections({ model: m, views: [view], pictures: [pic], proposals: [update(m)] })
+    const g = out.records[0].gate as { winner: string; proposedZ: number | null; currentZ?: number | null; crossWitness?: string }
+    // the gate alone keeps the ASSUMED tall box (it ends on the spandrel's edges and outscores the window)
+    expect(g.winner).toBe('CURRENT')
+    expect(g.proposedZ ?? 0).toBeGreaterThanOrEqual(2)
+    expect(g.crossWitness).toBe('PLAN_SPAN')
+    expect(out.records[0].status).toBe('COMMITTED')
+    expect(out.model.openings.find((o) => o.id === 'A')?.sill).toBeCloseTo(0.9, 1)
+    expect(out.model.openings.find((o) => o.id === 'A')?.height).toBeCloseTo(1.2, 1)
+  })
+
+  it('COUNTER-TRIALS: a printed height is never replaced this way; another stretch of wall is not the same opening', () => {
+    const pic = faint()
+    const printed = house(EV_PRINTED)
+    const a = executeCorrections({ model: printed, views: [view], pictures: [pic], proposals: [update(printed)] })
+    expect((a.records[0].gate as { crossWitness?: string }).crossWitness).toBeUndefined()
+    const m = house(EV_ASSUMED)
+    const moved = executeCorrections({ model: m, views: [view], pictures: [pic], proposals: [update(m, boxOf(2.9, 4.1, 0.9, 2.1))] })
+    expect((moved.records[0].gate as { crossWitness?: string } | undefined)?.crossWitness).toBeUndefined()
+    expect(moved.records[0].status).not.toBe('COMMITTED')
+    expect(a.records[0].status).toBe('REJECTED_BY_SOURCE') // the printed 120/120 box stands where the picture scores it higher
+  })
+})
