@@ -229,12 +229,22 @@ export type PatchFields = {
   outline?: Array<[number, number]>
   /** v3.54.17 R3: UPDATE_OPENING — openings of the same wall the new shape covers (the source's one opening is several in the model). */
   absorbs?: string[]
+  /**
+   * v3.54.18 — facade adoption (analyzer-made; honoured only for a SKETCH proposal on a frame the run adopted): the reading
+   * of this elevation is supported by the picture on most of its openings and refuted on none, so where the picture does
+   * not decide ONE element it follows the reading. Such an element is applied but never marked source-verified.
+   */
+  adopt?: true
+  /** With `adopt` on a REMOVE: what in the reading explains the picture's edges where the model's opening stands (a finish-zone boundary it draws there). */
+  explained?: string
   /** v3.54.18: ADD/UPDATE_OPENING from a typed reading — model openings of the same wall the new shape overlaps and the reading
    * does not draw. Two openings cannot stand on one stretch of wall: one the picture does not itself support gives way in the
    * same transaction; one the picture supports apart from the new shape refuses the proposal (analyzer-made, never the reviewer's). */
   displaces?: string[]
   /** v3.54.17 R3: SET_OUTLINE from a printed overall dimension of a registered plan (analyzer-made from the metric read). */
   printed?: { valueM: number; literal: string; planFrameId: string; from: [number, number]; to: [number, number]; sourceByteHash: string }
+  /** v3.54.18: SET_ROOF from a typed reading — the row where the drawn walls end at the body's outer corners (the eaves at the wall). */
+  wallTopY?: number
   /** v3.54.17 R3: SET_ROOF_OVERHANG — the drawn roof's two ends, in the picture's pixels. */
   roofLeftX?: number
   roofRightX?: number

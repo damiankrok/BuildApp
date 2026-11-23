@@ -97,6 +97,74 @@ export function finishProposalsFromSketch(s: ElevationSketch, facade: string, mo
   return { proposals: out, skipped }
 }
 
+/**
+ * v3.54.18 — FACADE ADOPTION. The source gate judges one element at a time, and on a rendered elevation it cannot always:
+ * a model opening that straddles a cladding boundary scores as "something drawn" (Alaska's long side: z 27 for a phantom
+ * across the edge of the timber zone), and an update of a wide phantom to the real window inside it ties (z 6.8 against
+ * 6.5). The decision is then taken for the facade as a whole, on evidence that is not the reading's own word: the reading
+ * of an elevation is ADOPTED when the picture supports at least `minSupportedShare` of the openings it draws (each one
+ * committed through the gate, or already standing in the model) and refutes none. On an adopted facade the elements the
+ * picture left undecided follow the reading; a model opening the picture seems to support is removed only where the
+ * reading explains those edges by a finish-zone boundary it draws through the opening's box. Adopted elements are applied
+ * and marked NOT source-verified. A reading the picture refutes anywhere, or supports on too little, adopts nothing.
+ */
+export const FACADE_ADOPTION = { minOpenings: 2, minSupportedShare: 0.6 } as const
+export type FacadeAdoption = { frameId: string; side?: Side; drawn: number; supported: number; refuted: number; pending: number; decision: 'ADOPTED' | 'NOT_ADOPTED' | 'NOTHING_PENDING' | 'NOT_REGISTERED'; why: string; proposals: CorrectionProposal[] }
+/** `fate`: the last status the executor gave the proposal about a sketch opening (`open:<id>`) or about removing a model opening (`rem:<id>`). */
+export function facadeAdoption(s: ElevationSketch, facade: string, model: CanonicalBuildingModel, views: readonly BindView[], baseRevision: string, fate: (key: string) => string | undefined, sideOf?: Side): FacadeAdoption {
+  const acc = proposalsFromSketch(s, facade, model, views, baseRevision, sideOf)
+  const side = sideOf ?? sideOfFacade(facade)
+  const view = preferredView(views, s.frameId, side) ?? (sideOf ? undefined : preferredView(views, s.frameId))
+  const base = { frameId: s.frameId, ...(acc.side ? { side: acc.side as Side } : {}) }
+  if (!view) return { ...base, drawn: 0, supported: 0, refuted: 0, pending: 0, decision: 'NOT_REGISTERED', why: 'the elevation is registered to no side', proposals: [] }
+  const sketchId = (q: CorrectionProposal): string => q.proposalId.replace(/@\w+$/, '').split(':').slice(3).join(':')
+  const openings = acc.proposals.filter((q) => q.operation === 'ADD_OPENING' || q.operation === 'UPDATE_OPENING')
+  const removals = acc.proposals.filter((q) => q.operation === 'REMOVE_OPENING')
+  const refuted = openings.filter((q) => fate(`open:${sketchId(q)}`) === 'REJECTED_BY_SOURCE')
+  const pending = openings.filter((q) => fate(`open:${sketchId(q)}`) !== 'REJECTED_BY_SOURCE')
+  // supported: standing in the model as drawn, or a proposal the picture itself supports (z ≥ 2) that only ties with the model's element
+  const supported = acc.agreed.length + pending.filter((q) => fate(`open:${sketchId(q)}`) === 'UNDECIDED_BUT_SUPPORTED').length
+  const drawn = supported + openings.length
+  const counts = { drawn, supported, refuted: refuted.length, pending: pending.length }
+  const open = removals.filter((q) => fate(`rem:${q.targetId}`) !== 'COMMITTED')
+  if (pending.length === 0 && open.length === 0) return { ...base, ...counts, decision: 'NOTHING_PENDING', why: `every opening the reading draws stands (${supported} of ${drawn}) and it leaves no model opening in question`, proposals: [] }
+  if (drawn < FACADE_ADOPTION.minOpenings) return { ...base, ...counts, decision: 'NOT_ADOPTED', why: `the reading draws ${drawn} opening(s) here: too few to adopt a facade on (fewer than ${FACADE_ADOPTION.minOpenings})`, proposals: [] }
+  if (refuted.length > 0) return { ...base, ...counts, decision: 'NOT_ADOPTED', why: `the picture refutes ${refuted.length} of the reading's ${drawn} opening(s) (${refuted.map(sketchId).join(', ')}): a reading contradicted by its own picture is not adopted`, proposals: [] }
+  if (supported / drawn < FACADE_ADOPTION.minSupportedShare) return { ...base, ...counts, decision: 'NOT_ADOPTED', why: `the picture supports ${supported} of the reading's ${drawn} opening(s) (${Math.round((100 * supported) / drawn)} %, below ${FACADE_ADOPTION.minSupportedShare * 100} %): the rest stay undecided, by name`, proposals: [] }
+  // what the reading explains: a model opening whose box lies across the boundary of two finish zones it draws
+  const polyArea = (poly: ReadonlyArray<readonly [number, number]>): number => Math.abs(poly.reduce((a, q, i) => a + q[0] * poly[(i + 1) % poly.length][1] - poly[(i + 1) % poly.length][0] * q[1], 0)) / 2
+  const inPoly = (poly: ReadonlyArray<readonly [number, number]>, x: number, y: number): boolean => {
+    let c = false
+    for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) if (poly[i][1] > y !== poly[j][1] > y && x < ((poly[j][0] - poly[i][0]) * (y - poly[i][1])) / (poly[j][1] - poly[i][1]) + poly[i][0]) c = !c
+    return c
+  }
+  const zones = s.walls.map((w, i) => ({ i, id: w.id, cls: w.class, poly: w.polygon, a: polyArea(w.polygon) })).sort((a, b) => a.a - b.a)
+  const boxes = new Map(openingBoxes(model, view).map((o) => [o.id, o.box]))
+  const explains = (modelId: string): string | undefined => {
+    const b = boxes.get(modelId)
+    if (!b) return undefined
+    const seen = new Map<string, number>()
+    for (let u = 0; u < 5; u += 1) for (let v = 0; v < 5; v += 1) {
+      const x = b.x0 + ((u + 0.5) * (b.x1 - b.x0)) / 5
+      const y = b.y0 + ((v + 0.5) * (b.y1 - b.y0)) / 5
+      const z = zones.find((q) => inPoly(q.poly, x, y))
+      const key = z ? `${z.cls} zone ${z.id}` : 'no wall zone'
+      seen.set(key, (seen.get(key) ?? 0) + 1)
+    }
+    const parts = [...seen.entries()].filter(([, n]) => n >= 3)
+    return parts.length >= 2 ? `its box lies across what the reading draws as ${parts.map(([k]) => k).join(' and ')}` : undefined
+  }
+  const out: CorrectionProposal[] = []
+  for (const q of open) {
+    const st = fate(`rem:${q.targetId}`)
+    const why = st === 'REJECTED_BY_SOURCE' ? explains(q.targetId) : undefined
+    if (st === 'REJECTED_BY_SOURCE' && !why) continue
+    out.push({ ...q, proposalId: `${q.proposalId}@adopt`, patch: { ...(q.patch ?? {}), adopt: true as const, ...(why ? { explained: why } : {}) } })
+  }
+  for (const q of pending) out.push({ ...q, proposalId: `${q.proposalId}@adopt`, patch: { ...(q.patch ?? {}), adopt: true as const } })
+  return { ...base, ...counts, decision: 'ADOPTED', why: `the picture supports ${supported} of the ${drawn} opening(s) the reading draws on this side (${Math.round((100 * supported) / drawn)} %) and refutes none: the ${pending.length} it left undecided and ${out.length - pending.length} model opening(s) the reading does not draw follow the reading (applied, not source-verified)`, proposals: out }
+}
+
 export type SketchProposalAccount = { sketchId: string; frameId: string; side?: string; proposals: CorrectionProposal[]; agreed: Array<{ sketchId: string; modelId: string; iou: number }>; skipped: Array<{ sketchId: string; why: string }> }
 
 /** `sideOf` (v3.54.17 R3): the side this elevation shows when the orientation hypothesis says it is not its label's. */

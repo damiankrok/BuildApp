@@ -8,7 +8,8 @@ set -euo pipefail
 TREE=$1; HOUSE=$2; URL=$3; OUT=$4; CACHE=$5; shift 5
 LEDGER=/home/user/BuildApp/research/ai-assist/spend-ledger-v35417r3.json
 cd "$TREE"
-BUILDPLAN_ANTHROPIC_API_KEY="$(cat /root/.config/buildplan/campaign-key)" npx vite-node research/source-to-model/v35417/run.ts -- \
+RUNNER=research/source-to-model/v35418/run.ts; [ -f "$RUNNER" ] || RUNNER=research/source-to-model/v35417/run.ts
+BUILDPLAN_ANTHROPIC_API_KEY="$(cat /root/.config/buildplan/campaign-key)" npx vite-node "$RUNNER" -- \
   --url "$URL" --cache "$CACHE" --out "$OUT" --house "$HOUSE" \
   --live --sketch-live --check-live --check-model claude-sonnet-5-5 --outline-live --strict --prompt-cache 5m --geometry-rounds 2 \
   --ledger "$LEDGER" --opening 28.542857 --ceiling 68.542857 "$@"

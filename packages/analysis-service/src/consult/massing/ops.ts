@@ -21,7 +21,7 @@ import type { Poly } from '../correct/source-gate.js'
 import { facadePx, levelOf, openingBoxes, pictureOf, tolPxOf, toFrameX, toFrameY, viewOf } from '../correct/execute.js'
 import type { BindPicture, BindView, Bound, Ctx, CorrectionProposal, Refusal, Side } from '../correct/execute.js'
 import { targetBodies } from '../correct/resolve.js'
-import { area, bodiesOf, bodyCommands, extentOn, MASSING_TOLERANCES, MASSING_VERSION, massingCommands, MINIATURE_CONVENTIONS, profileOver, readableStretch, registerByPlan, solveMassing } from './massing.js'
+import { area, bodiesOf, bodyCommands, extentOn, MASSING_TOLERANCES, MASSING_VERSION, massingCommands, MINIATURE_CONVENTIONS, profileOver, readableStretch, registerByPlan, solveMassing, wallCornerTopM } from './massing.js'
 import type { BodySpec, Fidelity, MassingHypothesis, ModelBody, OutlineObservation, Rect, RoofSpec, SilhouetteObservation } from './massing.js'
 
 export const MASSING_OPS_VERSION = '1.5.0' as const
@@ -255,6 +255,12 @@ export function bindSetRoof(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
     const axis: 'X' | 'Z' = prof.shape === 'TRIANGLE' ? (along(view.side) === 'x' ? 'Z' : 'X') : along(view.side) === 'x' ? 'X' : 'Z'
     const span = axis === 'X' ? body.rect.maxZ - body.rect.minZ : body.rect.maxX - body.rect.minX
     spec = { kind: 'GABLE', ridgeAxis: axis, pitchDeg: Math.round(((Math.atan2(rise, span / 2) * 180) / Math.PI) * 10) / 10, eavesM: r6(prof.eavesM), ridgeM: r6(prof.topM) }
+    // v3.54.18 (ops 1.5.0): the eaves AT THE WALL are where the drawn walls end at the body's corners (`wallTopY`, the
+    // line both an eaves view and a gable view share). The drawn roof's lowest edge is its fascia — or a porch roof
+    // carried lower (Alberto: the lowest edge at 2.38 m gave a 35° roof for the page's 25°; the walls end at 2.87 m).
+    const wallTopM = typeof f.wallTopY === 'number' && Number.isFinite(f.wallTopY) ? (view.projection.zeroRow - toFrameY(pic, p, f.wallTopY)) * (view.projection.mppV ?? view.projection.mpp) : undefined
+    const wallTopOk = wallTopM !== undefined && wallTopM - top.elevation > 0.3 && prof.topM - wallTopM >= MASSING_TOLERANCES.flatRiseM
+    if (wallTopOk) spec = { kind: 'GABLE', ridgeAxis: axis, pitchDeg: Math.round(((Math.atan2(prof.topM - (wallTopM as number), span / 2) * 180) / Math.PI) * 10) / 10, eavesM: r6(wallTopM as number), ridgeM: r6(prof.topM) }
     // v3.54.17 R3: seen along its ridge, a gable's lowest drawn edge is its fascia — past the wall by the overhang and
     // lower than the eaves at the wall. With the pitch the page states, the eaves at the wall follow from the drawn ridge
     // (ridge − half the span × tan pitch) and the overhang from the drawn fascia; both must be possible (0..MAX), or the
@@ -263,10 +269,13 @@ export function bindSetRoof(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
     if (prof.shape !== 'TRIANGLE' && pagePitch !== undefined && pagePitch >= 10 && pagePitch <= 60) {
       const tan = Math.tan((pagePitch * Math.PI) / 180)
       const eavesWall = prof.topM - (span / 2) * tan
-      const oh = (eavesWall - prof.eavesM) / tan
-      if (oh >= -0.05 && oh <= MAX_OVERHANG_M) {
+      // with the walls' top drawn: a boxed soffit hides the wall between the fascia line and the plate, so the plate the
+      // page's pitch gives may stand above the drawn wall top by no more than the overhang's fall — and the overhang is
+      // that fall over the pitch. Without it (R3): the overhang from the roof's lowest edge.
+      const oh = wallTopOk ? (eavesWall - (wallTopM as number)) / tan : (eavesWall - prof.eavesM) / tan
+      if (oh >= (wallTopOk ? -0.35 / tan : -0.05) && oh <= MAX_OVERHANG_M + (wallTopOk ? 0.25 : 0)) {
         spec = { kind: 'GABLE', ridgeAxis: axis, pitchDeg: pagePitch, eavesM: r6(eavesWall), ridgeM: r6(prof.topM) }
-        overhangM = Math.round(Math.max(0, oh) * 100) / 100
+        overhangM = Math.round(Math.min(MAX_OVERHANG_M, Math.max(0, oh)) * 100) / 100
         // the model builds one overhang all round: where another body stands against an eaves side within that reach,
         // the eaves overhang would run into it — the heights and the pitch are kept, the overhang is not built (named)
         const eavesSides = axis === 'X' ? (['minZ', 'maxZ'] as const) : (['minX', 'maxX'] as const)
@@ -279,7 +288,7 @@ export function bindSetRoof(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
           pitchFrom = `the page's ${pagePitch}° with the drawn ridge: eaves at the wall ${eavesWall.toFixed(2)} m; the drawn ${overhangM.toFixed(2)} m eaves overhang is NOT built — ${against.id} stands against an eaves side (one overhang all round in the model)`
           overhangM = 0
         }
-        pitchFrom = `the page's ${pagePitch}° with the drawn ridge ${prof.topM.toFixed(2)} m: eaves at the wall ${eavesWall.toFixed(2)} m, fascia ${prof.eavesM.toFixed(2)} m → overhang ${overhangM.toFixed(2)} m`
+        pitchFrom = `the page's ${pagePitch}° with the drawn ridge ${prof.topM.toFixed(2)} m: eaves at the wall ${eavesWall.toFixed(2)} m, ${wallTopOk ? `the drawn walls end at ${(wallTopM as number).toFixed(2)} m` : `fascia ${prof.eavesM.toFixed(2)} m`} → overhang ${overhangM.toFixed(2)} m`
       } else pitchFrom = `the page's ${pagePitch}° would put the overhang at ${oh.toFixed(2)} m from the drawn ridge and fascia: not used, the drawn eaves taken`
     }
   } else spec = { kind: 'FLAT', eavesM: r6(prof.topM) }
@@ -706,15 +715,8 @@ export function orientationOf(sketches: readonly SketchForMassing[], m: Canonica
         // differ by the band's thickness and the overhang's fall (Ballina live: 3.26 / 3.28 m against 2.91 / 2.86 m for
         // walls that end at 2.9 m in all four drawings). Where a view draws no wall corner there, the roof's edge stays.
         const own = extentOn(b.rect, side) // the body's own ends (the readable stretch is drawn in from them)
-        const px = [pxOf(r.view.projection, own.lo), pxOf(r.view.projection, own.hi)]
-        const [c0, c1] = [Math.min(...px), Math.max(...px)]
-        const near = Math.max(2, 0.03 * (c1 - c0))
-        const corner = (cx: number): number | undefined => {
-          const ys = s.walls.flatMap((poly) => poly.filter((q) => Math.abs(q[0] - cx) <= near && q[1] < (s.groundRow as number) - 2).map((q) => q[1]))
-          return ys.length > 0 ? Math.min(...ys) : undefined
-        }
-        const [k0, k1] = [corner(c0), corner(c1)]
-        const wallTopM = k0 !== undefined && k1 !== undefined ? Math.round(((((r.view.projection.zeroRow - k0) * (r.view.projection.mppV ?? r.view.projection.mpp)) + ((r.view.projection.zeroRow - k1) * (r.view.projection.mppV ?? r.view.projection.mpp))) / 2) * 100) / 100 : undefined
+        const wt = wallCornerTopM(r.view, own.lo, own.hi, s.walls, s.groundRow)
+        const wallTopM = wt !== undefined ? Math.round(wt * 100) / 100 : undefined
         if (prof && prof.shape !== 'NONE') per.get(b.id)?.[turn ? 'turned' : 'labelled'].push({ frameId: s.frameId, side, eavesM: Math.round(prof.eavesM * 100) / 100, ...(wallTopM !== undefined ? { wallTopM } : {}) })
       }
     }
@@ -831,6 +833,9 @@ export function roofProposalsFromSketches(sketches: readonly SketchForMassing[],
         acc.skipped.push({ bodyId: b.id, why: `the drawn roof agrees with the model's (${kind}, overlap ${ov.toFixed(2)})` })
         continue
       }
+      // v3.54.18: where the drawn walls end at this body's corners (the eaves at the wall), as a row of this frame
+      const wtM = wallCornerTopM(view, e.lo, e.hi, s.walls, s.groundRow)
+      const wallTopRow = wtM !== undefined ? Math.round((view.projection.zeroRow - wtM / (view.projection.mppV ?? view.projection.mpp)) * 10) / 10 : undefined
       const p: CorrectionProposal = {
         proposalId: `sk-roof-${b.id}-${s.frameId.slice(-10)}`,
         baseRevision: rev,
@@ -842,7 +847,7 @@ export function roofProposalsFromSketches(sketches: readonly SketchForMassing[],
         justification: `${disagree}; the sketch of the ${lab?.toLowerCase()} elevation${turned ? ` (drawing the model's ${side.toLowerCase()} side: ${orientation.why})` : ''} draws a ${prof.shape.toLowerCase()} ${kind.toLowerCase()} roof over it`,
         // R2: the registration the proposal was read through travels with it — the whole house's walls against the whole
         // house's extent — so the executor reads the same scale (the narrow wall ends of one body gave the 87° annex)
-        patch: { roofKind: kind, roofPolygon: poly.map((q) => [q[0], q[1]] as [number, number]), side, ...(reg ? {} : { wallLeftX: Math.min(...xs), wallRightX: Math.max(...xs), groundY: s.groundRow, extent: 'HOUSE' as const }) },
+        patch: { roofKind: kind, roofPolygon: poly.map((q) => [q[0], q[1]] as [number, number]), side, ...(wallTopRow !== undefined ? { wallTopY: wallTopRow } : {}), ...(reg ? {} : { wallLeftX: Math.min(...xs), wallRightX: Math.max(...xs), groundY: s.groundRow, extent: 'HOUSE' as const }) },
       }
       // a band (slopes) or a triangle (gable end) is a clear form; a registered view beats one made by the plan
       const score = (prof.shape === 'BAND' || prof.shape === 'TRIANGLE' ? 2 : 1) + (reg ? 1 : 0) + over[0].share

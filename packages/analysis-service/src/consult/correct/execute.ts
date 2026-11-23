@@ -121,7 +121,7 @@ export type PatchRecord = {
   /** What the patch was bound to: the source frame and its pixels, the side, the host, the ids it creates or changes. */
   bound?: { frameId: string; side?: Side; box?: Box; hostId?: string; ids: string[]; /** v3.54.18: openings that gave way to this one, each with its own support z on the picture. */ displaced?: Record<string, number | null>; depth?: 'SECOND_VIEW' | 'ROOF_MEET_LINE' | 'DISPLAY_ASSUMPTION'; values?: Record<string, number> }
   source?: { frameId: string; sourceByteHash: string; crop?: Box }
-  gate?: { winner: HypothesisVerdict['winner']; proposedZ: number | null; currentZ?: number | null; nullBoxes: number; /** 1.3.0: the band the z was read against (absent: JOINT). */ nullMode?: 'JOINT' | 'CLAIMS_ROBUST' | 'DISPLACED'; why: string; /** 1.1.0: BOX, POLYGON (a raked head on either side) or FILL (a change of kind on the same shape). */ measure?: 'BOX' | 'POLYGON' | 'FILL' | 'REGION'; fill?: Pick<FillVerdict, 'observed' | 'features'> }
+  gate?: { winner: HypothesisVerdict['winner']; proposedZ: number | null; currentZ?: number | null; nullBoxes: number; /** 1.3.0: the band the z was read against (absent: JOINT). */ nullMode?: 'JOINT' | 'CLAIMS_ROBUST' | 'DISPLACED'; /** v3.54.18: the picture did not decide this element; it follows the adopted reading of its facade (never source-verified). */ adopted?: true; /** v3.54.18: the opening's span is the plan's and this reading's alike; only ASSUMED properties were replaced. */ crossWitness?: 'PLAN_SPAN'; why: string; /** 1.1.0: BOX, POLYGON (a raked head on either side) or FILL (a change of kind on the same shape). */ measure?: 'BOX' | 'POLYGON' | 'FILL' | 'REGION'; fill?: Pick<FillVerdict, 'observed' | 'features'> }
   measure?: { builtBox?: Box; iouWithProposal?: number; builtSupportZ?: number | null; headErrorPx?: number; builtKind?: string; sourceVerified: boolean | null; why: string }
   commands?: BuildingCommand[]
   /** v3.54.17: how a printed witness was bound to the target (its observation, the body both stand on, the datum). */
@@ -227,6 +227,8 @@ export function openingBoxes(m: CanonicalBuildingModel, v: BindView): Array<{ id
     return s && s.side === v.side ? [{ id: o.id, box: boxOfSpan(v, s) }] : []
   })
 }
+/** v3.54.18: the share of the longer span an update must share with the model's plan-traced opening to be the same opening. */
+export const PLAN_SPAN_AGREE = 0.7
 export type OpeningPatchKindExact = 'WINDOW' | 'DOOR' | 'GLAZED_DOOR' | 'GARAGE_DOOR'
 /** A2: the exact kind of a model opening, from its fill (a glazed leaf, a garage door), never WINDOW / not-WINDOW. */
 export function kindOfOpening(m: CanonicalBuildingModel, id: string): OpeningPatchKindExact | undefined {
@@ -294,8 +296,8 @@ const changedKeys = (a: Map<string, string>, b: Map<string, string>): string[] =
 // ---------------------------------------------------------------------------------------------------------------
 
 export type Expect =
-  | { kind: 'OPENING'; id: string; view: BindView; box: Box; shape: Shape; levelId: string; openingKind: OpeningPatchKindExact; fillChangeFrom?: OpeningPatchKindExact }
-  | { kind: 'REMOVED'; id: string }
+  | { kind: 'OPENING'; id: string; view: BindView; box: Box; shape: Shape; levelId: string; openingKind: OpeningPatchKindExact; fillChangeFrom?: OpeningPatchKindExact; adopted?: true }
+  | { kind: 'REMOVED'; id: string; adopted?: true }
   | { kind: 'CHIMNEY'; id: string; view: BindView; box: Box }
   | { kind: 'FINISH'; hosts: string[] }
   | { kind: 'PARAM'; targetId: string; property: string; value: number }
@@ -310,7 +312,7 @@ export type Refusal = { status: PatchStatus; code: string; why: string; record?:
 export type BindPlan = { frameId: string; toWorld: (px: number, py: number) => { x: number; z: number } }
 /** v3.54.17 R3: facts the publisher's page states in words (not printed on a drawing): the roof's pitch. */
 export type PageFacts = { roofPitchDeg?: number }
-export type Ctx = { model: CanonicalBuildingModel; views: BindView[]; pictures: readonly BindPicture[]; witnesses: readonly PrintedWitness[]; massing?: MassingObservations; plans?: readonly BindPlan[]; facts?: PageFacts; claims?: FacadeClaims }
+export type Ctx = { model: CanonicalBuildingModel; views: BindView[]; pictures: readonly BindPicture[]; witnesses: readonly PrintedWitness[]; massing?: MassingObservations; plans?: readonly BindPlan[]; facts?: PageFacts; claims?: FacadeClaims; adopted?: ReadonlySet<string> }
 /** v3.54.18 (gate 1.3.0): per source frame, every opening box the reading of that picture draws (frame pixels) — the places it does NOT call plain wall. */
 export type FacadeClaims = ReadonlyMap<string, readonly Box[]>
 
@@ -397,13 +399,19 @@ function bindOpening(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
     const s = supportOf(src.raster, box, facadePx(m, view), [box, ...others], tolPxOf(view), undefined, claimed ? [box, ...claimed] : undefined)
     const gate = { winner: (s.z === null ? 'UNDECIDED' : s.z < 1 ? 'PROPOSED' : s.supported ? 'CURRENT' : 'UNDECIDED') as HypothesisVerdict['winner'], proposedZ: null, currentZ: s.z, nullBoxes: s.null.n, ...(s.null.mode ? { nullMode: s.null.mode } : {}), why: s.z === null ? 'too few free places on the band to judge' : s.z < 1 ? `the source draws nothing distinct where ${target.id} stands (z ${s.z} < 1)` : s.supported ? `the source draws an opening where ${target.id} stands (z ${s.z}): it is not removed` : `the source is not clear at ${target.id} (z ${s.z})` }
     const record = { bound: { frameId: view.frameId, side: view.side, box, hostId: target.wallId, ids: [target.id] }, source: { frameId: src.frameId, sourceByteHash: src.sourceByteHash, crop: box }, gate }
-    if (gate.winner === 'CURRENT') return { status: 'REJECTED_BY_SOURCE', code: 'SOURCE_SHOWS_OPENING', why: gate.why, record }
-    if (gate.winner === 'UNDECIDED') return { status: 'NEEDS_EVIDENCE', code: 'SOURCE_UNDECIDED', why: gate.why, record }
+    // v3.54.18: on an adopted facade an opening the picture does not decide follows the reading; one the picture seems to
+    // support is removed only when the reading explains those edges by something else it draws there (a finish boundary)
+    const adopt = p.origin === 'SKETCH' && f.adopt === true && (ctx.adopted?.has(view.frameId) ?? false)
+    const followsReading = adopt && (gate.winner === 'UNDECIDED' || (gate.winner === 'CURRENT' && typeof f.explained === 'string' && f.explained.length > 0))
+    if (followsReading) (gate as { adopted?: true; why: string }).adopted = true
+    if (followsReading) gate.why = `${gate.why} — the facade's reading is adopted (most of its openings supported by the picture, none refuted)${gate.winner === 'CURRENT' ? `, and it explains these edges: ${f.explained}` : ''}: the opening it does not draw goes, NOT source-verified`
+    if (gate.winner === 'CURRENT' && !followsReading) return { status: 'REJECTED_BY_SOURCE', code: 'SOURCE_SHOWS_OPENING', why: gate.why, record }
+    if (gate.winner === 'UNDECIDED' && !followsReading) return { status: 'NEEDS_EVIDENCE', code: 'SOURCE_UNDECIDED', why: gate.why, record }
     const fills = [...m.windows.filter((w) => w.openingId === target.id).map((w) => `windows:${w.id}`), ...m.doors.filter((d) => d.openingId === target.id).map((d) => `doors:${d.id}`)]
     // the cascade takes the opening's own relationships with it (an alignment with an opening round the corner is about
     // the removed opening, not about the other one)
     const rels = m.relationships.filter((r) => r.from === target.id || r.to === target.id).map((r) => `relationships:${r.id}`)
-    return { commands: [{ type: 'removeFeature', targetId: target.id, cascade: true }], allowed: [`openings:${target.id}`, ...fills, ...rels], expect: { kind: 'REMOVED', id: target.id }, record }
+    return { commands: [{ type: 'removeFeature', targetId: target.id, cascade: true }], allowed: [`openings:${target.id}`, ...fills, ...rels], expect: { kind: 'REMOVED', id: target.id, ...(followsReading ? { adopted: true as const } : {}) }, record }
   }
   if (!finiteBox(f.box)) return { status: 'INVALID', code: 'NO_BOX', why: `${p.operation} states the opening's box in a source picture (x0 < x1, y0 < y1); this one does not` }
   const currentKind = existing ? kindOfOpening(m, existing.id) : undefined
@@ -493,7 +501,26 @@ function bindOpening(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
   }
   const record = { bound: { frameId: view.frameId, side: view.side, box, hostId: host.id, ids: [id], values: { offset: u0, width, sill, height } }, source: { frameId: pic.frameId, sourceByteHash: pic.sourceByteHash, crop: box }, gate }
   if (g.winner === 'CURRENT') return { status: 'REJECTED_BY_SOURCE', code: fillRecord ? 'MODEL_FILL_BETTER_SUPPORTED' : existing ? 'MODEL_BETTER_SUPPORTED' : 'SOURCE_SHOWS_NO_OPENING', why: g.why, record }
-  if (g.winner === 'UNDECIDED') return { status: 'NEEDS_EVIDENCE', code: fillRecord ? 'FILL_UNDECIDED' : 'SOURCE_UNDECIDED', why: g.why, record }
+  // v3.54.18 — PER-PROPERTY ARBITRATION. LOCAL's openings say what each of their properties rests on: the place along the
+  // wall is a gap traced on the PLAN, the sill and height mostly ASSUMED ("no callout read, not read on an elevation").
+  // When an update keeps the plan's span (the elevation reading draws the same opening where the plan has its gap — two
+  // drawings, two readers) and changes only what the model ASSUMED, the model's shape has no evidence to be beaten by a
+  // margin: the picture must only not refute the proposal (z at or above the "nothing distinct" bound). The printed or
+  // elevation-read properties of an opening never fall under this rule.
+  const evp = (existing as { evidence?: { properties?: Record<string, string> } } | undefined)?.evidence?.properties
+  const fromPlan = (v: string | undefined): boolean => v === 'SOURCE_DERIVED' || v === 'SOURCE_EXACT'
+  const spanShare = existing && ofExisting ? (Math.min(a1, ofExisting.a1) - Math.max(a0, ofExisting.a0)) / Math.max(a1 - a0, ofExisting.a1 - ofExisting.a0) : 0
+  const crossWitness = g.winner === 'UNDECIDED' && !fillRecord && !!existing && !!evp && fromPlan(evp.offset) && fromPlan(evp.width) && evp.sill === 'ASSUMED' && evp.height === 'ASSUMED' && spanShare >= PLAN_SPAN_AGREE && g.proposed.z !== null && g.proposed.z >= SUPPORT_Z_MIN - HYPOTHESIS_Z_MARGIN
+  if (crossWitness) {
+    ;(gate as { crossWitness?: string }).crossWitness = 'PLAN_SPAN'
+    gate.why = `${g.why} — but the model's ${existing?.id} keeps its place from the plan (a traced gap; ${Math.round(spanShare * 100)} % of the span shared with this elevation reading) and its sill and height were ASSUMED, never read: the reading replaces the assumption, and the picture does not refute it (z ${g.proposed.z})`
+  }
+  const followsReading = g.winner === 'UNDECIDED' && !crossWitness && !fillRecord && p.origin === 'SKETCH' && f.adopt === true && (ctx.adopted?.has(pic.frameId) ?? false)
+  if (followsReading) {
+    ;(gate as { adopted?: true }).adopted = true
+    gate.why = `${g.why} — the facade's reading is adopted (most of its openings supported by the picture, none refuted): this element follows it, NOT source-verified`
+  }
+  if (g.winner === 'UNDECIDED' && !followsReading && !crossWitness) return { status: 'NEEDS_EVIDENCE', code: fillRecord ? 'FILL_UNDECIDED' : 'SOURCE_UNDECIDED', why: g.why, record }
   // v3.54.18: each opening in the way is held against the picture on its own. One the picture supports as a distinct
   // element, most of which lies OUTSIDE the new shape, is another real opening: the proposal is refused, by name.
   const displacedZ: Record<string, number | null> = {}
@@ -521,7 +548,7 @@ function bindOpening(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
   const gone = [...(existing ? [existing.id] : []), ...absorbed.map((o) => o.id), ...displaced.map((o) => o.id)]
   const oldRels = m.relationships.filter((r) => gone.includes(r.from) || gone.includes(r.to)).map((r) => `relationships:${r.id}`)
   const absorbedKeys = [...absorbed, ...displaced].flatMap((o) => [`openings:${o.id}`, ...m.windows.filter((w) => w.openingId === o.id).map((w) => `windows:${w.id}`), ...m.doors.filter((d) => d.openingId === o.id).map((d) => `doors:${d.id}`)])
-  return { commands, allowed: [`openings:${id}`, ...oldFills.map((x) => `${x.coll}:${x.id}`), `${kind === 'WINDOW' ? 'windows' : 'doors'}:${fillId}`, ...oldRels, ...absorbedKeys], expect: { kind: 'OPENING', id, view, box, shape: head ? proposedShape : box, levelId: host.levelId, openingKind: kind as OpeningPatchKindExact, ...(fillFrom ? { fillChangeFrom: fillFrom } : {}) }, record }
+  return { commands, allowed: [`openings:${id}`, ...oldFills.map((x) => `${x.coll}:${x.id}`), `${kind === 'WINDOW' ? 'windows' : 'doors'}:${fillId}`, ...oldRels, ...absorbedKeys], expect: { kind: 'OPENING', id, view, box, shape: head ? proposedShape : box, levelId: host.levelId, openingKind: kind as OpeningPatchKindExact, ...(fillFrom ? { fillChangeFrom: fillFrom } : {}), ...(followsReading ? { adopted: true as const } : {}) }, record }
 }
 
 /** Where a stack meets the roof, across the side: the roof planes' height along the line at `along`. */
@@ -1114,6 +1141,8 @@ export type ExecuteInput = {
   derivedViews?: (model: CanonicalBuildingModel, held: readonly BindView[]) => BindView[]
   /** v3.54.18: what each source picture's reading draws as openings (the gate's fallback band is that reading's plain wall). */
   claims?: FacadeClaims
+  /** v3.54.18: the frames whose reading the run adopted as a whole facade (supported on most openings, refuted on none). */
+  adopted?: ReadonlySet<string>
   /** v3.54.17 R3: the run's registered plan sheets (SET_OUTLINE from a printed dimension). */
   plans?: readonly BindPlan[]
   /** v3.54.17 R3: facts of the project page (SET_ROOF reads the stated pitch). */
@@ -1203,7 +1232,7 @@ export function executeCorrections(input: ExecuteInput): CorrectionOutcome {
     const pending: Array<{ p: CorrectionProposal; bound?: Bound; view?: BindView; extra: Partial<PatchRecord> }> = []
     let refusal: { p: CorrectionProposal; r: Refusal } | undefined
     for (const p of ordered) {
-      const ctx: Ctx = { model: working, views: workingViews, pictures: input.pictures, witnesses: input.witnesses ?? [], ...(input.massing ? { massing: input.massing } : {}), ...(input.plans ? { plans: input.plans } : {}), ...(input.facts ? { facts: input.facts } : {}), ...(input.claims ? { claims: input.claims } : {}) }
+      const ctx: Ctx = { model: working, views: workingViews, pictures: input.pictures, witnesses: input.witnesses ?? [], ...(input.massing ? { massing: input.massing } : {}), ...(input.plans ? { plans: input.plans } : {}), ...(input.facts ? { facts: input.facts } : {}), ...(input.claims ? { claims: input.claims } : {}), ...(input.adopted ? { adopted: input.adopted } : {}) }
       if (p.operation === 'ASSIGN_VIEW') {
         const b = bindView(ctx, p)
         if ('status' in b) {
@@ -1291,7 +1320,7 @@ export function executeCorrections(input: ExecuteInput): CorrectionOutcome {
         const fillOk = e.fillChangeFrom && builtShape && pic ? compareFill(pic.raster, builtShape, e.openingKind, e.fillChangeFrom).winner === 'PROPOSED' : true
         const hErr = builtShape ? headError(builtShape, e.shape) : Infinity
         const hTol = Math.max(3, 0.05 * (e.box.y1 - e.box.y0))
-        const verified = sup ? (sup.supported === null ? null : sup.supported && fillOk) : null
+        const verified = e.adopted ? false : sup ? (sup.supported === null ? null : sup.supported && fillOk) : null
         measures.set(x.p.proposalId, { ...(built ? { builtBox: built } : {}), iouWithProposal: Math.round(ov * 1000) / 1000, builtSupportZ: sup?.z ?? null, ...(Number.isFinite(hErr) ? { headErrorPx: Math.round(hErr * 10) / 10 } : {}), ...(builtKind ? { builtKind } : {}), sourceVerified: verified, why: built ? `built ${e.id} (${builtKind ?? '?'}) on ${s?.wall.id} drawn back into the source: overlap ${ov.toFixed(2)} with the proposal${isRaked(e.shape) ? `, head ends within ${Number.isFinite(hErr) ? hErr.toFixed(1) : '∞'} px` : ''}, support z ${sup?.z ?? '—'}${e.fillChangeFrom ? `; fill ${fillOk ? 'shows' : 'does not show'} a ${e.openingKind}` : ''}` : `${e.id} is not in the candidate` })
         if (!built || ov < 0.85) failure = `${e.id} was not built where the proposal binds it (overlap ${ov.toFixed(2)})`
         else if (s && s.wall.levelId !== e.levelId) failure = `${e.id} was built on another storey`
@@ -1299,7 +1328,7 @@ export function executeCorrections(input: ExecuteInput): CorrectionOutcome {
         else if (builtKind !== e.openingKind) failure = `${e.id} was built as ${builtKind ?? 'nothing'}, not ${e.openingKind}`
       } else if (e.kind === 'REMOVED') {
         if (working.openings.some((q) => q.id === e.id)) failure = `${e.id} is still in the candidate`
-        measures.set(x.p.proposalId, { sourceVerified: true, why: `${e.id} and its fill removed` })
+        measures.set(x.p.proposalId, { sourceVerified: e.adopted ? false : true, why: `${e.id} and its fill removed${e.adopted ? ' (the adopted reading of the facade; the picture alone did not decide it)' : ''}` })
       } else if (e.kind === 'CHIMNEY') {
         const c = working.chimneys.find((q) => q.id === e.id)
         const ax = alongAxis(e.view.side)

@@ -19,6 +19,8 @@ import type { CanonicalBuildingModel } from '@buildapp/model'
 import { executeCorrections, modelRevision } from '../src/consult/correct/execute.js'
 import type { BindPicture, BindView, CorrectionProposal } from '../src/consult/correct/execute.js'
 import { SOURCE_GATE_VERSION, supportOf } from '../src/consult/correct/source-gate.js'
+import { FACADE_ADOPTION, facadeAdoption } from '../src/consult/correct/from-sketch.js'
+import type { ElevationSketch } from '../src/appearance/elevation-sketch.js'
 
 const MPP = 0.025
 const ALONG0 = -1.25
@@ -230,5 +232,80 @@ describe('v3.54.18 ADD_ROOF_WINDOW: a window in a slope, placed from the elevati
     expect(edgeOn.records[0].code).toBe('SLOPE_SEEN_EDGE_ON')
     const low = executeCorrections({ model: m, views: [view], pictures: [pic], proposals: [prop(m, { proposalId: 'rw-low', operation: 'ADD_ROOF_WINDOW', patch: { box: boxOf(3.0, 3.8, 1.0, 1.8) } })] })
     expect(low.records[0].code).toBe('NOT_ON_THE_SLOPE')
+  })
+})
+
+// ---- v3.54.18: facade adoption ------------------------------------------------------------------------------------------
+describe('v3.54.18 facade adoption: the picture supports most of a reading and refutes none of it', () => {
+  const poly = (b: { x0: number; y0: number; x1: number; y1: number }): Array<[number, number]> => [[b.x0, b.y0], [b.x1, b.y0], [b.x1, b.y1], [b.x0, b.y1]]
+  // the model: the two real windows as the picture has them, a window where the door is, and an opening (Z) the reading does not draw
+  const house = (): CanonicalBuildingModel => {
+    const cmds = [
+      { type: 'createBuilding', id: 'b', name: 'adopt' },
+      { type: 'createLevel', id: 'l0', name: 'Ground', index: 0, elevation: 0, height: 2.8 },
+      { type: 'createWallRing', id: 'g', levelId: 'l0', polygon: [{ x: 0, z: 0 }, { x: 10, z: 0 }, { x: 10, z: 8 }, { x: 0, z: 8 }], thickness: 0.3, height: 2.8, baseOffset: 0, kind: 'EXTERIOR', cornerOwnership: 'ALTERNATE' },
+      { type: 'cutOpening', id: 'A', wallId: 'g-w0', kind: 'WINDOW', offset: 1.0, sill: 0.9, width: 1.2, height: 1.2 }, { type: 'placeWindow', id: 'A-unit', openingId: 'A' },
+      { type: 'cutOpening', id: 'C', wallId: 'g-w0', kind: 'WINDOW', offset: 7.4, sill: 0.9, width: 1.2, height: 1.2 }, { type: 'placeWindow', id: 'C-unit', openingId: 'C' },
+      { type: 'cutOpening', id: 'D', wallId: 'g-w0', kind: 'WINDOW', offset: 4.3, sill: 0.9, width: 1.5, height: 1.2 }, { type: 'placeWindow', id: 'D-unit', openingId: 'D' },
+      { type: 'cutOpening', id: 'Z', wallId: 'g-w0', kind: 'WINDOW', offset: 2.6, sill: 0.9, width: 1.2, height: 1.2 }, { type: 'placeWindow', id: 'Z-unit', openingId: 'Z' },
+    ] as BuildingCommand[]
+    const r = applyCommands(createEmptyModel('m-adopt', 'adopt'), cmds)
+    if (r.failedAt !== undefined) throw new Error(`fixture: ${JSON.stringify(r.results[r.failedAt])}`)
+    return r.model
+  }
+  // the reading: both windows, the door, and two finish zones meeting at 3.2 m (Z's box lies across that boundary)
+  const zones = [{ id: 'w-light', class: 'LIGHT_RENDER', polygon: poly(boxOf(0, 3.2, 0, 2.8)), host: 'main', visibility: 'VISIBLE' }, { id: 'w-timber', class: 'TIMBER', polygon: poly(boxOf(3.2, 10, 0, 2.8)), host: 'main', visibility: 'VISIBLE' }]
+  const reading = (extra: Array<{ id: string; kind: string; polygon: Array<[number, number]> }> = []): ElevationSketch => ({ sketchId: 's', frameId: FRAME, groundRow: ZERO, elements: [], roofs: [], walls: zones, openings: [{ id: 'sA', kind: 'WINDOW', polygon: poly(b4(REAL.A)) }, { id: 'sC', kind: 'WINDOW', polygon: poly(b4(REAL.C)) }, { id: 'sDoor', kind: 'DOOR', polygon: poly(b4(REAL.DOOR)) }, ...extra] }) as unknown as ElevationSketch
+  const none = (): string | undefined => undefined
+
+  it('states its criteria', () => expect(FACADE_ADOPTION).toEqual({ minOpenings: 2, minSupportedShare: 0.6 }))
+
+  it('adopts a reading the picture supports on two of three openings and refutes on none: the undecided follow it', () => {
+    const m = house()
+    const a = facadeAdoption(reading(), 'FRONT', m, [view], modelRevision(m), none)
+    expect([a.decision, a.drawn, a.supported, a.refuted, a.pending]).toEqual(['ADOPTED', 3, 2, 0, 1])
+    expect(a.proposals.map((q) => [q.operation, q.targetId, (q.patch as { adopt?: boolean }).adopt])).toEqual([['REMOVE_OPENING', 'Z', true], ['UPDATE_OPENING', 'D', true]])
+    expect(a.proposals.every((q) => q.proposalId.endsWith('@adopt'))).toBe(true)
+  })
+
+  it('COUNTER-TRIAL: one opening the picture refuted and the reading is not adopted', () => {
+    const m = house()
+    const a = facadeAdoption(reading(), 'FRONT', m, [view], modelRevision(m), (k) => (k === 'open:sDoor' ? 'REJECTED_BY_SOURCE' : undefined))
+    expect(a.decision).toBe('NOT_ADOPTED')
+    expect(a.proposals).toEqual([])
+    expect(a.why).toMatch(/refutes 1/)
+  })
+
+  it('COUNTER-TRIAL: a reading the picture supports on too little is not adopted', () => {
+    const m = house()
+    const invented = [{ id: 'x1', kind: 'WINDOW', polygon: poly(boxOf(0.2, 0.7, 0.9, 2.1)) }, { id: 'x2', kind: 'WINDOW', polygon: poly(boxOf(8.9, 9.7, 0.9, 2.1)) }, { id: 'x3', kind: 'WINDOW', polygon: poly(boxOf(6.2, 7.0, 0.2, 0.7)) }]
+    const a = facadeAdoption(reading(invented), 'FRONT', m, [view], modelRevision(m), none)
+    expect(a.decision).toBe('NOT_ADOPTED')
+    expect(a.supported / a.drawn).toBeLessThan(FACADE_ADOPTION.minSupportedShare)
+  })
+
+  it('a model opening the picture seemed to support goes only where the reading explains its edges (a finish boundary through its box)', () => {
+    const m = house()
+    const across = facadeAdoption(reading(), 'FRONT', m, [view], modelRevision(m), (k) => (k === 'rem:Z' ? 'REJECTED_BY_SOURCE' : undefined))
+    const z = across.proposals.find((q) => q.targetId === 'Z')
+    expect((z?.patch as { explained?: string }).explained).toMatch(/LIGHT_RENDER zone w-light and TIMBER zone w-timber/)
+    // COUNTER-TRIAL: the same opening inside ONE zone is not explained: the picture's support for it stands
+    const oneZone = { ...reading(), walls: [{ id: 'w-all', class: 'LIGHT_RENDER', polygon: poly(boxOf(0, 10, 0, 2.8)), host: 'main', visibility: 'VISIBLE' }] } as unknown as ElevationSketch
+    const inside = facadeAdoption(oneZone, 'FRONT', m, [view], modelRevision(m), (k) => (k === 'rem:Z' ? 'REJECTED_BY_SOURCE' : undefined))
+    expect(inside.decision).toBe('ADOPTED')
+    expect(inside.proposals.some((q) => q.targetId === 'Z')).toBe(false)
+  })
+
+  it('the executor honours `adopt` only for a SKETCH proposal on an adopted frame, and never marks the element source-verified', () => {
+    const m = phantomHouse() // no joint place free and no claims given: the gate alone is UNDECIDED for every correction
+    const upd = (id: string, origin: 'SKETCH' | 'REVIEW' = 'SKETCH'): CorrectionProposal => ({ ...prop(m, { proposalId: id, operation: 'UPDATE_OPENING', targetId: 'P1', patch: { box: b4(REAL.A), kind: 'WINDOW', adopt: true } }), origin }) as CorrectionProposal
+    const notAdopted = executeCorrections({ model: m, views: [view], pictures: [picture], proposals: [upd('a1')] })
+    expect(notAdopted.records[0].code).toBe('SOURCE_UNDECIDED')
+    const reviewer = executeCorrections({ model: m, views: [view], pictures: [picture], adopted: new Set([FRAME]), proposals: [upd('a2', 'REVIEW')] })
+    expect(reviewer.records[0].code).toBe('SOURCE_UNDECIDED')
+    const adopted = executeCorrections({ model: m, views: [view], pictures: [picture], adopted: new Set([FRAME]), proposals: [upd('a3')] })
+    expect(adopted.records[0].status).toBe('COMMITTED')
+    expect(adopted.records[0].gate?.adopted).toBe(true)
+    expect(adopted.records[0].measure?.sourceVerified).toBe(false)
   })
 })

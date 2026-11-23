@@ -59,7 +59,7 @@ import type { ElementIndex } from './element-index.js'
 import { identityOf } from '../identity.js'
 import type { BindPicture, BindView, CorrectionOutcome, CorrectionProposal, PatchRecord, PrintedWitness, Side, SketchAnchors, TransactionRecord } from './correct/execute.js'
 import { SOURCE_GATE_VERSION } from './correct/source-gate.js'
-import { SKETCH_PROPOSALS_VERSION, finishProposalsFromSketch, proposalsFromSketch } from './correct/from-sketch.js'
+import { SKETCH_PROPOSALS_VERSION, facadeAdoption, finishProposalsFromSketch, proposalsFromSketch } from './correct/from-sketch.js'
 import type { SketchProposalAccount } from './correct/from-sketch.js'
 import { MASSING_OPS_VERSION, roofProposalsFromSketches } from './massing/ops.js'
 import { PLAN_OUTLINE_VERSION, readPlanOutline } from './plan-outline.js'
@@ -68,6 +68,9 @@ import type { PlanOutlineRead } from './plan-outline.js'
 import type { MassingProposalAccount, OrientationHypothesis } from './massing/ops.js'
 import { QUALITY_VERSION, qualityOf, reconcileLedger, settleDefects } from './correct/quality.js'
 import type { DefectEntry, DefectResolution, ListedElements, QualitySummary } from './correct/quality.js'
+
+/** v3.54.18: below this size an elevation picture is a thumbnail — too small for any element to be placed from it. */
+export const MIN_SKETCH_FRAME_PX = { width: 240, height: 120 } as const
 
 export type ConsultantWiring = {
   model: ConsultantModel
@@ -137,7 +140,12 @@ export type ConsultantWiring = {
 /** v3.54.14: what the sketch step read, accepted and changed (the rasters are not kept: they are redrawn from the sketches). */
 export type SketchSummary = { reading: Omit<SketchReading, 'elevationSketches'>; form: { decision: 'ACCEPT' | 'ROLLBACK' | 'NOT_RUN'; why: string; measuredBefore?: BuiltMeasure; measuredAfter?: BuiltMeasure }; finish: { decision: 'ACCEPT' | 'ROLLBACK' | 'NOT_RUN'; why: string }; usd: number
   /** v3.54.16: the sketches' elements as proposals of the correction registry, and what the executor did with each. */
-  semantic?: { version: string; decision: 'APPLIED' | 'NONE_KEPT' | 'NOT_RUN'; why: string; /** v3.54.18: the sketches' finish zones proposed as SET_FINISH (sides without regions). */ finishes?: { proposed: number; skipped: Array<{ sketchId: string; why: string }> }; /** v3.54.18: sides taken by the named miniature convention (source order), not read. */ sidesByConvention?: Array<{ frameId: string; side: string | null; basis: 'MINIATURE_CONVENTION_SOURCE_ORDER' }>; accounts: Array<{ frameId: string; side?: string; proposals: number; agreed: number; skipped: Array<{ sketchId: string; why: string }> }>; records: PatchRecord[]; transactions: TransactionRecord[]; /** v3.54.17: each sketch held against each body's roof (SET_ROOF proposals or why not), and the side assignment it was read under. */ massing?: MassingProposalAccount[]; orientation?: OrientationHypothesis; /** v3.54.17 R3: stacks of perpendicular sketches paired into one stack with both plan coordinates. */ chimneyFusion?: FusionRecord & { version: string } } }
+  semantic?: { version: string; decision: 'APPLIED' | 'NONE_KEPT' | 'NOT_RUN'; why: string; /** v3.54.18: per sketched elevation, whether its reading was adopted as a whole facade, on what counts. */ adoption?: Array<{ frameId: string; side?: string; drawn: number; supported: number; refuted: number; pending: number; decision: string; why: string; proposed: number }>; /** v3.54.18: the sketches' finish zones proposed as SET_FINISH (sides without regions). */ finishes?: { proposed: number; skipped: Array<{ sketchId: string; why: string }> }; /** v3.54.18: sides taken by the named miniature convention (source order), not read. */ sidesByConvention?: Array<{ frameId: string; side: string | null; basis: 'MINIATURE_CONVENTION_SOURCE_ORDER' }>; accounts: Array<{ frameId: string; side?: string; proposals: number; agreed: number; skipped: Array<{ sketchId: string; why: string }> }>; records: PatchRecord[]; transactions: TransactionRecord[]; /** v3.54.17: each sketch held against each body's roof (SET_ROOF proposals or why not), and the side assignment it was read under. */ massing?: MassingProposalAccount[]; orientation?: OrientationHypothesis; /** v3.54.17 R3: stacks of perpendicular sketches paired into one stack with both plan coordinates. */ chimneyFusion?: FusionRecord & { version: string } } }
+
+/** v3.54.18: tolerances of the body arbitration, fixed before any result (a printed dimension, a published height). */
+export const BODY_ARBITRATION = { version: '1.0.0', dimAgreeM: 0.3, dimAgreeShare: 0.04, heightAgreeM: 0.6, heightAgreeShare: 0.1 } as const
+export type BodyEvidence = { bodies: number; registrations: Array<{ frameId: string; side: string; ok: boolean; code: string }>; printed: Array<{ literal: string; valueM: number; modelM: number; agrees: boolean }>; height?: { publishedM: number; modelRidgeM: number; agrees: boolean }; contradictions: number; supports: number }
+export type BodyArbitration = { version: string; local: BodyEvidence; alternative?: BodyEvidence; massing?: { decision: string; why: string; usd: number }; decision: 'LOCAL_STANDS' | 'REPLACED_BY_SOURCE_BODY'; why: string }
 
 /** v3.54.17: the no-model path's delivery: a mass built from the source, or the anchors it lacks. */
 export type MassingDelivery = {
@@ -331,6 +339,8 @@ export type ConsultationSummary = {
 }
 
 export type ConsultedAnalysis = {
+  /** v3.54.18: LOCAL's body held against the sources, and the body built from them when they contradict it. */
+  bodyArbitration?: BodyArbitration
   /** v3.54.16 §7: the labelled elevations read when LOCAL built no model, UNCHECKED, with the anchors that are missing. */
   sketchesWithoutModel?: { sketches: SketchReading['sketches']; missingAnchors: string[]; usd: number; sides: Array<{ facade: string; frameId?: string; status: string; why: string }> }
   contract: string
@@ -640,7 +650,7 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
     const b = consultBinding({
       sourcePackageHash: local.pkg.contentHash,
       analyzer: `${ANALYSIS_SERVICE_VERSION}/${SOLVER_V2_VERSION}`,
-      consultant: [CONSULTANT_CONTRACT_VERSION, CONSULTANT_PROMPT_VERSION, METRIC_READ_PROMPT_VERSION, METRIC_VERIFY_PROMPT_VERSION, METRIC_RESOLVER_VERSION, ELEVATION_SKETCH_PROMPT_VERSION, `parser${ELEVATION_SKETCH_PARSER_VERSION}`, SKETCH_STEP_VERSION, CHOOSE_VERSION, ACCEPTED_CONSULT_VERSION, `registry${CORRECTION_REGISTRY_VERSION}`, `executor${CORRECTION_EXECUTOR_VERSION}`, `gate${SOURCE_GATE_VERSION}`, `sketchProposals${SKETCH_PROPOSALS_VERSION}`, `quality${QUALITY_VERSION}`].join(','),
+      consultant: [CONSULTANT_CONTRACT_VERSION, CONSULTANT_PROMPT_VERSION, METRIC_READ_PROMPT_VERSION, METRIC_VERIFY_PROMPT_VERSION, METRIC_RESOLVER_VERSION, ELEVATION_SKETCH_PROMPT_VERSION, `parser${ELEVATION_SKETCH_PARSER_VERSION}`, SKETCH_STEP_VERSION, CHOOSE_VERSION, ACCEPTED_CONSULT_VERSION, `registry${CORRECTION_REGISTRY_VERSION}`, `executor${CORRECTION_EXECUTOR_VERSION}`, `gate${SOURCE_GATE_VERSION}`, `sketchProposals${SKETCH_PROPOSALS_VERSION}`, `quality${QUALITY_VERSION}`, `massing${MASSING_OPS_VERSION}`, `bodyArbitration${BODY_ARBITRATION.version}`].join(','),
       models: { ROUNDS: wiring.model.model, ...(wiring.metricRead === 'ON' ? { METRIC: (wiring.metricModel ?? wiring.model).model } : {}), ...(wiring.sketches === 'ON' ? { SKETCH: (wiring.sketchModel ?? wiring.model).model } : {}) },
       settings: `strict=${wiring.model.strict === true || wiring.metricModel?.strict === true || wiring.sketchModel?.strict === true ? 'on' : 'off'};variant=${wiring.variant};metric=${wiring.metricRead ?? 'OFF'};sketches=${wiring.sketches ?? 'OFF'};rounds=${maxRounds};geometryRounds=${wiring.maxGeometryRounds ?? '-'};check=${wiring.check ?? 'ON'};sketchCorrections=${wiring.sketchCorrections ?? 'ON'}`,
     })
@@ -729,6 +739,83 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
       }
     }
   }
+  /**
+   * v3.54.17 / v3.54.18: the body and roof from the plan outline and the elevation readings, without LOCAL's model or
+   * registrations — one function for both uses: LOCAL built no model, or (v3.54.18) LOCAL built a body the sources
+   * contradict. It builds and wraps the candidate; whether it stands is the caller's decision.
+   */
+  const buildMassing = async (A: { pkg0: SourcePackage; graph0: SourceObservationGraph; sketches: SketchReading['sketches']; planFrame?: string; cmPerPx?: number; strong: boolean; diag: Record<string, unknown>; localFailure?: { code?: string; reasonCode?: string | null }; why: string }): Promise<{ delivery: MassingDelivery; built?: Local }> => {
+    const { pkg0, graph0, planFrame, cmPerPx, strong, diag } = A
+    let built: Local | undefined
+    const delivery: MassingDelivery = { decision: 'NOT_RUN', why: '', records: [], transactions: [], usd: 0 }
+    {
+      const f = planFrame ? graph0.coordinateFrames.find((x) => x.id === planFrame) : undefined
+      const fr = f ? await frameRaster(pkg0, graph0, f.id, options) : undefined
+      if (!f || !fr?.raster) delivery.why = 'PLAN_OUTLINE: the analyzer selected no plan frame to trace (or its bytes could not be decoded)'
+      else {
+        const published = (pkg0.publishedFacts as Array<{ kind?: string; key?: string; value?: number }> | undefined)?.find((x) => (x.kind ?? x.key) === 'footprint_area')?.value
+        const asset = pkg0.assets.find((a) => a.id === f.assetId)
+        stage('PLAN_OUTLINE')
+        const plan = await readPlanOutline({ model: wiring.outlineModel ?? wiring.metricModel ?? wiring.model, price: wiring.outlinePrice ?? wiring.metricPrice ?? wiring.price, ...(wiring.spend ? { spend: wiring.spend } : {}), ...(options.signal ? { signal: options.signal } : {}) }, { frameId: f.id, raster: fr.raster, caption: (asset?.caption ?? '').slice(0, 120), sourceByteHash: f.variantByteHash, ...(cmPerPx && strong ? { scale: { mPerPx: cmPerPx / 100, why: `${cmPerPx} cm/px, ${String(diag.metricConfidence)} / ${String(diag.metricRelation)} with ${String(diag.independentWitnesses ?? '?')} independent witnesses` } } : {}), ...(typeof published === 'number' ? { publishedFootprintM2: published } : {}) })
+        usd += plan.usd
+        delivery.usd += plan.usd
+        delivery.plan = plan
+        record({ at: now().toISOString(), kind: 'PLAN_OUTLINE', frameId: f.id, refused: plan.refused, check: plan.check ?? null, usd: plan.usd })
+        if (!plan.observation) delivery.why = `the plan outline gives no outline in metres: ${plan.refused.join('; ') || 'no read'}${strong ? '' : '; PLAN_SCALE: the analyzer\'s plan scale is not STRONG/CONFIRMED'}`
+        else {
+          const silhouettes = A.sketches.flatMap((x) => {
+            const side = sideOfFacade(x.facade)
+            const fx = graph0.coordinateFrames.find((q) => q.id === x.frameId)
+            return side && x.sketch ? [{ observationId: `sk-${x.frameId.slice(-12)}`, side, frameId: x.frameId, sourceByteHash: fx?.variantByteHash ?? '', groundRow: x.sketch.groundRow ?? null, walls: x.sketch.walls.map((w) => w.polygon as Array<[number, number]>), roofs: x.sketch.roofs.map((r) => r.polygon as Array<[number, number]>) }] : []
+          })
+          const pictures: BindPicture[] = []
+          for (const [i, x] of A.sketches.entries()) {
+            const fx = graph0.coordinateFrames.find((q) => q.id === x.frameId)
+            const r = fx ? await frameRaster(pkg0, graph0, fx.id, options) : undefined
+            if (fx && r?.raster) pictures.push({ n: i + 1, frameId: fx.id, projection: String(fx.roles.projection), transform: { x0: 0, y0: 0, scale: 1 }, raster: r.raster, sourceByteHash: fx.variantByteHash })
+          }
+          stage('BUILD_MASSING')
+          const empty = createEmptyModel(`massing-${f.variantByteHash.slice(0, 12)}`, (asset?.caption ?? 'house').slice(0, 60))
+          const out = executeCorrections({ model: empty, views: [], pictures, proposals: [{ proposalId: `massing-${f.variantByteHash.slice(0, 12)}`, baseRevision: modelRevision(empty), operation: 'BUILD_MASSING', targetId: 'WHOLE', origin: 'SKETCH', uncertainty: 'MEDIUM', justification: A.why }], massing: { outline: plan.observation, silhouettes } })
+          delivery.records = out.records
+          delivery.transactions = out.transactions
+          const rec0 = out.records[0]
+          if (rec0?.status === 'COMMITTED') {
+            const scene = compileBuilding(out.model)
+            const sceneText = serializeBundle(buildMobileSceneBundle(out.model, { scene }))
+            delivery.decision = 'BUILT'
+            delivery.model = out.model
+            delivery.sceneText = sceneText
+            delivery.sceneSha256 = sha256Hex(sceneText)
+            delivery.modelSha256 = sha256Hex(serializeModel(out.model))
+            delivery.why = `BUILD_MASSING committed on the empty model: ${rec0.measure?.why ?? ''}`.slice(0, 600)
+            // v3.54.17 R2: the body becomes the analysis that stands — an ordinary result through the shared envelope,
+            // delivered by the host and looked at by the review like any model (no rebuild by the drawings' solver)
+            const identity = { ...identityOf(pkg0, options.adapters), ...options.identity }
+            const failure = A.localFailure
+            const build = (delivered?: CanonicalBuildingModel): Local | undefined => {
+              const mr = massingRun({ pkg: pkg0, graph: graph0, ...(good.metrics ? { metrics: good.metrics } : {}), ...(good.plans ? { plans: good.plans } : {}), identity, sourceUrl: input.kind === 'URL' ? input.url : pkg0.canonicalUrl, jobId: options.jobId ?? null, record: rec0, executorModel: out.model, plan: { frameId: plan.frameId, version: plan.version, promptVersion: plan.promptVersion, ...(plan.check ? { check: plan.check } : {}), ...(plan.observation ? { observation: plan.observation } : {}), ...(cmPerPx && strong ? { scale: { mPerPx: cmPerPx / 100, why: `${cmPerPx} cm/px, ${String(diag.metricConfidence)} / ${String(diag.metricRelation)}` } } : {}) }, localFailure: { code: failure?.code ?? 'ANALYSIS_FAILED', reasonCode: failure?.reasonCode ?? null }, outlineModel: (wiring.outlineModel ?? wiring.metricModel ?? wiring.model).model, sketches: { attempted: A.sketches.length ?? 0, used: silhouettes.length, frameIds: silhouettes.map((x) => x.frameId) }, ...(delivered ? { delivered } : {}), startedAt, now })
+              if (!mr) return undefined
+              const l: Local = { run: mr.run, pkg: pkg0, graph: graph0, ...(good.metrics ? { metrics: good.metrics } : {}), ...(good.plans ? { plans: good.plans } : {}) }
+              massingOf.set(l, { views: mr.views, rebuild: (m) => build(m) })
+              return l
+            }
+            const m0 = build()
+            if (m0?.run) {
+              built = m0
+              delivery.delivery = { delivered: true, why: 'the body is the analysis that stands: result, model and scene through the shared envelope; the review looks at this revision', modelSha256: m0.run.result.modelSha256, sceneSha256: m0.run.result.sceneSha256, revision: modelRevision(m0.run.reconstruction.model) }
+            } else delivery.delivery = { delivered: false, why: 'the committed record\'s commands do not rebuild the executor\'s model byte for byte: nothing is delivered' }
+            record({ at: now().toISOString(), kind: 'MASSING_DELIVERED', ...delivery.delivery })
+          } else {
+            delivery.decision = 'NOT_BUILT'
+            delivery.why = `${rec0?.status ?? 'NO_RECORD'} ${rec0?.code ?? ''}: ${rec0?.why ?? ''}`.slice(0, 600)
+          }
+          record({ at: now().toISOString(), kind: 'MASSING_WITHOUT_MODEL', decision: delivery.decision, why: delivery.why })
+        }
+      }
+    }
+    return { delivery, ...(built ? { built } : {}) }
+  }
   // v3.54.14 (L-MS): the sketches, on the model that stands and its metric facts
   let sketchSummary: SketchSummary | undefined
   // v3.54.16 §7: no model — the labelled elevations are still read into observations, with the missing anchors named
@@ -764,76 +851,15 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
       const planFrame = typeof diag.selectedPlanFrameId === 'string' ? diag.selectedPlanFrameId : undefined
       const cmPerPx = typeof diag.scaleCmPerPx === 'number' ? diag.scaleCmPerPx : undefined
       const strong = diag.metricConfidence === 'STRONG' && diag.metricRelation === 'CONFIRMED'
-      const delivery: MassingDelivery = { decision: 'NOT_RUN', why: '', records: [], transactions: [], usd: 0 }
-      massingDelivery = delivery
-      const f = planFrame ? graph0.coordinateFrames.find((x) => x.id === planFrame) : undefined
-      const fr = f ? await frameRaster(pkg0, graph0, f.id, options) : undefined
-      if (!f || !fr?.raster) delivery.why = 'PLAN_OUTLINE: the analyzer selected no plan frame to trace (or its bytes could not be decoded)'
-      else {
-        const published = (pkg0.publishedFacts as Array<{ kind?: string; key?: string; value?: number }> | undefined)?.find((x) => (x.kind ?? x.key) === 'footprint_area')?.value
-        const asset = pkg0.assets.find((a) => a.id === f.assetId)
-        stage('PLAN_OUTLINE')
-        const plan = await readPlanOutline({ model: wiring.outlineModel ?? wiring.metricModel ?? wiring.model, price: wiring.outlinePrice ?? wiring.metricPrice ?? wiring.price, ...(wiring.spend ? { spend: wiring.spend } : {}), ...(options.signal ? { signal: options.signal } : {}) }, { frameId: f.id, raster: fr.raster, caption: (asset?.caption ?? '').slice(0, 120), sourceByteHash: f.variantByteHash, ...(cmPerPx && strong ? { scale: { mPerPx: cmPerPx / 100, why: `${cmPerPx} cm/px, ${String(diag.metricConfidence)} / ${String(diag.metricRelation)} with ${String(diag.independentWitnesses ?? '?')} independent witnesses` } } : {}), ...(typeof published === 'number' ? { publishedFootprintM2: published } : {}) })
-        usd += plan.usd
-        delivery.usd += plan.usd
-        delivery.plan = plan
-        record({ at: now().toISOString(), kind: 'PLAN_OUTLINE', frameId: f.id, refused: plan.refused, check: plan.check ?? null, usd: plan.usd })
-        if (!plan.observation) delivery.why = `the plan outline gives no outline in metres: ${plan.refused.join('; ') || 'no read'}${strong ? '' : '; PLAN_SCALE: the analyzer\'s plan scale is not STRONG/CONFIRMED'}`
-        else {
-          const silhouettes = unregisteredSketches.sketches.flatMap((x) => {
-            const side = sideOfFacade(x.facade)
-            const fx = graph0.coordinateFrames.find((q) => q.id === x.frameId)
-            return side && x.sketch ? [{ observationId: `sk-${x.frameId.slice(-12)}`, side, frameId: x.frameId, sourceByteHash: fx?.variantByteHash ?? '', groundRow: x.sketch.groundRow ?? null, walls: x.sketch.walls.map((w) => w.polygon as Array<[number, number]>), roofs: x.sketch.roofs.map((r) => r.polygon as Array<[number, number]>) }] : []
-          })
-          const pictures: BindPicture[] = []
-          for (const [i, x] of unregisteredSketches.sketches.entries()) {
-            const fx = graph0.coordinateFrames.find((q) => q.id === x.frameId)
-            const r = fx ? await frameRaster(pkg0, graph0, fx.id, options) : undefined
-            if (fx && r?.raster) pictures.push({ n: i + 1, frameId: fx.id, projection: String(fx.roles.projection), transform: { x0: 0, y0: 0, scale: 1 }, raster: r.raster, sourceByteHash: fx.variantByteHash })
-          }
-          stage('BUILD_MASSING')
-          const empty = createEmptyModel(`massing-${f.variantByteHash.slice(0, 12)}`, (asset?.caption ?? 'house').slice(0, 60))
-          const out = executeCorrections({ model: empty, views: [], pictures, proposals: [{ proposalId: `massing-${f.variantByteHash.slice(0, 12)}`, baseRevision: modelRevision(empty), operation: 'BUILD_MASSING', targetId: 'WHOLE', origin: 'SKETCH', uncertainty: 'MEDIUM', justification: 'LOCAL built no model; the plan outline and the elevations are read' }], massing: { outline: plan.observation, silhouettes } })
-          delivery.records = out.records
-          delivery.transactions = out.transactions
-          const rec0 = out.records[0]
-          if (rec0?.status === 'COMMITTED') {
-            const scene = compileBuilding(out.model)
-            const sceneText = serializeBundle(buildMobileSceneBundle(out.model, { scene }))
-            delivery.decision = 'BUILT'
-            delivery.model = out.model
-            delivery.sceneText = sceneText
-            delivery.sceneSha256 = sha256Hex(sceneText)
-            delivery.modelSha256 = sha256Hex(serializeModel(out.model))
-            delivery.why = `BUILD_MASSING committed on the empty model: ${rec0.measure?.why ?? ''}`.slice(0, 600)
-            // v3.54.17 R2: the body becomes the analysis that stands — an ordinary result through the shared envelope,
-            // delivered by the host and looked at by the review like any model (no rebuild by the drawings' solver)
-            const identity = { ...identityOf(pkg0, options.adapters), ...options.identity }
-            const failure = local.error?.failure()
-            const build = (delivered?: CanonicalBuildingModel): Local | undefined => {
-              const mr = massingRun({ pkg: pkg0, graph: graph0, ...(good.metrics ? { metrics: good.metrics } : {}), ...(good.plans ? { plans: good.plans } : {}), identity, sourceUrl: input.kind === 'URL' ? input.url : pkg0.canonicalUrl, jobId: options.jobId ?? null, record: rec0, executorModel: out.model, plan: { frameId: plan.frameId, version: plan.version, promptVersion: plan.promptVersion, ...(plan.check ? { check: plan.check } : {}), ...(plan.observation ? { observation: plan.observation } : {}), ...(cmPerPx && strong ? { scale: { mPerPx: cmPerPx / 100, why: `${cmPerPx} cm/px, ${String(diag.metricConfidence)} / ${String(diag.metricRelation)}` } } : {}) }, localFailure: { code: failure?.code ?? 'ANALYSIS_FAILED', reasonCode: failure?.reasonCode ?? null }, outlineModel: (wiring.outlineModel ?? wiring.metricModel ?? wiring.model).model, sketches: { attempted: unregisteredSketches?.sketches.length ?? 0, used: silhouettes.length, frameIds: silhouettes.map((x) => x.frameId) }, ...(delivered ? { delivered } : {}), startedAt, now })
-              if (!mr) return undefined
-              const l: Local = { run: mr.run, pkg: pkg0, graph: graph0, ...(good.metrics ? { metrics: good.metrics } : {}), ...(good.plans ? { plans: good.plans } : {}) }
-              massingOf.set(l, { views: mr.views, rebuild: (m) => build(m) })
-              return l
-            }
-            const m0 = build()
-            if (m0?.run) {
-              good = m0
-              goodState = stateOf(m0)
-              // v3.54.18: the elevations read without a model are the same typed readings as with one — they go on to the ONE
-              // facade consumer (roof, overhang, stacks, openings, finishes), registered from their own anchors on this body.
-              // A side the source did not state stays unstated (decided by evidence or by the named convention below).
-              sketchSummary = { reading: { version: SKETCH_STEP_VERSION, printedLevels: [], sketches: unregisteredSketches.sketches.map((x) => (x.sideUnstated ? { ...x, facade: 'SIDE_UNSPECIFIED' as const } : x)), appearance: { observations: [], projections: {} }, usd: 0 }, form: { decision: 'NOT_RUN', why: 'the body was built from the plan outline (no LOCAL model for the shape reader)' }, finish: { decision: 'NOT_RUN', why: 'finishes go through the correction registry on this path (SET_FINISH)' }, usd: 0 }
-              delivery.delivery = { delivered: true, why: 'the body is the analysis that stands: result, model and scene through the shared envelope; the review looks at this revision', modelSha256: m0.run.result.modelSha256, sceneSha256: m0.run.result.sceneSha256, revision: modelRevision(m0.run.reconstruction.model) }
-            } else delivery.delivery = { delivered: false, why: 'the committed record\'s commands do not rebuild the executor\'s model byte for byte: nothing is delivered' }
-            record({ at: now().toISOString(), kind: 'MASSING_DELIVERED', ...delivery.delivery })
-          } else {
-            delivery.decision = 'NOT_BUILT'
-            delivery.why = `${rec0?.status ?? 'NO_RECORD'} ${rec0?.code ?? ''}: ${rec0?.why ?? ''}`.slice(0, 600)
-          }
-          record({ at: now().toISOString(), kind: 'MASSING_WITHOUT_MODEL', decision: delivery.decision, why: delivery.why })
-        }
+      const mb = await buildMassing({ pkg0, graph0, sketches: unregisteredSketches.sketches, ...(planFrame ? { planFrame } : {}), ...(cmPerPx !== undefined ? { cmPerPx } : {}), strong, diag, ...(local.error ? { localFailure: local.error.failure() } : {}), why: 'LOCAL built no model; the plan outline and the elevations are read' })
+      massingDelivery = mb.delivery
+      if (mb.built?.run) {
+        good = mb.built
+        goodState = stateOf(mb.built)
+        // v3.54.18: the elevations read without a model are the same typed readings as with one — they go on to the ONE
+        // facade consumer (roof, overhang, stacks, openings, finishes), registered from their own anchors on this body.
+        // A side the source did not state stays unstated (decided by evidence or by the named convention below).
+        sketchSummary = { reading: { version: SKETCH_STEP_VERSION, printedLevels: [], sketches: unregisteredSketches.sketches.map((x) => (x.sideUnstated ? { ...x, facade: 'SIDE_UNSPECIFIED' as const } : x)), appearance: { observations: [], projections: {} }, usd: 0 }, form: { decision: 'NOT_RUN', why: 'the body was built from the plan outline (no LOCAL model for the shape reader)' }, finish: { decision: 'NOT_RUN', why: 'finishes go through the correction registry on this path (SET_FINISH)' }, usd: 0 }
       }
     }
   }
@@ -854,7 +880,14 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
     // v3.54.17 R3: every orthographic elevation of the source is read, registered or not (two "side" elevations the
     // analyzer could not tell apart were never sketched)
     const registeredFrames = new Set(run0.reconstruction.facadeAlignment.views.map((v) => v.frameId))
-    const unregistered = (graph0.coordinateFrames ?? []).filter((f) => f.roles.projection === 'ORTHOGRAPHIC_ELEVATION' && f.roles.document === 'ELEVATION' && !registeredFrames.has(f.id)).map((f) => ({ frameId: f.id }))
+    // v3.54.18: a thumbnail of an elevation (the page's 120 px copy of a drawing it also gives large) is not read: nothing
+    // can be placed from it, and it only adds an unlabelled "side" that is one of the labelled ones (Medulin: four of eight
+    // sketches were such copies). The gate is legibility — the picture's own size — not a count per house.
+    const candidates = (graph0.coordinateFrames ?? []).filter((f) => f.roles.projection === 'ORTHOGRAPHIC_ELEVATION' && f.roles.document === 'ELEVATION' && !registeredFrames.has(f.id))
+    const legible = (f: (typeof candidates)[number]): boolean => (f.size?.width ?? 0) >= MIN_SKETCH_FRAME_PX.width && (f.size?.height ?? 0) >= MIN_SKETCH_FRAME_PX.height
+    const thumbnails = candidates.filter((f) => !legible(f))
+    if (thumbnails.length > 0) record({ at: now().toISOString(), kind: 'ELEVATION_THUMBNAILS_NOT_READ', frames: thumbnails.map((f) => ({ frameId: f.id, width: f.size?.width ?? 0, height: f.size?.height ?? 0 })), min: MIN_SKETCH_FRAME_PX })
+    const unregistered = candidates.filter(legible).map((f) => ({ frameId: f.id }))
     const reading = await readSketches({ metrics: metrics0, model: run0.reconstruction.model, views: run0.reconstruction.facadeAlignment.views.map((v) => ({ facade: v.facade, frameId: v.frameId, projection: v.projection })), unregistered, ...(metricRead ? { metricReads: metricRead.reads } : {}), rasterOf, ctx: { model: wiring.sketchModel ?? wiring.model, price: wiring.sketchPrice ?? wiring.price, ...(wiring.spend ? { spend: wiring.spend } : {}), ...(options.signal ? { signal: options.signal } : {}) } })
     usd += reading.usd
     const { elevationSketches, ...kept } = reading
@@ -1107,6 +1140,7 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
     })
   // v3.54.18 (gate 1.3.0): what each sketched picture draws as openings, in that picture's own pixels — the gate's band
   // where the model's own (possibly wrong) openings leave no place free is the wall this reading calls plain
+  const adoptedFrames = new Set<string>()
   const allSketches = (): SketchReading['sketches'] => sketchSummary?.reading.sketches ?? []
   const facadeClaims = (): Map<string, Array<{ x0: number; y0: number; x1: number; y1: number }>> =>
     new Map(allSketches().filter((x) => x.sketch).map((x) => [x.frameId, (x.sketch?.openings ?? []).map((o) => { const ps = o.polygon as Array<[number, number]>; return { x0: Math.min(...ps.map((q) => q[0])), y0: Math.min(...ps.map((q) => q[1])), x1: Math.max(...ps.map((q) => q[0])), y1: Math.max(...ps.map((q) => q[1])) } })]))
@@ -1118,7 +1152,7 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
     const held = viewsOfRun(l.run.reconstruction.facadeAlignment.views)
     const plans = (l.run.reconstruction.registrations.plans ?? []).map((q) => ({ frameId: q.frameId, toWorld: q.toWorld }))
     const pitch = (l.pkg ?? l.run.pkg)?.publishedFacts.find((f) => f.key === 'roof_pitch' && f.unit === 'deg')?.value
-    const out = executeCorrections({ model: m0, claims: facadeClaims(), views: massingOf.get(l)?.views ?? held, derivedViews: (m: CanonicalBuildingModel, h: readonly BindView[]) => sketchViewsOf(m, pictures, h), ...(plans.length > 0 ? { plans } : {}), ...(typeof pitch === 'number' ? { facts: { roofPitchDeg: pitch } } : {}), pictures, proposals, witnesses: witnessesOf(l), seen, ...(retiredIds.size > 0 ? { retiredIds } : {}) })
+    const out = executeCorrections({ model: m0, claims: facadeClaims(), adopted: adoptedFrames, views: massingOf.get(l)?.views ?? held, derivedViews: (m: CanonicalBuildingModel, h: readonly BindView[]) => sketchViewsOf(m, pictures, h), ...(plans.length > 0 ? { plans } : {}), ...(typeof pitch === 'number' ? { facts: { roofPitchDeg: pitch } } : {}), pictures, proposals, witnesses: witnessesOf(l), seen, ...(retiredIds.size > 0 ? { retiredIds } : {}) })
     correctionRuns.push({ stage, baseRevision: out.baseRevision, revision: out.revision, delivered: false, records: out.records, transactions: out.transactions })
     record({ at: now().toISOString(), kind: 'CORRECTIONS', stage, baseRevision: out.baseRevision, revision: out.revision, records: out.records.map((r) => ({ proposalId: r.proposalId, operation: r.operation, status: r.status, code: r.code ?? null })), transactions: out.transactions.map((t) => ({ txId: t.txId, decision: t.decision, why: t.why })) })
     return out
@@ -1165,6 +1199,63 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
     }
     base = newBase
     return m
+  }
+  // --- v3.54.18: BODY ARBITRATION — LOCAL's body is a hypothesis too ---------------------------------------------------
+  // Until v3.54.18 a body LOCAL built was the base every correction had to start from: when LOCAL split one house into
+  // several masses, or drew it narrower and taller than its drawings (Medulin: a 7.83 m front for the plan's printed
+  // 9.25 m, eaves at 5.5 m for the drawn 3 m), the elevations could not be registered on it, the printed outline was
+  // refused ("not one body at the ends") and nothing could repair it — a good correction needed a good LOCAL first. Now
+  // the body is held against what does not come from it: the labelled elevation readings (do their wall ends and eaves
+  // register on it?), the plan's printed overall dimensions, the page's published building height. Only when that
+  // evidence contradicts LOCAL's body is the other body built — from the plan outline and the elevations, the path a
+  // house without a LOCAL model already takes — and it replaces LOCAL's only when the same evidence contradicts it less
+  // and supports it at least as much. The interior LOCAL read does not move to the new body (named: NOT_CHECKED).
+  let bodyArbitration: BodyArbitration | undefined
+  if ((wiring.massing ?? 'ON') === 'ON' && (wiring.sketchCorrections ?? 'ON') === 'ON' && wiring.variant !== 'R' && sketchSummary && good.run && good.pkg && good.graph && !massingOf.has(good)) {
+    const pkg0 = good.pkg
+    const graph0 = good.graph
+    const pics = await allPicturesOf(good)
+    const printedDims = (metricRead?.reads ?? []).flatMap((r) => r.observations.filter((o) => o.kind === 'LENGTH' && o.scope === 'WHOLE_HOUSE' && o.reference === 'OUTER_FACE' && o.status === 'PRINTED' && typeof o.value === 'number' && (o.axis === 'HORIZONTAL' || o.axis === 'VERTICAL')).map((o) => ({ literal: o.literal, valueM: o.value as number, axis: o.axis as 'HORIZONTAL' | 'VERTICAL' })))
+    const publishedHeight = pkg0.publishedFacts.find((f) => f.key === 'building_height' && f.unit === 'm')?.value
+    const TURNED: Record<Side, Side> = { FRONT: 'RIGHT', RIGHT: 'REAR', REAR: 'LEFT', LEFT: 'FRONT' }
+    const evidenceOf = (model: CanonicalBuildingModel, heldViews: readonly BindView[]): BodyEvidence => {
+      const built = measureBuilt(model, compileBuilding(model))
+      const labelled = sketchAnchors().filter((a) => (sketchSummary?.reading.sketches ?? []).some((x) => x.frameId === a.frameId && x.facade !== 'SIDE_UNSPECIFIED'))
+      const tryAll = (turn: boolean) => labelled.map((a) => { const r = registerFromSketch({ model, views: [...heldViews], pictures: pics, witnesses: [] }, turn ? { ...a, side: TURNED[a.side] } : a); return { frameId: a.frameId, side: turn ? TURNED[a.side] : a.side, ok: !('status' in r), code: 'status' in r ? r.code ?? r.status : 'REGISTERED' } })
+      const [asL, asT] = [tryAll(false), tryAll(true)]
+      const regs = asT.filter((q) => q.ok).length > asL.filter((q) => q.ok).length ? asT : asL
+      const dims = printedDims.map((d) => { const ext = d.axis === 'HORIZONTAL' ? built.outlineX : built.outlineZ; return { literal: d.literal, valueM: d.valueM, modelM: Math.round(ext * 100) / 100, agrees: Math.abs(ext - d.valueM) <= Math.max(BODY_ARBITRATION.dimAgreeM, BODY_ARBITRATION.dimAgreeShare * d.valueM) } })
+      const height = typeof publishedHeight === 'number' && typeof built.ridge === 'number' ? { publishedM: publishedHeight, modelRidgeM: Math.round(built.ridge * 100) / 100, agrees: Math.abs(built.ridge - publishedHeight) <= Math.max(BODY_ARBITRATION.heightAgreeM, BODY_ARBITRATION.heightAgreeShare * publishedHeight) } : undefined
+      const contradictions = regs.filter((q) => !q.ok).length + dims.filter((d) => !d.agrees).length + (height && !height.agrees ? 1 : 0)
+      const supports = regs.filter((q) => q.ok).length + dims.filter((d) => d.agrees).length + (height?.agrees ? 1 : 0)
+      return { bodies: bodiesOf(model).length, registrations: regs, printed: dims, ...(height ? { height } : {}), contradictions, supports }
+    }
+    const localEv = evidenceOf(good.run.reconstruction.model, viewsOfRun(good.run.reconstruction.facadeAlignment.views))
+    const arb: BodyArbitration = { version: BODY_ARBITRATION.version, local: localEv, decision: 'LOCAL_STANDS', why: '' }
+    bodyArbitration = arb
+    if (localEv.contradictions === 0) arb.why = `nothing the sources state contradicts LOCAL's body (${localEv.supports} agreement(s): elevations registered, printed dimensions, published height)`
+    else {
+      stage('BODY_ARBITRATION')
+      const st = goodState
+      const conf = st.metric?.confidence ?? 'INCONCLUSIVE'
+      const mb = await buildMassing({ pkg0, graph0, sketches: sketchSummary.reading.sketches, ...(good.plans?.selectedPlanFrameId ? { planFrame: good.plans.selectedPlanFrameId } : {}), ...(typeof st.metric?.cmPerPixelX === 'number' ? { cmPerPx: st.metric.cmPerPixelX } : {}), strong: (CONF_RANK[conf] ?? 0) >= 2, diag: { metricConfidence: conf, metricRelation: st.metric?.relation ?? '?' }, localFailure: { code: 'LOCAL_BODY_CONTRADICTED', reasonCode: 'BODY_ARBITRATION' }, why: `LOCAL's body is contradicted by ${localEv.contradictions} source statement(s); the plan outline and the elevations are read` })
+      arb.massing = { decision: mb.delivery.decision, why: mb.delivery.why.slice(0, 400), usd: mb.delivery.usd }
+      if (!mb.built?.run) arb.why = `LOCAL's body is contradicted (${localEv.contradictions}), but the other body could not be built (${mb.delivery.why.slice(0, 200)}): LOCAL's stands, the contradiction named`
+      else {
+        const altEv = evidenceOf(mb.built.run.reconstruction.model, massingOf.get(mb.built)?.views ?? [])
+        arb.alternative = altEv
+        if (altEv.contradictions < localEv.contradictions && altEv.supports >= localEv.supports) {
+          arb.decision = 'REPLACED_BY_SOURCE_BODY'
+          arb.why = `the sources contradict LOCAL's body ${localEv.contradictions} time(s) and support it ${localEv.supports}; the body built from the plan outline and the elevations: ${altEv.contradictions} and ${altEv.supports}. The source body stands; LOCAL's interior is not carried over (NOT_CHECKED)`
+          massingDelivery = mb.delivery
+          good = mb.built
+          goodState = stateOf(mb.built)
+          basis = mb.built
+          sketchSummary = { ...sketchSummary, reading: { ...sketchSummary.reading, appearance: { observations: [], projections: {} } }, form: { decision: 'NOT_RUN', why: 'the body was replaced by the one built from the plan outline and the elevations' }, finish: { decision: 'NOT_RUN', why: 'finishes go through the correction registry on this body (SET_FINISH)' } }
+        } else arb.why = `LOCAL's body is contradicted ${localEv.contradictions} time(s) (supported ${localEv.supports}), the other body ${altEv.contradictions} (supported ${altEv.supports}): not clearly better — LOCAL's stands, both on the record`
+      }
+    }
+    record({ at: now().toISOString(), kind: 'BODY_ARBITRATION', ...arb })
   }
   if ((wiring.sketchCorrections ?? 'ON') === 'ON' && wiring.variant !== 'R' && sketchSummary && good.run) {
     const run = good.run
@@ -1288,6 +1379,25 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
       if (again.length === 0) break
       await phase(`SKETCH_PASS_${pass}`, again)
       if (stood === before) break
+    }
+    // v3.54.18: facade adoption — where the picture supported most of a reading's openings and refuted none, what it
+    // left undecided on that side follows the reading (applied, never marked source-verified)
+    if (stood.run) {
+      const mA = stood.run.reconstruction.model
+      const heldA = massingOf.get(stood)?.views ?? viewsOfRun(stood.run.reconstruction.facadeAlignment.views)
+      const viewsA = [...heldA, ...sketchViewsOf(mA, await allPicturesOf(stood), heldA)]
+      const fates = new Map<string, string>()
+      for (const r of sem.records) {
+        const parts = r.proposalId.replace(/@\w+$/, '').split(':')
+        if (parts[0] !== 'sk') continue
+        if (r.operation === 'REMOVE_OPENING') fates.set(`${parts[1]}|rem:${r.targetId}`, r.status)
+        else if (r.operation === 'ADD_OPENING' || r.operation === 'UPDATE_OPENING') fates.set(`${parts[1]}|open:${parts.slice(3).join(':')}`, r.status === 'NEEDS_EVIDENCE' && (r.gate?.proposedZ ?? -1) >= 2 ? 'UNDECIDED_BUT_SUPPORTED' : r.status)
+      }
+      const ads = sketched.map((x) => facadeAdoption(x.sketch as NonNullable<typeof x.sketch>, x.facade, mA, viewsA, modelRevision(mA), (key) => fates.get(`${x.frameId.slice(-10)}|${key}`), sketchSideOf?.[x.frameId]))
+      sem.adoption = ads.map(({ proposals, ...a }) => ({ ...a, proposed: proposals.length }))
+      for (const a of ads) if (a.decision === 'ADOPTED') adoptedFrames.add(a.frameId)
+      record({ at: now().toISOString(), kind: 'FACADE_ADOPTION', facades: sem.adoption })
+      await phase('FACADE_ADOPT', ads.flatMap((a) => a.proposals))
     }
     // v3.54.18: the finish zones of every side whose walls carry none yet (always so on a body built without LOCAL; with
     // LOCAL, the sides its finish consumer did not reach) — through the same registry and the same registrations
@@ -1615,7 +1725,7 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
   const consultation: ConsultationSummary = { schemaVersion: '1.0.0', contract: CONSULTANT_CONTRACT_VERSION, prompt: CONSULTANT_PROMPT_VERSION, variant: wiring.variant, model: wiring.model.model, usd: Math.round(usd * 1e6) / 1e6, globalDescription: 'DISABLED', local: { outcome: localState.outcome, reasonCode: localState.reasonCode ?? null, modelHash: localState.modelHash ?? null }, metricRounds: rounds.map((r) => ({ round: r.round, decision: r.decision, why: r.why })), boundary: boundary ? { decision: boundary.decision, why: boundary.why, sides: boundary.sides } : null, looks: geometry.map((g) => ({ round: g.round, revision: g.revision, status: g.status, decision: g.decision, why: g.why })), roofFeatures: features.map((f) => f.id), ...(metricRead ? { metricRead: { decision: metricRead.decision, why: metricRead.why, corrected: metricRead.resolution.decisions.filter((d) => d.decision === 'CORRECTED').length, agrees: metricRead.resolution.decisions.filter((d) => d.decision === 'AGREES').length, unresolved: metricRead.resolution.decisions.filter((d) => d.decision === 'UNRESOLVED').length, newSpans: metricRead.resolution.spans.length, usd: metricRead.usd } } : {}), ...(sketchSummary ? { sketches: { sides: sketchSummary.reading.sketches.map((x) => `${x.facade}:${x.check?.verdict ?? (x.failed ? 'FAILED' : 'NONE')}`), form: sketchSummary.form.decision, finish: sketchSummary.finish.decision, usd: sketchSummary.usd } } : {}), ...(accepted ? { accepted } : {}), ...(sourceCheck?.quality ? { quality: { state: sourceCheck.quality.state, reasons: sourceCheck.quality.reasons, reviewCompleted: sourceCheck.quality.reviewCompleted, openKey: sourceCheck.quality.openKey, closedVerified: sourceCheck.quality.closedVerified } } : {}), corrections: { runs: correctionRuns.length, committed: correctionRuns.reduce((a, r) => a + r.records.filter((x) => x.status === 'COMMITTED').length, 0), refused: correctionRuns.reduce((a, r) => a + r.records.filter((x) => x.status !== 'COMMITTED').length, 0), registry: CORRECTION_REGISTRY_VERSION } }
   if (good.run) (good.run.result as { consultation?: ConsultationSummary }).consultation = consultation
   record({ at: now().toISOString(), kind: 'FINAL', local: localState, final: finalState, usd, readings, roofFeatures: features, sourceCheck: sourceCheck ?? null })
-  return { contract: CONSULTANT_CONTRACT_VERSION, prompt: CONSULTANT_PROMPT_VERSION, variant: wiring.variant, ...(good.run ? { run: good.run } : {}), ...(good.error ? { error: good.error } : {}), local: localState, ...(wiring.keepLocalModel && local.run ? { localModel: local.run.reconstruction.model } : {}), final: finalState, rounds, readings: good === local ? [] : readings, spans: good === local ? [] : spans, usd, ...(boundary ? { boundary } : {}), geometry, roofFeatures: features, ...(sourceCheck ? { sourceCheck } : {}), consultation, ...(metricRead ? { metricRead } : {}), ...(sketchSummary ? { sketches: sketchSummary } : {}), ...(unregisteredSketches ? { sketchesWithoutModel: unregisteredSketches } : {}), ...(massingDelivery ? { massing: massingDelivery } : {}), globalDescription: 'DISABLED' }
+  return { ...(bodyArbitration ? { bodyArbitration } : {}), contract: CONSULTANT_CONTRACT_VERSION, prompt: CONSULTANT_PROMPT_VERSION, variant: wiring.variant, ...(good.run ? { run: good.run } : {}), ...(good.error ? { error: good.error } : {}), local: localState, ...(wiring.keepLocalModel && local.run ? { localModel: local.run.reconstruction.model } : {}), final: finalState, rounds, readings: good === local ? [] : readings, spans: good === local ? [] : spans, usd, ...(boundary ? { boundary } : {}), geometry, roofFeatures: features, ...(sourceCheck ? { sourceCheck } : {}), consultation, ...(metricRead ? { metricRead } : {}), ...(sketchSummary ? { sketches: sketchSummary } : {}), ...(unregisteredSketches ? { sketchesWithoutModel: unregisteredSketches } : {}), ...(massingDelivery ? { massing: massingDelivery } : {}), globalDescription: 'DISABLED' }
 }
 
 /** What the looks established, for the result: the delivered revision, the findings still open, each correction's fate. */

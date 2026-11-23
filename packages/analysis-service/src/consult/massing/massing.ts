@@ -186,6 +186,26 @@ export function profileOver(view: BindView, a0: number, a1: number, own: { walls
 }
 
 /**
+ * v3.54.18: the top of the drawn walls at a body's two outer corners, in metres — the wall plate under the soffit, the ONE
+ * line every view of a body shares (an eaves view and a gable view alike end their wall zone there). The roof's own lowest
+ * edge is not that line: it is the fascia, lower by the overhang's fall, or a porch roof carried lower still. Undefined
+ * when the reading draws no wall corner within 3 % of the stretch at either end.
+ */
+export function wallCornerTopM(view: BindView, lo: number, hi: number, walls: readonly Poly[], groundRow: number | null): number | undefined {
+  if (groundRow === null) return undefined
+  const p = view.projection
+  const px = [pxOfAlong(p, lo), pxOfAlong(p, hi)]
+  const [c0, c1] = [Math.min(...px), Math.max(...px)]
+  const near = Math.max(2, 0.03 * (c1 - c0))
+  const corner = (cx: number): number | undefined => {
+    const ys = walls.flatMap((poly) => poly.filter((q) => Math.abs(q[0] - cx) <= near && q[1] < groundRow - 2).map((q) => q[1]))
+    return ys.length > 0 ? Math.min(...ys) : undefined
+  }
+  const [k0, k1] = [corner(c0), corner(c1)]
+  return k0 !== undefined && k1 !== undefined ? (yOfRow(p, k0) + yOfRow(p, k1)) / 2 : undefined
+}
+
+/**
  * Which drawn polygons belong to which body on one side. Bodies side by side on this side (disjoint stretches) share a
  * polygon that spans both, each reading its own columns of it; bodies one in front of the other (overlapping stretches)
  * take each polygon whole, by the stretch it matches best (intersection over union) — so a low wing in front never
@@ -213,6 +233,63 @@ function attribute(obs: SilhouetteObservation, view: BindView, stretches: Readon
     if (iou[best] > 0.3) out[best][key].push(poly)
   }
   return out
+}
+
+/**
+ * v3.54.18 (massing 1.1.0): an orthogonal outline with more corners than a rectangle or an L, reduced step by step — a
+ * named MINIATURE CONVENTION, never a measured outline. Each reduction removes the cheapest step (an edge is slid until
+ * the shorter of its two neighbours is gone; the area between is added or cut), as long as that single step is at most
+ * `stepShare` of the bounding rectangle's area and all of them together at most `totalShare`. A terrace notch, a bay,
+ * an entrance recess under the same roof go; a third wing of real size does not (the outline stays unsupported, by name).
+ */
+export const OUTLINE_SIMPLIFICATION = { stepShare: 0.06, totalShare: 0.12, corners: 6 } as const
+export function simplifyOutline(outline: ReadonlyArray<{ x: number; z: number }>): { outline: Array<{ x: number; z: number }>; steps: Array<{ areaM2: number; at: { x: number; z: number } }>; changedM2: number; share: number } | undefined {
+  const clean = (v: Array<{ x: number; z: number }>): Array<{ x: number; z: number }> => {
+    let pts = v.filter((p, i) => Math.hypot(p.x - v[(i + 1) % v.length].x, p.z - v[(i + 1) % v.length].z) > 1e-6)
+    for (let changed = true; changed && pts.length > 4; ) {
+      changed = false
+      for (let i = 0; i < pts.length; i += 1) {
+        const a = pts[(i + pts.length - 1) % pts.length]
+        const b = pts[(i + 1) % pts.length]
+        const q = pts[i]
+        if ((Math.abs(a.x - q.x) < 1e-6 && Math.abs(b.x - q.x) < 1e-6) || (Math.abs(a.z - q.z) < 1e-6 && Math.abs(b.z - q.z) < 1e-6)) {
+          pts = pts.filter((_, k) => k !== i)
+          changed = true
+          break
+        }
+      }
+    }
+    return pts
+  }
+  let pts = clean(outline.map((p) => ({ x: p.x, z: p.z })))
+  const orth = (v: Array<{ x: number; z: number }>): boolean => v.every((p, i) => { const n = v[(i + 1) % v.length]; return Math.abs(p.x - n.x) < 1e-6 || Math.abs(p.z - n.z) < 1e-6 })
+  if (pts.length <= OUTLINE_SIMPLIFICATION.corners || !orth(pts)) return undefined
+  const bb = rectOfOutline(pts)
+  const total = (bb.maxX - bb.minX) * (bb.maxZ - bb.minZ)
+  const steps: Array<{ areaM2: number; at: { x: number; z: number } }> = []
+  let changed = 0
+  while (pts.length > OUTLINE_SIMPLIFICATION.corners) {
+    const n = pts.length
+    let best: { cost: number; next: Array<{ x: number; z: number }>; at: { x: number; z: number } } | undefined
+    for (let i = 0; i < n; i += 1) {
+      // edge e = pts[i] → pts[i+1]; its neighbours p = pts[i-1] → pts[i] and q = pts[i+1] → pts[i+2]
+      const [p0, e0, e1, q1] = [pts[(i + n - 1) % n], pts[i], pts[(i + 1) % n], pts[(i + 2) % n]]
+      const eLen = Math.hypot(e1.x - e0.x, e1.z - e0.z)
+      for (const side of ['p', 'q'] as const) {
+        // slide e along the neighbour being removed, by that neighbour's whole length
+        const d = side === 'p' ? { x: p0.x - e0.x, z: p0.z - e0.z } : { x: q1.x - e1.x, z: q1.z - e1.z }
+        const cost = eLen * Math.hypot(d.x, d.z)
+        if (best && cost >= best.cost) continue
+        const next = pts.map((v, k) => (k === i || k === (i + 1) % n ? { x: v.x + d.x, z: v.z + d.z } : v))
+        best = { cost, next: clean(next), at: { x: r6((e0.x + e1.x) / 2), z: r6((e0.z + e1.z) / 2) } }
+      }
+    }
+    if (!best || best.next.length >= pts.length || best.cost > OUTLINE_SIMPLIFICATION.stepShare * total || changed + best.cost > OUTLINE_SIMPLIFICATION.totalShare * total || !orth(best.next)) return undefined
+    changed += best.cost
+    steps.push({ areaM2: r6(best.cost), at: best.at })
+    pts = best.next
+  }
+  return { outline: pts.map((p) => ({ x: r6(p.x), z: r6(p.z) })), steps, changedM2: r6(changed), share: r6(changed / total) }
 }
 
 /** 2. An orthogonal outline as one rectangle or two joined rectangles (both splits of an L). */
@@ -266,7 +343,15 @@ export function solveMassing(input: MassingInput): MassingHypothesis {
     base.views_used.push({ side: s.side, frameId: s.frameId, used: true, why: reg.why })
   }
   if (byView.size === 0) return { ...base, status: 'INSUFFICIENT', bodies: [], views, missing: [{ anchor: 'ELEVATION_SILHOUETTE', why: 'no elevation could be registered by the plan: no height and no roof form can be read' }], why: 'the outline alone gives a footprint, not a mass' }
-  const split = rectanglesOf(input.outline.outline)
+  let split = rectanglesOf(input.outline.outline)
+  if (split.splits.length === 0) {
+    // v3.54.18: small steps of the outline (a terrace notch, a bay) are taken out as a named miniature convention
+    const simple = simplifyOutline(input.outline.outline)
+    if (simple) {
+      split = rectanglesOf(simple.outline)
+      if (split.splits.length > 0) base.alternatives.push(`MINIATURE_CONVENTION: the outline's ${simple.steps.length} small step(s) (${simple.changedM2.toFixed(1)} m², ${(simple.share * 100).toFixed(1)} % of its bounding rectangle) are not modelled — the body is ${split.why}; the drawn outline is kept in the observation`)
+    }
+  }
   if (split.splits.length === 0) return { ...base, status: 'UNSUPPORTED_FORM', bodies: [], views, missing: [{ anchor: 'SUPPORTED_OUTLINE', why: split.why }], why: split.why }
   // choose the split whose line an elevation steps at: a body boundary is a jump of the drawn top AT that line (a gable's
   // slope runs through it continuously); the top is read just either side of the line, on every view that shows it
@@ -305,7 +390,7 @@ export function solveMassing(input: MassingInput): MassingHypothesis {
   const bodies: BodySpec[] = []
   for (const [i, rect] of rects.entries()) {
     const id = i === 0 ? 'mass-main' : `mass-wing-${i}`
-    const reads: Array<{ side: Side; p: NonNullable<ReturnType<typeof profileOver>> }> = []
+    const reads: Array<{ side: Side; p: NonNullable<ReturnType<typeof profileOver>>; wallTopM?: number }> = []
     for (const { obs, view } of byView.values()) {
       const e = extentOn(rect, obs.side)
       // a body hidden behind another on this side (its whole stretch inside the other's, and further back) is not read there
@@ -315,8 +400,10 @@ export function solveMassing(input: MassingInput): MassingHypothesis {
         const depth = (r: Rect): number => (obs.side === 'FRONT' ? r.minZ : obs.side === 'REAR' ? -r.maxZ : obs.side === 'LEFT' ? r.minX : -r.maxX)
         if (eo.lo <= e.lo + 0.05 && eo.hi >= e.hi - 0.05 && depth(other) < depth(rect) - 0.05) continue
       }
-      const p = profileOver(view, e.lo, e.hi, attribute(obs, view, rects.map((r) => extentOn(r, obs.side)))[i])
-      if (p) reads.push({ side: obs.side, p })
+      const own = attribute(obs, view, rects.map((r) => extentOn(r, obs.side)))[i]
+      const p = profileOver(view, e.lo, e.hi, own)
+      const wt = p && p.shape !== 'NONE' ? wallCornerTopM(view, e.lo, e.hi, own.walls, obs.groundRow) : undefined
+      if (p) reads.push({ side: obs.side, p, ...(wt !== undefined ? { wallTopM: wt } : {}) })
     }
     if (reads.length === 0) {
       base.missing.push({ anchor: `HEIGHT:${id}`, why: `no registered elevation shows ${id}` })
@@ -324,10 +411,14 @@ export function solveMassing(input: MassingInput): MassingHypothesis {
     }
     const median = (v: number[]): number => [...v].sort((a, b) => a - b)[Math.floor((v.length - 1) / 2)]
     const top = median(reads.map((r) => r.p.topM))
-    const eaves = median(reads.map((r) => r.p.eavesM))
-    const spread = Math.max(...reads.map((r) => r.p.eavesM)) - Math.min(...reads.map((r) => r.p.eavesM))
+    // v3.54.18 (massing 1.1.0): the eaves at the wall are where the drawn walls end at the body's corners, when every view
+    // that reads this body draws them; else the roofs' lowest edges, as before
+    const byWalls = reads.every((r) => r.wallTopM !== undefined)
+    const eavesOf = (r: (typeof reads)[number]): number => (byWalls ? (r.wallTopM as number) : r.p.eavesM)
+    const eaves = median(reads.map(eavesOf))
+    const spread = Math.max(...reads.map(eavesOf)) - Math.min(...reads.map(eavesOf))
     const agree = reads.length >= 2 && spread <= Math.max(MASSING_TOLERANCES.heightAgreeM, MASSING_TOLERANCES.heightAgreeShare * eaves)
-    const hProv: Prov = { fidelity: agree ? 'SOURCE_DERIVED' : 'TRACE_UNCERTAIN', source: reads.map((r) => r.side).join('+'), why: `${reads.length} registered elevation(s) give eaves ${reads.map((r) => r.p.eavesM.toFixed(2)).join(' / ')} m and top ${reads.map((r) => r.p.topM.toFixed(2)).join(' / ')} m${agree ? ' (they agree)' : reads.length < 2 ? ' (one view: the vertical scale is the horizontal one, unconfirmed)' : ` (they disagree by ${spread.toFixed(2)} m)`}` }
+    const hProv: Prov = { fidelity: agree ? 'SOURCE_DERIVED' : 'TRACE_UNCERTAIN', source: reads.map((r) => r.side).join('+'), why: `${reads.length} registered elevation(s) give eaves ${byWalls ? '(the walls\' corner tops) ' : ''}${reads.map((r) => eavesOf(r).toFixed(2)).join(' / ')} m and top ${reads.map((r) => r.p.topM.toFixed(2)).join(' / ')} m${agree ? ' (they agree)' : reads.length < 2 ? ' (one view: the vertical scale is the horizontal one, unconfirmed)' : ` (they disagree by ${spread.toFixed(2)} m)`}` }
     if (eaves < MASSING_TOLERANCES.minBodyM) {
       base.missing.push({ anchor: `HEIGHT:${id}`, why: `the elevations put ${id}'s eaves at ${eaves.toFixed(2)} m: not a storey` })
       continue
