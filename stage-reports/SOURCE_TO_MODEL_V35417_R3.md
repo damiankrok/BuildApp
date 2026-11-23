@@ -99,5 +99,13 @@ dach bez materiału (jasny) i za mało okien na froncie.
 
 ## Dostawa
 
-Prywatny ZIP (< 30 000 000 B, sumy SHA-256 i instrukcja w `MANIFEST-R3.txt`): plansze R3, biegi na żywo (zapisy wymiany,
-tury, szkice, korekty, jakość, modele), powtórki, księga, logi. Obrazy wydawcy tylko w ZIP-ie, nigdy w Gicie.
+Prywatne archiwa (poza Gitem, obrazy wydawców tylko tutaj, skan klucza i nagłówków autoryzacji czysty), każde
+< 30 000 000 B, instrukcja rozpakowania w `MANIFEST-R3.txt`:
+
+| Archiwum | Bajty | SHA-256 | Zawartość |
+|---|---|---|---|
+| `BuildPlan-V35417-R2-Private.zip` | 27 265 996 | `09a142e17aa3babcd30f2166f6eea6f1d9a4ae5be8118770ac25d45861b7abf4` | R2: galeria i plansze §5, dowody indeksu, powtórki z zapisami wymiany, log macierzy |
+| `BuildPlan-V35417-R3a-Private.zip` | 14 441 396 | `402a63140f01cddbeea1e7d5a5bad2b2bad54f2ebe10865a51e1dde99a91cec1` | R3: plansze, pięć biegów na żywo (wymiany, tury, szkice, korekty, jakość, modele), księga |
+| `BuildPlan-V35417-R3b-Private.zip` | 2 937 428 | `8acaef4dd6f219799a24e19e6e11fe4e90a6c81f5db8a656e756a1a46ee0663e` | R3: powtórki 0 USD na kodzie końcowym, diagnozy, macierz |
+
+Galeria R2 po rozpakowaniu: `boards-gallery.py --check R2/delivery` → 56 odnośników, 0 brakujących.
