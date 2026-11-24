@@ -79,3 +79,27 @@ Pełny opis: §16 raportu. Krótko:
 - Koszt R2: 1,88 USD (62 żądania); księga łącznie 36,33 USD przy pułapie 68,54 USD.
 - Dysk: usunąłem stare pliki robocze (z ok. 0,1 GB wolnego zrobiło się 6,5 GB); nagrania odpowiedzi API, pamięci bajtów
   i modele zostały.
+
+## R3 — druga kontynuacja (2026-11-24, APK 1351)
+
+Pełny opis: §17 raportu. Krótko, najpierw to, co nie wyszło:
+
+- **Bez zmian:** Medulin i Mindelo (zła bryła wieloskrzydłowa), Jeziorko i Ballina (były dobre i są).
+- **Nadal bez drzwi wejściowych:** Alberto i G6. G6 stracił też okno na lewym boku, które miał wcześniej.
+- **Aurora** straciła wnętrze, tylne przeszklenie tarasowe i pasy drewna — w zamian zniknęło sześć zmyślonych otworów
+  i zmyślony blok ganku, a dach ma 35° jak na stronie wydawcy.
+- **Alaska stoi wreszcie tak jak na rysunkach:** frontem jest szczyt z wejściem, boki są po właściwych stronach,
+  komplet 11 otworów, zero zmyślonych. To, która elewacja boczna jest lewa, a która prawa, mówi teraz rzut (otwory
+  narysowane na każdym boku), a nie zgadnięcie.
+- **G6 ma dach czterospadowy i bramę garażową** na bryle zbudowanej ze źródeł (skala rzutu wyliczona z powierzchni
+  zabudowy i potwierdzona wysokością budynku ze strony: 6,12 m wobec 6,10 m).
+- **Alberto** ma okno szczytowe po właściwej stronie.
+- Niezależny oceniający (nie wiedział, który wariant jest który): R3 bliżej rysunków w 5 z 9 domów, bez różnicy w 4,
+  gorzej w żadnym. Miniatur użytecznych 2 → 4 (Alaska, Aurora — Aurora warunkowo). **To są te same dziewięć domów, na
+  których powstały reguły, więc to nie jest dowód, że działa na nowych linkach.** Obiecany próg jest spełniony w części
+  dla sześciu starszych domów, nie dla trzech z dawnej próby ślepej (Sakura, Mindelo, G6: 0 → 0).
+- Pełna macierz testów: 4581, w tym 16 czerwonych z listy bazowej i 2 testy czasowe hosta, które padają w pełnym
+  przebiegu, a osobno przechodzą — zgłoszone, nie ukryte.
+- Koszt R3: 1,45 USD (43 żądania); księga łącznie 37,78 USD przy pułapie 68,54 USD.
+- Dysk: usunąłem ok. 8,5 GB starych plików roboczych (kopie dawno oddanych dostaw, rendery i paczki etapów sprzed
+  v3.54.14); nagrania odpowiedzi API, pamięci bajtów, modele i wszystko wstrzymane zostały.

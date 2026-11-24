@@ -33,7 +33,9 @@
   a plan without a measured scale takes one from its own traced outline (two overall dimensions, or the footprint area
   confirmed by the published height). Alaska faces its entrance, G6 has its hip roof on a source body, Aurora has a
   source body. Kept failures: Medulin, Mindelo, entrance doors of Alberto and G6, interiors lost with replaced bodies.
-  No threshold was loosened.
+  Blind grader (variants unlabelled, same nine houses — not a fresh blind set): R3 nearer the drawings in 5 of 9,
+  worse in none; useful miniatures 2 → 4 (Alaska, Aurora); the pre-registered goal holds for DEV-K + NEW-B only,
+  not for NEW-C (0 → 0). No threshold was loosened.
 - **v3.54.18 R2 (2026-11-24): roof form and house sides read from the drawings — APK 1350.** Report §16 of
   `stage-reports/SOURCE_TO_MODEL_V35418.md`; ADR section R2; hand-off section R2. Hip roofs are read (a trapezoid on
   the sides along the ridge) and built as four roof planes through the same source gate; a gable end drawn as its

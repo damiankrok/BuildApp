@@ -1,0 +1,60 @@
+{
+ "schema": "buildapp.delivery-verification",
+ "stage": "v3.54.18 R3",
+ "topFolder": "BuildPlan-V35418-R3",
+ "archives": [
+  {
+   "file": "BuildPlan-V35418-R3-01-RAPORT-GALERIA.zip",
+   "bytes": 14066625,
+   "under30000000": true,
+   "sha256": "0774360b3d7e2578ddf7af518c1de126645052cc9a367c3e62353386151cb79c"
+  },
+  {
+   "file": "BuildPlan-V35418-R3-02-DEV-K.zip",
+   "bytes": 16778245,
+   "under30000000": true,
+   "sha256": "e0e030e6b45654d37cb565a2be1725afc7ffc9cb1348b26919c1d49c83983203"
+  },
+  {
+   "file": "BuildPlan-V35418-R3-03-NEW-B.zip",
+   "bytes": 19316728,
+   "under30000000": true,
+   "sha256": "e006b042c739ad487b765c05643fafa66e320d0da0391fa13d0fdf910ec18347"
+  },
+  {
+   "file": "BuildPlan-V35418-R3-04-NEW-C.zip",
+   "bytes": 19224599,
+   "under30000000": true,
+   "sha256": "9b4b8ab895a11582bf7376dcacd9a1981e555f50cf74e2af5f841c198adddc57"
+  },
+  {
+   "file": "BuildPlan-V35418-R3-05-KAFLE.zip",
+   "bytes": 19299310,
+   "under30000000": true,
+   "sha256": "3e39a27021e90354940bd96e45766cf1d79c788aa51e8341a164ca1f243077cd"
+  }
+ ],
+ "manifestFiles": 1577,
+ "manifestMismatches": [],
+ "galleryLinks": 396,
+ "galleryLinksMissing": [],
+ "readmes": [
+  "README-01-RAPORT-GALERIA.txt",
+  "README-02-DEV-K.txt",
+  "README-03-NEW-B.txt",
+  "README-04-NEW-C.txt",
+  "README-05-KAFLE.txt"
+ ],
+ "providerKeyOccurrences": {
+  "unpackedFiles": 0,
+  "archivesAndApkRawBytes": 0,
+  "keyShapedStrings": 0
+ },
+ "apk": {
+  "file": "BuildPlan-Model-Preview-1351-arm64-v8a.apk",
+  "bytes": 53153150,
+  "sha256": "a12402a9fa75e7363daa9990a36ad76e2cb419a9aa35e8718bb9c4d6d103d883",
+  "deliveredSeparately": true
+ },
+ "note": "Verified after unpacking all five parts into one empty directory: every manifest line re-hashed, every local link of gallery.html resolved, the key searched as a literal and by shape. Request images identical in both variants of a house are kept once (in runs/r3/exchanges/img; a README in the 1350 variant says so)."
+}

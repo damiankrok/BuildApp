@@ -9,6 +9,11 @@ do odczytu, H2 i benchmark OWNER-a nieotwierane. Klucz czytany wyłącznie z pli
 nie ma go w Gicie, logach, APK, zrzutach ani ZIP-ach (skan przed commitem i przed spakowaniem). Rysunki wydawców nie są
 w repozytorium — tylko w prywatnej dostawie.
 
+**Kontynuacja R3 (2026-11-24, kod `58ff26a`, APK 1351): §17** — bryła ze źródeł stoi w układzie elewacji (front =
+bok z wejściem), elewacje boczne bez strony w podpisie przypisuje rzut, skala rzutu z jego własnego obrysu. Ślepa ocena:
+R3 bliżej rysunków w 5 z 9 domów, gorzej w żadnym; użytecznych 2 → 4 na tych samych, nieślepych już domach; próg
+z PROTOCOL spełniony tylko w części DEV-K + NEW-B, nie na NEW-C.
+
 **Kontynuacja R2 (2026-11-24, kod `35f5ee1`, APK 1350): §16** — dach czterospadowy, szczyty i okap czytane z rysunku,
 kierunek obrotu z wejścia na rzucie; co nadal nie działa, stoi tam na początku.
 
@@ -687,3 +692,171 @@ wydawcy, kolorowe szkice (PNG / SVG / JSON), cztery strony z werdyktem użycia, 
 renderera, plansza porównawcza (źródło | szkic | 1349 | R2), rzut bez dachu, a dla każdego wariantu model, scena,
 korekty, zdarzenia i odpowiedzi API. Sumy SHA-256 archiwów: plik `BuildPlan-V35418-R2-SHA256.txt` dostarczony obok.
 Listę archiwów i wynik weryfikacji po rozpakowaniu zawiera `stage-reports/artifacts/v35418/r2-delivery-verification.json`.
+
+## 17. R3 — druga kontynuacja (2026-11-24): strony domu i skala rzutu z rysunku
+
+Zlecenie OWNER-a powtórzone po dostawie 1350: uporządkować dysk i kontynuować. **Dysk:** usunięto ok. 8,5 GB — stare
+kopie dawno oddanych dostaw (ZIP i APK w katalogu domowym), środowisko Pythona i wyniki pośrednie etapów sprzed
+listopada, rendery i paczki etapów sprzed v3.54.14, masę przebiegów pośrednich R2; z 5,8 GB wolnego zrobiło się 14 GB.
+Zostały: pamięci bajtów źródeł, nagrane odpowiedzi API, modele, wszystko „wstrzymane" i referencyjne, katalogi
+v3.54.14–18. Praca: punkty 1 i 2 z listy „otwarte po R2" (strony pod obrotem, skala rzutu G6) i to, co z nich wynikło.
+Progów pomiaru nie poluzowano.
+
+### 17.0 Werdykt (najpierw to, co nie wyszło)
+
+- **Medulin i Mindelo bez zmian** — bryły wieloskrzydłowe LOCAL; R3 ich nie ruszył (obrazy identyczne z 1350).
+- **G6 nadal nie ma drzwi wejściowych** (bramka źródła: z −1,26) ani ryzalitu z daszkiem; **lewy bok stracił okno,
+  które miał w 1350**; boki przypisane konwencją (rzut rysuje je jednakowo). Nadal nieużyteczna.
+- **Aurora straciła wnętrze, tylne przeszklenie tarasowe i pasy drewna między oknami** przy wymianie bryły (zysk: dach
+  35° jak na stronie, szczyty bez zmyślonego szkła, brak zmyślonego bloku ganku).
+- **Alberto nadal bez drzwi wejściowych** i bez przedłużenia dachu nad gankiem. **Sakura:** boczne elewacje nadal nie
+  rejestrują się na bryle uproszczonej do prostokąta (głębokość 9,84 m przy rysowanych 12,3 m); oceniający R3 — inaczej
+  niż oceniający R2 — uznał ją za nieużyteczną w obu wariantach (zmyślone szkło na boku; zależy od tego, który bok jest
+  prawy, a tego rysunki nie podpisują).
+- **Próg zapisany z góry w PROTOCOL jest spełniony w połowie:** na sześciu domach DEV-K + NEW-B miniatur użytecznych
+  jest według ślepej oceny 2 → 4 (Alaska, Aurora) i żaden nie stracił cechy F; na NEW-C nie przybyła żadna (0 → 0).
+  **To nie jest dowód przenoszenia na nowe linki:** reguły R2 i R3 powstały na błędach tych samych dziewięciu domów,
+  a Aurora jest „użyteczna" tylko przy odczycie cechy F1, który oceniający sam nazwał osądem (§17.4). Świeża próba
+  ślepa na nowych domach nie została w R3 zrobiona i jest pierwszą rzeczą, którą należy zrobić dalej.
+
+### 17.1 Kolejne miejsca pierwszej straty (ciąg dalszy listy)
+
+| # | Gdzie ginęła informacja | Dowód | Co zrobiono |
+|---|---|---|---|
+| 22 | Bryła budowana ze źródeł stała w układzie RZUTU, choć elewacje rysują ją obróconą: front modelu nie był frontem domu (własny układ modelu mówi: „lico fasady frontowej to z = 0") | Alaska: frontem modelu długi bok; oceniający: „nie przechodzi tylko przez ćwierćobrót" | bryła ze źródeł powstaje w układzie ELEWACJI: obrys rzutu obracany sztywno (nigdy lustrzanie), bok z wejściem staje się frontem; żadne „obrócone" mapowanie stron nie idzie dalej przez potok |
+| 23 | Lewa/prawa elewacja boczna była zgadnięciem LOCAL, gdy wydawca podpisuje obie tak samo | Alaska: „elewacja boczna" ×2 → `WEST` z LOCAL; długie boki zamienione. Alberto: okno szczytowe na złym końcu | odczyt rzutu (`plan-outline/3`) podaje otwory ścian zewnętrznych na każdym boku obrysu; elewacje bez strony w podpisie przypisuje dopasowanie otworów rzut–elewacja (margines 1,5 otworu netto), etykieta LOCAL zostaje tylko konwencją ostatniej szansy |
+| 24 | Rejestracje bryły ze źródeł trzymały elewację na boku z etykiety, gdy rzut przypisał ją na przeciwny | Alaska (pierwszy bieg R3): cztery okna na lewej ścianie, potem konflikt z elewacją ogrodową | każdy czytelnik bierze rejestracje przez rozstrzygnięte strony |
+| 25 | Rzut bez skali analizatora = brak bryły ze źródeł, choć strona podaje wymiary albo powierzchnię | Aurora: wydrukowane 15,90 × 8,90 bez linii wymiarowych; G6: tylko powierzchnia zabudowy 87,5 m² | skala z samego obrysu: dwa wymiary gabarytowe nad dwiema rozpiętościami obrysu (muszą się zgadzać do 3 %), albo — jako hipoteza — powierzchnia zabudowy nad polem obrysu, przyjmowana tylko, gdy wysokość budynku ze strony zgadza się z kalenicą zbudowanej bryły |
+| 26 | Gdy bryłę czytają wyłącznie widoki wzdłuż kalenicy, szczyt ściany brano z mediany linii okapu | Aurora: 2,07 / 2,76 m → ściana 2,41 m, 14 otworów niewyciętych i wycofanych | takie widoki dają tylko DOLNE ograniczenie; kąt dachu ze strony stawia ścianę, gdy narysowane ściany na to pozwalają (Aurora: 35°, ściana 3,26 m), inaczej najwyższa z nich, nazwana ograniczeniem |
+| 27 | „L" z cienkim drugim prostokątem: odcinano pas wzdłuż całego domu | G6: garaż 8,2 m głęboki zbudowany jako 7,0 m; żadna boczna elewacja się nie rejestrowała | zamyka się mniejsze z dwojga — otwarty narożnik zamiast pasa |
+
+Dopisana została też reguła „dwie bryły w jednej linii" (prostokąt na rzucie, uskok dachu w tym samym miejscu na dwóch
+przeciwległych elewacjach) — z testem i kontrpróbami; na dziewięciu domach nie zadziałała ani razu (Aurora ma na
+elewacjach jeden dach nad całością), więc nie ma dla niej wyniku z domu, tylko z rysunku kontrolnego.
+
+### 17.2 Co wdrożono
+
+`massing.ts` 1.5.0, `ops.ts` 1.9.0, `plan-outline.ts` 1.3.0 (prompt `plan-outline/3`), nowy moduł `plan-openings.ts`
+1.0.0, zmiany w `consult-analysis.ts`; wersje w kluczu przyjętej rewizji. Odczyt rzutu to nadal JEDNO żądanie na dom
+(doszły dwa pola odpowiedzi: wejście i otwory), bez nowej usługi. Otwory z rzutu nie dodają, nie przesuwają i nie usuwają
+żadnego otworu modelu — służą wyłącznie do rozróżnienia elewacji, których nie rozróżnia podpis.
+
+### 17.3 Testy
+
+`hip-v35418.test.ts` 26 testów, `plan-outline-v35418.test.ts` 11. Kontrpróby R3: elewacje narysowane jak rzut zostawiają
+bryłę w układzie rzutu; obrót obrysu zachowuje znak pola (lustro by go zmieniło) i stawia stopę arkusza po prawej ręce
+jego lewego boku; dwa boki, które rzut rysuje jednakowo, niczego nie rozstrzygają; otwory wyższej kondygnacji nie są
+porównywane z rzutem parteru; wymiary niepasujące do obrysu, jeden wymiar albo zamienione osie nie dają skali; powierzchnia
+zabudowy jest hipotezą i nie jest brana, gdy rozstrzygają wymiary; uskok na jednej elewacji to nie dwie bryły; kąt ze
+strony, który postawiłby ścianę poniżej narysowanej albo wyżej, niż zasłoni wysięg, nie jest używany.
+
+Macierz na drzewie R3: 4581 testów, **4552 zielone, 18 czerwonych, 11 pominiętych**. 16 czerwonych to ta sama lista
+bazowa co w v3.54.18 (bez zmian). Pozostałe 2 to testy czasowe wątków hosta (`apps/analyzer-api/test/worker.test.ts`:
+dwa zadania obok siebie; zatrzymanie zadania, które utknęło) — padają wewnątrz pełnego przebiegu, także na bezczynnej
+maszynie, i przechodzą osobno na tym samym drzewie (3 z 3). Kod hosta jest bez zmian od v3.54.18; urósł pakiet analizy,
+który ładuje wątek. Zgłaszam to jako regresję czasową pełnego przebiegu, nie jako „zielone": limity czasu w tym pliku
+wymagają przejrzenia. Żaden test kodu tej rundy nie pada. `packages/mobile-scene` po dodaniu scen: 123 z 123.
+Zapis: `stage-reports/artifacts/v35418/matrix-r3-summary.json`.
+
+### 17.4 Pomiar: model oddany z APK 1350 (R2) obok R3
+
+Te same bajty źródeł i te same nagrane odczyty elewacji; odczyt rzutu nowym promptem raz na żywo, potem z nagrania;
+recenzja na żywo. Kod `58ff26a`.
+
+| Dom | Co się zmieniło w R3 | Otwory zewn. R2 → R3 | Stan recenzji R3 |
+|---|---|---|---|
+| Alaska | bryła w układzie elewacji: **frontem jest szczyt z wejściem**; boki z rzutu (7,0 do 1,0 dopasowanych otworów) | 11 → 11 | RECOGNIZABLE_PARTIAL, 20 zamkniętych, 0 KEY (było: 2 KEY) |
+| Aurora | skala z wymiarów 15,90 × 8,90 nad obrysem (0,2 % różnicy); **bryła ze źródeł**, dach 35° (strona: 35°), szczyty bez szkła | 19 → 9 | RECOGNIZABLE_PARTIAL; MAJOR: brak przeszklenia tarasowego z tyłu |
+| Ballina | rzut potwierdził strony z etykiet (2 do 0); model bez zmian | 10 → 10 | bez zmian |
+| Alberto | **okno szczytowe na właściwym końcu** (rzut: 1 do −1) | 7 → 7 | RECOGNIZABLE_PARTIAL; brak drzwi wejściowych |
+| Medulin | bez zmian | 24 → 24 | bez zmian |
+| Jeziorko | bez zmian (jedna boczna przypisana z rzutu) | 7 → 7 | bez zmian |
+| Mindelo | bez zmian | 18 → 18 | bez zmian |
+| Sakura | bez zmian formy (dach czterospadowy) | 9 → 8 | RECOGNIZABLE_PARTIAL, 0 KEY |
+| G6 | skala z powierzchni zabudowy, potwierdzona wysokością (kalenica 6,12 m, strona 6,10 m); **bryła ze źródeł 11,5 × 8,1 m (drukowane 11,32 × 8,02) z dachem czterospadowym** 33,7° / 35,4° (strona: 35°) | 4 → 3 (brama garażowa + 2 okna) | RECOGNIZABLE_PARTIAL, 0 KEY (było: 2 KEY, UNSUPPORTED) |
+
+Odczyt wejścia i otworów z rzutu: Alaska — wejście po lewej, cztery okna u stopy arkusza, drzwi tarasowe i dwa okna
+u głowy; Ballina i Alberto — front u stopy; G6 — brama i drzwi od frontu, po dwa okna z boków (jednakowo: boki konwencją).
+
+### 17.4a Ślepa ocena R3
+
+Ten sam sposób co w §7 i §16.5: niezależny oceniający dostał dla każdego domu rysunki wydawcy i dwa warianty X / Y
+(losowo „oddany 1350" albo „R3"; nowe losowanie, klucz poza jego zasięgiem), listy cech i kryterium z PROTOCOL §3.
+**To nadal nie jest próba ślepa na nowych domach** — oceniający nie wie, który wariant jest który, ale domy są te same
+dziewięć, na których powstały reguły.
+
+| Dom | Bliżej źródła | Użyteczna 1350 → R3 | Otwory na właściwej stronie i miejscu 1350 → R3 | Zmyślone otwory 1350 → R3 | Forma dachu zgodna 1350 → R3 |
+|---|---|---|---|---|---|
+| Alaska | **R3** | nie → **tak** | 0 → 11 (1350: 11, gdyby pominąć obrót) | 11 → 0 | tak → tak |
+| Aurora | **R3** | nie → **tak** (warunkowo) | 9 → 9 | 6 → 0 | tak → tak |
+| Ballina | bez różnicy | tak → tak | 10 → 10 | 0 → 0 | tak → tak |
+| Alberto | **R3** | nie → nie | 6 → 7 | 1 → 0 | tak → tak |
+| Medulin | bez różnicy (obrazy identyczne) | nie → nie | 14 → 14 | 5 → 5 | nie → nie |
+| Jeziorko | bez różnicy (identyczne) | tak → tak | 7 → 7 | 0 → 0 | tak → tak |
+| Mindelo | bez różnicy (identyczne) | nie → nie | 15 → 15 | 2 → 2 | nie → nie |
+| Sakura | R3, minimalnie („można uczciwie nazwać bez różnicy") | nie → nie | 8 → 8 | 2 → 1 | tak → tak |
+| G6 | **R3** | nie → nie | 2 → 2 | 1 → 0 | nie → **tak** |
+
+R3 bliżej źródła w 5 z 9 domów (w tym Sakura minimalnie), bez różnicy w 4, gorzej w żadnym. Miniatur użytecznych
+według oceniającego: 2 → 4 (dochodzą Alaska i Aurora; tak samo przy ścisłym „każda cecha F"). Zastrzeżenia
+oceniającego, powtórzone bez łagodzenia:
+
+- **Alaska:** R3 to „dom ze źródła w orientacji źródła" — szczyt z wejściem od frontu, bok z czterema oknami po prawej,
+  bok z przeszkleniem po lewej; komplet 11 otworów, zero zmyślonych. Brakuje daszku nad wejściem i drewna na szczytach.
+  Wariant 1350 był obrócony o ćwierć obrotu i miał zamienione szczyty (nie był to nawet sztywny obrót).
+- **Aurora „użyteczna" zależy od odczytu cechy F1:** lista cech mówi o „niższej dobudówce z boku", której oceniający
+  nie znalazł na elewacjach jako osobnej bryły (widzi tylko płytki wykusz narożny pod głównym okapem) i ocenił bryłę
+  główną. Gdyby dobudówkę wymagać dosłownie, R3 jej nie ma i wynik ścisły to „nie". Niezależnie od tego R3 **nie ma
+  tylnego przeszklenia tarasowego** (9 z 10 dużych otworów) ani pasów drewna; wariant 1350 miał zmyślony blok ganku,
+  drugie drzwi od frontu, pas szkła na całym prawym szczycie i zmyślone przeszklenie na ślepym lewym szczycie.
+- **Alberto:** oba warianty bez drzwi wejściowych i bez przedłużenia dachu nad gankiem i tarasem; R3 ma okno szczytowe
+  po tej stronie, po której rysuje je źródło (1350: szczyty zamienione). Który szczyt jest prawy, oceniający wywnioskował
+  z kamiennych narożników — rysunki tego nie podpisują.
+- **G6:** R3 ma dach czterospadowy, ściany w tonie cegły i bramę garażową na miejscu; 1350 to czarne pudło z dachem
+  dwuspadowym, bez bramy, z oknem w miejscu drzwi. **Oba bez drzwi wejściowych; R3 nie ma też okna na lewym boku, które
+  1350 miał (cecha O3: OK → ZŁA), ani daszku nad bocznym oknem.**
+- **Sakura:** oceniający R3 uznał oba warianty za nieużyteczne (zmyślone szkło na boku, który wg niego jest ślepy) —
+  oceniający R2 ten sam model z 1350 uznał za warunkowo użyteczny. Różnica bierze się z tego, który bok uznać za prawy:
+  rysunki tego nie podpisują, obaj wnioskowali z sylwetek dachu. Dwóch oceniających, dwa odczyty: nie rozstrzygam,
+  liczę ostrożniej (nieużyteczna).
+- Ciemne bloki na tylnej ścianie Jeziorka i ciemne panele Mindelo oceniający potraktował jako materiał, nie otwory.
+  Wymiarów w metrach i wnętrz nie oceniał.
+
+**Próg z PROTOCOL §6:** część pierwsza (DEV-K + NEW-B: o ≥ 2 miniatury użyteczne więcej, żaden dom nie traci cechy F)
+— liczbowo spełniona: 2 → 4, bez utraty cechy F. Część druga (NEW-C: F i S nie gorzej dom po domu oraz ≥ 1 miniatura
+użyteczna więcej łącznie) — F i S nie gorzej (G6 zyskuje formę dachu i front), ale **żadna nowa użyteczna: 0 → 0.
+Próg jako całość pozostaje nieosiągnięty**, a jego pierwsza część jest osiągnięta na domach, które od dawna nie są
+ślepe. Surowe wyniki, klucz i odkodowanie: `research/source-to-model/v35418/scores/r3-grader-*.json`.
+
+### 17.5 Budżet
+
+Ta sama księga. Po R2: 36,330447 USD. Po R3: 37,778557 USD — R3 kosztował 1,448110 USD w 43 żądaniach (odczyty rzutu nowym promptem, recenzje dostarczonych rewizji, powtórki po zmianach reguł; diagnostyka offline i ślepa ocena 0 USD z tej księgi). Zero otwartych rezerwacji; pułap 68,542857 USD bez zmian.
+
+### 17.6 APK i dostawa R3
+
+APK `BuildPlan-Model-Preview-1351-arm64-v8a.apk` (wersja 1351, `0.1351.0-owner`, 53 153 150 B, SHA-256
+`a12402a9fa75e7363daa9990a36ad76e2cb419a9aa35e8718bb9c4d6d103d883`) zbudowany zwykłym
+`./gradlew --offline -PpreviewVersionCode=1351 previewApks` z commita `a9a97c4` (kod analizy: `58ff26a`), podpisany tym
+samym kluczem co 1349 i 1350 (instaluje się na wierzch), 48 scen, cztery sceny R3 pierwsze: Alaska frontem do wejścia,
+G6 z dachem czterospadowym, Aurora na bryle ze źródeł, Alberto — każda podpisana tym, czym jest, z zachowanymi
+porażkami w podtytule; za nimi cztery sceny R2. Zapis: `stage-reports/artifacts/v35418/VERSION-1351.txt`. Na urządzeniu
+nie sprawdzono (`ANDROID_UI_NOT_VERIFIED`: w tej sesji nie ma telefonu ani emulatora).
+
+Prywatna dostawa R3 (poza Gitem — zawiera rysunki wydawców): zwykłe, niezależne archiwa ZIP poniżej 30 000 000 B,
+z jednym folderem głównym `BuildPlan-V35418-R3/`, własnym `README-<część>.txt` i `MANIFEST-<część>.sha256`; po
+rozpakowaniu do jednego katalogu `gallery.html` działa offline. W galerii dla każdego z dziewięciu domów: oryginały
+wydawcy, kolorowe szkice (PNG / SVG / JSON), model oddany z 1350 obok R3 z tego samego renderera, plansza porównawcza
+(źródło | szkic | 1350 | R3), rzut bez dachu, a dla każdego wariantu model, scena, korekty, zdarzenia i odpowiedzi API.
+Obrazy wysłane do API, które w obu wariantach są bajt w bajt takie same, leżą raz (w wariancie R3; w wariancie 1350
+jest o tym notatka). Plansze, które dostał oceniający: `grader-packs/`. Sumy SHA-256 archiwów: plik
+`BuildPlan-V35418-R3-SHA256.txt` dostarczony obok; lista archiwów i wynik weryfikacji po rozpakowaniu:
+`stage-reports/artifacts/v35418/r3-delivery-verification.json`.
+
+### 17.7 Co dalej (kolejność według wartości)
+
+1. **Świeża próba ślepa na nowych linkach** z zamrożonym kodem — bez niej nie wiadomo, ile z 2 → 4 się przenosi.
+2. Drzwi wejściowe, które odrzuca bramka (Alberto, G6): rzut widzi je teraz jako drugi rysunek; trzeba to zmierzyć,
+   zanim cokolwiek z rzutu zacznie dodawać otwory.
+3. Bryły wieloskrzydłowe z własnym dachem na skrzydło (Medulin, Mindelo, skrzydło Sakury poniżej 12 % obrysu).
+4. Przeniesienie wnętrza LOCAL na bryłę ze źródeł (Alberto, Aurora, Alaska, Ballina, G6) i tylne przeszklenie Aurory.
+5. Limity czasu w `worker.test.ts`.

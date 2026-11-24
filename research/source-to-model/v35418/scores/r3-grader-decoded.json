@@ -1,0 +1,523 @@
+{
+ "alaska": {
+  "key": {
+   "X": "r3",
+   "Y": "delivered1350"
+  },
+  "better": "r3",
+  "betterWhy": "X is the source house in the source orientation: entrance gable on FRONT, 4-window flank on the right, glazing flank on the left with the glazing at the rear end. Y has the same elements but is turned a quarter turn with the two gables swapped, so the entrance is on LEFT and the handedness is wrong.",
+  "identicalRenders": false,
+  "delivered1350": {
+   "useful": false,
+   "usefulStrict": false,
+   "usefulIfRotationIgnored": true,
+   "correct": 0,
+   "phantoms": 11,
+   "roofFormMatchesSource": true,
+   "usefulWhy": "Fails (1) F1/F2 (front is the long side, ridge parallel to front), (2) S1 (front is not the entrance gable), (3) entrance door not on front, (4) 0 % of front openings.",
+   "features": {
+    "F1": "ZLA",
+    "F2": "ZLA",
+    "F3": "OK",
+    "F4": "OK",
+    "S1": "ZLA",
+    "O1": "ZLA",
+    "O2": "ZLA",
+    "O3": "ZLA",
+    "O4": "ZLA",
+    "O5": "OK",
+    "C1": "OK",
+    "C2": "BRAK",
+    "M1": "ZLA",
+    "M2": "OK"
+   }
+  },
+  "r3": {
+   "useful": true,
+   "usefulStrict": true,
+   "usefulIfRotationIgnored": true,
+   "correct": 11,
+   "phantoms": 0,
+   "roofFormMatchesSource": true,
+   "usefulWhy": "All F OK, all four sides on the right side of the model, entrance door OK, 11/11 openings found on the correct sides, no phantoms. Only canopy and gable wood cladding missing (non-blocking C/M).",
+   "features": {
+    "F1": "OK",
+    "F2": "OK",
+    "F3": "OK",
+    "F4": "OK",
+    "S1": "OK",
+    "O1": "OK",
+    "O2": "OK",
+    "O3": "OK",
+    "O4": "OK",
+    "O5": "OK",
+    "C1": "OK",
+    "C2": "BRAK",
+    "M1": "ZLA",
+    "M2": "OK"
+   }
+  }
+ },
+ "aurora": {
+  "key": {
+   "X": "delivered1350",
+   "Y": "r3"
+  },
+  "better": "r3",
+  "betterWhy": "Y is a clean copy of the source: right gable with one central glazing, left gable blank, front 3+door+1, no phantoms (it lacks the rear terrace glazing and the wood). X adds a projecting porch block and a second door on the front, a full-width glazing strip on the right gable, a phantom large glazing on the blank left gable and a scrambled rear.",
+  "identicalRenders": false,
+  "delivered1350": {
+   "useful": false,
+   "usefulStrict": false,
+   "usefulIfRotationIgnored": false,
+   "correct": 9,
+   "phantoms": 6,
+   "roofFormMatchesSource": true,
+   "usefulWhy": "Fails (5): LEFT gable has 1 phantom large glazing and 0 correct openings (source gable is blank). Also (1) by my judgement call on F1 (phantom porch block). Even if F1 were accepted, (5) still fails.",
+   "features": {
+    "F1": "ZLA",
+    "F2": "OK",
+    "F3": "OK",
+    "F4": "OK",
+    "S1": "OK",
+    "O1": "OK",
+    "O2": "OK",
+    "O3": "ZLA",
+    "O4": "ZLA",
+    "C1": "OK",
+    "M1": "OK",
+    "M2": "OK"
+   }
+  },
+  "r3": {
+   "useful": true,
+   "usefulStrict": true,
+   "usefulIfRotationIgnored": true,
+   "correct": 9,
+   "phantoms": 0,
+   "roofFormMatchesSource": true,
+   "usefulWhy": "F1-F4 OK (F1 with the caveat above), front + both gables on the right sides, entrance door OK, front 5/5, all sides 9/10 large openings (rear terrace glazing missing), no phantoms. usefulStrict=true only under my reading of F1; if the reference's 'lower addition at the side' is required literally, Y lacks it and usefulStrict would be false.",
+   "features": {
+    "F1": "OK",
+    "F2": "OK",
+    "F3": "OK",
+    "F4": "OK",
+    "S1": "OK",
+    "O1": "OK",
+    "O2": "OK",
+    "O3": "ZLA",
+    "O4": "OK",
+    "C1": "OK",
+    "M1": "ZLA",
+    "M2": "OK"
+   }
+  }
+ },
+ "ballina": {
+  "key": {
+   "X": "r3",
+   "Y": "delivered1350"
+  },
+  "better": "SAME",
+  "betterWhy": "Same openings, same positions, same roof and same material zones in both; only sub-pixel edge shifts.",
+  "identicalRenders": false,
+  "delivered1350": {
+   "useful": true,
+   "usefulStrict": true,
+   "usefulIfRotationIgnored": true,
+   "correct": 10,
+   "phantoms": 0,
+   "roofFormMatchesSource": true,
+   "usefulWhy": "All F OK, all four sides on the right side, entrance door OK, 10/10 openings correct, no phantoms. Counts include the narrow windows.",
+   "features": {
+    "F1": "OK",
+    "F2": "OK",
+    "F3": "OK",
+    "F4": "OK",
+    "S1": "OK",
+    "O1": "OK",
+    "O2": "OK",
+    "O3": "OK",
+    "O4": "OK",
+    "O5": "OK",
+    "C1": "NIEOCENIALNA",
+    "M1": "ZLA",
+    "M2": "OK"
+   }
+  },
+  "r3": {
+   "useful": true,
+   "usefulStrict": true,
+   "usefulIfRotationIgnored": true,
+   "correct": 10,
+   "phantoms": 0,
+   "roofFormMatchesSource": true,
+   "usefulWhy": "All F OK, all four sides on the right side, entrance door OK, 10/10 openings correct, no phantoms. Counts include the narrow windows.",
+   "features": {
+    "F1": "OK",
+    "F2": "OK",
+    "F3": "OK",
+    "F4": "OK",
+    "S1": "OK",
+    "O1": "OK",
+    "O2": "OK",
+    "O3": "OK",
+    "O4": "OK",
+    "O5": "OK",
+    "C1": "NIEOCENIALNA",
+    "M1": "ZLA",
+    "M2": "OK"
+   }
+  }
+ },
+ "alberto": {
+  "key": {
+   "X": "r3",
+   "Y": "delivered1350"
+  },
+  "better": "r3",
+  "betterWhy": "Front and rear are the same in both and both lack the entrance door; X has the window gable on the right as the source draws it, Y has the two gables swapped (phantom window on the blank left gable, right gable empty).",
+  "identicalRenders": false,
+  "delivered1350": {
+   "useful": false,
+   "usefulStrict": false,
+   "usefulIfRotationIgnored": false,
+   "correct": 6,
+   "phantoms": 1,
+   "roofFormMatchesSource": true,
+   "usefulWhy": "Fails (3): no entrance door; (1): F4 missing; (5): LEFT gable has 1 phantom window and 0 correct. Right gable window missing.",
+   "features": {
+    "F1": "OK",
+    "F2": "OK",
+    "F3": "OK",
+    "F4": "ZLA",
+    "S1": "OK",
+    "O1": "BRAK",
+    "O2": "OK",
+    "O3": "OK",
+    "O4": "OK",
+    "O5": "OK",
+    "O6": "ZLA",
+    "C1": "OK",
+    "C2": "BRAK",
+    "M1": "ZLA",
+    "M2": "OK"
+   }
+  },
+  "r3": {
+   "useful": false,
+   "usefulStrict": false,
+   "usefulIfRotationIgnored": false,
+   "correct": 7,
+   "phantoms": 0,
+   "roofFormMatchesSource": true,
+   "usefulWhy": "Fails (3): no entrance door. Also (1): F4 (roof extension over porch/terrace) missing. Otherwise sides and 7 of 8 large openings are right, no phantoms.",
+   "features": {
+    "F1": "OK",
+    "F2": "OK",
+    "F3": "OK",
+    "F4": "ZLA",
+    "S1": "OK",
+    "O1": "BRAK",
+    "O2": "OK",
+    "O3": "OK",
+    "O4": "OK",
+    "O5": "OK",
+    "O6": "OK",
+    "C1": "OK",
+    "C2": "BRAK",
+    "M1": "ZLA",
+    "M2": "OK"
+   }
+  }
+ },
+ "medulin": {
+  "key": {
+   "X": "delivered1350",
+   "Y": "r3"
+  },
+  "better": "SAME",
+  "betterWhy": "The X and Y renders are pixel-identical.",
+  "identicalRenders": true,
+  "delivered1350": {
+   "useful": false,
+   "usefulStrict": false,
+   "usefulIfRotationIgnored": false,
+   "correct": 14,
+   "phantoms": 5,
+   "roofFormMatchesSource": false,
+   "usefulWhy": "Fails (1): F2 and F3 (gable over half the width at two-storey eave height, rest flat boxes) and F4; fails (3): entrance door not present.",
+   "features": {
+    "F1": "OK",
+    "F2": "ZLA",
+    "F3": "ZLA",
+    "F4": "ZLA",
+    "S1": "OK",
+    "O1": "OK",
+    "O2": "BRAK",
+    "O3": "OK",
+    "O4": "OK",
+    "O5": "ZLA",
+    "O6": "ZLA",
+    "C1": "ZLA",
+    "M1": "OK",
+    "M2": "OK"
+   }
+  },
+  "r3": {
+   "useful": false,
+   "usefulStrict": false,
+   "usefulIfRotationIgnored": false,
+   "correct": 14,
+   "phantoms": 5,
+   "roofFormMatchesSource": false,
+   "usefulWhy": "Fails (1): F2 and F3 (gable over half the width at two-storey eave height, rest flat boxes) and F4; fails (3): entrance door not present.",
+   "features": {
+    "F1": "OK",
+    "F2": "ZLA",
+    "F3": "ZLA",
+    "F4": "ZLA",
+    "S1": "OK",
+    "O1": "OK",
+    "O2": "BRAK",
+    "O3": "OK",
+    "O4": "OK",
+    "O5": "ZLA",
+    "O6": "ZLA",
+    "C1": "ZLA",
+    "M1": "OK",
+    "M2": "OK"
+   }
+  }
+ },
+ "jeziorko": {
+  "key": {
+   "X": "delivered1350",
+   "Y": "r3"
+  },
+  "better": "SAME",
+  "betterWhy": "The X and Y renders are pixel-identical.",
+  "identicalRenders": true,
+  "delivered1350": {
+   "useful": true,
+   "usefulStrict": true,
+   "usefulIfRotationIgnored": true,
+   "correct": 7,
+   "phantoms": 0,
+   "roofFormMatchesSource": true,
+   "usefulWhy": "All F OK, all four sides on the right side, entrance door OK, 7/7 openings correct, no phantoms. The black block on the rear is counted as a material panel (the source has a concrete panel exactly there), not as an opening.",
+   "features": {
+    "F1": "OK",
+    "F2": "OK",
+    "F3": "OK",
+    "F4": "OK",
+    "S1": "OK",
+    "O1": "OK",
+    "O2": "OK",
+    "O3": "OK",
+    "O4": "OK",
+    "O5": "OK",
+    "O6": "OK",
+    "C1": "OK",
+    "M1": "ZLA",
+    "M2": "OK"
+   }
+  },
+  "r3": {
+   "useful": true,
+   "usefulStrict": true,
+   "usefulIfRotationIgnored": true,
+   "correct": 7,
+   "phantoms": 0,
+   "roofFormMatchesSource": true,
+   "usefulWhy": "All F OK, all four sides on the right side, entrance door OK, 7/7 openings correct, no phantoms. The black block on the rear is counted as a material panel (the source has a concrete panel exactly there), not as an opening.",
+   "features": {
+    "F1": "OK",
+    "F2": "OK",
+    "F3": "OK",
+    "F4": "OK",
+    "S1": "OK",
+    "O1": "OK",
+    "O2": "OK",
+    "O3": "OK",
+    "O4": "OK",
+    "O5": "OK",
+    "O6": "OK",
+    "C1": "OK",
+    "M1": "ZLA",
+    "M2": "OK"
+   }
+  }
+ },
+ "mindelo": {
+  "key": {
+   "X": "r3",
+   "Y": "delivered1350"
+  },
+  "better": "SAME",
+  "betterWhy": "The X and Y renders are pixel-identical.",
+  "identicalRenders": true,
+  "delivered1350": {
+   "useful": false,
+   "usefulStrict": false,
+   "usefulIfRotationIgnored": false,
+   "correct": 15,
+   "phantoms": 2,
+   "roofFormMatchesSource": false,
+   "usefulWhy": "Fails (1): F1 (no projecting garage wing, flat boxes at the rear instead), F2 (no cross gable over the garage), F4. Front and rear openings are otherwise well placed (13 of 13 on those two sides).",
+   "features": {
+    "F1": "ZLA",
+    "F2": "ZLA",
+    "F3": "OK",
+    "F4": "ZLA",
+    "S1": "OK",
+    "O1": "OK",
+    "O2": "OK",
+    "O3": "OK",
+    "O4": "OK",
+    "O5": "OK",
+    "O6": "ZLA",
+    "C1": "OK",
+    "C2": "ZLA",
+    "M1": "ZLA",
+    "M2": "OK"
+   }
+  },
+  "r3": {
+   "useful": false,
+   "usefulStrict": false,
+   "usefulIfRotationIgnored": false,
+   "correct": 15,
+   "phantoms": 2,
+   "roofFormMatchesSource": false,
+   "usefulWhy": "Fails (1): F1 (no projecting garage wing, flat boxes at the rear instead), F2 (no cross gable over the garage), F4. Front and rear openings are otherwise well placed (13 of 13 on those two sides).",
+   "features": {
+    "F1": "ZLA",
+    "F2": "ZLA",
+    "F3": "OK",
+    "F4": "ZLA",
+    "S1": "OK",
+    "O1": "OK",
+    "O2": "OK",
+    "O3": "OK",
+    "O4": "OK",
+    "O5": "OK",
+    "O6": "ZLA",
+    "C1": "OK",
+    "C2": "ZLA",
+    "M1": "ZLA",
+    "M2": "OK"
+   }
+  }
+ },
+ "sakura": {
+  "key": {
+   "X": "delivered1350",
+   "Y": "r3"
+  },
+  "better": "r3",
+  "betterWhy": "Marginal, low confidence: form, front and rear openings are the same; Y has one phantom glazing instead of two on the right side and adds three wood panels at positions where the source has wood, but drops one side window and its brown panels read like extra doors. Could fairly be called SAME.",
+  "identicalRenders": false,
+  "delivered1350": {
+   "useful": false,
+   "usefulStrict": false,
+   "usefulIfRotationIgnored": false,
+   "correct": 8,
+   "phantoms": 2,
+   "roofFormMatchesSource": true,
+   "usefulWhy": "Fails (5): RIGHT side has 2 phantom glazings and 0 correct openings (source right side is solid). F4 (recesses) also not OK; I would treat F4 as non-blocking, so (5) is the deciding failure and it depends on my reading of which source side is the right one (see orientationNote).",
+   "features": {
+    "F1": "OK",
+    "F2": "OK",
+    "F3": "OK",
+    "F4": "ZLA",
+    "S1": "OK",
+    "O1": "OK",
+    "O2": "OK",
+    "O3": "ZLA",
+    "O4": "ZLA",
+    "C1": "ZLA",
+    "M1": "ZLA",
+    "M2": "OK"
+   }
+  },
+  "r3": {
+   "useful": false,
+   "usefulStrict": false,
+   "usefulIfRotationIgnored": false,
+   "correct": 8,
+   "phantoms": 1,
+   "roofFormMatchesSource": true,
+   "usefulWhy": "Fails (5): RIGHT side has 1 phantom glazing and 0 correct openings (source right side is solid). F4 not OK either (treated as non-blocking). Same dependence on the handedness reading as X.",
+   "features": {
+    "F1": "OK",
+    "F2": "OK",
+    "F3": "OK",
+    "F4": "ZLA",
+    "S1": "OK",
+    "O1": "OK",
+    "O2": "OK",
+    "O3": "ZLA",
+    "O4": "ZLA",
+    "C1": "ZLA",
+    "M1": "ZLA",
+    "M2": "OK"
+   }
+  }
+ },
+ "g6": {
+  "key": {
+   "X": "r3",
+   "Y": "delivered1350"
+  },
+  "better": "r3",
+  "betterWhy": "X has the hip roof, brick-coloured walls and the wide garage door at the source position on the front; Y is a black gable-roofed box with no garage door and a window where the entrance door should be. Both lack the entrance door.",
+  "identicalRenders": false,
+  "delivered1350": {
+   "useful": false,
+   "usefulStrict": false,
+   "usefulIfRotationIgnored": false,
+   "correct": 2,
+   "phantoms": 1,
+   "roofFormMatchesSource": false,
+   "usefulWhy": "Fails (1) F2 (gable instead of hip), (2) S1, (3) no garage door and no entrance door, (4) 0 % of front openings, (5) front: 1 phantom window vs 0 correct.",
+   "features": {
+    "F1": "OK",
+    "F2": "ZLA",
+    "F3": "OK",
+    "F4": "ZLA",
+    "S1": "ZLA",
+    "O1": "BRAK",
+    "O2": "ZLA",
+    "O3": "OK",
+    "O4": "OK",
+    "C1": "BRAK",
+    "M1": "ZLA",
+    "M2": "OK"
+   }
+  },
+  "r3": {
+   "useful": false,
+   "usefulStrict": false,
+   "usefulIfRotationIgnored": false,
+   "correct": 2,
+   "phantoms": 0,
+   "roofFormMatchesSource": true,
+   "usefulWhy": "Fails (3): entrance door missing. (1): F4 gablet missing (I would treat that as non-blocking). Form, roof and garage door are right.",
+   "features": {
+    "F1": "OK",
+    "F2": "OK",
+    "F3": "OK",
+    "F4": "ZLA",
+    "S1": "OK",
+    "O1": "OK",
+    "O2": "BRAK",
+    "O3": "ZLA",
+    "O4": "OK",
+    "C1": "BRAK",
+    "M1": "OK",
+    "M2": "OK"
+   }
+  }
+ }
+}
