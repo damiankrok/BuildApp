@@ -108,7 +108,10 @@ export function readbackStructure(m: CanonicalBuildingModel, taken: { fullStorey
     const zs = walls.flatMap((w) => [w.start.z, w.end.z])
     const rect = { minX: Math.min(...xs), maxX: Math.max(...xs), minZ: Math.min(...zs), maxZ: Math.max(...zs) }
     const over = (f: { minX: number; maxX: number; minZ: number; maxZ: number }): boolean => Math.abs(f.minX - rect.minX) < 0.6 && Math.abs(f.maxX - rect.maxX) < 0.6 && Math.abs(f.minZ - rect.minZ) < 0.6 && Math.abs(f.maxZ - rect.maxZ) < 0.6
-    const roof = m.roofs.find((r) => over(r.footprint))
+    // the roof built over this ring carries the ring's name (`roof-<body>`); else the one whose footprint is the ring's
+    // rectangle, or holds it within an overhang (a roof whose eaves were set out past the walls)
+    const holds = (f: { minX: number; maxX: number; minZ: number; maxZ: number }): boolean => f.minX <= rect.minX + 0.05 && f.maxX >= rect.maxX - 0.05 && f.minZ <= rect.minZ + 0.05 && f.maxZ >= rect.maxZ - 0.05 && f.maxX - f.minX <= rect.maxX - rect.minX + 3 && f.maxZ - f.minZ <= rect.maxZ - rect.minZ + 3
+    const roof = m.roofs.find((r) => r.id === ring.id.replace(/^ring-/, 'roof-')) ?? m.roofs.find((r) => over(r.footprint)) ?? m.roofs.find((r) => holds(r.footprint))
     const planes = m.roofPlanes.filter((p) => p.id.includes(ring.id.replace(/^ring-/, '')))
     const levelOf = (id: string): number => m.levels.find((l) => l.id === id)?.elevation ?? 0
     if (roof) {

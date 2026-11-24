@@ -1547,9 +1547,17 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
         const failsBoth = altEv.registrations.filter((q) => !q.ok && localEv.registrations.some((l) => l.frameId === q.frameId && !l.ok)).map((q) => q.frameId)
         const [altC, localC] = [altEv.contradictions - failsBoth.length, localEv.contradictions - failsBoth.length]
         if (failsBoth.length > 0) arb.setAside = { frames: failsBoth, why: `${failsBoth.length} elevation(s) register on neither body: they do not choose between the two (LOCAL ${localC}, the other body ${altC} contradiction(s) without them)` }
-        if (altC === 0 && altC < localC && altEv.supports >= localEv.supports) {
+        // v3.54.20 arbitration 1.4.0: the FORM decides between two bodies the pictures' rows contradict alike. Where the
+        // agreed structure contradicts LOCAL's body (flat boxes it does not report, another roof kind) and agrees with
+        // the other one, the other body stands even with a registration against it — as long as it is contradicted no
+        // more than LOCAL's, its printed dimensions are no worse, and the page's height does not refute it (the Jeziorko
+        // case of 1.1.0 stays refused: there the height did). A row a few decimetres off is a height to correct; flat
+        // boxes beside a gable where the sheets show one house under one roof is another house.
+        const printedOff = (e: BodyEvidence): number => e.printed.filter((q) => !q.agrees).length
+        const formDecides = localEv.form?.verdict === 'CONTRADICTS' && altEv.form?.verdict === 'AGREES' && altC <= localC && printedOff(altEv) <= printedOff(localEv) && altEv.height?.agrees !== false
+        if ((altC === 0 && altC < localC && altEv.supports >= localEv.supports) || formDecides) {
           arb.decision = 'REPLACED_BY_SOURCE_BODY'
-          arb.why = `the sources contradict LOCAL's body ${localEv.contradictions} time(s) and support it ${localEv.supports}; the body built from the plan outline and the elevations: ${altEv.contradictions} and ${altEv.supports}${failsBoth.length > 0 ? ` (${failsBoth.length} elevation(s) that register on neither body set aside)` : ''}. The source body stands; LOCAL's interior is not carried over (NOT_CHECKED)`
+          arb.why = altC === 0 ? `the sources contradict LOCAL's body ${localEv.contradictions} time(s) and support it ${localEv.supports}; the body built from the plan outline and the elevations: ${altEv.contradictions} and ${altEv.supports}${failsBoth.length > 0 ? ` (${failsBoth.length} elevation(s) that register on neither body set aside)` : ''}. The source body stands; LOCAL's interior is not carried over (NOT_CHECKED)` : `the agreed structure contradicts LOCAL's body (${localEv.form?.flatVolumes ?? 0} flat-roofed volume(s) against ${localEv.form?.reportedFlatVolumes ?? 0} reported, main roof reported ${localEv.form?.reportedMainRoof}) and agrees with the body built from the plan outline and the elevations; that body is contradicted no more than LOCAL's (${altC} against ${localC}${failsBoth.length > 0 ? `, ${failsBoth.length} elevation(s) that register on neither set aside` : ''}), its printed dimensions are no worse and the page's height does not refute it: the structure decides. The source body stands with its ${altC} contradiction(s) named; LOCAL's interior is not carried over (NOT_CHECKED)`
           massingDelivery = mb.delivery
           // the plan gaps are stated on the plan's sides: on a body built turned against the sheet they are not carried (named)
           replacedPlanGaps = good.run && !altFront ? planGapsOf(good.run.reconstruction.model) : []
@@ -1798,7 +1806,13 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
         const proposals: CorrectionProposal[] = []
         const reads: Array<Record<string, unknown>> = []
         for (const side of (['FRONT', 'RIGHT', 'REAR', 'LEFT'] as Side[]).filter((sd) => uncovered.some((g) => g.side === sd))) {
-          const x = sketched.find((q) => (sketchSideOf?.[q.frameId] ?? sideOfFacade(q.facade)) === side)
+          // v3.54.20: the typed list is read on the elevation's own picture across the side's width — it needs the side,
+          // not a registration. Where no sketch is assigned to this side (its picture registered on no side of a body
+          // whose heights are off), the side the structure read saw on that picture is taken: the plan's gaps on three
+          // sides of one house stayed uncovered because none of its elevations could be asked.
+          const assigned = new Set(sketched.map((q) => sketchSideOf?.[q.frameId] ?? sideOfFacade(q.facade)).filter(Boolean))
+          const byStructureRead = (sd: Side): (typeof sketched)[number] | undefined => { if (assigned.has(sd)) return undefined; const n = structureMemo?.agreed?.pictures.find((q) => q.shows === sd)?.n; const fid = n ? structureMemo?.frames[n - 1] : undefined; return fid ? sketched.find((q) => q.frameId === fid && !(sketchSideOf?.[q.frameId] ?? sideOfFacade(q.facade))) : undefined }
+          const x = sketched.find((q) => (sketchSideOf?.[q.frameId] ?? sideOfFacade(q.facade)) === side) ?? byStructureRead(side)
           const range = sideRange(mG, side)
           const fx = x ? stood.graph.coordinateFrames.find((q) => q.id === x.frameId) : undefined
           const fr = x && fx ? await frameRaster(stood.pkg, stood.graph, x.frameId, options) : undefined
