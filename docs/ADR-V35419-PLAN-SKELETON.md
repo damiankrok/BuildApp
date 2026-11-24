@@ -45,6 +45,24 @@ replaced LOCAL's. Nothing about a partition depends on who placed the outer wall
 8. **Scale from the site plan's printed building dimensions** (`site-dimensions.ts`): one small typed read, used only as a
    pair that must agree over the outline's two extents.
 9. **Ids follow the observation, not the re-application**; fate targets are checked against the delivered model.
+10. **Objects drawn in the wall's tone are not partitions** (skeleton 1.1.0, `objectsAmong`): a shorter piece alongside
+    a longer wall closer than a person passes (a cabinet), pieces closing a ring with no way in (a bed, a table), a group
+    too small to hold anything, and a piece neither of whose ends touches a wall, the exterior or a door gap of its own
+    line (a car's bumper) are dropped by name, with the "doors" read beside them. An open group of room size (a pantry's
+    three walls) stays. Found on the overlays of the development houses, not on a count.
+11. **Two bodies in line meet on the plan's wall** (massing 1.7.0): the elevations say that the top steps and only
+    roughly where; a partition the plan draws across the body (over half its depth) within 1.25 m of that step is the
+    wall the bodies meet at.
+12. **The page's building height is a witness of the quarter turn** (ops 1.9.0): the labelled and the turned reading put
+    the same drawn tops over different widths; where exactly one puts the top at the published height, it is taken — in
+    BUILD_MASSING and in the orientation hypothesis every later consumer reads its sides through. A count of views that
+    agree with each other does not outvote it (two views can agree on the wrong width).
+13. **A picture that registers on neither body chooses none** (arbitration 1.2.0): it is set aside on both sides, named;
+    the body that replaces LOCAL's must still be uncontradicted by everything else.
+14. **A roof's lowest drawn edge is the wall's top, not the roof's** (massing 1.7.0), where no gable-end corner is agreed
+    and not every wall top is drawn: taken as the roof's top surface at the wall, a steep roof stood in its own walls and
+    every door under it went uncut. **A lower body's roof steeper than 60°** is the roof of the body behind it: it takes
+    the first body's pitch from its own walls, unconfirmed.
 
 ## Considered and not taken
 
@@ -61,5 +79,5 @@ replaced LOCAL's. Nothing about a partition depends on who placed the outer wall
 ## Consequences
 
 A body built from the sources is no longer empty, and replacing LOCAL's body no longer costs the interior. The interior is
-as good as the sheet's wall fill is readable; furniture drawn in the wall's tone can still read as a short wall. Multi-body
+as good as the sheet's wall fill is readable; furniture drawn in the wall's tone is dropped where its shape gives it away (10), and can still read as a short wall where it does not (a car's rear line that ends at a door-wide gap from the garage wall). Multi-body
 source models still have a party wall where their bodies meet, whether or not the plan draws one.

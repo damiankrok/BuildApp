@@ -177,7 +177,7 @@ async function step(input: ConsultInput, messages: unknown[], n: number, limits:
 
 export type EvidenceHandler = (toolInput: unknown) => { img: ToolImage; text: string; frameId: string; region: Region } | { refused: string }
 
-async function stepWith(input: ConsultInput, messages: unknown[], n: number, limits: ConsultLimits, system: string, tools: unknown[], usedEvidence = 0, evidence?: EvidenceHandler): Promise<StepResult> {
+async function stepWith(input: ConsultInput, messages: unknown[], n: number, limits: ConsultLimits, system: string, tools: unknown[], usedEvidence = 0, evidence?: EvidenceHandler, expectApplied: readonly string[] = []): Promise<StepResult> {
   const now = input.now ?? (() => new Date())
   let evidenceRequests = 0
   let usd = 0
@@ -199,6 +199,17 @@ async function stepWith(input: ConsultInput, messages: unknown[], n: number, lim
         input.record({ at: now().toISOString(), kind: 'REVIEW_REASKED', step: n, turn, why: parsed.refused })
         const others = uses.filter((u) => u !== review).map((u) => ({ type: 'tool_result', tool_use_id: u.id, content: 'not executed: the review was submitted in the same turn', is_error: true }))
         messages.push({ role: 'user', content: [{ type: 'tool_result', tool_use_id: review.id, content: `NOT RECORDED: ${parsed.refused}. Call ${REVIEW_TOOL_NAME} once more with the same findings: every list field (observations, requestedEvidence, proposedCorrections, checked, notChecked) must be a JSON array, each observation or correction an object inside its array — never text, never fields at the top level.`, is_error: true }, ...others] })
+        continue
+      }
+      // v3.54.19: a look that was told which corrections the analyzer applied and answers with no verdict on any of them
+      // leaves every one of them "not reviewed" — and the whole revision with a status that says nothing about it (two
+      // of thirteen live looks of one batch, the same houses reviewed element by element an hour earlier). The field is
+      // optional in the contract; its absence here is an omission. Asked for ONCE more, by name; the second answer stands.
+      if ('review' in parsed && expectApplied.length > 0 && (parsed.review.appliedReview ?? []).length === 0 && !reasked && turn < limits.maxTurnsPerStep) {
+        reasked = true
+        input.record({ at: now().toISOString(), kind: 'REVIEW_REASKED', step: n, turn, why: `appliedReview is missing: ${expectApplied.length} applied correction(s) were listed for review` })
+        const others = uses.filter((u) => u !== review).map((u) => ({ type: 'tool_result', tool_use_id: u.id, content: 'not executed: the review was submitted in the same turn', is_error: true }))
+        messages.push({ role: 'user', content: [{ type: 'tool_result', tool_use_id: review.id, content: `NOT RECORDED: appliedReview is missing. You were told the analyzer applied ${expectApplied.length} correction(s); call ${REVIEW_TOOL_NAME} once more with the same findings AND one appliedReview entry for each applied id you can judge on the pictures (${expectApplied.slice(0, 60).join(', ')}).`, is_error: true }, ...others] })
         continue
       }
       // close the tool call so the conversation stays well-formed for a next step
@@ -619,6 +630,6 @@ export async function checkModel(input: ModelCheckInput): Promise<ModelCheckResu
     const img = cropOf(src.raster, src.frameId, region, { minSide: 420 })
     return { img, text: `Region x ${Math.round(r.x0)}-${Math.round(r.x1)}, y ${Math.round(r.y0)}-${Math.round(r.y1)} of picture ${r.picture}, shown ${Math.round((img.transform.scale * src.img.transform.scale) * 100) / 100}x larger than that picture. Coordinates you report stay in picture ${r.picture}'s own pixels.`, frameId: src.frameId, region }
   }
-  const res = await stepWith(consultInput, messages, 3, limits, MODEL_CHECK_SYSTEM, [CHECK_REGION_TOOL, REVIEW_TOOL], 0, evidence)
+  const res = await stepWith(consultInput, messages, 3, limits, MODEL_CHECK_SYSTEM, [CHECK_REGION_TOOL, REVIEW_TOOL], 0, evidence, (input.applied ?? []).map((q) => q.id))
   return { ...res, pictures }
 }
