@@ -122,7 +122,7 @@ export type PatchRecord = {
   why: string
   txId?: string
   /** What the patch was bound to: the source frame and its pixels, the side, the host, the ids it creates or changes. */
-  bound?: { frameId: string; side?: Side; box?: Box; hostId?: string; ids: string[]; /** v3.54.18: openings that gave way to this one, each with its own support z on the picture. */ displaced?: Record<string, number | null>; depth?: 'SECOND_VIEW' | 'ROOF_MEET_LINE' | 'DISPLAY_ASSUMPTION'; values?: Record<string, number> }
+  bound?: { frameId: string; side?: Side; box?: Box; hostId?: string; ids: string[]; /** v3.54.18: openings that gave way to this one, each with its own support z on the picture. */ displaced?: Record<string, number | null>; depth?: 'SECOND_VIEW' | 'ROOF_MEET_LINE' | 'DISPLAY_ASSUMPTION'; values?: Record<string, number> ; /** v3.54.19: the head of a door or gate cut to the top of its wall (it was drawn a little above the wall top the model has) */ headCut?: { fromM: number; toM: number; wallId: string } }
   source?: { frameId: string; sourceByteHash: string; crop?: Box }
   gate?: { winner: HypothesisVerdict['winner']; proposedZ: number | null; currentZ?: number | null; nullBoxes: number; /** 1.3.0: the band the z was read against (absent: JOINT). */ nullMode?: 'JOINT' | 'CLAIMS_ROBUST' | 'DISPLACED'; /** v3.54.18: the picture did not decide this element; it follows the adopted reading of its facade (never source-verified). */ adopted?: true; /** v3.54.18: the opening's span is the plan's and this reading's alike; only ASSUMED properties were replaced. */ crossWitness?: 'PLAN_SPAN'; why: string; /** 1.1.0: BOX, POLYGON (a raked head on either side) or FILL (a change of kind on the same shape). */ measure?: 'BOX' | 'POLYGON' | 'FILL' | 'REGION'; fill?: Pick<FillVerdict, 'observed' | 'features'> }
   measure?: { builtBox?: Box; iouWithProposal?: number; builtSupportZ?: number | null; headErrorPx?: number; builtKind?: string; sourceVerified: boolean | null; why: string }
@@ -254,6 +254,8 @@ export function openingBoxes(m: CanonicalBuildingModel, v: BindView): Array<{ id
 }
 /** v3.54.18: the share of the longer span an update must share with the model's plan-traced opening to be the same opening. */
 export const PLAN_SPAN_AGREE = 0.7
+/** v3.54.19: a door's or gate's head may be cut to its wall's top when it overshoots by at most this share of its own height. */
+export const HEAD_CUT_MAX_SHARE = 0.25
 export type OpeningPatchKindExact = 'WINDOW' | 'DOOR' | 'GLAZED_DOOR' | 'GARAGE_DOOR'
 /** A2: the exact kind of a model opening, from its fill (a glazed leaf, a garage door), never WINDOW / not-WINDOW. */
 export function kindOfOpening(m: CanonicalBuildingModel, id: string): OpeningPatchKindExact | undefined {
@@ -342,6 +344,17 @@ export type Ctx = { model: CanonicalBuildingModel; views: BindView[]; pictures: 
 export type FacadeClaims = ReadonlyMap<string, readonly Box[]>
 
 const short = (s: string): string => sha256Hex(s).slice(0, 6)
+/**
+ * v3.54.19: the id of an element a proposal creates follows the proposal's OWN name, without the suffix a re-application
+ * adds to it (`@<revision>` when the committed proposals are laid on a rebuilt base, `@p2` on a later pass). The same
+ * source observation then builds the same element id on every base: a fate recorded at the first application still names
+ * the element of the delivered model (until now it named an id the rebuild had replaced), and a reviewer's reference to
+ * an element survives a rebuild. Where that id is already taken in the model, the full name is hashed as before.
+ */
+const stableShort = (proposalId: string, taken: (id: string) => boolean, prefix: string): string => {
+  const base = short(proposalId.replace(/(@[A-Za-z0-9]+)+$/, ''))
+  return taken(`${prefix}${base}`) ? short(proposalId) : base
+}
 
 export function pictureOf(ctx: Ctx, p: CorrectionProposal, n: number | undefined): BindPicture | undefined {
   if (p.frameId) return ctx.pictures.find((x) => x.frameId === p.frameId)
@@ -451,7 +464,7 @@ function bindOpening(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
   const at = elevationOf(ctx, p, f.picture, 'HEIGHTS')
   if ('status' in at) return at
   const { pic, view } = at
-  const box = toFrame(pic, p, f.box)
+  let box = toFrame(pic, p, f.box)
   if (!inPicture(pic, box)) return { status: 'INVALID', code: 'OUT_OF_PICTURE', why: `the box lies outside picture ${pic.n}` }
   if (existing && ofExisting && ofExisting.side !== view.side) return { status: 'NEEDS_EVIDENCE', code: 'OTHER_SIDE', why: `${existing.id} is on the ${ofExisting.side.toLowerCase()} side; picture ${pic.n} is registered as the ${view.side.toLowerCase()} side: moving an opening to another side is not an update` }
   const pr = view.projection
@@ -459,7 +472,21 @@ function bindOpening(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
   const a0 = r6(Math.min(...xs))
   const a1 = r6(Math.max(...xs))
   const y0 = r6(yOf(pr, box.y1))
-  const y1 = r6(yOf(pr, box.y0))
+  let y1 = r6(yOf(pr, box.y0))
+  // v3.54.19: a door or a gate whose drawn head stands a little ABOVE the top of the only wall it can stand in (the wall's
+  // top was read at the fascia, a lower bound; the gate is drawn up to the eaves) was refused whole as NO_HOST_WALL — the
+  // garage lost its gate over a few centimetres. Its head is cut to the wall's top, named in the record; a box that
+  // overshoots by more than a quarter of its own height is not this case and is refused as before.
+  let headCut: { fromM: number; toM: number; wallId: string } | undefined
+  if (!existing && (kind === 'DOOR' || kind === 'GLAZED_DOOR' || kind === 'GARAGE_DOOR') && !hostWall(m, view.side, a0, a1, y0, y1)) {
+    const lower = exteriorWalls(m).filter((w) => { if (sideOfWall(m, w) !== view.side) return false; const ax = alongAxis(view.side); const lo = Math.min(w.start[ax], w.end[ax]); const hi = Math.max(w.start[ax], w.end[ax]); const base = levelOf(m, w.levelId).elevation + w.baseOffset; return a0 >= lo - 0.02 && a1 <= hi + 0.02 && y0 >= base - 0.05 && y0 < base + w.height - 0.1 })
+    const top = lower.length > 0 ? Math.max(...lower.map((w) => levelOf(m, w.levelId).elevation + w.baseOffset + w.height)) : undefined
+    if (top !== undefined && y1 > top && y1 - top <= HEAD_CUT_MAX_SHARE * (y1 - y0) && top - 0.03 - y0 >= 1.6) {
+      headCut = { fromM: y1, toM: r6(top - 0.03), wallId: lower.sort((p, q) => levelOf(m, q.levelId).elevation + q.baseOffset + q.height - (levelOf(m, p.levelId).elevation + p.baseOffset + p.height))[0].id }
+      y1 = headCut.toM
+      box = { ...box, y0: pyOf(pr, y1) }
+    }
+  }
   if (!(a1 - a0 >= 0.2) || !(y1 - y0 >= 0.25)) return { status: 'INVALID', code: 'TOO_SMALL', why: `the box is ${(a1 - a0).toFixed(2)} × ${(y1 - y0).toFixed(2)} m at the registration: not an opening` }
   const host = hostWall(m, view.side, a0, a1, y0, y1)
   if (!host) return { status: 'INVALID', code: 'NO_HOST_WALL', why: `no exterior wall of the ${view.side.toLowerCase()} side holds ${a0.toFixed(2)}..${a1.toFixed(2)} m along it from ${y0.toFixed(2)} to ${y1.toFixed(2)} m` }
@@ -508,7 +535,7 @@ function bindOpening(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
     g = { winner: fv.winner, proposed: sup, why: fv.why }
   } else g = compareHypotheses(pic.raster, proposedShape, currentShape, facadePx(m, view), others.map((o) => o.box), tolPxOf(view), claimed)
   const gate = { winner: g.winner, proposedZ: g.proposed.z, ...(g.current ? { currentZ: g.current.z } : {}), nullBoxes: g.proposed.null.n, ...(g.proposed.null.mode ? { nullMode: g.proposed.null.mode } : {}), why: g.why, measure: fillRecord ? ('FILL' as const) : (g.measure ?? 'BOX'), ...(fillRecord ? { fill: fillRecord } : {}) }
-  const id = existing?.id ?? `op-fix-${view.side.toLowerCase()}-${short(p.proposalId)}`
+  const id = existing?.id ?? `op-fix-${view.side.toLowerCase()}-${stableShort(p.proposalId, (q) => m.openings.some((o) => o.id === q), `op-fix-${view.side.toLowerCase()}-`)}`
   const L = wallLen(host)
   const ax = alongAxis(view.side)
   const dir = (host.end[ax] - host.start[ax]) / L
@@ -530,7 +557,7 @@ function bindOpening(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
       head = { kind: 'RAKED', heightFar: r6(far) }
     }
   }
-  const record = { bound: { frameId: view.frameId, side: view.side, box, hostId: host.id, ids: [id], values: { offset: u0, width, sill, height } }, source: { frameId: pic.frameId, sourceByteHash: pic.sourceByteHash, crop: box }, gate }
+  const record = { bound: { frameId: view.frameId, side: view.side, box, hostId: host.id, ids: [id], values: { offset: u0, width, sill, height }, ...(headCut ? { headCut } : {}) }, source: { frameId: pic.frameId, sourceByteHash: pic.sourceByteHash, crop: box }, gate }
   // v3.54.18 — PER-PROPERTY ARBITRATION. LOCAL's openings say what each of their properties rests on: the place along the
   // wall is a gap traced on the PLAN, the sill and height mostly ASSUMED ("no callout read, not read on an elevation").
   // When an update keeps the plan's span (the elevation reading draws the same opening where the plan has its gap — two
@@ -708,7 +735,7 @@ function bindChimney(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
   const g = compareHypotheses(pic.raster, box, currentBox, { x0: Math.min(box.x0, fp.x0), x1: Math.max(box.x1, fp.x1) }, others, tolPxOf(view))
   const gate = { winner: g.winner, proposedZ: g.proposed.z, ...(g.current ? { currentZ: g.current.z } : {}), nullBoxes: g.proposed.null.n, why: g.why }
   const ground = m.levels.slice().sort((x, y) => x.elevation - y.elevation)[0]
-  const id = existing?.id ?? `chimney-fix-${view.side.toLowerCase()}-${short(p.proposalId)}`
+  const id = existing?.id ?? `chimney-fix-${view.side.toLowerCase()}-${stableShort(p.proposalId, (q) => m.chimneys.some((o) => o.id === q), `chimney-fix-${view.side.toLowerCase()}-`)}`
   const record = { bound: { frameId: view.frameId, side: view.side, box, ids: [id], depth, values: { a0, a1, top: yTop, meet: yMeet } }, source: { frameId: pic.frameId, sourceByteHash: pic.sourceByteHash, crop: box }, gate }
   if (g.winner === 'CURRENT') return { status: 'REJECTED_BY_SOURCE', code: existing ? 'MODEL_BETTER_SUPPORTED' : 'SOURCE_SHOWS_NO_STACK', why: g.why, record }
   if (g.winner === 'UNDECIDED') return { status: 'NEEDS_EVIDENCE', code: 'SOURCE_UNDECIDED', why: g.why, record }
@@ -906,7 +933,7 @@ function bindRoofWindow(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
   const claimed = ctx.claims?.get(pic.frameId) ?? []
   const sup = supportOf(pic.raster, box, band, [box, ...claimed], tolPxOf(view), false, [box, ...claimed])
   const gate = { winner: (sup.z === null ? 'UNDECIDED' : sup.supported ? 'PROPOSED' : sup.z < SUPPORT_Z_MIN - HYPOTHESIS_Z_MARGIN ? 'CURRENT' : 'UNDECIDED') as HypothesisVerdict['winner'], proposedZ: sup.z, nullBoxes: sup.null.n, ...(sup.null.mode ? { nullMode: sup.null.mode } : {}), why: sup.z === null ? 'too few same-size places on the roof band to judge' : sup.supported ? `the source draws a framed element on the slope in the proposed box (z ${sup.z})` : `the source draws nothing distinct enough on the slope there (z ${sup.z})`, measure: 'BOX' as const }
-  const id = `rw-fix-${view.side.toLowerCase()}-${short(p.proposalId)}`
+  const id = `rw-fix-${view.side.toLowerCase()}-${stableShort(p.proposalId, (q) => m.roofOpenings.some((o) => o.id === q) || m.rooflights.some((o) => o.id === q), `rw-fix-${view.side.toLowerCase()}-`)}`
   const rec = { ...record, bound: { ...record.bound, ids: [id] }, gate }
   if (gate.winner === 'CURRENT') return { status: 'REJECTED_BY_SOURCE', code: 'SOURCE_SHOWS_NO_ROOF_WINDOW', why: gate.why, record: rec }
   if (gate.winner === 'UNDECIDED') return { status: 'NEEDS_EVIDENCE', code: 'SOURCE_UNDECIDED', why: gate.why, record: rec }

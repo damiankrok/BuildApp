@@ -1969,6 +1969,15 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
   // v3.54.18: openings the delivered model holds and the compiler does not cut (no viewer shows them) — named, never silent
   const uncutOpenings = good.run ? compileBuilding(good.run.reconstruction.model).diagnostics.filter((d) => d.severity === 'ERROR' && (d.code === 'OPENING_ABOVE_WALL_TOP' || d.code === 'OPENING_OPEN_END_UNSUPPORTED') && d.objectId).map((d) => ({ id: d.objectId as string, code: d.code })) : []
   if (uncutOpenings.length > 0) record({ at: now().toISOString(), kind: 'DELIVERED_OPENINGS_NOT_CUT', openings: uncutOpenings, why: 'the delivered model holds these openings and the compiler does not cut them (above the top of their wall, or run through a skewed end): no view shows them — a known defect of the delivered revision' })
+  // v3.54.19: the fates were written on the model the sketch stage left; later looks may rebuild it. Each element a fate
+  // says was BUILT (or agrees with) is looked up in the DELIVERED model, so that the trace cannot name an element that is
+  // not there without saying so (the audit of v3.54.18 R3 found three such ids on one house)
+  if (good.run && sketchSummary?.semantic?.fates) {
+    const mD = good.run.reconstruction.model
+    const rows = sketchSummary.semantic.fates.rows.filter((q) => (q.fate === 'BUILT' || q.fate === 'AGREES_WITH_MODEL') && (q.targetIds ?? []).length > 0)
+    const missing = rows.flatMap((q) => (q.targetIds ?? []).filter((id) => !elementExists(mD, id)).map((id) => ({ id, fate: q.fate, ...(q.proposalId ? { proposalId: q.proposalId } : {}) })))
+    record({ at: now().toISOString(), kind: 'OBSERVATION_FATE_TARGETS', checked: rows.reduce((t, q) => t + (q.targetIds ?? []).length, 0), missing, why: missing.length === 0 ? 'every element a fate names as built or agreeing is in the delivered model' : `${missing.length} element(s) a fate names are not in the delivered model: built at the sketch stage and removed or replaced by a later look (named here, never silent)` })
+  }
   // v3.54.19: where the plan sheet lies in the delivered model (three mapped points): any overlay of the model on its plan
   if (good.run) {
     const mm = massingOf.get(good)?.planMap
