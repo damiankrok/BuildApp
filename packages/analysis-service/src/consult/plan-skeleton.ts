@@ -47,6 +47,10 @@ export const PLAN_SKELETON = {
   gapMaxShare: 0.85,
   /** a partition piece shorter than this that meets a wall at one end only is furniture, not a wall */
   stubMinM: 0.9,
+  /** a partition is at most this many times as thick as the sheet's exterior wall … */
+  maxPartitionShare: 1.25,
+  /** … and at least this many times as long as it is thick */
+  minSlenderness: 2,
 } as const
 
 export type SkeletonWall = { id: string; axis: 'H' | 'V'; /** the centre line across (y for H, x for V), px */ at: number; from: number; to: number; thicknessPx: number; ends: { start: 'JUNCTION' | 'FREE'; end: 'JUNCTION' | 'FREE' }; confidence: number }
@@ -316,6 +320,9 @@ export function readPlanSkeleton(input: PlanSkeletonInput): PlanSkeleton {
       const atDoor = (u: number): boolean => doorEnds.some((q) => q.axis === w.axis && Math.abs(q.at - w.at) < 0.12 && Math.abs(q.u - u) < 0.12)
       const open = Number(w.ends.start === 'FREE' && !atDoor(w.from)) + Number(w.ends.end === 'FREE' && !atDoor(w.to))
       if (open === 2 || (open === 1 && lenM < PLAN_SKELETON.stubMinM)) continue
+      // a "wall" thicker than the sheet's own exterior wall, or nearly as thick as it is long, is a filled object drawn in
+      // the wall's tone (a dark bed, a hearth, a column): not a partition
+      if (w.thicknessM > PLAN_SKELETON.maxPartitionShare * wallM || lenM < PLAN_SKELETON.minSlenderness * w.thicknessM) continue
       void free
       const p = px(w.axis, w.at, w.from, w.to)
       walls.push({ id: `iw-${p.axis}${Math.round(p.at)}-${Math.round(p.from)}`, axis: p.axis, at: r1(p.at), from: r1(p.from), to: r1(p.to), thicknessPx: r1(w.thicknessM / s), ends: w.axis === 'X' ? w.ends : { start: w.ends.end, end: w.ends.start }, confidence: w.confidence })

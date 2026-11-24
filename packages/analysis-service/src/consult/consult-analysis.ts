@@ -50,10 +50,11 @@ import type { CanonicalBuildingModel } from '@buildapp/model'
 import { sha256Hex } from '@buildapp/source-common'
 import { renderStoreyCut } from './model-views.js'
 import { CORRECTION_REGISTRY_VERSION } from './correct/registry.js'
-import { CORRECTION_EXECUTOR_VERSION, elementExists, executeCorrections, modelRevision, planGapsOf, preferredView, registerFromSketch, sideOfFacade, viewsOfRun } from './correct/execute.js'
+import { CORRECTION_EXECUTOR_VERSION, elementExists, executeCorrections, modelRevision, PLAN_SPAN_AGREE, planGapsOf, preferredView, registerFromSketch, sideOfFacade, sideOpeningSpans, sideRange, viewsOfRun } from './correct/execute.js'
 import { CHIMNEY_FUSION_VERSION, fuseChimneys } from './correct/chimney-fusion.js'
 import { MASSING_VERSION, bodiesOf, pointWithFront } from './massing/massing.js'
 import { readSiteDimensions, SITE_DIMENSIONS_VERSION } from './site-dimensions.js'
+import { FACADE_METRIC_VERSION, readFacadeMetric } from './facade-metric.js'
 import { PLAN_SKELETON_VERSION, readPlanSkeleton } from './plan-skeleton.js'
 import type { PlanSkeleton } from './plan-skeleton.js'
 import { INTERIOR_OPS_VERSION, planGapsFromSkeleton, skeletonInModel } from './correct/interior.js'
@@ -675,7 +676,7 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
     const b = consultBinding({
       sourcePackageHash: local.pkg.contentHash,
       analyzer: `${ANALYSIS_SERVICE_VERSION}/${SOLVER_V2_VERSION}`,
-      consultant: [CONSULTANT_CONTRACT_VERSION, CONSULTANT_PROMPT_VERSION, METRIC_READ_PROMPT_VERSION, METRIC_VERIFY_PROMPT_VERSION, METRIC_RESOLVER_VERSION, ELEVATION_SKETCH_PROMPT_VERSION, `parser${ELEVATION_SKETCH_PARSER_VERSION}`, SKETCH_STEP_VERSION, CHOOSE_VERSION, ACCEPTED_CONSULT_VERSION, `registry${CORRECTION_REGISTRY_VERSION}`, `executor${CORRECTION_EXECUTOR_VERSION}`, `gate${SOURCE_GATE_VERSION}`, `sketchProposals${SKETCH_PROPOSALS_VERSION}`, `quality${QUALITY_VERSION}`, `massing${MASSING_OPS_VERSION}`, `massingBody${MASSING_VERSION}`, `bodyArbitration${BODY_ARBITRATION.version}`, SOURCE_FRAMES_RULE, `outline${PLAN_OUTLINE_VERSION}`, `planOpenings${PLAN_OPENINGS_VERSION}`, `skeleton${PLAN_SKELETON_VERSION}`, `interior${INTERIOR_OPS_VERSION}`, `site${SITE_DIMENSIONS_VERSION}`].join(','),
+      consultant: [CONSULTANT_CONTRACT_VERSION, CONSULTANT_PROMPT_VERSION, METRIC_READ_PROMPT_VERSION, METRIC_VERIFY_PROMPT_VERSION, METRIC_RESOLVER_VERSION, ELEVATION_SKETCH_PROMPT_VERSION, `parser${ELEVATION_SKETCH_PARSER_VERSION}`, SKETCH_STEP_VERSION, CHOOSE_VERSION, ACCEPTED_CONSULT_VERSION, `registry${CORRECTION_REGISTRY_VERSION}`, `executor${CORRECTION_EXECUTOR_VERSION}`, `gate${SOURCE_GATE_VERSION}`, `sketchProposals${SKETCH_PROPOSALS_VERSION}`, `quality${QUALITY_VERSION}`, `massing${MASSING_OPS_VERSION}`, `massingBody${MASSING_VERSION}`, `bodyArbitration${BODY_ARBITRATION.version}`, SOURCE_FRAMES_RULE, `outline${PLAN_OUTLINE_VERSION}`, `planOpenings${PLAN_OPENINGS_VERSION}`, `skeleton${PLAN_SKELETON_VERSION}`, `interior${INTERIOR_OPS_VERSION}`, `site${SITE_DIMENSIONS_VERSION}`, `facadeMetric${FACADE_METRIC_VERSION}`].join(','),
       models: { ROUNDS: wiring.model.model, ...(wiring.metricRead === 'ON' ? { METRIC: (wiring.metricModel ?? wiring.model).model } : {}), ...(wiring.sketches === 'ON' ? { SKETCH: (wiring.sketchModel ?? wiring.model).model } : {}) },
       settings: `strict=${wiring.model.strict === true || wiring.metricModel?.strict === true || wiring.sketchModel?.strict === true ? 'on' : 'off'};variant=${wiring.variant};metric=${wiring.metricRead ?? 'OFF'};sketches=${wiring.sketches ?? 'OFF'};rounds=${maxRounds};geometryRounds=${wiring.maxGeometryRounds ?? '-'};check=${wiring.check ?? 'ON'};sketchCorrections=${wiring.sketchCorrections ?? 'ON'}`,
     })
@@ -1636,6 +1637,47 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
       const fin = sketched.map((x) => finishProposalsFromSketch(x.sketch as NonNullable<typeof x.sketch>, x.facade, m3, views3, modelRevision(m3), sketchSideOf?.[x.frameId]))
       sem.finishes = { proposed: fin.reduce((n, f) => n + f.proposals.length, 0), skipped: fin.flatMap((f) => f.skipped) }
       await phase('SKETCH_FINISH', fin.flatMap((f) => f.proposals))
+    }
+    // v3.54.19: PLAN GAPS THE MODEL DOES NOT COVER. The ground-floor plan draws a gap in an exterior wall (plan skeleton)
+    // and after every elevation reading the model still has no opening there — the contour reading missed it, or its
+    // registration could not place it. That side's elevation is then read once more as a list IN METRES along its known
+    // width (`facade-metric.ts`); where that list puts a ground-storey opening on the gap's stretch, the opening is
+    // built: span from the plan, kind and heights from the list. Two drawings, two readers; never source-verified.
+    {
+      const io = massingOf.get(stood)?.interior
+      const mG = stood.run?.reconstruction.model
+      if (io && mG && stood.pkg && stood.graph && io.gaps.length > 0) {
+        const share = (a0: number, a1: number, b0: number, b1: number): number => (Math.min(a1, b1) - Math.max(a0, b0)) / Math.max(a1 - a0, b1 - b0, 1e-6)
+        const gaps = planGapsFromSkeleton(mG, io)
+        const uncovered = gaps.filter((g) => !sideOpeningSpans(mG, g.side).some((o) => o.b0 < g.storeyHi && share(o.a0, o.a1, g.a0, g.a1) >= 0.4))
+        const proposals: CorrectionProposal[] = []
+        const reads: Array<Record<string, unknown>> = []
+        for (const side of (['FRONT', 'RIGHT', 'REAR', 'LEFT'] as Side[]).filter((sd) => uncovered.some((g) => g.side === sd))) {
+          const x = sketched.find((q) => (sketchSideOf?.[q.frameId] ?? sideOfFacade(q.facade)) === side)
+          const range = sideRange(mG, side)
+          const fx = x ? stood.graph.coordinateFrames.find((q) => q.id === x.frameId) : undefined
+          const fr = x && fx ? await frameRaster(stood.pkg, stood.graph, x.frameId, options) : undefined
+          if (!x || !range || !fr?.raster) continue
+          const widthM = range.hi - range.lo
+          stage('FACADE_METRIC')
+          const read = await readFacadeMetric({ model: wiring.outlineModel ?? wiring.metricModel ?? wiring.model, price: wiring.outlinePrice ?? wiring.metricPrice ?? wiring.price, ...(wiring.spend ? { spend: wiring.spend } : {}), ...(options.signal ? { signal: options.signal } : {}) }, { frameId: x.frameId, raster: fr.raster, side, widthM, caption: (stood.pkg.assets.find((a) => a.id === fx?.assetId)?.caption ?? '').slice(0, 120) })
+          usd += read.usd
+          // the list runs left to right as the picture shows the side: along the model's axis on the front and the right
+          // side, against it on the rear and the left
+          const alongOf = (leftM: number): number => (side === 'FRONT' || side === 'RIGHT' ? range.lo + leftM : range.hi - leftM)
+          const listed = read.openings.filter((o) => o.storey === 'GROUND').map((o) => { const [p, q] = [alongOf(o.leftM), alongOf(o.leftM + o.widthM)]; return { o, a0: Math.min(p, q), a1: Math.max(p, q) } })
+          const used = new Set<number>()
+          for (const g of uncovered.filter((q) => q.side === side)) {
+            const best = listed.map((l, i) => ({ l, i, v: share(l.a0, l.a1, g.a0, g.a1) })).filter((q) => !used.has(q.i)).sort((a, b) => b.v - a.v)[0]
+            if (!best || best.v < PLAN_SPAN_AGREE) continue
+            used.add(best.i)
+            proposals.push({ proposalId: `plan-gap:${g.id}`, baseRevision: modelRevision(mG), operation: 'ADD_PLAN_OPENING', targetId: side, origin: 'PLAN', uncertainty: 'MEDIUM', planOpening: { side, a0: g.a0, a1: g.a1, kind: best.l.o.kind, sillM: best.l.o.sillM, heightM: best.l.o.heightM, gapId: g.id, frameId: x.frameId, share: Math.round(best.v * 1000) / 1000 }, justification: `the plan draws a gap at ${g.a0.toFixed(2)}..${g.a1.toFixed(2)} m of the ${side.toLowerCase()} wall; the elevation's metric list puts a ${best.l.o.kind.toLowerCase()} there` })
+          }
+          reads.push({ frameId: x.frameId, side, widthM: Math.round(widthM * 100) / 100, listed: read.openings.length, ground: listed.length, refused: read.refused, usd: read.usd })
+        }
+        record({ at: now().toISOString(), kind: 'PLAN_GAP_OPENINGS', version: FACADE_METRIC_VERSION, gaps: gaps.length, uncovered: uncovered.map((g) => ({ id: g.id, side: g.side, a0: g.a0, a1: g.a1 })), reads, proposals: proposals.map((q) => q.proposalId) })
+        await phase('PLAN_GAP_OPENINGS', proposals)
+      }
     }
     // v3.54.18: the fate of every element the readings state, on the model that now stands (agreements recomputed on it)
     {

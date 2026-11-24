@@ -104,7 +104,9 @@ export type CorrectionProposal = {
   uncertainty?: 'LOW' | 'MEDIUM' | 'HIGH'
   justification?: string
   /** METRIC (v3.54.17 R3): made by the analyzer from the independent metric read's printed dimensions. */
-  /** PLAN (v3.54.19): made by the analyzer from the plan skeleton (BUILD_INTERIOR). */
+  /** v3.54.19 ADD_PLAN_OPENING: a gap the plan draws in a wall (its span along the side, metres of the model) with the kind, sill and height one metric reading of that side's elevation gives for the same stretch. */
+  planOpening?: { side: Side; a0: number; a1: number; kind: OpeningPatchKindExact; sillM: number; heightM: number; gapId: string; frameId: string; share: number }
+  /** PLAN (v3.54.19): made by the analyzer from the plan skeleton (BUILD_INTERIOR, ADD_PLAN_OPENING). */
   origin: 'REVIEW' | 'SKETCH' | 'CONTROL' | 'METRIC' | 'PLAN'
 }
 
@@ -627,6 +629,66 @@ function bindOpening(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
   const oldRels = m.relationships.filter((r) => gone.includes(r.from) || gone.includes(r.to)).map((r) => `relationships:${r.id}`)
   const absorbedKeys = [...absorbed, ...displaced].flatMap((o) => [`openings:${o.id}`, ...m.windows.filter((w) => w.openingId === o.id).map((w) => `windows:${w.id}`), ...m.doors.filter((d) => d.openingId === o.id).map((d) => `doors:${d.id}`)])
   return { commands, allowed: [`openings:${id}`, ...oldFills.map((x) => `${x.coll}:${x.id}`), `${kind === 'WINDOW' ? 'windows' : 'doors'}:${fillId}`, ...oldRels, ...absorbedKeys], expect: { kind: 'OPENING', id, view, box, shape: head ? proposedShape : box, levelId: host.levelId, openingKind: kind as OpeningPatchKindExact, ...(fillFrom ? { fillChangeFrom: fillFrom } : {}), ...(followsReading ? { adopted: true as const } : {}) }, record }
+}
+
+/**
+ * v3.54.19 — ADD_PLAN_OPENING: an opening where the ground-floor PLAN leaves a gap in an exterior wall and the model has
+ * none. The span along the wall is the plan's (read on the sheet, deterministic); the kind, sill and height are what one
+ * metric reading of that side's elevation gives for the same stretch (`facade-metric.ts`), checked for plausibility. Two
+ * drawings and two readers put an opening there; nothing is located in the elevation's pixels, so the contrast gate is
+ * not asked and the opening is never source-verified. A head above its wall is cut to the wall (as for any door).
+ */
+function bindPlanOpening(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
+  const m = ctx.model
+  const f = p.planOpening
+  if (!f) return { status: 'INVALID', code: 'NO_PLAN_OPENING', why: 'ADD_PLAN_OPENING states the plan gap and the reading it follows; this one does not' }
+  if (!(ctx.planGaps ?? []).some((g) => g.id === f.gapId && g.side === f.side && Math.abs(g.a0 - f.a0) < 0.02 && Math.abs(g.a1 - f.a1) < 0.02)) return { status: 'NEEDS_EVIDENCE', code: 'NO_PLAN_GAP', why: `${f.gapId} is not a gap the plan draws on the ${f.side.toLowerCase()} side of this model` }
+  const taken = sideOpeningSpans(m, f.side).find((o) => (Math.min(o.a1, f.a1) - Math.max(o.a0, f.a0)) / Math.max(o.a1 - o.a0, f.a1 - f.a0) >= 0.4 && o.b0 < f.sillM + f.heightM && o.b1 > f.sillM)
+  if (taken) return { status: 'DUPLICATE', code: 'OPENING_ALREADY_THERE', why: `${taken.id} already stands in that stretch of the ${f.side.toLowerCase()} side` }
+  const level = [...m.levels].sort((a, b) => a.elevation - b.elevation)[0]
+  const y0 = r6((level?.elevation ?? 0) + Math.max(0, f.sillM))
+  let y1 = r6(y0 + f.heightM)
+  let host = hostWall(m, f.side, f.a0, f.a1, y0, y1)
+  if (!host) {
+    const lower = exteriorWalls(m).filter((w) => { if (sideOfWall(m, w) !== f.side) return false; const ax = alongAxis(f.side); const lo = Math.min(w.start[ax], w.end[ax]); const hi = Math.max(w.start[ax], w.end[ax]); const base = levelOf(m, w.levelId).elevation + w.baseOffset; return f.a0 >= lo - 0.02 && f.a1 <= hi + 0.02 && y0 >= base - 0.05 && y0 < base + w.height - 0.1 })
+    const top = lower.length > 0 ? Math.max(...lower.map((w) => levelOf(m, w.levelId).elevation + w.baseOffset + w.height)) : undefined
+    if (top !== undefined && y1 > top && y1 - top <= HEAD_CUT_MAX_SHARE * (y1 - y0) && top - 0.03 - y0 >= (f.kind === 'WINDOW' ? 0.4 : 1.6)) {
+      y1 = r6(top - 0.03)
+      host = hostWall(m, f.side, f.a0, f.a1, y0, y1)
+    }
+  }
+  if (!host) return { status: 'INVALID', code: 'NO_HOST_WALL', why: `no exterior wall of the ${f.side.toLowerCase()} side holds ${f.a0.toFixed(2)}..${f.a1.toFixed(2)} m along it from ${y0.toFixed(2)} to ${y1.toFixed(2)} m` }
+  const ax = alongAxis(f.side)
+  const L = Math.hypot(host.end.x - host.start.x, host.end.z - host.start.z)
+  const uOf = (a: number): number => ((a - host.start[ax]) / (host.end[ax] - host.start[ax])) * L
+  const u0 = r6(Math.max(0.05, Math.min(uOf(f.a0), uOf(f.a1))))
+  const width = r6(Math.min(Math.abs(uOf(f.a1) - uOf(f.a0)), L - 0.05 - u0))
+  if (!(width >= 0.3)) return { status: 'INVALID', code: 'TOO_SMALL', why: `the gap leaves ${width.toFixed(2)} m on ${host.id}` }
+  const base = levelOf(m, host.levelId).elevation + host.baseOffset
+  const sill = r6(y0 - base)
+  const height = r6(y1 - y0)
+  const id = `op-plan-${f.side.toLowerCase()}-${stableShort(p.proposalId, (q) => m.openings.some((o) => o.id === q), `op-plan-${f.side.toLowerCase()}-`)}`
+  const fillId = `${id}-${f.kind === 'WINDOW' ? 'unit' : 'leaf'}`
+  const evidence = { status: 'SOURCE_DERIVED', source: f.frameId, interpretation: `a gap the ground-floor plan draws in this wall (${f.gapId}: ${f.a0.toFixed(2)}..${f.a1.toFixed(2)} m), where the model had no opening; its kind, sill and height follow one metric reading of this side's elevation (${f.frameId}, ${Math.round(f.share * 100)} % of the span shared): not located in the elevation's pixels, not source-verified`, properties: { offset: 'SOURCE_DERIVED', width: 'SOURCE_DERIVED', sill: 'VISUAL_INFERRED', height: 'VISUAL_INFERRED' } }
+  // an opening of the model in the way: one that itself stands on a gap of the plan is another real opening (refused, by
+  // name); one that covers NO gap of the plan stands where the plan draws wall — the plan and this reading agree against
+  // it, and it gives way (removed in the same transaction, named in the record)
+  const shareOf = (a0: number, a1: number, b0: number, b1: number): number => (Math.min(a1, b1) - Math.max(a0, b0)) / Math.max(a1 - a0, b1 - b0, 1e-6)
+  const inWay = m.openings.filter((o) => o.wallId === host.id).map((o) => ({ o, sp: openingSpan(m, o) })).filter((q): q is { o: Opening; sp: NonNullable<ReturnType<typeof openingSpan>> } => !!q.sp && Math.min(q.sp.a1, f.a1 + 0.05) - Math.max(q.sp.a0, f.a0 - 0.05) > 0.01 && Math.min(q.sp.y1, y1) - Math.max(q.sp.y0, y0) > 0.01)
+  const backed = inWay.find((q) => (ctx.planGaps ?? []).some((g) => g.side === f.side && shareOf(g.a0, g.a1, q.sp.a0, q.sp.a1) >= 0.4))
+  if (backed) return { status: 'NEEDS_EVIDENCE', code: 'OVERLAPS_PLAN_BACKED_OPENING', why: `${backed.o.id} overlaps this stretch and itself stands on a gap of the plan: two openings the plan draws cannot share a stretch — neither is moved` }
+  const displaced = inWay.map((q) => q.o)
+  const commands = [
+    ...displaced.map((o) => ({ type: 'removeFeature' as const, targetId: o.id, cascade: true })),
+    { type: 'cutOpening', id, wallId: host.id, kind: f.kind === 'WINDOW' ? 'WINDOW' : 'DOOR', offset: u0, sill, width, height, evidence },
+    ...fillCommands(m, id, f.kind as 'WINDOW' | 'DOOR' | 'GLAZED_DOOR' | 'GARAGE_DOOR', fillId, host.thickness),
+  ] as BuildingCommand[]
+  const goneKeys = displaced.flatMap((o) => [`openings:${o.id}`, ...m.windows.filter((w) => w.openingId === o.id).map((w) => `windows:${w.id}`), ...m.doors.filter((d) => d.openingId === o.id).map((d) => `doors:${d.id}`), ...m.relationships.filter((r) => r.from === o.id || r.to === o.id).map((r) => `relationships:${r.id}`)])
+  const measure = (working: CanonicalBuildingModel): { failure?: string; measure: { sourceVerified: boolean | null; why: string } } => {
+    if (!working.openings.some((o) => o.id === id)) return { failure: `${id} was not cut`, measure: { sourceVerified: false, why: 'the opening is not in the candidate' } }
+    return { measure: { sourceVerified: null, why: `${id} (${f.kind}) cut in ${host.id} at the plan's gap ${f.a0.toFixed(2)}..${f.a1.toFixed(2)} m, sill ${sill.toFixed(2)} m, ${height.toFixed(2)} m high by the elevation's metric reading; two drawings, not source-verified` } }
+  }
+  return { commands, allowed: [`openings:${id}`, `${f.kind === 'WINDOW' ? 'windows' : 'doors'}:${fillId}`, ...goneKeys], expect: { kind: 'CUSTOM', measure }, record: { bound: { frameId: f.frameId, side: f.side, hostId: host.id, ids: [id], ...(displaced.length > 0 ? { displaced: Object.fromEntries(displaced.map((o) => [o.id, null])) } : {}), values: { offset: u0, width, sill, height } } } }
 }
 
 /** Where a stack meets the roof, across the side: the roof planes' height along the line at `along`. */
@@ -1285,7 +1347,7 @@ export function executeCorrections(input: ExecuteInput): CorrectionOutcome {
     }
     seen.add(p.proposalId)
     // v3.54.19: BUILD_INTERIOR is the analyzer's own operation (origin PLAN): never offered to a reviewer, so not in the registry
-    if (!isPatchOperation(p.operation) && !(p.operation === 'BUILD_INTERIOR' && p.origin === 'PLAN')) {
+    if (!isPatchOperation(p.operation) && !((p.operation === 'BUILD_INTERIOR' || p.operation === 'ADD_PLAN_OPENING') && p.origin === 'PLAN')) {
       rec(p, 'UNSUPPORTED_OPERATION', 'NOT_IN_REGISTRY', `${p.operation} is not an operation of registry ${CORRECTION_REGISTRY_VERSION}: the analyzer cannot execute it; the defect stays open and named`)
       continue
     }
@@ -1341,7 +1403,7 @@ export function executeCorrections(input: ExecuteInput): CorrectionOutcome {
         continue
       }
       const op = p.operation as PatchOperation
-      const b = (p.operation as string) === 'BUILD_INTERIOR' ? bindBuildInterior(ctx, p) : op === 'SET_FINISH' ? bindFinish(ctx, p) : op === 'SET_PARAMETER' ? bindParameter(ctx, p) : op === 'ADD_CHIMNEY' || op === 'UPDATE_CHIMNEY' ? bindChimney(ctx, p) : op === 'BUILD_MASSING' ? bindBuildMassing(ctx, p) : op === 'SET_ROOF' ? bindSetRoof(ctx, p) : op === 'SET_OUTLINE' ? bindSetOutline(ctx, p) : op === 'SET_ROOF_OVERHANG' ? bindOverhang(ctx, p) : op === 'ADD_ROOF_WINDOW' ? bindRoofWindow(ctx, p) : bindOpening(ctx, p)
+      const b = (p.operation as string) === 'BUILD_INTERIOR' ? bindBuildInterior(ctx, p) : (p.operation as string) === 'ADD_PLAN_OPENING' ? bindPlanOpening(ctx, p) : op === 'SET_FINISH' ? bindFinish(ctx, p) : op === 'SET_PARAMETER' ? bindParameter(ctx, p) : op === 'ADD_CHIMNEY' || op === 'UPDATE_CHIMNEY' ? bindChimney(ctx, p) : op === 'BUILD_MASSING' ? bindBuildMassing(ctx, p) : op === 'SET_ROOF' ? bindSetRoof(ctx, p) : op === 'SET_OUTLINE' ? bindSetOutline(ctx, p) : op === 'SET_ROOF_OVERHANG' ? bindOverhang(ctx, p) : op === 'ADD_ROOF_WINDOW' ? bindRoofWindow(ctx, p) : bindOpening(ctx, p)
       if ('status' in b) {
         refusal = { p, r: b }
         break
