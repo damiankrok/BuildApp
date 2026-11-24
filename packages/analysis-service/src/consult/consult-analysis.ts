@@ -55,7 +55,9 @@ import { CHIMNEY_FUSION_VERSION, fuseChimneys } from './correct/chimney-fusion.j
 import { MASSING_VERSION, bodiesOf, pointWithFront } from './massing/massing.js'
 import { readSiteDimensions, SITE_DIMENSIONS_VERSION } from './site-dimensions.js'
 import { FACADE_METRIC_VERSION, readFacadeMetric } from './facade-metric.js'
-import { PLAN_SKELETON_VERSION, readPlanSkeleton } from './plan-skeleton.js'
+import { FORM_READ_VERSION, flatVolumesOf, formVerdict, readForm } from './form-read.js'
+import type { FormRead } from './form-read.js'
+import { outerFaceOutline, PLAN_SKELETON_VERSION, readPlanSkeleton } from './plan-skeleton.js'
 import type { PlanSkeleton } from './plan-skeleton.js'
 import { INTERIOR_OPS_VERSION, planGapsFromSkeleton, skeletonInModel } from './correct/interior.js'
 import type { InteriorObservation } from './correct/interior.js'
@@ -70,7 +72,7 @@ import { observationFates } from './correct/fates.js'
 import type { ObservationFates } from './correct/fates.js'
 import type { SketchProposalAccount } from './correct/from-sketch.js'
 import { MASSING_OPS_VERSION, roofProposalsFromSketches } from './massing/ops.js'
-import { outlineScale, PLAN_OUTLINE_VERSION, readPlanOutline, scaleOutline } from './plan-outline.js'
+import { outlineScale, OUTLINE_SCALE_AGREE, PLAN_OUTLINE_VERSION, readPlanOutline, scaleOutline } from './plan-outline.js'
 import type { PlanSideOpening } from './plan-outline.js'
 import { drawnStretches, PLAN_OPENINGS_VERSION, planSideInModel, SIDE_MARGIN, stretchAgreement } from './plan-openings.js'
 import { massingRun } from './massing-result.js'
@@ -156,7 +158,7 @@ export type SketchSummary = { reading: Omit<SketchReading, 'elevationSketches'>;
 /** v3.54.18 R2: which source pictures get a frame changed (a content-disputed orthographic elevation keeps its frame): part of the accepted-revision key. */
 export const SOURCE_FRAMES_RULE = 'frames2' as const
 export const BODY_ARBITRATION = { version: '1.2.0', dimAgreeM: 0.3, dimAgreeShare: 0.04, heightAgreeM: 0.6, heightAgreeShare: 0.1 } as const
-export type BodyEvidence = { bodies: number; registrations: Array<{ frameId: string; side: string; ok: boolean; code: string; why?: string }>; printed: Array<{ literal: string; valueM: number; modelM: number; agrees: boolean }>; height?: { publishedM: number; modelRidgeM: number; agrees: boolean }; contradictions: number; supports: number }
+export type BodyEvidence = { bodies: number; registrations: Array<{ frameId: string; side: string; ok: boolean; code: string; why?: string }>; printed: Array<{ literal: string; valueM: number; modelM: number; agrees: boolean }>; height?: { publishedM: number; modelRidgeM: number; agrees: boolean }; /** v3.54.19: what the typed form of the house (form-read) says of this body's roofs. */ form?: { verdict: 'CONTRADICTS' | 'AGREES' | 'SILENT'; flatVolumes: number; reportedFlatVolumes: number; reportedMainRoof: string; reportedVolumes: number }; contradictions: number; supports: number }
 export type BodyArbitration = { version: string; local: BodyEvidence; /** LOCAL's body was judged with this many roof corrections from the same elevations applied (on a copy). */ localAfterRoofCorrections?: number; alternative?: BodyEvidence; massing?: { decision: string; why: string; usd: number }; /** 1.2.0: elevations that register on neither body, set aside on both sides. */ setAside?: { frames: string[]; why: string }; decision: 'LOCAL_STANDS' | 'REPLACED_BY_SOURCE_BODY'; why: string }
 
 /** v3.54.17: the no-model path's delivery: a mass built from the source, or the anchors it lacks. */
@@ -676,7 +678,7 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
     const b = consultBinding({
       sourcePackageHash: local.pkg.contentHash,
       analyzer: `${ANALYSIS_SERVICE_VERSION}/${SOLVER_V2_VERSION}`,
-      consultant: [CONSULTANT_CONTRACT_VERSION, CONSULTANT_PROMPT_VERSION, METRIC_READ_PROMPT_VERSION, METRIC_VERIFY_PROMPT_VERSION, METRIC_RESOLVER_VERSION, ELEVATION_SKETCH_PROMPT_VERSION, `parser${ELEVATION_SKETCH_PARSER_VERSION}`, SKETCH_STEP_VERSION, CHOOSE_VERSION, ACCEPTED_CONSULT_VERSION, `registry${CORRECTION_REGISTRY_VERSION}`, `executor${CORRECTION_EXECUTOR_VERSION}`, `gate${SOURCE_GATE_VERSION}`, `sketchProposals${SKETCH_PROPOSALS_VERSION}`, `quality${QUALITY_VERSION}`, `massing${MASSING_OPS_VERSION}`, `massingBody${MASSING_VERSION}`, `bodyArbitration${BODY_ARBITRATION.version}`, SOURCE_FRAMES_RULE, `outline${PLAN_OUTLINE_VERSION}`, `planOpenings${PLAN_OPENINGS_VERSION}`, `skeleton${PLAN_SKELETON_VERSION}`, `interior${INTERIOR_OPS_VERSION}`, `site${SITE_DIMENSIONS_VERSION}`, `facadeMetric${FACADE_METRIC_VERSION}`].join(','),
+      consultant: [CONSULTANT_CONTRACT_VERSION, CONSULTANT_PROMPT_VERSION, METRIC_READ_PROMPT_VERSION, METRIC_VERIFY_PROMPT_VERSION, METRIC_RESOLVER_VERSION, ELEVATION_SKETCH_PROMPT_VERSION, `parser${ELEVATION_SKETCH_PARSER_VERSION}`, SKETCH_STEP_VERSION, CHOOSE_VERSION, ACCEPTED_CONSULT_VERSION, `registry${CORRECTION_REGISTRY_VERSION}`, `executor${CORRECTION_EXECUTOR_VERSION}`, `gate${SOURCE_GATE_VERSION}`, `sketchProposals${SKETCH_PROPOSALS_VERSION}`, `quality${QUALITY_VERSION}`, `massing${MASSING_OPS_VERSION}`, `massingBody${MASSING_VERSION}`, `bodyArbitration${BODY_ARBITRATION.version}`, SOURCE_FRAMES_RULE, `outline${PLAN_OUTLINE_VERSION}`, `planOpenings${PLAN_OPENINGS_VERSION}`, `skeleton${PLAN_SKELETON_VERSION}`, `interior${INTERIOR_OPS_VERSION}`, `site${SITE_DIMENSIONS_VERSION}`, `facadeMetric${FACADE_METRIC_VERSION}`, `form${FORM_READ_VERSION}`, `arbitration${BODY_ARBITRATION.version}`].join(','),
       models: { ROUNDS: wiring.model.model, ...(wiring.metricRead === 'ON' ? { METRIC: (wiring.metricModel ?? wiring.model).model } : {}), ...(wiring.sketches === 'ON' ? { SKETCH: (wiring.sketchModel ?? wiring.model).model } : {}) },
       settings: `strict=${wiring.model.strict === true || wiring.metricModel?.strict === true || wiring.sketchModel?.strict === true ? 'on' : 'off'};variant=${wiring.variant};metric=${wiring.metricRead ?? 'OFF'};sketches=${wiring.sketches ?? 'OFF'};rounds=${maxRounds};geometryRounds=${wiring.maxGeometryRounds ?? '-'};check=${wiring.check ?? 'ON'};sketchCorrections=${wiring.sketchCorrections ?? 'ON'}`,
     })
@@ -804,6 +806,32 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
         usd += plan.usd
         delivery.usd += plan.usd
         delivery.plan = plan
+        // (the skeleton reads the sheet along the outline AS TRACED — the wall's filled core — whichever outline the body takes)
+        let tracedOutlinePx: Array<[number, number]> | undefined
+        // v3.54.19: the plan's two printed overall dimensions decide between the outline as traced and the walls' outer
+        // line. Where they disagree over the traced outline's two extents (more than the 3 % any pair is held to) and agree
+        // over the outline moved onto the outermost wall line, the moved outline is the house's and the pair its scale.
+        if (plan.outlinePx) {
+          const pr = (metricRead?.reads ?? []).filter((r) => r.frameId === f.id).flatMap((r) => r.observations.filter((o) => o.kind === 'LENGTH' && o.scope === 'WHOLE_HOUSE' && o.reference === 'OUTER_FACE' && o.status === 'PRINTED' && typeof o.value === 'number'))
+          const [pH, pV] = [pr.find((o) => o.axis === 'HORIZONTAL')?.value, pr.find((o) => o.axis === 'VERTICAL')?.value]
+          if (typeof pH === 'number' && typeof pV === 'number') {
+            const spreadOf = (o: ReadonlyArray<readonly [number, number]>): number => { const [w, h] = [Math.max(...o.map((q) => q[0])) - Math.min(...o.map((q) => q[0])), Math.max(...o.map((q) => q[1])) - Math.min(...o.map((q) => q[1]))]; const [sx, sy] = [pH / w, pV / h]; return Math.abs(sx - sy) / Math.max(sx, sy) }
+            const before = spreadOf(plan.outlinePx)
+            if (before > OUTLINE_SCALE_AGREE) {
+              const outer = outerFaceOutline(fr.raster, plan.outlinePx)
+              const after = outer ? spreadOf(outer.outline) : undefined
+              const sc = outer && after !== undefined && after <= OUTLINE_SCALE_AGREE ? outlineScale(outer.outline, { horizontalM: pH, verticalM: pV }) : undefined
+              record({ at: now().toISOString(), kind: 'PLAN_OUTLINE_ON_OUTER_LINE', frameId: f.id, taken: !!sc, printedM: [pH, pV], spreadTraced: Math.round(before * 1e4) / 1e4, spreadOuter: after !== undefined ? Math.round(after * 1e4) / 1e4 : null, moved: outer?.moved ?? [], why: sc ? `the printed ${pH} × ${pV} m disagree over the traced outline by ${(before * 100).toFixed(1)} % and agree over the walls' outer line within ${((after as number) * 100).toFixed(1)} %: the outline is taken on that line, at the scale the two dimensions give` : `the printed ${pH} × ${pV} m disagree over the traced outline by ${(before * 100).toFixed(1)} %${after !== undefined ? ` and over the walls' outer line by ${(after * 100).toFixed(1)} %` : '; no outer line found'}: the traced outline stands` })
+              if (sc && outer) {
+                tracedOutlinePx = plan.outlinePx
+                plan.outlinePx = outer.outline
+                cmPerPx = Math.round(sc.mPerPx * 100 * 1e6) / 1e6
+                strong = true
+                scaleOutline(plan, { frameId: f.id, sourceByteHash: f.variantByteHash, ...(typeof published === 'number' ? { publishedFootprintM2: published } : {}) }, { mPerPx: sc.mPerPx, why: `${cmPerPx} cm/px on the walls' outer line: ${sc.why}` })
+              }
+            }
+          }
+        }
         // v3.54.18 R3: a plan the analyzer measured no scale on is put in metres from its own traced outline — the two
         // overall dimensions over the outline's two extents (they must agree), or, as a hypothesis the published height has
         // to confirm on the built body, the published footprint area over the outline's area
@@ -858,7 +886,7 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
           // colour to read between them, but that band is not always the wall's outer face (a sheet that draws the outer
           // layer of its walls in another tone has the printed overall dimension outside it — the first replay of this
           // stage put a body on the bands and lost 0.4 m of a house against its own printed dimensions).
-          const skeleton = plan.outlinePx && cmPerPx ? readPlanSkeleton({ frameId: f.id, sourceByteHash: f.variantByteHash, raster: fr.raster, outlinePx: plan.outlinePx, mPerPx: cmPerPx / 100 }) : undefined
+          const skeleton = plan.outlinePx && cmPerPx ? readPlanSkeleton({ frameId: f.id, sourceByteHash: f.variantByteHash, raster: fr.raster, outlinePx: tracedOutlinePx ?? plan.outlinePx, mPerPx: cmPerPx / 100 }) : undefined
           if (skeleton) {
             delivery.skeleton = skeleton
             record({ at: now().toISOString(), kind: 'PLAN_SKELETON', version: PLAN_SKELETON_VERSION, frameId: f.id, ink: skeleton.ink, wallM: Math.round(skeleton.wallPx * skeleton.mPerPx * 100) / 100, walls: skeleton.walls.length, doors: skeleton.doors.length, gaps: skeleton.gaps.length, refused: skeleton.refused })
@@ -1398,9 +1426,32 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
     const tried = roofs0.proposals.length > 0 ? executeCorrections({ model: mL0, views: heldL, derivedViews: (m: CanonicalBuildingModel, h: readonly BindView[]) => sketchViewsOf(m, pics, h), pictures: pics, proposals: roofs0.proposals.map((q) => ({ ...q, proposalId: `arb:${q.proposalId}` })), witnesses: witnessesOf(good), ...(typeof pitch0 === 'number' ? { facts: { roofPitchDeg: pitch0 } } : {}), seen: new Set<string>() }) : undefined
     const roofFixed = (tried?.records ?? []).filter((r) => r.status === 'COMMITTED').length
     const localEv = evidenceOf(tried && roofFixed > 0 ? tried.model : mL0, heldL)
+    // v3.54.19 (arbitration 1.2.0): the typed FORM of the house as one more witness. Asked only where it can say
+    // something the other witnesses cannot: LOCAL's body is a pitched house with flat-roofed volumes beside it (LOCAL
+    // builds a recessed front as a box of its own under a flat roof; elevations registered by wall ends and the printed
+    // overall dimensions agree with such a body just as well). One request, all captioned elevations; no dimension taken.
+    const roofsOf = (model: CanonicalBuildingModel): { flatVolumes: number; pitchedKinds: string[] } => ({ flatVolumes: model.roofs.filter((r) => r.kind === 'FLAT').length, pitchedKinds: [...model.roofs.filter((r) => r.kind !== 'FLAT').map((r) => r.kind as string), ...(model.roofPlanes.length > 0 ? ['HIP'] : [])] })
+    const localRoofs = roofsOf(tried && roofFixed > 0 ? tried.model : mL0)
+    let formRead: FormRead | undefined
+    const withForm = (ev: BodyEvidence, roofs: { flatVolumes: number; pitchedKinds: string[] }): void => {
+      if (!formRead?.form) return
+      const verdict = formVerdict(formRead.form, roofs)
+      ev.form = { verdict, flatVolumes: roofs.flatVolumes, reportedFlatVolumes: flatVolumesOf(formRead.form), reportedMainRoof: formRead.form.mainRoof.kind, reportedVolumes: formRead.form.volumes }
+      if (verdict === 'CONTRADICTS') ev.contradictions += 1
+      if (verdict === 'AGREES') ev.supports += 1
+    }
+    if (localRoofs.flatVolumes > 0 && localRoofs.pitchedKinds.length > 0) {
+      const formPics = sketchSummary.reading.sketches.filter((x) => x.sketch).flatMap((x) => { const p = pics.find((q) => q.frameId === x.frameId); return p ? [{ caption: x.facade === 'SIDE_UNSPECIFIED' ? 'SIDE (which side is not captioned)' : x.facade, raster: p.raster }] : [] })
+      if (formPics.length >= 2) {
+        formRead = await readForm({ model: wiring.outlineModel ?? wiring.metricModel ?? wiring.model, price: wiring.outlinePrice ?? wiring.metricPrice ?? wiring.price, ...(wiring.spend ? { spend: wiring.spend } : {}), ...(options.signal ? { signal: options.signal } : {}) }, formPics)
+        usd += formRead.usd
+        record({ at: now().toISOString(), kind: 'FORM_READ', version: FORM_READ_VERSION, promptVersion: formRead.promptVersion, pictures: formRead.pictures, form: formRead.form ?? null, refused: formRead.refused, usd: formRead.usd, localRoofs, why: `LOCAL's body has ${localRoofs.flatVolumes} flat-roofed volume(s) beside a pitched roof: the elevations are asked, as a whole, what volumes and roofs the house has` })
+        withForm(localEv, localRoofs)
+      }
+    }
     const arb: BodyArbitration = { version: BODY_ARBITRATION.version, local: localEv, ...(roofFixed > 0 ? { localAfterRoofCorrections: roofFixed } : {}), decision: 'LOCAL_STANDS', why: '' }
     bodyArbitration = arb
-    if (localEv.contradictions === 0) arb.why = `nothing the sources state contradicts LOCAL's body (${localEv.supports} agreement(s): elevations registered, printed dimensions, published height)`
+    if (localEv.contradictions === 0) arb.why = `nothing the sources state contradicts LOCAL's body (${localEv.supports} agreement(s): elevations registered, printed dimensions, published height${localEv.form ? ', the typed form' : ''})`
     else {
       stage('BODY_ARBITRATION')
       const st = goodState
@@ -1413,6 +1464,7 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
       else {
         const altFront = massingOf.get(mb.built)?.planFront
         const altEv = evidenceOf(mb.built.run.reconstruction.model, massingViews(mb.built) ?? [], altFront)
+        withForm(altEv, roofsOf(mb.built.run.reconstruction.model))
         arb.alternative = altEv
         // v3.54.18 arbitration 1.1.0: the body that replaces LOCAL's must itself be UNCONTRADICTED. One the same sources
         // contradict "less" is still a body they contradict — and it costs the interior and the plan's openings (Jeziorko,

@@ -26,7 +26,7 @@ describe('v3.54.19 the review of applied corrections', () => {
     const events: ConsultEvent[] = []
     const model = scripted([review('a'), review('b', [{ id: 'op-fix-front-1', verdict: 'MATCHES', note: 'door' }])])
     const out = await run(model, events, applied)
-    expect('review' in out && out.review.appliedReview).toEqual([{ id: 'op-fix-front-1', verdict: 'MATCHES', note: 'door' }])
+    expect('review' in out && out.review?.appliedReview).toEqual([{ id: 'op-fix-front-1', verdict: 'MATCHES', note: 'door' }])
     expect(events.filter((e) => e.kind === 'REVIEW_REASKED')).toHaveLength(1)
     expect(JSON.stringify(model.sent[1])).toMatch(/NOT RECORDED: appliedReview is missing.*op-fix-front-1, iw-H10-20/)
     expect(out.turns).toBe(2)

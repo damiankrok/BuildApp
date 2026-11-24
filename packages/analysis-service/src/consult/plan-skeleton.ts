@@ -27,7 +27,7 @@ import type { Raster } from '@buildapp/source-cv'
 import { readInterior } from '@buildapp/reconstruction'
 import type { PlanFrameV2 } from '@buildapp/reconstruction'
 
-export const PLAN_SKELETON_VERSION = '1.1.0' as const
+export const PLAN_SKELETON_VERSION = '1.2.0' as const
 export const PLAN_SKELETON = {
   /** the band the wall colour is sampled in, as shares of the outline's shorter extent, inward from the traced edge */
   bandFrom: 0.01,
@@ -111,6 +111,44 @@ export function edgesOf(outline: ReadonlyArray<readonly [number, number]>): Edge
   })
 }
 const shorterExtent = (outline: ReadonlyArray<readonly [number, number]>): number => Math.min(Math.max(...outline.map((q) => q[0])) - Math.min(...outline.map((q) => q[0])), Math.max(...outline.map((q) => q[1])) - Math.min(...outline.map((q) => q[1])))
+
+/**
+ * 1.2.0 — the walls' OUTER line. A sheet that draws its walls in layers (a dark core, a lighter outer layer closed by a
+ * thin line) has its printed overall dimensions on that thin line; a tracing may follow the dark core on one side and
+ * the thin line on another. Each edge of the traced outline is moved OUTWARD onto the outermost dark line that runs
+ * along most of it within reach (a share of the outline's shorter extent). Whether the moved outline is the house's is
+ * not decided here: the caller takes it only where the plan's two printed overall dimensions, which disagree over the
+ * traced outline, agree over this one.
+ */
+export const OUTER_FACE = { reachShare: 0.06, minReachPx: 6, lineShare: 0.6, darkLuma: 140 } as const
+export function outerFaceOutline(raster: Raster, outline: ReadonlyArray<readonly [number, number]>): { outline: Array<[number, number]>; moved: Array<{ edge: number; byPx: number }> } | undefined {
+  if (outline.length < 4) return undefined
+  const es = edgesOf(outline)
+  const reach = Math.max(OUTER_FACE.minReachPx, Math.round(OUTER_FACE.reachShare * shorterExtent(outline)))
+  const dark = (x: number, y: number): boolean => {
+    if (x < 0 || y < 0 || x >= raster.width || y >= raster.height) return false
+    const i = (Math.round(y) * raster.width + Math.round(x)) * 4
+    return 0.299 * raster.data[i] + 0.587 * raster.data[i + 1] + 0.114 * raster.data[i + 2] < OUTER_FACE.darkLuma
+  }
+  const moved: Array<{ edge: number; byPx: number }> = []
+  const cs = es.map((e) => {
+    const len = e.a1 - e.a0
+    if (len < 8) return e.c
+    let best = 0
+    for (let k = 1; k <= reach; k += 1) {
+      const c = Math.round(e.c) - e.inward * k
+      let n = 0
+      for (let a = Math.ceil(e.a0); a <= Math.floor(e.a1); a += 1) if (e.dir === 'H' ? dark(a, c) : dark(c, a)) n += 1
+      if (n >= OUTER_FACE.lineShare * len) best = k
+    }
+    if (best > 0) moved.push({ edge: e.i, byPx: best })
+    return Math.round(e.c) - e.inward * best
+  })
+  if (moved.length === 0) return undefined
+  const n = es.length
+  const out = es.map((e, i): [number, number] => { const prev = (i + n - 1) % n; return e.dir === 'H' ? [cs[prev], cs[i]] : [cs[i], cs[prev]] })
+  return { outline: out, moved }
+}
 
 /** 1. How this sheet draws a wall: the commonest colour of the band just inside the traced outline. */
 export function wallInkOf(raster: Raster, outline: ReadonlyArray<readonly [number, number]>): WallInk {

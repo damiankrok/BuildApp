@@ -571,6 +571,7 @@ export function solveMassing(input: MassingInput): MassingHypothesis {
   // plan's outline does not show it; two OPPOSITE elevations do, where the drawn top (walls and roofs) jumps at one place
   // along the side (a gable seen from its end slopes through such a place and a hip end slopes down to it: neither
   // jumps). Both views must put the jump at the same place of the plan and the lower part on the same side of it.
+  const builtOn = new Map<Rect, Rect>()
   if (rects.length === 1) {
     const rect = rects[0]
     const jumpOn = (obs: SilhouetteObservation, view: BindView): { at: number; lowAbove: boolean; by: number } | undefined => {
@@ -604,7 +605,13 @@ export function solveMassing(input: MassingInput): MassingHypothesis {
       const across = (input.planWalls ?? []).filter((w) => (axis === 'x' ? Math.abs(w.a.x - w.b.x) < 0.05 : Math.abs(w.a.z - w.b.z) < 0.05)).map((w) => ({ at: axis === 'x' ? (w.a.x + w.b.x) / 2 : (w.a.z + w.b.z) / 2, len: axis === 'x' ? Math.abs(w.a.z - w.b.z) : Math.abs(w.a.x - w.b.x) }))
       const lines = across.map((w) => ({ at: w.at, len: across.filter((v) => Math.abs(v.at - w.at) <= 0.2).reduce((t, v) => t + v.len, 0) })).filter((w) => w.len >= 0.5 * depth && Math.abs(w.at - at) <= MASSING_TOLERANCES.stepSnapM && w.at - lo >= MASSING_TOLERANCES.minBodyM && hi - w.at >= MASSING_TOLERANCES.minBodyM).sort((p, q) => Math.abs(p.at - at) - Math.abs(q.at - at))
       const cut = lines[0]?.at ?? at
-      rects = axis === 'x' ? [{ ...rect, maxX: cut }, { ...rect, minX: cut }] : [{ ...rect, maxZ: cut }, { ...rect, minZ: cut }]
+      // The bodies are READ where the elevations draw the step (the taller roof's verge overhangs the lower body: read
+      // over its plan extent, the lower body would take that roof for its own) and BUILT on the plan's wall.
+      rects = axis === 'x' ? [{ ...rect, maxX: at }, { ...rect, minX: at }] : [{ ...rect, maxZ: at }, { ...rect, minZ: at }]
+      if (cut !== at) {
+        builtOn.set(rects[0], axis === 'x' ? { ...rect, maxX: cut } : { ...rect, maxZ: cut })
+        builtOn.set(rects[1], axis === 'x' ? { ...rect, minX: cut } : { ...rect, minZ: cut })
+      }
       base.alternatives.push(`the outline is one rectangle, but ${js.length} opposite elevations draw the top stepping by ${js.map((j) => j.by.toFixed(2)).join(' / ')} m at ${js.map((j) => j.at.toFixed(2)).join(' / ')} m along ${axis}: two bodies in line (split at ${cut.toFixed(2)} m${lines[0] ? ` — on the wall the plan draws across the body there, ${lines[0].len.toFixed(2)} m of its ${depth.toFixed(2)} m depth; the elevations alone put the step at ${at.toFixed(2)} m` : ''}), each with its own roof`)
       break
     }
@@ -762,7 +769,15 @@ export function solveMassing(input: MassingInput): MassingHypothesis {
         roofProv = { fidelity: top0 === top && vote.X !== vote.Z && hProv.fidelity === 'SOURCE_DERIVED' ? 'SOURCE_DERIVED' : 'TRACE_UNCERTAIN', source: reads.map((r) => `${r.side}:${r.p.shape}`).join(' '), why: `ridge along ${axis} (slopes seen on the sides along it, the gable end across it); pitch ${roof.pitchDeg}° from a ${(top0 - eavesTop).toFixed(2)} m rise over half of ${span.toFixed(2)} m${pitchNote || (byWalls ? ` (the walls end at ${eaves.toFixed(2)} m: the roof's underside there)` : '')}` }
       }
     }
-    bodies.push({ id, rect: { minX: r6(rect.minX), maxX: r6(rect.maxX), minZ: r6(rect.minZ), maxZ: r6(rect.maxZ) }, roof, provenance: { outline: { fidelity: input.outline.fidelity, source: input.outline.by, why: input.outline.why }, height: hProv, roof: roofProv, wallThickness: input.wallThicknessM?.prov ?? { fidelity: 'DISPLAY_ASSUMPTION', source: 'MINIATURE', why: `${MINIATURE_CONVENTIONS.wallThicknessM} m: no wall thickness was measured` } } })
+    // a body read at the elevations' step and built on the plan's wall: its heights stand; a gable across the moved side
+    // keeps its ridge height over the new span (the pitch follows)
+    const onPlan = builtOn.get(rect)
+    if (onPlan && roof.kind === 'GABLE' && roof.ridgeM !== undefined) {
+      const spanNow = roof.ridgeAxis === 'X' ? onPlan.maxZ - onPlan.minZ : onPlan.maxX - onPlan.minX
+      roof = { ...roof, pitchDeg: Math.round(((Math.atan2(roof.ridgeM - roof.eavesM, spanNow / 2) * 180) / Math.PI) * 10) / 10 }
+    }
+    const built = onPlan ?? rect
+    bodies.push({ id, rect: { minX: r6(built.minX), maxX: r6(built.maxX), minZ: r6(built.minZ), maxZ: r6(built.maxZ) }, roof, provenance: { outline: { fidelity: input.outline.fidelity, source: input.outline.by, why: input.outline.why }, height: hProv, roof: roofProv, wallThickness: input.wallThicknessM?.prov ?? { fidelity: 'DISPLAY_ASSUMPTION', source: 'MINIATURE', why: `${MINIATURE_CONVENTIONS.wallThicknessM} m: no wall thickness was measured` } } })
   }
   if (bodies.length === 0) return { ...base, status: 'INSUFFICIENT', bodies, views, why: `no body has its height and roof read (${base.missing.map((m) => m.anchor).join(', ')})` }
   return { ...base, status: 'BUILDABLE', bodies, views, why: `${bodies.length} body/bodies: ${bodies.map((b) => `${b.id} ${(b.rect.maxX - b.rect.minX).toFixed(2)} × ${(b.rect.maxZ - b.rect.minZ).toFixed(2)} m, ${b.roof.kind}${b.roof.ridgeAxis ? ` along ${b.roof.ridgeAxis}` : ''} eaves ${b.roof.eavesM.toFixed(2)}${b.roof.ridgeM ? ` ridge ${b.roof.ridgeM.toFixed(2)}` : ''}`).join('; ')}` }
