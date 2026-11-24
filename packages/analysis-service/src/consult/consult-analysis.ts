@@ -52,11 +52,12 @@ import { renderStoreyCut } from './model-views.js'
 import { CORRECTION_REGISTRY_VERSION } from './correct/registry.js'
 import { CORRECTION_EXECUTOR_VERSION, elementExists, executeCorrections, modelRevision, PLAN_SPAN_AGREE, planGapsOf, preferredView, registerFromSketch, sideOfFacade, sideOpeningSpans, sideRange, viewsOfRun } from './correct/execute.js'
 import { CHIMNEY_FUSION_VERSION, fuseChimneys } from './correct/chimney-fusion.js'
-import { MASSING_VERSION, OUTLINE_SIMPLIFICATION, bodiesOf, pointWithFront, wallEndsPx } from './massing/massing.js'
+import { MASSING_VERSION, OUTLINE_SIMPLIFICATION, STOREY_WALLS, bodiesOf, pointWithFront, wallEndsPx } from './massing/massing.js'
 import { readSiteDimensions, SITE_DIMENSIONS_VERSION } from './site-dimensions.js'
 import { FACADE_METRIC_VERSION, readFacadeMetric } from './facade-metric.js'
 import { FORM_READ_VERSION, flatVolumesOf, formVerdict, readForm } from './form-read.js'
 import { STRUCTURE_VERSION, agreeStructure, buildStructureOf, wallToApex } from './structure.js'
+import { readbackOpenings, readbackStructure } from './readback.js'
 import type { AgreedStructure, BuildStructure, StructureSide } from './structure.js'
 import type { Raster } from '@buildapp/source-cv'
 import type { FormRead } from './form-read.js'
@@ -2166,6 +2167,16 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
     for (const r of sketchSummary.semantic.records ?? []) for (const id of Object.keys((r.bound as { displaced?: Record<string, unknown> } | undefined)?.displaced ?? {})) gaveWay.set(id, `${r.operation} ${(r.bound?.ids ?? []).join(', ')}`)
     const missing = rows.flatMap((q) => (q.targetIds ?? []).filter((id) => !elementExists(mD, id)).map((id) => ({ id, fate: q.fate, ...(q.proposalId ? { proposalId: q.proposalId } : {}), ...(gaveWay.has(id) ? { gaveWayTo: gaveWay.get(id) as string } : {}) })))
     record({ at: now().toISOString(), kind: 'OBSERVATION_FATE_TARGETS', checked: rows.reduce((t, q) => t + (q.targetIds ?? []).length, 0), missing, why: missing.length === 0 ? 'every element a fate names as built or agreeing is in the delivered model' : `${missing.length} element(s) a fate names are not in the delivered model: built at the sketch stage and removed or replaced by a later look (named here, never silent)` })
+  }
+  // v3.54.20: what was BUILT, read back from the delivered model and held against what the executor bound (readback.ts):
+  // every exterior opening in its host wall's own frame with the sum of the wall's stretches checked, and the bodies and
+  // roofs beside what the agreed structure asked for. A measurement of the delivered model, not the record of a command.
+  if (good.run) {
+    const mD = good.run.reconstruction.model
+    const ob = readbackOpenings(mD, (sketchSummary?.semantic?.records ?? []) as Parameters<typeof readbackOpenings>[1])
+    record({ at: now().toISOString(), kind: 'OPENINGS_READBACK', version: ob.version, frame: ob.frame, counts: ob.counts, openings: ob.openings, why: `${ob.counts.built} exterior opening(s) in the delivered model: ${ob.counts.agree} as the executor bound them, ${ob.counts.differ} different, ${ob.counts.unbound} without a bound record (the analyzer's own); ${ob.counts.sumFailures} wall(s) whose stretches do not add up, ${ob.counts.outsideWall} opening(s) past a wall's end` })
+    const sb = readbackStructure(mD, structureMemo?.build, STOREY_WALLS)
+    record({ at: now().toISOString(), kind: 'STRUCTURE_READBACK', version: sb.version, taken: structureMemo?.build ?? null, bodies: sb.bodies, checks: sb.checks, why: structureMemo?.build ? `${sb.checks.filter((q) => q.agrees).length} of ${sb.checks.length} taken structure properties are in the delivered model${sb.checks.some((q) => !q.agrees) ? ` (not: ${sb.checks.filter((q) => !q.agrees).map((q) => `${q.property} taken ${q.taken}, built ${q.built}`).join('; ')})` : ''}` : 'no structure was taken (not read, refused, or fewer than two sketched elevations): the bodies are listed as built' })
   }
   // v3.54.19: where the plan sheet lies in the delivered model (three mapped points): any overlay of the model on its plan
   if (good.run) {

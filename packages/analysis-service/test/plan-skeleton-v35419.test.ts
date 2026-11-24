@@ -68,6 +68,24 @@ describe('v3.54.19 the sheet says how it draws a wall', () => {
     const i = ((Y0 + 6) * p.width + 200) * 4
     expect(p.data[i]).toBe(0)
   })
+  it('v3.54.20 (skeleton 1.3.0) REPRODUCES a refusal: a house whose outline is half glazing, traced 4 px off its walls, holds the wall colour on less than a quarter of the strip — and as a filled stroke along half of the outline: its walls are filled', () => {
+    const r = sheet()
+    const white = (x0: number, y0: number, x1: number, y1: number): void => { for (let y = y0; y <= y1; y += 1) for (let x = x0; x <= x1; x += 1) { const i = (y * r.width + x) * 4; r.data[i] = 255; r.data[i + 1] = 255; r.data[i + 2] = 255 } }
+    white(X0 + T + 1, Y0, 210, Y0 + T) // half of the rear wall is glazing
+    white(210, Y1 - T, X1 - T - 1, Y1) // half of the front wall
+    white(X0, Y0 + T + 1, X0 + T, 160) // half of the left wall
+    white(X1 - T, 160, X1, Y1 - T - 1) // half of the right wall
+    const off: Array<[number, number]> = [[X0 - 4, Y0 - 4], [X1 + 4, Y0 - 4], [X1 + 4, Y1 + 4], [X0 - 4, Y1 + 4]]
+    const ink = wallInkOf(r, off)
+    expect(ink.share).toBeLessThan(0.25)
+    expect(ink.coverage).toBeGreaterThanOrEqual(0.25)
+    expect(ink.filled).toBe(true)
+    expect(ink.why).toMatch(/filled stroke along/)
+    // counter-trial: the same half-glazed house drawn with outlined (unfilled) walls has no such stroke
+    const o = sheet({ outlineOnly: true })
+    const inkO = wallInkOf(o, off)
+    expect(inkO.filled).toBe(false)
+  })
   it('counter-trial: walls drawn as outlines only leave a paper band — named, nothing is read', () => {
     const sk = read(sheet({ outlineOnly: true }))
     expect(sk.ink.filled).toBe(false)

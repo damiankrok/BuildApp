@@ -27,7 +27,7 @@ import type { Raster } from '@buildapp/source-cv'
 import { readInterior } from '@buildapp/reconstruction'
 import type { PlanFrameV2 } from '@buildapp/reconstruction'
 
-export const PLAN_SKELETON_VERSION = '1.2.0' as const
+export const PLAN_SKELETON_VERSION = '1.3.0' as const
 export const PLAN_SKELETON = {
   /** the band the wall colour is sampled in, as shares of the outline's shorter extent, inward from the traced edge */
   bandFrom: 0.01,
@@ -36,6 +36,9 @@ export const PLAN_SKELETON = {
   colourTol: 26,
   /** the commonest colour must hold this share of the band (openings, corners and a traced edge a few px off take the rest) */
   minShare: 0.25,
+  /** skeleton 1.3.0: where the band's share falls short, the wall colour must run — as a stroke at least `minRunShare` of the outline's shorter extent thick, within the snap reach of the traced edge — along this share of the outline's length */
+  minCoverage: 0.25,
+  minRunShare: 0.006,
   /** brighter than this, the band is paper: the walls are not filled */
   paperLuma: 215,
   /** how far an edge may be moved onto its band, as a share of the outline's shorter extent (plus 6 px) */
@@ -64,7 +67,7 @@ export const PLAN_SKELETON = {
 export type SkeletonWall = { id: string; axis: 'H' | 'V'; /** the centre line across (y for H, x for V), px */ at: number; from: number; to: number; thicknessPx: number; ends: { start: 'JUNCTION' | 'FREE'; end: 'JUNCTION' | 'FREE' }; confidence: number }
 export type SkeletonDoor = { id: string; axis: 'H' | 'V'; at: number; from: number; to: number }
 export type SkeletonGap = { id: string; /** index of the outline edge (corner i → corner i+1) */ edge: number; /** the way the wall faces on the sheet */ face: 'TOP' | 'RIGHT' | 'BOTTOM' | 'LEFT'; /** along the edge: x for TOP/BOTTOM, y for LEFT/RIGHT */ from: number; to: number; /** thin strokes run along the gap inside the band (a window's glazing lines) */ lines: boolean }
-export type WallInk = { rgb: [number, number, number]; luma: number; share: number; filled: boolean; why: string }
+export type WallInk = { rgb: [number, number, number]; luma: number; share: number; /** skeleton 1.3.0: the share of the outline's length the wall colour runs along as a filled stroke (measured only where `share` falls short) */ coverage?: number; filled: boolean; why: string }
 export type PlanSkeleton = {
   version: string
   frameId: string
@@ -184,8 +187,39 @@ export function wallInkOf(raster: Raster, outline: ReadonlyArray<readonly [numbe
   void mn
   const luma = lumaOf(rgb[0], rgb[1], rgb[2])
   const share = Math.round((near / total) * 1000) / 1000
-  const filled = luma < PLAN_SKELETON.paperLuma && share >= PLAN_SKELETON.minShare
-  return { rgb, luma: Math.round(luma), share, filled, why: filled ? `the band just inside the traced outline is ${rgb.join(',')} on ${(share * 100).toFixed(0)} % of its length: this sheet's wall colour` : luma >= PLAN_SKELETON.paperLuma ? `the band just inside the traced outline is paper (${rgb.join(',')}): the walls are not filled on this sheet, or the outline does not run on them` : `no colour holds ${(PLAN_SKELETON.minShare * 100).toFixed(0)} % of the band inside the traced outline (the commonest, ${rgb.join(',')}, ${(share * 100).toFixed(0)} %)` }
+  // skeleton 1.3.0: the band is a fixed strip beside the edge AS TRACED. An outline traced a few pixels off thin walls
+  // (or round a part drawn with thinner walls) leaves most of the strip on paper, and a sheet whose walls ARE filled was
+  // refused at 24 % for 25 %. What "filled walls" means does not depend on the strip: the wall colour runs along the
+  // outline as a stroke with a thickness. Where the strip falls short, each station along each edge is searched across the
+  // snap reach for a run of the wall colour at least `minRunShare` of the shorter extent thick; the walls are filled when
+  // such a stroke runs along `minCoverage` of the outline's length — the SAME quarter the strip is held to (a house whose
+  // outline is half glazing has walls along half of it; a wall drawn as two thin lines has no such run at all).
+  let coverage: number | undefined
+  if (luma < PLAN_SKELETON.paperLuma && share < PLAN_SKELETON.minShare) {
+    const reach = Math.round(PLAN_SKELETON.snapReach * S) + 6
+    const minRun = Math.max(3, Math.round(PLAN_SKELETON.minRunShare * S))
+    const isWall = (x: number, y: number): boolean => { if (x < 0 || y < 0 || x >= raster.width || y >= raster.height) return false; const i = (y * raster.width + x) * 4; return Math.abs(raster.data[i] - rgb[0]) <= PLAN_SKELETON.colourTol + 8 && Math.abs(raster.data[i + 1] - rgb[1]) <= PLAN_SKELETON.colourTol + 8 && Math.abs(raster.data[i + 2] - rgb[2]) <= PLAN_SKELETON.colourTol + 8 }
+    let stations = 0
+    let hit = 0
+    for (const e of edgesOf(outline)) {
+      const trim = Math.min((e.a1 - e.a0) * 0.1, d1 * 3)
+      for (let a = Math.round(e.a0 + trim); a <= e.a1 - trim; a += 2) {
+        stations += 1
+        let run = 0
+        let best = 0
+        for (let d = -reach; d <= reach; d += 1) {
+          const c = Math.round(e.c + d * e.inward)
+          if (e.dir === 'H' ? isWall(a, c) : isWall(c, a)) { run += 1; if (run > best) best = run } else run = 0
+        }
+        if (best >= minRun) hit += 1
+      }
+    }
+    coverage = stations > 0 ? Math.round((hit / stations) * 1000) / 1000 : 0
+  }
+  const byCoverage = coverage !== undefined && coverage >= PLAN_SKELETON.minCoverage
+  const filled = luma < PLAN_SKELETON.paperLuma && (share >= PLAN_SKELETON.minShare || byCoverage)
+  if (byCoverage) return { rgb, luma: Math.round(luma), share, coverage, filled, why: `the band just inside the traced outline holds ${rgb.join(',')} on ${(share * 100).toFixed(0)} % only, but that colour runs as a filled stroke along ${((coverage as number) * 100).toFixed(0)} % of the outline within the snap reach: this sheet's wall colour (the outline is traced a little off its walls)` }
+  return { rgb, luma: Math.round(luma), share, ...(coverage !== undefined ? { coverage } : {}), filled, why: filled ? `the band just inside the traced outline is ${rgb.join(',')} on ${(share * 100).toFixed(0)} % of its length: this sheet's wall colour` : luma >= PLAN_SKELETON.paperLuma ? `the band just inside the traced outline is paper (${rgb.join(',')}): the walls are not filled on this sheet, or the outline does not run on them` : `no colour holds ${(PLAN_SKELETON.minShare * 100).toFixed(0)} % of the band inside the traced outline (the commonest, ${rgb.join(',')}, ${(share * 100).toFixed(0)} %${coverage !== undefined ? `; as a filled stroke it runs along ${(coverage * 100).toFixed(0)} % of the outline, short of ${(PLAN_SKELETON.minCoverage * 100).toFixed(0)} %` : ''})` }
 }
 
 /** The sheet as the partition reader expects it: pixels of the sheet's wall colour painted as ink (a copy). */

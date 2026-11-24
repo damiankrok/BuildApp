@@ -50,7 +50,7 @@ import type { MassingObservations } from '../massing/ops.js'
 import { bindBuildInterior } from './interior.js'
 import type { InteriorObservation } from './interior.js'
 
-export const CORRECTION_EXECUTOR_VERSION = '1.10.0' as const
+export const CORRECTION_EXECUTOR_VERSION = '1.11.0' as const
 
 export type Side = 'FRONT' | 'RIGHT' | 'REAR' | 'LEFT'
 export const SIDES: readonly Side[] = ['FRONT', 'RIGHT', 'REAR', 'LEFT']
@@ -777,6 +777,34 @@ function roofMeet(m: CanonicalBuildingModel, side: Side, along: number, yMeet: n
   return hit ? { c: hit.c, how: 'ROOF_MEET_LINE' } : { c: peak.c, how: 'DISPLAY_ASSUMPTION' }
 }
 
+/** The gap kept between a chimney's face and a wall's inner face (metres). */
+export const CHIMNEY_WALL_CLEAR_M = 0.05
+/**
+ * A footprint slid along one axis until it stands inside the ring of exterior walls its centre is over (the walls' outer
+ * faces in by their thickness and `CHIMNEY_WALL_CLEAR_M`). Left as it is when its centre is over no ring, or when it does
+ * not fit between the two walls.
+ */
+export function clearOfWalls(m: CanonicalBuildingModel, f: { minX: number; maxX: number; minZ: number; maxZ: number }, slide: 'x' | 'z'): { minX: number; maxX: number; minZ: number; maxZ: number } {
+  const [cx, cz] = [(f.minX + f.maxX) / 2, (f.minZ + f.maxZ) / 2]
+  for (const ring of m.wallRings) {
+    const walls = m.walls.filter((w) => ring.wallIds.includes(w.id) && w.kind === 'EXTERIOR')
+    if (walls.length < 3) continue
+    const xs = walls.flatMap((w) => [w.start.x, w.end.x])
+    const zs = walls.flatMap((w) => [w.start.z, w.end.z])
+    const t = Math.max(...walls.map((w) => w.thickness)) + CHIMNEY_WALL_CLEAR_M
+    const [x0, x1, z0, z1] = [Math.min(...xs), Math.max(...xs), Math.min(...zs), Math.max(...zs)]
+    // the centre over this ring, counting the wall's own thickness (a stack at the wall line belongs to this body)
+    if (cx < x0 - 1e-6 || cx > x1 + 1e-6 || cz < z0 - 1e-6 || cz > z1 + 1e-6) continue
+    const [lo, hi] = slide === 'x' ? [x0 + t, x1 - t] : [z0 + t, z1 - t]
+    const [a, b] = slide === 'x' ? [f.minX, f.maxX] : [f.minZ, f.maxZ]
+    if (b - a > hi - lo) return f
+    const d = a < lo ? lo - a : b > hi ? hi - b : 0
+    if (d === 0) return f
+    return slide === 'x' ? { ...f, minX: r6(f.minX + d), maxX: r6(f.maxX + d) } : { ...f, minZ: r6(f.minZ + d), maxZ: r6(f.maxZ + d) }
+  }
+  return f
+}
+
 function bindChimney(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
   const m = ctx.model
   const f = p.patch ?? {}
@@ -822,7 +850,12 @@ function bindChimney(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
     }
     depth = meet.how
   }
-  const footprint = ax === 'x' ? { minX: a0, maxX: a1, minZ: r6(c0), maxZ: r6(c1) } : { minX: r6(c0), maxX: r6(c1), minZ: a0, maxZ: a1 }
+  const footprint0 = ax === 'x' ? { minX: a0, maxX: a1, minZ: r6(c0), maxZ: r6(c1) } : { minX: r6(c0), maxX: r6(c1), minZ: a0, maxZ: a1 }
+  // v3.54.20: a stack stands INSIDE the walls of the body it rises from. Its depth from one elevation is where it meets
+  // the roof — near the eaves that is the wall's own plane, and a stack coplanar with a wall face was rolled back whole
+  // (COPLANAR_DUPLICATE: two houses lost every chimney). It is slid, along the axis this elevation does not show, just
+  // inside that wall; its position along the elevation is the drawn one and is not moved.
+  const footprint = clearOfWalls(m, footprint0, ax === 'x' ? 'z' : 'x')
   // one stack seen from two sides is one stack: along this side's axis, a chimney already standing over most of the same
   // stretch is that stack (its depth from one view is not known well enough to tell two stacks apart behind each other)
   const alongOfChimney = (c: { footprint: { minX: number; maxX: number; minZ: number; maxZ: number } }): [number, number] => (ax === 'x' ? [c.footprint.minX, c.footprint.maxX] : [c.footprint.minZ, c.footprint.maxZ])
