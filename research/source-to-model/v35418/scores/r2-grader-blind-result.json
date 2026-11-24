@@ -1,0 +1,1813 @@
+{
+ "method": {
+  "inputs": "packs/<house>.png (source elevations, variant X, variant Y), refs/PROTOCOL.md section 3, refs/DEV-K.md, NEW-B.md, NEW-C.md. Nothing else was opened.",
+  "verdicts": "v = verdict against the model's own side names; vIfRotationIgnored given only where the model is consistently quarter-turned. Where a feature has several parts, OK means the majority is present at the drawn place and the note names what is missing.",
+  "counts": "Wall doors, garage doors, windows and glazings only; roof windows are covered by the feature verdicts. Positions were measured as a percentage of wall length on enlarged crops.",
+  "usefulRule": "PROTOCOL section 3. 'All F OK' was applied to the body, roof form, ridge direction and storey features (F1-F3); F4 items about eaves or shallow niches were treated as non-blocking, as the protocol says for eaves. This only matters for sakura X and is stated there.",
+  "identicalPairs": "aurora, medulin, jeziorko, mindelo and g6: X and Y panels are pixel-identical (0 differing pixels in both the elevation strip and the axonometric strip). ballina: only a few pixels of wall height differ.",
+  "notJudged": [
+   "Interiors, metric dimensions (out of scope of this verdict).",
+   "Aurora F1 'lower annex at the side': not visible in the four source elevations of the pack.",
+   "Ballina C1 chimneys: source shows none.",
+   "Materials only as flat colour zones; the renderer has no textures.",
+   "Left/right assignment of source side elevations is my own inference (chimneys, terrace furniture, niches), since the pack does not label the source images."
+  ]
+ },
+ "houses": {
+  "alaska": {
+   "X": {
+    "features": {
+     "F1": {
+      "v": "ZLA",
+      "note": "One plain rectangular block (correct), but the model's FRONT is the long eaves side; the gable ends sit on model RIGHT/LEFT. Source front is the short gable end.",
+      "vIfRotationIgnored": "OK"
+     },
+     "F2": {
+      "v": "ZLA",
+      "note": "Steep gable roof is there, but the ridge runs parallel to model FRONT (source: perpendicular to front). Correct once the quarter turn is ignored.",
+      "vIfRotationIgnored": "OK"
+     },
+     "F3": {
+      "v": "OK",
+      "note": "Ground floor + attic: eaves above ground floor, one window high in each gable."
+     },
+     "F4": {
+      "v": "OK",
+      "note": "Only a thin roof edge beyond the walls; reads as near-flush."
+     },
+     "S1": {
+      "v": "ZLA",
+      "note": "Model FRONT is a long side. A solid (brown) entrance-type door is on model LEFT gable. By the handedness of the long sides (source: glazing side on the left of the front, big glazing at the rear end) that gable is where the source has the REAR terrace door; the true-front gable (model RIGHT) carries a glazed door.",
+      "vIfRotationIgnored": "OK"
+     },
+     "O1": {
+      "v": "ZLA",
+      "note": "Solid door centred in a gable exists (model LEFT) but not on FRONT; relative to the long sides it is on the gable where the source draws the terrace door.",
+      "vIfRotationIgnored": "OK"
+     },
+     "O2": {
+      "v": "ZLA",
+      "note": "Attic window is centred in both gables, but neither gable is the model FRONT.",
+      "vIfRotationIgnored": "OK"
+     },
+     "O3": {
+      "v": "ZLA",
+      "note": "Other gable (model RIGHT): glazed door + attic window, as the source rear draws; wrong side name; and relative to the long sides it is the source-front end.",
+      "vIfRotationIgnored": "OK"
+     },
+     "O4": {
+      "v": "ZLA",
+      "note": "4 separate windows in a brown band on model REAR (source: right long side). Positions match the source drawing.",
+      "vIfRotationIgnored": "OK"
+     },
+     "O5": {
+      "v": "ZLA",
+      "note": "3 roof windows (2 left, 1 right) above the 4-window side, matching the source; the other slope has 4+1 like the source. Wrong side name only.",
+      "vIfRotationIgnored": "OK"
+     },
+     "C1": {
+      "v": "OK",
+      "note": "2 chimneys, one each side of the ridge, as drawn."
+     },
+     "C2": {
+      "v": "BRAK",
+      "note": "No canopy over any door."
+     },
+     "M1": {
+      "v": "ZLA",
+      "note": "Long sides: light wall + brown band at the windows (right idea). Gables are plain grey - the dark timber in a white frame is missing."
+     },
+     "M2": {
+      "v": "OK",
+      "note": "Dark grey roof."
+     }
+    },
+    "comparedWith": {
+     "FRONT": "source left long side (glazing + 2 windows)",
+     "RIGHT": "source gable (door + attic window)",
+     "REAR": "source right long side (4 windows)",
+     "LEFT": "source gable (door + attic window)"
+    },
+    "correct": {
+     "FRONT": 3,
+     "RIGHT": 2,
+     "REAR": 4,
+     "LEFT": 2
+    },
+    "phantoms": {
+     "FRONT": 0,
+     "RIGHT": 0,
+     "REAR": 0,
+     "LEFT": 0
+    },
+    "correctStrictSideNames": {
+     "FRONT": 0,
+     "RIGHT": 0,
+     "REAR": 0,
+     "LEFT": 0
+    },
+    "phantomsStrictSideNames": {
+     "FRONT": 3,
+     "RIGHT": 2,
+     "REAR": 4,
+     "LEFT": 2
+    },
+    "countNote": "correct/phantoms are counted against the source elevation the model side evidently depicts (rotation ignored); the *StrictSideNames counts compare model FRONT with source front etc. Roof windows not counted. Both gable doors are at the right place but their kinds are swapped (solid door on the rear-position gable, glazed door on the front-position gable).",
+    "rotatedConsistently": true,
+    "rotationNote": "Quarter turn: source front gable is on a model side. Long-side content, roof windows and chimneys match the source without mirroring; only the two gable door kinds are swapped end for end.",
+    "roofFormMatchesSource": true,
+    "useful": false,
+    "usefulWhy": "Fails (1) and (2) as labelled: model FRONT is the long side, ridge parallel to it; no entrance door on FRONT. All 11 wall openings exist at drawn positions, 0 phantoms.",
+    "usefulIfRotationIgnored": true,
+    "usefulIfRotationIgnoredWhy": "With the solid-door gable taken as the front: form, door, attic window, rear door+window and both long sides are all present with 0 phantoms. Caveat: the long sides are then left/right swapped relative to the source (equivalently: the two gable door kinds are swapped).",
+    "correctTotal": 11,
+    "phantomsTotal": 0
+   },
+   "Y": {
+    "features": {
+     "F1": {
+      "v": "ZLA",
+      "note": "One plain rectangular block, but model FRONT is the long eaves side (source front = short gable end).",
+      "vIfRotationIgnored": "OK"
+     },
+     "F2": {
+      "v": "ZLA",
+      "note": "Steep gable roof, ridge parallel to model FRONT (source: perpendicular).",
+      "vIfRotationIgnored": "OK"
+     },
+     "F3": {
+      "v": "OK",
+      "note": "Ground floor + attic, window high in each gable."
+     },
+     "F4": {
+      "v": "OK",
+      "note": "Thin roof edge only."
+     },
+     "S1": {
+      "v": "ZLA",
+      "note": "Model FRONT is the 4-window long side. No gable carries a solid entrance door: model LEFT gable has a glazed door + attic window, model RIGHT gable has only the attic window.",
+      "vIfRotationIgnored": "ZLA"
+     },
+     "O1": {
+      "v": "ZLA",
+      "note": "No solid entrance door anywhere. A glazed door-sized opening is centred in the gable that, by the handedness of the long sides, is the source front (model LEFT) - right place, wrong kind, wrong side name.",
+      "vIfRotationIgnored": "ZLA"
+     },
+     "O2": {
+      "v": "ZLA",
+      "note": "Attic window centred in both gables; neither gable is model FRONT.",
+      "vIfRotationIgnored": "OK"
+     },
+     "O3": {
+      "v": "ZLA",
+      "note": "The gable next to the big side glazing (source rear position, model RIGHT) has the attic window but NO terrace door.",
+      "vIfRotationIgnored": "ZLA"
+     },
+     "O4": {
+      "v": "ZLA",
+      "note": "4 separate windows in a brown band, on model FRONT (source: right long side). Positions match.",
+      "vIfRotationIgnored": "OK"
+     },
+     "O5": {
+      "v": "ZLA",
+      "note": "3 roof windows (2 left, 1 right) above that side as drawn; wrong side name only.",
+      "vIfRotationIgnored": "OK"
+     },
+     "C1": {
+      "v": "OK",
+      "note": "2 chimneys, one each side of the ridge."
+     },
+     "C2": {
+      "v": "BRAK",
+      "note": "No canopy."
+     },
+     "M1": {
+      "v": "ZLA",
+      "note": "Brown band at the long-side windows; gables plain grey, no dark timber / white frame."
+     },
+     "M2": {
+      "v": "OK",
+      "note": "Dark grey roof."
+     }
+    },
+    "comparedWith": {
+     "FRONT": "source right long side (4 windows)",
+     "RIGHT": "source gable (door + attic window)",
+     "REAR": "source left long side (glazing + 2 windows)",
+     "LEFT": "source gable (door + attic window)"
+    },
+    "correct": {
+     "FRONT": 4,
+     "RIGHT": 1,
+     "REAR": 3,
+     "LEFT": 2
+    },
+    "phantoms": {
+     "FRONT": 0,
+     "RIGHT": 0,
+     "REAR": 0,
+     "LEFT": 0
+    },
+    "correctStrictSideNames": {
+     "FRONT": 0,
+     "RIGHT": 0,
+     "REAR": 0,
+     "LEFT": 0
+    },
+    "phantomsStrictSideNames": {
+     "FRONT": 4,
+     "RIGHT": 1,
+     "REAR": 3,
+     "LEFT": 2
+    },
+    "countNote": "As for X. One gable has no door at all (1 source opening missing); the door that exists is glazed.",
+    "rotatedConsistently": true,
+    "rotationNote": "Quarter turn (opposite sense to X: the two variants are the same house turned 180 degrees to each other). Long sides, roof windows, chimneys match the source.",
+    "roofFormMatchesSource": true,
+    "useful": false,
+    "usefulWhy": "Fails (1)/(2) as labelled (front is the long side) and (3): there is no entrance door - only one glazed door on one gable; the other gable is blank below the attic window.",
+    "usefulIfRotationIgnored": false,
+    "usefulIfRotationIgnoredWhy": "Even ignoring the turn there is no entrance door (criterion 3) and one gable lost its door.",
+    "correctTotal": 10,
+    "phantomsTotal": 0
+   },
+   "sourceRoofForm": "steep gable (dwuspadowy), ridge perpendicular to the front, near-flush eaves",
+   "sourceSides": "front = gable with solid door + canopy + attic window; rear = gable with glazed terrace door + attic window; left long side = big glazing at the rear end + 2 windows (4+1 roof windows); right long side = 4 windows (3 roof windows). Left/right derived from the chimney with the aerial, which is on the right in the front view and on the near slope of the 4-window side.",
+   "better": "X",
+   "betterWhy": "X has a door-sized opening in both gables and one of them is a recognisable solid entrance door (11/11 wall openings placed, 0 phantoms); Y has no entrance door at all and one gable lost its door (10/11). Both are turned a quarter turn and both show a glazed door on the gable that is the true front by the long sides."
+  },
+  "aurora": {
+   "X": {
+    "features": {
+     "F1": {
+      "v": "OK",
+      "note": "Long rectangular block, long side is the front. Deviation: a flat-roofed entrance box projects from the front centre; the source elevations show no projecting volume there. The 'lower annex at the side' of the reference is not visible in the source elevations I was given and is not in the model either (that part not judged)."
+     },
+     "F2": {
+      "v": "OK",
+      "note": "Gable roof, ridge parallel to front."
+     },
+     "F3": {
+      "v": "OK",
+      "note": "Single storey."
+     },
+     "F4": {
+      "v": "OK",
+      "note": "Clear eaves overhang on the long sides and verges."
+     },
+     "S1": {
+      "v": "OK",
+      "note": "Model FRONT repeats the source front: three windows left, entrance right of centre, window at the right end."
+     },
+     "O1": {
+      "v": "OK",
+      "note": "Entrance at 59-72 % of the front (source door 58-64 %), but built as a brown box with the door leaf on its side cheek, not a door facing the street."
+     },
+     "O2": {
+      "v": "OK",
+      "note": "Three windows left (two large + one small high) and the window at the right end all sit where drawn; the wood between them is ragged brown patches. Extra brown door at the far left end of the front that the source does not have."
+     },
+     "O3": {
+      "v": "ZLA",
+      "note": "Right-hand pair of windows OK. The big terrace glazing (source: left third, 11-28 %) is in the middle (45-60 %); the left third has only a window inside a brown field; an extra window at the far right; a black triangular artefact on the wall."
+     },
+     "O4": {
+      "v": "OK",
+      "note": "The glazed gable is on the correct (right) end, but drawn as a full-width four-pane band instead of one ~3 m glazing plus a small corner window. The other gable, blank in the source, has a large phantom glazing."
+     },
+     "C1": {
+      "v": "OK",
+      "note": "3 chimneys."
+     },
+     "M1": {
+      "v": "OK",
+      "note": "Light wall with brown (wood) patches between windows on front and rear; patch outlines are jagged."
+     },
+     "M2": {
+      "v": "OK",
+      "note": "Dark roof."
+     }
+    },
+    "comparedWith": {
+     "FRONT": "source front",
+     "RIGHT": "source gable with glazing",
+     "REAR": "source rear",
+     "LEFT": "source blank gable"
+    },
+    "correct": {
+     "FRONT": 5,
+     "RIGHT": 2,
+     "REAR": 3,
+     "LEFT": 0
+    },
+    "phantoms": {
+     "FRONT": 1,
+     "RIGHT": 1,
+     "REAR": 2,
+     "LEFT": 1
+    },
+    "correctStrictSideNames": {
+     "FRONT": 5,
+     "RIGHT": 2,
+     "REAR": 3,
+     "LEFT": 0
+    },
+    "phantomsStrictSideNames": {
+     "FRONT": 1,
+     "RIGHT": 1,
+     "REAR": 2,
+     "LEFT": 1
+    },
+    "countNote": "FRONT phantom = brown door at far left. RIGHT: band covers the source glazing and corner window (2) and continues over the wood zone (1 phantom). REAR: 5 openings for the source's 3 large ones; terrace glazing counted as present although displaced. LEFT: source gable is blank; model has a large glazing (plus a small brown hatch not counted).",
+    "rotatedConsistently": false,
+    "roofFormMatchesSource": true,
+    "useful": false,
+    "usefulWhy": "F, S and the entrance pass, front openings 5/5. Fails (5): the left gable is blank in the source and carries a large phantom glazing (1 phantom > 0 correct). Rear is also loose (terrace glazing in the wrong third, 2 phantoms vs 3 correct).",
+    "usefulIfRotationIgnored": false,
+    "correctTotal": 10,
+    "phantomsTotal": 5
+   },
+   "Y": {
+    "features": {
+     "F1": {
+      "v": "OK",
+      "note": "Long rectangular block, long side is the front. Deviation: a flat-roofed entrance box projects from the front centre; the source elevations show no projecting volume there. The 'lower annex at the side' of the reference is not visible in the source elevations I was given and is not in the model either (that part not judged)."
+     },
+     "F2": {
+      "v": "OK",
+      "note": "Gable roof, ridge parallel to front."
+     },
+     "F3": {
+      "v": "OK",
+      "note": "Single storey."
+     },
+     "F4": {
+      "v": "OK",
+      "note": "Clear eaves overhang on the long sides and verges."
+     },
+     "S1": {
+      "v": "OK",
+      "note": "Model FRONT repeats the source front: three windows left, entrance right of centre, window at the right end."
+     },
+     "O1": {
+      "v": "OK",
+      "note": "Entrance at 59-72 % of the front (source door 58-64 %), but built as a brown box with the door leaf on its side cheek, not a door facing the street."
+     },
+     "O2": {
+      "v": "OK",
+      "note": "Three windows left (two large + one small high) and the window at the right end all sit where drawn; the wood between them is ragged brown patches. Extra brown door at the far left end of the front that the source does not have."
+     },
+     "O3": {
+      "v": "ZLA",
+      "note": "Right-hand pair of windows OK. The big terrace glazing (source: left third, 11-28 %) is in the middle (45-60 %); the left third has only a window inside a brown field; an extra window at the far right; a black triangular artefact on the wall."
+     },
+     "O4": {
+      "v": "OK",
+      "note": "The glazed gable is on the correct (right) end, but drawn as a full-width four-pane band instead of one ~3 m glazing plus a small corner window. The other gable, blank in the source, has a large phantom glazing."
+     },
+     "C1": {
+      "v": "OK",
+      "note": "3 chimneys."
+     },
+     "M1": {
+      "v": "OK",
+      "note": "Light wall with brown (wood) patches between windows on front and rear; patch outlines are jagged."
+     },
+     "M2": {
+      "v": "OK",
+      "note": "Dark roof."
+     }
+    },
+    "comparedWith": {
+     "FRONT": "source front",
+     "RIGHT": "source gable with glazing",
+     "REAR": "source rear",
+     "LEFT": "source blank gable"
+    },
+    "correct": {
+     "FRONT": 5,
+     "RIGHT": 2,
+     "REAR": 3,
+     "LEFT": 0
+    },
+    "phantoms": {
+     "FRONT": 1,
+     "RIGHT": 1,
+     "REAR": 2,
+     "LEFT": 1
+    },
+    "correctStrictSideNames": {
+     "FRONT": 5,
+     "RIGHT": 2,
+     "REAR": 3,
+     "LEFT": 0
+    },
+    "phantomsStrictSideNames": {
+     "FRONT": 1,
+     "RIGHT": 1,
+     "REAR": 2,
+     "LEFT": 1
+    },
+    "countNote": "FRONT phantom = brown door at far left. RIGHT: band covers the source glazing and corner window (2) and continues over the wood zone (1 phantom). REAR: 5 openings for the source's 3 large ones; terrace glazing counted as present although displaced. LEFT: source gable is blank; model has a large glazing (plus a small brown hatch not counted).",
+    "rotatedConsistently": false,
+    "roofFormMatchesSource": true,
+    "useful": false,
+    "usefulWhy": "F, S and the entrance pass, front openings 5/5. Fails (5): the left gable is blank in the source and carries a large phantom glazing (1 phantom > 0 correct). Rear is also loose (terrace glazing in the wrong third, 2 phantoms vs 3 correct).",
+    "usefulIfRotationIgnored": false,
+    "correctTotal": 10,
+    "phantomsTotal": 5
+   },
+   "sourceRoofForm": "gable (dwuspadowy), ridge parallel to the front, single storey",
+   "better": "SAME",
+   "betterWhy": "The X and Y renders are pixel-identical in all nine views (verified by pixel comparison), so there is nothing to choose between them.",
+   "identicalRenders": true
+  },
+  "ballina": {
+   "X": {
+    "features": {
+     "F1": {
+      "v": "OK",
+      "note": "One rectangular block, long side is the front."
+     },
+     "F2": {
+      "v": "OK",
+      "note": "Gable roof, ridge parallel to front."
+     },
+     "F3": {
+      "v": "OK",
+      "note": "Single storey, low eaves."
+     },
+     "F4": {
+      "v": "OK",
+      "note": "Eaves and verges project beyond the walls."
+     },
+     "S1": {
+      "v": "OK",
+      "note": "Front = long side with the door; all four sides correspond to the right source elevation."
+     },
+     "O1": {
+      "v": "OK",
+      "note": "Door at 63-70 % of the front, exactly as drawn (the brick field around it is not shown)."
+     },
+     "O2": {
+      "v": "OK",
+      "note": "Window left (16-25 %), two narrow windows (38-43 %, 53-56 %), window right (82-92 %) - all at the drawn positions."
+     },
+     "O3": {
+      "v": "OK",
+      "note": "Large glazing at 11-35 % of the rear, as drawn."
+     },
+     "O4": {
+      "v": "OK",
+      "note": "Two windows at 52-62 % and 79-89 % with a brown panel between them."
+     },
+     "O5": {
+      "v": "OK",
+      "note": "Right (east) gable: one window at 42-58 % inside a brown field on the front half; left (west) gable: one narrow window at centre."
+     },
+     "C1": {
+      "v": "NIEOCENIALNA",
+      "note": "Source elevations show no chimney; model has none."
+     },
+     "M1": {
+      "v": "ZLA",
+      "note": "Brown field on the east gable and brown panel on the rear are right; the brick field on the right half of the FRONT is missing (plain grey), and there is an unexplained brown strip along the bottom-left of the front."
+     },
+     "M2": {
+      "v": "OK",
+      "note": "Dark roof."
+     }
+    },
+    "comparedWith": {
+     "FRONT": "source front",
+     "RIGHT": "source east gable",
+     "REAR": "source rear",
+     "LEFT": "source west gable"
+    },
+    "correct": {
+     "FRONT": 5,
+     "RIGHT": 1,
+     "REAR": 3,
+     "LEFT": 1
+    },
+    "phantoms": {
+     "FRONT": 0,
+     "RIGHT": 0,
+     "REAR": 0,
+     "LEFT": 0
+    },
+    "correctStrictSideNames": {
+     "FRONT": 5,
+     "RIGHT": 1,
+     "REAR": 3,
+     "LEFT": 1
+    },
+    "phantomsStrictSideNames": {
+     "FRONT": 0,
+     "RIGHT": 0,
+     "REAR": 0,
+     "LEFT": 0
+    },
+    "countNote": "All ten wall openings of the source are present at the drawn positions. Window heads touch the eaves in the model; the source has a band of wall above them.",
+    "rotatedConsistently": false,
+    "roofFormMatchesSource": true,
+    "useful": true,
+    "usefulWhy": "All F OK, all sides on the right side, door OK, 5/5 front and 10/10 overall openings, no phantoms.",
+    "usefulIfRotationIgnored": true,
+    "variantNote": "Differs from Y only by marginally lower walls.",
+    "correctTotal": 10,
+    "phantomsTotal": 0
+   },
+   "Y": {
+    "features": {
+     "F1": {
+      "v": "OK",
+      "note": "One rectangular block, long side is the front."
+     },
+     "F2": {
+      "v": "OK",
+      "note": "Gable roof, ridge parallel to front."
+     },
+     "F3": {
+      "v": "OK",
+      "note": "Single storey, low eaves."
+     },
+     "F4": {
+      "v": "OK",
+      "note": "Eaves and verges project beyond the walls."
+     },
+     "S1": {
+      "v": "OK",
+      "note": "Front = long side with the door; all four sides correspond to the right source elevation."
+     },
+     "O1": {
+      "v": "OK",
+      "note": "Door at 63-70 % of the front, exactly as drawn (the brick field around it is not shown)."
+     },
+     "O2": {
+      "v": "OK",
+      "note": "Window left (16-25 %), two narrow windows (38-43 %, 53-56 %), window right (82-92 %) - all at the drawn positions."
+     },
+     "O3": {
+      "v": "OK",
+      "note": "Large glazing at 11-35 % of the rear, as drawn."
+     },
+     "O4": {
+      "v": "OK",
+      "note": "Two windows at 52-62 % and 79-89 % with a brown panel between them."
+     },
+     "O5": {
+      "v": "OK",
+      "note": "Right (east) gable: one window at 42-58 % inside a brown field on the front half; left (west) gable: one narrow window at centre."
+     },
+     "C1": {
+      "v": "NIEOCENIALNA",
+      "note": "Source elevations show no chimney; model has none."
+     },
+     "M1": {
+      "v": "ZLA",
+      "note": "Brown field on the east gable and brown panel on the rear are right; the brick field on the right half of the FRONT is missing (plain grey), and there is an unexplained brown strip along the bottom-left of the front."
+     },
+     "M2": {
+      "v": "OK",
+      "note": "Dark roof."
+     }
+    },
+    "comparedWith": {
+     "FRONT": "source front",
+     "RIGHT": "source east gable",
+     "REAR": "source rear",
+     "LEFT": "source west gable"
+    },
+    "correct": {
+     "FRONT": 5,
+     "RIGHT": 1,
+     "REAR": 3,
+     "LEFT": 1
+    },
+    "phantoms": {
+     "FRONT": 0,
+     "RIGHT": 0,
+     "REAR": 0,
+     "LEFT": 0
+    },
+    "correctStrictSideNames": {
+     "FRONT": 5,
+     "RIGHT": 1,
+     "REAR": 3,
+     "LEFT": 1
+    },
+    "phantomsStrictSideNames": {
+     "FRONT": 0,
+     "RIGHT": 0,
+     "REAR": 0,
+     "LEFT": 0
+    },
+    "countNote": "All ten wall openings of the source are present at the drawn positions. Window heads touch the eaves in the model; the source has a band of wall above them.",
+    "rotatedConsistently": false,
+    "roofFormMatchesSource": true,
+    "useful": true,
+    "usefulWhy": "All F OK, all sides on the right side, door OK, 5/5 front and 10/10 overall openings, no phantoms.",
+    "usefulIfRotationIgnored": true,
+    "variantNote": "Differs from X only by walls about 4 px (~3 %) taller, so the windows are marginally taller. No opening, side or form difference.",
+    "correctTotal": 10,
+    "phantomsTotal": 0
+   },
+   "sourceRoofForm": "gable (dwuspadowy), ridge parallel to the front, single storey, projecting eaves",
+   "better": "SAME",
+   "betterWhy": "The two variants differ only by a few pixels of wall height; every opening, side and material patch is the same. I cannot rank them on anything the source shows."
+  },
+  "alberto": {
+   "X": {
+    "features": {
+     "F1": {
+      "v": "OK",
+      "note": "One rectangular block, long side is the front."
+     },
+     "F2": {
+      "v": "OK",
+      "note": "Low gable roof, ridge parallel to front."
+     },
+     "F3": {
+      "v": "OK",
+      "note": "Single storey, low eaves."
+     },
+     "F4": {
+      "v": "ZLA",
+      "note": "Plain eaves present, but the roof is not carried down over an entrance porch (front right) or over the terrace (rear left)."
+     },
+     "S1": {
+      "v": "OK",
+      "note": "Model FRONT repeats the window layout of the source front (band left, window right) and the gables are at the sides - but the front has no entrance."
+     },
+     "O1": {
+      "v": "BRAK",
+      "note": "No entrance door anywhere on the front; the wall between the left band and the right window is blank."
+     },
+     "O2": {
+      "v": "OK",
+      "note": "One continuous glazing band at 11-42 % where the source has two windows with a wood panel between (9-40 %); brown panel below."
+     },
+     "O3": {
+      "v": "OK",
+      "note": "Single window at 83-92 %, as drawn."
+     },
+     "O4": {
+      "v": "OK",
+      "note": "Large near-full-height glazing at 9-26 % of the rear (source 12-28 %)."
+     },
+     "O5": {
+      "v": "OK",
+      "note": "Three windows at 38-48, 60-69, 80-90 % (source 40-49, 61-70, 80-89 %), brown panel between the last two."
+     },
+     "O6": {
+      "v": "ZLA",
+      "note": "Gable contents swapped: the single window is on the LEFT gable (blank in the source) and the RIGHT gable (source: window with shutters) is blank."
+     },
+     "C1": {
+      "v": "OK",
+      "note": "2 chimneys near the ridge."
+     },
+     "C2": {
+      "v": "BRAK",
+      "note": "No porch posts."
+     },
+     "M1": {
+      "v": "ZLA",
+      "note": "Plain grey walls; wood only in one gable triangle (source: both) and a brown panel under the front band; no stone, no wood at the entrance."
+     },
+     "M2": {
+      "v": "OK",
+      "note": "Dark grey roof."
+     }
+    },
+    "comparedWith": {
+     "FRONT": "source front",
+     "RIGHT": "source gable A (window with shutters)",
+     "REAR": "source rear",
+     "LEFT": "source gable B (blank)"
+    },
+    "correct": {
+     "FRONT": 3,
+     "RIGHT": 0,
+     "REAR": 4,
+     "LEFT": 0
+    },
+    "phantoms": {
+     "FRONT": 0,
+     "RIGHT": 0,
+     "REAR": 0,
+     "LEFT": 1
+    },
+    "correctStrictSideNames": {
+     "FRONT": 3,
+     "RIGHT": 0,
+     "REAR": 4,
+     "LEFT": 0
+    },
+    "phantomsStrictSideNames": {
+     "FRONT": 0,
+     "RIGHT": 0,
+     "REAR": 0,
+     "LEFT": 1
+    },
+    "countNote": "FRONT: source has 4 (two windows, door, window); model has the two windows as one band and the right window; door missing. RIGHT: source window missing. LEFT: 1 phantom window. Which gable is right/left derived from the terrace furniture (rear) visible beside each gable.",
+    "rotatedConsistently": false,
+    "roofFormMatchesSource": true,
+    "useful": false,
+    "usefulWhy": "Fails (3): no entrance door. Also (5) on the left gable (1 phantom, 0 correct). Form, rear (4/4) and front windows are right.",
+    "usefulIfRotationIgnored": false,
+    "correctTotal": 7,
+    "phantomsTotal": 1
+   },
+   "Y": {
+    "features": {
+     "F1": {
+      "v": "OK",
+      "note": "One rectangular block, long side is the front."
+     },
+     "F2": {
+      "v": "OK",
+      "note": "Low gable roof, ridge parallel to front."
+     },
+     "F3": {
+      "v": "OK",
+      "note": "Single storey."
+     },
+     "F4": {
+      "v": "ZLA",
+      "note": "Plain eaves only; no roof extension over porch or terrace."
+     },
+     "S1": {
+      "v": "OK",
+      "note": "Front = long side and it has an entrance door; gables at the sides."
+     },
+     "O1": {
+      "v": "ZLA",
+      "note": "A brown entrance door exists, but at the extreme right corner of the front (93-99 % of the wall; source 62-68 %, inside the porch). It is in the right half as the reference says, but about 4.5 m away from the drawn place and in a different third of the wall."
+     },
+     "O2": {
+      "v": "OK",
+      "note": "Glazing band at 11-42 % covers the two source windows, but it is flanked by more glazing on both sides, so the pair no longer reads as a pair."
+     },
+     "O3": {
+      "v": "OK",
+      "note": "Window at 83-92 % present (touching further glazing on its left)."
+     },
+     "O4": {
+      "v": "ZLA",
+      "note": "No large terrace glazing in the rear-left: there is a window at 1-11 %, a narrow window and a brown door-like panel at 26-35 %."
+     },
+     "O5": {
+      "v": "ZLA",
+      "note": "Instead of three separate windows there is a continuous six-pane glazing band from 38 % to 98 % of the rear."
+     },
+     "O6": {
+      "v": "ZLA",
+      "note": "RIGHT gable is glazed across its whole width (source: one window with shutters); LEFT gable (blank in the source) has a window."
+     },
+     "C1": {
+      "v": "OK",
+      "note": "2 chimneys near the ridge (brown, one very large)."
+     },
+     "C2": {
+      "v": "BRAK",
+      "note": "No porch posts."
+     },
+     "M1": {
+      "v": "OK",
+      "note": "Light walls, brown wood field at the entrance zone of the front and brown panels under the window bands; no stone."
+     },
+     "M2": {
+      "v": "OK",
+      "note": "Dark grey roof."
+     }
+    },
+    "comparedWith": {
+     "FRONT": "source front",
+     "RIGHT": "source gable A (window with shutters)",
+     "REAR": "source rear",
+     "LEFT": "source gable B (blank)"
+    },
+    "correct": {
+     "FRONT": 3,
+     "RIGHT": 1,
+     "REAR": 3,
+     "LEFT": 0
+    },
+    "phantoms": {
+     "FRONT": 4,
+     "RIGHT": 2,
+     "REAR": 5,
+     "LEFT": 1
+    },
+    "correctStrictSideNames": {
+     "FRONT": 3,
+     "RIGHT": 1,
+     "REAR": 3,
+     "LEFT": 0
+    },
+    "phantomsStrictSideNames": {
+     "FRONT": 4,
+     "RIGHT": 2,
+     "REAR": 5,
+     "LEFT": 1
+    },
+    "countNote": "FRONT phantoms: window at 1-11 %, glazing at 42-63 %, window at 70-83 %, and the door at the far corner (counted as a phantom because the source draws a stone wall there; the real door position is empty of a door). RIGHT: full-width three-pane band = 1 correct + 2 phantoms. REAR: 3 source windows covered, plus 3 extra panes, a far-left window and a brown door-like panel; the terrace glazing itself is missing.",
+    "rotatedConsistently": false,
+    "roofFormMatchesSource": true,
+    "useful": false,
+    "usefulWhy": "Fails (5) on three sides (rear 5 phantoms vs 3 correct, right 2 vs 1, left 1 vs 0; front 4 vs 3) and the entrance door is not where the source draws it. The house reads as glazed all round, which the source is not.",
+    "usefulIfRotationIgnored": false,
+    "correctTotal": 7,
+    "phantomsTotal": 12
+   },
+   "sourceRoofForm": "low gable (dwuspadowy, ~25 deg), ridge parallel to the front, roof extended over the entrance porch and the terrace",
+   "better": "X",
+   "betterWhy": "X places every opening it has where the source draws one (rear 4/4, front windows right, 1 phantom in total) but has no entrance door and puts the gable window on the wrong end; Y does have an entrance door (at the far corner) and wood at the entrance, but adds about a dozen phantom openings so that front, rear and one gable read as continuous glazing."
+  },
+  "medulin": {
+   "X": {
+    "features": {
+     "F1": {
+      "v": "ZLA",
+      "note": "Footprint is long and narrow with the short side to the front (about 1:2, right), but it is not one body: a narrow gabled core plus flat-roofed boxes along the whole left side (a two-storey one, a one-storey one at the rear-left, a small one at the entrance). The source is one volume under one roof."
+     },
+     "F2": {
+      "v": "ZLA",
+      "note": "Ridge direction is right (perpendicular to front) but the gable spans only the right ~55 % of the front width and is not as steep; the rest is flat-roofed. Source: one steep 45-degree gable over the whole width, left slope running lower."
+     },
+     "F3": {
+      "v": "ZLA",
+      "note": "Side walls are two full storeys high (eaves at about two thirds of the total height; source eaves at well under half, attic inside the roof)."
+     },
+     "F4": {
+      "v": "ZLA",
+      "note": "There is a lower piece at the front-left and a step at the rear, but as flat-roofed boxes, not as a set-back under the main roof."
+     },
+     "S1": {
+      "v": "OK",
+      "note": "Front is the short gable side with the garage door; sides and rear correspond to the right source elevations."
+     },
+     "O1": {
+      "v": "OK",
+      "note": "Garage door at 64-95 % of the front ground floor (source 62-90 %)."
+     },
+     "O2": {
+      "v": "BRAK",
+      "note": "No entrance door: at the door's place (16-29 %) there is a window, and next to the garage a brown box with a small window and dark posts."
+     },
+     "O3": {
+      "v": "OK",
+      "note": "Two windows in the upper part under the gable (one narrow, one square - not the tall pair drawn) plus an extra upper window in the flat-roofed part."
+     },
+     "O4": {
+      "v": "OK",
+      "note": "Rear: attic window and wide ground-floor window as drawn; the big corner glazing is present but only one storey high and inside a flat-roofed box."
+     },
+     "O5": {
+      "v": "ZLA",
+      "note": "Partly: the two ground-floor windows and the small high window are at the drawn positions, but there are no roof windows on that slope (source: a row of them)."
+     },
+     "O6": {
+      "v": "ZLA",
+      "note": "Partly: door, wide terrace glazing, two tall windows and the window in the brick field are all at the drawn ground-floor positions; but the roof windows have become three vertical windows in an upper-storey wall that the source does not have."
+     },
+     "C1": {
+      "v": "ZLA",
+      "note": "The terrace niche under the roof is rendered as a glazed flat-roofed box standing out from the side wall."
+     },
+     "M1": {
+      "v": "OK",
+      "note": "Brown (brick) on the front ground floor and on the correct parts of both long sides, light elsewhere."
+     },
+     "M2": {
+      "v": "OK",
+      "note": "Dark grey roof."
+     }
+    },
+    "comparedWith": {
+     "FRONT": "source front gable",
+     "RIGHT": "source right side",
+     "REAR": "source rear gable",
+     "LEFT": "source left side"
+    },
+    "correct": {
+     "FRONT": 3,
+     "RIGHT": 3,
+     "REAR": 3,
+     "LEFT": 5
+    },
+    "phantoms": {
+     "FRONT": 2,
+     "RIGHT": 0,
+     "REAR": 0,
+     "LEFT": 3
+    },
+    "correctStrictSideNames": {
+     "FRONT": 3,
+     "RIGHT": 3,
+     "REAR": 3,
+     "LEFT": 5
+    },
+    "phantomsStrictSideNames": {
+     "FRONT": 2,
+     "RIGHT": 0,
+     "REAR": 0,
+     "LEFT": 3
+    },
+    "countNote": "FRONT: garage + 2 upper windows correct, door missing; phantoms = window in the door's place and an upper window in the flat annex. LEFT: 5 ground-floor openings correct; 3 phantom upper-wall windows (source has roof windows there). Roof windows themselves not counted.",
+    "rotatedConsistently": false,
+    "roofFormMatchesSource": false,
+    "useful": false,
+    "usefulWhy": "Fails (1): F1, F2, F3 all wrong - gabled core with flat-roofed two-storey annexes instead of one steep-roofed volume - and (3): no entrance door. Opening positions on the ground floor are good (14 of 15).",
+    "usefulIfRotationIgnored": false,
+    "correctTotal": 14,
+    "phantomsTotal": 5
+   },
+   "Y": {
+    "features": {
+     "F1": {
+      "v": "ZLA",
+      "note": "Footprint is long and narrow with the short side to the front (about 1:2, right), but it is not one body: a narrow gabled core plus flat-roofed boxes along the whole left side (a two-storey one, a one-storey one at the rear-left, a small one at the entrance). The source is one volume under one roof."
+     },
+     "F2": {
+      "v": "ZLA",
+      "note": "Ridge direction is right (perpendicular to front) but the gable spans only the right ~55 % of the front width and is not as steep; the rest is flat-roofed. Source: one steep 45-degree gable over the whole width, left slope running lower."
+     },
+     "F3": {
+      "v": "ZLA",
+      "note": "Side walls are two full storeys high (eaves at about two thirds of the total height; source eaves at well under half, attic inside the roof)."
+     },
+     "F4": {
+      "v": "ZLA",
+      "note": "There is a lower piece at the front-left and a step at the rear, but as flat-roofed boxes, not as a set-back under the main roof."
+     },
+     "S1": {
+      "v": "OK",
+      "note": "Front is the short gable side with the garage door; sides and rear correspond to the right source elevations."
+     },
+     "O1": {
+      "v": "OK",
+      "note": "Garage door at 64-95 % of the front ground floor (source 62-90 %)."
+     },
+     "O2": {
+      "v": "BRAK",
+      "note": "No entrance door: at the door's place (16-29 %) there is a window, and next to the garage a brown box with a small window and dark posts."
+     },
+     "O3": {
+      "v": "OK",
+      "note": "Two windows in the upper part under the gable (one narrow, one square - not the tall pair drawn) plus an extra upper window in the flat-roofed part."
+     },
+     "O4": {
+      "v": "OK",
+      "note": "Rear: attic window and wide ground-floor window as drawn; the big corner glazing is present but only one storey high and inside a flat-roofed box."
+     },
+     "O5": {
+      "v": "ZLA",
+      "note": "Partly: the two ground-floor windows and the small high window are at the drawn positions, but there are no roof windows on that slope (source: a row of them)."
+     },
+     "O6": {
+      "v": "ZLA",
+      "note": "Partly: door, wide terrace glazing, two tall windows and the window in the brick field are all at the drawn ground-floor positions; but the roof windows have become three vertical windows in an upper-storey wall that the source does not have."
+     },
+     "C1": {
+      "v": "ZLA",
+      "note": "The terrace niche under the roof is rendered as a glazed flat-roofed box standing out from the side wall."
+     },
+     "M1": {
+      "v": "OK",
+      "note": "Brown (brick) on the front ground floor and on the correct parts of both long sides, light elsewhere."
+     },
+     "M2": {
+      "v": "OK",
+      "note": "Dark grey roof."
+     }
+    },
+    "comparedWith": {
+     "FRONT": "source front gable",
+     "RIGHT": "source right side",
+     "REAR": "source rear gable",
+     "LEFT": "source left side"
+    },
+    "correct": {
+     "FRONT": 3,
+     "RIGHT": 3,
+     "REAR": 3,
+     "LEFT": 5
+    },
+    "phantoms": {
+     "FRONT": 2,
+     "RIGHT": 0,
+     "REAR": 0,
+     "LEFT": 3
+    },
+    "correctStrictSideNames": {
+     "FRONT": 3,
+     "RIGHT": 3,
+     "REAR": 3,
+     "LEFT": 5
+    },
+    "phantomsStrictSideNames": {
+     "FRONT": 2,
+     "RIGHT": 0,
+     "REAR": 0,
+     "LEFT": 3
+    },
+    "countNote": "FRONT: garage + 2 upper windows correct, door missing; phantoms = window in the door's place and an upper window in the flat annex. LEFT: 5 ground-floor openings correct; 3 phantom upper-wall windows (source has roof windows there). Roof windows themselves not counted.",
+    "rotatedConsistently": false,
+    "roofFormMatchesSource": false,
+    "useful": false,
+    "usefulWhy": "Fails (1): F1, F2, F3 all wrong - gabled core with flat-roofed two-storey annexes instead of one steep-roofed volume - and (3): no entrance door. Opening positions on the ground floor are good (14 of 15).",
+    "usefulIfRotationIgnored": false,
+    "correctTotal": 14,
+    "phantomsTotal": 5
+   },
+   "sourceRoofForm": "steep gable (dwuspadowy 45 deg), ridge perpendicular to the front, one roof over the whole width with the left slope running lower",
+   "better": "SAME",
+   "betterWhy": "The X and Y renders are pixel-identical in all nine views.",
+   "identicalRenders": true
+  },
+  "jeziorko": {
+   "X": {
+    "features": {
+     "F1": {
+      "v": "OK",
+      "note": "One rectangular block under one roof, long side is the front."
+     },
+     "F2": {
+      "v": "OK",
+      "note": "Gable roof at about 30 degrees, ridge parallel to front."
+     },
+     "F3": {
+      "v": "OK",
+      "note": "Single storey, low eaves."
+     },
+     "F4": {
+      "v": "OK",
+      "note": "Open terrace bay under the same roof at the left end of the front (roof and slab continue past the end wall); the slatted screen is not modelled."
+     },
+     "S1": {
+      "v": "OK",
+      "note": "Front = long side with the door, terrace at its left end; rear and both gables correspond."
+     },
+     "O1": {
+      "v": "OK",
+      "note": "Door at 45-55 % of the living part (source 45-56 %)."
+     },
+     "O2": {
+      "v": "OK",
+      "note": "Large window at 9-22 % left of the door (source 7-21 %), with a brown strip beside it."
+     },
+     "O3": {
+      "v": "OK",
+      "note": "Small window at 69-80 % (source 70-80 %)."
+     },
+     "O4": {
+      "v": "OK",
+      "note": "Rear: window at 27-37 % next to a dark panel and a narrow window at 50-56 % (source 25-36 %, 49-56 %); the grey concrete panel is drawn almost black."
+     },
+     "O5": {
+      "v": "OK",
+      "note": "Terrace gable: large glazing at 24-75 % with a brown field beside it (source 25-74 % + wood)."
+     },
+     "O6": {
+      "v": "OK",
+      "note": "Other gable: one tall window at 32-48 % (source 33-48 %)."
+     },
+     "C1": {
+      "v": "OK",
+      "note": "1 chimney near the ridge."
+     },
+     "M1": {
+      "v": "OK",
+      "note": "Light walls, dark panel at the correct place on the rear, wood on the terrace gable; the front wood band is reduced to a narrow strip by the window."
+     },
+     "M2": {
+      "v": "OK",
+      "note": "Dark grey roof."
+     }
+    },
+    "comparedWith": {
+     "FRONT": "source front",
+     "RIGHT": "source plain gable",
+     "REAR": "source rear",
+     "LEFT": "source terrace gable"
+    },
+    "correct": {
+     "FRONT": 3,
+     "RIGHT": 1,
+     "REAR": 2,
+     "LEFT": 1
+    },
+    "phantoms": {
+     "FRONT": 0,
+     "RIGHT": 0,
+     "REAR": 0,
+     "LEFT": 0
+    },
+    "correctStrictSideNames": {
+     "FRONT": 3,
+     "RIGHT": 1,
+     "REAR": 2,
+     "LEFT": 1
+    },
+    "phantomsStrictSideNames": {
+     "FRONT": 0,
+     "RIGHT": 0,
+     "REAR": 0,
+     "LEFT": 0
+    },
+    "rotatedConsistently": false,
+    "roofFormMatchesSource": true,
+    "useful": true,
+    "usefulWhy": "All F OK including the roofed terrace bay, all four sides on the right side, entrance door OK, 3/3 front and 7/7 overall openings, no phantoms.",
+    "usefulIfRotationIgnored": true,
+    "correctTotal": 7,
+    "phantomsTotal": 0
+   },
+   "Y": {
+    "features": {
+     "F1": {
+      "v": "OK",
+      "note": "One rectangular block under one roof, long side is the front."
+     },
+     "F2": {
+      "v": "OK",
+      "note": "Gable roof at about 30 degrees, ridge parallel to front."
+     },
+     "F3": {
+      "v": "OK",
+      "note": "Single storey, low eaves."
+     },
+     "F4": {
+      "v": "OK",
+      "note": "Open terrace bay under the same roof at the left end of the front (roof and slab continue past the end wall); the slatted screen is not modelled."
+     },
+     "S1": {
+      "v": "OK",
+      "note": "Front = long side with the door, terrace at its left end; rear and both gables correspond."
+     },
+     "O1": {
+      "v": "OK",
+      "note": "Door at 45-55 % of the living part (source 45-56 %)."
+     },
+     "O2": {
+      "v": "OK",
+      "note": "Large window at 9-22 % left of the door (source 7-21 %), with a brown strip beside it."
+     },
+     "O3": {
+      "v": "OK",
+      "note": "Small window at 69-80 % (source 70-80 %)."
+     },
+     "O4": {
+      "v": "OK",
+      "note": "Rear: window at 27-37 % next to a dark panel and a narrow window at 50-56 % (source 25-36 %, 49-56 %); the grey concrete panel is drawn almost black."
+     },
+     "O5": {
+      "v": "OK",
+      "note": "Terrace gable: large glazing at 24-75 % with a brown field beside it (source 25-74 % + wood)."
+     },
+     "O6": {
+      "v": "OK",
+      "note": "Other gable: one tall window at 32-48 % (source 33-48 %)."
+     },
+     "C1": {
+      "v": "OK",
+      "note": "1 chimney near the ridge."
+     },
+     "M1": {
+      "v": "OK",
+      "note": "Light walls, dark panel at the correct place on the rear, wood on the terrace gable; the front wood band is reduced to a narrow strip by the window."
+     },
+     "M2": {
+      "v": "OK",
+      "note": "Dark grey roof."
+     }
+    },
+    "comparedWith": {
+     "FRONT": "source front",
+     "RIGHT": "source plain gable",
+     "REAR": "source rear",
+     "LEFT": "source terrace gable"
+    },
+    "correct": {
+     "FRONT": 3,
+     "RIGHT": 1,
+     "REAR": 2,
+     "LEFT": 1
+    },
+    "phantoms": {
+     "FRONT": 0,
+     "RIGHT": 0,
+     "REAR": 0,
+     "LEFT": 0
+    },
+    "correctStrictSideNames": {
+     "FRONT": 3,
+     "RIGHT": 1,
+     "REAR": 2,
+     "LEFT": 1
+    },
+    "phantomsStrictSideNames": {
+     "FRONT": 0,
+     "RIGHT": 0,
+     "REAR": 0,
+     "LEFT": 0
+    },
+    "rotatedConsistently": false,
+    "roofFormMatchesSource": true,
+    "useful": true,
+    "usefulWhy": "All F OK including the roofed terrace bay, all four sides on the right side, entrance door OK, 3/3 front and 7/7 overall openings, no phantoms.",
+    "usefulIfRotationIgnored": true,
+    "correctTotal": 7,
+    "phantomsTotal": 0
+   },
+   "sourceRoofForm": "gable (dwuspadowy 30 deg), ridge parallel to the front, roof continued over an open terrace at one end",
+   "better": "SAME",
+   "betterWhy": "The X and Y renders are pixel-identical in all nine views.",
+   "identicalRenders": true
+  },
+  "mindelo": {
+   "X": {
+    "features": {
+     "F1": {
+      "v": "ZLA",
+      "note": "Long main body parallel to the front is right, but the front is one flat plane: no garage wing stepping forward. At the rear there are two flat-roofed boxes with a gap between them."
+     },
+     "F2": {
+      "v": "ZLA",
+      "note": "Main gable roof with ridge parallel to the front is right; the cross gable over the garage is missing (only a brown trapezoid painted above the garage door)."
+     },
+     "F3": {
+      "v": "OK",
+      "note": "Single storey, low eaves."
+     },
+     "F4": {
+      "v": "BRAK",
+      "note": "No cross gable at the rear; the terrace gap is flanked by flat-roofed boxes."
+     },
+     "S1": {
+      "v": "OK",
+      "note": "Front = long side with the garage door; rear has the terrace gap and glazing in wood."
+     },
+     "O1": {
+      "v": "OK",
+      "note": "Wide dark garage door at 63-85 % of the front (source 63-86 %), though flush under the main eaves and with a stray window overlapping its corner."
+     },
+     "O2": {
+      "v": "ZLA",
+      "note": "At the entrance niche (49-59 %) the model shows a second dark sectional garage-type door; the only entrance-type (brown) door is at the far left (9-15 %) where the source has windows."
+     },
+     "O3": {
+      "v": "OK",
+      "note": "Four openings at 5-9, 15-19, 28-32, 38-42 % match the four drawn windows (the fourth is a small square, not a tall slit); no wood bands."
+     },
+     "O4": {
+      "v": "ZLA",
+      "note": "The middle of the rear is a large black panel, not glazing, and has no gable over it."
+     },
+     "O5": {
+      "v": "OK",
+      "note": "Left of the gap two openings, right of it three large glazings in brown wood, as drawn."
+     },
+     "O6": {
+      "v": "ZLA",
+      "note": "Both end walls are dark gables with one small square window each; no tall glazing, no wood, no garage wall with horizontal window."
+     },
+     "C1": {
+      "v": "OK",
+      "note": "Thin chimney stacks near the ridge (2-3 visible)."
+     },
+     "C2": {
+      "v": "ZLA",
+      "note": "There is a gap between two rear boxes where the terrace is, but nothing roofs it."
+     },
+     "M1": {
+      "v": "ZLA",
+      "note": "Wood only on the rear boxes; front is light panels on dark grey, end walls dark grey (source: wood gables, wood bands on the front). Garage door dark (right)."
+     },
+     "M2": {
+      "v": "OK",
+      "note": "Dark grey roof."
+     }
+    },
+    "comparedWith": {
+     "FRONT": "source front",
+     "RIGHT": "source side with garage wall",
+     "REAR": "source rear",
+     "LEFT": "source other side"
+    },
+    "correct": {
+     "FRONT": 6,
+     "RIGHT": 1,
+     "REAR": 4,
+     "LEFT": 1
+    },
+    "phantoms": {
+     "FRONT": 2,
+     "RIGHT": 1,
+     "REAR": 1,
+     "LEFT": 0
+    },
+    "correctStrictSideNames": {
+     "FRONT": 6,
+     "RIGHT": 1,
+     "REAR": 4,
+     "LEFT": 1
+    },
+    "phantomsStrictSideNames": {
+     "FRONT": 2,
+     "RIGHT": 1,
+     "REAR": 1,
+     "LEFT": 0
+    },
+    "countNote": "FRONT: 4 windows + garage + right-end window correct; entrance not counted (garage-type door in its place); phantoms = brown door at far left, window overlapping the garage door. REAR: left glazing + three right glazings correct, black centre panel not counted, one extra narrow window. Side windows are counted as correct only for position; they are much smaller than the drawn tall glazing.",
+    "rotatedConsistently": false,
+    "roofFormMatchesSource": false,
+    "useful": false,
+    "usefulWhy": "Fails (1): no projecting garage wing and neither cross gable (F1, F2), and (3): the entrance is drawn as a second garage door while a brown door appears at the far left.",
+    "usefulIfRotationIgnored": false,
+    "correctTotal": 12,
+    "phantomsTotal": 4
+   },
+   "Y": {
+    "features": {
+     "F1": {
+      "v": "ZLA",
+      "note": "Long main body parallel to the front is right, but the front is one flat plane: no garage wing stepping forward. At the rear there are two flat-roofed boxes with a gap between them."
+     },
+     "F2": {
+      "v": "ZLA",
+      "note": "Main gable roof with ridge parallel to the front is right; the cross gable over the garage is missing (only a brown trapezoid painted above the garage door)."
+     },
+     "F3": {
+      "v": "OK",
+      "note": "Single storey, low eaves."
+     },
+     "F4": {
+      "v": "BRAK",
+      "note": "No cross gable at the rear; the terrace gap is flanked by flat-roofed boxes."
+     },
+     "S1": {
+      "v": "OK",
+      "note": "Front = long side with the garage door; rear has the terrace gap and glazing in wood."
+     },
+     "O1": {
+      "v": "OK",
+      "note": "Wide dark garage door at 63-85 % of the front (source 63-86 %), though flush under the main eaves and with a stray window overlapping its corner."
+     },
+     "O2": {
+      "v": "ZLA",
+      "note": "At the entrance niche (49-59 %) the model shows a second dark sectional garage-type door; the only entrance-type (brown) door is at the far left (9-15 %) where the source has windows."
+     },
+     "O3": {
+      "v": "OK",
+      "note": "Four openings at 5-9, 15-19, 28-32, 38-42 % match the four drawn windows (the fourth is a small square, not a tall slit); no wood bands."
+     },
+     "O4": {
+      "v": "ZLA",
+      "note": "The middle of the rear is a large black panel, not glazing, and has no gable over it."
+     },
+     "O5": {
+      "v": "OK",
+      "note": "Left of the gap two openings, right of it three large glazings in brown wood, as drawn."
+     },
+     "O6": {
+      "v": "ZLA",
+      "note": "Both end walls are dark gables with one small square window each; no tall glazing, no wood, no garage wall with horizontal window."
+     },
+     "C1": {
+      "v": "OK",
+      "note": "Thin chimney stacks near the ridge (2-3 visible)."
+     },
+     "C2": {
+      "v": "ZLA",
+      "note": "There is a gap between two rear boxes where the terrace is, but nothing roofs it."
+     },
+     "M1": {
+      "v": "ZLA",
+      "note": "Wood only on the rear boxes; front is light panels on dark grey, end walls dark grey (source: wood gables, wood bands on the front). Garage door dark (right)."
+     },
+     "M2": {
+      "v": "OK",
+      "note": "Dark grey roof."
+     }
+    },
+    "comparedWith": {
+     "FRONT": "source front",
+     "RIGHT": "source side with garage wall",
+     "REAR": "source rear",
+     "LEFT": "source other side"
+    },
+    "correct": {
+     "FRONT": 6,
+     "RIGHT": 1,
+     "REAR": 4,
+     "LEFT": 1
+    },
+    "phantoms": {
+     "FRONT": 2,
+     "RIGHT": 1,
+     "REAR": 1,
+     "LEFT": 0
+    },
+    "correctStrictSideNames": {
+     "FRONT": 6,
+     "RIGHT": 1,
+     "REAR": 4,
+     "LEFT": 1
+    },
+    "phantomsStrictSideNames": {
+     "FRONT": 2,
+     "RIGHT": 1,
+     "REAR": 1,
+     "LEFT": 0
+    },
+    "countNote": "FRONT: 4 windows + garage + right-end window correct; entrance not counted (garage-type door in its place); phantoms = brown door at far left, window overlapping the garage door. REAR: left glazing + three right glazings correct, black centre panel not counted, one extra narrow window. Side windows are counted as correct only for position; they are much smaller than the drawn tall glazing.",
+    "rotatedConsistently": false,
+    "roofFormMatchesSource": false,
+    "useful": false,
+    "usefulWhy": "Fails (1): no projecting garage wing and neither cross gable (F1, F2), and (3): the entrance is drawn as a second garage door while a brown door appears at the far left.",
+    "usefulIfRotationIgnored": false,
+    "correctTotal": 12,
+    "phantomsTotal": 4
+   },
+   "sourceRoofForm": "gable main roof (ridge parallel to the front) with two cross gables: over the projecting garage at the front and over the terrace at the rear",
+   "better": "SAME",
+   "betterWhy": "The X and Y renders are pixel-identical in all nine views.",
+   "identicalRenders": true
+  },
+  "sakura": {
+   "X": {
+    "features": {
+     "F1": {
+      "v": "OK",
+      "note": "One compact rectangular block, long side is the front. Depth is about 20 % short (front:side about 1.77 against 1.43 drawn)."
+     },
+     "F2": {
+      "v": "OK",
+      "note": "Hip roof with a short ridge parallel to the front - the form the source draws."
+     },
+     "F3": {
+      "v": "OK",
+      "note": "Single storey."
+     },
+     "F4": {
+      "v": "ZLA",
+      "note": "Eaves run all round (right), but neither the entrance niche nor the terrace niche is cut into the outline."
+     },
+     "S1": {
+      "v": "OK",
+      "note": "Front = long side with the entrance; rear and both sides correspond."
+     },
+     "O1": {
+      "v": "OK",
+      "note": "Door at 42-48 % of the front (source 43-48 %)."
+     },
+     "O2": {
+      "v": "OK",
+      "note": "Horizontal window at 7-24 % and two narrow windows at 57-60 % and 75-78 % as drawn; the glazing at the right end (85-94 %) is missing."
+     },
+     "O3": {
+      "v": "OK",
+      "note": "Three door-height glazings at 9-18, 32-41, 54-64 % as drawn; the fourth, widest one at the right end (terrace niche) is missing."
+     },
+     "O4": {
+      "v": "OK",
+      "note": "Right side: two glazings in the rear half (drawn at 53-67 and 75-88 %, modelled about 10 % further forward); left side: blank except a brown door/panel at the rear end, as drawn. No wood plane."
+     },
+     "C1": {
+      "v": "ZLA",
+      "note": "3 chimneys: two small at the ridge (as drawn) plus a large one low on a hip that the source does not show."
+     },
+     "M1": {
+      "v": "ZLA",
+      "note": "Light grey walls; no graphite, no wood fields."
+     },
+     "M2": {
+      "v": "OK",
+      "note": "Dark roof."
+     }
+    },
+    "comparedWith": {
+     "FRONT": "source front",
+     "RIGHT": "source side with two glazings",
+     "REAR": "source rear",
+     "LEFT": "source near-blank side"
+    },
+    "correct": {
+     "FRONT": 4,
+     "RIGHT": 2,
+     "REAR": 3,
+     "LEFT": 1
+    },
+    "phantoms": {
+     "FRONT": 0,
+     "RIGHT": 0,
+     "REAR": 0,
+     "LEFT": 0
+    },
+    "correctStrictSideNames": {
+     "FRONT": 4,
+     "RIGHT": 2,
+     "REAR": 3,
+     "LEFT": 1
+    },
+    "phantomsStrictSideNames": {
+     "FRONT": 0,
+     "RIGHT": 0,
+     "REAR": 0,
+     "LEFT": 0
+    },
+    "countNote": "Source has 5 on the front and 4 on the rear; the right-end glazing is missing on both. Which side elevation is right/left derived from the terrace niche (rear-left corner in the rear view).",
+    "rotatedConsistently": false,
+    "roofFormMatchesSource": true,
+    "useful": true,
+    "usefulWhy": "F1-F3 OK with the correct hip roof, front and all other sides on the right side, entrance door OK, front 4/5 (80 %), all sides 10/12 (83 %), no phantoms. F4 fails only on the two shallow niches, which I treated as non-blocking detail; if every F item must be OK this becomes false.",
+    "usefulIfRotationIgnored": true,
+    "correctTotal": 10,
+    "phantomsTotal": 0
+   },
+   "Y": {
+    "features": {
+     "F1": {
+      "v": "OK",
+      "note": "One compact rectangular block, long side is the front; depth about 20 % short."
+     },
+     "F2": {
+      "v": "ZLA",
+      "note": "Gable roof with full gable walls at both ends; the source draws a hip roof."
+     },
+     "F3": {
+      "v": "OK",
+      "note": "Single storey."
+     },
+     "F4": {
+      "v": "ZLA",
+      "note": "No eaves line across the ends (gable walls instead), no niches."
+     },
+     "S1": {
+      "v": "OK",
+      "note": "Front = long side with the entrance."
+     },
+     "O1": {
+      "v": "OK",
+      "note": "Door at 42-48 % of the front."
+     },
+     "O2": {
+      "v": "OK",
+      "note": "Horizontal window left and two narrow windows right as drawn; right-end glazing missing; an extra brown door is attached to the second narrow window (78-83 %)."
+     },
+     "O3": {
+      "v": "OK",
+      "note": "Three glazings as drawn; right-end terrace glazing missing; a thin brown door strip at the far right end."
+     },
+     "O4": {
+      "v": "OK",
+      "note": "Right side: two glazings, but with an extra brown door between them; left side: brown door/panel at the rear end only."
+     },
+     "C1": {
+      "v": "OK",
+      "note": "2 small chimneys at the ridge."
+     },
+     "M1": {
+      "v": "ZLA",
+      "note": "Light grey walls; no graphite, no wood."
+     },
+     "M2": {
+      "v": "OK",
+      "note": "Dark roof."
+     }
+    },
+    "comparedWith": {
+     "FRONT": "source front",
+     "RIGHT": "source side with two glazings",
+     "REAR": "source rear",
+     "LEFT": "source near-blank side"
+    },
+    "correct": {
+     "FRONT": 4,
+     "RIGHT": 2,
+     "REAR": 3,
+     "LEFT": 1
+    },
+    "phantoms": {
+     "FRONT": 1,
+     "RIGHT": 1,
+     "REAR": 1,
+     "LEFT": 0
+    },
+    "correctStrictSideNames": {
+     "FRONT": 4,
+     "RIGHT": 2,
+     "REAR": 3,
+     "LEFT": 1
+    },
+    "phantomsStrictSideNames": {
+     "FRONT": 1,
+     "RIGHT": 1,
+     "REAR": 1,
+     "LEFT": 0
+    },
+    "countNote": "Same openings as X plus three extra brown doors (front, right side, far end of the rear - the last one is only a thin strip).",
+    "rotatedConsistently": false,
+    "roofFormMatchesSource": false,
+    "useful": false,
+    "usefulWhy": "Fails (1): roof is a gable, the source is a hip roof (F2). Openings would pass (front 4/5, overall 10/12, phantoms never exceed correct).",
+    "usefulIfRotationIgnored": false,
+    "correctTotal": 10,
+    "phantomsTotal": 3
+   },
+   "sourceRoofForm": "hip roof (czterospadowy / kopertowy) with a short ridge, eaves all round",
+   "better": "X",
+   "betterWhy": "X has the hip roof the source draws; Y has a gable roof with two gable walls that do not exist in the source. Y also adds three brown doors the source does not have; the remaining openings are the same in both."
+  },
+  "g6": {
+   "X": {
+    "features": {
+     "F1": {
+      "v": "OK",
+      "note": "One rectangular block with the long side to the front; somewhat too elongated (about 1.6:1 against 1.4:1) and without the shallow side projection."
+     },
+     "F2": {
+      "v": "ZLA",
+      "note": "Gable roof with full gable walls; the source draws a hip roof with a short ridge."
+     },
+     "F3": {
+      "v": "OK",
+      "note": "One storey of wall with the roof space above."
+     },
+     "F4": {
+      "v": "ZLA",
+      "note": "Eaves on the long sides only; no gablet over the side window."
+     },
+     "S1": {
+      "v": "ZLA",
+      "note": "Model FRONT has neither garage door nor entrance door, so nothing marks it as the front; orientation is only inferable from the blank rear and one window per side."
+     },
+     "O1": {
+      "v": "BRAK",
+      "note": "No garage door: the front wall is blank where the source has a two-car door."
+     },
+     "O2": {
+      "v": "BRAK",
+      "note": "No entrance door; a window stands at the door's position (79-90 % of the front)."
+     },
+     "O3": {
+      "v": "OK",
+      "note": "One window per side wall near the middle (one drawn as two narrow panes, the other as one wide pane, both somewhat off-centre)."
+     },
+     "O4": {
+      "v": "OK",
+      "note": "Rear wall has no openings."
+     },
+     "C1": {
+      "v": "BRAK",
+      "note": "No porch posts."
+     },
+     "M1": {
+      "v": "ZLA",
+      "note": "Walls are near-black; source is red brick with a light plinth and a wood-coloured garage door."
+     },
+     "M2": {
+      "v": "OK",
+      "note": "Dark roof."
+     }
+    },
+    "comparedWith": {
+     "FRONT": "source front (garage + door)",
+     "RIGHT": "source side",
+     "REAR": "source rear (blank)",
+     "LEFT": "source side"
+    },
+    "correct": {
+     "FRONT": 0,
+     "RIGHT": 1,
+     "REAR": 0,
+     "LEFT": 1
+    },
+    "phantoms": {
+     "FRONT": 1,
+     "RIGHT": 0,
+     "REAR": 0,
+     "LEFT": 0
+    },
+    "correctStrictSideNames": {
+     "FRONT": 0,
+     "RIGHT": 1,
+     "REAR": 0,
+     "LEFT": 1
+    },
+    "phantomsStrictSideNames": {
+     "FRONT": 1,
+     "RIGHT": 0,
+     "REAR": 0,
+     "LEFT": 0
+    },
+    "countNote": "FRONT: source has 2 (garage door, entrance door), model has neither; the window in the door's place is counted as a phantom. Each double side window counted as one opening.",
+    "rotatedConsistently": false,
+    "roofFormMatchesSource": false,
+    "useful": false,
+    "usefulWhy": "Fails (1) hip roof drawn as gable, (3) no garage door and no entrance door, (4) 0 % of front openings, (5) front has 1 phantom and 0 correct. It does not read as a garage building at all.",
+    "usefulIfRotationIgnored": false,
+    "correctTotal": 2,
+    "phantomsTotal": 1
+   },
+   "Y": {
+    "features": {
+     "F1": {
+      "v": "OK",
+      "note": "One rectangular block with the long side to the front; somewhat too elongated (about 1.6:1 against 1.4:1) and without the shallow side projection."
+     },
+     "F2": {
+      "v": "ZLA",
+      "note": "Gable roof with full gable walls; the source draws a hip roof with a short ridge."
+     },
+     "F3": {
+      "v": "OK",
+      "note": "One storey of wall with the roof space above."
+     },
+     "F4": {
+      "v": "ZLA",
+      "note": "Eaves on the long sides only; no gablet over the side window."
+     },
+     "S1": {
+      "v": "ZLA",
+      "note": "Model FRONT has neither garage door nor entrance door, so nothing marks it as the front; orientation is only inferable from the blank rear and one window per side."
+     },
+     "O1": {
+      "v": "BRAK",
+      "note": "No garage door: the front wall is blank where the source has a two-car door."
+     },
+     "O2": {
+      "v": "BRAK",
+      "note": "No entrance door; a window stands at the door's position (79-90 % of the front)."
+     },
+     "O3": {
+      "v": "OK",
+      "note": "One window per side wall near the middle (one drawn as two narrow panes, the other as one wide pane, both somewhat off-centre)."
+     },
+     "O4": {
+      "v": "OK",
+      "note": "Rear wall has no openings."
+     },
+     "C1": {
+      "v": "BRAK",
+      "note": "No porch posts."
+     },
+     "M1": {
+      "v": "ZLA",
+      "note": "Walls are near-black; source is red brick with a light plinth and a wood-coloured garage door."
+     },
+     "M2": {
+      "v": "OK",
+      "note": "Dark roof."
+     }
+    },
+    "comparedWith": {
+     "FRONT": "source front (garage + door)",
+     "RIGHT": "source side",
+     "REAR": "source rear (blank)",
+     "LEFT": "source side"
+    },
+    "correct": {
+     "FRONT": 0,
+     "RIGHT": 1,
+     "REAR": 0,
+     "LEFT": 1
+    },
+    "phantoms": {
+     "FRONT": 1,
+     "RIGHT": 0,
+     "REAR": 0,
+     "LEFT": 0
+    },
+    "correctStrictSideNames": {
+     "FRONT": 0,
+     "RIGHT": 1,
+     "REAR": 0,
+     "LEFT": 1
+    },
+    "phantomsStrictSideNames": {
+     "FRONT": 1,
+     "RIGHT": 0,
+     "REAR": 0,
+     "LEFT": 0
+    },
+    "countNote": "FRONT: source has 2 (garage door, entrance door), model has neither; the window in the door's place is counted as a phantom. Each double side window counted as one opening.",
+    "rotatedConsistently": false,
+    "roofFormMatchesSource": false,
+    "useful": false,
+    "usefulWhy": "Fails (1) hip roof drawn as gable, (3) no garage door and no entrance door, (4) 0 % of front openings, (5) front has 1 phantom and 0 correct. It does not read as a garage building at all.",
+    "usefulIfRotationIgnored": false,
+    "correctTotal": 2,
+    "phantomsTotal": 1
+   },
+   "sourceRoofForm": "hip roof (czterospadowy, 35 deg) with a short ridge and a small gablet over one side window",
+   "better": "SAME",
+   "betterWhy": "The X and Y renders are pixel-identical in all nine views.",
+   "identicalRenders": true
+  }
+ }
+}

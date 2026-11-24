@@ -55,3 +55,27 @@ odczytanym faktem". Progów pomiaru nie poluzowałem w żadnym miejscu.
 2. Bryła ze źródeł o dwóch–trzech skrzydłach z własnymi dachami (Medulin, Mindelo) i dach czterospadowy (Sakura, G6).
 3. Przeniesienie pomieszczeń przy zamianie bryły, żeby poprawa zewnętrza nie kosztowała wnętrza.
 4. Obrót modelu do stron źródła, gdy elewacje są podpisane o ćwierć obrotu.
+
+## R2 — kontynuacja (2026-11-24, APK 1350)
+
+Pełny opis: §16 raportu. Krótko:
+
+- **Dom pod sakurą ma dach czterospadowy** — cztery połacie pod kątem, który rysuje elewacja (~30°), z okapem.
+  Wcześniej każdy taki dach wychodził dwuspadowy albo był odmową.
+- **Alberto** ma dach 25,2° (strona wydawcy podaje 25°; było 30,7°) i szczyty bez zmyślonego szkła: zmyślonych otworów
+  było około 12, jest 1. Cena: nie ma drzwi wejściowych i zniknęło wnętrze (bryła została zbudowana od nowa ze źródeł).
+- **Alaska** ma drzwi na obu szczytach, a to, który szczyt jest frontem, rozstrzyga teraz wejście zaznaczone na rzucie.
+  Nadal źle: długie boki są zamienione (podpis „elewacja boczna" nie mówi, która jest lewa).
+- **Ballina** wychodzi tak samo dobrze jak przedtem, ale już nie „na styk" — jeden z przebiegów po drodze zostawił ją
+  bez dachu; przyczyna znaleziona, przypadek odtworzony i naprawiony.
+- **Bez zmian:** Medulin, Mindelo (zła bryła), G6 (dach czterospadowy rozpoznany i zaproponowany, ale rysunek nie
+  rozstrzyga na błędnej bryle), Aurora, Jeziorko.
+- Niezależny oceniający (nie wiedział, który wariant jest który): R2 bliżej rysunków w 3 z 9 domów, bez różnicy w 6,
+  gorzej w żadnym. Miniatur użytecznych 2 → 3, przy czym trzecia (Sakura) jest warunkowa i nie jest już „ślepa".
+  **Obiecany wcześniej próg nadal nie jest osiągnięty.**
+- Po drodze znalazłem 10 kolejnych miejsc, w których ginęła dobra informacja (lista #12–#21 w raporcie), między innymi:
+  szczyt bez okien był w ogóle pomijany jako „przekrój"; szczyt narysowany samą krawędzią dachu był brany za połać;
+  wysokość ściany brano spod okapu, gdzie ścianę zasłania podbitka. Progów pomiaru nie poluzowałem.
+- Koszt R2: 1,88 USD (62 żądania); księga łącznie 36,33 USD przy pułapie 68,54 USD.
+- Dysk: usunąłem stare pliki robocze (z ok. 0,1 GB wolnego zrobiło się 6,5 GB); nagrania odpowiedzi API, pamięci bajtów
+  i modele zostały.

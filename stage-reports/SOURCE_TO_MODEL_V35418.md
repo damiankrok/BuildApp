@@ -9,6 +9,9 @@ do odczytu, H2 i benchmark OWNER-a nieotwierane. Klucz czytany wyłącznie z pli
 nie ma go w Gicie, logach, APK, zrzutach ani ZIP-ach (skan przed commitem i przed spakowaniem). Rysunki wydawców nie są
 w repozytorium — tylko w prywatnej dostawie.
 
+**Kontynuacja R2 (2026-11-24, kod `35f5ee1`, APK 1350): §16** — dach czterospadowy, szczyty i okap czytane z rysunku,
+kierunek obrotu z wejścia na rzucie; co nadal nie działa, stoi tam na początku.
+
 ## 0. Werdykt (uczciwie, najpierw to, co się nie udało)
 
 **Cel zapisany z góry nie został osiągnięty.** Protokół wymagał, żeby liczba „użytecznych rozpoznawalnych miniatur"
@@ -522,3 +525,165 @@ APK osobno: `BuildPlan-Model-Preview-1349-arm64-v8a.apk` + `VERSION-1349.txt`.
 Wszystkie obrazy modeli w raporcie i galerii to rzeczywiste rendery jednego renderera (`neutral-flat/1`): te same
 kamery, skala, paleta i światło dla każdego wariantu. Znaczniki: LIVE (świeże żądania), REPLAY (te same nagrane
 odpowiedzi — porównanie algorytmu), HOST (publiczny host), KONTROLA (nie użyto).
+
+## 16. R2 — kontynuacja po dostawie 1349 (2026-11-24)
+
+Zlecenie OWNER-a po dostawie: uporządkować dysk i kontynuować. Dysk: usunięto stare katalogi robocze i pośrednie pliki
+sprzed v3.54.14 (z 106 MB wolnego zrobiło się 6,5 GB); zostały pamięci bajtów, nagrane odpowiedzi API, modele i wszystkie
+katalogi v3.54.14–18. Praca szła według listy „co dalej" z §12; ten rozdział mówi, co z niej zrobiono, co wyszło i co
+nadal nie działa. Progów pomiaru nie poluzowano w żadnym miejscu; próg bramki źródła, tolerancje rejestracji i reguła
+„bryła zastępująca LOCAL nie może być niczym zaprzeczona" zostały jak były.
+
+### 16.0 Werdykt (najpierw to, co nie wyszło)
+
+- **G6 nadal bez poprawy.** Dach czterospadowy jest teraz rozpoznany i zaproponowany, ale bramka źródła nie rozstrzyga
+  (`SOURCE_UNDECIDED`): bryła LOCAL ma 11,80 × 7,41 m przy drukowanych 11,32 × 8,02 m, a bryły ze źródeł nie da się
+  zbudować, bo rzut nie ma skali (na rzucie parteru odczytano jeden wymiar). Model zostaje dwuspadowy.
+- **Medulin i Mindelo bez zmian** (bryły wieloskrzydłowe LOCAL) — tego R2 nie ruszał.
+- **Alberto nie ma drzwi wejściowych** (bramka: z 0,39 — drzwi pod podcieniem rysowane jasno na jasnym) i **stracił
+  wnętrze**: bryła LOCAL (73 ściany, 2 pomieszczenia) została zastąpiona bryłą ze źródeł (4 ściany).
+- **Alaska: długie boki zamienione według recenzenta.** Kierunek obrotu rozstrzyga teraz wejście z rzutu i oba szczyty
+  mają drzwi tam, gdzie stawia je rzut, ale podpis „elewacja boczna" (dwa razy ten sam) nie mówi, która jest lewa —
+  etykieta `WEST` to zgadnięcie LOCAL, nadal przenoszone.
+- **Wykończenia na bryle ze źródeł** recenzent cofa równie często, jak zostawia (Alberto: szary dom bez kamienia
+  i drewna).
+- Ślepa ocena R2 i jej ograniczenia: §16.5.
+
+Co wyszło: **Dom pod sakurą ma dach czterospadowy** (cztery połacie ~30°, kalenica 4,9 m od ścian szczytowych, okap
+0,85 m — tyle, ile rysuje elewacja); **Alberto ma dach 25,2° przy 25° ze strony wydawcy** (było 30,7°), ścianę
+pod okapem na 3,17 m i szczyty bez zmyślonych przeszkleń; **Alaska ma drzwi na obu szczytach**; **Ballina** wychodzi
+30,4° i nie zależy już od przypadku na granicy tolerancji; **G6 nie jest już „obrócony o 90°"** przez artefakt.
+
+### 16.1 Kolejne miejsca pierwszej straty (ciąg dalszy listy z §2)
+
+| # | Gdzie ginęła informacja | Dowód | Co zrobiono |
+|---|---|---|---|
+| 12 | Elewacja szczytowa bez otworów była odrzucana przez klasyfikator treści jako „przekrój" i nigdy nie trafiała do szkicu | Alberto: 4 elewacje na stronie, 3 czytane; Aurora: 5 i 3 | ramka zostaje (podpis wydawcy + piksele ortogonalne), ekstraktory LOCAL jej nie czytają, czytnik elewacji tak; zdarzenie `ELEVATION_READ_DESPITE_LOCAL_CONTENT_VETO` |
+| 13 | Przy wymianie bryły LOCAL ginęły luki okien z rzutu — drugi rysunek, który mógł potwierdzić okno z elewacji | Alberto po odczytaniu szczytu: 1 otwór w modelu | luki zostają jako świadek (`PLAN_GAP`, nigdy „zweryfikowane źródłem"); Alberto: 6 otworów przyjętych tą drogą |
+| 14 | Szczyt narysowany samą wiatrownicą (dwie belki, bez powierzchni) był liczony jak połać („pas") | Ballina: cztery widoki = cztery „pasy", oś kalenicy z remisu; Alberto: szczyt = „pas" | gdzie dach jest pusty u podstawy, szerokość w wierszu to szerokość obrysu |
+| 15 | Okap przy ścianie brano z widoku wzdłuż kalenicy, gdzie ścianę zasłania okap i podbitka | Alberto: 2,53 / 2,70 m pod okapem, 3,17 m na szczycie → dach 34,2° i ściana 2,27 m; okna z głową na 2,34–2,52 m niewycięte i wycofane | okap przy ścianie z naroża ściany na widoku szczytu, jeśli widoki wzdłuż kalenicy mu nie przeczą |
+| 16 | Trapez na elewacji = „dach czterospadowy, poza zakresem" | Sakura zbudowana dwuspadowo 36°, G6: `UNSUPPORTED` | forma HIP: odczyt, bryła, `SET_ROOF HIP`, bramka źródła |
+| 17 | Kąt dachu czterospadowego liczony od lica ściany, a okap rysowany jest na końcu wysięgu | Sakura: 36,2° przy narysowanych 30° | kąt od najniższej krawędzi przez wysięg i połowę rozpiętości |
+| 18 | „Obrót o 90°" dowodzony parą przeciwległych elewacji | G6: 2,62 / 2,14 m jak opisano (dwa różne wiersze terenu) „zgadzało się" po obrocie jako 1,65 / 1,35 m | obrót wymaga widoków na obu osiach bryły |
+| 19 | KTÓRY ćwierćobrót — konwencja | Alaska: recenzent: drzwi wejściowe i tarasowe na zamienionych szczytach | odczyt rzutu podaje wejście główne (tylko gdy rzut je oznacza); ono wybiera kierunek |
+| 20 | Kalenica = niższa z dwóch środkowych wartości przy czterech widokach | Ballina: raz bryła ze źródeł odrzucona na jednej rejestracji i dom został bez dachu (zachowane: `r2c/ballina-fail1`) | prawdziwa mediana; ten sam nagrany przypadek odtworzony i naprawiony |
+| 21 | Krótka kalenica (jedna piąta długości) czytana jako „trójkąt" | G6: dach czterospadowy proponowany na widoku, który go nie stanowi | poziomy szczyt ≥ 1 m i ≥ 10 % odcinka to kalenica |
+
+Każdą regułę odczytu przeliczono najpierw offline na nagranych szkicach wszystkich dziewięciu domów
+(`research/source-to-model/v35418/diag-massing.ts`, 0 USD) — dopiero potem poszły żądania.
+
+### 16.2 Co wdrożono
+
+`massing.ts` 1.3.0, `ops.ts` 1.7.0, rejestr korekt 1.6.0 (`roofKind: HIP`), wykonawca 1.8.0, `plan-outline.ts` 1.1.0
+(prompt `plan-outline/2`), `source-analyzer/analyze.ts`. Wszystkie wersje wchodzą do klucza przyjętej rewizji.
+Dach czterospadowy to cztery `roofPlanes` o stałych identyfikatorach `roof-<bryła>-{minZ,maxZ,minX,maxX}`; ściany pod
+nim kończą się poziomo pod spodem połaci (ściany szczytowe pod kątem własnej połaci). Model nie dostał nowego typu
+dachu ani nowego jądra — użyto istniejącego `createRoofPlane`. Szczegóły decyzji: ADR, sekcja R2.
+
+### 16.3 Testy przyczynowe i kontrpróby
+
+`packages/analysis-service/test/hip-v35418.test.ts` (21 testów) i `plan-outline-v35418.test.ts` (3), na kontrolowanych
+rysunkach o znanych wymiarach (nie na domach z próby). Każdy mechanizm ma próbę, która ma NIE przejść:
+
+- dach czterospadowy czytany i budowany zamknięty (wzdłuż X i Z, z okapem i bez, krótka kalenica, ostrosłup); **kontra:**
+  ten sam dom narysowany dwuspadowo zostaje dwuspadowy; HIP zaproponowany na rysunku dwuspadowym — odmowa (kształt,
+  a przy „dorysowanym" trapezie bramka źródła); HIP podany na ścianie szczytowej — `HIP_RUN_NOT_SEEN`, nic nie zbudowane;
+- kąt z okapu przez wysięg; **kontra:** bez wysięgu ta sama krawędź daje dach o ponad 2,5° bardziej stromy;
+- wiatrownica = szczyt; **kontra:** wypełniona połać zostaje pasem; ostrosłup zostaje trójkątem;
+- okap z naroża szczytu; **kontry:** widok wzdłuż kalenicy rysuje ścianę wyżej → mediana jak dawniej, niepotwierdzona;
+  ściana niżej, niż wysięg może zasłonić → też;
+- obrót tylko z obu osi; **kontra:** przeciwległe elewacje niezgodne co do wysokości → „jak opisano", nigdy „obrócone";
+- kierunek obrotu z wejścia; **kontry:** wejście na boku, na którym żaden obrót nie stawia frontu → konwencja nazwana;
+  wskazówka nie obraca elewacji, których wysokości zgadzają się jak opisano; punkt w narożniku albo w środku domu →
+  żaden bok.
+
+Macierz na drzewie R2: 4565 testów — 4536 zaliczonych, 18 niezaliczonych, 11 pominiętych. 16 niezaliczonych to ta sama
+lista bazowa co w §13 (bez zmian). Pozostałe 2 to testy czasowe wątków hosta (`apps/analyzer-api/test/worker.test.ts`):
+przegrały z obciążeniem maszyny (równolegle renderowała się galeria i pracował oceniający), a uruchomione osobno na tym
+samym drzewie przechodzą 3 z 3. Żaden test kodu tej rundy nie zawodzi. Po dodaniu scen: `packages/mobile-scene` 120 z 120.
+Zapis: `stage-reports/artifacts/v35418/matrix-r2-summary.json`.
+
+### 16.4 Pomiar: model oddany z APK 1349 obok R2
+
+Te same bajty źródeł i te same nagrane odczyty elewacji (Alberto i Aurora: z dodatkowo odczytanym szczytem z #12);
+odczyt rzutu (nowy prompt) i recenzja — na żywo. Kod: `35f5ee1` (sceny i dokumenty: `9816a43`). Liczniki z modeli
+(`stage-reports/artifacts/v35418/r2-summary.json`).
+
+| Dom | 1349: dach | R2: dach | Otwory zewn. 1349 → R2 | Bryła | Stan recenzji R2 |
+|---|---|---|---|---|---|
+| Alaska | dwuspad. 40°, okap 4,25 | dwuspad. 38,2°, okap 4,16 | 10 → 11 (drzwi 2 → 3) | ze źródeł; obrót, wejście po lewej (z rzutu) | NEEDS_EVIDENCE: 2 KEY (długie boki zamienione) |
+| Aurora | bez zmian | bez zmian | 19 → 19 | LOCAL | RECOGNIZABLE_PARTIAL; pusty szczyt odczytany, odłożony (13 px przy tolerancji 8) |
+| Ballina | dwuspad. 30,1° | dwuspad. 30,4° | 10 → 10 | ze źródeł | RECOGNIZABLE_PARTIAL, 10 zamkniętych |
+| Alberto | dwuspad. 30,7°, okap 2,82 | dwuspad. 25,2°, okap 3,45 (strona: 25°) | 18 → 7 | LOCAL → ze źródeł (wnętrze utracone) | RECOGNIZABLE_PARTIAL; brak drzwi wejściowych |
+| Medulin | bez zmian | bez zmian | 24 → 24 | LOCAL | bez zmian |
+| Jeziorko | bez zmian | bez zmian | 7 → 7 | LOCAL | bez zmian |
+| Mindelo | bez zmian | bez zmian | 18 → 18 | LOCAL | bez zmian |
+| Sakura | dwuspad. 36,1° | **czterospad.** 4 połacie 29,7–29,9°, okap 0,87 | 9 → 9 | ze źródeł | 1 KEY otwarty (operacja nieobsługiwana) |
+| G6 | dwuspad. 35° | dwuspad. 35° (HIP: `SOURCE_UNDECIDED`) | 4 → 4 | LOCAL | bez zmian; orientacja: jak opisano (było: obrócone) |
+
+Alberto: 18 → 7 to nie strata okien ze źródła, tylko zniknięcie zmyślonych — w 1349 prawy szczyt był pasem szkła,
+front prawie cały przeszklony; w R2 każdy z siedmiu otworów przeszedł bramkę na rysunku wydawcy (6 z nich ze świadkiem
+z rzutu). Jednocześnie R2 nie ma drzwi wejściowych ani wnętrza — to jest zamiana, nie czysty zysk.
+
+Odczyt wejścia z rzutu na dziewięciu domach: Alaska lewy bok; Aurora, Ballina, Jeziorko front; Sakura i Mindelo —
+punkt w zagłębieniu obrysu, żaden bok nie wzięty; Alberto, Medulin — rzut nie oznacza; G6 — nie oznacza. Na żadnym domu
+czytanym „jak opisano" wskazówka niczego nie zmieniła.
+
+### 16.5 Ślepa ocena R2
+
+Ten sam sposób co w §7: niezależny oceniający dostał dla każdego domu rysunki wydawcy i dwa warianty X / Y (losowo
+„oddany 1349" albo „R2"; nowe losowanie, klucz poza jego zasięgiem), listy cech spisane przed pierwszą oceną i kryterium
+z PROTOCOL §3. **To nie jest próba ślepa na nowych domach** — to te same dziewięć, a reguły R2 powstały na ich błędach.
+Wynik odpowiada na pytanie „czy R2 jest bliżej rysunków niż 1349", nie „czy przenosi się na nowe linki".
+
+| Dom | Bliżej źródła | Użyteczna 1349 → R2 | Poprawne duże otwory 1349 → R2 | Zmyślone otwory 1349 → R2 | Forma dachu zgodna 1349 → R2 |
+|---|---|---|---|---|---|
+| Alaska | **R2** | nie → nie | 10 → 11 | 0 → 0 | tak → tak |
+| Aurora | bez różnicy (obrazy identyczne) | nie → nie | 10 → 10 | 5 → 5 | tak → tak |
+| Ballina | bez różnicy | tak → tak | 10 → 10 | 0 → 0 | tak → tak |
+| Alberto | **R2** | nie → nie | 7 → 7 | 12 → 1 | tak → tak |
+| Medulin | bez różnicy (identyczne) | nie → nie | 14 → 14 | 5 → 5 | nie → nie |
+| Jeziorko | bez różnicy (identyczne) | tak → tak | 7 → 7 | 0 → 0 | tak → tak |
+| Mindelo | bez różnicy (identyczne) | nie → nie | 12 → 12 | 4 → 4 | nie → nie |
+| Sakura | **R2** | nie → **tak** | 10 → 10 | 3 → 0 | nie → **tak** |
+| G6 | bez różnicy (identyczne) | nie → nie | 2 → 2 | 1 → 1 | nie → nie |
+
+R2 bliżej źródła w 3 z 9 domów, bez różnicy w 6, gorzej w żadnym. Miniatur użytecznych według oceniającego: 2 → 3
+(dochodzi Sakura). Zastrzeżenia oceniającego, powtórzone bez łagodzenia:
+
+- **Sakura „użyteczna" jest warunkowa:** cechy F1–F3 są OK, F4 (dwie płytkie wnęki) nie; oceniający uznał wnęki za
+  szczegół nieblokujący. Przy ścisłym „każda cecha F musi być OK" Sakura zostaje nieużyteczna i wynik to 2 → 2.
+  Głębokość bryły jest o ok. 20 % za mała (L uproszczone do prostokąta).
+- **Alaska nadal nie przechodzi „jak opisano":** frontem modelu jest długi bok (ćwierćobrót wobec nazw stron źródła);
+  R2 ma komplet 11 otworów na rysowanych miejscach i drzwi wejściowe, ale według długich boków pełne drzwi wejściowe
+  stoją na szczycie w pozycji tylnej — to samo, co zgłosił recenzent („długie boki zamienione").
+- **Alberto:** R2 nie ma drzwi wejściowych, a okno szczytowe jest na niewłaściwym końcu; 1349 miał drzwi, ale w złym
+  miejscu (93–99 % ściany przy rysowanych 62–68 %) i około tuzina zmyślonych przeszkleń.
+- Przypisanie rysunków źródła do stron jest wnioskiem oceniającego (plansze nie podpisują lewej i prawej).
+
+Próg zapisany z góry w PROTOCOL (o 2 miniatury użyteczne więcej na sześciu domach DEV-K + NEW-B) **pozostaje
+nieosiągnięty**: na tych sześciu jest 2 → 2. Jedyna nowa „użyteczna" to Sakura z dawnej próby ślepej, która ślepą już
+nie jest. Surowe wyniki, klucz i odkodowanie: `research/source-to-model/v35418/scores/r2-grader-*.json`.
+
+### 16.6 Budżet
+
+Jedna, ta sama księga (`research/ai-assist/spend-ledger-v35417r3.json`). Po dostawie 1349: 34,452762 USD. Po R2:
+36,330447 USD — R2 kosztował 1,877685 USD w 62 żądaniach (odczyt dwóch pominiętych szczytów, odczyty rzutu,
+recenzje dostarczonych rewizji, powtórki po każdej zmianie reguły; diagnostyka offline 0 USD). Zero otwartych rezerwacji. Pułap 68,542857 USD bez zmian.
+
+### 16.7 APK i dostawa R2
+
+APK `BuildPlan-Model-Preview-1350-arm64-v8a.apk` (wersja 1350, `0.1350.0-owner`) zbudowany zwykłym
+`./gradlew --offline -PpreviewVersionCode=1350 previewApks` z commita `9816a43`, podpisany tym samym kluczem co 1349
+(instaluje się na wierzch), 44 sceny, cztery sceny R2 pierwsze: Sakura z dachem czterospadowym, Alberto, Alaska,
+Ballina — każda podpisana tym, czym jest, z zachowanymi porażkami w podtytule. Zapis: `VERSION-1350.txt`
+(`stage-reports/artifacts/v35418/VERSION-1350.txt`). Na urządzeniu nie sprawdzono (`ANDROID_UI_NOT_VERIFIED`: w tej sesji
+nie ma telefonu ani emulatora).
+
+Prywatna dostawa R2 (poza Gitem — zawiera rysunki wydawców): zwykłe, niezależne archiwa ZIP poniżej 30 000 000 B,
+z jednym folderem głównym `BuildPlan-V35418-R2/`, własnym `README-<część>.txt` i `MANIFEST-<część>.sha256`; po
+rozpakowaniu do jednego katalogu `gallery.html` działa offline. W galerii dla każdego z dziewięciu domów: oryginały
+wydawcy, kolorowe szkice (PNG / SVG / JSON), cztery strony z werdyktem użycia, model oddany z 1349 obok R2 z tego samego
+renderera, plansza porównawcza (źródło | szkic | 1349 | R2), rzut bez dachu, a dla każdego wariantu model, scena,
+korekty, zdarzenia i odpowiedzi API. Sumy SHA-256 archiwów: plik `BuildPlan-V35418-R2-SHA256.txt` dostarczony obok.
+Listę archiwów i wynik weryfikacji po rozpakowaniu zawiera `stage-reports/artifacts/v35418/r2-delivery-verification.json`.

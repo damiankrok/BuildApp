@@ -1,0 +1,218 @@
+{
+ "alaska": {
+  "key": {
+   "X": "r2",
+   "Y": "delivered1349"
+  },
+  "better": "r2",
+  "betterWhy": "X has a door-sized opening in both gables and one of them is a recognisable solid entrance door (11/11 wall openings placed, 0 phantoms); Y has no entrance door at all and one gable lost its door (10/11). Both are turned a quarter turn and both show a glazed door on the gable that is the true front by the long sides.",
+  "delivered1349": {
+   "useful": false,
+   "usefulIfRotationIgnored": false,
+   "correct": 10,
+   "phantoms": 0,
+   "roofFormMatchesSource": true,
+   "usefulWhy": "Fails (1)/(2) as labelled (front is the long side) and (3): there is no entrance door - only one glazed door on one gable; the other gable is blank below the attic window."
+  },
+  "r2": {
+   "useful": false,
+   "usefulIfRotationIgnored": true,
+   "correct": 11,
+   "phantoms": 0,
+   "roofFormMatchesSource": true,
+   "usefulWhy": "Fails (1) and (2) as labelled: model FRONT is the long side, ridge parallel to it; no entrance door on FRONT. All 11 wall openings exist at drawn positions, 0 phantoms."
+  }
+ },
+ "aurora": {
+  "key": {
+   "X": "delivered1349",
+   "Y": "r2"
+  },
+  "better": "SAME",
+  "betterWhy": "The X and Y renders are pixel-identical in all nine views (verified by pixel comparison), so there is nothing to choose between them.",
+  "delivered1349": {
+   "useful": false,
+   "usefulIfRotationIgnored": false,
+   "correct": 10,
+   "phantoms": 5,
+   "roofFormMatchesSource": true,
+   "usefulWhy": "F, S and the entrance pass, front openings 5/5. Fails (5): the left gable is blank in the source and carries a large phantom glazing (1 phantom > 0 correct). Rear is also loose (terrace glazing in the wrong third, 2 phantoms vs 3 correct)."
+  },
+  "r2": {
+   "useful": false,
+   "usefulIfRotationIgnored": false,
+   "correct": 10,
+   "phantoms": 5,
+   "roofFormMatchesSource": true,
+   "usefulWhy": "F, S and the entrance pass, front openings 5/5. Fails (5): the left gable is blank in the source and carries a large phantom glazing (1 phantom > 0 correct). Rear is also loose (terrace glazing in the wrong third, 2 phantoms vs 3 correct)."
+  }
+ },
+ "ballina": {
+  "key": {
+   "X": "delivered1349",
+   "Y": "r2"
+  },
+  "better": "SAME",
+  "betterWhy": "The two variants differ only by a few pixels of wall height; every opening, side and material patch is the same. I cannot rank them on anything the source shows.",
+  "delivered1349": {
+   "useful": true,
+   "usefulIfRotationIgnored": true,
+   "correct": 10,
+   "phantoms": 0,
+   "roofFormMatchesSource": true,
+   "usefulWhy": "All F OK, all sides on the right side, door OK, 5/5 front and 10/10 overall openings, no phantoms."
+  },
+  "r2": {
+   "useful": true,
+   "usefulIfRotationIgnored": true,
+   "correct": 10,
+   "phantoms": 0,
+   "roofFormMatchesSource": true,
+   "usefulWhy": "All F OK, all sides on the right side, door OK, 5/5 front and 10/10 overall openings, no phantoms."
+  }
+ },
+ "alberto": {
+  "key": {
+   "X": "r2",
+   "Y": "delivered1349"
+  },
+  "better": "r2",
+  "betterWhy": "X places every opening it has where the source draws one (rear 4/4, front windows right, 1 phantom in total) but has no entrance door and puts the gable window on the wrong end; Y does have an entrance door (at the far corner) and wood at the entrance, but adds about a dozen phantom openings so that front, rear and one gable read as continuous glazing.",
+  "delivered1349": {
+   "useful": false,
+   "usefulIfRotationIgnored": false,
+   "correct": 7,
+   "phantoms": 12,
+   "roofFormMatchesSource": true,
+   "usefulWhy": "Fails (5) on three sides (rear 5 phantoms vs 3 correct, right 2 vs 1, left 1 vs 0; front 4 vs 3) and the entrance door is not where the source draws it. The house reads as glazed all round, which the source is not."
+  },
+  "r2": {
+   "useful": false,
+   "usefulIfRotationIgnored": false,
+   "correct": 7,
+   "phantoms": 1,
+   "roofFormMatchesSource": true,
+   "usefulWhy": "Fails (3): no entrance door. Also (5) on the left gable (1 phantom, 0 correct). Form, rear (4/4) and front windows are right."
+  }
+ },
+ "medulin": {
+  "key": {
+   "X": "delivered1349",
+   "Y": "r2"
+  },
+  "better": "SAME",
+  "betterWhy": "The X and Y renders are pixel-identical in all nine views.",
+  "delivered1349": {
+   "useful": false,
+   "usefulIfRotationIgnored": false,
+   "correct": 14,
+   "phantoms": 5,
+   "roofFormMatchesSource": false,
+   "usefulWhy": "Fails (1): F1, F2, F3 all wrong - gabled core with flat-roofed two-storey annexes instead of one steep-roofed volume - and (3): no entrance door. Opening positions on the ground floor are good (14 of 15)."
+  },
+  "r2": {
+   "useful": false,
+   "usefulIfRotationIgnored": false,
+   "correct": 14,
+   "phantoms": 5,
+   "roofFormMatchesSource": false,
+   "usefulWhy": "Fails (1): F1, F2, F3 all wrong - gabled core with flat-roofed two-storey annexes instead of one steep-roofed volume - and (3): no entrance door. Opening positions on the ground floor are good (14 of 15)."
+  }
+ },
+ "jeziorko": {
+  "key": {
+   "X": "delivered1349",
+   "Y": "r2"
+  },
+  "better": "SAME",
+  "betterWhy": "The X and Y renders are pixel-identical in all nine views.",
+  "delivered1349": {
+   "useful": true,
+   "usefulIfRotationIgnored": true,
+   "correct": 7,
+   "phantoms": 0,
+   "roofFormMatchesSource": true,
+   "usefulWhy": "All F OK including the roofed terrace bay, all four sides on the right side, entrance door OK, 3/3 front and 7/7 overall openings, no phantoms."
+  },
+  "r2": {
+   "useful": true,
+   "usefulIfRotationIgnored": true,
+   "correct": 7,
+   "phantoms": 0,
+   "roofFormMatchesSource": true,
+   "usefulWhy": "All F OK including the roofed terrace bay, all four sides on the right side, entrance door OK, 3/3 front and 7/7 overall openings, no phantoms."
+  }
+ },
+ "mindelo": {
+  "key": {
+   "X": "r2",
+   "Y": "delivered1349"
+  },
+  "better": "SAME",
+  "betterWhy": "The X and Y renders are pixel-identical in all nine views.",
+  "delivered1349": {
+   "useful": false,
+   "usefulIfRotationIgnored": false,
+   "correct": 12,
+   "phantoms": 4,
+   "roofFormMatchesSource": false,
+   "usefulWhy": "Fails (1): no projecting garage wing and neither cross gable (F1, F2), and (3): the entrance is drawn as a second garage door while a brown door appears at the far left."
+  },
+  "r2": {
+   "useful": false,
+   "usefulIfRotationIgnored": false,
+   "correct": 12,
+   "phantoms": 4,
+   "roofFormMatchesSource": false,
+   "usefulWhy": "Fails (1): no projecting garage wing and neither cross gable (F1, F2), and (3): the entrance is drawn as a second garage door while a brown door appears at the far left."
+  }
+ },
+ "sakura": {
+  "key": {
+   "X": "r2",
+   "Y": "delivered1349"
+  },
+  "better": "r2",
+  "betterWhy": "X has the hip roof the source draws; Y has a gable roof with two gable walls that do not exist in the source. Y also adds three brown doors the source does not have; the remaining openings are the same in both.",
+  "delivered1349": {
+   "useful": false,
+   "usefulIfRotationIgnored": false,
+   "correct": 10,
+   "phantoms": 3,
+   "roofFormMatchesSource": false,
+   "usefulWhy": "Fails (1): roof is a gable, the source is a hip roof (F2). Openings would pass (front 4/5, overall 10/12, phantoms never exceed correct)."
+  },
+  "r2": {
+   "useful": true,
+   "usefulIfRotationIgnored": true,
+   "correct": 10,
+   "phantoms": 0,
+   "roofFormMatchesSource": true,
+   "usefulWhy": "F1-F3 OK with the correct hip roof, front and all other sides on the right side, entrance door OK, front 4/5 (80 %), all sides 10/12 (83 %), no phantoms. F4 fails only on the two shallow niches, which I treated as non-blocking detail; if every F item must be OK this becomes false."
+  }
+ },
+ "g6": {
+  "key": {
+   "X": "r2",
+   "Y": "delivered1349"
+  },
+  "better": "SAME",
+  "betterWhy": "The X and Y renders are pixel-identical in all nine views.",
+  "delivered1349": {
+   "useful": false,
+   "usefulIfRotationIgnored": false,
+   "correct": 2,
+   "phantoms": 1,
+   "roofFormMatchesSource": false,
+   "usefulWhy": "Fails (1) hip roof drawn as gable, (3) no garage door and no entrance door, (4) 0 % of front openings, (5) front has 1 phantom and 0 correct. It does not read as a garage building at all."
+  },
+  "r2": {
+   "useful": false,
+   "usefulIfRotationIgnored": false,
+   "correct": 2,
+   "phantoms": 1,
+   "roofFormMatchesSource": false,
+   "usefulWhy": "Fails (1) hip roof drawn as gable, (3) no garage door and no entrance door, (4) 0 % of front openings, (5) front has 1 phantom and 0 correct. It does not read as a garage building at all."
+  }
+ }
+}
