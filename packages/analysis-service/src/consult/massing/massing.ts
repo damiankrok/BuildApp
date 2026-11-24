@@ -613,7 +613,7 @@ export const STOREY_WALLS = { twoMinM: 4.4, oneMaxM: 4.6, oneMinM: 2.0 } as cons
  *    them, else to the eaves the read states as printed or derived; the same, downwards, for one storey.
  * A flat reading is left alone (no height to build a pitched roof from), and so is a pitched one the structure calls flat.
  */
-export function roofByStructure(roof: RoofSpec, want: { kind?: 'GABLE' | 'HIP' | 'FLAT'; axis?: 'X' | 'Z'; full?: 1 | 2; pitchDeg?: number; eavesM?: { m: number; status: string } }, rect: Rect): { roof: RoofSpec; notes: string[] } {
+export function roofByStructure(roof: RoofSpec, want: { kind?: 'GABLE' | 'HIP' | 'FLAT'; axis?: 'X' | 'Z'; full?: 1 | 2; pitchDeg?: number; eavesM?: { m: number; status: string }; /** the wall tops the elevations themselves draw for this body, one per view (metres) */ drawnTopsM?: readonly number[] }, rect: Rect): { roof: RoofSpec; notes: string[] } {
   const notes: string[] = []
   if (want.kind === 'FLAT') return { roof, notes }
   const t = MINIATURE_CONVENTIONS.roofThicknessM
@@ -659,7 +659,13 @@ export function roofByStructure(roof: RoofSpec, want: { kind?: 'GABLE' | 'HIP' |
       let byStated: number | undefined
       if (stated !== undefined) { let e = stated; for (let k = 0; k < 6; k += 1) e = stated + t / Math.cos(pitchOf(e)); byStated = e }
       const was = wallTop(eaves)
-      if (byPitch !== undefined && fits(byPitch)) { eaves = byPitch; notes.push(`${want.full === 2 ? 'two full storeys' : 'one storey'} under the eaves: the walls end at ${wallTop(eaves).toFixed(2)} m (the agreed ${want.pitchDeg}° down from the drawn ridge at ${ridge.toFixed(2)} m), not at ${was.toFixed(2)} m`) }
+      // first what the elevations themselves draw: the wall tops of the views that ARE within the storey (the solver's
+      // one figure took a view where a cross gable's wall rises, or a lower part's eaves)
+      const drawn = (want.drawnTopsM ?? []).filter((v) => (want.full === 2 ? v >= STOREY_WALLS.twoMinM : v <= STOREY_WALLS.oneMaxM && v >= STOREY_WALLS.oneMinM)).sort((p, q) => p - q)
+      let byDrawn: number | undefined
+      if (drawn.length > 0) { const target = drawn[Math.floor((drawn.length - 1) / 2)]; let e = target; for (let k = 0; k < 6; k += 1) e = target + t / Math.cos(pitchOf(e)); byDrawn = e }
+      if (byDrawn !== undefined && fits(byDrawn)) { eaves = byDrawn; notes.push(`${want.full === 2 ? 'two full storeys' : 'one storey'} under the eaves: the walls end at ${wallTop(eaves).toFixed(2)} m (the wall top ${drawn.length} elevation(s) draw within the storey), not at ${was.toFixed(2)} m`) }
+      else if (byPitch !== undefined && fits(byPitch)) { eaves = byPitch; notes.push(`${want.full === 2 ? 'two full storeys' : 'one storey'} under the eaves: the walls end at ${wallTop(eaves).toFixed(2)} m (the agreed ${want.pitchDeg}° down from the drawn ridge at ${ridge.toFixed(2)} m), not at ${was.toFixed(2)} m`) }
       else if (byStated !== undefined && fits(byStated)) { eaves = byStated; notes.push(`${want.full === 2 ? 'two full storeys' : 'one storey'} under the eaves: the walls end at ${wallTop(eaves).toFixed(2)} m (the eaves the read states as ${want.eavesM?.status}), not at ${was.toFixed(2)} m`) }
     }
   }
@@ -995,8 +1001,8 @@ export function solveMassing(input: MassingInput): MassingHypothesis {
     if (input.structure) {
       const st = input.structure
       const wing = wingBodies.find((q) => q.rect === rect)?.part
-      const want = wing ? { ...(wing.roof ? { kind: wing.roof } : {}), ...(wing.ridge ? { axis: wing.ridge } : {}), full: wing.fullStoreys, ...(st.pitchDeg !== undefined ? { pitchDeg: st.pitchDeg } : {}) }
-        : { ...(st.mainRoof ? { kind: st.mainRoof } : {}), ...(i === 0 && st.mainRidge ? { axis: st.mainRidge } : {}), ...(st.fullStoreys ? { full: st.fullStoreys } : {}), ...(st.pitchDeg !== undefined ? { pitchDeg: st.pitchDeg } : {}), ...(i === 0 && st.eavesM ? { eavesM: st.eavesM } : {}) }
+      const want = wing ? { ...(wing.roof ? { kind: wing.roof } : {}), ...(wing.ridge ? { axis: wing.ridge } : {}), full: wing.fullStoreys, ...(st.pitchDeg !== undefined ? { pitchDeg: st.pitchDeg } : {}), drawnTopsM: reads.map((q) => q.wallTopM ?? q.p.eavesM).filter((v) => Number.isFinite(v)) }
+        : { ...(st.mainRoof ? { kind: st.mainRoof } : {}), ...(i === 0 && st.mainRidge ? { axis: st.mainRidge } : {}), ...(st.fullStoreys ? { full: st.fullStoreys } : {}), ...(st.pitchDeg !== undefined ? { pitchDeg: st.pitchDeg } : {}), ...(i === 0 && st.eavesM ? { eavesM: st.eavesM } : {}), drawnTopsM: reads.map((q) => q.wallTopM ?? q.p.eavesM).filter((v) => Number.isFinite(v)) }
       const applied = roofByStructure(roof, want, rect)
       if (applied.notes.length > 0) {
         roof = applied.roof

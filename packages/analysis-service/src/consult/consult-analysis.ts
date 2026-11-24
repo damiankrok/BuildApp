@@ -919,8 +919,23 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
         record({ at: now().toISOString(), kind: 'PLAN_OUTLINE', frameId: f.id, refused: plan.refused, check: plan.check ?? null, entrance: plan.entrance ?? null, openings: plan.openings ?? null, usd: plan.usd })
         if (!plan.observation) delivery.why = `the plan outline gives no outline in metres: ${plan.refused.join('; ') || 'no read'}${strong ? '' : '; PLAN_SCALE: the analyzer\'s plan scale is not STRONG/CONFIRMED'}`
         else {
+          // v3.54.20: the structure is read BEFORE the body is solved, and an elevation the publisher did not caption with
+          // a side takes the side the read saw on it — so the solver holds the house's heights against every elevation, not
+          // against the captioned ones only (one house's eaves came from its front alone, the gable wall of a cross wing,
+          // while both side elevations drew them three metres lower). A captioned side is never overridden; two pictures
+          // the read puts on one side are both left out (it does not know).
+          const structure = await structureOf({ pkg0, graph0, sketches: A.sketches, planRaster: fr.raster, ...(plan.parts ? { planParts: plan.parts } : {}) })
+          const captioned = new Set(A.sketches.map((x) => sideOfFacade(x.facade)).filter(Boolean))
+          const readSide = (frameId: string): Side | undefined => {
+            const n = (structure?.frames ?? []).indexOf(frameId) + 1
+            const sd = n > 0 ? structure?.agreed?.pictures.find((q) => q.n === n)?.shows : undefined
+            if (!sd || sd === 'NONE' || captioned.has(sd as Side)) return undefined
+            return (structure?.agreed?.pictures ?? []).filter((q) => q.shows === sd).length === 1 ? (sd as Side) : undefined
+          }
+          const sidesByRead: Array<{ frameId: string; side: Side }> = []
           const silhouettes = A.sketches.flatMap((x) => {
-            const side = sideOfFacade(x.facade)
+            const side = sideOfFacade(x.facade) ?? (x.sketch ? readSide(x.frameId) : undefined)
+            if (side && !sideOfFacade(x.facade)) sidesByRead.push({ frameId: x.frameId, side })
             const fx = graph0.coordinateFrames.find((q) => q.id === x.frameId)
             return side && x.sketch ? [{ observationId: `sk-${x.frameId.slice(-12)}`, side, frameId: x.frameId, sourceByteHash: fx?.variantByteHash ?? '', groundRow: x.sketch.groundRow ?? null, walls: x.sketch.walls.map((w) => w.polygon as Array<[number, number]>), roofs: x.sketch.roofs.map((r) => r.polygon as Array<[number, number]>) }] : []
           })
@@ -953,7 +968,7 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
           const heightFact = pkg0.publishedFacts.find((x) => x.key === 'building_height' && x.unit === 'm')?.value
           const pitchFact = pkg0.publishedFacts.find((x) => x.key === 'roof_pitch' && x.unit === 'deg')?.value
           const empty = createEmptyModel(`massing-${f.variantByteHash.slice(0, 12)}`, (asset?.caption ?? 'house').slice(0, 60))
-          const structure = await structureOf({ pkg0, graph0, sketches: A.sketches, planRaster: fr.raster, ...(plan.parts ? { planParts: plan.parts } : {}) })
+          if (sidesByRead.length > 0) record({ at: now().toISOString(), kind: 'ELEVATION_SIDES_BY_STRUCTURE_READ', sides: sidesByRead, why: 'these elevations carry no side in their caption: the body is solved with them on the side the structure read saw (a read side, never a captioned one; the openings\' assignment is decided later by what registers)' })
           const out = executeCorrections({ model: empty, views: [], pictures, proposals: [{ proposalId: `massing-${f.variantByteHash.slice(0, 12)}`, baseRevision: modelRevision(empty), operation: 'BUILD_MASSING', targetId: 'WHOLE', origin: 'SKETCH', uncertainty: 'MEDIUM', justification: A.why }], massing: { outline: plan.observation, silhouettes, ...(plan.entrance?.side ? { entranceSide: plan.entrance.side } : {}), ...(planWalls.length > 0 ? { planWalls } : {}) }, facts: { ...(typeof pitchFact === 'number' ? { roofPitchDeg: pitchFact } : {}), ...(typeof heightFact === 'number' ? { buildingHeightM: heightFact } : {}), ...(structure?.build ? { structure: structure.build } : {}) } })
           delivery.records = out.records
           delivery.transactions = out.transactions
@@ -1640,7 +1655,11 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
         // (an elevation whose side only LOCAL named keeps that side as the convention; the others follow the source order)
         const localSaid = unspecified.map((x) => (weakSide(x) ? sideOfFacade(x.facade) : undefined))
         const byLocal = !decided && final && scored.length > 1 && localSaid.some((v) => v) ? scored.find((q) => q.perm.every((sd, i) => localSaid[i] === undefined || localSaid[i] === sd)) : undefined
-        const byOrder = byLocal ?? (!decided && final && scored.length > 1 ? scored.find((q) => q.perm.every((sd, i) => sd === (['LEFT', 'RIGHT', 'REAR', 'FRONT'] as Side[]).filter((f) => free.includes(f))[i])) : undefined)
+        // v3.54.20: the source-order convention never puts a picture on a side the structure read contradicts (a rear
+        // elevation that registers only as a side was placed on the LEFT, its openings with it): such a picture stays
+        // unassigned, named — its openings can still be read by the typed list on the side the read saw
+        const contradictsRead = (q: { perm: Side[] }): boolean => q.perm.some((sd, i) => { const said = saidSide(unspecified[i].frameId); return said !== undefined && said !== sd })
+        const byOrder = byLocal ?? (!decided && final && scored.length > 1 ? scored.find((q) => !contradictsRead(q) && q.perm.every((sd, i) => sd === (['LEFT', 'RIGHT', 'REAR', 'FRONT'] as Side[]).filter((f) => free.includes(f))[i])) : undefined)
         const pick = decided ?? byOrder
         if (pick) for (const x of unspecified) sideBasisOf.set(x.frameId, byPlan && pick === byPlan ? 'PLAN_OPENINGS' : byStructure && pick === byStructure ? 'STRUCTURE_READ' : decided ? 'EVIDENCE' : byLocal ? 'CONVENTION_LOCAL_LABEL_NOT_IN_CAPTION' : 'MINIATURE_CONVENTION_SOURCE_ORDER')
         record({ at: now().toISOString(), kind: 'SIDE_OF_UNLABELLED_ELEVATIONS', frames: unspecified.map((x) => x.frameId), options: scored.map((q) => ({ sides: q.perm, support: Math.round(q.score * 100) / 100, ...(q.plan !== null ? { planOpenings: Math.round(q.plan * 100) / 100 } : {}) })), chosen: pick?.perm ?? null, basis: byPlan && pick === byPlan ? 'PLAN_OPENINGS' : decided ? 'EVIDENCE' : byLocal ? 'CONVENTION_LOCAL_LABEL_NOT_IN_CAPTION' : byOrder ? 'MINIATURE_CONVENTION_SOURCE_ORDER' : 'NONE', planOpeningsVersion: PLAN_OPENINGS_VERSION, why: byPlan && pick === byPlan ? `the openings the plan draws on each side agree with these elevations' own by a clear margin (${(planRanked[0].plan as number).toFixed(1)} against ${(planRanked[1].plan as number).toFixed(1)} net matched openings; the margin is ${SIDE_MARGIN})` : decided ? (scored.length === 1 ? 'the only assignment under which every one registers' : 'the drawn openings support it by a clear margin') : byOrder ? 'several assignments register and the drawings do not tell them apart: the source order is taken as a named miniature convention (the side is NOT read; mirrored sides are possible)' : scored.length === 0 ? 'no assignment registers them all' : 'two assignments register and the drawings do not tell them apart: left unassigned for now (named, not chosen)' })

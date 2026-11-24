@@ -180,3 +180,27 @@ describe('v3.54.20 (massing 1.9.0) the builder takes the agreed structure', () =
     expect(withIt.alternatives.join(' | ')).toMatch(/STRUCTURE: the garage reported on the right stands where the outline steps out/)
   })
 })
+
+describe('v3.54.20 the storeys rule takes the elevations\' own wall tops first, and never an estimated pitch', () => {
+  const rect = { minX: 0, maxX: 9, minZ: 0, maxZ: 9 }
+  const high: RoofSpec = { kind: 'GABLE', ridgeAxis: 'X', pitchDeg: 25, eavesM: 6.3, ridgeM: 8.4 }
+  it('walls two storeys high under a roof over ONE storey are lowered to the wall top the other elevations draw within a storey', () => {
+    const r = roofByStructure(high, { kind: 'GABLE', axis: 'X', full: 1, drawnTopsM: [6.1, 3.1, 3.0] }, rect)
+    expect(r.notes[0]).toMatch(/the wall top 2 elevation\(s\) draw within the storey/)
+    // the built wall top is one of the drawn ones (the lower median), the roof's top surface a slab above it
+    expect(r.roof.eavesM).toBeGreaterThan(3.0)
+    expect(r.roof.eavesM).toBeLessThan(3.6)
+    expect(r.roof.ridgeM).toBe(8.4)
+  })
+  it('counter-trials: no elevation draws a wall top within the storey and no pitch is agreed — nothing is moved; an agreed pitch is the second choice', () => {
+    expect(roofByStructure(high, { full: 1, drawnTopsM: [6.1, 5.9] }, rect).notes).toEqual([])
+    const byPitch = roofByStructure(high, { full: 1, drawnTopsM: [6.1], pitchDeg: 45 }, rect)
+    expect(byPitch.roof.eavesM).toBeCloseTo(8.4 - 4.5, 5)
+  })
+  it('the builder is given a pitch only when the page agrees with it or the read states it as printed or derived', () => {
+    const est = form({ pitchDeg: 42, pitchStatus: 'ESTIMATED' })
+    expect(buildStructureOf(agreeStructure(est, { planStoreys: ['GROUND'], gableWalls: [] })).pitchDeg).toBeUndefined()
+    expect(buildStructureOf(agreeStructure(est, { planStoreys: ['GROUND'], gableWalls: [], publishedPitchDeg: 42 })).pitchDeg).toBe(42)
+    expect(buildStructureOf(agreeStructure(form(), { planStoreys: ['GROUND'], gableWalls: [] })).pitchDeg).toBe(35)
+  })
+})

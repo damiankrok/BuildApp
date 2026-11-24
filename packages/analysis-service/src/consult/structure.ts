@@ -155,7 +155,8 @@ export function buildStructureOf(a: AgreedStructure): BuildStructure {
     ...(ok(a.storeys) ? { fullStoreys: a.storeys.value.full } : {}),
     ...(kind ? { mainRoof: kind } : {}),
     ...(ridge ? { mainRidge: ridge } : {}),
-    ...(ok(a.pitchDeg) && a.pitchDeg.value.deg !== null && a.pitchDeg.value.deg >= 5 && a.pitchDeg.value.deg <= 60 ? { pitchDeg: a.pitchDeg.value.deg } : {}),
+    // a pitch moves walls (the storeys rule): only one the page agrees with, or the read states as printed or derived — never its estimate
+    ...(ok(a.pitchDeg) && a.pitchDeg.value.deg !== null && a.pitchDeg.value.deg >= 5 && a.pitchDeg.value.deg <= 60 && (a.pitchDeg.standing === 'AGREED' || a.pitchDeg.value.status === 'PRINTED' || a.pitchDeg.value.status === 'DERIVED') ? { pitchDeg: a.pitchDeg.value.deg } : {}),
     ...(ok(a.eavesM) && a.eavesM.value.m !== null ? { eavesM: { m: a.eavesM.value.m, status: a.eavesM.value.status } } : {}),
     ...(ok(a.ridgeM) && a.ridgeM.value.m !== null ? { ridgeM: { m: a.ridgeM.value.m, status: a.ridgeM.value.status } } : {}),
     parts: a.parts.filter(ok).map((p) => { const k = buildable(p.value.roof); const r = axisOf(p.value.ridgeAlong); return { what: p.value.what, where: p.value.where, fullStoreys: p.value.full, ...(k ? { roof: k } : {}), ...(r ? { ridge: r } : {}) } }),
