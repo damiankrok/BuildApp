@@ -124,7 +124,7 @@ export type PatchRecord = {
   why: string
   txId?: string
   /** What the patch was bound to: the source frame and its pixels, the side, the host, the ids it creates or changes. */
-  bound?: { frameId: string; side?: Side; box?: Box; hostId?: string; ids: string[]; /** v3.54.18: openings that gave way to this one, each with its own support z on the picture. */ displaced?: Record<string, number | null>; depth?: 'SECOND_VIEW' | 'ROOF_MEET_LINE' | 'DISPLAY_ASSUMPTION'; values?: Record<string, number> ; /** v3.54.19: the head of a door or gate cut to the top of its wall (it was drawn a little above the wall top the model has) */ headCut?: { fromM: number; toM: number; wallId: string } }
+  bound?: { frameId: string; side?: Side; box?: Box; hostId?: string; ids: string[]; /** v3.54.18: openings that gave way to this one, each with its own support z on the picture. */ displaced?: Record<string, number | null>; depth?: 'SECOND_VIEW' | 'ROOF_MEET_LINE' | 'DISPLAY_ASSUMPTION'; values?: Record<string, number> ; /** v3.54.19: the head of a door or gate cut to the top of its wall (it was drawn a little above the wall top the model has) */ headCut?: { fromM: number; toM: number; wallId: string }; /** v3.54.19: the opening cut back to the end of the wall that holds most of it */ endClip?: { fromM: [number, number]; toM: [number, number]; wallId: string } }
   source?: { frameId: string; sourceByteHash: string; crop?: Box }
   gate?: { winner: HypothesisVerdict['winner']; proposedZ: number | null; currentZ?: number | null; nullBoxes: number; /** 1.3.0: the band the z was read against (absent: JOINT). */ nullMode?: 'JOINT' | 'CLAIMS_ROBUST' | 'DISPLACED'; /** v3.54.18: the picture did not decide this element; it follows the adopted reading of its facade (never source-verified). */ adopted?: true; /** v3.54.18: the opening's span is the plan's and this reading's alike; only ASSUMED properties were replaced. */ crossWitness?: 'PLAN_SPAN'; why: string; /** 1.1.0: BOX, POLYGON (a raked head on either side) or FILL (a change of kind on the same shape). */ measure?: 'BOX' | 'POLYGON' | 'FILL' | 'REGION'; fill?: Pick<FillVerdict, 'observed' | 'features'> }
   measure?: { builtBox?: Box; iouWithProposal?: number; builtSupportZ?: number | null; headErrorPx?: number; builtKind?: string; sourceVerified: boolean | null; why: string }
@@ -258,6 +258,8 @@ export function openingBoxes(m: CanonicalBuildingModel, v: BindView): Array<{ id
 export const PLAN_SPAN_AGREE = 0.7
 /** v3.54.19: a door's or gate's head may be cut to its wall's top when it overshoots by at most this share of its own height. */
 export const HEAD_CUT_MAX_SHARE = 0.25
+/** v3.54.19: an opening running past the end of a wall is kept in that wall when at least this share of its width lies in it. */
+export const END_CLIP_MIN_SHARE = 0.85
 export type OpeningPatchKindExact = 'WINDOW' | 'DOOR' | 'GLAZED_DOOR' | 'GARAGE_DOOR'
 /** A2: the exact kind of a model opening, from its fill (a glazed leaf, a garage door), never WINDOW / not-WINDOW. */
 export function kindOfOpening(m: CanonicalBuildingModel, id: string): OpeningPatchKindExact | undefined {
@@ -471,10 +473,34 @@ function bindOpening(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
   if (existing && ofExisting && ofExisting.side !== view.side) return { status: 'NEEDS_EVIDENCE', code: 'OTHER_SIDE', why: `${existing.id} is on the ${ofExisting.side.toLowerCase()} side; picture ${pic.n} is registered as the ${view.side.toLowerCase()} side: moving an opening to another side is not an update` }
   const pr = view.projection
   const xs = [alongOf(pr, box.x0), alongOf(pr, box.x1)]
-  const a0 = r6(Math.min(...xs))
-  const a1 = r6(Math.max(...xs))
+  let a0 = r6(Math.min(...xs))
+  let a1 = r6(Math.max(...xs))
   const y0 = r6(yOf(pr, box.y1))
   let y1 = r6(yOf(pr, box.y0))
+  // v3.54.19: an opening that lies almost wholly in one wall and runs a few centimetres past its END (the line between two
+  // bodies is where the outline's step was traced, the opening where the elevation's registration put it) had no host
+  // wall and was refused whole — a garage lost its gate over 5 cm. It is kept in the wall that holds at least
+  // `END_CLIP_MIN_SHARE` of it, cut back to that wall's end; less than that is two walls' business and is refused as before.
+  let endClip: { fromM: [number, number]; toM: [number, number]; wallId: string } | undefined
+  if (!existing && !hostWall(m, view.side, a0, a1, y0, Math.min(y1, y0 + 0.3))) {
+    const ax = alongAxis(view.side)
+    const cands = exteriorWalls(m).flatMap((w) => {
+      if (sideOfWall(m, w) !== view.side) return []
+      const lo = Math.min(w.start[ax], w.end[ax]) + 0.03
+      const hi = Math.max(w.start[ax], w.end[ax]) - 0.03
+      const base = levelOf(m, w.levelId).elevation + w.baseOffset
+      if (!(y0 >= base - 0.05 && y0 < base + w.height - 0.1)) return []
+      const share = (Math.min(a1, hi) - Math.max(a0, lo)) / (a1 - a0)
+      return share >= END_CLIP_MIN_SHARE && share < 1 ? [{ w, lo, hi, share }] : []
+    }).sort((p, q) => q.share - p.share)
+    if (cands.length > 0) {
+      const c = cands[0]
+      endClip = { fromM: [a0, a1], toM: [r6(Math.max(a0, c.lo)), r6(Math.min(a1, c.hi))], wallId: c.w.id }
+      ;[a0, a1] = endClip.toM
+      const px = [pxOf(pr, a0), pxOf(pr, a1)]
+      box = { ...box, x0: Math.min(...px), x1: Math.max(...px) }
+    }
+  }
   // v3.54.19: a door or a gate whose drawn head stands a little ABOVE the top of the only wall it can stand in (the wall's
   // top was read at the fascia, a lower bound; the gate is drawn up to the eaves) was refused whole as NO_HOST_WALL — the
   // garage lost its gate over a few centimetres. Its head is cut to the wall's top, named in the record; a box that
@@ -559,7 +585,7 @@ function bindOpening(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
       head = { kind: 'RAKED', heightFar: r6(far) }
     }
   }
-  const record = { bound: { frameId: view.frameId, side: view.side, box, hostId: host.id, ids: [id], values: { offset: u0, width, sill, height }, ...(headCut ? { headCut } : {}) }, source: { frameId: pic.frameId, sourceByteHash: pic.sourceByteHash, crop: box }, gate }
+  const record = { bound: { frameId: view.frameId, side: view.side, box, hostId: host.id, ids: [id], values: { offset: u0, width, sill, height }, ...(headCut ? { headCut } : {}), ...(endClip ? { endClip } : {}) }, source: { frameId: pic.frameId, sourceByteHash: pic.sourceByteHash, crop: box }, gate }
   // v3.54.18 — PER-PROPERTY ARBITRATION. LOCAL's openings say what each of their properties rests on: the place along the
   // wall is a gap traced on the PLAN, the sill and height mostly ASSUMED ("no callout read, not read on an elevation").
   // When an update keeps the plan's span (the elevation reading draws the same opening where the plan has its gap — two

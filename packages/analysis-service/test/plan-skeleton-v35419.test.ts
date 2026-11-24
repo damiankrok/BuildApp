@@ -238,6 +238,51 @@ describe('v3.54.19 BUILD_INTERIOR', () => {
   })
 })
 
+describe('v3.54.19 a gap of the plan the model does not cover', () => {
+  const sk = read(sheet())
+  const obs = skeletonInModel(sk, toModel)
+  const gapsOf = (m: CanonicalBuildingModel) => planGapsFromSkeleton(m, obs)
+  const add = (m: CanonicalBuildingModel, gap: ReturnType<typeof gapsOf>[number], over: Partial<NonNullable<CorrectionProposal['planOpening']>> = {}, id = `plan-gap:${gap.id}`): CorrectionProposal => ({ proposalId: id, baseRevision: modelRevision(m), operation: 'ADD_PLAN_OPENING', targetId: gap.side, origin: 'PLAN', uncertainty: 'MEDIUM', planOpening: { side: gap.side, a0: gap.a0, a1: gap.a1, kind: 'DOOR', sillM: 0, heightM: 2.1, gapId: gap.id, frameId: 'frame-front', share: 0.9, ...over } })
+  it('is cut where the plan has the gap, with the kind and heights the metric list gives — in one committed transaction', () => {
+    const m = body()
+    const front = gapsOf(m).find((g) => g.side === 'FRONT') as ReturnType<typeof gapsOf>[number]
+    const out = executeCorrections({ model: m, views: [], pictures: [], proposals: [add(m, front)], planGaps: gapsOf(m) })
+    expect(out.records[0].status).toBe('COMMITTED')
+    const o = out.model.openings[0]
+    expect(o.kind).toBe('DOOR')
+    expect(o.width).toBeCloseTo(front.a1 - front.a0, 1)
+    expect(o.sill).toBe(0)
+    expect((o as { evidence?: { properties?: Record<string, string> } }).evidence?.properties).toMatchObject({ offset: 'SOURCE_DERIVED', sill: 'VISUAL_INFERRED' })
+    expect(out.records[0].measure?.sourceVerified).toBeNull()
+  })
+  it('the element id follows the proposal\'s own name: the same gap builds the same id on a rebuilt base', () => {
+    const m = body()
+    const front = gapsOf(m).find((g) => g.side === 'FRONT') as ReturnType<typeof gapsOf>[number]
+    const first = executeCorrections({ model: m, views: [], pictures: [], proposals: [add(m, front)], planGaps: gapsOf(m) })
+    const again = executeCorrections({ model: m, views: [], pictures: [], proposals: [add(m, front, {}, `plan-gap:${front.id}@${modelRevision(m)}`)], planGaps: gapsOf(m) })
+    expect(again.model.openings[0].id).toBe(first.model.openings[0].id)
+  })
+  it('counter-trials: no such gap, no opening; an opening that stands on a gap of the plan is not displaced; one on plain wall gives way', () => {
+    const m = body()
+    const gaps = gapsOf(m)
+    const front = gaps.find((g) => g.side === 'FRONT') as (typeof gaps)[number]
+    const noGap = executeCorrections({ model: m, views: [], pictures: [], proposals: [add(m, { ...front, id: 'plan-nowhere' })], planGaps: gaps })
+    expect(noGap.records[0].code).toBe('NO_PLAN_GAP')
+    const implausible = executeCorrections({ model: m, views: [], pictures: [], proposals: [add(m, front, { heightM: 9 })], planGaps: gaps })
+    expect(implausible.records[0].status).not.toBe('COMMITTED')
+    // an opening already on the gap: nothing is doubled
+    const once = executeCorrections({ model: m, views: [], pictures: [], proposals: [add(m, front)], planGaps: gaps })
+    const twice = executeCorrections({ model: once.model, views: [], pictures: [], proposals: [add(once.model, front, {}, 'plan-gap:second')], planGaps: gaps })
+    expect(twice.records[0].code).toBe('OPENING_ALREADY_THERE')
+    // an opening of the model that overlaps the gap a little and stands on NO gap of the plan: it gives way
+    const frontWall = m.walls.find((w) => w.id === 'ring-mass-main-w0') as CanonicalBuildingModel['walls'][number]
+    const phantom = applyCommands(m, [{ type: 'cutOpening', id: 'phantom', wallId: frontWall.id, kind: 'WINDOW', offset: front.a1 - 0.25, sill: 0.9, width: 2.2, height: 1.2 } as BuildingCommand]).model
+    const out = executeCorrections({ model: phantom, views: [], pictures: [], proposals: [add(phantom, front)], planGaps: gapsOf(phantom) })
+    expect(out.records[0].status).toBe('COMMITTED')
+    expect(out.model.openings.map((o) => o.id)).not.toContain('phantom')
+  })
+})
+
 describe('v3.54.19 read pieces never share plan area', () => {
   const P = (id: string, axis: 'X' | 'Z', at: number, from: number, to: number, half = 0.06) => ({ id, axis, at, half, from, to, doors: [], height: 2.7 })
   it('an end inside another wall\'s band stops at the band\'s face', () => {
