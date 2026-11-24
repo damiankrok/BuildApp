@@ -24,7 +24,7 @@ import type { CanonicalBuildingModel, Wall } from '@buildapp/model'
 import type { BindView, Projection, Side } from '../correct/execute.js'
 import type { Poly } from '../correct/source-gate.js'
 
-export const MASSING_VERSION = '1.4.0' as const
+export const MASSING_VERSION = '1.5.0' as const
 
 export type Rect = { minX: number; maxX: number; minZ: number; maxZ: number }
 export type Fidelity = 'SOURCE_EXACT' | 'SOURCE_DERIVED' | 'SOURCE_TRACED' | 'DISPLAY_ASSUMPTION' | 'TRACE_UNCERTAIN'
@@ -85,6 +85,10 @@ export const MASSING_TOLERANCES = {
   /** A roof whose slopes run on to a level top at least this long (metres, and this share of the stretch) has a ridge there: not a gable end's point. */
   minRidgeM: 1.0,
   minRidgeShare: 0.1,
+  /** Two bodies in line under different roofs: the drawn top jumps at least this much (metres) at one place, on two opposite views. */
+  stepM: 1.2,
+  /** …and the two views put that place within this (metres) of each other. */
+  stepAgreeM: 0.8,
 } as const
 /** The furthest a drawn roof edge is taken to overhang its wall (metres): beyond it the edge is another body's. */
 export const MAX_OVERHANG_M = 1.0
@@ -420,7 +424,7 @@ export function rectanglesOf(outline: ReadonlyArray<{ x: number; z: number }>): 
   return { splits: [cut('x'), cut('z')], why: 'an L: two joined rectangles, split at its inner corner either way' }
 }
 
-export type MassingInput = { outline: OutlineObservation; silhouettes: readonly SilhouetteObservation[]; wallThicknessM?: { value: number; prov: Prov } }
+export type MassingInput = { outline: OutlineObservation; silhouettes: readonly SilhouetteObservation[]; wallThicknessM?: { value: number; prov: Prov }; /** the roof pitch the page publishes (degrees): used only where no view shows the wall's corner under the roof, and only when the drawn walls allow it */ publishedPitchDeg?: number }
 
 /** 3. The mass the observations support, or exactly what they lack. */
 export function solveMassing(input: MassingInput): MassingHypothesis {
@@ -482,7 +486,58 @@ export function solveMassing(input: MassingInput): MassingHypothesis {
     else base.alternatives.push(`the L's other split (${sc[1 - best]} elevation steps against ${sc[best]}) is kept as an alternative`)
   }
   const total = area(bb)
-  rects = rects.filter((r) => area(r) >= MASSING_TOLERANCES.minWingShare * total && r.maxX - r.minX >= MASSING_TOLERANCES.minBodyM && r.maxZ - r.minZ >= MASSING_TOLERANCES.minBodyM)
+  {
+    const all = rects
+    rects = rects.filter((r) => area(r) >= MASSING_TOLERANCES.minWingShare * total && r.maxX - r.minX >= MASSING_TOLERANCES.minBodyM && r.maxZ - r.minZ >= MASSING_TOLERANCES.minBodyM)
+    // massing 1.5.0: an L whose second rectangle is too thin to be a body is one body with a corner taken out. Dropping
+    // the thin rectangle cut a strip off the whole length of the house (a garage 8.2 m deep became 7.0 m, and no side
+    // elevation registered on it any more); where the open corner is the smaller of the two, the corner is closed
+    // instead — the bounding rectangle, a named miniature convention like every other step not modelled.
+    if (all.length === 2 && rects.length === 1) {
+      const dropped = all.find((r) => r !== rects[0]) as Rect
+      const box: Rect = { minX: Math.min(all[0].minX, all[1].minX), maxX: Math.max(all[0].maxX, all[1].maxX), minZ: Math.min(all[0].minZ, all[1].minZ), maxZ: Math.max(all[0].maxZ, all[1].maxZ) }
+      const corner = area(box) - area(all[0]) - area(all[1])
+      if (corner >= 0 && corner < area(dropped)) {
+        rects = [box]
+        base.alternatives.push(`MINIATURE_CONVENTION: the L's second rectangle (${area(dropped).toFixed(1)} m², ${Math.min(dropped.maxX - dropped.minX, dropped.maxZ - dropped.minZ).toFixed(2)} m thin) is not a body of its own; the corner it leaves open (${corner.toFixed(1)} m²) is the smaller: the body is the bounding rectangle, the corner closed — not cut off along the house's whole length`)
+      }
+    }
+  }
+  // massing 1.5.0: one rectangle on the plan, two bodies in line — a house and a lower garage under their own roofs. The
+  // plan's outline does not show it; two OPPOSITE elevations do, where the drawn top (walls and roofs) jumps at one place
+  // along the side (a gable seen from its end slopes through such a place and a hip end slopes down to it: neither
+  // jumps). Both views must put the jump at the same place of the plan and the lower part on the same side of it.
+  if (rects.length === 1) {
+    const rect = rects[0]
+    const jumpOn = (obs: SilhouetteObservation, view: BindView): { at: number; lowAbove: boolean; by: number } | undefined => {
+      const e = extentOn(rect, obs.side)
+      const p = view.projection
+      const N = 120
+      const tops = Array.from({ length: N }, (_, i) => {
+        const a = e.lo + ((i + 0.5) * (e.hi - e.lo)) / N
+        const x = pxOfAlong(p, a)
+        const rows = [...obs.walls, ...obs.roofs].map((q) => columnRange(q, x)?.[0]).filter((v): v is number => v !== undefined)
+        return { a, y: rows.length > 0 ? yOfRow(p, Math.min(...rows)) : undefined }
+      })
+      let best: { at: number; lowAbove: boolean; by: number } | undefined
+      for (let i = 1; i < N - 1; i += 1) {
+        const [l, r] = [tops[i - 1].y, tops[i + 1].y]
+        if (l === undefined || r === undefined) continue
+        const by = Math.abs(l - r)
+        if (by >= MASSING_TOLERANCES.stepM && (!best || by > best.by) && tops[i].a - e.lo >= MASSING_TOLERANCES.minBodyM && e.hi - tops[i].a >= MASSING_TOLERANCES.minBodyM) best = { at: tops[i].a, lowAbove: r < l, by }
+      }
+      return best
+    }
+    for (const axis of ['x', 'z'] as const) {
+      const js = [...byView.values()].filter((v) => along(v.obs.side) === axis).map((v) => jumpOn(v.obs, v.view)).filter((j): j is NonNullable<typeof j> => !!j)
+      if (js.length < 2) continue
+      const at = js.reduce((t, j) => t + j.at, 0) / js.length
+      if (Math.max(...js.map((j) => j.at)) - Math.min(...js.map((j) => j.at)) > MASSING_TOLERANCES.stepAgreeM || !js.every((j) => j.lowAbove === js[0].lowAbove)) continue
+      rects = axis === 'x' ? [{ ...rect, maxX: at }, { ...rect, minX: at }] : [{ ...rect, maxZ: at }, { ...rect, minZ: at }]
+      base.alternatives.push(`the outline is one rectangle, but ${js.length} opposite elevations draw the top stepping by ${js.map((j) => j.by.toFixed(2)).join(' / ')} m at ${js.map((j) => j.at.toFixed(2)).join(' / ')} m along ${axis}: two bodies in line (split at ${at.toFixed(2)} m), each with its own roof`)
+      break
+    }
+  }
   rects.sort((a, b) => area(b) - area(a))
   const bodies: BodySpec[] = []
   for (const [i, rect] of rects.entries()) {
@@ -572,10 +627,30 @@ export function solveMassing(input: MassingInput): MassingHypothesis {
       // v3.54.18 (massing 1.2.0): eaves read from the walls' corner tops are the roof's UNDERSIDE at the wall; the roof's
       // top surface there (`eavesM`, what createRoof takes) is the slab's vertical thickness above it, solved with the
       // pitch it changes — so the built wall ends where the drawn one does and the openings under it are cut
-      let eavesTop = eaves
-      if (byWalls) for (let i = 0; i < 6; i += 1) eavesTop = eaves + MINIATURE_CONVENTIONS.roofThicknessM / Math.cos(Math.atan2(Math.max(0.01, top - eavesTop), span / 2))
-      if (top - eavesTop < MASSING_TOLERANCES.flatRiseM) eavesTop = eaves
-      const pitch = (Math.atan2(top - eavesTop, span / 2) * 180) / Math.PI
+      // massing 1.5.0: where NO view shows the wall's corner under the roof (every view of this body looks along the
+      // ridge), the drawn wall tops are the fascia line — a LOWER bound of the wall's top, the highest of them the
+      // tightest; their median put the wall below its own doors. The page's roof pitch, where it is published, says where
+      // the slope from the drawn ridge meets the wall — taken when the drawn walls allow it (not above that line, not
+      // further below it than an overhang hides); else the highest drawn wall top stands, unconfirmed.
+      const boundOnly = !byEnds && reads.every((r) => r.p.shape !== 'TRIANGLE')
+      const lower = boundOnly ? Math.max(...reads.map((r) => r.wallTopM ?? r.p.eavesM)) : eaves
+      const underside = byWalls || boundOnly
+      let eavesTop = lower
+      if (underside) for (let i = 0; i < 6; i += 1) eavesTop = lower + MINIATURE_CONVENTIONS.roofThicknessM / Math.cos(Math.atan2(Math.max(0.01, top - eavesTop), span / 2))
+      if (top - eavesTop < MASSING_TOLERANCES.flatRiseM) eavesTop = lower
+      let pitch = (Math.atan2(top - eavesTop, span / 2) * 180) / Math.PI
+      let pitchNote = ''
+      const P = input.publishedPitchDeg
+      if (boundOnly && P !== undefined && P >= 10 && P <= 60) {
+        const tan = Math.tan((P * Math.PI) / 180)
+        const topAtWall = top - (span / 2) * tan
+        const wallAt = topAtWall - MINIATURE_CONVENTIONS.roofThicknessM / Math.cos((P * Math.PI) / 180)
+        if (wallAt >= lower - tolOf(lower) && wallAt - lower <= MAX_OVERHANG_M * tan + tolOf(lower) && top - topAtWall >= MASSING_TOLERANCES.flatRiseM) {
+          eavesTop = topAtWall
+          pitch = P
+          pitchNote = `; no view shows the wall's corner under the roof: the page's ${P}° from the drawn ridge puts the wall's top at ${wallAt.toFixed(2)} m, the drawn walls end at ${lower.toFixed(2)} m behind the fascia (within what an overhang hides)`
+        } else pitchNote = `; no view shows the wall's corner under the roof and the page's ${P}° does not fit the drawn walls (it would put their top at ${wallAt.toFixed(2)} m, they are drawn to ${lower.toFixed(2)} m): the highest drawn wall top is taken, unconfirmed`
+      } else if (boundOnly) pitchNote = `; no view shows the wall's corner under the roof: the highest drawn wall top (${lower.toFixed(2)} m) is taken as the wall's, a lower bound`
       // massing 1.3.0: a HIP — the sides ALONG the ridge draw a trapezoid (the ridge shorter than the eaves, a hip slope
       // at each end), none of them a band. How far each ridge end stands in from its end wall is read on those views,
       // through the registration that put the wall ends on the plan. A gable draws a band there and is built as before.
@@ -597,7 +672,7 @@ export function solveMassing(input: MassingInput): MassingHypothesis {
         roofProv = { fidelity: !everyTrapezoid && runsAgree && hProv.fidelity === 'SOURCE_DERIVED' ? 'SOURCE_DERIVED' : 'TRACE_UNCERTAIN', source: reads.map((r) => `${r.side}:${r.p.shape}`).join(' '), why: `a hip, ridge along ${axis}: the side(s) along it draw a trapezoid, the ridge ends ${runs.map((v) => v.toFixed(2)).join(' / ')} m in from the end walls (${hipRun.toFixed(2)} m taken${run > length / 2 ? ', half the length: the ridge is a point' : ''}); main pitch ${roof.pitchDeg}° from the drawn roof's lowest edge at ${low.toFixed(2)} m up to the ridge over ${(span / 2 + reach).toFixed(2)} m (half the span${reach >= 0.1 ? ` and the ${reach.toFixed(2)} m the eaves are drawn past the walls` : ''}), hip ends ${((Math.atan2(top - hipEaves, hipRun) * 180) / Math.PI).toFixed(1)}°; the roof's top surface at the wall face ${hipEaves.toFixed(2)} m, the walls end under it at ${hipWallTopM(roof).toFixed(2)} m${reach < 0.1 && rects.length > 1 ? '; no overhang built (another body stands against this one)' : ''}` }
       } else {
         roof = { kind: 'GABLE', ridgeAxis: axis, pitchDeg: Math.round(pitch * 10) / 10, eavesM: r6(eavesTop), ridgeM: r6(top) }
-        roofProv = { fidelity: vote.X !== vote.Z && hProv.fidelity === 'SOURCE_DERIVED' ? 'SOURCE_DERIVED' : 'TRACE_UNCERTAIN', source: reads.map((r) => `${r.side}:${r.p.shape}`).join(' '), why: `ridge along ${axis} (slopes seen on the sides along it, the gable end across it); pitch ${roof.pitchDeg}° from a ${(top - eavesTop).toFixed(2)} m rise over half of ${span.toFixed(2)} m${byWalls ? ` (the walls end at ${eaves.toFixed(2)} m: the roof's underside there)` : ''}` }
+        roofProv = { fidelity: vote.X !== vote.Z && hProv.fidelity === 'SOURCE_DERIVED' ? 'SOURCE_DERIVED' : 'TRACE_UNCERTAIN', source: reads.map((r) => `${r.side}:${r.p.shape}`).join(' '), why: `ridge along ${axis} (slopes seen on the sides along it, the gable end across it); pitch ${roof.pitchDeg}° from a ${(top - eavesTop).toFixed(2)} m rise over half of ${span.toFixed(2)} m${pitchNote || (byWalls ? ` (the walls end at ${eaves.toFixed(2)} m: the roof's underside there)` : '')}` }
       }
     }
     bodies.push({ id, rect: { minX: r6(rect.minX), maxX: r6(rect.maxX), minZ: r6(rect.minZ), maxZ: r6(rect.maxZ) }, roof, provenance: { outline: { fidelity: input.outline.fidelity, source: input.outline.by, why: input.outline.why }, height: hProv, roof: roofProv, wallThickness: input.wallThicknessM?.prov ?? { fidelity: 'DISPLAY_ASSUMPTION', source: 'MINIATURE', why: `${MINIATURE_CONVENTIONS.wallThicknessM} m: no wall thickness was measured` } } })

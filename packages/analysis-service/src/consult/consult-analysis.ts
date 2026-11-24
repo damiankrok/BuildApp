@@ -828,8 +828,9 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
             if (fx && r?.raster) pictures.push({ n: i + 1, frameId: fx.id, projection: String(fx.roles.projection), transform: { x0: 0, y0: 0, scale: 1 }, raster: r.raster, sourceByteHash: fx.variantByteHash })
           }
           stage('BUILD_MASSING')
+          const pitchFact = pkg0.publishedFacts.find((x) => x.key === 'roof_pitch' && x.unit === 'deg')?.value
           const empty = createEmptyModel(`massing-${f.variantByteHash.slice(0, 12)}`, (asset?.caption ?? 'house').slice(0, 60))
-          const out = executeCorrections({ model: empty, views: [], pictures, proposals: [{ proposalId: `massing-${f.variantByteHash.slice(0, 12)}`, baseRevision: modelRevision(empty), operation: 'BUILD_MASSING', targetId: 'WHOLE', origin: 'SKETCH', uncertainty: 'MEDIUM', justification: A.why }], massing: { outline: plan.observation, silhouettes, ...(plan.entrance?.side ? { entranceSide: plan.entrance.side } : {}) } })
+          const out = executeCorrections({ model: empty, views: [], pictures, proposals: [{ proposalId: `massing-${f.variantByteHash.slice(0, 12)}`, baseRevision: modelRevision(empty), operation: 'BUILD_MASSING', targetId: 'WHOLE', origin: 'SKETCH', uncertainty: 'MEDIUM', justification: A.why }], massing: { outline: plan.observation, silhouettes, ...(plan.entrance?.side ? { entranceSide: plan.entrance.side } : {}) }, ...(typeof pitchFact === 'number' ? { facts: { roofPitchDeg: pitchFact } } : {}) })
           delivery.records = out.records
           delivery.transactions = out.transactions
           const rec0 = out.records[0]

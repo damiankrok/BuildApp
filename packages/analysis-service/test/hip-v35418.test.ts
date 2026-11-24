@@ -344,6 +344,60 @@ describe('v3.54.18 R2 BUILD_MASSING and SET_ROOF: the hip through the executor a
     expect(t.some((p) => p.x === 8 && p.z === 10)).toBe(true)
     expect(t.some((p) => p.x === 4 && p.z === 10)).toBe(true)
   })
+  it('one rectangle on the plan, two bodies in line: two opposite elevations draw the roof ending and the top stepping at one place; counter-trials', () => {
+    // a house 0..8 m under a gable (ridge along x) and a flat garage 8..12 m, one 12 x 8 rectangle on the plan
+    const side = (s: Side, withStep: boolean): SilhouetteObservation => {
+      const c = (a: number): number => col(s, a)
+      const walls: Poly[] = [[[c(0), row(0)], [c(12), row(0)], [c(12), row(2.8)], [c(0), row(2.8)]]]
+      const roofs: Poly[] = [[[c(0), row(2.8)], [c(withStep ? 8 : 12), row(2.8)], [c(withStep ? 8 : 12), row(5.8)], [c(0), row(5.8)]]]
+      return { observationId: `sk-${s}`, side: s, frameId: frameOf(s), sourceByteHash: sha(s), groundRow: ZERO, walls, roofs }
+    }
+    const two = solveMassing({ outline: OUTLINE, silhouettes: [side('FRONT', true), side('REAR', true)] })
+    expect(two.bodies).toHaveLength(2)
+    const [main, garage] = [...two.bodies].sort((a, b) => a.rect.minX - b.rect.minX)
+    expect(main.roof.kind).toBe('GABLE')
+    expect(garage.roof.kind).toBe('FLAT')
+    expect(Math.abs(main.rect.maxX - 8) <= 0.2 && Math.abs(garage.rect.minX - 8) <= 0.2).toBe(true)
+    expect(two.alternatives.join(' ')).toMatch(/two bodies in line/)
+    // counter-trials: one elevation alone is not two; a roof that runs the whole length is one body
+    expect(solveMassing({ outline: OUTLINE, silhouettes: [side('FRONT', true), side('REAR', false)] }).bodies).toHaveLength(1)
+    expect(solveMassing({ outline: OUTLINE, silhouettes: [side('FRONT', false), side('REAR', false)] }).bodies).toHaveLength(1)
+    // a gable seen from its end slopes through every place: no step, one body
+    expect(solveMassing({ outline: OUTLINE, silhouettes: silhouettes(GABLE) }).bodies).toHaveLength(1)
+  })
+  it('only views along the ridge: the drawn wall tops bound the wall from below — the page\'s pitch places it when the drawn walls allow; counter-trials', () => {
+    // true: walls to 3.11 m under a 31° roof; both eaves views draw their walls ending behind the fascia, at 2.7 and 2.5 m
+    const boxed: True = { ...GABLE, oh: 0, wallDrawn: { FRONT: 2.7, REAR: 2.5 } }
+    const obs = silhouettes(boxed, ['FRONT', 'REAR'])
+    const withPitch = solveMassing({ outline: OUTLINE, silhouettes: obs, publishedPitchDeg: 31 })
+    expect(withPitch.bodies[0].roof.pitchDeg).toBe(31)
+    expect(Math.abs(withPitch.bodies[0].roof.eavesM - 3.4) <= 0.06).toBe(true)
+    expect(withPitch.bodies[0].provenance.roof.why).toMatch(/no view shows the wall's corner/)
+    // without a published pitch: the HIGHEST drawn wall top (was: their median, below the doors), named a lower bound
+    const none = solveMassing({ outline: OUTLINE, silhouettes: obs })
+    expect(Math.abs(none.bodies[0].roof.eavesM - (2.7 + 0.31)) <= 0.08).toBe(true)
+    expect(none.bodies[0].provenance.roof.why).toMatch(/lower bound/)
+    // a pitch that would put the wall's top BELOW the drawn walls, or further above them than an overhang hides, is not used
+    for (const bad of [50, 12]) {
+      const h = solveMassing({ outline: OUTLINE, silhouettes: obs, publishedPitchDeg: bad })
+      expect(h.bodies[0].roof.pitchDeg).not.toBe(bad)
+      expect(h.bodies[0].provenance.roof.why).toMatch(/does not fit the drawn walls/)
+    }
+    // and where a gable end IS read, the page's pitch is not consulted at all
+    expect(solveMassing({ outline: OUTLINE, silhouettes: silhouettes({ ...GABLE, oh: 0, wallDrawn: { FRONT: 2.7, REAR: 2.7, RIGHT: 3.11, LEFT: 3.11 } }), publishedPitchDeg: 45 }).bodies[0].roof.pitchDeg).not.toBe(45)
+  })
+  it('an L whose second rectangle is too thin to be a body: the smaller of the two is given up — the open corner closed, not a strip cut off the whole house; counter-trial', () => {
+    const views = silhouettes(GABLE, ['FRONT', 'REAR'])
+    // a 12 x 7 main part and a 1 m strip along 9 m of its front: the open corner is 3 x 1 m
+    const strip = solveMassing({ outline: { ...OUTLINE, outline: [{ x: 0, z: 0 }, { x: 9, z: 0 }, { x: 9, z: 1 }, { x: 12, z: 1 }, { x: 12, z: 8 }, { x: 0, z: 8 }] }, silhouettes: views })
+    expect(strip.bodies).toHaveLength(1)
+    expect([strip.bodies[0].rect.minZ, strip.bodies[0].rect.maxZ]).toEqual([0, 8])
+    expect(strip.alternatives.join(' ')).toMatch(/corner closed/)
+    // counter-trial: a 1 m bay along 3 m of the front leaves a 9 x 1 m corner — the bay is the smaller, and is not modelled
+    const bay = solveMassing({ outline: { ...OUTLINE, outline: [{ x: 0, z: 0 }, { x: 3, z: 0 }, { x: 3, z: 1 }, { x: 12, z: 1 }, { x: 12, z: 8 }, { x: 0, z: 8 }] }, silhouettes: views })
+    expect(bay.bodies).toHaveLength(1)
+    expect([bay.bodies[0].rect.minZ, bay.bodies[0].rect.maxZ]).toEqual([1, 8])
+  })
   it('the registry offers it', () => {
     expect(capabilityPrompt()).toMatch(/roofKind \(GABLE, HIP or FLAT\)/)
   })
