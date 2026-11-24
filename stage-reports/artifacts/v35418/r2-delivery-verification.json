@@ -1,0 +1,61 @@
+{
+ "schema": "buildapp.delivery-verification",
+ "stage": "v3.54.18 R2",
+ "topFolder": "BuildPlan-V35418-R2",
+ "archives": [
+  {
+   "file": "BuildPlan-V35418-R2-01-RAPORT-GALERIA.zip",
+   "bytes": 14040318,
+   "under30000000": true,
+   "sha256": "3d50fe653eca6f48bebe6f32f4fdeed16712e6948891f5a205b9bbfebd0b4713"
+  },
+  {
+   "file": "BuildPlan-V35418-R2-02-DEV-K.zip",
+   "bytes": 16500222,
+   "under30000000": true,
+   "sha256": "9505a7387ce76fab2f281bdccf0559af48a10f804a4b1cdfe2a2b6b5d553a5a6"
+  },
+  {
+   "file": "BuildPlan-V35418-R2-03-NEW-B.zip",
+   "bytes": 19121431,
+   "under30000000": true,
+   "sha256": "df007cb3ec2b30cf4cbb36b98b46e186c9851d82bbce9354407cf554c78b33eb"
+  },
+  {
+   "file": "BuildPlan-V35418-R2-04-NEW-C.zip",
+   "bytes": 18871062,
+   "under30000000": true,
+   "sha256": "d04fb9339d162c598fc68ba17f9fb6c511b41f4bb0b41efd9f08bb1014d43e08"
+  },
+  {
+   "file": "BuildPlan-V35418-R2-05-KAFLE.zip",
+   "bytes": 19293669,
+   "under30000000": true,
+   "sha256": "37c83feee183bec199824343dda303444870913df6d801671895c72ca666debc"
+  }
+ ],
+ "manifestFiles": 1275,
+ "manifestMismatches": [],
+ "galleryLinks": 367,
+ "galleryLinksMissing": [],
+ "providerKeyFiles": 0,
+ "readmes": [
+  "README-01-RAPORT-GALERIA.txt",
+  "README-02-DEV-K.txt",
+  "README-03-NEW-B.txt",
+  "README-04-NEW-C.txt",
+  "README-05-KAFLE.txt"
+ ],
+ "houses": [
+  "alaska",
+  "alberto",
+  "aurora",
+  "ballina",
+  "g6",
+  "jeziorko",
+  "medulin",
+  "mindelo",
+  "sakura"
+ ],
+ "method": "all five archives extracted into one empty directory; every MANIFEST line re-hashed; every relative href/src of gallery.html resolved; every extracted file scanned for the provider key"
+}
