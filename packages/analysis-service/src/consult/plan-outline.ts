@@ -18,7 +18,7 @@ import { reserveOf } from './cost.js'
 import { pictureOf } from './metric-read.js'
 import type { OutlineObservation } from './massing/massing.js'
 
-export const PLAN_OUTLINE_VERSION = '1.2.0' as const
+export const PLAN_OUTLINE_VERSION = '1.3.0' as const
 export const PLAN_OUTLINE_PROMPT_VERSION = 'plan-outline/3' as const
 /** The main entrance is taken to stand on a side when its point lies within this share of the outline's extent from that side's edge. */
 const ENTRANCE_NEAR_SHARE = 0.15
@@ -171,13 +171,22 @@ export async function readPlanOutline(ctx: Ctx, f: PlanOutlineInput): Promise<Pl
     })
   }
   if (!f.scale) {
-    read.refused.push('PLAN_SCALE: the analyzer measured no scale of this plan: the outline stays in pixels')
+    read.refused.push(NO_PLAN_SCALE)
     return read
   }
-  const s = f.scale.mPerPx
-  const minX = Math.min(...o.outline.map((q) => q[0]))
-  const maxY = Math.max(...o.outline.map((q) => q[1]))
-  const outline = o.outline.map(([x, y]) => ({ x: Math.round((x - minX) * s * 1e4) / 1e4, z: Math.round((maxY - y) * s * 1e4) / 1e4 }))
+  scaleOutline(read, f, f.scale)
+  return read
+}
+
+const NO_PLAN_SCALE = 'PLAN_SCALE: the analyzer measured no scale of this plan: the outline stays in pixels'
+/** Puts a traced outline (pixels) in metres at a stated scale: the observation the massing solver takes, and the footprint check. */
+export function scaleOutline(read: PlanOutlineRead, f: Pick<PlanOutlineInput, 'frameId' | 'sourceByteHash' | 'publishedFootprintM2'>, scale: { mPerPx: number; why: string }): void {
+  const o = read.outlinePx
+  if (!o) return
+  const s = scale.mPerPx
+  const minX = Math.min(...o.map((q) => q[0]))
+  const maxY = Math.max(...o.map((q) => q[1]))
+  const outline = o.map(([x, y]) => ({ x: Math.round((x - minX) * s * 1e4) / 1e4, z: Math.round((maxY - y) * s * 1e4) / 1e4 }))
   let a2 = 0
   for (let i = 0; i < outline.length; i += 1) {
     const q = outline[i]
@@ -185,7 +194,37 @@ export async function readPlanOutline(ctx: Ctx, f: PlanOutlineInput): Promise<Pl
     a2 += q.x * r.z - r.x * q.z
   }
   const areaM2 = Math.round(Math.abs(a2 / 2) * 100) / 100
+  read.refused = read.refused.filter((x) => x !== NO_PLAN_SCALE)
   read.check = { areaM2, ...(f.publishedFootprintM2 ? { publishedM2: f.publishedFootprintM2, share: Math.round((areaM2 / f.publishedFootprintM2) * 1000) / 1000 } : {}) }
-  read.observation = { observationId: `outline-${f.frameId.slice(-16)}`, frameId: f.frameId, sourceByteHash: f.sourceByteHash, outline, by: 'API_PLAN_OUTLINE', fidelity: 'SOURCE_TRACED', why: `the outer wall faces traced on ${f.frameId} (${p.data.parts.join(', ') || 'parts not named'}), at the analyzer's own scale: ${f.scale.why}` }
-  return read
+  read.observation = { observationId: `outline-${f.frameId.slice(-16)}`, frameId: f.frameId, sourceByteHash: f.sourceByteHash, outline, by: 'API_PLAN_OUTLINE', fidelity: 'SOURCE_TRACED', why: `the outer wall faces traced on ${f.frameId} (${(read.parts ?? []).join(', ') || 'parts not named'}), at the analyzer's own scale: ${scale.why}` }
+}
+
+/** Two scales of one drawing agree within this share, or none is taken from them. */
+export const OUTLINE_SCALE_AGREE = 0.03
+/**
+ * plan-outline 1.3.0: a scale for a plan the analyzer measured none on, from the traced outline itself.
+ *  - OVERALL: the house's two overall outer dimensions (printed on this plan with their axes, or published as length and
+ *    width) over the outline's two extents — two numbers over two independent extents, taken only when the two scales
+ *    agree; a printed number and a traced line, not an estimate.
+ *  - FOOTPRINT (a hypothesis, never taken alone): the published footprint area over the outline's area. The caller must
+ *    confirm it by something that does not come from the plan (the published height against the elevations' ridge).
+ */
+export function outlineScale(outlinePx: ReadonlyArray<readonly [number, number]>, facts: { horizontalM?: number; verticalM?: number; overallM?: [number, number]; footprintM2?: number }): { mPerPx: number; basis: 'OVERALL_DIMENSIONS' | 'FOOTPRINT_AREA'; why: string } | undefined {
+  const xs = outlinePx.map((q) => q[0])
+  const ys = outlinePx.map((q) => q[1])
+  const [w, h] = [Math.max(...xs) - Math.min(...xs), Math.max(...ys) - Math.min(...ys)]
+  if (!(w > 20 && h > 20)) return undefined
+  const pair = facts.horizontalM && facts.verticalM ? { x: facts.horizontalM, y: facts.verticalM, how: 'printed on the plan with their axes' } : facts.overallM ? (w >= h ? { x: Math.max(...facts.overallM), y: Math.min(...facts.overallM), how: 'published length and width, the longer over the longer extent' } : { x: Math.min(...facts.overallM), y: Math.max(...facts.overallM), how: 'published length and width, the longer over the longer extent' }) : undefined
+  if (pair) {
+    const [sx, sy] = [pair.x / w, pair.y / h]
+    const spread = Math.abs(sx - sy) / Math.max(sx, sy)
+    if (spread <= OUTLINE_SCALE_AGREE) return { mPerPx: (sx + sy) / 2, basis: 'OVERALL_DIMENSIONS', why: `${pair.x} m over the outline's ${w.toFixed(0)} px and ${pair.y} m over its ${h.toFixed(0)} px (${pair.how}): ${(sx * 100).toFixed(3)} and ${(sy * 100).toFixed(3)} cm/px, ${(spread * 100).toFixed(1)} % apart` }
+  }
+  if (facts.footprintM2 && facts.footprintM2 > 10) {
+    let a2 = 0
+    for (let i = 0; i < outlinePx.length; i += 1) a2 += outlinePx[i][0] * outlinePx[(i + 1) % outlinePx.length][1] - outlinePx[(i + 1) % outlinePx.length][0] * outlinePx[i][1]
+    const areaPx = Math.abs(a2 / 2)
+    if (areaPx > 400) return { mPerPx: Math.sqrt(facts.footprintM2 / areaPx), basis: 'FOOTPRINT_AREA', why: `the published footprint ${facts.footprintM2} m² over the outline's ${areaPx.toFixed(0)} px² (a hypothesis: one number, to be confirmed by the published height)${pair ? '; the overall dimensions do not agree over the outline\'s extents' : ''}` }
+  }
+  return undefined
 }

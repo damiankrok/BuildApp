@@ -64,7 +64,7 @@ import { observationFates } from './correct/fates.js'
 import type { ObservationFates } from './correct/fates.js'
 import type { SketchProposalAccount } from './correct/from-sketch.js'
 import { MASSING_OPS_VERSION, roofProposalsFromSketches } from './massing/ops.js'
-import { PLAN_OUTLINE_VERSION, readPlanOutline } from './plan-outline.js'
+import { outlineScale, PLAN_OUTLINE_VERSION, readPlanOutline, scaleOutline } from './plan-outline.js'
 import type { PlanSideOpening } from './plan-outline.js'
 import { drawnStretches, PLAN_OPENINGS_VERSION, planSideInModel, SIDE_MARGIN, stretchAgreement } from './plan-openings.js'
 import { massingRun } from './massing-result.js'
@@ -794,6 +794,25 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
         usd += plan.usd
         delivery.usd += plan.usd
         delivery.plan = plan
+        // v3.54.18 R3: a plan the analyzer measured no scale on is put in metres from its own traced outline — the two
+        // overall dimensions over the outline's two extents (they must agree), or, as a hypothesis the published height has
+        // to confirm on the built body, the published footprint area over the outline's area
+        let scaleHypothesis: string | undefined
+        if (!plan.observation && plan.outlinePx && !(cmPerPx && strong)) {
+          const printedOn = (metricRead?.reads ?? []).filter((r) => r.frameId === f.id).flatMap((r) => r.observations.filter((o) => o.kind === 'LENGTH' && o.scope === 'WHOLE_HOUSE' && o.reference === 'OUTER_FACE' && o.status === 'PRINTED' && typeof o.value === 'number'))
+          const fact = (key: string): number | undefined => { const v = pkg0.publishedFacts.find((x) => x.key === key && x.unit === 'm')?.value; return typeof v === 'number' ? v : undefined }
+          const [pw, pl] = [fact('building_width'), fact('building_length')]
+          const sc = outlineScale(plan.outlinePx, { ...(printedOn.find((o) => o.axis === 'HORIZONTAL') ? { horizontalM: printedOn.find((o) => o.axis === 'HORIZONTAL')?.value as number } : {}), ...(printedOn.find((o) => o.axis === 'VERTICAL') ? { verticalM: printedOn.find((o) => o.axis === 'VERTICAL')?.value as number } : {}), ...(pw !== undefined && pl !== undefined ? { overallM: [pw, pl] as [number, number] } : {}), ...(typeof published === 'number' ? { footprintM2: published } : {}) })
+          if (sc) {
+            cmPerPx = Math.round(sc.mPerPx * 100 * 1e6) / 1e6
+            strong = sc.basis === 'OVERALL_DIMENSIONS'
+            if (sc.basis === 'FOOTPRINT_AREA') scaleHypothesis = sc.why
+            diag.metricConfidence = sc.basis === 'OVERALL_DIMENSIONS' ? 'OVERALL_DIMENSIONS_OVER_OUTLINE' : 'FOOTPRINT_AREA_OVER_OUTLINE (hypothesis)'
+            diag.metricRelation = sc.why
+            scaleOutline(plan, { frameId: f.id, sourceByteHash: f.variantByteHash, ...(typeof published === 'number' ? { publishedFootprintM2: published } : {}) }, { mPerPx: sc.mPerPx, why: `${cmPerPx} cm/px from the traced outline: ${sc.why}` })
+            record({ at: now().toISOString(), kind: 'PLAN_SCALE_FROM_OUTLINE', frameId: f.id, cmPerPx, basis: sc.basis, why: sc.why })
+          }
+        }
         record({ at: now().toISOString(), kind: 'PLAN_OUTLINE', frameId: f.id, refused: plan.refused, check: plan.check ?? null, entrance: plan.entrance ?? null, openings: plan.openings ?? null, usd: plan.usd })
         if (!plan.observation) delivery.why = `the plan outline gives no outline in metres: ${plan.refused.join('; ') || 'no read'}${strong ? '' : '; PLAN_SCALE: the analyzer\'s plan scale is not STRONG/CONFIRMED'}`
         else {
@@ -814,7 +833,14 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
           delivery.records = out.records
           delivery.transactions = out.transactions
           const rec0 = out.records[0]
-          if (rec0?.status === 'COMMITTED') {
+          // a scale that is only a hypothesis (footprint area over the outline) stands when something that does not come
+          // from the plan confirms it: the page's building height against the ridge the elevations give at that scale
+          const heightFact = pkg0.publishedFacts.find((x) => x.key === 'building_height' && x.unit === 'm')?.value
+          const ridgeBuilt = rec0?.status === 'COMMITTED' && scaleHypothesis ? measureBuilt(out.model, compileBuilding(out.model)).ridge : undefined
+          const confirmed = !scaleHypothesis || (typeof heightFact === 'number' && typeof ridgeBuilt === 'number' && Math.abs(ridgeBuilt - heightFact) <= Math.max(BODY_ARBITRATION.heightAgreeM, BODY_ARBITRATION.heightAgreeShare * heightFact))
+          if (scaleHypothesis) record({ at: now().toISOString(), kind: 'PLAN_SCALE_HYPOTHESIS', confirmed, publishedHeightM: heightFact ?? null, ridgeM: ridgeBuilt ?? null, why: confirmed ? `the scale from the footprint area puts the ridge at ${(ridgeBuilt as number).toFixed(2)} m, the page states ${heightFact} m: confirmed by a fact outside the plan` : `the scale from the footprint area is not confirmed (ridge ${ridgeBuilt?.toFixed(2) ?? 'not built'} m against the published ${heightFact ?? 'none'} m): no body is delivered on it` })
+          if (rec0?.status === 'COMMITTED' && !confirmed) delivery.why = `BUILD_MASSING committed, but its plan scale is a hypothesis the published height does not confirm (${scaleHypothesis})`.slice(0, 600)
+          if (rec0?.status === 'COMMITTED' && confirmed) {
             const scene = compileBuilding(out.model)
             const sceneText = serializeBundle(buildMobileSceneBundle(out.model, { scene }))
             delivery.decision = 'BUILT'
@@ -843,7 +869,7 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
             record({ at: now().toISOString(), kind: 'MASSING_DELIVERED', ...delivery.delivery })
           } else {
             delivery.decision = 'NOT_BUILT'
-            delivery.why = `${rec0?.status ?? 'NO_RECORD'} ${rec0?.code ?? ''}: ${rec0?.why ?? ''}`.slice(0, 600)
+            if (!(rec0?.status === 'COMMITTED' && !confirmed)) delivery.why = `${rec0?.status ?? 'NO_RECORD'} ${rec0?.code ?? ''}: ${rec0?.why ?? ''}`.slice(0, 600)
           }
           record({ at: now().toISOString(), kind: 'MASSING_WITHOUT_MODEL', decision: delivery.decision, why: delivery.why })
         }

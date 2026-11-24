@@ -4,7 +4,7 @@
  */
 import { describe, expect, it } from 'vitest'
 import type { ConsultantModel, ModelTurn } from '../src/consult/loop.js'
-import { PLAN_OUTLINE_PROMPT_VERSION, PLAN_OUTLINE_SYSTEM, readPlanOutline } from '../src/consult/plan-outline.js'
+import { outlineScale, PLAN_OUTLINE_PROMPT_VERSION, PLAN_OUTLINE_SYSTEM, readPlanOutline, scaleOutline } from '../src/consult/plan-outline.js'
 import { drawnStretches, planSideInModel, SIDE_MARGIN, stretchAgreement } from '../src/consult/plan-openings.js'
 
 const W = 600
@@ -75,5 +75,37 @@ describe('v3.54.18 R3 plan read: the openings of the exterior walls, by side, as
     const sk = { groundRow: 500, walls: [{ polygon: [[100, 500], [500, 500], [500, 300], [300, 150], [100, 300]] as Array<[number, number]> }], openings: [{ polygon: [[140, 480], [180, 480], [180, 380], [140, 380]] as Array<[number, number]> }, { polygon: [[280, 280], [320, 280], [320, 220], [280, 220]] as Array<[number, number]> }] }
     expect(drawnStretches(sk)).toEqual([{ u0: 0.1, u1: 0.2 }])
     expect(drawnStretches({ ...sk, groundRow: null })).toEqual([])
+  })
+})
+
+describe('v3.54.18 R3 a plan scale from the traced outline itself', () => {
+  const px: Array<[number, number]> = [[100, 100], [500, 100], [500, 400], [100, 400]] // 400 x 300 px
+  it('two overall dimensions over the outline\'s two extents give a scale when they agree; printed axes are kept, published ones go longer-to-longer', () => {
+    const printed = outlineScale(px, { horizontalM: 12, verticalM: 9 })
+    expect(printed?.basis).toBe('OVERALL_DIMENSIONS')
+    expect(printed?.mPerPx).toBeCloseTo(0.03, 6)
+    expect(outlineScale(px, { overallM: [9, 12] })?.mPerPx).toBeCloseTo(0.03, 6)
+  })
+  it('counter-trials: dimensions that do not fit the outline give none; one dimension alone gives none; axes swapped give none', () => {
+    expect(outlineScale(px, { horizontalM: 12, verticalM: 7 })).toBeUndefined()
+    expect(outlineScale(px, { horizontalM: 12 })).toBeUndefined()
+    expect(outlineScale(px, { horizontalM: 9, verticalM: 12 })).toBeUndefined()
+  })
+  it('the footprint area is only a hypothesis, named so, and is not taken when the overall dimensions decide', () => {
+    const area = outlineScale(px, { footprintM2: 108 })
+    expect(area?.basis).toBe('FOOTPRINT_AREA')
+    expect(area?.mPerPx).toBeCloseTo(0.03, 6)
+    expect(area?.why).toMatch(/hypothesis/)
+    expect(outlineScale(px, { horizontalM: 12, verticalM: 9, footprintM2: 200 })?.basis).toBe('OVERALL_DIMENSIONS')
+    expect(outlineScale(px, {})).toBeUndefined()
+  })
+  it('a read without a scale is put in metres afterwards: the refusal goes, the outline and the footprint check come', async () => {
+    const r = await readPlanOutline({ model: fake({ outline: OUTLINE, parts: ['MAIN'], orthogonal: true }), price }, { frameId: 'frame-plan', raster, caption: 'rzut', sourceByteHash: 'p'.repeat(64) })
+    expect(r.observation).toBeUndefined()
+    expect(r.refused.join(' ')).toMatch(/PLAN_SCALE/)
+    scaleOutline(r, { frameId: 'frame-plan', sourceByteHash: 'p'.repeat(64), publishedFootprintM2: 108 }, { mPerPx: 0.03, why: 'test' })
+    expect(r.refused).toEqual([])
+    expect((r.observation?.outline ?? []).map((q) => `${q.x},${q.z}`).sort()).toEqual(['0,0', '0,9', '12,0', '12,9'])
+    expect(r.check?.share).toBe(1)
   })
 })
