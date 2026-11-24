@@ -73,3 +73,17 @@ rodziny widzianej wcześniej, oraz stron innych niż „projekt-dom-…"/„proj
 - **NEW-E (odłożona, nieotwierana do zamrożenia):** Amarylis, Oban III, Juliusz Nowy (pula ARCHON nie dała drugiego domu).
 
 Cechy referencyjne NEW-D: `references/NEW-D.md` (spisane ze źródeł przed obejrzeniem modeli).
+
+## 7. Zamrożenie kodu i odstępstwa (2026-11-24, zapisane przed otwarciem NEW-E)
+
+- **Kod zamrożony:** `4c2c73e` (`packages/analysis-service/src` bez zmian w późniejszych commitach: te dodają testy,
+  dokumenty i sceny). Ostatnia partia DEV + NEW-D na tym kodzie (odczyty elewacji nagrane, recenzja i małe odczyty kanału
+  obrysu na żywo): `dev/a6` na hoście sesji.
+- **Odstępstwo 1 (kolejność, bez otwierania):** biegi baseline NEW-E (drzewo `9ac25b6`) zostały uruchomione, zanim kod
+  był zamrożony — baseline nie zależy od kodu końcowego. Katalogów wyników nie otwierano.
+- **Odstępstwo 2 (kolejność, bez otwierania):** biegi NEW-E na kodzie-kandydacie `4c2c73e` uruchomiono równolegle
+  z ostatnią partią DEV + NEW-D na tym samym commicie. Otwarte dopiero po sprawdzeniu, że partia nie wymaga zmiany kodu;
+  gdyby wymagała, biegi NEW-E byłyby powtórzone na nowym zamrożeniu, a ten zapis by o tym mówił.
+- **Kolejność otwierania NEW-E:** (1) eksport źródeł i spisanie `references/NEW-E.md` wyłącznie z rysunków wydawcy;
+  (2) dopiero potem modele, nakładki i ocena. Po otwarciu nic w kodzie analizy nie jest zmieniane.
+- **Jeden bieg na dom i stan kodu** — bez ponawiania, cokolwiek wyszło.

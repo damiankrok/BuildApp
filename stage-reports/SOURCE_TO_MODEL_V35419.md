@@ -174,4 +174,37 @@ zgłasza, jest przez niego podważona; bryłę zastępczą nadal buduje ten sam 
 pochodzi z opisu. Skutek zmierzony na Novarze (§6). Niewdrożone w tej rundzie i nazwane jako następny krok: opis formy
 jako **założenie wstępne solvera** (czterospad kontra dwuspad, dwie kondygnacje) — to by naprawiło Willę Elizę.
 
+## 4. Protokół próby (zapisany przed biegami)
+
+`research/source-to-model/v35419/PROTOCOL.md`. Skrót:
+
+- **Baseline** = kod APK 1351 uruchomiony na tych samych bajtach źródeł (nie wspomnienie o nim).
+- **DEV** (9 znanych domów: Alaska, Aurora, Ballina, Alberto, Medulin, Domek nad jeziorkiem, Mindelo, Dom pod sakurą,
+  G6) — jawnie nie-ślepe, tu wolno było stroić.
+- **NEW-D** (4 nowe domy, losowane z pul czterech wydawców: Aletta New, Novara, Jarzębina, Willa Eliza 5 G2) —
+  najpierw sam baseline i zapis pierwszych wyników (`FIRST_LOOK_NEW-D.md`: **0 z 4** całych wyników), dopiero potem
+  stały się rozwojowe.
+- **NEW-E** (3 odłożone domy: Amarylis, Oban III, Juliusz Nowy) — nieotwierane do zamrożenia kodu, po jednym biegu na
+  baseline i na kodzie zamrożonym, niczego potem nie strojono. Pula ARCHON nie dała drugiego domu (§6 protokołu).
+- **Cały wynik domu** = zewnętrze użyteczne (reguła „użytecznej miniatury" z v3.54.18, bez zmian) **oraz** wnętrze
+  zgodne z rzutem (nakładka: ≥ 70 % ścian rysowanych przez rzut obecnych, ≤ 20 % ścian modelu zmyślonych, obrys zgodny
+  lub jawnie uproszczony). Brak modelu albo puste wnętrze to porażka, nie „nieoceniane".
+- **Kryterium z góry:** na NEW-E liczba całych wyników rośnie o ≥ 2 wobec baseline i żaden dom nie traci cechy formy ani
+  dobrego wnętrza. Limit kosztu etapu 14 USD.
+- Zamrożenie i dwa odstępstwa kolejności (bez otwierania wyników): §7 protokołu.
+
+## 5. Testy przyczynowe i kontrpróby
+
+Każda reguła ma test, który odtwarza stratę, i próbę, która ma **nie** przejść. Nowe pliki testów (kontrolowane
+arkusze, bryły i obrazy — nie domy z benchmarku):
+
+| Plik | Testów | Co sprawdza (z kontrpróbą) |
+|---|---|---|
+| `plan-skeleton-v35419.test.ts` | 28 | kolor ścian arkusza (kontra: ściany samym konturem → nazwana odmowa); dosuw do pasm; przerwy zewnętrzne; ściana z drzwiami; `BUILD_INTERIOR` w jednej transakcji (kontra: istniejące wnętrze zostaje, recenzent nie może zamówić operacji); bryła obrócona; `ADD_PLAN_OPENING` (kontra: brak przerwy → brak otworu; otwór na przerwie rzutu nie ustępuje); docinanie ścian; meble (kontra: spiżarnia zostaje, ściana o korytarz dalej zostaje, kikut przy drzwiach zostaje); zewnętrzna linia ścian (kontra: krótka kreska to nie linia ściany) |
+| `openings-v35419.test.ts` | 7 | drzwi na przerwie rzutu mimo braku kontrastu (kontra: okno nadal wymaga obrazu, drzwi obok przerwy i przerwa innej kondygnacji nie świadczą); nadproże docięte do ściany (kontra: > 25 % ponad ścianę → odmowa); koniec ściany (kontra: połowa otworu poza ścianą → odmowa); konsument `GLAZED_WALL` (kontra: nieznany rodzaj nadal nazwany jako pominięty) |
+| `wings-v35419.test.ts` | 9 | T i U jako korpusy (kontra: wykusz nie jest korpusem, obrys ukośny nieczytany); najwyżej 4 korpusy; „iglica" (kontra: stromy, ale możliwy dach 50° zostaje); podział na ścianie z rzutu (kontra: ściana za daleko lub za krótka nic nie przesuwa); wymiary z planu sytuacyjnego (kontra: para niezgodna nie jest skalą) |
+| `form-read-v35419.test.ts` | 4 | werdykt formy (kontra: zgłoszony garaż z płaskim dachem nie jest sprzecznością; bryła bez dachu nie jest potwierdzona); odpowiedź sprzeczna wewnętrznie lub nietypowana → odmowa po nazwie |
+| `review-applied-v35419.test.ts` | 2 | ponowne pytanie o werdykty (kontra: tylko raz; nie pyta, gdy werdykty są albo nic nie nałożono) |
+| `hip-v35418.test.ts` (dopisane) | 3 | wysokość ze strony rozstrzyga ćwierć obrotu (kontra: wysokość niepasująca do żadnego odczytu nie rozstrzyga niczego) |
+
 <!-- REST -->
