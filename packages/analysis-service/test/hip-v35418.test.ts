@@ -402,3 +402,38 @@ describe('v3.54.18 R2 BUILD_MASSING and SET_ROOF: the hip through the executor a
     expect(capabilityPrompt()).toMatch(/roofKind \(GABLE, HIP or FLAT\)/)
   })
 })
+
+describe('v3.54.19 (ops 1.9.0) the page\'s building height is a witness of the quarter turn', () => {
+  // the 12 × 8 m plan, ridge 5.8 m; four elevations drawn as the plan labels them
+  const empty = createEmptyModel('m-height', 'controlled')
+  const run = (silhouettesIn: SilhouetteObservation[], buildingHeightM?: number) => executeCorrections({ model: empty, views: [], pictures: [], proposals: [propose(empty, { operation: 'BUILD_MASSING' })], massing: { outline: OUTLINE, silhouettes: silhouettesIn }, ...(buildingHeightM !== undefined ? { facts: { buildingHeightM } } : {}) })
+  const hypOf = (out: ReturnType<typeof run>) => (out.records[0].massing as { hypothesis: { planFront?: Side; alternatives: string[]; bodies: Array<{ roof: { ridgeM?: number } }> } }).hypothesis
+  it('elevations drawn a quarter turn from the plan agree with each other either way on their own axis; the height the page states says which reading is the house', () => {
+    // FRONT and REAR captions on the plan's 8 m ends (a quarter turn), LEFT and RIGHT on its 12 m sides
+    const back: Record<Side, Side> = { FRONT: 'LEFT', LEFT: 'REAR', REAR: 'RIGHT', RIGHT: 'FRONT' }
+    const turnedLabels = SIDES.map((s) => ({ ...silhouettes(GABLE, [back[s]])[0], side: s, frameId: frameOf(s), observationId: `sk-${s}` }))
+    // the true ridge is 5.8 m: the page says 5.9 m → the turned reading (the body in the elevations' frame) fits it
+    const h = hypOf(run(turnedLabels, 5.9))
+    expect(h.planFront).toBeDefined()
+    expect(h.bodies[0].roof.ridgeM as number).toBeGreaterThan(5.3)
+    expect(h.bodies[0].roof.ridgeM as number).toBeLessThan(6.4)
+  })
+  it('counter-trials: elevations drawn as labelled stay as labelled when the page\'s height fits them, and a height that fits neither reading decides nothing', () => {
+    const straight = hypOf(run(silhouettes(GABLE), 5.9))
+    expect(straight.planFront).toBeUndefined()
+    expect(straight.bodies[0].roof.ridgeM as number).toBeCloseTo(5.8, 0)
+    const neither = hypOf(run(silhouettes(GABLE), 12))
+    expect(neither.planFront).toBeUndefined()
+    expect(neither.alternatives.join(' ')).not.toMatch(/the page states the building/)
+  })
+  it('only two opposite elevations: both readings agree with themselves (one axis), the page\'s height picks the width they were drawn over', () => {
+    const two = silhouettes(GABLE, ['FRONT', 'REAR'])
+    // read over the plan's 12 m front the ridge is 5.8 m; turned onto its 8 m end it would be 5.8 × 8 / 12 = 3.87 m
+    const labelled = hypOf(run(two, 5.9))
+    expect(labelled.planFront).toBeUndefined()
+    expect(labelled.alternatives.join(' ')).toMatch(/the page states the building 5.9 m high/)
+    const turned = hypOf(run(two, 3.9))
+    expect(turned.planFront).toBeDefined()
+    expect(turned.alternatives.join(' ')).toMatch(/the page states the building 3.9 m high/)
+  })
+})
