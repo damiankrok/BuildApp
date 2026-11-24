@@ -342,7 +342,7 @@ export type Refusal = { status: PatchStatus; code: string; why: string; record?:
 /** v3.54.17 R3: a registered plan sheet (pixels → world metres), for a printed dimension's line. */
 export type BindPlan = { frameId: string; toWorld: (px: number, py: number) => { x: number; z: number } }
 /** v3.54.17 R3: facts the publisher's page states in words (not printed on a drawing): the roof's pitch. */
-export type PageFacts = { roofPitchDeg?: number }
+export type PageFacts = { roofPitchDeg?: number; /** v3.54.19: the building's height the page states (ground to ridge, metres) */ buildingHeightM?: number }
 export type Ctx = { model: CanonicalBuildingModel; views: BindView[]; pictures: readonly BindPicture[]; witnesses: readonly PrintedWitness[]; planGaps?: readonly PlanGap[]; massing?: MassingObservations; /** v3.54.19: the plan skeleton in the model's frame (BUILD_INTERIOR). */ interior?: InteriorObservation; plans?: readonly BindPlan[]; facts?: PageFacts; claims?: FacadeClaims; adopted?: ReadonlySet<string> }
 /** v3.54.18 (gate 1.3.0): per source frame, every opening box the reading of that picture draws (frame pixels) — the places it does NOT call plain wall. */
 export type FacadeClaims = ReadonlyMap<string, readonly Box[]>

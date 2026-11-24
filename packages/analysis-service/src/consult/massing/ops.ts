@@ -654,6 +654,9 @@ function withEvidence(cmds: BuildingCommand[], b: BodySpec, frames: string[]): B
   return cmds.map((c) => (c.type === 'createWallRing' ? { ...c, evidence: ev('ring') } : c.type === 'createRoof' ? { ...c, evidence: ev('roof') } : c.type === 'createRoofPlane' ? ({ ...c, evidence: { ...ev('roof'), properties: { pitchDeg: STATUS_OF[pr.roof?.fidelity ?? 'TRACE_UNCERTAIN'], datum: STATUS_OF[pr.height?.fidelity ?? 'TRACE_UNCERTAIN'] } } } as BuildingCommand) : c))
 }
 
+/** ops 1.9.0: a reading's top agrees with the page's building height within this (the page measures from the ground, the model from its floor). */
+export const PAGE_HEIGHT_AGREE = { m: 0.6, share: 0.1 } as const
+
 export function bindBuildMassing(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
   const m = ctx.model
   const obs = ctx.massing
@@ -677,8 +680,18 @@ export function bindBuildMassing(ctx: Ctx, p: CorrectionProposal): Bound | Refus
   const quarter = planFront === 'LEFT' ? TURN_BACK : TURN
   const frame0 = obs.outline.outline
   const turnedH = ownFrame ? solveMassing({ outline: { ...obs.outline, outline: outlineWithFront(obs.outline.outline, planFront) }, silhouettes: obs.silhouettes, ...pitchFact, ...(obs.planWalls && obs.planWalls.length > 0 ? { planWalls: obs.planWalls.map((w) => ({ a: pointWithFront(w.a, planFront, frame0), b: pointWithFront(w.b, planFront, frame0) })) } : {}) }) : solveMassing({ outline: obs.outline, silhouettes: obs.silhouettes.map((q) => ({ ...q, side: quarter[q.side] })), ...pitchFact, ...wallsFact })
-  const turn = agreeing(turnedH) > agreeing(asLabelled)
+  // ops 1.9.0: which reading the page's own building height fits. The two readings put the same drawn heights over
+  // different widths, so their ridges differ by the outline's aspect; where the page states the building's height and
+  // exactly one reading's top agrees with it, that reading is taken — a fact from outside the drawings decides before
+  // a count of agreeing views does (two views that agree with each other on the wrong width agree on the wrong height)
+  const topOf = (x: MassingHypothesis): number | undefined => (x.status === 'BUILDABLE' && x.bodies.length > 0 ? Math.max(...x.bodies.map((b) => b.roof.ridgeM ?? b.roof.eavesM)) : undefined)
+  const pageH = ctx.facts?.buildingHeightM
+  const fits = (x: MassingHypothesis): boolean => { const t = topOf(x); return pageH !== undefined && t !== undefined && Math.abs(t - pageH) <= Math.max(PAGE_HEIGHT_AGREE.m, PAGE_HEIGHT_AGREE.share * pageH) }
+  const byHeight = pageH !== undefined && fits(asLabelled) !== fits(turnedH) ? (fits(turnedH) ? 'TURNED' : 'LABELLED') : undefined
+  const turn = byHeight ? byHeight === 'TURNED' : agreeing(turnedH) > agreeing(asLabelled)
+  const heightNote = byHeight ? [`the page states the building ${pageH} m high: ${byHeight === 'TURNED' ? 'turned by 90°' : 'as labelled'} the top stands at ${(topOf(byHeight === 'TURNED' ? turnedH : asLabelled) as number).toFixed(2)} m, ${byHeight === 'TURNED' ? 'as labelled' : 'turned by 90°'} at ${topOf(byHeight === 'TURNED' ? asLabelled : turnedH)?.toFixed(2) ?? 'no'} m — the reading the page's height fits is taken (heights agreeing: ${agreeing(asLabelled)} as labelled, ${agreeing(turnedH)} turned)`] : []
   const h: MassingHypothesis = turn && !ownFrame ? { ...turnedH, alternatives: [...turnedH.alternatives, `the elevations draw the model's sides turned by 90° from their labels: ${agreeing(turnedH)} body/bodies' heights agree so against ${agreeing(asLabelled)} as labelled (the labelled reading is kept as an alternative)`] } : turn ? { ...turnedH, planFront, alternatives: [...turnedH.alternatives, `the body is built in the elevations' frame, the plan sheet's ${planFront.toLowerCase()} side as its front (${obs.entranceSide === undefined ? 'which end is a convention: the plan read marks no main entrance' : obs.entranceSide === planFront ? 'the plan marks its main entrance there' : `the plan marks its main entrance on its ${obs.entranceSide.toLowerCase()} side, where neither quarter turn puts the front: a convention`}) — the elevations draw the plan's sides turned by 90° from their labels: ${agreeing(turnedH)} body/bodies' heights agree so against ${agreeing(asLabelled)} as labelled (the labelled reading is kept as an alternative)`] } : { ...asLabelled, alternatives: [...asLabelled.alternatives, ...(agreeing(turnedH) === agreeing(asLabelled) && turnedH.status === 'BUILDABLE' ? [`turned by 90° the elevations agree as well (${agreeing(turnedH)} body/bodies): the labels are kept`] : [])] }
+  if (heightNote.length > 0) h.alternatives = [...h.alternatives, ...heightNote]
   const record = { massing: { version: MASSING_OPS_VERSION, hypothesis: h } as Record<string, unknown>, ...(obs.outline.frameId ? { source: { frameId: obs.outline.frameId, sourceByteHash: obs.outline.sourceByteHash } } : {}) }
   if (h.status !== 'BUILDABLE') return { status: h.status === 'UNSUPPORTED_FORM' ? 'UNSUPPORTED_OPERATION' : 'NEEDS_EVIDENCE', code: h.status === 'UNSUPPORTED_FORM' ? 'MASSING_UNSUPPORTED_FORM' : 'MASSING_MISSING_ANCHORS', why: `${h.why}; missing: ${h.missing.map((x) => `${x.anchor} (${x.why})`).join('; ') || 'none'}`, record }
   const existing = bodiesOf(m).filter((b) => b.ringIds.length > 0)
@@ -755,7 +768,7 @@ const TURN: Record<Side, Side> = { FRONT: 'RIGHT', RIGHT: 'REAR', REAR: 'LEFT', 
 /** The other quarter turn: heights cannot tell the two apart (they differ by which end of the house the front elevation draws). */
 const TURN_BACK: Record<Side, Side> = { FRONT: 'LEFT', LEFT: 'REAR', REAR: 'RIGHT', RIGHT: 'FRONT' }
 /** What does not come from the elevations and may decide what their heights cannot. */
-export type OrientationHints = { /** the side of the plan its main entrance is marked on (the plan read) */ entranceSide?: Side }
+export type OrientationHints = { /** the side of the plan its main entrance is marked on (the plan read) */ entranceSide?: Side; /** ops 1.9.0: the building's height the page states (metres) */ buildingHeightM?: number }
 /** Whether a body stands in front of every other body whose stretch it shares on this side (its face nearer the viewer). */
 function inFront(r: Rect, others: readonly Rect[], s: Side): boolean {
   const e = extentOn(r, s)
@@ -851,6 +864,21 @@ export function orientationOf(sketches: readonly SketchForMassing[], m: Canonica
   const turnWhy = hints.entranceSide === undefined ? 'which of the two quarter turns is a convention: the plan read marks no main entrance' : hints.entranceSide === TURN.FRONT || back ? `the plan marks its main entrance on the ${hints.entranceSide.toLowerCase()} side: the front elevation draws that side` : `the plan marks its main entrance on the ${hints.entranceSide.toLowerCase()} side, where neither quarter turn puts the front elevation: the first turn stands as a convention`
   const mapping = (turn: boolean): Record<string, Side> => Object.fromEntries(sketches.flatMap((s) => { const lab = sideOf(s.facade); return lab ? [[s.frameId, turn ? (back ? TURN_BACK[lab] : TURN[lab]) : lab]] : [] }))
   const base = { labelled: { eavesM: flat('labelled'), spreadM: spread(flat('labelled')) }, turned: { eavesM: flat('turned'), spreadM: spread(flat('turned')) }, perBody }
+  // ops 1.9.0: the page's building height before any count of agreeing views (see bindBuildMassing): the two assignments
+  // put the same drawn tops over different widths; where exactly one of them puts the house's top at the height the page
+  // states, that one is the assignment
+  const pageH = hints.buildingHeightM
+  if (pageH !== undefined) {
+    const mid = (v: number[]): number | undefined => { if (v.length === 0) return undefined; const q = [...v].sort((x, y) => x - y); return (q[Math.floor((q.length - 1) / 2)] + q[Math.ceil((q.length - 1) / 2)]) / 2 }
+    const topUnder = (k: 'labelled' | 'turned'): number | undefined => { const tops = perBody.map((b) => mid(b[k].map((x) => x.topM).filter((t): t is number => t !== undefined))).filter((t): t is number => t !== undefined); return tops.length > 0 ? Math.max(...tops) : undefined }
+    const [tl, tt] = [topUnder('labelled'), topUnder('turned')]
+    const fit = (t: number | undefined): boolean => t !== undefined && Math.abs(t - pageH) <= Math.max(PAGE_HEIGHT_AGREE.m, PAGE_HEIGHT_AGREE.share * pageH)
+    if (fit(tl) !== fit(tt) && twoAxes(perBody.flatMap((b) => b.turned))) {
+      const why = `the page states the building ${pageH} m high: as labelled the drawn top stands at ${tl?.toFixed(2) ?? 'no'} m, turned by 90° at ${tt?.toFixed(2) ?? 'no'} m — the assignment the page's height fits is taken (as labelled: ${describe('labelled')}; turned: ${describe('turned')})`
+      if (fit(tl)) return { ...base, assignment: 'AS_LABELLED', confirmed: perBody.filter((b) => b.agreesLabelled).map((b) => b.bodyId), sideOf: mapping(false), why }
+      return { ...base, assignment: 'TURNED_90', confirmed: perBody.filter((b) => b.agreesTurned).map((b) => b.bodyId), sideOf: mapping(true), why: `${why}; ${turnWhy}`, turn: back ? 'FRONT_ON_LEFT' : 'FRONT_ON_RIGHT' }
+    }
+  }
   if (judged('agreesLabelled').length === 0) return { ...base, assignment: 'AS_LABELLED', confirmed: [], sideOf: mapping(false), why: `no body is read by two views (${describe('labelled')}): read as labelled, nothing confirmed by agreement` }
   if (allAgree('agreesLabelled')) return { ...base, assignment: 'AS_LABELLED', confirmed: perBody.filter((b) => b.agreesLabelled).map((b) => b.bodyId), sideOf: mapping(false), why: `each body's views agree as labelled (${describe('labelled')})` }
   if (allAgree('agreesTurned')) return { ...base, assignment: 'TURNED_90', confirmed: perBody.filter((b) => b.agreesTurned).map((b) => b.bodyId), sideOf: mapping(true), why: `as labelled the views disagree on a body (${describe('labelled')}); turned by 90° every body's views agree (${describe('turned')}): the elevations draw the model's sides turned — read so for every consumer, named, no wall moved; ${turnWhy}`, turn: back ? 'FRONT_ON_LEFT' : 'FRONT_ON_RIGHT' }

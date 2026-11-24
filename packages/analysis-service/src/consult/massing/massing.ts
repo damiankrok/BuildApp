@@ -699,9 +699,16 @@ export function solveMassing(input: MassingInput): MassingHypothesis {
       // tightest; their median put the wall below its own doors. The page's roof pitch, where it is published, says where
       // the slope from the drawn ridge meets the wall — taken when the drawn walls allow it (not above that line, not
       // further below it than an overhang hides); else the highest drawn wall top stands, unconfirmed.
+      // massing 1.7.0: the same holds where a gable end IS seen but gives no wall corner the views agree on (its walls
+      // not read to the roof, or read wider than the body) and not every view draws its walls' tops: what is left are
+      // roofs' lower edges and some wall tops. A roof's lowest drawn edge is the eaves' edge out on the overhang — below
+      // the place the slope crosses the wall — so it too is a lower bound of the wall's top, never the roof's top surface
+      // at the wall (taken so, a 49° roof stood 0.4 m into its own walls and every door under it went uncut).
       const boundOnly = !byEnds && reads.every((r) => r.p.shape !== 'TRIANGLE')
+      // (there the median of the roofs' lower edges stands — as the wall's top under the roof, not as the roof's top)
+      const fasciaOnly = !byEnds && !byWalls && !boundOnly
       const lower = boundOnly ? Math.max(...reads.map((r) => r.wallTopM ?? r.p.eavesM)) : eaves
-      const underside = byWalls || boundOnly
+      const underside = byWalls || boundOnly || fasciaOnly
       let eavesTop = lower
       if (underside) for (let i = 0; i < 6; i += 1) eavesTop = lower + MINIATURE_CONVENTIONS.roofThicknessM / Math.cos(Math.atan2(Math.max(0.01, top - eavesTop), span / 2))
       if (top - eavesTop < MASSING_TOLERANCES.flatRiseM) eavesTop = lower
@@ -717,7 +724,8 @@ export function solveMassing(input: MassingInput): MassingHypothesis {
           pitch = P
           pitchNote = `; no view shows the wall's corner under the roof: the page's ${P}° from the drawn ridge puts the wall's top at ${wallAt.toFixed(2)} m, the drawn walls end at ${lower.toFixed(2)} m behind the fascia (within what an overhang hides)`
         } else pitchNote = `; no view shows the wall's corner under the roof and the page's ${P}° does not fit the drawn walls (it would put their top at ${wallAt.toFixed(2)} m, they are drawn to ${lower.toFixed(2)} m): the highest drawn wall top is taken, unconfirmed`
-      } else if (boundOnly) pitchNote = `; no view shows the wall's corner under the roof: the highest drawn wall top (${lower.toFixed(2)} m) is taken as the wall's, a lower bound`
+      } else if (fasciaOnly) pitchNote = `; no gable-end view gives the wall's corner under the roof: the roofs' lowest drawn edge (${lower.toFixed(2)} m, the eaves' edge out on the overhang) is taken as the wall's top under the roof, a lower bound`
+      else if (boundOnly) pitchNote = `; no view shows the wall's corner under the roof: the highest drawn wall top (${lower.toFixed(2)} m) is taken as the wall's, a lower bound`
       // massing 1.3.0: a HIP — the sides ALONG the ridge draw a trapezoid (the ridge shorter than the eaves, a hip slope
       // at each end), none of them a band. How far each ridge end stands in from its end wall is read on those views,
       // through the registration that put the wall ends on the plan. A gable draws a band there and is built as before.

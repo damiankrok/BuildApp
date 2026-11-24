@@ -155,9 +155,9 @@ export type SketchSummary = { reading: Omit<SketchReading, 'elevationSketches'>;
 /** v3.54.18: tolerances of the body arbitration, fixed before any result (a printed dimension, a published height). */
 /** v3.54.18 R2: which source pictures get a frame changed (a content-disputed orthographic elevation keeps its frame): part of the accepted-revision key. */
 export const SOURCE_FRAMES_RULE = 'frames2' as const
-export const BODY_ARBITRATION = { version: '1.1.0', dimAgreeM: 0.3, dimAgreeShare: 0.04, heightAgreeM: 0.6, heightAgreeShare: 0.1 } as const
+export const BODY_ARBITRATION = { version: '1.2.0', dimAgreeM: 0.3, dimAgreeShare: 0.04, heightAgreeM: 0.6, heightAgreeShare: 0.1 } as const
 export type BodyEvidence = { bodies: number; registrations: Array<{ frameId: string; side: string; ok: boolean; code: string; why?: string }>; printed: Array<{ literal: string; valueM: number; modelM: number; agrees: boolean }>; height?: { publishedM: number; modelRidgeM: number; agrees: boolean }; contradictions: number; supports: number }
-export type BodyArbitration = { version: string; local: BodyEvidence; /** LOCAL's body was judged with this many roof corrections from the same elevations applied (on a copy). */ localAfterRoofCorrections?: number; alternative?: BodyEvidence; massing?: { decision: string; why: string; usd: number }; decision: 'LOCAL_STANDS' | 'REPLACED_BY_SOURCE_BODY'; why: string }
+export type BodyArbitration = { version: string; local: BodyEvidence; /** LOCAL's body was judged with this many roof corrections from the same elevations applied (on a copy). */ localAfterRoofCorrections?: number; alternative?: BodyEvidence; massing?: { decision: string; why: string; usd: number }; /** 1.2.0: elevations that register on neither body, set aside on both sides. */ setAside?: { frames: string[]; why: string }; decision: 'LOCAL_STANDS' | 'REPLACED_BY_SOURCE_BODY'; why: string }
 
 /** v3.54.17: the no-model path's delivery: a mass built from the source, or the anchors it lacks. */
 export type MassingDelivery = {
@@ -873,18 +873,18 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
               })()
             : []
           stage('BUILD_MASSING')
+          const heightFact = pkg0.publishedFacts.find((x) => x.key === 'building_height' && x.unit === 'm')?.value
           const pitchFact = pkg0.publishedFacts.find((x) => x.key === 'roof_pitch' && x.unit === 'deg')?.value
           const empty = createEmptyModel(`massing-${f.variantByteHash.slice(0, 12)}`, (asset?.caption ?? 'house').slice(0, 60))
-          const out = executeCorrections({ model: empty, views: [], pictures, proposals: [{ proposalId: `massing-${f.variantByteHash.slice(0, 12)}`, baseRevision: modelRevision(empty), operation: 'BUILD_MASSING', targetId: 'WHOLE', origin: 'SKETCH', uncertainty: 'MEDIUM', justification: A.why }], massing: { outline: plan.observation, silhouettes, ...(plan.entrance?.side ? { entranceSide: plan.entrance.side } : {}), ...(planWalls.length > 0 ? { planWalls } : {}) }, ...(typeof pitchFact === 'number' ? { facts: { roofPitchDeg: pitchFact } } : {}) })
+          const out = executeCorrections({ model: empty, views: [], pictures, proposals: [{ proposalId: `massing-${f.variantByteHash.slice(0, 12)}`, baseRevision: modelRevision(empty), operation: 'BUILD_MASSING', targetId: 'WHOLE', origin: 'SKETCH', uncertainty: 'MEDIUM', justification: A.why }], massing: { outline: plan.observation, silhouettes, ...(plan.entrance?.side ? { entranceSide: plan.entrance.side } : {}), ...(planWalls.length > 0 ? { planWalls } : {}) }, facts: { ...(typeof pitchFact === 'number' ? { roofPitchDeg: pitchFact } : {}), ...(typeof heightFact === 'number' ? { buildingHeightM: heightFact } : {}) } })
           delivery.records = out.records
           delivery.transactions = out.transactions
           const rec0 = out.records[0]
           // a scale that is only a hypothesis (footprint area over the outline) stands when something that does not come
           // from the plan confirms it: the page's building height against the ridge the elevations give at that scale
-          const heightFact = pkg0.publishedFacts.find((x) => x.key === 'building_height' && x.unit === 'm')?.value
           const ridgeBuilt = rec0?.status === 'COMMITTED' && scaleHypothesis ? measureBuilt(out.model, compileBuilding(out.model)).ridge : undefined
           const confirmed = !scaleHypothesis || (typeof heightFact === 'number' && typeof ridgeBuilt === 'number' && Math.abs(ridgeBuilt - heightFact) <= Math.max(BODY_ARBITRATION.heightAgreeM, BODY_ARBITRATION.heightAgreeShare * heightFact))
-          if (scaleHypothesis) record({ at: now().toISOString(), kind: 'PLAN_SCALE_HYPOTHESIS', confirmed, publishedHeightM: heightFact ?? null, ridgeM: ridgeBuilt ?? null, why: confirmed ? `the scale from the footprint area puts the ridge at ${(ridgeBuilt as number).toFixed(2)} m, the page states ${heightFact} m: confirmed by a fact outside the plan` : `the scale from the footprint area is not confirmed (ridge ${ridgeBuilt?.toFixed(2) ?? 'not built'} m against the published ${heightFact ?? 'none'} m): no body is delivered on it` })
+          if (scaleHypothesis) record({ at: now().toISOString(), kind: 'PLAN_SCALE_HYPOTHESIS', confirmed, publishedHeightM: heightFact ?? null, ridgeM: ridgeBuilt ?? null, bodies: ((rec0?.massing as { hypothesis?: { bodies?: Array<{ id: string; rect: unknown; roof: unknown; provenance: { height?: { why: string } } }> } } | undefined)?.hypothesis?.bodies ?? []).map((q) => ({ id: q.id, rect: q.rect, roof: q.roof, height: q.provenance.height?.why ?? null })), why: confirmed ? `the scale from the footprint area puts the ridge at ${(ridgeBuilt as number).toFixed(2)} m, the page states ${heightFact} m: confirmed by a fact outside the plan` : `the scale from the footprint area is not confirmed (ridge ${ridgeBuilt?.toFixed(2) ?? 'not built'} m against the published ${heightFact ?? 'none'} m): no body is delivered on it` })
           if (rec0?.status === 'COMMITTED' && !confirmed) delivery.why = `BUILD_MASSING committed, but its plan scale is a hypothesis the published height does not confirm (${scaleHypothesis})`.slice(0, 600)
           if (rec0?.status === 'COMMITTED' && confirmed) {
             const scene = compileBuilding(out.model)
@@ -1417,9 +1417,16 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
         // v3.54.18 arbitration 1.1.0: the body that replaces LOCAL's must itself be UNCONTRADICTED. One the same sources
         // contradict "less" is still a body they contradict — and it costs the interior and the plan's openings (Jeziorko,
         // cycle 4: 2 contradictions against LOCAL's 3 replaced a good model by a body the published height refuted)
-        if (altEv.contradictions === 0 && altEv.contradictions < localEv.contradictions && altEv.supports >= localEv.supports) {
+        // v3.54.19 arbitration 1.2.0: a picture that registers on NEITHER body does not choose between them (an
+        // elevation whose walls were read too wide fails any body at any scale): it is set aside on both sides, named.
+        // What is left must still leave the other body uncontradicted — by every other picture, by the printed
+        // dimensions and by the page's height — and LOCAL's contradicted.
+        const failsBoth = altEv.registrations.filter((q) => !q.ok && localEv.registrations.some((l) => l.frameId === q.frameId && !l.ok)).map((q) => q.frameId)
+        const [altC, localC] = [altEv.contradictions - failsBoth.length, localEv.contradictions - failsBoth.length]
+        if (failsBoth.length > 0) arb.setAside = { frames: failsBoth, why: `${failsBoth.length} elevation(s) register on neither body: they do not choose between the two (LOCAL ${localC}, the other body ${altC} contradiction(s) without them)` }
+        if (altC === 0 && altC < localC && altEv.supports >= localEv.supports) {
           arb.decision = 'REPLACED_BY_SOURCE_BODY'
-          arb.why = `the sources contradict LOCAL's body ${localEv.contradictions} time(s) and support it ${localEv.supports}; the body built from the plan outline and the elevations: ${altEv.contradictions} and ${altEv.supports}. The source body stands; LOCAL's interior is not carried over (NOT_CHECKED)`
+          arb.why = `the sources contradict LOCAL's body ${localEv.contradictions} time(s) and support it ${localEv.supports}; the body built from the plan outline and the elevations: ${altEv.contradictions} and ${altEv.supports}${failsBoth.length > 0 ? ` (${failsBoth.length} elevation(s) that register on neither body set aside)` : ''}. The source body stands; LOCAL's interior is not carried over (NOT_CHECKED)`
           massingDelivery = mb.delivery
           // the plan gaps are stated on the plan's sides: on a body built turned against the sheet they are not carried (named)
           replacedPlanGaps = good.run && !altFront ? planGapsOf(good.run.reconstruction.model) : []
@@ -1429,7 +1436,7 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
           goodState = stateOf(mb.built)
           basis = mb.built
           sketchSummary = { ...sketchSummary, reading: { ...sketchSummary.reading, appearance: { observations: [], projections: {} } }, form: { decision: 'NOT_RUN', why: 'the body was replaced by the one built from the plan outline and the elevations' }, finish: { decision: 'NOT_RUN', why: 'finishes go through the correction registry on this body (SET_FINISH)' } }
-        } else arb.why = `LOCAL's body is contradicted ${localEv.contradictions} time(s) (supported ${localEv.supports}), the other body ${altEv.contradictions} (supported ${altEv.supports}): ${altEv.contradictions > 0 ? 'the sources contradict the other body too — a contradicted body replaces nothing' : 'not clearly better'}; LOCAL's stands, both on the record`
+        } else arb.why = `LOCAL's body is contradicted ${localEv.contradictions} time(s) (supported ${localEv.supports}), the other body ${altEv.contradictions} (supported ${altEv.supports}): ${altC > 0 ? 'the sources contradict the other body too — a contradicted body replaces nothing' : 'not clearly better'}; LOCAL's stands, both on the record`
       }
     }
     record({ at: now().toISOString(), kind: 'BODY_ARBITRATION', ...arb })
@@ -1441,7 +1448,8 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
     // v3.54.17: the bodies' roofs first — a roof the sketches draw and the model lacks (or has wrong) is a SET_ROOF
     const sketchInputs = () => sketchSummary.reading.sketches.filter((x) => x.sketch).map((x) => ({ facade: x.facade, frameId: x.frameId, groundRow: x.sketch?.groundRow ?? null, walls: (x.sketch?.walls ?? []).map((w) => w.polygon as Array<[number, number]>), roofs: (x.sketch?.roofs ?? []).map((r) => r.polygon as Array<[number, number]>) }))
     // v3.54.18 R2: what the plan read says of the main entrance decides WHICH quarter turn a turned set of elevations is
-    const orientationHints = planEntranceSide ? { entranceSide: planEntranceSide } : {}
+    const pageHeightM = (good.pkg ?? run.pkg)?.publishedFacts.find((f: { key: string; unit?: string }) => f.key === 'building_height' && f.unit === 'm')?.value
+    const orientationHints = { ...(planEntranceSide ? { entranceSide: planEntranceSide } : {}), ...(typeof pageHeightM === 'number' ? { buildingHeightM: pageHeightM } : {}) }
     let roofs = roofProposalsFromSketches(sketchInputs(), run.reconstruction.model, held, rev, sideOfFacade, orientationHints)
     // v3.54.17 R2: ONE side mapping for every consumer of the sketches — under a TURNED_90 hypothesis the openings are not
     // bound through the analyzer's registrations made as labelled (that would bind them to the other side)
