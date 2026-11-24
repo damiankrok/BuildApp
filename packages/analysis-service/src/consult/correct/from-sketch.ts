@@ -22,7 +22,7 @@ import { kindOfOpening, openingBoxes, openingSpan, OVERHANG_MIN_CHANGE_M, prefer
 const openingSideWalls = (m: CanonicalBuildingModel, side: Side): string[] => m.walls.filter((w) => w.kind === 'EXTERIOR' && sideOfWall(m, w) === side).map((w) => w.id)
 import type { BindView, CorrectionProposal, Side } from './execute.js'
 
-export const SKETCH_PROPOSALS_VERSION = '1.6.0' as const
+export const SKETCH_PROPOSALS_VERSION = '1.7.0' as const
 /** Below this overlap a model opening and a sketch opening are two different openings. */
 export const PAIR_MIN_IOU = 0.1
 /** At or above this overlap (and the same kind) a pair agrees: nothing to propose. */
@@ -65,6 +65,8 @@ function occluded(m: CanonicalBuildingModel, sp: NonNullable<ReturnType<typeof o
   })
 }
 
+/** v3.54.19: a glazing whose foot stands no higher than this above the storey's floor reaches the floor. */
+export const GLAZED_WALL_FLOOR_M = 0.35
 const KIND: Record<string, 'WINDOW' | 'DOOR' | 'GLAZED_DOOR' | 'GARAGE_DOOR' | undefined> = { WINDOW: 'WINDOW', DOOR: 'DOOR', GLAZED_DOOR: 'GLAZED_DOOR', GATE: 'GARAGE_DOOR' }
 
 /**
@@ -208,7 +210,11 @@ export function proposalsFromSketch(s: ElevationSketch, facade: string, model: C
   const sketchOpenings = s.openings.filter((o) => !inRoof(o)).map((o) => {
     const head = headOf(o.polygon)
     const box = bbox(o.polygon)
-    return { o, box, head, shape: (head ? { ...box, ...head } : box) as Shape, kind: KIND[o.kind] }
+    // v3.54.19: a GLAZED_WALL (a glazing the reading does not call a window or a door) had no consumer and was dropped
+    // with its polygon. Its kind follows from where it stands: reaching down to the floor it is a glazed door (a terrace
+    // glazing), standing on a sill a window — the same shape and place either way, read from the same polygon
+    const sillM = (view.projection.zeroRow - box.y1) * (view.projection.mppV ?? view.projection.mpp)
+    return { o, box, head, shape: (head ? { ...box, ...head } : box) as Shape, kind: KIND[o.kind] ?? (o.kind === 'GLAZED_WALL' ? (sillM <= GLAZED_WALL_FLOOR_M ? ('GLAZED_DOOR' as const) : ('WINDOW' as const)) : undefined) }
   })
   const modelShape = (id: string): Shape | undefined => {
     const op = model.openings.find((x) => x.id === id)

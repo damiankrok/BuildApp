@@ -18,7 +18,7 @@ import { reserveOf } from './cost.js'
 import { pictureOf } from './metric-read.js'
 import type { OutlineObservation } from './massing/massing.js'
 
-export const PLAN_OUTLINE_VERSION = '1.3.0' as const
+export const PLAN_OUTLINE_VERSION = '1.4.0' as const
 export const PLAN_OUTLINE_PROMPT_VERSION = 'plan-outline/3' as const
 /** The main entrance is taken to stand on a side when its point lies within this share of the outline's extent from that side's edge. */
 const ENTRANCE_NEAR_SHARE = 0.15
@@ -209,12 +209,12 @@ export const OUTLINE_SCALE_AGREE = 0.03
  *  - FOOTPRINT (a hypothesis, never taken alone): the published footprint area over the outline's area. The caller must
  *    confirm it by something that does not come from the plan (the published height against the elevations' ridge).
  */
-export function outlineScale(outlinePx: ReadonlyArray<readonly [number, number]>, facts: { horizontalM?: number; verticalM?: number; overallM?: [number, number]; footprintM2?: number }): { mPerPx: number; basis: 'OVERALL_DIMENSIONS' | 'FOOTPRINT_AREA'; why: string } | undefined {
+export function outlineScale(outlinePx: ReadonlyArray<readonly [number, number]>, facts: { horizontalM?: number; verticalM?: number; overallM?: [number, number]; /** where the pair comes from, for the record (default: the page's length and width) */ overallFrom?: string; footprintM2?: number }): { mPerPx: number; basis: 'OVERALL_DIMENSIONS' | 'FOOTPRINT_AREA'; why: string } | undefined {
   const xs = outlinePx.map((q) => q[0])
   const ys = outlinePx.map((q) => q[1])
   const [w, h] = [Math.max(...xs) - Math.min(...xs), Math.max(...ys) - Math.min(...ys)]
   if (!(w > 20 && h > 20)) return undefined
-  const pair = facts.horizontalM && facts.verticalM ? { x: facts.horizontalM, y: facts.verticalM, how: 'printed on the plan with their axes' } : facts.overallM ? (w >= h ? { x: Math.max(...facts.overallM), y: Math.min(...facts.overallM), how: 'published length and width, the longer over the longer extent' } : { x: Math.min(...facts.overallM), y: Math.max(...facts.overallM), how: 'published length and width, the longer over the longer extent' }) : undefined
+  const pair = facts.horizontalM && facts.verticalM ? { x: facts.horizontalM, y: facts.verticalM, how: 'printed on the plan with their axes' } : facts.overallM ? (w >= h ? { x: Math.max(...facts.overallM), y: Math.min(...facts.overallM), how: `${facts.overallFrom ?? 'published length and width'}, the longer over the longer extent` } : { x: Math.min(...facts.overallM), y: Math.max(...facts.overallM), how: `${facts.overallFrom ?? 'published length and width'}, the longer over the longer extent` }) : undefined
   if (pair) {
     const [sx, sy] = [pair.x / w, pair.y / h]
     const spread = Math.abs(sx - sy) / Math.max(sx, sy)

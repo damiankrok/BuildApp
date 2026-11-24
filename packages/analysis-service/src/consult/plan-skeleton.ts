@@ -11,9 +11,10 @@
  *      publisher fills its walls black, dark green or mid grey; the partition reader's fixed "dark neutral ink" rule saw
  *      only the 3 px outlines of a grey wall. Pixels of that colour are painted as ink for the reader; a band that is
  *      paper says the walls are not filled (or the outline is not on them) and is named, never guessed around.
- *   2. THE OUTER FACES (`snapOutline`): each edge of the traced outline is moved onto the outer face of the wall band it
- *      runs along (the median over the edge of where the band starts), when most of the edge finds one. A traced corner
- *      is a model's reading of the picture, a few pixels off; the band is the drawing.
+ *   2. THE WALL BANDS (`snapOutline`): each edge of the traced outline is moved onto the band of that colour it runs
+ *      along (the median over the edge of where the band starts), when most of the edge finds one — so that the reading
+ *      between the bands starts at the bands. This is the skeleton's own working outline, NOT a correction of the body's:
+ *      a sheet may draw an outer layer of its walls in another tone, and the building's outer face is then outside it.
  *   3. THE GAPS OF THE EXTERIOR WALLS (`gaps`): stretches of an edge where the band is interrupted between two pieces of
  *      wall — where the plan draws an opening. A second drawing's witness for what an elevation reading proposes.
  *   4. THE INTERIOR (`walls`, `doors`): the reconstruction's own partition reader (`readInterior`, the reader LOCAL's

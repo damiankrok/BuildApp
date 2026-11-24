@@ -24,7 +24,7 @@ import type { CanonicalBuildingModel, Wall } from '@buildapp/model'
 import type { BindView, Projection, Side } from '../correct/execute.js'
 import type { Poly } from '../correct/source-gate.js'
 
-export const MASSING_VERSION = '1.5.0' as const
+export const MASSING_VERSION = '1.6.0' as const
 
 export type Rect = { minX: number; maxX: number; minZ: number; maxZ: number }
 export type Fidelity = 'SOURCE_EXACT' | 'SOURCE_DERIVED' | 'SOURCE_TRACED' | 'DISPLAY_ASSUMPTION' | 'TRACE_UNCERTAIN'
@@ -428,6 +428,53 @@ export function rectanglesOf(outline: ReadonlyArray<{ x: number; z: number }>): 
   return { splits: [cut('x'), cut('z')], why: 'an L: two joined rectangles, split at its inner corner either way' }
 }
 
+/**
+ * massing 1.6.0: an orthogonal outline of ANY number of corners as bodies — the largest rectangle that fits inside it, then
+ * the largest that fits in what is left, and so on (the corners' own columns and rows are the only lines a body can end
+ * on). Until now an outline that was neither a rectangle nor an L, and could not be simplified into one by small steps,
+ * was "beyond the supported form": a house with a garage wing AND a rear projection got no body at all. Each rectangle is
+ * a body the elevations must then give a height and a roof; what no rectangle covers (a notch's rim, a bay narrower than
+ * a body) is not modelled, by name and by area. Nothing is added to the outline: bodies only ever lie inside it.
+ */
+export const WINGS = { maxBodies: 4 } as const
+export function wingsOf(outline: ReadonlyArray<{ x: number; z: number }>, minAreaM2: number, minSideM: number): { rects: Rect[]; coveredM2: number; outlineM2: number } | undefined {
+  const orth = outline.every((p, i) => { const n = outline[(i + 1) % outline.length]; return Math.abs(p.x - n.x) < 1e-6 || Math.abs(p.z - n.z) < 1e-6 })
+  if (!orth || outline.length < 4) return undefined
+  const uniq = (v: number[]): number[] => [...new Set(v.map((q) => r6(q)))].sort((a, b) => a - b)
+  const xs = uniq(outline.map((p) => p.x))
+  const zs = uniq(outline.map((p) => p.z))
+  const inside = (x: number, z: number): boolean => {
+    let c = false
+    for (let i = 0, j = outline.length - 1; i < outline.length; j = i++) if (outline[i].z > z !== outline[j].z > z && x < ((outline[j].x - outline[i].x) * (z - outline[i].z)) / (outline[j].z - outline[i].z) + outline[i].x) c = !c
+    return c
+  }
+  const [nx, nz] = [xs.length - 1, zs.length - 1]
+  const free = Array.from({ length: nx }, (_, i) => Array.from({ length: nz }, (_, j) => inside((xs[i] + xs[i + 1]) / 2, (zs[j] + zs[j + 1]) / 2)))
+  let outlineM2 = 0
+  for (let i = 0; i < nx; i += 1) for (let j = 0; j < nz; j += 1) if (free[i][j]) outlineM2 += (xs[i + 1] - xs[i]) * (zs[j + 1] - zs[j])
+  const rects: Rect[] = []
+  while (rects.length < WINGS.maxBodies) {
+    let best: { i0: number; i1: number; j0: number; j1: number; a: number } | undefined
+    for (let i0 = 0; i0 < nx; i0 += 1) for (let j0 = 0; j0 < nz; j0 += 1) for (let i1 = i0; i1 < nx; i1 += 1) {
+      if (!free[i1][j0]) break
+      for (let j1 = j0; j1 < nz; j1 += 1) {
+        let ok = true
+        for (let i = i0; i <= i1 && ok; i += 1) if (!free[i][j1]) ok = false
+        if (!ok) break
+        const a = (xs[i1 + 1] - xs[i0]) * (zs[j1 + 1] - zs[j0])
+        if (!best || a > best.a + 1e-9) best = { i0, i1, j0, j1, a }
+      }
+    }
+    if (!best) break
+    const r: Rect = { minX: xs[best.i0], maxX: xs[best.i1 + 1], minZ: zs[best.j0], maxZ: zs[best.j1 + 1] }
+    if (rects.length > 0 && (best.a < minAreaM2 || r.maxX - r.minX < minSideM || r.maxZ - r.minZ < minSideM)) break
+    rects.push(r)
+    for (let i = best.i0; i <= best.i1; i += 1) for (let j = best.j0; j <= best.j1; j += 1) free[i][j] = false
+  }
+  if (rects.length === 0) return undefined
+  return { rects, coveredM2: r6(rects.reduce((t, q) => t + area(q), 0)), outlineM2: r6(outlineM2) }
+}
+
 export type MassingInput = { outline: OutlineObservation; silhouettes: readonly SilhouetteObservation[]; wallThicknessM?: { value: number; prov: Prov }; /** the roof pitch the page publishes (degrees): used only where no view shows the wall's corner under the roof, and only when the drawn walls allow it */ publishedPitchDeg?: number }
 
 /** 3. The mass the observations support, or exactly what they lack. */
@@ -455,6 +502,15 @@ export function solveMassing(input: MassingInput): MassingHypothesis {
     if (simple) {
       split = rectanglesOf(simple.outline)
       if (split.splits.length > 0) base.alternatives.push(`MINIATURE_CONVENTION: the outline's ${simple.steps.length} small step(s) (${simple.changedM2.toFixed(1)} m², ${(simple.share * 100).toFixed(1)} % of its bounding rectangle) are not modelled — the body is ${split.why}; the drawn outline is kept in the observation`)
+    }
+  }
+  if (split.splits.length === 0) {
+    // massing 1.6.0: an outline no small step reduces to a rectangle or an L is taken as its own bodies, largest first
+    const total0 = area(bb)
+    const w = wingsOf(input.outline.outline, MASSING_TOLERANCES.minWingShare * total0, MASSING_TOLERANCES.minBodyM)
+    if (w && w.rects.length >= 1) {
+      split = { splits: [w.rects], why: `an outline of ${input.outline.outline.length} corners as ${w.rects.length} bodies` }
+      base.alternatives.push(`the outline (${input.outline.outline.length} corners, ${w.outlineM2.toFixed(1)} m²) is read as ${w.rects.length} bodies — the largest rectangle that fits inside it, then the largest in what is left (${w.rects.map((q) => `${(q.maxX - q.minX).toFixed(2)} × ${(q.maxZ - q.minZ).toFixed(2)} m`).join(', ')})${w.outlineM2 - w.coveredM2 > 0.5 ? `; MINIATURE_CONVENTION: ${(w.outlineM2 - w.coveredM2).toFixed(1)} m² of it (${(((w.outlineM2 - w.coveredM2) / w.outlineM2) * 100).toFixed(0)} %) lies in no body and is not modelled` : ''}`)
     }
   }
   if (split.splits.length === 0) return { ...base, status: 'UNSUPPORTED_FORM', bodies: [], views, missing: [{ anchor: 'SUPPORTED_OUTLINE', why: split.why }], why: split.why }
@@ -550,12 +606,8 @@ export function solveMassing(input: MassingInput): MassingHypothesis {
     for (const { obs, view } of byView.values()) {
       const e = extentOn(rect, obs.side)
       // a body hidden behind another on this side (its whole stretch inside the other's, and further back) is not read there
-      const other = rects.find((r) => r !== rect)
-      if (other) {
-        const eo = extentOn(other, obs.side)
-        const depth = (r: Rect): number => (obs.side === 'FRONT' ? r.minZ : obs.side === 'REAR' ? -r.maxZ : obs.side === 'LEFT' ? r.minX : -r.maxX)
-        if (eo.lo <= e.lo + 0.05 && eo.hi >= e.hi - 0.05 && depth(other) < depth(rect) - 0.05) continue
-      }
+      const depth = (r: Rect): number => (obs.side === 'FRONT' ? r.minZ : obs.side === 'REAR' ? -r.maxZ : obs.side === 'LEFT' ? r.minX : -r.maxX)
+      if (rects.some((other) => { if (other === rect) return false; const eo = extentOn(other, obs.side); return eo.lo <= e.lo + 0.05 && eo.hi >= e.hi - 0.05 && depth(other) < depth(rect) - 0.05 })) continue
       const own = attribute(obs, view, rects.map((r) => extentOn(r, obs.side)))[i]
       const p = profileOver(view, e.lo, e.hi, own)
       const wt = p && p.shape !== 'NONE' ? wallCornerTopM(view, e.lo, e.hi, own.walls, obs.groundRow) : undefined

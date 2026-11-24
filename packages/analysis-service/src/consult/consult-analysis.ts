@@ -53,7 +53,8 @@ import { CORRECTION_REGISTRY_VERSION } from './correct/registry.js'
 import { CORRECTION_EXECUTOR_VERSION, elementExists, executeCorrections, modelRevision, planGapsOf, preferredView, registerFromSketch, sideOfFacade, viewsOfRun } from './correct/execute.js'
 import { CHIMNEY_FUSION_VERSION, fuseChimneys } from './correct/chimney-fusion.js'
 import { MASSING_VERSION, bodiesOf, pointWithFront } from './massing/massing.js'
-import { PLAN_SKELETON_VERSION, paintWalls, readPlanSkeleton, snapOutline, wallInkOf } from './plan-skeleton.js'
+import { readSiteDimensions, SITE_DIMENSIONS_VERSION } from './site-dimensions.js'
+import { PLAN_SKELETON_VERSION, readPlanSkeleton } from './plan-skeleton.js'
 import type { PlanSkeleton } from './plan-skeleton.js'
 import { INTERIOR_OPS_VERSION, planGapsFromSkeleton, skeletonInModel } from './correct/interior.js'
 import type { InteriorObservation } from './correct/interior.js'
@@ -674,7 +675,7 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
     const b = consultBinding({
       sourcePackageHash: local.pkg.contentHash,
       analyzer: `${ANALYSIS_SERVICE_VERSION}/${SOLVER_V2_VERSION}`,
-      consultant: [CONSULTANT_CONTRACT_VERSION, CONSULTANT_PROMPT_VERSION, METRIC_READ_PROMPT_VERSION, METRIC_VERIFY_PROMPT_VERSION, METRIC_RESOLVER_VERSION, ELEVATION_SKETCH_PROMPT_VERSION, `parser${ELEVATION_SKETCH_PARSER_VERSION}`, SKETCH_STEP_VERSION, CHOOSE_VERSION, ACCEPTED_CONSULT_VERSION, `registry${CORRECTION_REGISTRY_VERSION}`, `executor${CORRECTION_EXECUTOR_VERSION}`, `gate${SOURCE_GATE_VERSION}`, `sketchProposals${SKETCH_PROPOSALS_VERSION}`, `quality${QUALITY_VERSION}`, `massing${MASSING_OPS_VERSION}`, `massingBody${MASSING_VERSION}`, `bodyArbitration${BODY_ARBITRATION.version}`, SOURCE_FRAMES_RULE, `outline${PLAN_OUTLINE_VERSION}`, `planOpenings${PLAN_OPENINGS_VERSION}`, `skeleton${PLAN_SKELETON_VERSION}`, `interior${INTERIOR_OPS_VERSION}`].join(','),
+      consultant: [CONSULTANT_CONTRACT_VERSION, CONSULTANT_PROMPT_VERSION, METRIC_READ_PROMPT_VERSION, METRIC_VERIFY_PROMPT_VERSION, METRIC_RESOLVER_VERSION, ELEVATION_SKETCH_PROMPT_VERSION, `parser${ELEVATION_SKETCH_PARSER_VERSION}`, SKETCH_STEP_VERSION, CHOOSE_VERSION, ACCEPTED_CONSULT_VERSION, `registry${CORRECTION_REGISTRY_VERSION}`, `executor${CORRECTION_EXECUTOR_VERSION}`, `gate${SOURCE_GATE_VERSION}`, `sketchProposals${SKETCH_PROPOSALS_VERSION}`, `quality${QUALITY_VERSION}`, `massing${MASSING_OPS_VERSION}`, `massingBody${MASSING_VERSION}`, `bodyArbitration${BODY_ARBITRATION.version}`, SOURCE_FRAMES_RULE, `outline${PLAN_OUTLINE_VERSION}`, `planOpenings${PLAN_OPENINGS_VERSION}`, `skeleton${PLAN_SKELETON_VERSION}`, `interior${INTERIOR_OPS_VERSION}`, `site${SITE_DIMENSIONS_VERSION}`].join(','),
       models: { ROUNDS: wiring.model.model, ...(wiring.metricRead === 'ON' ? { METRIC: (wiring.metricModel ?? wiring.model).model } : {}), ...(wiring.sketches === 'ON' ? { SKETCH: (wiring.sketchModel ?? wiring.model).model } : {}) },
       settings: `strict=${wiring.model.strict === true || wiring.metricModel?.strict === true || wiring.sketchModel?.strict === true ? 'on' : 'off'};variant=${wiring.variant};metric=${wiring.metricRead ?? 'OFF'};sketches=${wiring.sketches ?? 'OFF'};rounds=${maxRounds};geometryRounds=${wiring.maxGeometryRounds ?? '-'};check=${wiring.check ?? 'ON'};sketchCorrections=${wiring.sketchCorrections ?? 'ON'}`,
     })
@@ -802,17 +803,6 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
         usd += plan.usd
         delivery.usd += plan.usd
         delivery.plan = plan
-        // v3.54.19: the traced outline is put on the sheet's own wall bands before anything is measured on it — a traced
-        // corner is a reading a few pixels off, the band is the drawing (and the scale from the outline is taken on it)
-        if (plan.outlinePx) {
-          const ink = wallInkOf(fr.raster, plan.outlinePx)
-          const snap = ink.filled ? snapOutline(paintWalls(fr.raster, ink), plan.outlinePx) : undefined
-          record({ at: now().toISOString(), kind: 'PLAN_OUTLINE_ON_WALL_BANDS', frameId: f.id, ink, moved: snap?.snapped ?? [], wallPx: snap?.wallPx ?? null, why: snap && snap.snapped.length > 0 ? `${snap.snapped.length} edge(s) of the traced outline moved onto the outer face of the wall band they run along (by ${snap.snapped.map((q) => q.byPx).join(', ')} px)` : ink.filled ? 'every edge already runs on its band, or finds none' : ink.why })
-          if (snap && snap.snapped.length > 0) {
-            plan.outlinePx = snap.outlinePx.map((q) => [Math.round(q[0] * 10) / 10, Math.round(q[1] * 10) / 10] as [number, number])
-            if (plan.observation && cmPerPx && strong) scaleOutline(plan, { frameId: f.id, sourceByteHash: f.variantByteHash, ...(typeof published === 'number' ? { publishedFootprintM2: published } : {}) }, { mPerPx: cmPerPx / 100, why: `${cmPerPx} cm/px, ${String(diag.metricConfidence)} / ${String(diag.metricRelation)} with ${String(diag.independentWitnesses ?? '?')} independent witnesses` })
-          }
-        }
         // v3.54.18 R3: a plan the analyzer measured no scale on is put in metres from its own traced outline — the two
         // overall dimensions over the outline's two extents (they must agree), or, as a hypothesis the published height has
         // to confirm on the built body, the published footprint area over the outline's area
@@ -821,7 +811,23 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
           const printedOn = (metricRead?.reads ?? []).filter((r) => r.frameId === f.id).flatMap((r) => r.observations.filter((o) => o.kind === 'LENGTH' && o.scope === 'WHOLE_HOUSE' && o.reference === 'OUTER_FACE' && o.status === 'PRINTED' && typeof o.value === 'number'))
           const fact = (key: string): number | undefined => { const v = pkg0.publishedFacts.find((x) => x.key === key && x.unit === 'm')?.value; return typeof v === 'number' ? v : undefined }
           const [pw, pl] = [fact('building_width'), fact('building_length')]
-          const sc = outlineScale(plan.outlinePx, { ...(printedOn.find((o) => o.axis === 'HORIZONTAL') ? { horizontalM: printedOn.find((o) => o.axis === 'HORIZONTAL')?.value as number } : {}), ...(printedOn.find((o) => o.axis === 'VERTICAL') ? { verticalM: printedOn.find((o) => o.axis === 'VERTICAL')?.value as number } : {}), ...(pw !== undefined && pl !== undefined ? { overallM: [pw, pl] as [number, number] } : {}), ...(typeof published === 'number' ? { footprintM2: published } : {}) })
+          // v3.54.19: a plan sheet with no dimension line of its own, on a page that states no length and width: the
+          // SITE PLAN prints the building's two overall dimensions (one small request; taken only if both agree over the
+          // outline's two extents, like any other pair)
+          let site: [number, number] | undefined
+          if (!(printedOn.some((o) => o.axis === 'HORIZONTAL') && printedOn.some((o) => o.axis === 'VERTICAL')) && !(pw !== undefined && pl !== undefined)) {
+            const sf = graph0.coordinateFrames.filter((q) => String((q.roles as { document?: string }).document) === 'SITE_PLAN').sort((a, b) => (b.size?.width ?? 0) * (b.size?.height ?? 0) - (a.size?.width ?? 0) * (a.size?.height ?? 0))[0]
+            const sr = sf ? await frameRaster(pkg0, graph0, sf.id, options) : undefined
+            if (sf && sr?.raster && Math.min(sr.raster.width, sr.raster.height) >= 200) {
+              stage('SITE_DIMENSIONS')
+              const read = await readSiteDimensions({ model: wiring.outlineModel ?? wiring.metricModel ?? wiring.model, price: wiring.outlinePrice ?? wiring.metricPrice ?? wiring.price, ...(wiring.spend ? { spend: wiring.spend } : {}), ...(options.signal ? { signal: options.signal } : {}) }, { frameId: sf.id, raster: sr.raster, caption: (pkg0.assets.find((a) => a.id === sf.assetId)?.caption ?? '').slice(0, 120) })
+              usd += read.usd
+              delivery.usd += read.usd
+              if (read.horizontalM !== undefined && read.verticalM !== undefined) site = [read.horizontalM, read.verticalM]
+              record({ at: now().toISOString(), kind: 'SITE_DIMENSIONS', version: SITE_DIMENSIONS_VERSION, frameId: sf.id, horizontalM: read.horizontalM ?? null, verticalM: read.verticalM ?? null, literals: read.literals ?? null, refused: read.refused, usd: read.usd })
+            }
+          }
+          const sc = outlineScale(plan.outlinePx, { ...(printedOn.find((o) => o.axis === 'HORIZONTAL') ? { horizontalM: printedOn.find((o) => o.axis === 'HORIZONTAL')?.value as number } : {}), ...(printedOn.find((o) => o.axis === 'VERTICAL') ? { verticalM: printedOn.find((o) => o.axis === 'VERTICAL')?.value as number } : {}), ...(pw !== undefined && pl !== undefined ? { overallM: [pw, pl] as [number, number] } : site ? { overallM: site, overallFrom: 'the building\'s two overall dimensions printed on the site plan' } : {}), ...(typeof published === 'number' ? { footprintM2: published } : {}) })
           if (sc) {
             cmPerPx = Math.round(sc.mPerPx * 100 * 1e6) / 1e6
             strong = sc.basis === 'OVERALL_DIMENSIONS'
@@ -846,7 +852,11 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
             const r = fx ? await frameRaster(pkg0, graph0, fx.id, options) : undefined
             if (fx && r?.raster) pictures.push({ n: i + 1, frameId: fx.id, projection: String(fx.roles.projection), transform: { x0: 0, y0: 0, scale: 1 }, raster: r.raster, sourceByteHash: fx.variantByteHash })
           }
-          // v3.54.19: what the plan draws inside that outline, read on the sheet (0 USD): the body that stands takes it
+          // v3.54.19: what the plan draws inside that outline, read on the sheet (0 USD): the body that stands takes it.
+          // The body itself keeps the TRACED outline: the skeleton moves its own copy onto the bands of the sheet's wall
+          // colour to read between them, but that band is not always the wall's outer face (a sheet that draws the outer
+          // layer of its walls in another tone has the printed overall dimension outside it — the first replay of this
+          // stage put a body on the bands and lost 0.4 m of a house against its own printed dimensions).
           const skeleton = plan.outlinePx && cmPerPx ? readPlanSkeleton({ frameId: f.id, sourceByteHash: f.variantByteHash, raster: fr.raster, outlinePx: plan.outlinePx, mPerPx: cmPerPx / 100 }) : undefined
           if (skeleton) {
             delivery.skeleton = skeleton

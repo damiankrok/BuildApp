@@ -547,12 +547,19 @@ function bindOpening(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
   // shared — a wall-wide gap witnesses nothing). The picture must not refute it. Never source-verified.
   const yMid = (y0 + y1) / 2
   const gapHit = !existing && ctx.planGaps ? ctx.planGaps.filter((w) => w.side === view.side && yMid >= w.storeyLo && yMid <= w.storeyHi).map((w) => ({ w, share: (Math.min(a1, w.a1) - Math.max(a0, w.a0)) / Math.max(a1 - a0, w.a1 - w.a0) })).sort((x, z) => z.share - x.share)[0] : undefined
-  const gapWitness = g.winner === 'UNDECIDED' && !fillRecord && !existing && !!gapHit && gapHit.share >= PLAN_SPAN_AGREE && g.proposed.z !== null && g.proposed.z >= SUPPORT_Z_MIN - HYPOTHESIS_Z_MARGIN
+  // v3.54.19 — NO EVIDENCE IS NOT EVIDENCE OF ABSENCE. The gate reads contrast: a glazing stands out of its wall, a door
+  // leaf drawn in the wall's own tone, or in the shade of a porch, does not — the picture then "supports the plain wall"
+  // (z near or below zero) however plainly the door is drawn. For a DOOR, GLAZED_DOOR or GARAGE_DOOR the elevation
+  // reading draws where the PLAN leaves a gap of that span in that wall, the contrast score is therefore not asked: two
+  // drawings, read by two readers, put an opening there. A window still needs the picture not to refute it (z ≥ 1).
+  const doorKind = kind === 'DOOR' || kind === 'GLAZED_DOOR' || kind === 'GARAGE_DOOR'
+  const gapAgrees = !fillRecord && !existing && !!gapHit && gapHit.share >= PLAN_SPAN_AGREE
+  const gapWitness = gapAgrees && ((g.winner === 'UNDECIDED' && g.proposed.z !== null && g.proposed.z >= SUPPORT_Z_MIN - HYPOTHESIS_Z_MARGIN) || (doorKind && (g.winner === 'UNDECIDED' || g.winner === 'CURRENT')))
   const spanWitness = (g.winner === 'UNDECIDED' || (g.winner === 'CURRENT' && g.proposed.supported === true)) && !fillRecord && !!existing && !!evp && fromPlan(evp.offset) && fromPlan(evp.width) && evp.sill === 'ASSUMED' && evp.height === 'ASSUMED' && spanShare >= PLAN_SPAN_AGREE && g.proposed.z !== null && g.proposed.z >= SUPPORT_Z_MIN - HYPOTHESIS_Z_MARGIN
   const crossWitness = spanWitness || gapWitness
   if (gapWitness && gapHit) {
     ;(gate as { crossWitness?: string }).crossWitness = 'PLAN_GAP'
-    gate.why = `${g.why} — but the plan shows a gap of this span on this side (${gapHit.w.id} of the LOCAL model whose body was replaced: ${gapHit.w.a0.toFixed(2)}..${gapHit.w.a1.toFixed(2)} m, ${Math.round(gapHit.share * 100)} % shared with this elevation reading): two drawings give the same opening, and the picture does not refute it (z ${g.proposed.z})`
+    gate.why = `${g.why} — but the plan shows a gap of this span on this side (${gapHit.w.id}${gapHit.w.id.startsWith('plan-') ? ', read on the plan sheet in its wall colour' : ' of the LOCAL model whose body was replaced'}: ${gapHit.w.a0.toFixed(2)}..${gapHit.w.a1.toFixed(2)} m, ${Math.round(gapHit.share * 100)} % shared with this elevation reading): two drawings give the same opening${g.winner === 'CURRENT' || g.proposed.z === null || g.proposed.z < SUPPORT_Z_MIN - HYPOTHESIS_Z_MARGIN ? `; the picture's contrast (z ${g.proposed.z}) is not asked of a ${String(kind).toLowerCase().replace('_', ' ')}, whose leaf need not stand out of its wall` : `, and the picture does not refute it (z ${g.proposed.z})`}`
   }
   if (spanWitness) {
     ;(gate as { crossWitness?: string }).crossWitness = 'PLAN_SPAN'
