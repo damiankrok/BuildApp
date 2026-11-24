@@ -11,8 +11,9 @@ F = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf', 2
 key = {}
 for h in man['houses']:
     name = h['house']
-    rng = random.Random(int(hashlib.sha256(('grader:' + name).encode()).hexdigest(), 16))
-    vs = [v['key'] for v in h['variants'] if v['key'] in ('baseline', 'final')]
+    # the pair graded and the draw's seed may be named (R2: delivered1349 against r2, a draw of its own)
+    rng = random.Random(int(hashlib.sha256((os.environ.get('GRADER_SEED', 'grader') + ':' + name).encode()).hexdigest(), 16))
+    vs = [v['key'] for v in h['variants'] if v['key'] in tuple(os.environ.get('GRADER_KEYS', 'baseline,final').split(','))]
     if len(vs) < 2: continue
     rng.shuffle(vs)
     key[name] = {'X': vs[0], 'Y': vs[1]}

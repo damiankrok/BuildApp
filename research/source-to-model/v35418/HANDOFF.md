@@ -33,3 +33,33 @@ re-ask treats the symptom). 9) Operations for canopies, porches, covered terrace
 <n>`. Uncut openings: `compile-check.ts <model.json>`. Delivery: `rd/v35418/delivery/manifest.py <commit>` →
 `delivery/make_delivery.py <manifest> <out>`. Host: build `apps/analyzer-api`, `host-e2e.mjs`, then `book-host.ts`.
 Proofs: `npx vitest run packages/analysis-service/test/{facade-claims-v35418,massing-v35418,massing-v35417,consult-v3542}.test.ts`.
+
+## R2 (2026-11-24) — continuation after APK 1349
+
+**Code.** `massing.ts` 1.3.0 (`profileOver`: outline width for a hollow verge, ridge ends, apex from the polygon's own
+corners, a level top ≥ 1 m is a ridge; eaves from the gable-END wall corners; `HIP`: `hipSpecFrom`, `hipPlaneCommands`,
+`hipWallTopM`; true median), `ops.ts` 1.7.0 (`specSilhouette` HIP, `bindSetRoof` HIP, BUILD_MASSING hip, HIP proposals
+from a trapezoid, orientation: one-sided tolerance between a gable end and an eaves side, a turn needs both axes,
+`OrientationHints.entranceSide` → `TURN_BACK`), `registry.ts` 1.6.0, `execute.ts` 1.8.0 (`sideRidgeM` over planes,
+`planGapsOf` / `PLAN_GAP` from R2's first commit), `plan-outline.ts` 1.1.0 (`plan-outline/2`: `entrance`),
+`source-analyzer/analyze.ts` (a caption-named orthographic elevation the content classifier vetoes keeps its frame).
+All in the accepted-revision key (`outline<version>` added).
+
+**Tools.** `diag-massing.ts <run dir>…` re-solves the massing and the orientation on recorded sketches (0 USD): run it
+on every recorded house before changing a reading rule. `delivery/manifest_r2.py <commit>` builds the R2 manifest
+(`delivered1349` | `r2`); `pack.py` takes `BUILDPLAN_PACK_TOP`; `grader_pack.py` takes `GRADER_KEYS`, `GRADER_SEED`.
+The delivery scripts need Python ≥ 3.12 (`/usr/bin/python3`; `/usr/local/bin/python3` is 3.11).
+
+**Runs (private).** `rd/v35418/r2e/{alberto,sakura,ballina,aurora,medulin,jeziorko,mindelo}`, `rd/v35418/r2d/{alaska,g6}`
+(final code; recorded elevation reads, live plan read and review). Kept on the way: `r2/*`, `r2b/*` (PLAN_GAP only),
+`r2c/*` (intermediate; `r2c/ballina-fail1` = the lower-median failure: LOCAL stood without a roof).
+
+**Open after R2, most valuable first.** 1) The two SIDE elevations under a turn: a caption that says only "side" twice
+gives no left/right — LOCAL's `SIDE_LEFT` guess is still carried as a label (Alaska: the reviewer finds the long sides
+swapped). The plan must say it (window count per side from the plan read), or the label must be dropped under a turn.
+2) G6: the hip is recognised and proposed, the gate cannot decide on LOCAL's body (11.80 × 7.41 m for the printed
+11.32 × 8.02 m); no source body because the plan has no scale (one printed dimension read on the ground plan).
+3) Multi-wing bodies (Medulin, Mindelo): unchanged. 4) Entrance doors drawn white-on-white under a porch (Alberto:
+z 0.39). 5) LOCAL's interior is not carried to a source body (Alberto lost 69 interior walls for a correct roof and
+clean elevations). 6) Hip roofs: no roof windows, no overhang correction, one rectangle only (an L under one hip is
+its main rectangle). 7) Finishes on a source body are undone by the reviewer as often as kept.

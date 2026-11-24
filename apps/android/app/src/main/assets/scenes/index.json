@@ -1,5 +1,53 @@
 [
   {
+    "key": "sakura-r2-v35418",
+    "title": "Dom pod sakurą E (ARCHON) — v3.54.18 R2: dach czterospadowy",
+    "subtitle": "R2: dach czterospadowy odczytany z elewacji (trapez wzdłuż kalenicy) — cztery połacie ~30°, kalenica 4,9 m od ścian szczytowych, okap 0,87 m; bryła ze źródeł, 9 otworów; otwarte: 1 różnica KEY, bryła L uproszczona do prostokąta, wnętrze NOT_CHECKED",
+    "asset": "sakura-r2-v35418.scene.json",
+    "modelId": "m-analysis-m92728cdae273a",
+    "modelSchemaVersion": "1.9.0",
+    "contentHash": "3ca9ff32e321a0f9946ae94154762929a75898fff694f0a03a4071dcbaf6b6c8",
+    "meshCount": 46,
+    "triangleCount": 1216,
+    "objectCount": 30
+  },
+  {
+    "key": "alberto-r2-v35418",
+    "title": "Alberto (Studio Atrium) — v3.54.18 R2: dach i szczyty ze źródła",
+    "subtitle": "R2: bryła ze źródeł po odczytaniu szczytu — dach 25,2° (strona wydawcy: 25°), ściana pod okapem 3,17 m, 7 otworów przez bramkę źródła (6 ze świadkiem z rzutu), szczyty bez zmyślonych przeszkleń; NIEPOWODZENIA ZACHOWANE: brak drzwi wejściowych, wnętrze utracone, wykończenia cofnięte przez recenzenta",
+    "asset": "alberto-r2-v35418.scene.json",
+    "modelId": "m-analysis-uc82c607d67d6",
+    "modelSchemaVersion": "1.9.0",
+    "contentHash": "c34a0edb7f316c0f25bf1c930f6e11d8ab291f5daf922b9fec07d7da9a85b103",
+    "meshCount": 35,
+    "triangleCount": 3456,
+    "objectCount": 26
+  },
+  {
+    "key": "alaska-r2-v35418",
+    "title": "Alaska (Studio Atrium) — v3.54.18 R2: kierunek obrotu z wejścia na rzucie",
+    "subtitle": "R2: elewacje obrócone o 90°, kierunek rozstrzygnięty wejściem głównym z rzutu (lewy bok) — drzwi na obu szczytach, 11 otworów, 8 okien połaciowych; NIEPOWODZENIE ZACHOWANE: recenzent — długie boki zamienione (podpis „elewacja boczna” nie mówi, która jest lewa); wnętrze NOT_CHECKED",
+    "asset": "alaska-r2-v35418.scene.json",
+    "modelId": "m-analysis-u8fba8e6a95bb",
+    "modelSchemaVersion": "1.9.0",
+    "contentHash": "b5671d66c6e7a7091605cedca5601ecdae8dbde794ec53f25557244c6e158b98",
+    "meshCount": 71,
+    "triangleCount": 2676,
+    "objectCount": 47
+  },
+  {
+    "key": "ballina-r2-v35418",
+    "title": "Ballina (Lipińscy) — v3.54.18 R2: szczyty czytane jako szczyty",
+    "subtitle": "R2: oś kalenicy z dwóch widoków szczytu (było: remis czterech „pasów”), dach 30,4°, okap 0,80 m, 10 otworów zamkniętych recenzją; ten sam wynik na odczycie rzutu, który wcześniej zostawił dom bez dachu; wnętrze NOT_CHECKED",
+    "asset": "ballina-r2-v35418.scene.json",
+    "modelId": "m-analysis-dcb155",
+    "modelSchemaVersion": "1.9.0",
+    "contentHash": "b1902ef7df7b8176a54090e4fefc1a48d47f645d05f941bb627b5da65d8e3a10",
+    "meshCount": 41,
+    "triangleCount": 1424,
+    "objectCount": 28
+  },
+  {
     "key": "ballina-host-v35418",
     "title": "Ballina — v3.54.18: oddany przez host",
     "subtitle": "ODDANY (host, świeży odczyt): LOCAL + 6 poprawek ze szkiców zamkniętych recenzją dostarczonej rewizji; okap ze źródła; otwarte: przeszklenie tylne do podłogi, cegła, panele PV",

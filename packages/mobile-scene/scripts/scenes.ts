@@ -49,6 +49,32 @@ export type SceneSpec = { key: string; title: string; subtitle: string; build: (
  * hash — `bundle.test.ts` holds that.
  */
 export const SCENES: readonly SceneSpec[] = [
+  // v3.54.18 R2 (2026-11-24): the four houses whose result changed in the continuation round, first. Recorded elevation
+  // reads; the plan read (plan-outline/2) and the review live. Each is labelled for what it is, the open items named.
+  {
+    key: 'sakura-r2-v35418',
+    title: 'Dom pod sakurą E (ARCHON) — v3.54.18 R2: dach czterospadowy',
+    subtitle: 'R2: dach czterospadowy odczytany z elewacji (trapez wzdłuż kalenicy) — cztery połacie ~30°, kalenica 4,9 m od ścian szczytowych, okap 0,87 m; bryła ze źródeł, 9 otworów; otwarte: 1 różnica KEY, bryła L uproszczona do prostokąta, wnętrze NOT_CHECKED',
+    build: () => sealedOwnerModel('sakura-r2-v35418', 'fd9ee12f66836ed7265e4277a7640b709a25bd2d581fe39e4eac093b8a1c98d6', 'owner-v35418'),
+  },
+  {
+    key: 'alberto-r2-v35418',
+    title: 'Alberto (Studio Atrium) — v3.54.18 R2: dach i szczyty ze źródła',
+    subtitle: 'R2: bryła ze źródeł po odczytaniu szczytu — dach 25,2° (strona wydawcy: 25°), ściana pod okapem 3,17 m, 7 otworów przez bramkę źródła (6 ze świadkiem z rzutu), szczyty bez zmyślonych przeszkleń; NIEPOWODZENIA ZACHOWANE: brak drzwi wejściowych, wnętrze utracone, wykończenia cofnięte przez recenzenta',
+    build: () => sealedOwnerModel('alberto-r2-v35418', '4b0463716bb3a4c47f6c8957a9b8691d67987d4e0d8a134ae58b0ae73323c0a2', 'owner-v35418'),
+  },
+  {
+    key: 'alaska-r2-v35418',
+    title: 'Alaska (Studio Atrium) — v3.54.18 R2: kierunek obrotu z wejścia na rzucie',
+    subtitle: 'R2: elewacje obrócone o 90°, kierunek rozstrzygnięty wejściem głównym z rzutu (lewy bok) — drzwi na obu szczytach, 11 otworów, 8 okien połaciowych; NIEPOWODZENIE ZACHOWANE: recenzent — długie boki zamienione (podpis „elewacja boczna” nie mówi, która jest lewa); wnętrze NOT_CHECKED',
+    build: () => sealedOwnerModel('alaska-r2-v35418', '42f1b105aa9b03e60015eca4832bfb2bb76e912d7a64c225788cac7721cbdca3', 'owner-v35418'),
+  },
+  {
+    key: 'ballina-r2-v35418',
+    title: 'Ballina (Lipińscy) — v3.54.18 R2: szczyty czytane jako szczyty',
+    subtitle: 'R2: oś kalenicy z dwóch widoków szczytu (było: remis czterech „pasów”), dach 30,4°, okap 0,80 m, 10 otworów zamkniętych recenzją; ten sam wynik na odczycie rzutu, który wcześniej zostawił dom bez dachu; wnętrze NOT_CHECKED',
+    build: () => sealedOwnerModel('ballina-r2-v35418', 'a81eeb481380c2090c112a9bd0f41b2ead1ad62aa81a4d5b6f946e2df4d05a52', 'owner-v35418'),
+  },
   // v3.54.18 final host job (Ballina, Lipińscy; fresh reads): LOCAL stood in the body arbitration (the other body contradicted too); sketch patches gated on the original picture, 6 CLOSED_VERIFIED by the look at the delivered revision; the repeat reused it at 0 USD.
   {
     key: 'ballina-host-v35418',

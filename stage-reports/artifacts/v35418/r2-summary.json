@@ -1,0 +1,564 @@
+{
+ "alaska": {
+  "delivered1349": {
+   "run": "final/alaska",
+   "roofs": [
+    [
+     "GABLE",
+     4.25,
+     40,
+     0
+    ]
+   ],
+   "hipPlanes": [],
+   "walls": 4,
+   "ext": 10,
+   "openings": 10,
+   "doors": 2,
+   "chimneys": 2,
+   "roofWindows": 8,
+   "arbitration": "REPLACED_BY_SOURCE_BODY",
+   "orientation": "TURNED_90",
+   "turn": null,
+   "closedVerified": 22,
+   "openKey": 0,
+   "state": "RECOGNIZABLE_PARTIAL",
+   "usd": 0.073936
+  },
+  "r2": {
+   "run": "r2d/alaska",
+   "roofs": [
+    [
+     "GABLE",
+     4.16,
+     38.2,
+     0
+    ]
+   ],
+   "hipPlanes": [],
+   "walls": 4,
+   "ext": 11,
+   "openings": 11,
+   "doors": 3,
+   "chimneys": 2,
+   "roofWindows": 8,
+   "arbitration": "REPLACED_BY_SOURCE_BODY",
+   "orientation": "TURNED_90",
+   "turn": "FRONT_ON_LEFT",
+   "closedVerified": 6,
+   "openKey": 2,
+   "state": "NEEDS_EVIDENCE",
+   "usd": 0.103521
+  }
+ },
+ "aurora": {
+  "delivered1349": {
+   "run": "final/aurora",
+   "roofs": [
+    [
+     "FLAT",
+     2.8,
+     0,
+     0
+    ],
+    [
+     "GABLE",
+     3.4,
+     35,
+     0.45
+    ]
+   ],
+   "hipPlanes": [],
+   "walls": 18,
+   "ext": 19,
+   "openings": 23,
+   "doors": 9,
+   "chimneys": 3,
+   "roofWindows": 1,
+   "arbitration": "LOCAL_STANDS",
+   "orientation": "AS_LABELLED",
+   "turn": null,
+   "closedVerified": 5,
+   "openKey": 0,
+   "state": "BUDGET_OR_ROUND_LIMIT",
+   "usd": 0.048362
+  },
+  "r2": {
+   "run": "r2e/aurora",
+   "roofs": [
+    [
+     "FLAT",
+     2.8,
+     0,
+     0
+    ],
+    [
+     "GABLE",
+     3.4,
+     35,
+     0.45
+    ]
+   ],
+   "hipPlanes": [],
+   "walls": 18,
+   "ext": 19,
+   "openings": 23,
+   "doors": 9,
+   "chimneys": 3,
+   "roofWindows": 1,
+   "arbitration": "LOCAL_STANDS",
+   "orientation": "AS_LABELLED",
+   "turn": null,
+   "closedVerified": 19,
+   "openKey": 0,
+   "state": "RECOGNIZABLE_PARTIAL",
+   "usd": 0.06393
+  }
+ },
+ "ballina": {
+  "delivered1349": {
+   "run": "final/ballina",
+   "roofs": [
+    [
+     "GABLE",
+     3.14,
+     30.1,
+     0.81
+    ]
+   ],
+   "hipPlanes": [],
+   "walls": 4,
+   "ext": 10,
+   "openings": 10,
+   "doors": 2,
+   "chimneys": 0,
+   "roofWindows": 0,
+   "arbitration": "REPLACED_BY_SOURCE_BODY",
+   "orientation": "AS_LABELLED",
+   "turn": null,
+   "closedVerified": 10,
+   "openKey": 0,
+   "state": "RECOGNIZABLE_PARTIAL",
+   "usd": 0.062536
+  },
+  "r2": {
+   "run": "r2e/ballina",
+   "roofs": [
+    [
+     "GABLE",
+     3.21,
+     30.4,
+     0.8
+    ]
+   ],
+   "hipPlanes": [],
+   "walls": 4,
+   "ext": 10,
+   "openings": 10,
+   "doors": 2,
+   "chimneys": 0,
+   "roofWindows": 0,
+   "arbitration": "REPLACED_BY_SOURCE_BODY",
+   "orientation": "AS_LABELLED",
+   "turn": null,
+   "closedVerified": 10,
+   "openKey": 0,
+   "state": "RECOGNIZABLE_PARTIAL",
+   "usd": 0.048414
+  }
+ },
+ "alberto": {
+  "delivered1349": {
+   "run": "final2/alberto",
+   "roofs": [
+    [
+     "GABLE",
+     2.82,
+     30.7,
+     0
+    ]
+   ],
+   "hipPlanes": [],
+   "walls": 73,
+   "ext": 18,
+   "openings": 30,
+   "doors": 13,
+   "chimneys": 2,
+   "roofWindows": 0,
+   "arbitration": "LOCAL_STANDS",
+   "orientation": "AS_LABELLED",
+   "turn": null,
+   "closedVerified": 11,
+   "openKey": 0,
+   "state": "RECOGNIZABLE_PARTIAL",
+   "usd": 0.096404
+  },
+  "r2": {
+   "run": "r2e/alberto",
+   "roofs": [
+    [
+     "GABLE",
+     3.45,
+     25.2,
+     0
+    ]
+   ],
+   "hipPlanes": [],
+   "walls": 4,
+   "ext": 7,
+   "openings": 7,
+   "doors": 1,
+   "chimneys": 3,
+   "roofWindows": 0,
+   "arbitration": "REPLACED_BY_SOURCE_BODY",
+   "orientation": "AS_LABELLED",
+   "turn": null,
+   "closedVerified": 6,
+   "openKey": 0,
+   "state": "RECOGNIZABLE_PARTIAL",
+   "usd": 0.079691
+  }
+ },
+ "medulin": {
+  "delivered1349": {
+   "run": "final/medulin",
+   "roofs": [
+    [
+     "FLAT",
+     2.8,
+     0,
+     0
+    ],
+    [
+     "FLAT",
+     2.8,
+     0,
+     0
+    ],
+    [
+     "FLAT",
+     2.8,
+     0,
+     0
+    ],
+    [
+     "GABLE",
+     2.71,
+     45,
+     0
+    ]
+   ],
+   "hipPlanes": [],
+   "walls": 55,
+   "ext": 24,
+   "openings": 33,
+   "doors": 15,
+   "chimneys": 1,
+   "roofWindows": 0,
+   "arbitration": "LOCAL_STANDS",
+   "orientation": "UNDECIDED",
+   "turn": null,
+   "closedVerified": 3,
+   "openKey": 0,
+   "state": "RECOGNIZABLE_PARTIAL",
+   "usd": 0.080386
+  },
+  "r2": {
+   "run": "r2e/medulin",
+   "roofs": [
+    [
+     "FLAT",
+     2.8,
+     0,
+     0
+    ],
+    [
+     "FLAT",
+     2.8,
+     0,
+     0
+    ],
+    [
+     "FLAT",
+     2.8,
+     0,
+     0
+    ],
+    [
+     "GABLE",
+     2.71,
+     45,
+     0
+    ]
+   ],
+   "hipPlanes": [],
+   "walls": 55,
+   "ext": 24,
+   "openings": 33,
+   "doors": 15,
+   "chimneys": 1,
+   "roofWindows": 0,
+   "arbitration": "LOCAL_STANDS",
+   "orientation": "UNDECIDED",
+   "turn": null,
+   "closedVerified": 3,
+   "openKey": 0,
+   "state": "RECOGNIZABLE_PARTIAL",
+   "usd": 0.11354600000000001
+  }
+ },
+ "jeziorko": {
+  "delivered1349": {
+   "run": "final/jeziorko",
+   "roofs": [
+    [
+     "GABLE",
+     3.12,
+     30,
+     0.82
+    ]
+   ],
+   "hipPlanes": [],
+   "walls": 9,
+   "ext": 7,
+   "openings": 9,
+   "doors": 5,
+   "chimneys": 1,
+   "roofWindows": 0,
+   "arbitration": "LOCAL_STANDS",
+   "orientation": "AS_LABELLED",
+   "turn": null,
+   "closedVerified": 2,
+   "openKey": 0,
+   "state": "RECOGNIZABLE_PARTIAL",
+   "usd": 0.044481
+  },
+  "r2": {
+   "run": "r2e/jeziorko",
+   "roofs": [
+    [
+     "GABLE",
+     3.12,
+     30,
+     0.82
+    ]
+   ],
+   "hipPlanes": [],
+   "walls": 9,
+   "ext": 7,
+   "openings": 9,
+   "doors": 5,
+   "chimneys": 1,
+   "roofWindows": 0,
+   "arbitration": "LOCAL_STANDS",
+   "orientation": "AS_LABELLED",
+   "turn": null,
+   "closedVerified": 2,
+   "openKey": 0,
+   "state": "RECOGNIZABLE_PARTIAL",
+   "usd": 0.075514
+  }
+ },
+ "mindelo": {
+  "delivered1349": {
+   "run": "newc/mindelo",
+   "roofs": [
+    [
+     "FLAT",
+     2.8,
+     0,
+     0
+    ],
+    [
+     "FLAT",
+     2.8,
+     0,
+     0
+    ],
+    [
+     "FLAT",
+     2.8,
+     0,
+     0
+    ],
+    [
+     "FLAT",
+     2.8,
+     0,
+     0
+    ],
+    [
+     "GABLE",
+     3.85,
+     30,
+     0
+    ]
+   ],
+   "hipPlanes": [],
+   "walls": 32,
+   "ext": 18,
+   "openings": 29,
+   "doors": 15,
+   "chimneys": 2,
+   "roofWindows": 0,
+   "arbitration": "LOCAL_STANDS",
+   "orientation": "UNDECIDED",
+   "turn": null,
+   "closedVerified": 3,
+   "openKey": 1,
+   "state": "UNSUPPORTED_OPERATION",
+   "usd": 0.17759000000000003
+  },
+  "r2": {
+   "run": "r2e/mindelo",
+   "roofs": [
+    [
+     "FLAT",
+     2.8,
+     0,
+     0
+    ],
+    [
+     "FLAT",
+     2.8,
+     0,
+     0
+    ],
+    [
+     "FLAT",
+     2.8,
+     0,
+     0
+    ],
+    [
+     "FLAT",
+     2.8,
+     0,
+     0
+    ],
+    [
+     "GABLE",
+     3.85,
+     30,
+     0
+    ]
+   ],
+   "hipPlanes": [],
+   "walls": 32,
+   "ext": 18,
+   "openings": 29,
+   "doors": 15,
+   "chimneys": 2,
+   "roofWindows": 0,
+   "arbitration": "LOCAL_STANDS",
+   "orientation": "UNDECIDED",
+   "turn": null,
+   "closedVerified": 3,
+   "openKey": 1,
+   "state": "UNSUPPORTED_OPERATION",
+   "usd": 0.046703999999999996
+  }
+ },
+ "sakura": {
+  "delivered1349": {
+   "run": "final2/sakura",
+   "roofs": [
+    [
+     "GABLE",
+     3.12,
+     36.1,
+     0
+    ]
+   ],
+   "hipPlanes": [],
+   "walls": 4,
+   "ext": 9,
+   "openings": 9,
+   "doors": 4,
+   "chimneys": 2,
+   "roofWindows": 0,
+   "arbitration": "-",
+   "orientation": "AS_LABELLED",
+   "turn": null,
+   "closedVerified": 10,
+   "openKey": 1,
+   "state": "UNSUPPORTED_OPERATION",
+   "usd": 0.088334
+  },
+  "r2": {
+   "run": "r2e/sakura",
+   "roofs": [],
+   "hipPlanes": [
+    29.9,
+    29.7,
+    29.9,
+    29.7
+   ],
+   "walls": 4,
+   "ext": 9,
+   "openings": 9,
+   "doors": 4,
+   "chimneys": 3,
+   "roofWindows": 0,
+   "arbitration": "-",
+   "orientation": "AS_LABELLED",
+   "turn": null,
+   "closedVerified": 9,
+   "openKey": 1,
+   "state": "UNSUPPORTED_OPERATION",
+   "usd": 0.083136
+  }
+ },
+ "g6": {
+  "delivered1349": {
+   "run": "newc/g6",
+   "roofs": [
+    [
+     "GABLE",
+     3.49,
+     35,
+     0
+    ]
+   ],
+   "hipPlanes": [],
+   "walls": 4,
+   "ext": 4,
+   "openings": 4,
+   "doors": 0,
+   "chimneys": 0,
+   "roofWindows": 0,
+   "arbitration": "LOCAL_STANDS",
+   "orientation": "TURNED_90",
+   "turn": null,
+   "closedVerified": 0,
+   "openKey": 2,
+   "state": "UNSUPPORTED_OPERATION",
+   "usd": 0.141764
+  },
+  "r2": {
+   "run": "r2d/g6",
+   "roofs": [
+    [
+     "GABLE",
+     3.49,
+     35,
+     0
+    ]
+   ],
+   "hipPlanes": [],
+   "walls": 4,
+   "ext": 4,
+   "openings": 4,
+   "doors": 0,
+   "chimneys": 0,
+   "roofWindows": 0,
+   "arbitration": "LOCAL_STANDS",
+   "orientation": "AS_LABELLED",
+   "turn": null,
+   "closedVerified": 0,
+   "openKey": 2,
+   "state": "UNSUPPORTED_OPERATION",
+   "usd": 0.099861
+  }
+ }
+}

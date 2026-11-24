@@ -8,11 +8,11 @@ rest = sys.argv[4:]
 extra = []
 if '--extra' in rest:
     i = rest.index('--extra'); extra = [e.split('=', 1) for e in rest[i + 1:]]; rest = rest[:i]
-TOP = 'BuildPlan-V35418'
-README = f"""BuildPlan v3.54.18 — prywatna dostawa, część: {part}
+TOP = os.environ.get('BUILDPLAN_PACK_TOP', 'BuildPlan-V35418')
+README = f"""{TOP} — prywatna dostawa, część: {part}
 
 JAK ROZPAKOWAĆ I POŁĄCZYĆ
-1. Rozpakuj WSZYSTKIE części (pliki BuildPlan-V35418-0*.zip) do TEGO SAMEGO katalogu.
+1. Rozpakuj WSZYSTKIE części (pliki {TOP}-0*.zip) do TEGO SAMEGO katalogu.
    Każda część ma jeden folder główny „{TOP}/"; foldery o tej samej nazwie łączą się (scal, nie zastępuj).
 2. Otwórz {TOP}/gallery.html w przeglądarce (działa offline; odsyłacze są względne).
 3. Każda część jest zwykłym, niezależnym archiwum ZIP — można ją otworzyć osobno; bez pozostałych części

@@ -27,6 +27,13 @@
   Host on the final commit: all checks passed (reuse 0 USD / 0 requests; no token → 0 requests), one job FAILED on a
   fresh read (kept). Stage cost 4.951829 USD (books 34.452762 of 68.542857). Matrix 4536: 16 failures, the same 16 as the R3 base list (none new). APK 1349 from `ba41dbe`
   (same signer as 1348; ANDROID_UI_NOT_VERIFIED — no device in the session).
+- **v3.54.18 R2 (2026-11-24): roof form and house sides read from the drawings — APK 1350.** Report §16 of
+  `stage-reports/SOURCE_TO_MODEL_V35418.md`; ADR section R2; hand-off section R2. Hip roofs are read (a trapezoid on
+  the sides along the ridge) and built as four roof planes through the same source gate; a gable end drawn as its
+  verge alone is a gable end; the eaves at the wall come from the gable-end wall corner; a turn needs views on both
+  axes and the plan's main entrance decides which quarter turn; the plan gaps of a replaced LOCAL body stay a second
+  drawing's witness. Kept failures: G6 (hip proposed, source undecided), Medulin, Mindelo, Alberto's entrance door,
+  the long sides under a turn (Alaska). No threshold was loosened.
 - **v3.54.17 R3 (2026-11-20): overhang, chimneys, heights behind pots, full dimensions — OWNER +40 USD.** Report
   `stage-reports/SOURCE_TO_MODEL_V35417_R3.md`. Elevations registered from the sketch (ground behind pots; eaves or
   ridge checked); SET_ROOF_OVERHANG (verges, eaves capped to clear another body); chimneys fused across views (front/

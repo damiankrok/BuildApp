@@ -1,0 +1,980 @@
+{
+  "assemblies": [],
+  "balconies": [],
+  "building": {
+    "id": "building",
+    "name": "massing"
+  },
+  "chimneys": [
+    {
+      "baseOffset": 0,
+      "footprint": {
+        "maxX": 4.518771,
+        "maxZ": 5.841786,
+        "minX": 3.807298,
+        "minZ": 5.291772
+      },
+      "height": 7.738128,
+      "id": "chimney-fix-left-0270ca",
+      "levelId": "lvl-0",
+      "materialId": "mat-chimney"
+    },
+    {
+      "baseOffset": 0,
+      "footprint": {
+        "maxX": 6.663352,
+        "maxZ": 2.78826,
+        "minX": 6.219153,
+        "minZ": 2.12445
+      },
+      "height": 7.879704,
+      "id": "chimney-fix-rear-6eea3c",
+      "levelId": "lvl-0",
+      "materialId": "mat-chimney"
+    }
+  ],
+  "constraints": [],
+  "doors": [
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "glazing": "FULL",
+            "hinge": "LEFT",
+            "kind": "LEAF"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-front-5ec4d7-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-glass",
+      "openAngle": 0,
+      "openingId": "op-fix-front-5ec4d7",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-left-f55dca-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "op-fix-left-f55dca",
+      "swing": "IN"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "glazing": "FULL",
+            "hinge": "LEFT",
+            "kind": "LEAF"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-right-149c68-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-glass",
+      "openAngle": 0,
+      "openingId": "op-fix-right-149c68",
+      "swing": "IN"
+    }
+  ],
+  "evidenceSources": [
+    {
+      "id": "src-frame-asset-elewacja-boczna-projektu-alaska-99fa17bb7a-30f92f6a1b",
+      "kind": "DRAWING",
+      "label": "frame-asset-elewacja-boczna-projektu-alaska-99fa17bb7a-30f92f6a1b",
+      "note": "frame frame-asset-elewacja-boczna-projektu-alaska-99fa17bb7a-30f92f6a1b"
+    },
+    {
+      "id": "src-frame-asset-elewacja-frontowa-projektu-alaska-fe8773fc-e010262f95",
+      "kind": "DRAWING",
+      "label": "frame-asset-elewacja-frontowa-projektu-alaska-fe8773fc-e010262f95",
+      "note": "frame frame-asset-elewacja-frontowa-projektu-alaska-fe8773fc-e010262f95"
+    },
+    {
+      "id": "src-frame-asset-elewacja-tylna-projektu-alaska-d514b2a0c2-5dbc2f769e",
+      "kind": "DRAWING",
+      "label": "frame-asset-elewacja-tylna-projektu-alaska-d514b2a0c2-5dbc2f769e",
+      "note": "frame frame-asset-elewacja-tylna-projektu-alaska-d514b2a0c2-5dbc2f769e"
+    },
+    {
+      "id": "src-frame-asset-rzut-parteru-alaska-3bd1fc5e5c-39cb22e91e",
+      "kind": "DRAWING",
+      "label": "frame-asset-rzut-parteru-alaska-3bd1fc5e5c-39cb22e91e",
+      "note": "frame frame-asset-rzut-parteru-alaska-3bd1fc5e5c-39cb22e91e"
+    }
+  ],
+  "frame": {
+    "handedness": "LEFT_HANDED_AS_SPECIFIED",
+    "origin": "finished ground-floor level is y = 0; the front facade outer face is z = 0",
+    "viewerNote": "renderers working in a right-handed frame mirror z when building their scene",
+    "wallConvention": "a wall runs from start to end along its OUTER face at its base; its outward normal is up x u, so exterior rings are traversed counter-clockwise on a plan drawn with the front facade at the bottom and material lies to the left of the direction of travel",
+    "x": "right when looking at the front facade",
+    "y": "up (vertical)",
+    "z": "away from the front facade, into the building"
+  },
+  "id": "m-analysis-u8fba8e6a95bb",
+  "levels": [
+    {
+      "buildingId": "building",
+      "elevation": 0,
+      "height": 7.263978,
+      "id": "lvl-0",
+      "index": 0,
+      "name": "Massing"
+    }
+  ],
+  "linearSolids": [],
+  "materials": [
+    {
+      "color": "#6d6a66",
+      "id": "mat-chimney",
+      "name": "Chimney"
+    },
+    {
+      "color": "#55585c",
+      "id": "mat-gate",
+      "name": "Garage door"
+    },
+    {
+      "color": "#9fc3d8",
+      "id": "mat-glass",
+      "name": "Glazing",
+      "opacity": 0.35
+    },
+    {
+      "color": "#5a5550",
+      "id": "mat-roof",
+      "name": "Roof covering (tone not read: miniature convention)"
+    },
+    {
+      "color": "#b07a4a",
+      "id": "mat-timber",
+      "name": "Timber (door leaf, cladding)"
+    },
+    {
+      "color": "#e8e4dc",
+      "id": "mat-wall",
+      "name": "Rendered wall (tone not read: miniature convention)"
+    }
+  ],
+  "meta": {
+    "createdWith": "buildapp",
+    "notes": []
+  },
+  "name": "Alaska (analysis)",
+  "openings": [
+    {
+      "height": 1.326801,
+      "id": "op-fix-front-2d9d60",
+      "kind": "WINDOW",
+      "offset": 7.537724,
+      "sill": 1.115282,
+      "wallId": "ring-mass-main-w0",
+      "width": 1.192198
+    },
+    {
+      "height": 2.269022,
+      "id": "op-fix-front-5ec4d7",
+      "kind": "DOOR",
+      "offset": 1.884398,
+      "sill": 0.19229,
+      "wallId": "ring-mass-main-w0",
+      "width": 2.672831
+    },
+    {
+      "height": 1.34603,
+      "id": "op-fix-front-6f21a7",
+      "kind": "WINDOW",
+      "offset": 10.152868,
+      "sill": 1.115282,
+      "wallId": "ring-mass-main-w0",
+      "width": 1.172969
+    },
+    {
+      "height": 1.175892,
+      "id": "op-fix-left-0c3a0c",
+      "kind": "WINDOW",
+      "offset": 3.356868,
+      "sill": 3.98286,
+      "wallId": "ring-mass-main-w3",
+      "width": 1.175892
+    },
+    {
+      "height": 2.256954,
+      "id": "op-fix-left-f55dca",
+      "kind": "DOOR",
+      "offset": 3.96378,
+      "sill": 0.170694,
+      "wallId": "ring-mass-main-w3",
+      "width": 0.967266
+    },
+    {
+      "height": 1.390536,
+      "id": "op-fix-rear-1518d5",
+      "kind": "WINDOW",
+      "offset": 4.190836,
+      "sill": 1.255345,
+      "wallId": "ring-mass-main-w2",
+      "width": 1.197406
+    },
+    {
+      "height": 1.390536,
+      "id": "op-fix-rear-24dbb8",
+      "kind": "WINDOW",
+      "offset": 1.197321,
+      "sill": 1.255345,
+      "wallId": "ring-mass-main-w2",
+      "width": 1.216719
+    },
+    {
+      "height": 1.390536,
+      "id": "op-fix-rear-386c64",
+      "kind": "WINDOW",
+      "offset": 7.783054,
+      "sill": 1.255345,
+      "wallId": "ring-mass-main-w2",
+      "width": 1.197406
+    },
+    {
+      "height": 1.390536,
+      "id": "op-fix-rear-8cea3e",
+      "kind": "WINDOW",
+      "offset": 10.815195,
+      "sill": 1.255345,
+      "wallId": "ring-mass-main-w2",
+      "width": 1.197406
+    },
+    {
+      "height": 2.232678,
+      "id": "op-fix-right-149c68",
+      "kind": "DOOR",
+      "offset": 3.06524,
+      "sill": 0.208131,
+      "wallId": "ring-mass-main-w1",
+      "width": 1.759653
+    },
+    {
+      "height": 1.173102,
+      "id": "op-fix-right-5b39c1",
+      "kind": "WINDOW",
+      "offset": 3.367976,
+      "sill": 3.992331,
+      "wallId": "ring-mass-main-w1",
+      "width": 1.154181
+    }
+  ],
+  "platforms": [],
+  "railings": [],
+  "relationships": [],
+  "roofEdges": [],
+  "roofOpenings": [
+    {
+      "footprint": {
+        "maxX": 9.479853,
+        "maxZ": 1.380053,
+        "minX": 8.729922,
+        "minZ": 0.280447
+      },
+      "id": "rw-fix-front-2d5fb1",
+      "kind": "ROOFLIGHT",
+      "roofId": "roof-mass-main"
+    },
+    {
+      "footprint": {
+        "maxX": 4.461084,
+        "maxZ": 1.380053,
+        "minX": 3.691924,
+        "minZ": 0.280447
+      },
+      "id": "rw-fix-front-60ebea",
+      "kind": "ROOFLIGHT",
+      "roofId": "roof-mass-main"
+    },
+    {
+      "footprint": {
+        "maxX": 7.710785,
+        "maxZ": 3.628138,
+        "minX": 6.922396,
+        "minZ": 2.968374
+      },
+      "id": "rw-fix-front-67d8a3",
+      "kind": "ROOFLIGHT",
+      "roofId": "roof-mass-main"
+    },
+    {
+      "footprint": {
+        "maxX": 3.057367,
+        "maxZ": 1.380053,
+        "minX": 2.307436,
+        "minZ": 0.280447
+      },
+      "id": "rw-fix-front-6d3aba",
+      "kind": "ROOFLIGHT",
+      "roofId": "roof-mass-main"
+    },
+    {
+      "footprint": {
+        "maxX": 10.88357,
+        "maxZ": 1.380053,
+        "minX": 10.133639,
+        "minZ": 0.280447
+      },
+      "id": "rw-fix-front-9531db",
+      "kind": "ROOFLIGHT",
+      "roofId": "roof-mass-main"
+    },
+    {
+      "footprint": {
+        "maxX": 10.950838,
+        "maxZ": 7.388876,
+        "minX": 10.159005,
+        "minZ": 6.259923
+      },
+      "id": "rw-fix-rear-2524bc",
+      "kind": "ROOFLIGHT",
+      "roofId": "roof-mass-main"
+    },
+    {
+      "footprint": {
+        "maxX": 9.560302,
+        "maxZ": 7.388876,
+        "minX": 8.768469,
+        "minZ": 6.259923
+      },
+      "id": "rw-fix-rear-6f3447",
+      "kind": "ROOFLIGHT",
+      "roofId": "roof-mass-main"
+    },
+    {
+      "footprint": {
+        "maxX": 2.182736,
+        "maxZ": 7.388876,
+        "minX": 1.390903,
+        "minZ": 6.259923
+      },
+      "id": "rw-fix-rear-d7bd42",
+      "kind": "ROOFLIGHT",
+      "roofId": "roof-mass-main"
+    }
+  ],
+  "roofPlanes": [],
+  "rooflights": [
+    {
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "rw-fix-front-2d5fb1-light",
+      "roofOpeningId": "rw-fix-front-2d5fb1"
+    },
+    {
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "rw-fix-front-60ebea-light",
+      "roofOpeningId": "rw-fix-front-60ebea"
+    },
+    {
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "rw-fix-front-67d8a3-light",
+      "roofOpeningId": "rw-fix-front-67d8a3"
+    },
+    {
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "rw-fix-front-6d3aba-light",
+      "roofOpeningId": "rw-fix-front-6d3aba"
+    },
+    {
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "rw-fix-front-9531db-light",
+      "roofOpeningId": "rw-fix-front-9531db"
+    },
+    {
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "rw-fix-rear-2524bc-light",
+      "roofOpeningId": "rw-fix-rear-2524bc"
+    },
+    {
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "rw-fix-rear-6f3447-light",
+      "roofOpeningId": "rw-fix-rear-6f3447"
+    },
+    {
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "rw-fix-rear-d7bd42-light",
+      "roofOpeningId": "rw-fix-rear-d7bd42"
+    }
+  ],
+  "roofs": [
+    {
+      "eaveOffset": 4.163522,
+      "evidence": {
+        "interpretation": "ridge along X (slopes seen on the sides along it, the gable end across it); pitch 38.2° from a 3.10 m rise over half of 7.89 m (the walls end at 3.85 m: the roof's underside there)",
+        "properties": {
+          "eaveOffset": "SOURCE_DERIVED",
+          "pitchDeg": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-alaska-3bd1fc5e5c-39cb22e91e + frame-asset-elewacja-boczna-projektu-alaska-99fa17bb7a-30f92f6a1b + frame-asset-elewacja-frontowa-projektu-alaska-fe8773fc-e010262f95 + frame-asset-elewacja-tylna-projektu-alaska-d514b2a0c2-5dbc2f769e",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-alaska-3bd1fc5e5c-39cb22e91e",
+          "src-frame-asset-elewacja-boczna-projektu-alaska-99fa17bb7a-30f92f6a1b",
+          "src-frame-asset-elewacja-frontowa-projektu-alaska-fe8773fc-e010262f95",
+          "src-frame-asset-elewacja-tylna-projektu-alaska-d514b2a0c2-5dbc2f769e"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "footprint": {
+        "maxX": 13.249,
+        "maxZ": 7.89,
+        "minX": 0,
+        "minZ": 0
+      },
+      "id": "roof-mass-main",
+      "kind": "GABLE",
+      "levelId": "lvl-0",
+      "materialId": "mat-roof",
+      "overhang": 0,
+      "pitchDeg": 38.2,
+      "ridgeAxis": "X",
+      "thickness": 0.25
+    }
+  ],
+  "rooms": [],
+  "schema": "buildapp.canonical-building-model",
+  "schemaVersion": "1.9.0",
+  "slabs": [],
+  "stairs": [],
+  "stepRuns": [],
+  "surfaceRegions": [
+    {
+      "evidence": {
+        "interpretation": "a timber outline from finish-da22f6 (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-mass-main-w0",
+      "id": "appearance-front-ring-mass-main-w0-timber-0",
+      "materialId": "mat-timber",
+      "outline": [
+        {
+          "a": 4.58,
+          "b": 2.479704
+        },
+        {
+          "a": 11.32,
+          "b": 2.479704
+        },
+        {
+          "a": 11.32,
+          "b": 2.459704
+        },
+        {
+          "a": 11.34,
+          "b": 2.459704
+        },
+        {
+          "a": 11.34,
+          "b": 0
+        },
+        {
+          "a": 4.56,
+          "b": 0
+        },
+        {
+          "a": 4.56,
+          "b": 2.459704
+        },
+        {
+          "a": 4.58,
+          "b": 2.459704
+        }
+      ],
+      "rect": {
+        "a0": 4.56,
+        "a1": 11.34,
+        "b0": 0,
+        "b1": 2.479704
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a timber outline from finish-60a057 (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-mass-main-w2",
+      "id": "appearance-rear-ring-mass-main-w2-timber-0",
+      "materialId": "mat-timber",
+      "outline": [
+        {
+          "a": 12.009,
+          "b": 2.659704
+        },
+        {
+          "a": 1.189,
+          "b": 2.659704
+        },
+        {
+          "a": 1.189,
+          "b": 2.639704
+        },
+        {
+          "a": 1.169,
+          "b": 2.639704
+        },
+        {
+          "a": 1.169,
+          "b": 0.159704
+        },
+        {
+          "a": 1.189,
+          "b": 0.159704
+        },
+        {
+          "a": 1.189,
+          "b": 0.139704
+        },
+        {
+          "a": 12.009,
+          "b": 0.139704
+        },
+        {
+          "a": 12.009,
+          "b": 0.159704
+        },
+        {
+          "a": 12.029,
+          "b": 0.159704
+        },
+        {
+          "a": 12.029,
+          "b": 2.639704
+        },
+        {
+          "a": 12.009,
+          "b": 2.639704
+        }
+      ],
+      "rect": {
+        "a0": 1.169,
+        "a1": 12.029,
+        "b0": 0.139704,
+        "b1": 2.659704
+      }
+    }
+  ],
+  "terraces": [],
+  "units": {
+    "angle": "deg",
+    "length": "m"
+  },
+  "wallJunctions": [
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w3"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w0"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-alaska-3bd1fc5e5c-39cb22e91e (MAIN), at the analyzer's own scale: 1.413978 cm/px, SUPPORTED / ADDED with ? independent witnesses; heights: 3 registered elevation(s) give eaves (the walls' corner tops) 4.02 / 3.87 / 3.82 m and top 7.57 / 7.26 / 7.25 m — the gable-end view(s) (LEFT, RIGHT) show the wall corner under the roof: 3.85 m is taken; a view along the ridge draws its walls ending behind the fascia, lower by no more than an overhang hides (two views draw that line)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-alaska-3bd1fc5e5c-39cb22e91e + frame-asset-elewacja-boczna-projektu-alaska-99fa17bb7a-30f92f6a1b + frame-asset-elewacja-frontowa-projektu-alaska-fe8773fc-e010262f95 + frame-asset-elewacja-tylna-projektu-alaska-d514b2a0c2-5dbc2f769e",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-alaska-3bd1fc5e5c-39cb22e91e",
+          "src-frame-asset-elewacja-boczna-projektu-alaska-99fa17bb7a-30f92f6a1b",
+          "src-frame-asset-elewacja-frontowa-projektu-alaska-fe8773fc-e010262f95",
+          "src-frame-asset-elewacja-tylna-projektu-alaska-d514b2a0c2-5dbc2f769e"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j0",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w0"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w1"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-alaska-3bd1fc5e5c-39cb22e91e (MAIN), at the analyzer's own scale: 1.413978 cm/px, SUPPORTED / ADDED with ? independent witnesses; heights: 3 registered elevation(s) give eaves (the walls' corner tops) 4.02 / 3.87 / 3.82 m and top 7.57 / 7.26 / 7.25 m — the gable-end view(s) (LEFT, RIGHT) show the wall corner under the roof: 3.85 m is taken; a view along the ridge draws its walls ending behind the fascia, lower by no more than an overhang hides (two views draw that line)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-alaska-3bd1fc5e5c-39cb22e91e + frame-asset-elewacja-boczna-projektu-alaska-99fa17bb7a-30f92f6a1b + frame-asset-elewacja-frontowa-projektu-alaska-fe8773fc-e010262f95 + frame-asset-elewacja-tylna-projektu-alaska-d514b2a0c2-5dbc2f769e",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-alaska-3bd1fc5e5c-39cb22e91e",
+          "src-frame-asset-elewacja-boczna-projektu-alaska-99fa17bb7a-30f92f6a1b",
+          "src-frame-asset-elewacja-frontowa-projektu-alaska-fe8773fc-e010262f95",
+          "src-frame-asset-elewacja-tylna-projektu-alaska-d514b2a0c2-5dbc2f769e"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j1",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w1"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w2"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-alaska-3bd1fc5e5c-39cb22e91e (MAIN), at the analyzer's own scale: 1.413978 cm/px, SUPPORTED / ADDED with ? independent witnesses; heights: 3 registered elevation(s) give eaves (the walls' corner tops) 4.02 / 3.87 / 3.82 m and top 7.57 / 7.26 / 7.25 m — the gable-end view(s) (LEFT, RIGHT) show the wall corner under the roof: 3.85 m is taken; a view along the ridge draws its walls ending behind the fascia, lower by no more than an overhang hides (two views draw that line)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-alaska-3bd1fc5e5c-39cb22e91e + frame-asset-elewacja-boczna-projektu-alaska-99fa17bb7a-30f92f6a1b + frame-asset-elewacja-frontowa-projektu-alaska-fe8773fc-e010262f95 + frame-asset-elewacja-tylna-projektu-alaska-d514b2a0c2-5dbc2f769e",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-alaska-3bd1fc5e5c-39cb22e91e",
+          "src-frame-asset-elewacja-boczna-projektu-alaska-99fa17bb7a-30f92f6a1b",
+          "src-frame-asset-elewacja-frontowa-projektu-alaska-fe8773fc-e010262f95",
+          "src-frame-asset-elewacja-tylna-projektu-alaska-d514b2a0c2-5dbc2f769e"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j2",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w2",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w2"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w3"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-alaska-3bd1fc5e5c-39cb22e91e (MAIN), at the analyzer's own scale: 1.413978 cm/px, SUPPORTED / ADDED with ? independent witnesses; heights: 3 registered elevation(s) give eaves (the walls' corner tops) 4.02 / 3.87 / 3.82 m and top 7.57 / 7.26 / 7.25 m — the gable-end view(s) (LEFT, RIGHT) show the wall corner under the roof: 3.85 m is taken; a view along the ridge draws its walls ending behind the fascia, lower by no more than an overhang hides (two views draw that line)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-alaska-3bd1fc5e5c-39cb22e91e + frame-asset-elewacja-boczna-projektu-alaska-99fa17bb7a-30f92f6a1b + frame-asset-elewacja-frontowa-projektu-alaska-fe8773fc-e010262f95 + frame-asset-elewacja-tylna-projektu-alaska-d514b2a0c2-5dbc2f769e",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-alaska-3bd1fc5e5c-39cb22e91e",
+          "src-frame-asset-elewacja-boczna-projektu-alaska-99fa17bb7a-30f92f6a1b",
+          "src-frame-asset-elewacja-frontowa-projektu-alaska-fe8773fc-e010262f95",
+          "src-frame-asset-elewacja-tylna-projektu-alaska-d514b2a0c2-5dbc2f769e"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j3",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w2",
+      "tolerance": 0.001
+    }
+  ],
+  "wallPanels": [],
+  "wallRings": [
+    {
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-alaska-3bd1fc5e5c-39cb22e91e (MAIN), at the analyzer's own scale: 1.413978 cm/px, SUPPORTED / ADDED with ? independent witnesses; heights: 3 registered elevation(s) give eaves (the walls' corner tops) 4.02 / 3.87 / 3.82 m and top 7.57 / 7.26 / 7.25 m — the gable-end view(s) (LEFT, RIGHT) show the wall corner under the roof: 3.85 m is taken; a view along the ridge draws its walls ending behind the fascia, lower by no more than an overhang hides (two views draw that line)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-alaska-3bd1fc5e5c-39cb22e91e + frame-asset-elewacja-boczna-projektu-alaska-99fa17bb7a-30f92f6a1b + frame-asset-elewacja-frontowa-projektu-alaska-fe8773fc-e010262f95 + frame-asset-elewacja-tylna-projektu-alaska-d514b2a0c2-5dbc2f769e",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-alaska-3bd1fc5e5c-39cb22e91e",
+          "src-frame-asset-elewacja-boczna-projektu-alaska-99fa17bb7a-30f92f6a1b",
+          "src-frame-asset-elewacja-frontowa-projektu-alaska-fe8773fc-e010262f95",
+          "src-frame-asset-elewacja-tylna-projektu-alaska-d514b2a0c2-5dbc2f769e"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main",
+      "junctionIds": [
+        "ring-mass-main-j0",
+        "ring-mass-main-j1",
+        "ring-mass-main-j2",
+        "ring-mass-main-j3"
+      ],
+      "levelId": "lvl-0",
+      "wallIds": [
+        "ring-mass-main-w0",
+        "ring-mass-main-w1",
+        "ring-mass-main-w2",
+        "ring-mass-main-w3"
+      ]
+    }
+  ],
+  "walls": [
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 13.249,
+        "z": 0
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-alaska-3bd1fc5e5c-39cb22e91e (MAIN), at the analyzer's own scale: 1.413978 cm/px, SUPPORTED / ADDED with ? independent witnesses; heights: 3 registered elevation(s) give eaves (the walls' corner tops) 4.02 / 3.87 / 3.82 m and top 7.57 / 7.26 / 7.25 m — the gable-end view(s) (LEFT, RIGHT) show the wall corner under the roof: 3.85 m is taken; a view along the ridge draws its walls ending behind the fascia, lower by no more than an overhang hides (two views draw that line)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-alaska-3bd1fc5e5c-39cb22e91e + frame-asset-elewacja-boczna-projektu-alaska-99fa17bb7a-30f92f6a1b + frame-asset-elewacja-frontowa-projektu-alaska-fe8773fc-e010262f95 + frame-asset-elewacja-tylna-projektu-alaska-d514b2a0c2-5dbc2f769e",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-alaska-3bd1fc5e5c-39cb22e91e",
+          "src-frame-asset-elewacja-boczna-projektu-alaska-99fa17bb7a-30f92f6a1b",
+          "src-frame-asset-elewacja-frontowa-projektu-alaska-fe8773fc-e010262f95",
+          "src-frame-asset-elewacja-tylna-projektu-alaska-d514b2a0c2-5dbc2f769e"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 7.263978,
+      "id": "ring-mass-main-w0",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 0,
+        "z": 0
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-mass-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 13.249,
+        "z": 7.89
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-alaska-3bd1fc5e5c-39cb22e91e (MAIN), at the analyzer's own scale: 1.413978 cm/px, SUPPORTED / ADDED with ? independent witnesses; heights: 3 registered elevation(s) give eaves (the walls' corner tops) 4.02 / 3.87 / 3.82 m and top 7.57 / 7.26 / 7.25 m — the gable-end view(s) (LEFT, RIGHT) show the wall corner under the roof: 3.85 m is taken; a view along the ridge draws its walls ending behind the fascia, lower by no more than an overhang hides (two views draw that line)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-alaska-3bd1fc5e5c-39cb22e91e + frame-asset-elewacja-boczna-projektu-alaska-99fa17bb7a-30f92f6a1b + frame-asset-elewacja-frontowa-projektu-alaska-fe8773fc-e010262f95 + frame-asset-elewacja-tylna-projektu-alaska-d514b2a0c2-5dbc2f769e",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-alaska-3bd1fc5e5c-39cb22e91e",
+          "src-frame-asset-elewacja-boczna-projektu-alaska-99fa17bb7a-30f92f6a1b",
+          "src-frame-asset-elewacja-frontowa-projektu-alaska-fe8773fc-e010262f95",
+          "src-frame-asset-elewacja-tylna-projektu-alaska-d514b2a0c2-5dbc2f769e"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 7.263978,
+      "id": "ring-mass-main-w1",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 13.249,
+        "z": 0
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-mass-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0,
+        "z": 7.89
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-alaska-3bd1fc5e5c-39cb22e91e (MAIN), at the analyzer's own scale: 1.413978 cm/px, SUPPORTED / ADDED with ? independent witnesses; heights: 3 registered elevation(s) give eaves (the walls' corner tops) 4.02 / 3.87 / 3.82 m and top 7.57 / 7.26 / 7.25 m — the gable-end view(s) (LEFT, RIGHT) show the wall corner under the roof: 3.85 m is taken; a view along the ridge draws its walls ending behind the fascia, lower by no more than an overhang hides (two views draw that line)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-alaska-3bd1fc5e5c-39cb22e91e + frame-asset-elewacja-boczna-projektu-alaska-99fa17bb7a-30f92f6a1b + frame-asset-elewacja-frontowa-projektu-alaska-fe8773fc-e010262f95 + frame-asset-elewacja-tylna-projektu-alaska-d514b2a0c2-5dbc2f769e",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-alaska-3bd1fc5e5c-39cb22e91e",
+          "src-frame-asset-elewacja-boczna-projektu-alaska-99fa17bb7a-30f92f6a1b",
+          "src-frame-asset-elewacja-frontowa-projektu-alaska-fe8773fc-e010262f95",
+          "src-frame-asset-elewacja-tylna-projektu-alaska-d514b2a0c2-5dbc2f769e"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 7.263978,
+      "id": "ring-mass-main-w2",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 13.249,
+        "z": 7.89
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-mass-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0,
+        "z": 0
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-alaska-3bd1fc5e5c-39cb22e91e (MAIN), at the analyzer's own scale: 1.413978 cm/px, SUPPORTED / ADDED with ? independent witnesses; heights: 3 registered elevation(s) give eaves (the walls' corner tops) 4.02 / 3.87 / 3.82 m and top 7.57 / 7.26 / 7.25 m — the gable-end view(s) (LEFT, RIGHT) show the wall corner under the roof: 3.85 m is taken; a view along the ridge draws its walls ending behind the fascia, lower by no more than an overhang hides (two views draw that line)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-alaska-3bd1fc5e5c-39cb22e91e + frame-asset-elewacja-boczna-projektu-alaska-99fa17bb7a-30f92f6a1b + frame-asset-elewacja-frontowa-projektu-alaska-fe8773fc-e010262f95 + frame-asset-elewacja-tylna-projektu-alaska-d514b2a0c2-5dbc2f769e",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-alaska-3bd1fc5e5c-39cb22e91e",
+          "src-frame-asset-elewacja-boczna-projektu-alaska-99fa17bb7a-30f92f6a1b",
+          "src-frame-asset-elewacja-frontowa-projektu-alaska-fe8773fc-e010262f95",
+          "src-frame-asset-elewacja-tylna-projektu-alaska-d514b2a0c2-5dbc2f769e"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 7.263978,
+      "id": "ring-mass-main-w3",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 0,
+        "z": 7.89
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-mass-main"
+      }
+    }
+  ],
+  "windows": [
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-front-2d9d60-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-front-2d9d60"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-front-6f21a7-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-front-6f21a7"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-left-0c3a0c-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-left-0c3a0c"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-rear-1518d5-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-rear-1518d5"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-rear-24dbb8-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-rear-24dbb8"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-rear-386c64-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-rear-386c64"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-rear-8cea3e-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-rear-8cea3e"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-right-5b39c1-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-right-5b39c1"
+    }
+  ]
+}

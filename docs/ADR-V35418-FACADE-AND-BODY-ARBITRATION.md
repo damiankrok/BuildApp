@@ -66,3 +66,35 @@ sama zależała od błędnego modelu.
   bryłę ze źródeł, ton ściany bazowej, daszki/tarasy/pergole (brak operacji).
 - Wynik próby (cel zapisany z góry nieosiągnięty; liczby w raporcie §0 i §7) nie zmienia decyzji: wariant C usuwa
   nazwane straty, a pozostałe blokady leżą w reprezentacji (formy brył i dachów) i w drugim świadku dla drzwi.
+
+## R2 (2026-11-24): forma dachu i strony domu czytane z rysunku, nie z konwencji
+
+Kontynuacja po dostawie 1349. Decyzja C zostaje; dopisane są reguły ODCZYTU, które zasilają arbitraż bryły. Każda ma
+przyczynę fizyczną w rysunku, test z kontrpróbą (`packages/analysis-service/test/hip-v35418.test.ts`,
+`plan-outline-v35418.test.ts`) i została przeliczona offline na nagraniach wszystkich dziewięciu domów
+(`research/source-to-model/v35418/diag-massing.ts`, 0 USD) przed jakimkolwiek żądaniem.
+
+1. **Dach czterospadowy jest formą, nie odmową.** Model nadal zna tylko `GABLE | FLAT` jako dachy parametryczne; dach
+   czterospadowy to cztery `roofPlanes` (`createRoofPlane`) o stałych identyfikatorach `roof-<bryła>-{minZ,maxZ,minX,maxX}`.
+   Rozpoznanie: trapez na stronach WZDŁUŻ kalenicy (kalenica krótsza od okapu z obu końców), żadna z nich pasem.
+   Wysunięcie końców kalenicy czytane z tych widoków przez rejestrację, która położyła końce ścian na rzucie.
+   `SET_ROOF` przyjmuje `roofKind: HIP` (rejestr 1.6.0) i przechodzi przez tę samą bramkę źródła co każdy inny dach.
+2. **Każdy bok dachu czterospadowego jest okapem.** Żaden widok nie pokazuje naroża ściany pod dachem; każdy rysuje
+   okap na KOŃCU wysięgu. Kąt liczy się więc od najniższej narysowanej krawędzi przez wysięg i połowę rozpiętości do
+   kalenicy (liczony od lica ściany wychodził o udział wysięgu za stromo: 36° dla dachu rysowanego 30°).
+3. **Okap przy ścianie daje widok szczytu.** Widok szczytu pokazuje naroże ściany dochodzące do spodu dachu; widok
+   wzdłuż kalenicy rysuje ścianę kończącą się za okapem i podbitką — niżej, najwyżej o spadek wysięgu. Gdzie widok
+   szczytu rysuje naroża, one są okapem przy ścianie, o ile żaden widok wzdłuż kalenicy nie rysuje ściany WYŻEJ ani
+   niżej, niż wysięg może zasłonić (wtedy zostaje mediana wszystkich, niepotwierdzona — jak dotąd).
+4. **Szczyt narysowany samą wiatrownicą jest szczytem.** Liczony kolumnami pokrycia taki dach nie ma „szerokości" przy
+   okapie i wychodził pasem. Gdzie dach jest pusty u podstawy, jego szerokość w wierszu to szerokość obrysu.
+5. **Obrót o 90° dowodzą tylko widoki na OBU osiach bryły.** Front i tył skalują się tym samym wymiarem rzutu przy
+   obu przypisaniach; przy tolerancji w metrach obrót na krótszy bok zmniejsza każdą niezgodność poniżej progu.
+6. **KTÓRY obrót rozstrzyga rzut.** Wysokości są takie same dla obu ćwierćobrotów — różnią się tym, który KONIEC domu
+   rysuje elewacja frontowa. Odczyt rzutu (`plan-outline/2`) podaje punkt wejścia głównego na obrysie tylko tam, gdzie
+   rzut je oznacza; bok bierze się, gdy punkt leży przy jednym boku obrysu. Bez tego pierwszy obrót zostaje konwencją
+   (nazwaną). Wskazówka nigdy nie obraca elewacji, których wysokości zgadzają się jak opisano.
+
+Odrzucone w R2: wykorzystanie luk rzutu LOCAL do rozstrzygania stron (na Alasce LOCAL wypełnił całe ściany lukami —
+fantomy nie są świadkiem); próg „ściana niższa niż kondygnacja nie jest odczytem" (Jeziorko ma prawdziwe 1,9 m);
+poluzowanie tolerancji rejestracji okapu (Aurora: pusty szczyt nadal odłożony, 13 px przy tolerancji 8 px).

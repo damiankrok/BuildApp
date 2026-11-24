@@ -88,8 +88,8 @@ table{border-collapse:collapse;width:100%;margin:8px 0}td,th{border:1px solid #d
 img.thumb{max-width:230px;max-height:170px;border:1px solid #ccc;background:#fff}img.board{max-width:100%;border:1px solid #ccc}.none{color:#8a2be2;font-style:italic}.box{width:200px;height:60px;display:flex;align-items:center;justify-content:center;background:#eee;border:1px dashed #aaa}
 .tag{display:inline-block;padding:1px 7px;border-radius:10px;font-size:12px;font-weight:600;margin-right:4px}.LIVE{background:#d6f0d6}.REPLAY{background:#dde7f7}.KONTROLA{background:#ffe7b8}.HOST{background:#e8d6f5}
 .legend td{font-size:13px}small{color:#555}"""
-doc = [f'<!doctype html><html lang="pl"><head><meta charset="utf-8"><title>BuildPlan v3.54.18 — galeria próby</title><style>{css}</style></head><body>',
-       f'<header><h1>BuildPlan v3.54.18 — galeria próby (prywatna, offline)</h1><div>commit kodu końcowego: <code>{E(man.get("commit","?"))}</code> · wszystkie obrazy modeli to rzeczywiste rendery tego samego renderera (neutral-flat/1): te same kamery, paleta i światło</div></header><main>',
+doc = [f'<!doctype html><html lang="pl"><head><meta charset="utf-8"><title>{E(man.get("title","BuildPlan v3.54.18 — galeria próby"))}</title><style>{css}</style></head><body>',
+       f'<header><h1>{E(man.get("title","BuildPlan v3.54.18 — galeria próby"))} (prywatna, offline)</h1><div>commit kodu końcowego: <code>{E(man.get("commit","?"))}</code> · wszystkie obrazy modeli to rzeczywiste rendery tego samego renderera (neutral-flat/1): te same kamery, paleta i światło</div></header><main>',
        '<table class="legend"><tr><th>Znacznik</th><th>Znaczenie</th></tr>'
        '<tr><td><span class="tag LIVE">LIVE</span></td><td>świeże żądania do Claude API w tym biegu (zaksięgowane)</td></tr>'
        '<tr><td><span class="tag REPLAY">REPLAY</span></td><td>te same nagrane odpowiedzi API co w biegu wskazanym w opisie, kod inny — 0 USD; porównuje algorytm, nie odczyt</td></tr>'
