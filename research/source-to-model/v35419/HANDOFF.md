@@ -48,4 +48,34 @@ scripts; it is never an argument. Every billed request is booked in the ONE cont
 Publisher drawings, byte caches, recorded exchanges and every run directory live under `/home/user/rd/` on the session
 host and in the private delivery ZIPs. The repository holds text facts only.
 
-<!-- OPEN -->
+## Freezes and samples
+
+- Freeze 1 `4c2c73e` → NEW-E (Amarylis, Oban III, Juliusz Nowy): 0 → 0 whole results. Opened; developmental since.
+- Round R2 (ADR decisions 19–23), freeze 2 `af7db0e` → NEW-F (Ametyst New, Skagen, Fabia, Dom pod pomarańczą 2): 0 → 1.
+  Opened; developmental from now on. **A next stage needs a fresh held-out draw** (`trial/select.py`, a new
+  `TRIAL_LABEL`; the families opened so far are in `trial/seen-families.txt`).
+
+## Open, in the order I would take them
+
+1. **The form read as the body builder's input.** `form-read.ts` reads roof kind, ridge direction, storeys and lower
+   parts right where the silhouettes do not (report §3.2); today it only arbitrates between two finished bodies and is
+   asked only when LOCAL has flat-roofed volumes. Fabia (hip built as a gable), Skagen (two storeys built as one),
+   Eliza are this.
+2. **Openings on multi-body source models.** Amarylis: 6 of 7 plan gaps uncovered and no `facade-metric` read asked
+   (`PLAN_GAP_OPENINGS.reads` empty). Cause not established — start at how the gap reads pick an elevation when the
+   model has several bodies.
+3. **The plan as a witness for windows** (today doors only): Juliusz Nowy, 24 proposals refused at z between 1 and 2.
+4. **Chimneys rolled back as `COPLANAR_DUPLICATE` with a wall ring** (Ametyst New, Fabia): the chimney stands in the
+   wall's plane.
+5. **Skeleton refusal at the wall-colour share** (Skagen: 24 % against 25 %, the traced outline spans house and garage).
+   Not moved after the held-out result; look at the band's construction, not at the number.
+6. **Recesses, porches, bays, dormers** are not bodies or cuts (Novara's entrance recess is the one feature that cost a
+   "useful" verdict).
+7. **A shared wall of two bodies** is drawn as an exterior wall through open space (Eliza, Medulin, Mindelo, Amarylis).
+
+## Not verified
+
+- The phone: APK 1352 is built, signed and scanned; no device or emulator ran it (`ANDROID_UI_NOT_VERIFIED`).
+- The graders are model instances without the draw key, not people; their judgement calls are listed in the report
+  (§6.3, §6.4). Product acceptance is the OWNER's.
+

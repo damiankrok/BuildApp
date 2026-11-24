@@ -12,6 +12,28 @@
 
 ## Current summary (read first)
 
+- **v3.54.19 (2026-11-24): the interior from the plan sheet, openings witnessed by the plan, wider bodies — APK 1352.**
+  Report `stage-reports/SOURCE_TO_MODEL_V35419.md`, owner note `stage-reports/README_V35419.md`, ADR
+  `docs/ADR-V35419-PLAN-SKELETON.md`, protocol / references / hand-off under `research/source-to-model/v35419/`.
+  Baseline = APK 1351 code (`58ff26a`) on the same source bytes. The interior no longer belongs to the body builder: the
+  plan skeleton (wall colour, partitions, interior doors, exterior gaps; 0 USD) is built into whichever body stands;
+  plan gaps witness doors and are completed from a typed JSON list of an elevation's openings; `GLAZED_WALL` has a
+  consumer; stable ids; bodies for any orthogonal outline (exact partition, ≤ 4), in-line split on the plan's wall,
+  page height as the witness of the quarter turn; typed form read (`form-read/1`) as a witness of the body arbitration.
+  **Pre-registered goal (+2 whole results on a held-out sample) NOT met, twice:** NEW-E on freeze 1 (`4c2c73e`) 0 → 0
+  of 3; after round R2 (five general rules found on NEW-E), NEW-F on freeze 2 (`af7db0e`) 0 → 1 of 4, and that one is
+  the same body in both codes (a review-drawn entrance). Blind grading of 20 houses (exterior and interior apart):
+  exterior useful 6 → 9, interior matching the plan 6 → 18, whole result 2 → 9 (DEV 1 → 6); final closer to the source
+  in 15, baseline in 2, tie in 3. What transfers: the interior (NEW-F 1 → 3). What does not: roof kind and storeys
+  built from silhouettes (Fabia hip → gable, Skagen two storeys → one, Eliza), LOCAL bodies with flat annexes (Medulin,
+  Mindelo), low-contrast windows (Juliusz), openings on multi-body models (Amarylis 17 → 5). Losses kept: Novara no
+  longer "useful" (entrance recess), chimneys of Ametyst and Fabia, Medulin and Jeziorko closer in 1351. Owner's JSON
+  question measured: openings 38/42 (sketch) vs 40/42 (JSON list); form (roof kind, ridge direction) 13/13 by JSON vs
+  9/13 by silhouettes — the form read should become the body builder's INPUT (top recommendation). Host on `01fd2fb`:
+  53 checks passed (Alberto, Oban III, reuse 0 USD, no token → 0 requests). Stage cost 11.900462 USD (books 49.679019
+  of 68.542857, no open reservation). Matrix 4651: 18 failures in the same 9 files and counts as the v3.54.18 list
+  (16 inherited + 2 worker timing that pass alone). APK 1352 from `3095729` (same signer; 22 new scenes first;
+  ANDROID_UI_NOT_VERIFIED — no device in the session).
 - **v3.54.18 (2026-11-23): facade and body arbitration — APK 1349** (Master Plan v3.54.18). Report
   `stage-reports/SOURCE_TO_MODEL_V35418.md`, owner note `stage-reports/README_V35418.md`, ADR
   `docs/ADR-V35418-FACADE-AND-BODY-ARBITRATION.md`, protocol / references / scores / hand-off under

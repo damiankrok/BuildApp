@@ -7,7 +7,22 @@ Protokół zapisany przed biegami: `research/source-to-model/v35419/PROTOCOL.md`
 Renderów z komputera nie nazywam zrzutami z telefonu. W tej sesji nie było telefonu ani emulatora: APK jest zbudowany
 i podpisany, **na urządzeniu niesprawdzony** (`ANDROID_UI_NOT_VERIFIED`).
 
-<!-- VERDICT -->
+## Werdykt w pięciu zdaniach
+
+1. **Cel zapisany przed biegami nie został osiągnięty.** Na pierwszej próbie odłożonej (NEW-E, kod zamrożony `4c2c73e`)
+   liczba całych wyników to **0 → 0**; na drugiej (NEW-F, kod zamrożony `af7db0e`, po rundzie poprawek R2) **0 → 1**
+   przy wymaganych +2 — a ten jeden zysk jest kruchy (§6.6).
+2. **Na nowe projekty przenosi się wnętrze z rzutu.** Ocena ślepa na NEW-F: wnętrze zgodne z rzutem 1 → 3 z 4 domów
+   (Ametyst New 15/18 ścian rzutu, Fabia 18/19, bez ścian zmyślonych ponad próg); na wszystkich 20 domach 6 → 18.
+3. **Bryła i dach nadal się nie przenoszą.** Dom piętrowy z garażem powstaje jako parterowy ze stromym dachem (Skagen),
+   dach czterospadowy jako dwuspadowy (Fabia), a drzwi wejściowe w ścianie szczytowej giną (Ametyst New); zewnętrze
+   użyteczne na NEW-F to 0 → 1.
+4. **Na wszystkich 20 domach** (9 znanych, 11 nowych): cały wynik 2 → 9, zewnętrze użyteczne 6 → 9; oceniający, nie
+   wiedząc który wariant jest który, uznał końcowy za bliższy źródłu w 15 domach, baseline w 2, remis w 3.
+5. **Są straty** (§8): Novara przestała być „użyteczna" (brak wnęki wejściowej, choć jako całość oceniona bliżej źródła),
+   Amarylis ma 5 otworów zewnętrznych zamiast 17, Ametyst New i Fabia straciły komin, Medulin i Domek nad jeziorkiem
+   oceniono bliżej źródła w wariancie 1351.
+
 
 ## 1. Cel i punkt wyjścia
 
@@ -197,12 +212,15 @@ jako **założenie wstępne solvera** (czterospad kontra dwuspad, dwie kondygnac
 - **NEW-D** (4 nowe domy, losowane z pul czterech wydawców: Aletta New, Novara, Jarzębina, Willa Eliza 5 G2) —
   najpierw sam baseline i zapis pierwszych wyników (`FIRST_LOOK_NEW-D.md`: **0 z 4** całych wyników), dopiero potem
   stały się rozwojowe.
-- **NEW-E** (3 odłożone domy: Amarylis, Oban III, Juliusz Nowy) — nieotwierane do zamrożenia kodu, po jednym biegu na
-  baseline i na kodzie zamrożonym, niczego potem nie strojono. Pula ARCHON nie dała drugiego domu (§6 protokołu).
+- **NEW-E** (3 odłożone domy: Amarylis, Oban III, Juliusz Nowy) — nieotwierane do zamrożenia 1 (`4c2c73e`), po jednym
+  biegu na baseline i na kodzie zamrożonym. Wynik 0 → 0 (§6.2). Po otwarciu zbiór rozwojowy; na nim powstała runda R2.
+- **NEW-F** (4 domy losowane po R2 tą samą regułą, nową etykietą ziarna: Ametyst New, Skagen, Fabia, Dom pod pomarańczą
+  2) — reguła zapisana przed losowaniem (§8 protokołu), zamrożenie 2 (`af7db0e`) zapisane przed pierwszym biegiem,
+  po jednym biegu na baseline i na kodzie zamrożonym, niczego potem nie strojono.
 - **Cały wynik domu** = zewnętrze użyteczne (reguła „użytecznej miniatury" z v3.54.18, bez zmian) **oraz** wnętrze
   zgodne z rzutem (nakładka: ≥ 70 % ścian rysowanych przez rzut obecnych, ≤ 20 % ścian modelu zmyślonych, obrys zgodny
   lub jawnie uproszczony). Brak modelu albo puste wnętrze to porażka, nie „nieoceniane".
-- **Kryterium z góry:** na NEW-E liczba całych wyników rośnie o ≥ 2 wobec baseline i żaden dom nie traci cechy formy ani
+- **Kryterium z góry:** na próbie odłożonej liczba całych wyników rośnie o ≥ 2 wobec baseline i żaden dom nie traci cechy formy ani
   dobrego wnętrza. Limit kosztu etapu 14 USD.
 - Zamrożenie i dwa odstępstwa kolejności (bez otwierania wyników): §7 protokołu.
 
@@ -214,10 +232,297 @@ arkusze, bryły i obrazy — nie domy z benchmarku):
 | Plik | Testów | Co sprawdza (z kontrpróbą) |
 |---|---|---|
 | `plan-skeleton-v35419.test.ts` | 28 | kolor ścian arkusza (kontra: ściany samym konturem → nazwana odmowa); dosuw do pasm; przerwy zewnętrzne; ściana z drzwiami; `BUILD_INTERIOR` w jednej transakcji (kontra: istniejące wnętrze zostaje, recenzent nie może zamówić operacji); bryła obrócona; `ADD_PLAN_OPENING` (kontra: brak przerwy → brak otworu; otwór na przerwie rzutu nie ustępuje); docinanie ścian; meble (kontra: spiżarnia zostaje, ściana o korytarz dalej zostaje, kikut przy drzwiach zostaje); zewnętrzna linia ścian (kontra: krótka kreska to nie linia ściany) |
-| `openings-v35419.test.ts` | 7 | drzwi na przerwie rzutu mimo braku kontrastu (kontra: okno nadal wymaga obrazu, drzwi obok przerwy i przerwa innej kondygnacji nie świadczą); nadproże docięte do ściany (kontra: > 25 % ponad ścianę → odmowa); koniec ściany (kontra: połowa otworu poza ścianą → odmowa); konsument `GLAZED_WALL` (kontra: nieznany rodzaj nadal nazwany jako pominięty) |
-| `wings-v35419.test.ts` | 9 | T i U jako korpusy (kontra: wykusz nie jest korpusem, obrys ukośny nieczytany); najwyżej 4 korpusy; „iglica" (kontra: stromy, ale możliwy dach 50° zostaje); podział na ścianie z rzutu (kontra: ściana za daleko lub za krótka nic nie przesuwa); wymiary z planu sytuacyjnego (kontra: para niezgodna nie jest skalą) |
+| `openings-v35419.test.ts` | 9 | drzwi na przerwie rzutu mimo braku kontrastu (kontra: okno nadal wymaga obrazu, drzwi obok przerwy i przerwa innej kondygnacji nie świadczą); nadproże docięte do ściany (kontra: > 25 % ponad ścianę → odmowa); koniec ściany (kontra: połowa otworu poza ścianą → odmowa); konsument `GLAZED_WALL` (kontra: nieznany rodzaj nadal nazwany jako pominięty) |
+| `wings-v35419.test.ts` | 18 | T i U jako korpusy (kontra: wykusz nie jest korpusem, obrys ukośny nieczytany); najwyżej 4 korpusy; „iglica" (kontra: stromy, ale możliwy dach 50° zostaje); podział na ścianie z rzutu (kontra: ściana za daleko lub za krótka nic nie przesuwa); wymiary z planu sytuacyjnego (kontra: para niezgodna nie jest skalą) |
 | `form-read-v35419.test.ts` | 4 | werdykt formy (kontra: zgłoszony garaż z płaskim dachem nie jest sprzecznością; bryła bez dachu nie jest potwierdzona); odpowiedź sprzeczna wewnętrznie lub nietypowana → odmowa po nazwie |
 | `review-applied-v35419.test.ts` | 2 | ponowne pytanie o werdykty (kontra: tylko raz; nie pyta, gdy werdykty są albo nic nie nałożono) |
 | `hip-v35418.test.ts` (dopisane) | 3 | wysokość ze strony rozstrzyga ćwierć obrotu (kontra: wysokość niepasująca do żadnego odczytu nie rozstrzyga niczego) |
 
-<!-- REST -->
+## 6. Wyniki
+
+Wszystkie „przed" to kod APK 1351 uruchomiony na tych samych bajtach źródeł. Kod końcowy = zamrożenie 2 (`af7db0e`).
+DEV i NEW-D: odczyty elewacji, odczyty przerw rzutu i recenzja odtworzone z nagrań biegu końcowego zamrożenia 1 (0 USD).
+NEW-E: nagrania biegu zamrożenia 1 + odczyty przerw rzutu i recenzja na żywo. NEW-F: oba warianty na żywo, po jednym biegu.
+
+### 6.1 Co powstało (liczone z modeli)
+
+| Dom | Zbiór | Kod 1351 (baseline) | Kod końcowy | Przerwy rzutu pokryte otworem (1351 → końcowy) |
+|---|---|---|---|---|
+| Alaska (Studio Atrium) | DEV | ze źródeł; dach: dwusp. 38.2°; ściany wewn. 0 (drzwi 0); otwory zewn. 11; okna poł. 8; kominy 2 | ze źródeł; dach: dwusp. 38.2°; ściany wewn. 11 (drzwi 6); otwory zewn. 11; okna poł. 8; kominy 2 | 8/8 (+1 na pełnej ścianie) → 8/8 (+1 na pełnej ścianie) |
+| Aurora maxi II bis sz (Studio Atrium) | DEV | ze źródeł; dach: dwusp. 35°; ściany wewn. 0 (drzwi 0); otwory zewn. 9; okna poł. 1; kominy 3 | ze źródeł; dach: dwusp. 35°; ściany wewn. 15 (drzwi 7); otwory zewn. 10; okna poł. 1; kominy 3 | 7/9 (+2 na pełnej ścianie) → 8/9 (+2 na pełnej ścianie) |
+| Ballina (Lipińscy) | DEV | ze źródeł; dach: dwusp. 30.2°; ściany wewn. 0 (drzwi 0); otwory zewn. 10; okna poł. 0; kominy 0 | ze źródeł; dach: dwusp. 30.8°; ściany wewn. 10 (drzwi 7); otwory zewn. 10; okna poł. 0; kominy 0 | 11/11 → 11/11 |
+| Alberto (Studio Atrium) | DEV | ze źródeł; dach: dwusp. 25.1°; ściany wewn. 0 (drzwi 0); otwory zewn. 7; okna poł. 0; kominy 2 | ze źródeł; dach: dwusp. 25.2°; ściany wewn. 16 (drzwi 8); otwory zewn. 9; okna poł. 0; kominy 2 | 6/9 (+1 na pełnej ścianie) → 9/9 |
+| Medulin (Lipińscy) | DEV | LOCAL; dach: płaski, płaski, płaski, dwusp. 45°; ściany wewn. 25 (drzwi 9); otwory zewn. 24; okna poł. 0; kominy 1 | LOCAL; dach: płaski, płaski, płaski, dwusp. 45°; ściany wewn. 25 (drzwi 9); otwory zewn. 24; okna poł. 0; kominy 2 | — → — |
+| Domek letniskowy nad jeziorkiem (ARCHON) | DEV | LOCAL; dach: dwusp. 30°; ściany wewn. 5 (drzwi 2); otwory zewn. 7; okna poł. 0; kominy 1 | LOCAL; dach: dwusp. 30°; ściany wewn. 5 (drzwi 2); otwory zewn. 7; okna poł. 0; kominy 1 | — → — |
+| Mindelo (Lipińscy) | DEV | LOCAL; dach: płaski, płaski, płaski, płaski, dwusp. 30°; ściany wewn. 15 (drzwi 11); otwory zewn. 18; okna poł. 0; kominy 2 | LOCAL; dach: płaski, płaski, płaski, płaski, dwusp. 30°; ściany wewn. 15 (drzwi 11); otwory zewn. 19; okna poł. 0; kominy 2 | — → — |
+| Dom pod sakurą E (ARCHON) | DEV | ze źródeł; dach: 4 połaci; ściany wewn. 0 (drzwi 0); otwory zewn. 8; okna poł. 0; kominy 3 | ze źródeł; dach: 4 połaci; ściany wewn. 20 (drzwi 11); otwory zewn. 11; okna poł. 0; kominy 3 | — → 7/8 (+4 na pełnej ścianie) |
+| G6 (garaż ze strychem — nie dom mieszkalny) (Dobre Domy) | DEV | ze źródeł; dach: 4 połaci; ściany wewn. 0 (drzwi 0); otwory zewn. 3; okna poł. 0; kominy 0 | ze źródeł; dach: 4 połaci; ściany wewn. 0 (drzwi 0); otwory zewn. 5; okna poł. 0; kominy 0 | — → 4/4 (+1 na pełnej ścianie) |
+| Aletta New (Studio Atrium) | NEW-D | ze źródeł; dach: dwusp. 43.7°, dwusp. 35°; ściany wewn. 0 (drzwi 0); otwory zewn. 10; okna poł. 8; kominy 2 | ze źródeł; dach: dwusp. 42.7°, dwusp. 35°; ściany wewn. 10 (drzwi 3); otwory zewn. 15; okna poł. 8; kominy 2 | 8/11 (+1 na pełnej ścianie) → 9/11 (+3 na pełnej ścianie) |
+| Novara (Lipińscy) | NEW-D | LOCAL; dach: płaski, płaski, dwusp. 30°; ściany wewn. 13 (drzwi 7); otwory zewn. 21; okna poł. 0; kominy 0 | ze źródeł; dach: dwusp. 30°; ściany wewn. 10 (drzwi 8); otwory zewn. 13; okna poł. 0; kominy 0 | — → 11/11 (+2 na pełnej ścianie) |
+| Jarzębina (Dobre Domy) | NEW-D | LOCAL; dach: BRAK; ściany wewn. 1 (drzwi 0); otwory zewn. 29; okna poł. 0; kominy 0 | ze źródeł; dach: dwusp. 46.3°; ściany wewn. 15 (drzwi 4); otwory zewn. 12; okna poł. 3; kominy 2 | — → 9/12 (+1 na pełnej ścianie) |
+| Willa Eliza 5 G2 (ARCHON) | NEW-D | **BRAK MODELU** | ze źródeł; dach: dwusp. 28.3°, dwusp. 41.7°, dwusp. 28.3°; ściany wewn. 10 (drzwi 4); otwory zewn. 10; okna poł. 0; kominy 4 | — → 5/7 (+2 na pełnej ścianie) |
+| Amarylis (Studio Atrium) | NEW-E | LOCAL; dach: płaski; ściany wewn. 8 (drzwi 4); otwory zewn. 17; okna poł. 0; kominy 0 | ze źródeł; dach: dwusp. 33.9°, dwusp. 42°, dwusp. 25°; ściany wewn. 12 (drzwi 8); otwory zewn. 5; okna poł. 1; kominy 0 | — → 1/7 (+2 na pełnej ścianie) |
+| Oban III (Lipińscy) | NEW-E | **BRAK MODELU** | ze źródeł; dach: dwusp. 31.5°; ściany wewn. 8 (drzwi 3); otwory zewn. 8; okna poł. 0; kominy 1 | — → 8/8 (+1 na pełnej ścianie) |
+| Juliusz Nowy (Dobre Domy) | NEW-E | **BRAK MODELU** | ze źródeł; dach: dwusp. 37.4°; ściany wewn. 11 (drzwi 7); otwory zewn. 4; okna poł. 0; kominy 2 | — → 3/9 |
+| Ametyst New (Studio Atrium) | NEW-F | ze źródeł; dach: dwusp. 33.2°; ściany wewn. 0 (drzwi 0); otwory zewn. 8; okna poł. 1; kominy 1 | ze źródeł; dach: dwusp. 32.4°; ściany wewn. 12 (drzwi 6); otwory zewn. 9; okna poł. 1; kominy 0 | — → 9/9 |
+| Skagen (Lipińscy) | NEW-F | ze źródeł; dach: dwusp. 48.2°; ściany wewn. 0 (drzwi 0); otwory zewn. 8; okna poł. 1; kominy 0 | ze źródeł; dach: dwusp. 48.2°; ściany wewn. 0 (drzwi 0); otwory zewn. 9; okna poł. 2; kominy 0 | — → 0/0 (+8 na pełnej ścianie) |
+| Fabia (Dobre Domy) | NEW-F | ze źródeł; dach: dwusp. 27.5°; ściany wewn. 0 (drzwi 0); otwory zewn. 2; okna poł. 0; kominy 1 | ze źródeł; dach: dwusp. 28.8°; ściany wewn. 18 (drzwi 9); otwory zewn. 4; okna poł. 0; kominy 0 | 0/11 (+2 na pełnej ścianie) → 2/11 (+2 na pełnej ścianie) |
+| Dom pod pomarańczą 2 (ARCHON) | NEW-F | LOCAL; dach: dwusp. 30°; ściany wewn. 16 (drzwi 10); otwory zewn. 11; okna poł. 1; kominy 3 | LOCAL; dach: dwusp. 30°; ściany wewn. 16 (drzwi 10); otwory zewn. 11; okna poł. 1; kominy 3 | — → — |
+
+| Zbiór | Domów | Model (1351 → końcowy) | Model ze ścianami wewnętrznymi (1351 → końcowy) |
+|---|---|---|---|
+| DEV | 9 | 9 → 9 | 3 → 8 |
+| NEW-D | 4 | 3 → 4 | 2 → 4 |
+| NEW-E | 3 | 1 → 3 | 1 → 3 |
+| NEW-F | 4 | 4 → 4 | 1 → 3 |
+
+### 6.2 Pierwszy pomiar odłożony — NEW-E na zamrożeniu 1: 0 → 0
+
+Trzy domy losowane razem z NEW-D i nieotwierane do zamrożenia `4c2c73e`. Wynik: **Amarylis** — w obu wariantach bryła
+LOCAL z płaskim dachem (bryła ze źródeł odrzucona jako sprzeczna z wymiarami drukowanymi); **Oban III** i **Juliusz
+Nowy** — w obu wariantach **brak modelu**. Żaden cały wynik, przed ani po. Wszystko, co poprawiono w etapie do tego
+momentu, nie pomogło żadnemu z trzech nowych domów. Przyczyny i reguły po nich: §2.5. Ten wynik jest w galerii jako
+osobny wariant „zamrożenie 1" obok baseline i kodu końcowego.
+
+Po otwarciu NEW-E jest zbiorem rozwojowym: jego wynik na zamrożeniu 2 (Oban III: cały wynik; Juliusz Nowy: wnętrze
+tak, zewnętrze nie; Amarylis: bliżej źródła, nadal nie) pokazuje, że przyczyny zostały usunięte, **nie** że kod się
+przenosi. Do tego służy NEW-F (§6.6).
+
+### 6.3 Zewnętrze — ocena ślepa
+
+Oceniający: osobna instancja modelu bez dostępu do klucza losowania, z jedną planszą na dom (elewacje wydawcy u góry,
+warianty X i Y niżej, przydział losowy osobno dla każdego domu) i cechami spisanymi ze źródeł przed obejrzeniem modeli.
+Reguła „użytecznej miniatury" bez zmian od v3.54.18. To nie jest ocena człowieka i nie jest akceptacją produktu.
+
+| Dom | Zbiór | Użyteczna: 1351 | Użyteczna: końcowy | Bliżej źródła | Uwaga oceniającego |
+|---|---|---|---|---|---|
+| Alaska | DEV | TAK | TAK | REMIS | Oba warianty praktycznie identyczne i zgodne z bryłą oraz otworami źródła; brakuje daszku nad wejściem, a szczyty są szare zamiast ciemnego drewna w białej ramie. |
+| Aurora maxi II bis sz | DEV | TAK | TAK | końcowy | Y nie ma dużego przeszklenia tarasowego z lewej strony tyłu (zostają tylko drzwi i dwa okna); X je ma. W obu brak drewnianych pasów między oknami, a na szczycie jest dodatkowy niski brązowy element. |
+| Ballina | DEV | TAK | TAK | REMIS | Warianty nierozróżnialne; układ otworów wszystkich czterech stron zgodny ze źródłem, brakuje jedynie strefy cegły na prawej połowie frontu (cegła jest tylko na szczycie i w panelu tyłu). |
+| Alberto | DEV | NIE | TAK | końcowy | X nie ma drzwi wejściowych na froncie, Y ma je w prawej połowie i dwa osobne okna z lewej; w obu brak podcienia ze słupami i kamiennych ścian. |
+| Medulin | DEV | NIE | NIE | 1351 | Oba warianty mają tę samą błędną bryłę (wąski szczyt plus płaskie bryły boczne zamiast jednego stromego dachu 45° na całej szerokości) i tę samą bramę z prawej. X ma dodatkowo dwa cienkie brązowe słupy sterczące ponad dach przy froncie, których źródło nie ma;  |
+| Domek letniskowy nad jeziorkiem | DEV | TAK | TAK | 1351 | Warianty różnią się jednym elementem: X ma na tyle, na lewo od okna, ciemny panel w miejscu szarego panelu betonowego ze źródła (narysowany prawie czarno, więc może być czytany jak brama), Y go nie ma. Reszta — taras pod wspólnym dachem, drzwi, okna, przeszkle |
+| Mindelo | DEV | NIE | NIE | REMIS | Warianty różnią się tylko jednym małym oknem na boku (podwójne w X, pojedyncze w Y). W obu brak poprzecznych szczytów nad garażem i tarasem, a w ich miejscu są duże czarne płaszczyzny; boki mają małe okna zamiast wysokich przeszkleń w drewnie. |
+| Dom pod sakurą E | DEV | TAK | TAK | końcowy | Oba mają poprawny dach kopertowy i drzwi pośrodku. Y zamiast okna z prawej strony frontu ma brązowy element wyglądający jak drugie drzwi i nie ma dużego przeszklenia z prawej strony tyłu; X ma oba. Y ma za to drzwi na boku „prawie pełnym”, których X nie ma. Ko |
+| G6 (garaż ze strychem — nie dom mieszkalny) | DEV | NIE | NIE | końcowy | Oba mają poprawny dach kopertowy i szeroką bramę z lewej, ale żaden nie ma drzwi wejściowych ani słupów podcienia; Y ma podwójne okno na obu bokach (X tylko na jednym) i ceglany ryzalit wokół okna. |
+| Aletta New | NEW-D | NIE | TAK | końcowy | Y gubi bramę garażową i wszystkie otwory oraz drewno szczytu tarasowego (ściana ślepa); X ma komplet: bramę, drzwi, przeszklenie tarasu i dwa wysokie okna w drewnianym szczycie. |
+| Novara | NEW-D | TAK | NIE | końcowy | X ma bardzo wierny front (wnęka wejściowa, panel drewna między przeszkleniami), ale na tyle dwa niskie pasy okien zamiast wysokich przeszkleń i ślepy lewy szczyt; Y nie ma wnęki ani drewna na froncie, za to wszystkie przeszklenia tyłu i obu szczytów są wysokie |
+| Jarzębina | NEW-D | NIE | NIE | końcowy | X to poprawny dom z dachem dwuspadowym, bramą po prawej, drzwiami pośrodku i przeszkleniem tarasu od tyłu, ale bez frontowej lukarny z balkonem i z jednym ślepym szczytem; Y to pudło bez dachu z pasami szkła. |
+| Willa Eliza 5 G2 | NEW-D | NIE | NIE | końcowy | Y nie ma modelu. X to zlepek brył pod dachami dwuspadowymi: front pokazuje tylko jedno okno, a duży brązowy otwór i przeszklenia (prawdopodobnie brama/wejście) są na stronie opisanej jako tył. |
+| Amarylis | NEW-E | NIE | NIE | końcowy | X ma rozpoznawalny front (skrzydło garażu z bramą, duży szczyt z dwojgiem drzwi balkonowych, wejście z grafitową płytą), ale tył i boki są ślepe, a ściany tylne mają wysokość dwóch kondygnacji; Y to parterowe pudło bez dachu z pasami szkła. |
+| Oban III | NEW-E | NIE | TAK | końcowy | Y nie ma modelu. X zgadza się ze źródłem na wszystkich stronach: drzwi pośrodku z oknami po bokach, trzy przeszklenia do podłogi od tyłu, jedno okno w lewym szczycie, komin, cokół; nie widać jedynie płytkiej wnęki wejścia. |
+| Juliusz Nowy | NEW-E | NIE | NIE | końcowy | X nie ma modelu. Y to prosty dom ze szczytem od frontu, jednym oknem na parterze i jednym w szczycie, dwoma kominami; nie ma wejścia, bramy, balkonów ani poprzecznych szczytów. |
+| Ametyst New | NEW-F | NIE | NIE | końcowy | W obu wariantach front nie ma drzwi wejściowych; X ma duże przeszklenie tarasowe na boku ogrodowym, którego Y nie ma, za to Y ma jeden komin (z trzech) i drewno w jednym szczycie. |
+| Skagen | NEW-F | NIE | NIE | końcowy | W obu brak piętra i osobnego skrzydła garażu (parter frontu — przeszklenie, drzwi, wąskie okno, brama — jest poprawny). X ma od tyłu szerokie przeszklenie tarasowe i parę okien połaciowych od frontu; Y ma od tyłu tylko wąskie przeszklenie z drzwiami i jedno sz |
+| Fabia | NEW-F | NIE | NIE | końcowy | Oba warianty mają dach dwuspadowy zamiast kopertowego. Y ma poprawny front (okno z lewej, drzwi pośrodku, okno z prawej), ale pozostałe strony ślepe; X nie ma drzwi i ma tylko pojedyncze, niepasujące otwory. |
+| Dom pod pomarańczą 2 | NEW-F | NIE | TAK | końcowy | Jedyna istotna różnica to strefa wejścia na szczycie frontowym: X ma tam okno z brązowym podokiennikiem (bez drzwi), Y pełną drewnianą płaszczyznę do ziemi odpowiadającą okładzinie z drzwiami. Przeszklenie tarasu od tyłu jest w obu oknem w brązowej ramie, nie  |
+| Dom | Zbiór | 1351: ściany rzutu obecne / rysowane; zmyślone / ścian modelu; obrys | Końcowy: to samo | Wnętrze zgodne (1351 → końcowy) |
+|---|---|---|---|---|
+
+Zastrzeżenia oceniającego, które zmieniają werdykt (podaję wszystkie, także te na niekorzyść kodu końcowego):
+
+- **Novara (końcowy: NIE):** zawodzi wyłącznie cecha F4 — brak wnęki wejściowej; warunki 2–5 spełnione, wariant oceniony
+  jako bliższy źródłu dzięki otworom. Baseline (bryła LOCAL z trzech pudełek) wnękę ma.
+- **Dom pod pomarańczą 2 (końcowy: TAK):** drzwi są w kolorze okładziny, wejście czyta się jako jedna brązowa
+  płaszczyzna z progiem; przy surowszym odczycie wariant końcowy też nie jest użyteczny.
+- **Cechy F4 oparte na okapie (Alberto, Aletta New, Sakura, G6):** ocenione OK, gdy okap jest, choć podcień, wnęki albo
+  naczółek z tej samej cechy nie są odwzorowane (wyjątek „okap nie blokuje"). Surowszy odczyt odebrałby „użyteczność"
+  Alberto i Aletcie New w wariancie końcowym oraz Sakurze w obu.
+- **Jarzębina (końcowy: NIE):** zawodzi tylko F2 — brak wystawki ze szczytem i balkonem nad wejściem.
+
+### 6.4 Wnętrze na rzucie — ocena ślepa
+
+Drugi niezależny oceniający, ta sama zasada losowania; jedna plansza na dom: rzut wydawcy dwa razy, z nałożonymi
+ścianami parteru modelu. Liczone: ściany rysowane przez rzut, ile z nich model ma we właściwym miejscu, ile ścian modelu
+jest zmyślonych, zgodność obrysu. `Wnętrze zgodne` = obrys TAK/UPROSZCZONY, obecne/rysowane ≥ 0,7, zmyślone/ścian ≤ 0,2.
+
+| Dom | Zbiór | 1351: ściany rzutu obecne / rysowane; zmyślone / ścian modelu; obrys | Końcowy: to samo | Wnętrze zgodne (1351 → końcowy) |
+|---|---|---|---|---|
+| Alaska | DEV | 0/12; 0/0; TAK | 12/12; 0/12; TAK | NIE → TAK |
+| Aurora maxi II bis sz | DEV | 0/17; 0/0; TAK | 17/17; 0/17; TAK | NIE → TAK |
+| Ballina | DEV | 0/14; 0/0; TAK | 13/14; 0/13; TAK | NIE → TAK |
+| Alberto | DEV | 0/17; 0/0; TAK | 16/17; 2/18; TAK | NIE → TAK |
+| Medulin | DEV | 10/13; 0/11; TAK | 10/13; 0/11; TAK | TAK → TAK |
+| Domek letniskowy nad jeziorkiem | DEV | 4/5; 0/5; TAK | 4/5; 0/5; TAK | TAK → TAK |
+| Mindelo | DEV | 20/24; 0/20; UPROSZCZONY | 20/24; 0/20; UPROSZCZONY | TAK → TAK |
+| Dom pod sakurą E | DEV | 0/21; 0/0; UPROSZCZONY | 20/21; 0/20; UPROSZCZONY | NIE → TAK |
+| G6 (garaż ze strychem — nie dom mieszkalny) | DEV | 0/0; 0/0; UPROSZCZONY | 0/0; 0/0; UPROSZCZONY | TAK → TAK |
+| Aletta New | NEW-D | 0/10; 0/0; UPROSZCZONY | 8/10; 1/10; UPROSZCZONY | NIE → TAK |
+| Novara | NEW-D | 14/18; 2/16; UPROSZCZONY | 16/18; 0/16; UPROSZCZONY | TAK → TAK |
+| Jarzębina | NEW-D | 0/12; 0/1; UPROSZCZONY | 11/12; 0/12; UPROSZCZONY | NIE → TAK |
+| Willa Eliza 5 G2 | NEW-D | 0/12; 0/0; NIE | 11/12; 0/11; UPROSZCZONY | NIE → TAK |
+| Amarylis | NEW-E | 5/12; 2/10; UPROSZCZONY | 10/12; 3/13; UPROSZCZONY | NIE → NIE |
+| Oban III | NEW-E | 0/9; 0/0; NIE | 9/9; 0/9; UPROSZCZONY | NIE → TAK |
+| Juliusz Nowy | NEW-E | 0/12; 0/0; NIE | 12/12; 1/13; UPROSZCZONY | NIE → TAK |
+| Ametyst New | NEW-F | 0/18; 0/0; TAK | 15/18; 0/15; TAK | NIE → TAK |
+| Skagen | NEW-F | 0/7; 0/0; UPROSZCZONY | 0/7; 0/0; UPROSZCZONY | NIE → NIE |
+| Fabia | NEW-F | 0/19; 0/0; UPROSZCZONY | 18/19; 1/20; UPROSZCZONY | NIE → TAK |
+| Dom pod pomarańczą 2 | NEW-F | 19/19; 0/19; TAK | 19/19; 0/19; TAK | TAK → TAK |
+
+Zastrzeżenia oceniającego: **Amarylis (końcowy: NIE)** to jedyny wynik zależny od jednostki liczenia — 10/12 ścian rzutu
+jest, ale trzy ściany modelu stoją na masce samochodu, obok samochodu i na szafce RTV (3/13 = 0,23 przy progu 0,2).
+W Medulinie i Mindelo rzut rysuje ścianki działowe białymi paskami, niewidocznymi pod nakładką — liczba ścian rysowanych
+jest tam częściowo wnioskowana. Kilka modeli ma „niebieskie" ściany zewnętrzne biegnące przez otwarte wnętrze
+(wspólna ściana dwóch brył): reguła tego nie karze, a jest to błąd (Eliza, Medulin, Mindelo, Amarylis).
+
+### 6.5 Cały wynik domu
+
+| Dom | Zbiór | 1351: zewnętrze / wnętrze | Końcowy: zewnętrze / wnętrze | Cały wynik (1351 → końcowy) |
+|---|---|---|---|---|
+| Alaska | DEV | TAK / NIE | TAK / TAK | NIE → **TAK** |
+| Aurora maxi II bis sz | DEV | TAK / NIE | TAK / TAK | NIE → **TAK** |
+| Ballina | DEV | TAK / NIE | TAK / TAK | NIE → **TAK** |
+| Alberto | DEV | NIE / NIE | TAK / TAK | NIE → **TAK** |
+| Medulin | DEV | NIE / TAK | NIE / TAK | NIE → **NIE** |
+| Domek letniskowy nad jeziorkiem | DEV | TAK / TAK | TAK / TAK | TAK → **TAK** |
+| Mindelo | DEV | NIE / TAK | NIE / TAK | NIE → **NIE** |
+| Dom pod sakurą E | DEV | TAK / NIE | TAK / TAK | NIE → **TAK** |
+| G6 (garaż ze strychem — nie dom mieszkalny) | DEV | NIE / TAK | NIE / TAK | NIE → **NIE** |
+| Aletta New | NEW-D | NIE / NIE | TAK / TAK | NIE → **TAK** |
+| Novara | NEW-D | TAK / TAK | NIE / TAK | TAK → **NIE** |
+| Jarzębina | NEW-D | NIE / NIE | NIE / TAK | NIE → **NIE** |
+| Willa Eliza 5 G2 | NEW-D | NIE / NIE | NIE / TAK | NIE → **NIE** |
+| Amarylis | NEW-E | NIE / NIE | NIE / NIE | NIE → **NIE** |
+| Oban III | NEW-E | NIE / NIE | TAK / TAK | NIE → **TAK** |
+| Juliusz Nowy | NEW-E | NIE / NIE | NIE / TAK | NIE → **NIE** |
+| Ametyst New | NEW-F | NIE / NIE | NIE / TAK | NIE → **NIE** |
+| Skagen | NEW-F | NIE / NIE | NIE / NIE | NIE → **NIE** |
+| Fabia | NEW-F | NIE / NIE | NIE / TAK | NIE → **NIE** |
+| Dom pod pomarańczą 2 | NEW-F | NIE / TAK | TAK / TAK | NIE → **TAK** |
+
+| Zbiór | Domów | Zewnętrze użyteczne | Wnętrze zgodne z rzutem | **Cały wynik** |
+|---|---|---|---|---|
+| DEV | 9 | 5 → 6 | 4 → 9 | **1 → 6** |
+| NEW-D | 4 | 1 → 1 | 1 → 4 | **1 → 1** |
+| NEW-E | 3 | 0 → 1 | 0 → 2 | **0 → 1** |
+| NEW-F | 4 | 0 → 1 | 1 → 3 | **0 → 1** |
+| razem | 20 | 6 → 9 | 6 → 18 | **2 → 9** |
+
+### 6.6 NEW-F — jedyny dowód transferu po R2
+
+Cztery domy losowane po zamrożeniu zmian R2 (`PROTOCOL.md` §8), baseline i kod zamrożony po jednym biegu, cechy
+referencyjne spisane ze źródeł przed otwarciem modeli, **nic nie strojone po wyniku**.
+
+| Dom | Co się zmieniło | Dlaczego nie jest (albo jest) całym wynikiem |
+|---|---|---|
+| Ametyst New (Studio Atrium) | wnętrze 0/18 → 15/18 ścian rzutu, bez zmyślonych; bryła i dach poprawne w obu | zewnętrze NIE w obu: na froncie szczytowym nie ma drzwi wejściowych (są trzy okna); komin 1 → 0 |
+| Skagen (Lipińscy) | nic istotnego | w obu: jedna kondygnacja ze stromym dachem 48° zamiast piętra z osobnym garażem; rzut nieodczytany — kolor ścian trzyma 24 % pasa przy progu 25 % (obrys obejmuje dom i garaż), więc wnętrze puste |
+| Fabia (Dobre Domy) | wnętrze 0/19 → 18/19; front z drzwiami i dwoma oknami zamiast frontu bez drzwi | w obu dach dwuspadowy zamiast czterospadowego (opis JSON formy nie został tu w ogóle zadany: dziś pyta się o niego tylko wtedy, gdy bryła LOCAL ma płaskie przybudówki obok dachu spadzistego); boki i tył bez otworów; komin 1 → 0 |
+| Dom pod pomarańczą 2 (ARCHON) | bryła LOCAL identyczna w obu, wnętrze 19/19 w obu | cały wynik tylko dlatego, że wejście w okładzinie zostało tym razem narysowane do ziemi; różnica pochodzi z kroku recenzji/wykończeń, **nie** z kodu bryły — tego zysku nie liczę jako dowodu |
+
+Wniosek, którego nie łagodzę: **po dwóch próbach odłożonych kod końcowy nie daje na nowych linkach więcej użytecznych
+miniatur zewnętrza niż baseline w sposób, który da się przypisać zmianom tego etapu.** Daje wnętrze. Trzy z czterech
+porażek NEW-F mają przyczynę, której ten etap nie dotknął: liczba kondygnacji i osobna bryła garażu (Skagen), rodzaj
+dachu budowany z sylwetek (Fabia), drzwi w ścianie szczytowej (Ametyst New).
+
+## 7. Co nadal zawodzi
+
+1. **Rodzaj dachu i liczba kondygnacji są budowane z sylwetek elewacji.** Typowany opis formy (§3.2) czyta rodzaj
+   dachu i kierunek kalenicy poprawnie w 13 z 13 sprawdzonych domów, ale dziś tylko rozstrzyga spór dwóch gotowych brył.
+   Fabia (kopertowy → dwuspadowy), Skagen (piętro → parter), Willa Eliza (dwie kondygnacje, kopertowy → trzy dachy
+   dwuspadowe) to ta sama przyczyna. To jest najbardziej obiecujący następny krok: opis formy jako **wejście budowy**
+   (rodzaj dachu, kondygnacje, niższe części), sylwetki tylko jako pomiar wysokości.
+2. **Bryła LOCAL z płaskimi przybudówkami wygrywa, gdy bryła ze źródeł też jest sprzeczna** (Medulin, Mindelo — bez
+   zmiany wobec 1351).
+3. **Okna o słabym kontraście.** Rzut jest świadkiem tylko dla drzwi; okno wymaga z ≥ 2 na elewacji. Juliusz Nowy: 24
+   propozycje otworów odrzucone jako „słabe" (z między 1 a 2), w modelu 4 otwory zewnętrzne.
+4. **Otwory po zamianie bryły na wielobryłową.** Amarylis: z 7 przerw w ścianach zewnętrznych rzutu 6 zostało bez otworu,
+   a odczyt listy otworów nie został w ogóle zadany żadnej elewacji; przyczyny nie ustaliłem (kod był już zamrożony).
+5. **Wnęki, podcienie, wykusze i lukarny nie istnieją w bryle** — obrys jest upraszczany do prostokątów (Novara: wnęka
+   wejściowa; Jarzębina: wystawka z balkonem; Juliusz Nowy: wykusz zamknięty do narożnika).
+6. **Rzut nieczytelny dla szkieletu** tam, gdzie kolor ścian nie dominuje w pasie przy obrysie (Skagen: 24 % przy progu
+   25 % — progu nie ruszałem po wyniku) albo ściany są rysowane samym konturem.
+7. **Meble w kolorze ścian** nadal bywają ścianami (Amarylis: maska samochodu, szafka RTV).
+8. **Recenzja jest zmienna.** Ten sam model w dwóch biegach recenzji dostaje różne werdykty i różne wykończenia
+   (Dom pod pomarańczą 2: identyczna bryła, inne wejście; Domek nad jeziorkiem: panel na tylnej ścianie raz jest, raz
+   nie ma). Status jakości z recenzji nie jest oceną zadania.
+
+## 8. Co zostało utracone (dom po domu)
+
+| Dom | Zbiór | Strata wobec 1351 | Skąd |
+|---|---|---|---|
+| Novara | NEW-D | „użyteczna" TAK → NIE: brak wnęki wejściowej; ściany wewnętrzne 13 → 10; otwory zewnętrzne 21 → 13 | bryła LOCAL (trzy pudełka z wnęką między nimi) zastąpiona jedną bryłą ze źródeł pod jednym dachem; oceniający mimo to uznał wariant końcowy za bliższy źródłu (tył i szczyty z poprawnymi przeszkleniami, 16/18 ścian rzutu zamiast 14/18) |
+| Amarylis | NEW-E | otwory zewnętrzne 17 → 5 (tył i boki ślepe) | zamiana bryły LOCAL (płaski dach) na trzy bryły ze źródeł; otwory z elewacji i z rzutu nie trafiły na nowe ściany (§7.4) |
+| Jarzębina | NEW-D | otwory zewnętrzne 29 → 12 | baseline to bryła bez dachu z otworami na dwóch poziomach; liczba spadła razem z otworami-widmami; oceniający: końcowy bliżej |
+| Ametyst New | NEW-F | komin 1 → 0 | w biegu końcowym dwie propozycje komina wycofane (komin styka się współpłaszczyznowo ze ścianą), trzy nie trafiły na żadną stronę (jedna elewacja boczna nie została zarejestrowana); w baseline jedna z nich przeszła. Niczego nie stroiłem po NEW-F |
+| Fabia | NEW-F | komin 1 → 0 | obie propozycje wycofane z tego samego powodu (komin współpłaszczyznowy ze ścianą); w baseline druga przeszła |
+| Medulin | DEV | oceniony bliżej źródła w 1351 | w wariancie końcowym dwa kominy narysowane jako cienkie słupki ponad dachem (1351: jeden); bryła ta sama |
+| Domek nad jeziorkiem | DEV | oceniony bliżej źródła w 1351 | brak panelu na tylnej ścianie (wykończenie z recenzji); geometria identyczna co do piksela nakładki |
+
+Poza tym żaden dom nie stracił ścian wewnętrznych, które miał, ani modelu, który miał. Strat w cechach formy (F) wobec
+baseline oceniający nie odnotował poza Novarą.
+
+## 9. Budżet
+
+Jedna księga, ta sama co w R3: `research/ai-assist/spend-ledger-v35417r3.json`, pułap 68,542857 USD, bez nowej puli.
+
+| | USD |
+|---|---|
+| Stan na początku etapu | 37,778557 |
+| Biegi i recenzje na żywo (DEV, NEW-D, NEW-E, NEW-F) | 9,134359 |
+| Host (dwa sprawdzenia end-to-end: `3c3f28a` i finalne `01fd2fb`) | 2,394953 |
+| Eksperyment szkic / JSON (otwory 0,199988; forma 0,171162) | 0,371150 |
+| **Etap razem** (limit własny z protokołu: 14) | **11,900462** |
+| **Stan końcowy** | **49,679019** |
+
+W kwocie biegów jest 0,947360 USD dwóch rezerwacji przerwanego procesu, zamkniętych zachowawczo jako wydatek. Otwartych
+rezerwacji: 0. Żądań w księdze: 657. Koszt jednego domu na żywo w tym etapie: 0,12–0,53 USD.
+
+## 10. Host na finalnej rewizji
+
+Serwer zbudowany z `01fd2fb` (kod analizy = zamrożenie 2; późniejsze commity zmieniają tylko dokumenty, rejestr scen
+i narzędzia dostawy), publiczne wejście `POST /v1/analyses`, pilot z tokenem, strict tools, cache 5 min.
+`research/source-to-model/v35419/host-e2e.mjs`: **53 kontrole OK, 0 nieudanych.**
+
+| Zlecenie | Wynik | Czas | Koszt | Żądań |
+|---|---|---|---|---|
+| Alberto | COMPLETED, poprawki nałożone przez wspólny wykonawca, rewizja oddana = rewizja oceniona | 641 s | 0,737425 USD | 15 |
+| Oban III (dom bez modelu w 1351) | COMPLETED | 270 s | 0,275678 USD | 11 |
+| Alberto, drugi raz | REUSED — te same bajty modelu i sceny, ten sam stan jakości | 305 s | 0 USD | 0 |
+| Alberto bez tokenu | FAILED `RECONSTRUCTION_FAILED` na samej ścieżce rysunków (zamierzone: bez tokenu nie ma konsultacji) | 55 s | 0 USD | 0 |
+
+Oba modele oddane przez host są scenami w APK (`alberto-host-v35419`, `oban-host-v35419`).
+
+## 11. Testy
+
+- `packages/analysis-service`: 58 plików, **786 / 786**.
+- `packages/mobile-scene`: 18 plików, **126 / 126** (pozycje starszych scen przesunięte o 22; nowy `owner-v35419.test.ts`:
+  kolejność, nazwane porażki, zapieczętowane bajty się kompilują, liczba ścian w podpisie liczona z modelu).
+- Pełna macierz na finalnej rewizji: 400 plików, **4622 przeszły, 18 nie przeszło, 11 pominiętych**. Te 18 leży w tych
+  samych 9 plikach i w tej samej liczbie na plik co na liście z v3.54.18: 14 testów `tests/architecture/*` i 2
+  `apps/local-analyzer/*` (zastane, zależne od historii repozytorium i od zasobów spoza sesji) oraz 2 testy czasowe
+  `apps/analyzer-api/test/worker.test.ts`, które uruchomione osobno przechodzą (3 / 3). Żaden nie dotyczy kodu
+  zmienionego w tym etapie. Nie naprawiałem ich i nie wyłączałem.
+- `tsc -p tsconfig.json --noEmit`: czysto.
+
+Testy R2 są dopisane do istniejących plików (`wings-v35419`, `plan-outline-v35417`, `openings-v35419`): szerokość
+w połowie kondygnacji, skośna krawędź, dokładny podział z pierwszeństwem pełnych brył, wierzch ściany pod okapem —
+każdy z kontrpróbą.
+
+## 12. APK
+
+`BuildPlan-Model-Preview-1352-arm64-v8a.apk`, 54 009 346 B, SHA-256
+`aefd2b7640cbbba2c22c765fcbe64c06418b786633451004d42fd383025a09e0`, `versionCode` 1352, ten sam podpis co 1349–1351
+(instaluje się na nich). 70 paczek scen bajt w bajt jak w repozytorium; 22 sceny tego etapu jako pierwsze: NEW-F
+(Ametyst New, Skagen, Fabia, Dom pod pomarańczą 2), NEW-E po R2, NEW-D, dziewięć znanych domów, dwa modele z hosta.
+Porażki są nazwane w podpisach scen. Klucza dostawcy: 0 wystąpień w pliku i w rozpakowanej zawartości.
+**`ANDROID_UI_NOT_VERIFIED`** — w tej sesji nie było telefonu ani emulatora; wszystkie obrazy w raporcie i galerii to
+rendery z komputera. Zapis: `stage-reports/artifacts/v35419/VERSION-1352.txt`.
+
+## 13. Dostawa
+
+Prywatna (rysunki wydawców — nie publikować), w niezależnych ZIP-ach poniżej 30 000 000 B; każdy ma własny README
+i manifest SHA-256, wszystkie rozpakowują się do jednego folderu `BuildPlan-V35419/`. Lista części, rozmiary i sumy:
+`stage-reports/artifacts/v35419/DELIVERY.txt`. W galerii (`gallery.html`) na każdy dom: źródła wydawcy, kolorowe szkice
+PNG/SVG i ich zapis JSON, werdykt wykorzystania każdej obserwacji, modele 1351 / (zamrożenie 1) / końcowy obok siebie,
+wnętrze bez dachu na rzucie wydawcy. Oceny ślepe, klucze losowania i tabele: `grading/`.
+
+## 14. Rekomendacja następnego kroku
+
+Jedna rzecz, nie lista: **opis formy domu (JSON) ma stać się wejściem budowy bryły, a nie świadkiem.** Dwie próby
+odłożone pokazały, że po naprawieniu rejestracji i obrysu pozostała przyczyna porażek zewnętrza jest wspólna — rodzaj
+dachu, liczba kondygnacji i niższe części są wyprowadzane z sylwetek, które tę informację gubią, podczas gdy jedno
+tanie żądanie (ok. 0,014–0,03 USD) czyta ją poprawnie. Druga w kolejności: rzut jako świadek także dla okien oraz
+otwory na ścianach brył wielokorpusowych (Amarylis, Juliusz Nowy). Przed tym krokiem warto wylosować nową próbę
+odłożoną — NEW-E i NEW-F są już rozwojowe.
+
