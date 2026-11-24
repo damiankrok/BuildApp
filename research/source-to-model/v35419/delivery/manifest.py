@@ -1,9 +1,14 @@
 #!/usr/bin/env python3
 """v3.54.19 — the delivery manifest: per house the model of the frozen 1351 code beside the final code's, on the same source
-bytes. DEV (nine known houses) and NEW-D replay their recorded elevation readings; NEW-E is live on both codes, once each.
-Private work dirs, not in Git.   manifest.py <final code commit> <final run root> > manifest.json"""
+bytes. DEV (nine known houses) and NEW-D replay their recorded elevation readings. NEW-E was live on the baseline and on
+freeze 1, once each (the first held-out measurement, kept as its own variant); after it was opened it is developmental and
+its final variant is freeze 2 on the freeze-1 recordings. NEW-F (newf/houses.json) is live on the baseline and on freeze 2,
+once each. Private work dirs, not in Git.
+    manifest.py <final code commit> <DEV/NEW-D final run root> [<NEW-E final run root>] > manifest.json"""
 import json, os, sys
 C, FIN = sys.argv[1], sys.argv[2]
+FIN_E = sys.argv[3] if len(sys.argv) > 3 else None
+FREEZE1 = '4c2c73e'
 R8, R9 = '/home/user/rd/v35418', '/home/user/rd/v35419'
 T8, T9 = f'{R8}/trial/cache', f'{R9}/trial/cache'
 BASE = '58ff26a'
@@ -25,11 +30,14 @@ H = [
  ('oban', 'Oban III', 'Lipińscy', 'NEW-E', 'https://lipinscy.pl/projekt/oban-iii', T9, f'{R9}/newe/base/oban'),
  ('juliusz', 'Juliusz Nowy', 'Dobre Domy', 'NEW-E', 'https://www.dobredomy.pl/projekt/juliuszNowy', T9, f'{R9}/newe/base/juliusz'),
 ]
+if os.path.exists(f'{R9}/newf/houses.json'):
+    for q in json.load(open(f'{R9}/newf/houses.json')): H.append((q['house'], q['title'], q['publisher'], 'NEW-F', q['url'], f'{R9}/newf/trial/cache', f"{R9}/newf/base/{q['house']}"))
 houses = []
 for house, title, pub, st, url, cache, old in H:
-    new = f'{R9}/newe/final/{house}' if st == 'NEW-E' else f'{FIN}/{house}'
-    live = st == 'NEW-E'
+    new = f'{R9}/newf/final/{house}' if st == 'NEW-F' else (f'{FIN_E}/{house}' if FIN_E else f'{R9}/newe/final/{house}') if st == 'NEW-E' else f'{FIN}/{house}'
+    live = st == 'NEW-F' or (st == 'NEW-E' and not FIN_E)
     vs = [{'key': 'baseline1351', 'label': 'kod APK 1351 (baseline)', 'kind': 'LIVE' if st != 'DEV' else 'REPLAY', 'run': old, 'commit': BASE}]
+    if st == 'NEW-E' and FIN_E and os.path.isdir(f'{R9}/newe/final/{house}'): vs.append({'key': 'freeze1', 'label': 'zamrożenie 1 (pierwszy pomiar odłożony, na żywo)', 'kind': 'LIVE', 'run': f'{R9}/newe/final/{house}', 'commit': FREEZE1})
     if os.path.isdir(new): vs.append({'key': 'final', 'label': 'kod końcowy v3.54.19' + (' (na żywo, pierwszy bieg)' if live else ' (odczyty elewacji nagrane, recenzja na żywo)'), 'kind': 'LIVE' if live else 'REPLAY', 'run': new, 'commit': C})
     pkg = next((os.path.join(v['run'], 'source-package.json') for v in reversed(vs) if os.path.exists(os.path.join(v['run'], 'source-package.json'))), None)
     if pkg is None: pkg = {'oban': f'{R9}/trial/lipinscy-oban.package.json', 'juliusz': f'{R9}/trial/dobredomy-juliusznowy.package.json', 'amarylis': f'{R9}/trial/studioatrium-amarylis.package.json', 'eliza': f'{R9}/trial/archon-projekt-willa-eliza.package.json'}.get(house)  # a house without a model in any variant: the package of the selection step (the same source bytes)

@@ -17,13 +17,16 @@ def family(url):
 out = {'commit': commit, 'rule': 'TRIAL_SELECTION.md', 'publishers': {}}
 # v3.54.17: the ARCHON pool is exhausted by the exclusions, so the Studio Atrium walk gives both families (TRIAL_SELECTION.md)
 want = {'studioatrium': 2, 'lipinscy': 2, 'archon': 2, 'dobredomy': 2}
+# v3.54.19 R2 (NEW-F): a second, later walk — its own seed label and one accepted house a pool (environment, default = the first walk)
+LABEL = os.environ.get('TRIAL_LABEL', 'V35419-TRIAL')
+if os.environ.get('TRIAL_WANT'): want = {k: int(os.environ['TRIAL_WANT']) for k in want}
 os.makedirs(work, exist_ok=True)
 POOLS = (('studioatrium', 'studioatrium-pool.txt'), ('lipinscy', 'lipinscy-pool.txt'), ('archon', 'archon-pool.txt'), ('dobredomy', 'dobredomy-pool.txt'))
 # v3.54.19 correction before any analysis: `select.py <commit> <work> archon=archon-pool-2.txt` walks one publisher's replaced pool
 if len(sys.argv) > 3: POOLS = tuple(tuple(a.split('=')) for a in sys.argv[3:])
 for publisher, pool_file in POOLS:
     pool = [l.strip() for l in open(os.path.join(here, pool_file)) if l.strip()]
-    seed = hashlib.sha256(f'{commit}:V35419-TRIAL:{publisher}'.encode()).hexdigest()
+    seed = hashlib.sha256(f'{commit}:{LABEL}:{publisher}'.encode()).hexdigest()
     start = int(seed, 16) % len(pool)
     rec = {'seed': seed, 'start': start, 'poolSize': len(pool), 'opened': [], 'chosen': None}
     opened = 0

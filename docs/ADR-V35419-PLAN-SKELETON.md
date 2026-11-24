@@ -84,6 +84,33 @@ replaced LOCAL's. Nothing about a partition depends on who placed the outer wall
 18. **A look that omits its verdicts on the applied corrections is asked for them once more** (the field is optional in
     the contract; two of thirteen live looks of one batch left a whole revision "not reviewed").
 
+### Round R2 — after the first held-out measurement (NEW-E: 0 → 0)
+
+19. **An elevation's building width is the walls' extent half-way up the storey** (`wallEndsPx`, massing 1.8.0, ops
+    1.10.0): a stone plinth or a terrace wall drawn past the house is a wall polygon too, and the extent of all wall
+    polygons gave a width half as large again (825 px for 548), a scale two thirds of the true one and "eaves at 1.59 m:
+    not a storey". The row half-way between the ground and the roof's lowest edge crosses only what stands a storey
+    high. Used by every registration by the plan — `registerByPlan`, `orientationOf` (which passed no roofs and so kept
+    the old width: found on the replay, fixed), the sketch anchors and the overhang proposal. A row that crosses less
+    than 40 % of the old extent is refused and the old extent stands.
+20. **One oblique bay is squared, not refused** (`squareOblique`, plan-outline 1.5.0): an oblique edge is replaced by the
+    corner OUTSIDE the outline (the bay's bounding step), bounded at 2 % of the bounding rectangle per edge and 5 % in
+    total, recorded as `squared {edges, addedPx2}`. A house with a canted bay window was "beyond the supported form".
+21. **An outline is partitioned exactly before the largest-rectangle fallback** (`partitionOf`): after the small steps
+    the convention names are left out (partial simplification), the grid of the remaining corners is covered with at
+    most four rectangles, nothing left over. A cover whose every rectangle is a body in its own right comes before one
+    that is fewer or has a larger main: the largest rectangle sliced a house, its garage wing and its side wing across
+    all three and left a 0.6 m strip. Not accepted when a rectangle is below the body thresholds — then `wingsOf` as before.
+22. **Under a gable's eaves a wall ends at the roof's underside** (`cuttableTopM`, executor 1.10.0): a wall that follows
+    the roof carries the ridge's height, so `hostWall` accepted a window whose head stood 10 cm above the real wall and
+    the compiler left it uncut — the whole opening was rolled back (three front windows of a bungalow). The head is cut
+    to the underside when it overshoots by at most a quarter of the opening's height (`HEAD_CUT_MAX_SHARE`, unchanged),
+    for windows as for doors, and named in the record (`headCut`).
+23. **A printed dimension is held against the traced outline where the body leaves out only convention steps**
+    (arbitration 1.3.0): the body is shorter by the named steps, not at another scale. Applies only while the body's
+    bounding rectangle keeps all but `OUTLINE_SIMPLIFICATION.totalShare` of the traced outline's — a body that dropped
+    a wing is still contradicted. Recorded as `outlineM` beside `modelM`.
+
 ## Considered and not taken
 
 - **An API read of the interior walls** (segments in pixels). Not needed where the sheet fills its walls: the

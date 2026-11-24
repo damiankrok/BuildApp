@@ -87,3 +87,28 @@ Cechy referencyjne NEW-D: `references/NEW-D.md` (spisane ze źródeł przed obej
 - **Kolejność otwierania NEW-E:** (1) eksport źródeł i spisanie `references/NEW-E.md` wyłącznie z rysunków wydawcy;
   (2) dopiero potem modele, nakładki i ocena. Po otwarciu nic w kodzie analizy nie jest zmieniane.
 - **Jeden bieg na dom i stan kodu** — bez ponawiania, cokolwiek wyszło.
+
+## 8. Pierwszy pomiar odłożony (NEW-E) i druga odłożona próba NEW-F (zapisane 2026-11-24, przed losowaniem NEW-F)
+
+**Wynik NEW-E na zamrożeniu 1 (`4c2c73e`): 0 → 0 całych wyników. Cel z §4 NIE został osiągnięty.** Amarylis: bryła LOCAL
+z płaskim dachem w obu wariantach; Oban III i Juliusz Nowy: brak modelu w obu wariantach. Ten wynik zostaje w raporcie
+jako pierwszy pomiar transferu i nie jest zastępowany niczym, co powstało później.
+
+Po otwarciu NEW-E jest zbiorem **rozwojowym**. Runda R2 naprawia trzy przyczyny ogólnie (szerokość budynku na elewacji,
+skośny wykusz w obrysie, podział obrysu na bryły) i dwie znalezione przy tym (nadproże okna pod okapem, wymiar
+drukowany a obrys z pominiętymi małymi uskokami). Poprawa na NEW-E po R2 jest wynikiem rozwojowym, nie transferem.
+
+**NEW-F (nowa odłożona próba, jedyny dowód transferu R2):**
+
+- Losowanie tym samym `trial/select.py`, tym samym commitem bazowym `9ac25b6…`, etykietą ziarna `V35419-NEWF`
+  (`TRIAL_LABEL`), **jeden** przyjęty dom na pulę (`TRIAL_WANT=1`): Studio Atrium, Lipińscy, Dobre Domy oraz ARCHON
+  (pula `archon-pool-2.txt`; jeżeli 14 otwarć nie da domu, brak zostaje zapisany). Rodziny otwarte w pierwszym
+  przejściu tego etapu (24) zostały dopisane do `seen-families.txt` przed losowaniem. Reguła przyjęcia bez zmian.
+- **Zamrożenie 2** = commit, na którym regresja DEV + NEW-D (powtórka nagrań, 0 USD) nie pokaże pogorszenia; jego skrót
+  jest dopisywany niżej **przed** pierwszym biegiem NEW-F. Do tego czasu z NEW-F pobierany jest tylko pakiet (wymaga go
+  reguła przyjęcia); żaden rysunek, model ani odczyt nie jest otwierany.
+- Po zamrożeniu 2: baseline (`9ac25b6`) i kod zamrożony na tych samych bajtach, każdy **raz**. Cechy referencyjne
+  (`references/NEW-F.md`) spisane ze źródeł przed otwarciem modeli. **Nic nie jest strojone po wyniku NEW-F**; jeżeli
+  wynik jest słaby, jest raportowany jako słaby, a poprawki należą do następnego etapu.
+- Miara ta sama (§3): cały wynik = zewnętrze użyteczne ORAZ wnętrze zgodne z rzutem. Próba ma najwyżej 4 domy, więc
+  wynik jest liczbą domów, nie odsetkiem; cel z §4 (≥ +2 całe wyniki, bez pogorszeń) stosuje się do niej bez zmian.
