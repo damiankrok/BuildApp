@@ -49,6 +49,32 @@ export type SceneSpec = { key: string; title: string; subtitle: string; build: (
  * hash — `bundle.test.ts` holds that.
  */
 export const SCENES: readonly SceneSpec[] = [
+  // v3.54.18 R3 (2026-11-24): the four houses whose result changed in the second continuation round, first. Recorded
+  // elevation reads; the plan read (plan-outline/3: entrance and exterior openings by side) and the review live.
+  {
+    key: 'alaska-r3-v35418',
+    title: 'Alaska (Studio Atrium) — v3.54.18 R3: front domu jest frontem modelu',
+    subtitle: 'R3: bryła ze źródeł zbudowana w układzie elewacji — frontem jest szczyt z wejściem (wejście z rzutu), boczne elewacje przypisane z otworów rzutu (7 do 1); 11 otworów, 8 okien połaciowych, 20 poprawek zamkniętych recenzją, 0 różnic KEY; otwarte: wykończenie szczytów, wnętrze NOT_CHECKED',
+    build: () => sealedOwnerModel('alaska-r3-v35418', '77ab6318ca42369f8d7ae0fa2c7a8aa7f92e518eeb2aa7b0ef933a3750ed8ba6', 'owner-v35418'),
+  },
+  {
+    key: 'g6-r3-v35418',
+    title: 'G6 (Dobre Domy) — v3.54.18 R3: dach czterospadowy na bryle ze źródeł',
+    subtitle: 'R3: skala rzutu z powierzchni zabudowy potwierdzona wysokością ze strony (kalenica 6,12 m przy 6,10 m); bryła 11,5 × 8,1 m z dachem czterospadowym 33,7° / 35,4° (strona: 35°), brama garażowa i 2 okna; NIEPOWODZENIA ZACHOWANE: brak drzwi wejściowych, ryzalitu z daszkiem i okien lewego boku; boki przypisane konwencją',
+    build: () => sealedOwnerModel('g6-r3-v35418', '350b2c6ea20f2638c67af5cb14a1bfde211a2984431ad229781ac950c523a538', 'owner-v35418'),
+  },
+  {
+    key: 'aurora-r3-v35418',
+    title: 'Aurora maxi II bis sz (Studio Atrium) — v3.54.18 R3: bryła ze źródeł',
+    subtitle: 'R3: skala rzutu z wymiarów 15,90 × 8,90 nad obrysem; bryła ze źródeł, dach 35° (strona: 35°), szczyty bez zmyślonych przeszkleń, 9 otworów przez bramkę źródła; NIEPOWODZENIA ZACHOWANE: brak tylnego przeszklenia tarasowego, wnętrze utracone (było w modelu LOCAL)',
+    build: () => sealedOwnerModel('aurora-r3-v35418', 'a1968ffd4e70492f02abb4c22ed6885333906a1a7106ea48c0824c5ffa1dece3', 'owner-v35418'),
+  },
+  {
+    key: 'alberto-r3-v35418',
+    title: 'Alberto (Studio Atrium) — v3.54.18 R3: okno szczytowe po właściwej stronie',
+    subtitle: 'R3: boczne elewacje przypisane z otworów rzutu — okno na prawym szczycie, lewy pusty; dach 25,1° (strona: 25°), 7 otworów; NIEPOWODZENIA ZACHOWANE: brak drzwi wejściowych i podcieni, wnętrze utracone',
+    build: () => sealedOwnerModel('alberto-r3-v35418', '086b9263fe521d30c7a6f790f627b5475ea572b5ee4b6f31d7f83cd9147caf45', 'owner-v35418'),
+  },
   // v3.54.18 R2 (2026-11-24): the four houses whose result changed in the continuation round, first. Recorded elevation
   // reads; the plan read (plan-outline/2) and the review live. Each is labelled for what it is, the open items named.
   {

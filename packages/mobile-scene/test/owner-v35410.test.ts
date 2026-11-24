@@ -34,9 +34,9 @@ describe('v3.54.11 the v3.54.10 checkpoint scenes', () => {
   it('both are in the app index after the repaired H, titled as the candidate and as the delivered model', () => {
     const index = JSON.parse(readFileSync(join(ASSET_DIR, 'index.json'), 'utf8')) as Array<{ key: string; title: string; subtitle: string; contentHash: string }>
     // after the two v3.54.13 scenes, the two v3.54.12 scenes and the repaired H, the two checkpoints in their order
-    expect(index.slice(33, 35).map((e) => e.key)).toEqual(['marcowki-h-v35410', 'marcowki-local-v35410'])
-    expect(index[33].title).toContain('kandydat')
-    expect(index[33].subtitle).toContain('KANDYDAT')
-    expect(index[34].title).toContain('LOCAL oddany')
+    expect(index.slice(37, 39).map((e) => e.key)).toEqual(['marcowki-h-v35410', 'marcowki-local-v35410'])
+    expect(index[37].title).toContain('kandydat')
+    expect(index[37].subtitle).toContain('KANDYDAT')
+    expect(index[38].title).toContain('LOCAL oddany')
   })
 })

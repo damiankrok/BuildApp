@@ -1,0 +1,2264 @@
+{
+  "assemblies": [],
+  "balconies": [],
+  "building": {
+    "id": "building",
+    "name": "massing"
+  },
+  "chimneys": [
+    {
+      "baseOffset": 0,
+      "footprint": {
+        "maxX": 10.044724,
+        "maxZ": 4.424906,
+        "minX": 9.572956,
+        "minZ": 3.953137
+      },
+      "height": 5.818472,
+      "id": "chimney-fix-front-1963ce",
+      "levelId": "lvl-0",
+      "materialId": "mat-chimney"
+    },
+    {
+      "baseOffset": 0,
+      "footprint": {
+        "maxX": 12.607029,
+        "maxZ": 3.475492,
+        "minX": 11.018288,
+        "minZ": 3.02391
+      },
+      "height": 6.18471,
+      "id": "chimney-fix-left-7b7a17",
+      "levelId": "lvl-0",
+      "materialId": "mat-chimney"
+    }
+  ],
+  "constraints": [],
+  "doors": [
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "glazing": "FULL",
+            "hinge": "LEFT",
+            "kind": "LEAF"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-rear-f3f227-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-glass",
+      "openAngle": 0,
+      "openingId": "op-fix-rear-f3f227",
+      "swing": "IN"
+    }
+  ],
+  "evidenceSources": [
+    {
+      "id": "src-frame-asset-elewacja-boczna-domu-alberto-6f2a97a1a9-169803eb89",
+      "kind": "DRAWING",
+      "label": "frame-asset-elewacja-boczna-domu-alberto-6f2a97a1a9-169803eb89",
+      "note": "frame frame-asset-elewacja-boczna-domu-alberto-6f2a97a1a9-169803eb89"
+    },
+    {
+      "id": "src-frame-asset-elewacja-frontowa-domu-alberto-aa1801b956-4de244b263",
+      "kind": "DRAWING",
+      "label": "frame-asset-elewacja-frontowa-domu-alberto-aa1801b956-4de244b263",
+      "note": "frame frame-asset-elewacja-frontowa-domu-alberto-aa1801b956-4de244b263"
+    },
+    {
+      "id": "src-frame-asset-elewacja-tylna-domu-alberto-3021627941-66bd598591",
+      "kind": "DRAWING",
+      "label": "frame-asset-elewacja-tylna-domu-alberto-3021627941-66bd598591",
+      "note": "frame frame-asset-elewacja-tylna-domu-alberto-3021627941-66bd598591"
+    },
+    {
+      "id": "src-frame-asset-rzut-parteru-alberto-173bed68f4-8bd5599896",
+      "kind": "DRAWING",
+      "label": "frame-asset-rzut-parteru-alberto-173bed68f4-8bd5599896",
+      "note": "frame frame-asset-rzut-parteru-alberto-173bed68f4-8bd5599896"
+    }
+  ],
+  "frame": {
+    "handedness": "LEFT_HANDED_AS_SPECIFIED",
+    "origin": "finished ground-floor level is y = 0; the front facade outer face is z = 0",
+    "viewerNote": "renderers working in a right-handed frame mirror z when building their scene",
+    "wallConvention": "a wall runs from start to end along its OUTER face at its base; its outward normal is up x u, so exterior rings are traversed counter-clockwise on a plan drawn with the front facade at the bottom and material lies to the left of the direction of travel",
+    "x": "right when looking at the front facade",
+    "y": "up (vertical)",
+    "z": "away from the front facade, into the building"
+  },
+  "id": "m-analysis-uc82c607d67d6",
+  "levels": [
+    {
+      "buildingId": "building",
+      "elevation": 0,
+      "height": 5.340448,
+      "id": "lvl-0",
+      "index": 0,
+      "name": "Massing"
+    }
+  ],
+  "linearSolids": [],
+  "materials": [
+    {
+      "color": "#9a7b66",
+      "id": "mat-brick",
+      "name": "Facing brick"
+    },
+    {
+      "color": "#6d6a66",
+      "id": "mat-chimney",
+      "name": "Chimney"
+    },
+    {
+      "color": "#55585c",
+      "id": "mat-gate",
+      "name": "Garage door"
+    },
+    {
+      "color": "#9fc3d8",
+      "id": "mat-glass",
+      "name": "Glazing",
+      "opacity": 0.35
+    },
+    {
+      "color": "#5a5550",
+      "id": "mat-roof",
+      "name": "Roof covering (tone not read: miniature convention)"
+    },
+    {
+      "color": "#b07a4a",
+      "id": "mat-timber",
+      "name": "Timber (door leaf, cladding)"
+    },
+    {
+      "color": "#e8e4dc",
+      "id": "mat-wall",
+      "name": "Rendered wall (tone not read: miniature convention)"
+    }
+  ],
+  "meta": {
+    "createdWith": "buildapp",
+    "notes": []
+  },
+  "name": "Alberto (analysis)",
+  "openings": [
+    {
+      "height": 1.336676,
+      "id": "op-fix-front-17c82d",
+      "kind": "WINDOW",
+      "offset": 12.777047,
+      "sill": 1.002507,
+      "wallId": "ring-mass-main-w0",
+      "width": 1.415304
+    },
+    {
+      "height": 1.317019,
+      "id": "op-fix-front-8bd2e4",
+      "kind": "WINDOW",
+      "offset": 1.710156,
+      "sill": 1.041821,
+      "wallId": "ring-mass-main-w0",
+      "width": 4.678366
+    },
+    {
+      "height": 1.382411,
+      "id": "op-fix-rear-3f4869",
+      "kind": "WINDOW",
+      "offset": 5.92162,
+      "sill": 1.134815,
+      "wallId": "ring-mass-main-w2",
+      "width": 1.44431
+    },
+    {
+      "height": 1.382411,
+      "id": "op-fix-rear-7c497d",
+      "kind": "WINDOW",
+      "offset": 9.2229,
+      "sill": 1.134815,
+      "wallId": "ring-mass-main-w2",
+      "width": 1.423677
+    },
+    {
+      "height": 1.382411,
+      "id": "op-fix-rear-c4cc3f",
+      "kind": "WINDOW",
+      "offset": 12.297217,
+      "sill": 1.134815,
+      "wallId": "ring-mass-main-w2",
+      "width": 1.464943
+    },
+    {
+      "height": 2.290263,
+      "id": "op-fix-rear-f3f227",
+      "kind": "DOOR",
+      "offset": 1.341094,
+      "sill": 0.226963,
+      "wallId": "ring-mass-main-w2",
+      "width": 2.661657
+    },
+    {
+      "height": 1.277298,
+      "id": "op-fix-right-e4fea8",
+      "kind": "WINDOW",
+      "offset": 3.367353,
+      "sill": 1.180533,
+      "wallId": "ring-mass-main-w1",
+      "width": 1.35471
+    }
+  ],
+  "platforms": [],
+  "railings": [],
+  "relationships": [],
+  "roofEdges": [],
+  "roofOpenings": [],
+  "roofPlanes": [],
+  "rooflights": [],
+  "roofs": [
+    {
+      "eaveOffset": 3.437247,
+      "evidence": {
+        "interpretation": "ridge along X (slopes seen on the sides along it, the gable end across it); pitch 25.1° from a 1.90 m rise over half of 8.11 m (the walls end at 3.16 m: the roof's underside there)",
+        "properties": {
+          "eaveOffset": "UNRESOLVED",
+          "pitchDeg": "UNRESOLVED"
+        },
+        "source": "frame-asset-rzut-parteru-alberto-173bed68f4-8bd5599896 + frame-asset-elewacja-boczna-domu-alberto-6f2a97a1a9-169803eb89 + frame-asset-elewacja-frontowa-domu-alberto-aa1801b956-4de244b263 + frame-asset-elewacja-tylna-domu-alberto-3021627941-66bd598591",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-alberto-173bed68f4-8bd5599896",
+          "src-frame-asset-elewacja-boczna-domu-alberto-6f2a97a1a9-169803eb89",
+          "src-frame-asset-elewacja-frontowa-domu-alberto-aa1801b956-4de244b263",
+          "src-frame-asset-elewacja-tylna-domu-alberto-3021627941-66bd598591"
+        ],
+        "status": "UNRESOLVED"
+      },
+      "footprint": {
+        "maxX": 16.1418,
+        "maxZ": 8.109,
+        "minX": -0.86,
+        "minZ": 0
+      },
+      "id": "roof-mass-main",
+      "kind": "GABLE",
+      "levelId": "lvl-0",
+      "materialId": "mat-roof",
+      "overhang": 0,
+      "pitchDeg": 25.1,
+      "ridgeAxis": "X",
+      "thickness": 0.25
+    }
+  ],
+  "rooms": [],
+  "schema": "buildapp.canonical-building-model",
+  "schemaVersion": "1.9.0",
+  "slabs": [],
+  "stairs": [],
+  "stepRuns": [],
+  "surfaceRegions": [
+    {
+      "evidence": {
+        "interpretation": "a brick outline from finish-078d6f (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-mass-main-w1",
+      "id": "appearance-east-ring-mass-main-w1-brick-0",
+      "materialId": "mat-brick",
+      "outline": [
+        {
+          "a": 7.54,
+          "b": 2.50471
+        },
+        {
+          "a": 7.8,
+          "b": 2.50471
+        },
+        {
+          "a": 7.8,
+          "b": 2.48471
+        },
+        {
+          "a": 7.82,
+          "b": 2.48471
+        },
+        {
+          "a": 7.82,
+          "b": 0.34471
+        },
+        {
+          "a": 7.8,
+          "b": 0.34471
+        },
+        {
+          "a": 7.8,
+          "b": 0.32471
+        },
+        {
+          "a": 7.54,
+          "b": 0.32471
+        },
+        {
+          "a": 7.54,
+          "b": 0.34471
+        },
+        {
+          "a": 7.52,
+          "b": 0.34471
+        },
+        {
+          "a": 7.52,
+          "b": 2.48471
+        },
+        {
+          "a": 7.54,
+          "b": 2.48471
+        }
+      ],
+      "rect": {
+        "a0": 7.52,
+        "a1": 7.82,
+        "b0": 0.32471,
+        "b1": 2.50471
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a brick outline from finish-7d9e24 (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-mass-main-w0",
+      "id": "appearance-front-ring-mass-main-w0-brick-0",
+      "materialId": "mat-brick",
+      "outline": [
+        {
+          "a": 1.68,
+          "b": 0.96471
+        },
+        {
+          "a": 6.46,
+          "b": 0.96471
+        },
+        {
+          "a": 6.46,
+          "b": 0.94471
+        },
+        {
+          "a": 6.48,
+          "b": 0.94471
+        },
+        {
+          "a": 6.48,
+          "b": 0.12471
+        },
+        {
+          "a": 6.46,
+          "b": 0.12471
+        },
+        {
+          "a": 6.46,
+          "b": 0.10471
+        },
+        {
+          "a": 1.68,
+          "b": 0.10471
+        },
+        {
+          "a": 1.68,
+          "b": 0.12471
+        },
+        {
+          "a": 1.66,
+          "b": 0.12471
+        },
+        {
+          "a": 1.66,
+          "b": 0.94471
+        },
+        {
+          "a": 1.68,
+          "b": 0.94471
+        }
+      ],
+      "rect": {
+        "a0": 1.66,
+        "a1": 6.48,
+        "b0": 0.10471,
+        "b1": 0.96471
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a timber outline from finish-d99ec5 (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-mass-main-w2",
+      "id": "appearance-rear-ring-mass-main-w2-timber-0",
+      "materialId": "mat-timber",
+      "outline": [
+        {
+          "a": 12.2718,
+          "b": 2.56471
+        },
+        {
+          "a": 10.6918,
+          "b": 2.56471
+        },
+        {
+          "a": 10.6918,
+          "b": 2.54471
+        },
+        {
+          "a": 10.6718,
+          "b": 2.54471
+        },
+        {
+          "a": 10.6718,
+          "b": 1.06471
+        },
+        {
+          "a": 10.6918,
+          "b": 1.06471
+        },
+        {
+          "a": 10.6918,
+          "b": 1.04471
+        },
+        {
+          "a": 12.2718,
+          "b": 1.04471
+        },
+        {
+          "a": 12.2718,
+          "b": 1.06471
+        },
+        {
+          "a": 12.2918,
+          "b": 1.06471
+        },
+        {
+          "a": 12.2918,
+          "b": 2.54471
+        },
+        {
+          "a": 12.2718,
+          "b": 2.54471
+        }
+      ],
+      "rect": {
+        "a0": 10.6718,
+        "a1": 12.2918,
+        "b0": 1.04471,
+        "b1": 2.56471
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a timber outline from finish-4758eb (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-mass-main-w3",
+      "id": "appearance-west-ring-mass-main-w3-timber-0",
+      "materialId": "mat-timber",
+      "outline": [
+        {
+          "a": 4.129,
+          "b": 4.98471
+        },
+        {
+          "a": 4.069,
+          "b": 4.98471
+        },
+        {
+          "a": 4.069,
+          "b": 4.96471
+        },
+        {
+          "a": 4.029,
+          "b": 4.96471
+        },
+        {
+          "a": 4.029,
+          "b": 4.94471
+        },
+        {
+          "a": 3.989,
+          "b": 4.94471
+        },
+        {
+          "a": 3.989,
+          "b": 4.92471
+        },
+        {
+          "a": 3.949,
+          "b": 4.92471
+        },
+        {
+          "a": 3.949,
+          "b": 4.90471
+        },
+        {
+          "a": 3.909,
+          "b": 4.90471
+        },
+        {
+          "a": 3.909,
+          "b": 4.88471
+        },
+        {
+          "a": 3.869,
+          "b": 4.88471
+        },
+        {
+          "a": 3.869,
+          "b": 4.86471
+        },
+        {
+          "a": 3.829,
+          "b": 4.86471
+        },
+        {
+          "a": 3.829,
+          "b": 4.84471
+        },
+        {
+          "a": 3.789,
+          "b": 4.84471
+        },
+        {
+          "a": 3.789,
+          "b": 4.82471
+        },
+        {
+          "a": 3.749,
+          "b": 4.82471
+        },
+        {
+          "a": 3.749,
+          "b": 4.80471
+        },
+        {
+          "a": 3.709,
+          "b": 4.80471
+        },
+        {
+          "a": 3.709,
+          "b": 4.78471
+        },
+        {
+          "a": 3.669,
+          "b": 4.78471
+        },
+        {
+          "a": 3.669,
+          "b": 4.76471
+        },
+        {
+          "a": 3.629,
+          "b": 4.76471
+        },
+        {
+          "a": 3.629,
+          "b": 4.74471
+        },
+        {
+          "a": 3.589,
+          "b": 4.74471
+        },
+        {
+          "a": 3.589,
+          "b": 4.72471
+        },
+        {
+          "a": 3.549,
+          "b": 4.72471
+        },
+        {
+          "a": 3.549,
+          "b": 4.70471
+        },
+        {
+          "a": 3.489,
+          "b": 4.70471
+        },
+        {
+          "a": 3.489,
+          "b": 4.68471
+        },
+        {
+          "a": 3.449,
+          "b": 4.68471
+        },
+        {
+          "a": 3.449,
+          "b": 4.66471
+        },
+        {
+          "a": 3.409,
+          "b": 4.66471
+        },
+        {
+          "a": 3.409,
+          "b": 4.64471
+        },
+        {
+          "a": 3.369,
+          "b": 4.64471
+        },
+        {
+          "a": 3.369,
+          "b": 4.62471
+        },
+        {
+          "a": 3.329,
+          "b": 4.62471
+        },
+        {
+          "a": 3.329,
+          "b": 4.60471
+        },
+        {
+          "a": 3.289,
+          "b": 4.60471
+        },
+        {
+          "a": 3.289,
+          "b": 4.58471
+        },
+        {
+          "a": 3.249,
+          "b": 4.58471
+        },
+        {
+          "a": 3.249,
+          "b": 4.56471
+        },
+        {
+          "a": 3.209,
+          "b": 4.56471
+        },
+        {
+          "a": 3.209,
+          "b": 4.54471
+        },
+        {
+          "a": 3.169,
+          "b": 4.54471
+        },
+        {
+          "a": 3.169,
+          "b": 4.52471
+        },
+        {
+          "a": 3.129,
+          "b": 4.52471
+        },
+        {
+          "a": 3.129,
+          "b": 4.50471
+        },
+        {
+          "a": 3.089,
+          "b": 4.50471
+        },
+        {
+          "a": 3.089,
+          "b": 4.48471
+        },
+        {
+          "a": 3.049,
+          "b": 4.48471
+        },
+        {
+          "a": 3.049,
+          "b": 4.46471
+        },
+        {
+          "a": 3.009,
+          "b": 4.46471
+        },
+        {
+          "a": 3.009,
+          "b": 4.44471
+        },
+        {
+          "a": 2.969,
+          "b": 4.44471
+        },
+        {
+          "a": 2.969,
+          "b": 4.42471
+        },
+        {
+          "a": 2.909,
+          "b": 4.42471
+        },
+        {
+          "a": 2.909,
+          "b": 4.40471
+        },
+        {
+          "a": 2.869,
+          "b": 4.40471
+        },
+        {
+          "a": 2.869,
+          "b": 4.38471
+        },
+        {
+          "a": 2.829,
+          "b": 4.38471
+        },
+        {
+          "a": 2.829,
+          "b": 4.36471
+        },
+        {
+          "a": 2.789,
+          "b": 4.36471
+        },
+        {
+          "a": 2.789,
+          "b": 4.34471
+        },
+        {
+          "a": 2.749,
+          "b": 4.34471
+        },
+        {
+          "a": 2.749,
+          "b": 4.32471
+        },
+        {
+          "a": 2.709,
+          "b": 4.32471
+        },
+        {
+          "a": 2.709,
+          "b": 4.30471
+        },
+        {
+          "a": 2.669,
+          "b": 4.30471
+        },
+        {
+          "a": 2.669,
+          "b": 4.28471
+        },
+        {
+          "a": 2.629,
+          "b": 4.28471
+        },
+        {
+          "a": 2.629,
+          "b": 4.26471
+        },
+        {
+          "a": 2.589,
+          "b": 4.26471
+        },
+        {
+          "a": 2.589,
+          "b": 4.24471
+        },
+        {
+          "a": 2.549,
+          "b": 4.24471
+        },
+        {
+          "a": 2.549,
+          "b": 4.22471
+        },
+        {
+          "a": 2.509,
+          "b": 4.22471
+        },
+        {
+          "a": 2.509,
+          "b": 4.20471
+        },
+        {
+          "a": 2.469,
+          "b": 4.20471
+        },
+        {
+          "a": 2.469,
+          "b": 4.18471
+        },
+        {
+          "a": 2.429,
+          "b": 4.18471
+        },
+        {
+          "a": 2.429,
+          "b": 4.16471
+        },
+        {
+          "a": 2.389,
+          "b": 4.16471
+        },
+        {
+          "a": 2.389,
+          "b": 4.14471
+        },
+        {
+          "a": 2.349,
+          "b": 4.14471
+        },
+        {
+          "a": 2.349,
+          "b": 4.12471
+        },
+        {
+          "a": 2.289,
+          "b": 4.12471
+        },
+        {
+          "a": 2.289,
+          "b": 4.10471
+        },
+        {
+          "a": 2.249,
+          "b": 4.10471
+        },
+        {
+          "a": 2.249,
+          "b": 4.08471
+        },
+        {
+          "a": 2.209,
+          "b": 4.08471
+        },
+        {
+          "a": 2.209,
+          "b": 4.06471
+        },
+        {
+          "a": 2.169,
+          "b": 4.06471
+        },
+        {
+          "a": 2.169,
+          "b": 4.04471
+        },
+        {
+          "a": 2.129,
+          "b": 4.04471
+        },
+        {
+          "a": 2.129,
+          "b": 4.02471
+        },
+        {
+          "a": 2.089,
+          "b": 4.02471
+        },
+        {
+          "a": 2.089,
+          "b": 4.00471
+        },
+        {
+          "a": 2.049,
+          "b": 4.00471
+        },
+        {
+          "a": 2.049,
+          "b": 3.98471
+        },
+        {
+          "a": 2.009,
+          "b": 3.98471
+        },
+        {
+          "a": 2.009,
+          "b": 3.96471
+        },
+        {
+          "a": 1.969,
+          "b": 3.96471
+        },
+        {
+          "a": 1.969,
+          "b": 3.94471
+        },
+        {
+          "a": 1.929,
+          "b": 3.94471
+        },
+        {
+          "a": 1.929,
+          "b": 3.92471
+        },
+        {
+          "a": 1.889,
+          "b": 3.92471
+        },
+        {
+          "a": 1.889,
+          "b": 3.90471
+        },
+        {
+          "a": 1.849,
+          "b": 3.90471
+        },
+        {
+          "a": 1.849,
+          "b": 3.88471
+        },
+        {
+          "a": 1.809,
+          "b": 3.88471
+        },
+        {
+          "a": 1.809,
+          "b": 3.86471
+        },
+        {
+          "a": 1.769,
+          "b": 3.86471
+        },
+        {
+          "a": 1.769,
+          "b": 3.84471
+        },
+        {
+          "a": 1.729,
+          "b": 3.84471
+        },
+        {
+          "a": 1.729,
+          "b": 3.82471
+        },
+        {
+          "a": 1.669,
+          "b": 3.82471
+        },
+        {
+          "a": 1.669,
+          "b": 3.80471
+        },
+        {
+          "a": 1.629,
+          "b": 3.80471
+        },
+        {
+          "a": 1.629,
+          "b": 3.78471
+        },
+        {
+          "a": 1.589,
+          "b": 3.78471
+        },
+        {
+          "a": 1.589,
+          "b": 3.76471
+        },
+        {
+          "a": 1.549,
+          "b": 3.76471
+        },
+        {
+          "a": 1.549,
+          "b": 3.74471
+        },
+        {
+          "a": 1.509,
+          "b": 3.74471
+        },
+        {
+          "a": 1.509,
+          "b": 3.72471
+        },
+        {
+          "a": 1.469,
+          "b": 3.72471
+        },
+        {
+          "a": 1.469,
+          "b": 3.70471
+        },
+        {
+          "a": 1.429,
+          "b": 3.70471
+        },
+        {
+          "a": 1.429,
+          "b": 3.68471
+        },
+        {
+          "a": 1.389,
+          "b": 3.68471
+        },
+        {
+          "a": 1.389,
+          "b": 3.66471
+        },
+        {
+          "a": 1.349,
+          "b": 3.66471
+        },
+        {
+          "a": 1.349,
+          "b": 3.64471
+        },
+        {
+          "a": 1.309,
+          "b": 3.64471
+        },
+        {
+          "a": 1.309,
+          "b": 3.62471
+        },
+        {
+          "a": 1.269,
+          "b": 3.62471
+        },
+        {
+          "a": 1.269,
+          "b": 3.60471
+        },
+        {
+          "a": 1.229,
+          "b": 3.60471
+        },
+        {
+          "a": 1.229,
+          "b": 3.58471
+        },
+        {
+          "a": 1.189,
+          "b": 3.58471
+        },
+        {
+          "a": 1.189,
+          "b": 3.56471
+        },
+        {
+          "a": 1.149,
+          "b": 3.56471
+        },
+        {
+          "a": 1.149,
+          "b": 3.54471
+        },
+        {
+          "a": 1.089,
+          "b": 3.54471
+        },
+        {
+          "a": 1.089,
+          "b": 3.52471
+        },
+        {
+          "a": 1.049,
+          "b": 3.52471
+        },
+        {
+          "a": 1.049,
+          "b": 3.50471
+        },
+        {
+          "a": 1.009,
+          "b": 3.50471
+        },
+        {
+          "a": 1.009,
+          "b": 3.48471
+        },
+        {
+          "a": 0.969,
+          "b": 3.48471
+        },
+        {
+          "a": 0.969,
+          "b": 3.46471
+        },
+        {
+          "a": 0.929,
+          "b": 3.46471
+        },
+        {
+          "a": 0.929,
+          "b": 3.44471
+        },
+        {
+          "a": 0.889,
+          "b": 3.44471
+        },
+        {
+          "a": 0.889,
+          "b": 3.42471
+        },
+        {
+          "a": 0.849,
+          "b": 3.42471
+        },
+        {
+          "a": 0.849,
+          "b": 3.40471
+        },
+        {
+          "a": 0.809,
+          "b": 3.40471
+        },
+        {
+          "a": 0.809,
+          "b": 3.38471
+        },
+        {
+          "a": 0.769,
+          "b": 3.38471
+        },
+        {
+          "a": 0.769,
+          "b": 3.36471
+        },
+        {
+          "a": 0.729,
+          "b": 3.36471
+        },
+        {
+          "a": 0.729,
+          "b": 3.34471
+        },
+        {
+          "a": 0.689,
+          "b": 3.34471
+        },
+        {
+          "a": 0.689,
+          "b": 3.32471
+        },
+        {
+          "a": 0.649,
+          "b": 3.32471
+        },
+        {
+          "a": 0.649,
+          "b": 3.30471
+        },
+        {
+          "a": 0.609,
+          "b": 3.30471
+        },
+        {
+          "a": 0.609,
+          "b": 3.28471
+        },
+        {
+          "a": 0.569,
+          "b": 3.28471
+        },
+        {
+          "a": 0.569,
+          "b": 3.26471
+        },
+        {
+          "a": 0.549,
+          "b": 3.26471
+        },
+        {
+          "a": 0.549,
+          "b": 3.24471
+        },
+        {
+          "a": 0.569,
+          "b": 3.24471
+        },
+        {
+          "a": 0.569,
+          "b": 3.22471
+        },
+        {
+          "a": 7.569,
+          "b": 3.22471
+        },
+        {
+          "a": 7.569,
+          "b": 3.24471
+        },
+        {
+          "a": 7.589,
+          "b": 3.24471
+        },
+        {
+          "a": 7.589,
+          "b": 3.26471
+        },
+        {
+          "a": 7.569,
+          "b": 3.26471
+        },
+        {
+          "a": 7.569,
+          "b": 3.28471
+        },
+        {
+          "a": 7.529,
+          "b": 3.28471
+        },
+        {
+          "a": 7.529,
+          "b": 3.30471
+        },
+        {
+          "a": 7.489,
+          "b": 3.30471
+        },
+        {
+          "a": 7.489,
+          "b": 3.32471
+        },
+        {
+          "a": 7.449,
+          "b": 3.32471
+        },
+        {
+          "a": 7.449,
+          "b": 3.34471
+        },
+        {
+          "a": 7.409,
+          "b": 3.34471
+        },
+        {
+          "a": 7.409,
+          "b": 3.36471
+        },
+        {
+          "a": 7.369,
+          "b": 3.36471
+        },
+        {
+          "a": 7.369,
+          "b": 3.38471
+        },
+        {
+          "a": 7.329,
+          "b": 3.38471
+        },
+        {
+          "a": 7.329,
+          "b": 3.40471
+        },
+        {
+          "a": 7.289,
+          "b": 3.40471
+        },
+        {
+          "a": 7.289,
+          "b": 3.42471
+        },
+        {
+          "a": 7.249,
+          "b": 3.42471
+        },
+        {
+          "a": 7.249,
+          "b": 3.44471
+        },
+        {
+          "a": 7.209,
+          "b": 3.44471
+        },
+        {
+          "a": 7.209,
+          "b": 3.46471
+        },
+        {
+          "a": 7.169,
+          "b": 3.46471
+        },
+        {
+          "a": 7.169,
+          "b": 3.48471
+        },
+        {
+          "a": 7.129,
+          "b": 3.48471
+        },
+        {
+          "a": 7.129,
+          "b": 3.50471
+        },
+        {
+          "a": 7.089,
+          "b": 3.50471
+        },
+        {
+          "a": 7.089,
+          "b": 3.52471
+        },
+        {
+          "a": 7.049,
+          "b": 3.52471
+        },
+        {
+          "a": 7.049,
+          "b": 3.54471
+        },
+        {
+          "a": 7.009,
+          "b": 3.54471
+        },
+        {
+          "a": 7.009,
+          "b": 3.56471
+        },
+        {
+          "a": 6.969,
+          "b": 3.56471
+        },
+        {
+          "a": 6.969,
+          "b": 3.58471
+        },
+        {
+          "a": 6.929,
+          "b": 3.58471
+        },
+        {
+          "a": 6.929,
+          "b": 3.60471
+        },
+        {
+          "a": 6.889,
+          "b": 3.60471
+        },
+        {
+          "a": 6.889,
+          "b": 3.62471
+        },
+        {
+          "a": 6.849,
+          "b": 3.62471
+        },
+        {
+          "a": 6.849,
+          "b": 3.64471
+        },
+        {
+          "a": 6.809,
+          "b": 3.64471
+        },
+        {
+          "a": 6.809,
+          "b": 3.66471
+        },
+        {
+          "a": 6.749,
+          "b": 3.66471
+        },
+        {
+          "a": 6.749,
+          "b": 3.68471
+        },
+        {
+          "a": 6.709,
+          "b": 3.68471
+        },
+        {
+          "a": 6.709,
+          "b": 3.70471
+        },
+        {
+          "a": 6.669,
+          "b": 3.70471
+        },
+        {
+          "a": 6.669,
+          "b": 3.72471
+        },
+        {
+          "a": 6.629,
+          "b": 3.72471
+        },
+        {
+          "a": 6.629,
+          "b": 3.74471
+        },
+        {
+          "a": 6.589,
+          "b": 3.74471
+        },
+        {
+          "a": 6.589,
+          "b": 3.76471
+        },
+        {
+          "a": 6.549,
+          "b": 3.76471
+        },
+        {
+          "a": 6.549,
+          "b": 3.78471
+        },
+        {
+          "a": 6.509,
+          "b": 3.78471
+        },
+        {
+          "a": 6.509,
+          "b": 3.80471
+        },
+        {
+          "a": 6.469,
+          "b": 3.80471
+        },
+        {
+          "a": 6.469,
+          "b": 3.82471
+        },
+        {
+          "a": 6.429,
+          "b": 3.82471
+        },
+        {
+          "a": 6.429,
+          "b": 3.84471
+        },
+        {
+          "a": 6.389,
+          "b": 3.84471
+        },
+        {
+          "a": 6.389,
+          "b": 3.86471
+        },
+        {
+          "a": 6.349,
+          "b": 3.86471
+        },
+        {
+          "a": 6.349,
+          "b": 3.88471
+        },
+        {
+          "a": 6.309,
+          "b": 3.88471
+        },
+        {
+          "a": 6.309,
+          "b": 3.90471
+        },
+        {
+          "a": 6.269,
+          "b": 3.90471
+        },
+        {
+          "a": 6.269,
+          "b": 3.92471
+        },
+        {
+          "a": 6.229,
+          "b": 3.92471
+        },
+        {
+          "a": 6.229,
+          "b": 3.94471
+        },
+        {
+          "a": 6.189,
+          "b": 3.94471
+        },
+        {
+          "a": 6.189,
+          "b": 3.96471
+        },
+        {
+          "a": 6.149,
+          "b": 3.96471
+        },
+        {
+          "a": 6.149,
+          "b": 3.98471
+        },
+        {
+          "a": 6.109,
+          "b": 3.98471
+        },
+        {
+          "a": 6.109,
+          "b": 4.00471
+        },
+        {
+          "a": 6.069,
+          "b": 4.00471
+        },
+        {
+          "a": 6.069,
+          "b": 4.02471
+        },
+        {
+          "a": 6.029,
+          "b": 4.02471
+        },
+        {
+          "a": 6.029,
+          "b": 4.04471
+        },
+        {
+          "a": 5.989,
+          "b": 4.04471
+        },
+        {
+          "a": 5.989,
+          "b": 4.06471
+        },
+        {
+          "a": 5.949,
+          "b": 4.06471
+        },
+        {
+          "a": 5.949,
+          "b": 4.08471
+        },
+        {
+          "a": 5.909,
+          "b": 4.08471
+        },
+        {
+          "a": 5.909,
+          "b": 4.10471
+        },
+        {
+          "a": 5.869,
+          "b": 4.10471
+        },
+        {
+          "a": 5.869,
+          "b": 4.12471
+        },
+        {
+          "a": 5.829,
+          "b": 4.12471
+        },
+        {
+          "a": 5.829,
+          "b": 4.14471
+        },
+        {
+          "a": 5.789,
+          "b": 4.14471
+        },
+        {
+          "a": 5.789,
+          "b": 4.16471
+        },
+        {
+          "a": 5.749,
+          "b": 4.16471
+        },
+        {
+          "a": 5.749,
+          "b": 4.18471
+        },
+        {
+          "a": 5.709,
+          "b": 4.18471
+        },
+        {
+          "a": 5.709,
+          "b": 4.20471
+        },
+        {
+          "a": 5.669,
+          "b": 4.20471
+        },
+        {
+          "a": 5.669,
+          "b": 4.22471
+        },
+        {
+          "a": 5.629,
+          "b": 4.22471
+        },
+        {
+          "a": 5.629,
+          "b": 4.24471
+        },
+        {
+          "a": 5.589,
+          "b": 4.24471
+        },
+        {
+          "a": 5.589,
+          "b": 4.26471
+        },
+        {
+          "a": 5.549,
+          "b": 4.26471
+        },
+        {
+          "a": 5.549,
+          "b": 4.28471
+        },
+        {
+          "a": 5.509,
+          "b": 4.28471
+        },
+        {
+          "a": 5.509,
+          "b": 4.30471
+        },
+        {
+          "a": 5.469,
+          "b": 4.30471
+        },
+        {
+          "a": 5.469,
+          "b": 4.32471
+        },
+        {
+          "a": 5.429,
+          "b": 4.32471
+        },
+        {
+          "a": 5.429,
+          "b": 4.34471
+        },
+        {
+          "a": 5.389,
+          "b": 4.34471
+        },
+        {
+          "a": 5.389,
+          "b": 4.36471
+        },
+        {
+          "a": 5.349,
+          "b": 4.36471
+        },
+        {
+          "a": 5.349,
+          "b": 4.38471
+        },
+        {
+          "a": 5.309,
+          "b": 4.38471
+        },
+        {
+          "a": 5.309,
+          "b": 4.40471
+        },
+        {
+          "a": 5.269,
+          "b": 4.40471
+        },
+        {
+          "a": 5.269,
+          "b": 4.42471
+        },
+        {
+          "a": 5.229,
+          "b": 4.42471
+        },
+        {
+          "a": 5.229,
+          "b": 4.44471
+        },
+        {
+          "a": 5.189,
+          "b": 4.44471
+        },
+        {
+          "a": 5.189,
+          "b": 4.46471
+        },
+        {
+          "a": 5.149,
+          "b": 4.46471
+        },
+        {
+          "a": 5.149,
+          "b": 4.48471
+        },
+        {
+          "a": 5.109,
+          "b": 4.48471
+        },
+        {
+          "a": 5.109,
+          "b": 4.50471
+        },
+        {
+          "a": 5.069,
+          "b": 4.50471
+        },
+        {
+          "a": 5.069,
+          "b": 4.52471
+        },
+        {
+          "a": 5.029,
+          "b": 4.52471
+        },
+        {
+          "a": 5.029,
+          "b": 4.54471
+        },
+        {
+          "a": 4.969,
+          "b": 4.54471
+        },
+        {
+          "a": 4.969,
+          "b": 4.56471
+        },
+        {
+          "a": 4.929,
+          "b": 4.56471
+        },
+        {
+          "a": 4.929,
+          "b": 4.58471
+        },
+        {
+          "a": 4.889,
+          "b": 4.58471
+        },
+        {
+          "a": 4.889,
+          "b": 4.60471
+        },
+        {
+          "a": 4.849,
+          "b": 4.60471
+        },
+        {
+          "a": 4.849,
+          "b": 4.62471
+        },
+        {
+          "a": 4.809,
+          "b": 4.62471
+        },
+        {
+          "a": 4.809,
+          "b": 4.64471
+        },
+        {
+          "a": 4.769,
+          "b": 4.64471
+        },
+        {
+          "a": 4.769,
+          "b": 4.66471
+        },
+        {
+          "a": 4.729,
+          "b": 4.66471
+        },
+        {
+          "a": 4.729,
+          "b": 4.68471
+        },
+        {
+          "a": 4.689,
+          "b": 4.68471
+        },
+        {
+          "a": 4.689,
+          "b": 4.70471
+        },
+        {
+          "a": 4.649,
+          "b": 4.70471
+        },
+        {
+          "a": 4.649,
+          "b": 4.72471
+        },
+        {
+          "a": 4.609,
+          "b": 4.72471
+        },
+        {
+          "a": 4.609,
+          "b": 4.74471
+        },
+        {
+          "a": 4.569,
+          "b": 4.74471
+        },
+        {
+          "a": 4.569,
+          "b": 4.76471
+        },
+        {
+          "a": 4.529,
+          "b": 4.76471
+        },
+        {
+          "a": 4.529,
+          "b": 4.78471
+        },
+        {
+          "a": 4.489,
+          "b": 4.78471
+        },
+        {
+          "a": 4.489,
+          "b": 4.80471
+        },
+        {
+          "a": 4.449,
+          "b": 4.80471
+        },
+        {
+          "a": 4.449,
+          "b": 4.82471
+        },
+        {
+          "a": 4.409,
+          "b": 4.82471
+        },
+        {
+          "a": 4.409,
+          "b": 4.84471
+        },
+        {
+          "a": 4.369,
+          "b": 4.84471
+        },
+        {
+          "a": 4.369,
+          "b": 4.86471
+        },
+        {
+          "a": 4.329,
+          "b": 4.86471
+        },
+        {
+          "a": 4.329,
+          "b": 4.88471
+        },
+        {
+          "a": 4.289,
+          "b": 4.88471
+        },
+        {
+          "a": 4.289,
+          "b": 4.90471
+        },
+        {
+          "a": 4.249,
+          "b": 4.90471
+        },
+        {
+          "a": 4.249,
+          "b": 4.92471
+        },
+        {
+          "a": 4.209,
+          "b": 4.92471
+        },
+        {
+          "a": 4.209,
+          "b": 4.94471
+        },
+        {
+          "a": 4.169,
+          "b": 4.94471
+        },
+        {
+          "a": 4.169,
+          "b": 4.96471
+        },
+        {
+          "a": 4.129,
+          "b": 4.96471
+        }
+      ],
+      "rect": {
+        "a0": 0.549,
+        "a1": 7.589,
+        "b0": 3.22471,
+        "b1": 4.98471
+      }
+    }
+  ],
+  "terraces": [],
+  "units": {
+    "angle": "deg",
+    "length": "m"
+  },
+  "wallJunctions": [
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w3"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w0"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-alberto-173bed68f4-8bd5599896 (MAIN), at the analyzer's own scale: 1.410256 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 3 registered elevation(s) give eaves (the walls' corner tops) 3.16 / 2.53 / 2.57 m and top 5.34 / 5.23 / 5.53 m — the gable-end view(s) (RIGHT) show the wall corner under the roof: 3.16 m is taken; a view along the ridge draws its walls ending behind the fascia, lower by no more than an overhang hides (one view draws that line)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-alberto-173bed68f4-8bd5599896 + frame-asset-elewacja-boczna-domu-alberto-6f2a97a1a9-169803eb89 + frame-asset-elewacja-frontowa-domu-alberto-aa1801b956-4de244b263 + frame-asset-elewacja-tylna-domu-alberto-3021627941-66bd598591",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-alberto-173bed68f4-8bd5599896",
+          "src-frame-asset-elewacja-boczna-domu-alberto-6f2a97a1a9-169803eb89",
+          "src-frame-asset-elewacja-frontowa-domu-alberto-aa1801b956-4de244b263",
+          "src-frame-asset-elewacja-tylna-domu-alberto-3021627941-66bd598591"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j0",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w0"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w1"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-alberto-173bed68f4-8bd5599896 (MAIN), at the analyzer's own scale: 1.410256 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 3 registered elevation(s) give eaves (the walls' corner tops) 3.16 / 2.53 / 2.57 m and top 5.34 / 5.23 / 5.53 m — the gable-end view(s) (RIGHT) show the wall corner under the roof: 3.16 m is taken; a view along the ridge draws its walls ending behind the fascia, lower by no more than an overhang hides (one view draws that line)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-alberto-173bed68f4-8bd5599896 + frame-asset-elewacja-boczna-domu-alberto-6f2a97a1a9-169803eb89 + frame-asset-elewacja-frontowa-domu-alberto-aa1801b956-4de244b263 + frame-asset-elewacja-tylna-domu-alberto-3021627941-66bd598591",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-alberto-173bed68f4-8bd5599896",
+          "src-frame-asset-elewacja-boczna-domu-alberto-6f2a97a1a9-169803eb89",
+          "src-frame-asset-elewacja-frontowa-domu-alberto-aa1801b956-4de244b263",
+          "src-frame-asset-elewacja-tylna-domu-alberto-3021627941-66bd598591"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j1",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w1"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w2"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-alberto-173bed68f4-8bd5599896 (MAIN), at the analyzer's own scale: 1.410256 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 3 registered elevation(s) give eaves (the walls' corner tops) 3.16 / 2.53 / 2.57 m and top 5.34 / 5.23 / 5.53 m — the gable-end view(s) (RIGHT) show the wall corner under the roof: 3.16 m is taken; a view along the ridge draws its walls ending behind the fascia, lower by no more than an overhang hides (one view draws that line)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-alberto-173bed68f4-8bd5599896 + frame-asset-elewacja-boczna-domu-alberto-6f2a97a1a9-169803eb89 + frame-asset-elewacja-frontowa-domu-alberto-aa1801b956-4de244b263 + frame-asset-elewacja-tylna-domu-alberto-3021627941-66bd598591",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-alberto-173bed68f4-8bd5599896",
+          "src-frame-asset-elewacja-boczna-domu-alberto-6f2a97a1a9-169803eb89",
+          "src-frame-asset-elewacja-frontowa-domu-alberto-aa1801b956-4de244b263",
+          "src-frame-asset-elewacja-tylna-domu-alberto-3021627941-66bd598591"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j2",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w2",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w2"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w3"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-alberto-173bed68f4-8bd5599896 (MAIN), at the analyzer's own scale: 1.410256 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 3 registered elevation(s) give eaves (the walls' corner tops) 3.16 / 2.53 / 2.57 m and top 5.34 / 5.23 / 5.53 m — the gable-end view(s) (RIGHT) show the wall corner under the roof: 3.16 m is taken; a view along the ridge draws its walls ending behind the fascia, lower by no more than an overhang hides (one view draws that line)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-alberto-173bed68f4-8bd5599896 + frame-asset-elewacja-boczna-domu-alberto-6f2a97a1a9-169803eb89 + frame-asset-elewacja-frontowa-domu-alberto-aa1801b956-4de244b263 + frame-asset-elewacja-tylna-domu-alberto-3021627941-66bd598591",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-alberto-173bed68f4-8bd5599896",
+          "src-frame-asset-elewacja-boczna-domu-alberto-6f2a97a1a9-169803eb89",
+          "src-frame-asset-elewacja-frontowa-domu-alberto-aa1801b956-4de244b263",
+          "src-frame-asset-elewacja-tylna-domu-alberto-3021627941-66bd598591"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j3",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w2",
+      "tolerance": 0.001
+    }
+  ],
+  "wallPanels": [],
+  "wallRings": [
+    {
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-alberto-173bed68f4-8bd5599896 (MAIN), at the analyzer's own scale: 1.410256 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 3 registered elevation(s) give eaves (the walls' corner tops) 3.16 / 2.53 / 2.57 m and top 5.34 / 5.23 / 5.53 m — the gable-end view(s) (RIGHT) show the wall corner under the roof: 3.16 m is taken; a view along the ridge draws its walls ending behind the fascia, lower by no more than an overhang hides (one view draws that line)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-alberto-173bed68f4-8bd5599896 + frame-asset-elewacja-boczna-domu-alberto-6f2a97a1a9-169803eb89 + frame-asset-elewacja-frontowa-domu-alberto-aa1801b956-4de244b263 + frame-asset-elewacja-tylna-domu-alberto-3021627941-66bd598591",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-alberto-173bed68f4-8bd5599896",
+          "src-frame-asset-elewacja-boczna-domu-alberto-6f2a97a1a9-169803eb89",
+          "src-frame-asset-elewacja-frontowa-domu-alberto-aa1801b956-4de244b263",
+          "src-frame-asset-elewacja-tylna-domu-alberto-3021627941-66bd598591"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main",
+      "junctionIds": [
+        "ring-mass-main-j0",
+        "ring-mass-main-j1",
+        "ring-mass-main-j2",
+        "ring-mass-main-j3"
+      ],
+      "levelId": "lvl-0",
+      "wallIds": [
+        "ring-mass-main-w0",
+        "ring-mass-main-w1",
+        "ring-mass-main-w2",
+        "ring-mass-main-w3"
+      ]
+    }
+  ],
+  "walls": [
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 15.3718,
+        "z": 0
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-alberto-173bed68f4-8bd5599896 (MAIN), at the analyzer's own scale: 1.410256 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 3 registered elevation(s) give eaves (the walls' corner tops) 3.16 / 2.53 / 2.57 m and top 5.34 / 5.23 / 5.53 m — the gable-end view(s) (RIGHT) show the wall corner under the roof: 3.16 m is taken; a view along the ridge draws its walls ending behind the fascia, lower by no more than an overhang hides (one view draws that line)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-alberto-173bed68f4-8bd5599896 + frame-asset-elewacja-boczna-domu-alberto-6f2a97a1a9-169803eb89 + frame-asset-elewacja-frontowa-domu-alberto-aa1801b956-4de244b263 + frame-asset-elewacja-tylna-domu-alberto-3021627941-66bd598591",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-alberto-173bed68f4-8bd5599896",
+          "src-frame-asset-elewacja-boczna-domu-alberto-6f2a97a1a9-169803eb89",
+          "src-frame-asset-elewacja-frontowa-domu-alberto-aa1801b956-4de244b263",
+          "src-frame-asset-elewacja-tylna-domu-alberto-3021627941-66bd598591"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 5.340448,
+      "id": "ring-mass-main-w0",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 0,
+        "z": 0
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-mass-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 15.3718,
+        "z": 8.109
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-alberto-173bed68f4-8bd5599896 (MAIN), at the analyzer's own scale: 1.410256 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 3 registered elevation(s) give eaves (the walls' corner tops) 3.16 / 2.53 / 2.57 m and top 5.34 / 5.23 / 5.53 m — the gable-end view(s) (RIGHT) show the wall corner under the roof: 3.16 m is taken; a view along the ridge draws its walls ending behind the fascia, lower by no more than an overhang hides (one view draws that line)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-alberto-173bed68f4-8bd5599896 + frame-asset-elewacja-boczna-domu-alberto-6f2a97a1a9-169803eb89 + frame-asset-elewacja-frontowa-domu-alberto-aa1801b956-4de244b263 + frame-asset-elewacja-tylna-domu-alberto-3021627941-66bd598591",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-alberto-173bed68f4-8bd5599896",
+          "src-frame-asset-elewacja-boczna-domu-alberto-6f2a97a1a9-169803eb89",
+          "src-frame-asset-elewacja-frontowa-domu-alberto-aa1801b956-4de244b263",
+          "src-frame-asset-elewacja-tylna-domu-alberto-3021627941-66bd598591"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 5.340448,
+      "id": "ring-mass-main-w1",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 15.3718,
+        "z": 0
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-mass-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0,
+        "z": 8.109
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-alberto-173bed68f4-8bd5599896 (MAIN), at the analyzer's own scale: 1.410256 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 3 registered elevation(s) give eaves (the walls' corner tops) 3.16 / 2.53 / 2.57 m and top 5.34 / 5.23 / 5.53 m — the gable-end view(s) (RIGHT) show the wall corner under the roof: 3.16 m is taken; a view along the ridge draws its walls ending behind the fascia, lower by no more than an overhang hides (one view draws that line)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-alberto-173bed68f4-8bd5599896 + frame-asset-elewacja-boczna-domu-alberto-6f2a97a1a9-169803eb89 + frame-asset-elewacja-frontowa-domu-alberto-aa1801b956-4de244b263 + frame-asset-elewacja-tylna-domu-alberto-3021627941-66bd598591",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-alberto-173bed68f4-8bd5599896",
+          "src-frame-asset-elewacja-boczna-domu-alberto-6f2a97a1a9-169803eb89",
+          "src-frame-asset-elewacja-frontowa-domu-alberto-aa1801b956-4de244b263",
+          "src-frame-asset-elewacja-tylna-domu-alberto-3021627941-66bd598591"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 5.340448,
+      "id": "ring-mass-main-w2",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 15.3718,
+        "z": 8.109
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-mass-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0,
+        "z": 0
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-alberto-173bed68f4-8bd5599896 (MAIN), at the analyzer's own scale: 1.410256 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 3 registered elevation(s) give eaves (the walls' corner tops) 3.16 / 2.53 / 2.57 m and top 5.34 / 5.23 / 5.53 m — the gable-end view(s) (RIGHT) show the wall corner under the roof: 3.16 m is taken; a view along the ridge draws its walls ending behind the fascia, lower by no more than an overhang hides (one view draws that line)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-alberto-173bed68f4-8bd5599896 + frame-asset-elewacja-boczna-domu-alberto-6f2a97a1a9-169803eb89 + frame-asset-elewacja-frontowa-domu-alberto-aa1801b956-4de244b263 + frame-asset-elewacja-tylna-domu-alberto-3021627941-66bd598591",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-alberto-173bed68f4-8bd5599896",
+          "src-frame-asset-elewacja-boczna-domu-alberto-6f2a97a1a9-169803eb89",
+          "src-frame-asset-elewacja-frontowa-domu-alberto-aa1801b956-4de244b263",
+          "src-frame-asset-elewacja-tylna-domu-alberto-3021627941-66bd598591"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 5.340448,
+      "id": "ring-mass-main-w3",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 0,
+        "z": 8.109
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-mass-main"
+      }
+    }
+  ],
+  "windows": [
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-front-17c82d-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-front-17c82d"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-front-8bd2e4-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-front-8bd2e4"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-rear-3f4869-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-rear-3f4869"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-rear-7c497d-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-rear-7c497d"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-rear-c4cc3f-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-rear-c4cc3f"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-right-e4fea8-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-right-e4fea8"
+    }
+  ]
+}

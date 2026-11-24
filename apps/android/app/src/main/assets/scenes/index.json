@@ -1,5 +1,53 @@
 [
   {
+    "key": "alaska-r3-v35418",
+    "title": "Alaska (Studio Atrium) — v3.54.18 R3: front domu jest frontem modelu",
+    "subtitle": "R3: bryła ze źródeł zbudowana w układzie elewacji — frontem jest szczyt z wejściem (wejście z rzutu), boczne elewacje przypisane z otworów rzutu (7 do 1); 11 otworów, 8 okien połaciowych, 20 poprawek zamkniętych recenzją, 0 różnic KEY; otwarte: wykończenie szczytów, wnętrze NOT_CHECKED",
+    "asset": "alaska-r3-v35418.scene.json",
+    "modelId": "m-analysis-u8fba8e6a95bb",
+    "modelSchemaVersion": "1.9.0",
+    "contentHash": "ff8050d2ce931fd6575c3a58c3a337c4aa6aa7ab94974cf71e131162d2bdef7d",
+    "meshCount": 71,
+    "triangleCount": 2716,
+    "objectCount": 47
+  },
+  {
+    "key": "g6-r3-v35418",
+    "title": "G6 (Dobre Domy) — v3.54.18 R3: dach czterospadowy na bryle ze źródeł",
+    "subtitle": "R3: skala rzutu z powierzchni zabudowy potwierdzona wysokością ze strony (kalenica 6,12 m przy 6,10 m); bryła 11,5 × 8,1 m z dachem czterospadowym 33,7° / 35,4° (strona: 35°), brama garażowa i 2 okna; NIEPOWODZENIA ZACHOWANE: brak drzwi wejściowych, ryzalitu z daszkiem i okien lewego boku; boki przypisane konwencją",
+    "asset": "g6-r3-v35418.scene.json",
+    "modelId": "m-analysis-u1e6cd513281f",
+    "modelSchemaVersion": "1.9.0",
+    "contentHash": "a1b66d7ba5fa53530ec568ba17b36436a154f13bad0b883948e9aa7398a345df",
+    "meshCount": 20,
+    "triangleCount": 540,
+    "objectCount": 17
+  },
+  {
+    "key": "aurora-r3-v35418",
+    "title": "Aurora maxi II bis sz (Studio Atrium) — v3.54.18 R3: bryła ze źródeł",
+    "subtitle": "R3: skala rzutu z wymiarów 15,90 × 8,90 nad obrysem; bryła ze źródeł, dach 35° (strona: 35°), szczyty bez zmyślonych przeszkleń, 9 otworów przez bramkę źródła; NIEPOWODZENIA ZACHOWANE: brak tylnego przeszklenia tarasowego, wnętrze utracone (było w modelu LOCAL)",
+    "asset": "aurora-r3-v35418.scene.json",
+    "modelId": "m-analysis-u3a44cf494a39",
+    "modelSchemaVersion": "1.9.0",
+    "contentHash": "20cf05b5d0fdc6a898bb6533619dacaa09c328a5eb4c94b4ff14ebe4ca56986a",
+    "meshCount": 44,
+    "triangleCount": 1452,
+    "objectCount": 32
+  },
+  {
+    "key": "alberto-r3-v35418",
+    "title": "Alberto (Studio Atrium) — v3.54.18 R3: okno szczytowe po właściwej stronie",
+    "subtitle": "R3: boczne elewacje przypisane z otworów rzutu — okno na prawym szczycie, lewy pusty; dach 25,1° (strona: 25°), 7 otworów; NIEPOWODZENIA ZACHOWANE: brak drzwi wejściowych i podcieni, wnętrze utracone",
+    "asset": "alberto-r3-v35418.scene.json",
+    "modelId": "m-analysis-uc82c607d67d6",
+    "modelSchemaVersion": "1.9.0",
+    "contentHash": "a43438f468d273e02934b54c443c72d0a8294a486b1fd1257e9680b1aadb1b3b",
+    "meshCount": 34,
+    "triangleCount": 3428,
+    "objectCount": 25
+  },
+  {
     "key": "sakura-r2-v35418",
     "title": "Dom pod sakurą E (ARCHON) — v3.54.18 R2: dach czterospadowy",
     "subtitle": "R2: dach czterospadowy odczytany z elewacji (trapez wzdłuż kalenicy) — cztery połacie ~30°, kalenica 4,9 m od ścian szczytowych, okap 0,87 m; bryła ze źródeł, 9 otworów; otwarte: 1 różnica KEY, bryła L uproszczona do prostokąta, wnętrze NOT_CHECKED",
