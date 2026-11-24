@@ -1332,7 +1332,7 @@ export type ExecuteInput = {
 const LISTED_TARGET_OPS = new Set(['UPDATE_OPENING', 'REMOVE_OPENING', 'UPDATE_CHIMNEY', 'SET_PARAMETER', 'SET_ROOF', 'SET_OUTLINE', 'SET_ROOF_OVERHANG'])
 /** Any element of the model by its id (collections the operations edit, and the wall rings a body is named by). */
 export function elementExists(m: CanonicalBuildingModel, id: string): boolean {
-  const colls = [m.levels, m.walls, m.wallRings, m.openings, m.roofs, m.roofPlanes, m.chimneys] as ReadonlyArray<ReadonlyArray<{ id: string }>>
+  const colls = [m.levels, m.walls, m.wallRings, m.openings, m.roofs, m.roofPlanes, m.chimneys, m.roofOpenings] as ReadonlyArray<ReadonlyArray<{ id: string }>>
   return colls.some((c) => c.some((x) => x.id === id))
 }
 

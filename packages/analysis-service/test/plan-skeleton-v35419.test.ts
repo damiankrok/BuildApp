@@ -16,7 +16,8 @@ import { executeCorrections, modelRevision } from '../src/consult/correct/execut
 import type { CorrectionProposal } from '../src/consult/correct/execute.js'
 import { interiorRuns, planGapsFromSkeleton, resolveOverlaps, skeletonInModel } from '../src/consult/correct/interior.js'
 import { bodyCommands, pointWithFront } from '../src/consult/massing/massing.js'
-import { edgesOf, insetOutline, paintWalls, readPlanSkeleton, slabsOf, snapOutline, wallInkOf } from '../src/consult/plan-skeleton.js'
+import { edgesOf, insetOutline, objectsAmong, paintWalls, readPlanSkeleton, slabsOf, snapOutline, wallInkOf } from '../src/consult/plan-skeleton.js'
+import type { SkeletonDoor, SkeletonWall } from '../src/consult/plan-skeleton.js'
 
 const S = 0.03 // m per px
 const [X0, Y0, X1, Y1] = [60, 50, 360, 270] // outer faces: 9.0 × 6.6 m
@@ -305,5 +306,47 @@ describe('v3.54.19 read pieces never share plan area', () => {
   it('counter-trial: walls that only touch are left alone', () => {
     const input = [P('a', 'X', 2, 0, 3.94), P('b', 'Z', 4, 0, 5)]
     expect(resolveOverlaps(input)).toEqual(input)
+  })
+})
+
+describe('v3.54.19 (skeleton 1.1.0) objects drawn in the wall\'s tone are not partitions', () => {
+  // a 1000 × 800 px sheet at 1 cm/px: a 10 × 8 m house with 30 px exterior walls
+  const outline: Array<[number, number]> = [[100, 100], [1100, 100], [1100, 900], [100, 900]]
+  const W = (axis: 'H' | 'V', at: number, from: number, to: number, thicknessPx = 12): SkeletonWall => ({ id: `iw-${axis}${at}-${from}`, axis, at, from, to, thicknessPx, ends: { start: 'JUNCTION', end: 'JUNCTION' }, confidence: 0.8 })
+  // the real plan: a partition across the house (exterior to exterior) and one from it down to the front wall
+  const across = W('H', 500, 130, 1070)
+  const down = W('V', 600, 506, 870)
+  const objects = (extra: SkeletonWall[], doors: SkeletonDoor[] = []): string[] => [...objectsAmong([across, down, ...extra], outline, 30, 0.01, doors).keys()].sort()
+
+  it('a bed: four thick pieces closing a ring with no way in, touching nothing else', () => {
+    const bed = [W('H', 200, 300, 440, 30), W('H', 330, 300, 440, 30), W('V', 315, 185, 345, 30), W('V', 425, 185, 345, 30)]
+    expect(objects(bed)).toEqual(bed.map((w) => w.id).sort())
+  })
+  it('counter-trial: a pantry — three thin walls and its door on the open side, touching nothing else — is a room and stays', () => {
+    const pantry = [W('H', 600, 800, 940), W('H', 700, 800, 940), W('V', 806, 594, 706)]
+    expect(objects(pantry)).toEqual([])
+  })
+  it('a cabinet against a wall: a shorter piece alongside a longer one closer than a person passes; counter-trial: a parallel wall a corridor away stays', () => {
+    const cabinet = W('H', 520, 300, 360, 16)
+    expect(objects([cabinet])).toEqual([cabinet.id])
+    // 1.2 m from the partition, tied to the exterior wall and to the cross partition
+    const corridor = W('H', 632, 130, 594)
+    expect(objects([corridor])).toEqual([])
+  })
+  it('a floating piece (a car\'s bumper): neither end on anything; counter-trials: a stub at a door gap stays, a wall another one ends on stays', () => {
+    const bumper = W('H', 250, 700, 800, 10)
+    expect(objects([bumper])).toEqual([bumper.id])
+    // the same piece with a door gap of its own line between it and the exterior wall
+    const stub = W('H', 250, 220, 330, 10)
+    expect(objects([stub], [{ id: 'id-H250-130', axis: 'H', at: 250, from: 130, to: 220 }])).toEqual([])
+    // a wall whose ends stand free but which bears a T: `across` would float without the exterior — here a free wall with `tee` ending on it
+    const free = W('V', 900, 200, 400)
+    const tee = W('H', 300, 906, 1070)
+    expect(objects([free, tee])).toEqual([])
+    expect(objects([free])).toEqual([free.id])
+  })
+  it('a group too small to hold anything is an object whatever its shape', () => {
+    const legs = [W('V', 400, 700, 740, 8), W('H', 704, 396, 430, 10)]
+    expect(objects(legs)).toEqual(legs.map((w) => w.id).sort())
   })
 })

@@ -863,10 +863,19 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
             delivery.skeleton = skeleton
             record({ at: now().toISOString(), kind: 'PLAN_SKELETON', version: PLAN_SKELETON_VERSION, frameId: f.id, ink: skeleton.ink, wallM: Math.round(skeleton.wallPx * skeleton.mPerPx * 100) / 100, walls: skeleton.walls.length, doors: skeleton.doors.length, gaps: skeleton.gaps.length, refused: skeleton.refused })
           }
+          // the skeleton's partitions in the outline's own metres (x from its left edge, z up from its foot): where the
+          // plan draws a wall across the body, two bodies in line meet there
+          const planWalls = skeleton && plan.outlinePx && skeleton.refused.every((q) => !q.startsWith('WALL_STYLE') && !q.startsWith('EXTERIOR_BAND: no'))
+            ? ((): Array<{ a: { x: number; z: number }; b: { x: number; z: number } }> => {
+                const [x0, y1, sM] = [Math.min(...plan.outlinePx.map((q) => q[0])), Math.max(...plan.outlinePx.map((q) => q[1])), skeleton.mPerPx]
+                const at = (px: number, py: number): { x: number; z: number } => ({ x: (px - x0) * sM, z: (y1 - py) * sM })
+                return skeleton.walls.map((w) => (w.axis === 'H' ? { a: at(w.from, w.at), b: at(w.to, w.at) } : { a: at(w.at, w.from), b: at(w.at, w.to) }))
+              })()
+            : []
           stage('BUILD_MASSING')
           const pitchFact = pkg0.publishedFacts.find((x) => x.key === 'roof_pitch' && x.unit === 'deg')?.value
           const empty = createEmptyModel(`massing-${f.variantByteHash.slice(0, 12)}`, (asset?.caption ?? 'house').slice(0, 60))
-          const out = executeCorrections({ model: empty, views: [], pictures, proposals: [{ proposalId: `massing-${f.variantByteHash.slice(0, 12)}`, baseRevision: modelRevision(empty), operation: 'BUILD_MASSING', targetId: 'WHOLE', origin: 'SKETCH', uncertainty: 'MEDIUM', justification: A.why }], massing: { outline: plan.observation, silhouettes, ...(plan.entrance?.side ? { entranceSide: plan.entrance.side } : {}) }, ...(typeof pitchFact === 'number' ? { facts: { roofPitchDeg: pitchFact } } : {}) })
+          const out = executeCorrections({ model: empty, views: [], pictures, proposals: [{ proposalId: `massing-${f.variantByteHash.slice(0, 12)}`, baseRevision: modelRevision(empty), operation: 'BUILD_MASSING', targetId: 'WHOLE', origin: 'SKETCH', uncertainty: 'MEDIUM', justification: A.why }], massing: { outline: plan.observation, silhouettes, ...(plan.entrance?.side ? { entranceSide: plan.entrance.side } : {}), ...(planWalls.length > 0 ? { planWalls } : {}) }, ...(typeof pitchFact === 'number' ? { facts: { roofPitchDeg: pitchFact } } : {}) })
           delivery.records = out.records
           delivery.transactions = out.transactions
           const rec0 = out.records[0]
@@ -2017,7 +2026,10 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
   if (good.run && sketchSummary?.semantic?.fates) {
     const mD = good.run.reconstruction.model
     const rows = sketchSummary.semantic.fates.rows.filter((q) => (q.fate === 'BUILT' || q.fate === 'AGREES_WITH_MODEL') && (q.targetIds ?? []).length > 0)
-    const missing = rows.flatMap((q) => (q.targetIds ?? []).filter((id) => !elementExists(mD, id)).map((id) => ({ id, fate: q.fate, ...(q.proposalId ? { proposalId: q.proposalId } : {}) })))
+    // an element a later operation removed to make room for its own (an opening displaced by the plan's) is named with what took its place
+    const gaveWay = new Map<string, string>()
+    for (const r of sketchSummary.semantic.records ?? []) for (const id of Object.keys((r.bound as { displaced?: Record<string, unknown> } | undefined)?.displaced ?? {})) gaveWay.set(id, `${r.operation} ${(r.bound?.ids ?? []).join(', ')}`)
+    const missing = rows.flatMap((q) => (q.targetIds ?? []).filter((id) => !elementExists(mD, id)).map((id) => ({ id, fate: q.fate, ...(q.proposalId ? { proposalId: q.proposalId } : {}), ...(gaveWay.has(id) ? { gaveWayTo: gaveWay.get(id) as string } : {}) })))
     record({ at: now().toISOString(), kind: 'OBSERVATION_FATE_TARGETS', checked: rows.reduce((t, q) => t + (q.targetIds ?? []).length, 0), missing, why: missing.length === 0 ? 'every element a fate names as built or agreeing is in the delivered model' : `${missing.length} element(s) a fate names are not in the delivered model: built at the sketch stage and removed or replaced by a later look (named here, never silent)` })
   }
   // v3.54.19: where the plan sheet lies in the delivered model (three mapped points): any overlay of the model on its plan

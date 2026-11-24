@@ -59,7 +59,7 @@ async function main(): Promise<void> {
   const ext = walls.filter((w) => w.kind === 'EXTERIOR')
   const int = walls.filter((w) => w.kind === 'INTERIOR')
   const massingBuilt = J<Massing>(runDir, 'massing.json')?.decision === 'BUILT' && J<{ decision?: string }>(runDir, 'body-arbitration.json')?.decision !== 'LOCAL_STANDS'
-  let frame = recordedFrame(runDir) ?? (massingBuilt ? massingFrame(runDir) : undefined) ?? (opt('frame-from') ? recordedFrame(opt('frame-from') as string) : undefined)
+  let frame = recordedFrame(runDir) ?? (massingBuilt ? massingFrame(runDir) : undefined) ?? (opt('frame-from') ? [recordedFrame(opt('frame-from') as string)].find((q) => q?.basis === 'LOCAL_PLAN_REGISTRATION' && !massingBuilt) : undefined)
   const pkg = J<{ assets: Array<{ id: string; variants: Array<{ url: string; byteHash: string }> }> }>(runDir, 'source-package.json') ?? J<{ assets: Array<{ id: string; variants: Array<{ url: string; byteHash: string }> }> }>(opt('frame-from') ?? opt('fit-from') ?? runDir, 'source-package.json')
   const graph = J<{ coordinateFrames: Array<{ id: string; assetId: string; variantByteHash: string }> }>(runDir, 'observation-graph.json') ?? J<{ coordinateFrames: Array<{ id: string; assetId: string; variantByteHash: string }> }>(opt('frame-from') ?? opt('fit-from') ?? runDir, 'observation-graph.json')
   if (!pkg || !graph) done({ why: 'the run kept no source package or observation graph' })

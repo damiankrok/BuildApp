@@ -61,6 +61,54 @@ describe('v3.54.19 an outline of any number of corners is read as its own bodies
     expect(h.bodies[0].rect).toEqual({ minX: 0, maxX: 16, minZ: 6, maxZ: 12 })
     expect(h.alternatives.join(' ')).toMatch(/read as 2 bodies/)
   })
+  it('massing 1.7.0: a lower body drawn under the roof of the one behind it does not become a spire — it takes the first body\'s pitch from its own walls; counter-trial: its own steep-but-possible roof stands', () => {
+    const MPP = 0.02
+    const ZERO = 500
+    const poly = (lo: number, pts: Array<[number, number]>): Array<[number, number]> => pts.map(([a, y]) => [100 + (a - lo) / MPP, ZERO - y / MPP])
+    const outline: OutlineObservation = { observationId: 'o', frameId: 'plan', sourceByteHash: '', outline: T, by: 'API_PLAN_OUTLINE', fidelity: 'SOURCE_TRACED', why: 'test' }
+    // FRONT: the bar's slopes (a band 3..5.1 m over 16 m) and the stem's own gable end in front of them
+    const front = (stemTop: number): SilhouetteObservation => ({ observationId: 'sk-F', side: 'FRONT', frameId: 'f-F', sourceByteHash: '', groundRow: ZERO, walls: [poly(0, [[0, 0], [16, 0], [16, 3], [0, 3]])], roofs: [poly(0, [[0, 3], [16, 3], [16, 5.1], [0, 5.1]]), poly(0, [[5, 3], [11, 3], [8, stemTop]])] })
+    // a SIDE: the bar's gable end over its 6 m and, over the stem's 6 m, a roof drawn up to `stemTop`
+    const side = (sd: 'LEFT' | 'RIGHT', stemTop: number): SilhouetteObservation => ({ observationId: `sk-${sd}`, side: sd, frameId: `f-${sd}`, sourceByteHash: '', groundRow: ZERO, walls: [poly(0, [[0, 0], [12, 0], [12, 3], [0, 3]])], roofs: [poly(0, [[6, 3], [12, 3], [9, 5.1]]), poly(0, [[0, 3], [6, 3], [6, stemTop], [0, stemTop]])] })
+    const solve = (stemTop: number): ReturnType<typeof solveMassing> => solveMassing({ outline, silhouettes: [front(stemTop), side('LEFT', stemTop), side('RIGHT', stemTop)] })
+    const spire = solve(9.5)
+    const [main, wing] = spire.bodies
+    expect(main.roof.pitchDeg).toBeGreaterThan(25)
+    expect(main.roof.pitchDeg).toBeLessThan(45)
+    expect(wing.roof.pitchDeg).toBe(main.roof.pitchDeg)
+    expect(wing.roof.ridgeM as number).toBeLessThan(main.roof.ridgeM as number + 0.5)
+    expect(wing.provenance.roof.fidelity).toBe('TRACE_UNCERTAIN')
+    expect(spire.alternatives.join(' ')).toMatch(/another body's roof seen behind it/)
+    // counter-trial: a 50° roof over the stem is a roof a house can have: kept as read
+    const steep = solve(3 + 3 * Math.tan((50 * Math.PI) / 180))
+    expect(steep.bodies[1].roof.pitchDeg as number).toBeGreaterThan(40)
+    expect(steep.alternatives.join(' ')).not.toMatch(/another body's roof seen behind it/)
+  })
+  it('massing 1.7.0: two bodies in line are split on the wall the plan draws across the body near the elevations\' step; counter-trials: a wall too far, or too short, moves nothing', () => {
+    const MPP = 0.02
+    const ZERO = 500
+    const poly = (pts: Array<[number, number]>): Array<[number, number]> => pts.map(([a, y]) => [100 + a / MPP, ZERO - y / MPP])
+    const outline: OutlineObservation = { observationId: 'o', frameId: 'plan', sourceByteHash: '', outline: [{ x: 0, z: 0 }, { x: 14, z: 0 }, { x: 14, z: 8 }, { x: 0, z: 8 }], by: 'API_PLAN_OUTLINE', fidelity: 'SOURCE_TRACED', why: 'test' }
+    // FRONT and REAR: a 3 m garage (top 3.6 m) beside the house (top 6 m); the drawn step stands at 3.0 m (FRONT) — an overhang short of the wall
+    const view = (sd: 'FRONT' | 'REAR'): SilhouetteObservation => {
+      const m = (a: number): number => (sd === 'FRONT' ? a : 14 - a)
+      const q = (pts: Array<[number, number]>): Array<[number, number]> => poly(pts.map(([a, y]) => [m(a), y]))
+      return { observationId: `sk-${sd}`, side: sd, frameId: `f-${sd}`, sourceByteHash: '', groundRow: ZERO, walls: [q([[0, 0], [14, 0], [14, 3], [0, 3]])], roofs: [q([[0, 3], [3, 3], [3, 3.6], [0, 3.6]]), q([[3, 3], [14, 3], [14, 6], [3, 6]])] }
+    }
+    const solve = (planWalls: Array<{ a: { x: number; z: number }; b: { x: number; z: number } }>): ReturnType<typeof solveMassing> => solveMassing({ outline, silhouettes: [view('FRONT'), view('REAR')], planWalls })
+    const alone = solve([])
+    expect(alone.bodies).toHaveLength(2)
+    const stepAt = Math.min(...alone.bodies.map((b) => b.rect.maxX))
+    expect(stepAt).toBeGreaterThan(2.5)
+    expect(stepAt).toBeLessThan(3.5)
+    // the plan draws the house's wall at 3.9 m, over 6 of the 8 m of depth
+    const snapped = solve([{ a: { x: 3.9, z: 0.3 }, b: { x: 3.9, z: 6.3 } }])
+    expect(Math.min(...snapped.bodies.map((b) => b.rect.maxX))).toBeCloseTo(3.9, 6)
+    expect(snapped.alternatives.join(' ')).toMatch(/on the wall the plan draws across the body there/)
+    // a wall 2 m from the step, and a 2 m stub near it: neither is where the bodies meet
+    expect(Math.min(...solve([{ a: { x: 5.2, z: 0.3 }, b: { x: 5.2, z: 7.7 } }]).bodies.map((b) => b.rect.maxX))).toBeCloseTo(stepAt, 6)
+    expect(Math.min(...solve([{ a: { x: 3.9, z: 0.3 }, b: { x: 3.9, z: 2.3 } }]).bodies.map((b) => b.rect.maxX))).toBeCloseTo(stepAt, 6)
+  })
 })
 
 describe('v3.54.19 the site plan\'s printed building dimensions', () => {

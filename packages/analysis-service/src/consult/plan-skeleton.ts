@@ -27,7 +27,7 @@ import type { Raster } from '@buildapp/source-cv'
 import { readInterior } from '@buildapp/reconstruction'
 import type { PlanFrameV2 } from '@buildapp/reconstruction'
 
-export const PLAN_SKELETON_VERSION = '1.0.0' as const
+export const PLAN_SKELETON_VERSION = '1.1.0' as const
 export const PLAN_SKELETON = {
   /** the band the wall colour is sampled in, as shares of the outline's shorter extent, inward from the traced edge */
   bandFrom: 0.01,
@@ -51,6 +51,14 @@ export const PLAN_SKELETON = {
   maxPartitionShare: 1.25,
   /** … and at least this many times as long as it is thick */
   minSlenderness: 2,
+  /** 1.1.0: a piece alongside a longer parallel wall closer than this (metres, clear), over this share of its length, is an object against that wall. */
+  besideM: 0.3,
+  besideShare: 0.7,
+  /** 1.1.0: a group of pieces touching only each other, no larger than this (metres), is an object standing in a room. */
+  islandMaxM: 2.5,
+  /** … when its pieces close a ring (a piece over this share of each of its four sides), or it is no larger than `islandTinyM`. */
+  ringSideShare: 0.7,
+  islandTinyM: 0.9,
 } as const
 
 export type SkeletonWall = { id: string; axis: 'H' | 'V'; /** the centre line across (y for H, x for V), px */ at: number; from: number; to: number; thicknessPx: number; ends: { start: 'JUNCTION' | 'FREE'; end: 'JUNCTION' | 'FREE' }; confidence: number }
@@ -236,6 +244,79 @@ export function insetOutline(outline: ReadonlyArray<readonly [number, number]>, 
 export type PlanSkeletonInput = { frameId: string; sourceByteHash: string; raster: Raster; /** the outline of the outer wall faces, orthogonal, in frame pixels */ outlinePx: ReadonlyArray<readonly [number, number]>; mPerPx: number }
 
 /** 3 + 4. The gaps of the exterior walls and the interior, inside an outline at a stated scale. */
+/**
+ * 1.1.0 — which of the read pieces are OBJECTS drawn in the wall's tone (see step 5 of `readPlanSkeleton`). Pure geometry on
+ * the pieces; returns id → reason.
+ */
+export function objectsAmong(walls: readonly SkeletonWall[], outline: ReadonlyArray<readonly [number, number]>, wallPx: number, mPerPx: number, doors: readonly SkeletonDoor[] = []): Map<string, string> {
+  const out = new Map<string, string>()
+  const band = (w: SkeletonWall): { lo: number; hi: number } => ({ lo: w.at - w.thicknessPx / 2, hi: w.at + w.thicknessPx / 2 })
+  const edges = outline.map((p, i) => { const q = outline[(i + 1) % outline.length]; return Math.abs(p[1] - q[1]) < 0.5 ? { axis: 'H' as const, at: p[1], from: Math.min(p[0], q[0]), to: Math.max(p[0], q[0]) } : { axis: 'V' as const, at: p[0], from: Math.min(p[1], q[1]), to: Math.max(p[1], q[1]) } })
+  // (a) alongside a longer parallel wall, or the exterior wall
+  for (const w of walls) {
+    const len = w.to - w.from
+    const beside = walls.find((v) => v !== w && v.axis === w.axis && v.to - v.from > len && Math.min(w.to, v.to) - Math.max(w.from, v.from) >= PLAN_SKELETON.besideShare * len && Math.abs(w.at - v.at) - (w.thicknessPx + v.thicknessPx) / 2 < PLAN_SKELETON.besideM / mPerPx)
+    if (beside) { out.set(w.id, `alongside ${beside.id}, ${(Math.max(0, Math.abs(w.at - beside.at) - (w.thicknessPx + beside.thicknessPx) / 2) * mPerPx).toFixed(2)} m from it`); continue }
+    const ext = edges.find((e) => e.axis === w.axis && Math.min(w.to, e.to) - Math.max(w.from, e.from) >= PLAN_SKELETON.besideShare * len && Math.abs(w.at - e.at) - wallPx - w.thicknessPx / 2 < PLAN_SKELETON.besideM / mPerPx)
+    if (ext) out.set(w.id, `alongside the exterior wall, ${(Math.max(0, Math.abs(w.at - ext.at) - wallPx - w.thicknessPx / 2) * mPerPx).toFixed(2)} m from its inner face`)
+  }
+  // (b) islands: groups of pieces touching each other and nothing else
+  const live = walls.filter((w) => !out.has(w.id))
+  const tol = (a: SkeletonWall, b: SkeletonWall): number => Math.max(a.thicknessPx, b.thicknessPx, 2)
+  const touch = (a: SkeletonWall, b: SkeletonWall): boolean => {
+    const t = tol(a, b)
+    if (a.axis === b.axis) return Math.abs(a.at - b.at) <= t && Math.min(a.to, b.to) - Math.max(a.from, b.from) >= -t
+    const [ba, bb] = [band(a), band(b)]
+    // perpendicular: each one's band must reach the other's extent
+    return b.at >= a.from - t && b.at <= a.to + t && a.at >= b.from - t && a.at <= b.to + t && ba.lo <= b.to + t && bb.lo <= a.to + t
+  }
+  const anchored = (w: SkeletonWall): boolean => edges.some((e) => e.axis !== w.axis && e.from - wallPx <= w.at && w.at <= e.to + wallPx && (Math.abs(w.from - e.at) <= 1.6 * wallPx || Math.abs(w.to - e.at) <= 1.6 * wallPx))
+  const seen = new Set<string>()
+  for (const w0 of live) {
+    if (seen.has(w0.id)) continue
+    const group: SkeletonWall[] = []
+    const queue = [w0]
+    seen.add(w0.id)
+    while (queue.length > 0) {
+      const w = queue.pop() as SkeletonWall
+      group.push(w)
+      for (const v of live) if (!seen.has(v.id) && touch(w, v)) { seen.add(v.id); queue.push(v) }
+    }
+    if (group.length < 2 || group.some(anchored)) continue
+    const xs = group.flatMap((w) => (w.axis === 'H' ? [w.from, w.to] : [band(w).lo, band(w).hi]))
+    const ys = group.flatMap((w) => (w.axis === 'V' ? [w.from, w.to] : [band(w).lo, band(w).hi]))
+    const [dx, dy] = [(Math.max(...xs) - Math.min(...xs)) * mPerPx, (Math.max(...ys) - Math.min(...ys)) * mPerPx]
+    if (Math.max(dx, dy) > PLAN_SKELETON.islandMaxM) continue
+    // a room has a way in: pieces that close a ring with no gap (a piece along each of the group's four sides) enclose
+    // nothing anyone enters — a bed, a table, a shaft. A group too small to hold anything is an object whatever its
+    // shape. An open group of room size (three walls of a pantry, its door on the fourth side) is left alone.
+    const [x0, x1, y0, y1] = [Math.min(...xs), Math.max(...xs), Math.min(...ys), Math.max(...ys)]
+    const side = (axis: 'H' | 'V', at: number, lo: number, hi: number): boolean => group.some((w) => w.axis === axis && Math.abs(w.at - at) <= w.thicknessPx && Math.min(w.to, hi) - Math.max(w.from, lo) >= PLAN_SKELETON.ringSideShare * (hi - lo))
+    const ring = side('H', y0, x0, x1) && side('H', y1, x0, x1) && side('V', x0, y0, y1) && side('V', x1, y0, y1)
+    const tiny = Math.max(dx, dy) <= PLAN_SKELETON.islandTinyM
+    if (!ring && !tiny) continue
+    for (const w of group) out.set(w.id, `one of ${group.length} pieces touching only each other, ${dx.toFixed(2)} × ${dy.toFixed(2)} m, standing free in a room${ring ? ' and closing a ring with no way in' : ''}`)
+  }
+  // (c) floating: a piece neither of whose ends touches anything the plan stands on — another piece that is kept, the
+  //     exterior wall, a door gap in its own line. (The reader's own JUNCTION is about painted pixels: the side line of
+  //     a car is paint too.) Repeated until nothing changes: a piece held only by a floating one floats with it.
+  for (let changed = true; changed; ) {
+    changed = false
+    const kept = walls.filter((w) => !out.has(w.id))
+    for (const w of kept) {
+      const t = Math.max(w.thicknessPx, 0.12 / mPerPx)
+      const held = (end: number): boolean =>
+        kept.some((v) => v !== w && (v.axis !== w.axis ? Math.abs(v.at - end) <= v.thicknessPx / 2 + t && v.from - t <= w.at && w.at <= v.to + t : Math.abs(v.at - w.at) <= t && v.from - t <= end && end <= v.to + t)) ||
+        edges.some((e) => (e.axis !== w.axis ? Math.abs(e.at - end) <= wallPx + t && e.from - t <= w.at && w.at <= e.to + t : false)) ||
+        doors.some((d) => d.axis === w.axis && Math.abs(d.at - w.at) <= t && (Math.abs(d.from - end) <= t || Math.abs(d.to - end) <= t))
+      // … nor does another kept piece end on its side (a T on its span)
+      const borne = kept.some((v) => v !== w && v.axis !== w.axis && w.from - t <= v.at && v.at <= w.to + t && (Math.abs(v.from - w.at) <= w.thicknessPx / 2 + t || Math.abs(v.to - w.at) <= w.thicknessPx / 2 + t))
+      if (!held(w.from) && !held(w.to) && !borne) { out.set(w.id, 'neither end touches a wall, the exterior wall or a door gap in its line, and no wall ends on it: standing free'); changed = true }
+    }
+  }
+  return out
+}
+
 export function readPlanSkeleton(input: PlanSkeletonInput): PlanSkeleton {
   const traced = input.outlinePx.map((q) => [q[0], q[1]] as [number, number])
   const s = input.mPerPx
@@ -333,6 +414,21 @@ export function readPlanSkeleton(input: PlanSkeletonInput): PlanSkeleton {
     }
   } catch (e) {
     refused.push(`INTERIOR: the partition reader failed (${(e as Error).message.slice(0, 160)})`)
+  }
+  // 5. (1.1.0) objects drawn in the wall's tone are not partitions. Two shapes of them pass the reader as slender pieces:
+  //    a cabinet or a desk standing AGAINST a wall (a shorter piece alongside a longer parallel one, closer than anything
+  //    a person passes through), and a bed or a table standing IN a room (a small group of pieces that touch each other
+  //    and nothing else of the plan — no other partition, not the exterior wall). Both are dropped by name, with the
+  //    "doors" the reader found between them and the real walls.
+  const objects = objectsAmong(walls, outline, wallPx, s, doors)
+  if (objects.size > 0) {
+    const gone = walls.filter((w) => objects.has(w.id))
+    const kept = walls.filter((w) => !objects.has(w.id))
+    const flanks = (d: SkeletonDoor, w: SkeletonWall): boolean => w.axis === d.axis && Math.abs(w.at - d.at) <= Math.max(w.thicknessPx, 0.15 / s) && (Math.abs(w.to - d.from) <= Math.max(w.thicknessPx, 0.15 / s) || Math.abs(w.from - d.to) <= Math.max(w.thicknessPx, 0.15 / s))
+    const lostDoors = doors.filter((d) => gone.some((w) => flanks(d, w)) && !kept.some((w) => flanks(d, w)))
+    refused.push(`OBJECTS: ${gone.length} piece(s) in the wall's tone are objects, not partitions (${[...objects.entries()].map(([id, why]) => `${id}: ${why}`).join('; ')})${lostDoors.length > 0 ? `; ${lostDoors.length} door gap(s) read beside them go with them` : ''}`)
+    walls.splice(0, walls.length, ...kept)
+    doors.splice(0, doors.length, ...doors.filter((d) => !lostDoors.includes(d)))
   }
   return { ...base, outlinePx: outline.map((q) => [Math.round(q[0] * 10) / 10, Math.round(q[1] * 10) / 10] as [number, number]), snapped: snap.snapped, wallPx: Math.round(wallPx * 10) / 10, walls, doors, gaps, refused }
 }
