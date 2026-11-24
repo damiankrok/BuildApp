@@ -17,7 +17,7 @@ import type { CanonicalBuildingModel } from '@buildapp/model'
 import { executeCorrections, modelRevision, sideRidgeM } from '../src/consult/correct/execute.js'
 import type { BindPicture, BindView, CorrectionProposal, Side } from '../src/consult/correct/execute.js'
 import { capabilityPrompt } from '../src/consult/correct/registry.js'
-import { bodiesOf, bodyCommands, HIP_PLANE_SIDES, hipPlaneCommands, hipSpecFrom, hipWallTopM, MINIATURE_CONVENTIONS, profileOver, solveMassing } from '../src/consult/massing/massing.js'
+import { bodiesOf, bodyCommands, HIP_PLANE_SIDES, hipPlaneCommands, hipSpecFrom, hipWallTopM, MINIATURE_CONVENTIONS, outlineWithFront, profileOver, solveMassing } from '../src/consult/massing/massing.js'
 import type { BodySpec, OutlineObservation, RoofSpec, SilhouetteObservation } from '../src/consult/massing/massing.js'
 import { orientationOf, roofProposalsFromSketches } from '../src/consult/massing/ops.js'
 
@@ -303,6 +303,46 @@ describe('v3.54.18 R2 BUILD_MASSING and SET_ROOF: the hip through the executor a
     expect(odd.turn).toBe('FRONT_ON_RIGHT')
     expect(odd.why).toMatch(/neither quarter turn/)
     expect(orientationOf(sketches(GABLE), m, sideOf, { entranceSide: 'LEFT' }).assignment).toBe('AS_LABELLED')
+  })
+  it('a body built from elevations drawn a quarter turn from the plan is built in THEIR frame: the entrance side is the model\'s front, every elevation read as labelled', () => {
+    // the plan: 12 (x) by 8 (z), ridge along x; the elevation the publisher calls FRONT draws the plan's LEFT end (8 m)
+    const back: Record<Side, Side> = { FRONT: 'LEFT', LEFT: 'REAR', REAR: 'RIGHT', RIGHT: 'FRONT' }
+    const labelled = SIDES.map((s) => ({ ...silhouettes(GABLE, [back[s]])[0], side: s, frameId: frameOf(s), observationId: `sk-${s}` }))
+    const empty = createEmptyModel('m-turn', 'controlled')
+    const run = (entranceSide?: Side) => executeCorrections({ model: empty, views: [], pictures: [], proposals: [propose(empty, { operation: 'BUILD_MASSING' })], massing: { outline: OUTLINE, silhouettes: labelled, ...(entranceSide ? { entranceSide } : {}) } })
+    const left = run('LEFT')
+    expect(left.records[0].status).toBe('COMMITTED')
+    const hyp = (left.records[0].massing as { hypothesis: { planFront?: Side; views: Array<{ side: Side; frameId: string }>; alternatives: string[] } }).hypothesis
+    expect(hyp.planFront).toBe('LEFT')
+    // the views keep the sides their captions name: no turned mapping is carried on
+    expect(hyp.views.map((v) => [v.frameId, v.side])).toEqual(SIDES.map((s) => [frameOf(s), s]))
+    const b = bodiesOf(left.model)[0]
+    expect([b.rect.maxX - b.rect.minX, b.rect.maxZ - b.rect.minZ].map((v) => Math.round(v))).toEqual([8, 12])
+    expect(left.model.roofs[0].ridgeAxis).toBe('Z')
+    const sk = SIDES.map((s) => ({ ...sketches(GABLE, [back[s]])[0], facade: s, frameId: frameOf(s) }))
+    expect(orientationOf(sk, left.model, sideOf).assignment).toBe('AS_LABELLED')
+    // unmarked, the first turn is a convention and is named so
+    const plain = run()
+    const hp = (plain.records[0].massing as { hypothesis: { planFront?: Side; alternatives: string[] } }).hypothesis
+    expect(hp.planFront).toBe('RIGHT')
+    expect(hp.alternatives.join(' ')).toMatch(/convention/)
+    // counter-trial: elevations drawn as the plan labels them leave the body in the plan's frame
+    const straight = executeCorrections({ model: empty, views: [], pictures: [], proposals: [propose(empty, { operation: 'BUILD_MASSING' })], massing: { outline: OUTLINE, silhouettes: silhouettes(GABLE), entranceSide: 'LEFT' } })
+    expect((straight.records[0].massing as { hypothesis: { planFront?: Side } }).hypothesis.planFront).toBeUndefined()
+    const sb = bodiesOf(straight.model)[0]
+    expect([sb.rect.maxX - sb.rect.minX, sb.rect.maxZ - sb.rect.minZ].map((v) => Math.round(v))).toEqual([12, 8])
+  })
+  it('the quarter turn of an outline is rigid, never a mirror: its signed area keeps its sign, and the sheet\'s foot lands on the right hand of its left side', () => {
+    const L = [{ x: 0, z: 0 }, { x: 10, z: 0 }, { x: 10, z: 4 }, { x: 6, z: 4 }, { x: 6, z: 8 }, { x: 0, z: 8 }]
+    const signed = (o: Array<{ x: number; z: number }>): number => o.reduce((a, p, i) => a + p.x * o[(i + 1) % o.length].z - o[(i + 1) % o.length].x * p.z, 0) / 2
+    for (const front of ['LEFT', 'RIGHT', 'REAR'] as Side[]) expect(signed(outlineWithFront(L, front))).toBeCloseTo(signed(L), 6)
+    // the notch stands at the sheet's head-right corner (x 6..10, z 4..8): facing the sheet's LEFT side it is far and to the left
+    const t = outlineWithFront(L, 'LEFT')
+    expect(Math.max(...t.map((p) => p.z))).toBe(10)
+    // (far-left corner cut away, far-right corner kept; a mirror would cut the far-right one)
+    expect(t.some((p) => p.x === 0 && p.z === 10)).toBe(false)
+    expect(t.some((p) => p.x === 8 && p.z === 10)).toBe(true)
+    expect(t.some((p) => p.x === 4 && p.z === 10)).toBe(true)
   })
   it('the registry offers it', () => {
     expect(capabilityPrompt()).toMatch(/roofKind \(GABLE, HIP or FLAT\)/)

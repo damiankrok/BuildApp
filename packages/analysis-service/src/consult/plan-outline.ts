@@ -18,8 +18,8 @@ import { reserveOf } from './cost.js'
 import { pictureOf } from './metric-read.js'
 import type { OutlineObservation } from './massing/massing.js'
 
-export const PLAN_OUTLINE_VERSION = '1.1.0' as const
-export const PLAN_OUTLINE_PROMPT_VERSION = 'plan-outline/2' as const
+export const PLAN_OUTLINE_VERSION = '1.2.0' as const
+export const PLAN_OUTLINE_PROMPT_VERSION = 'plan-outline/3' as const
 /** The main entrance is taken to stand on a side when its point lies within this share of the outline's extent from that side's edge. */
 const ENTRANCE_NEAR_SHARE = 0.15
 const MAX_OFF_AXIS_DEG = 8
@@ -27,7 +27,8 @@ const MAX_OFF_AXIS_DEG = 8
 export const PLAN_OUTLINE_SYSTEM = `You trace the outline of a house on one floor plan. You do not measure and you do not describe the house.
 Give the outline of the OUTER faces of the exterior walls of the building on this plan — every enclosed part of it that stands on the ground (the house, an attached garage, a wing) — as one closed polygon of its real corners, in pixels of the picture you were sent (x to the right, y down), clockwise. Leave out terraces, steps, paving, pergolas, balcony slabs, the plot, dimension lines, text and furniture.
 Name the parts the outline contains (e.g. MAIN, GARAGE, WING) and say whether every edge runs along the picture's axes.
-If the plan itself shows which exterior door is the MAIN ENTRANCE — an entrance arrow or triangle at it, or entrance steps or a porch leading through it into a vestibule or hall — give the point where that door stands on the outline as "entrance" [x, y]. If the plan does not show it, leave "entrance" out: do not guess.`
+If the plan itself shows which exterior door is the MAIN ENTRANCE — an entrance arrow or triangle at it, or entrance steps or a porch leading through it into a vestibule or hall — give the point where that door stands on the outline as "entrance" [x, y]. If the plan does not show it, leave "entrance" out: do not guess.
+List the openings the plan draws in the EXTERIOR walls of that outline — windows, exterior doors, terrace doors, garage doors — as "openings": for each, the side of the picture its wall faces (TOP, RIGHT, BOTTOM or LEFT) and its two ends in pixels along that wall (x for TOP and BOTTOM, y for LEFT and RIGHT). Only openings the plan draws in exterior walls; no interior doors; nothing inferred.`
 
 const TOOL = {
   name: 'report_outline',
@@ -41,12 +42,13 @@ const TOOL = {
       parts: { type: 'array', items: { type: 'string' } },
       orthogonal: { type: 'boolean' },
       entrance: { type: 'array', description: 'the main entrance door on the outline, in pixels of this picture — only when the plan shows which door it is', items: { type: 'number' }, minItems: 2, maxItems: 2 },
+      openings: { type: 'array', description: 'the openings drawn in the exterior walls of the outline', items: { type: 'object', additionalProperties: false, required: ['side', 'from', 'to', 'kind'], properties: { side: { type: 'string', enum: ['TOP', 'RIGHT', 'BOTTOM', 'LEFT'] }, from: { type: 'number' }, to: { type: 'number' }, kind: { type: 'string', enum: ['WINDOW', 'DOOR', 'GLAZED_DOOR', 'GARAGE_DOOR'] } } } },
       note: { type: 'string' },
     },
   },
 } as const
 
-const Raw = z.object({ outline: z.array(z.tuple([z.number().finite(), z.number().finite()])).min(4), parts: z.array(z.string()), orthogonal: z.boolean(), entrance: z.tuple([z.number().finite(), z.number().finite()]).nullable().optional(), note: z.string().nullable().optional() }).strict()
+const Raw = z.object({ outline: z.array(z.tuple([z.number().finite(), z.number().finite()])).min(4), parts: z.array(z.string()), orthogonal: z.boolean(), entrance: z.tuple([z.number().finite(), z.number().finite()]).nullable().optional(), openings: z.array(z.object({ side: z.enum(['TOP', 'RIGHT', 'BOTTOM', 'LEFT']), from: z.number().finite(), to: z.number().finite(), kind: z.enum(['WINDOW', 'DOOR', 'GLAZED_DOOR', 'GARAGE_DOOR']) }).strict()).nullable().optional(), note: z.string().nullable().optional() }).strict()
 
 type Ctx = { model: ConsultantModel; price: Price; spend?: ConsultSpend; signal?: AbortSignal }
 export type PlanOutlineInput = { frameId: string; raster: Raster; caption: string; sourceByteHash: string; /** metres per FRAME pixel, from the analyzer's own measured scale; absent = no metric anchor. */ scale?: { mPerPx: number; why: string }; publishedFootprintM2?: number }
@@ -62,11 +64,19 @@ export type PlanOutlineRead = {
   parts?: string[]
   /** plan-outline 1.1.0: the side of the outline the plan marks its main entrance on (the plan's own convention: its foot is the FRONT), with the point as read; absent when the plan does not show it or the point is not near one side. */
   entrance?: { px: [number, number]; side?: 'FRONT' | 'RIGHT' | 'REAR' | 'LEFT'; why: string }
+  /**
+   * plan-outline 1.2.0: the openings the plan draws in its exterior walls, by the side of the PLAN (its foot is the front),
+   * each as a stretch of that side seen from outside, left to right, 0..1 — a turn of the house does not change it. A
+   * second drawing's observation: it never adds an opening; it tells two side elevations apart.
+   */
+  openings?: PlanSideOpening[]
   observation?: OutlineObservation
   /** The area of the outline at the analyzer's scale against the published footprint: a check, never an anchor. */
   check?: { areaM2: number; publishedM2?: number; share?: number }
   refused: string[]
 }
+
+export type PlanSideOpening = { side: 'FRONT' | 'RIGHT' | 'REAR' | 'LEFT'; u0: number; u1: number; kind: 'WINDOW' | 'DOOR' | 'GLAZED_DOOR' | 'GARAGE_DOOR' }
 
 const toolInput = (turn: ModelTurn, name: string): unknown => (turn.content as Array<{ type: string; name?: string; input?: unknown }>).find((b) => b.type === 'tool_use' && b.name === name)?.input
 
@@ -145,6 +155,20 @@ export async function readPlanOutline(ctx: Ctx, f: PlanOutlineInput): Promise<Pl
     const d = [{ side: 'FRONT' as const, v: (y1 - ey) / (y1 - y0) }, { side: 'REAR' as const, v: (ey - y0) / (y1 - y0) }, { side: 'LEFT' as const, v: (ex - x0) / (x1 - x0) }, { side: 'RIGHT' as const, v: (x1 - ex) / (x1 - x0) }].sort((a, b) => Math.abs(a.v) - Math.abs(b.v))
     const one = Math.abs(d[0].v) <= ENTRANCE_NEAR_SHARE && Math.abs(d[1].v) > ENTRANCE_NEAR_SHARE
     read.entrance = { px: [Math.round(ex), Math.round(ey)], ...(one ? { side: d[0].side } : {}), why: one ? `the plan marks its main entrance ${(Math.abs(d[0].v) * 100).toFixed(0)} % in from the outline's ${d[0].side.toLowerCase()} side (the plan's foot is the front)` : `the entrance point is not near one side of the outline alone (${d.slice(0, 2).map((q) => `${q.side.toLowerCase()} ${(Math.abs(q.v) * 100).toFixed(0)} %`).join(', ')}): no side taken` }
+  }
+  if (p.data.openings && p.data.openings.length > 0) {
+    const xs = o.outline.map((q) => q[0])
+    const ys = o.outline.map((q) => q[1])
+    const [x0, x1, y0, y1] = [Math.min(...xs), Math.max(...xs), Math.min(...ys), Math.max(...ys)]
+    const clamp = (v: number): number => Math.round(Math.min(1, Math.max(0, v)) * 1e4) / 1e4
+    // along each side as a viewer outside it sees it, left to right: the foot (front) runs with x, the right side up the
+    // sheet, the head (rear) against x, the left side down the sheet
+    read.openings = p.data.openings.flatMap((q) => {
+      const [a, b] = [q.from * pic.scale, q.to * pic.scale]
+      const u = q.side === 'BOTTOM' ? [(a - x0) / (x1 - x0), (b - x0) / (x1 - x0)] : q.side === 'TOP' ? [(x1 - a) / (x1 - x0), (x1 - b) / (x1 - x0)] : q.side === 'RIGHT' ? [(y1 - a) / (y1 - y0), (y1 - b) / (y1 - y0)] : [(a - y0) / (y1 - y0), (b - y0) / (y1 - y0)]
+      const [u0, u1] = [clamp(Math.min(...u)), clamp(Math.max(...u))]
+      return u1 - u0 > 0.005 ? [{ side: q.side === 'BOTTOM' ? ('FRONT' as const) : q.side === 'TOP' ? ('REAR' as const) : q.side, u0, u1, kind: q.kind }] : []
+    })
   }
   if (!f.scale) {
     read.refused.push('PLAN_SCALE: the analyzer measured no scale of this plan: the outline stays in pixels')

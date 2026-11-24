@@ -24,7 +24,7 @@ import type { CanonicalBuildingModel, Wall } from '@buildapp/model'
 import type { BindView, Projection, Side } from '../correct/execute.js'
 import type { Poly } from '../correct/source-gate.js'
 
-export const MASSING_VERSION = '1.3.0' as const
+export const MASSING_VERSION = '1.4.0' as const
 
 export type Rect = { minX: number; maxX: number; minZ: number; maxZ: number }
 export type Fidelity = 'SOURCE_EXACT' | 'SOURCE_DERIVED' | 'SOURCE_TRACED' | 'DISPLAY_ASSUMPTION' | 'TRACE_UNCERTAIN'
@@ -57,6 +57,12 @@ export type MassingHypothesis = {
   /** What each elevation was used for, or why not. */
   views_used: Array<{ side: Side; frameId: string; used: boolean; why: string }>
   wallThicknessM: number
+  /**
+   * massing 1.4.0: the side of the PLAN SHEET that is the body's front (absent: the plan's foot, as the plan convention
+   * has it). Where the elevations are drawn a quarter turn from the plan's sides, the body is built in the SOURCE's frame
+   * — the model's own frame says "the front facade outer face is z = 0" — and the plan sheet is then turned against it.
+   */
+  planFront?: Side
   why: string
 }
 
@@ -189,6 +195,19 @@ export type RoofProfile = {
   drawn?: { lo: number; hi: number }
   /** The roof is drawn as its edge only (a verge seen from the gable end), not as a surface. */
   hollow?: boolean
+}
+/**
+ * massing 1.4.0: a plan outline turned so that the side of the sheet the front elevation draws (`front`: the sheet's LEFT
+ * or RIGHT) becomes the front (z = 0), a rigid quarter turn — never a mirror: facing the sheet's left side, the sheet's
+ * foot is on the right hand; facing its right side, the sheet's head is.
+ */
+export function outlineWithFront(outline: ReadonlyArray<{ x: number; z: number }>, front: Side): Array<{ x: number; z: number }> {
+  const [minX, maxX, minZ, maxZ] = [Math.min(...outline.map((p) => p.x)), Math.max(...outline.map((p) => p.x)), Math.min(...outline.map((p) => p.z)), Math.max(...outline.map((p) => p.z))]
+  const r = (v: number): number => Math.round(v * 1e4) / 1e4
+  if (front === 'LEFT') return outline.map((p) => ({ x: r(maxZ - p.z), z: r(p.x - minX) }))
+  if (front === 'RIGHT') return outline.map((p) => ({ x: r(p.z - minZ), z: r(maxX - p.x) }))
+  if (front === 'REAR') return outline.map((p) => ({ x: r(maxX - p.x), z: r(maxZ - p.z) }))
+  return outline.map((p) => ({ x: p.x, z: p.z }))
 }
 /** The stretch a set of polygons spans on one pixel row (leftmost to rightmost edge crossing), or none. */
 export function rowExtent(polys: readonly Poly[], row: number): [number, number] | undefined {

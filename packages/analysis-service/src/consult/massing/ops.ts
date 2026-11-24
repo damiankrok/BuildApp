@@ -21,10 +21,10 @@ import type { Poly } from '../correct/source-gate.js'
 import { facadePx, levelOf, openingBoxes, pictureOf, tolPxOf, toFrameX, toFrameY, viewOf } from '../correct/execute.js'
 import type { BindPicture, BindView, Bound, Ctx, CorrectionProposal, Refusal, Side } from '../correct/execute.js'
 import { targetBodies } from '../correct/resolve.js'
-import { area, bodiesOf, bodyCommands, extentOn, HIP_PLANE_SIDES, hipPlaneCommands, hipSpecFrom, hipWallTopM, MASSING_TOLERANCES, MAX_OVERHANG_M, MASSING_VERSION, massingCommands, MINIATURE_CONVENTIONS, profileOver, readableStretch, registerByPlan, solveMassing, wallCornerTopM } from './massing.js'
+import { area, bodiesOf, bodyCommands, extentOn, outlineWithFront, HIP_PLANE_SIDES, hipPlaneCommands, hipSpecFrom, hipWallTopM, MASSING_TOLERANCES, MAX_OVERHANG_M, MASSING_VERSION, massingCommands, MINIATURE_CONVENTIONS, profileOver, readableStretch, registerByPlan, solveMassing, wallCornerTopM } from './massing.js'
 import type { BodySpec, Fidelity, MassingHypothesis, ModelBody, OutlineObservation, Rect, RoofSpec, SilhouetteObservation } from './massing.js'
 
-export const MASSING_OPS_VERSION = '1.7.0' as const
+export const MASSING_OPS_VERSION = '1.8.0' as const
 /** v3.54.17 R2: the most overhang a drawn roof may have past its body on a side, and the steepest pitch the kernel builds. */
 export { MAX_OVERHANG_M }
 /** v3.54.18 (ops 1.6.0): an opening whose height the model ASSUMED comes down under a roof the source draws — to this far under the wall top, and only while at least this much of it is left (else the roof patch is refused, as before). */
@@ -664,10 +664,18 @@ export function bindBuildMassing(ctx: Ctx, p: CorrectionProposal): Bound | Refus
   const asLabelled = solveMassing({ outline: obs.outline, silhouettes: obs.silhouettes })
   // ops 1.7.0: the same quarter turn the orientation hypothesis takes (the plan's main entrance decides which), so the
   // views this body is built through carry the sides every later consumer reads them on
-  const quarter = obs.entranceSide === TURN_BACK.FRONT ? TURN_BACK : TURN
-  const turnedH = solveMassing({ outline: obs.outline, silhouettes: obs.silhouettes.map((q) => ({ ...q, side: quarter[q.side] })) })
+  // ops 1.8.0: a body built from the sources is built in the SOURCE's frame. Where the elevations are drawn a quarter
+  // turn from the plan's sides, the plan outline is turned — rigidly — so that the side the front elevation draws is the
+  // model's front, and every elevation is then read on the side its caption names: no turned mapping is carried through
+  // the consumers, and the delivered model keeps its own frame's promise ("the front facade outer face is z = 0"). The
+  // plan's main entrance says which end the front is; unmarked, the first turn stands as a convention.
+  const planFront: Side = obs.entranceSide === TURN_BACK.FRONT ? 'LEFT' : 'RIGHT'
+  // (a model that already has bodies keeps its frame: a body added to it is read through the turned side mapping, as before)
+  const ownFrame = !bodiesOf(m).some((b) => b.ringIds.length > 0)
+  const quarter = planFront === 'LEFT' ? TURN_BACK : TURN
+  const turnedH = ownFrame ? solveMassing({ outline: { ...obs.outline, outline: outlineWithFront(obs.outline.outline, planFront) }, silhouettes: obs.silhouettes }) : solveMassing({ outline: obs.outline, silhouettes: obs.silhouettes.map((q) => ({ ...q, side: quarter[q.side] })) })
   const turn = agreeing(turnedH) > agreeing(asLabelled)
-  const h: MassingHypothesis = turn ? { ...turnedH, alternatives: [...turnedH.alternatives, `the elevations draw the model's sides turned by 90° from their labels: ${agreeing(turnedH)} body/bodies' heights agree so against ${agreeing(asLabelled)} as labelled (the labelled reading is kept as an alternative)`] } : { ...asLabelled, alternatives: [...asLabelled.alternatives, ...(agreeing(turnedH) === agreeing(asLabelled) && turnedH.status === 'BUILDABLE' ? [`turned by 90° the elevations agree as well (${agreeing(turnedH)} body/bodies): the labels are kept`] : [])] }
+  const h: MassingHypothesis = turn && !ownFrame ? { ...turnedH, alternatives: [...turnedH.alternatives, `the elevations draw the model's sides turned by 90° from their labels: ${agreeing(turnedH)} body/bodies' heights agree so against ${agreeing(asLabelled)} as labelled (the labelled reading is kept as an alternative)`] } : turn ? { ...turnedH, planFront, alternatives: [...turnedH.alternatives, `the body is built in the elevations' frame, the plan sheet's ${planFront.toLowerCase()} side as its front (${obs.entranceSide === undefined ? 'which end is a convention: the plan read marks no main entrance' : obs.entranceSide === planFront ? 'the plan marks its main entrance there' : `the plan marks its main entrance on its ${obs.entranceSide.toLowerCase()} side, where neither quarter turn puts the front: a convention`}) — the elevations draw the plan's sides turned by 90° from their labels: ${agreeing(turnedH)} body/bodies' heights agree so against ${agreeing(asLabelled)} as labelled (the labelled reading is kept as an alternative)`] } : { ...asLabelled, alternatives: [...asLabelled.alternatives, ...(agreeing(turnedH) === agreeing(asLabelled) && turnedH.status === 'BUILDABLE' ? [`turned by 90° the elevations agree as well (${agreeing(turnedH)} body/bodies): the labels are kept`] : [])] }
   const record = { massing: { version: MASSING_OPS_VERSION, hypothesis: h } as Record<string, unknown>, ...(obs.outline.frameId ? { source: { frameId: obs.outline.frameId, sourceByteHash: obs.outline.sourceByteHash } } : {}) }
   if (h.status !== 'BUILDABLE') return { status: h.status === 'UNSUPPORTED_FORM' ? 'UNSUPPORTED_OPERATION' : 'NEEDS_EVIDENCE', code: h.status === 'UNSUPPORTED_FORM' ? 'MASSING_UNSUPPORTED_FORM' : 'MASSING_MISSING_ANCHORS', why: `${h.why}; missing: ${h.missing.map((x) => `${x.anchor} (${x.why})`).join('; ') || 'none'}`, record }
   const existing = bodiesOf(m).filter((b) => b.ringIds.length > 0)
