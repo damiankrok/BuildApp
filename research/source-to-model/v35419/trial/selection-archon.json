@@ -1,0 +1,342 @@
+{
+ "commit": "9ac25b629e8f370c95be50008408f0471be5c0f6",
+ "rule": "TRIAL_SELECTION.md",
+ "publishers": {
+  "archon": {
+   "seed": "9dc504a1f70e7d915690423afabab68bf0f936db574e54b4ca4a1027794d2454",
+   "start": 260,
+   "poolSize": 356,
+   "opened": [
+    {
+     "url": "https://www.archon.pl/projekty-domow/projekt-willa-cecylia-m6692225a12d1d",
+     "opened": true,
+     "package": "archon-projekt-willa-cecylia.package.json",
+     "elevations": [
+      "SIDE_UNSPECIFIED",
+      "SIDE_UNSPECIFIED",
+      "FRONT",
+      "REAR"
+     ],
+     "plans": [
+      "GROUND",
+      "UPPER",
+      "UPPER",
+      "GROUND",
+      "UPPER",
+      "GROUND"
+     ],
+     "sections": 1,
+     "refused": "no published usable area (not a dwelling)"
+    },
+    {
+     "url": "https://www.archon.pl/projekty-domow/projekt-willa-edyta-r2be-m89429956dfc8d",
+     "opened": true,
+     "package": "archon-projekt-willa-edyta-r2be.package.json",
+     "elevations": [
+      "SIDE_UNSPECIFIED",
+      "SIDE_UNSPECIFIED",
+      "FRONT",
+      "REAR"
+     ],
+     "plans": [
+      "GROUND",
+      "UPPER",
+      "ATTIC",
+      "UPPER",
+      "GROUND",
+      "GROUND",
+      "UPPER",
+      "ATTIC",
+      "ATTIC"
+     ],
+     "sections": 1,
+     "refused": "no published usable area (not a dwelling)"
+    },
+    {
+     "url": "https://www.archon.pl/projekty-domow/projekt-willa-eliza-2-m4392174fd4c73",
+     "opened": true,
+     "package": "archon-projekt-willa-eliza.package.json",
+     "elevations": [
+      "SIDE_UNSPECIFIED",
+      "SIDE_UNSPECIFIED",
+      "FRONT",
+      "REAR"
+     ],
+     "plans": [
+      "GROUND",
+      "UPPER",
+      "GROUND",
+      "UPPER",
+      "UPPER",
+      "UPPER",
+      "GROUND",
+      "GROUND"
+     ],
+     "sections": 1,
+     "refused": "no published usable area (not a dwelling)"
+    },
+    {
+     "url": "https://www.archon.pl/projekty-domow/projekt-willa-eliza-3-m71b21bd1f4ced",
+     "opened": true,
+     "package": "archon-projekt-willa-eliza.package.json",
+     "elevations": [
+      "SIDE_UNSPECIFIED",
+      "SIDE_UNSPECIFIED",
+      "FRONT",
+      "REAR"
+     ],
+     "plans": [
+      "GROUND",
+      "UPPER",
+      "UPPER",
+      "GROUND",
+      "UPPER",
+      "GROUND",
+      "GROUND",
+      "UPPER"
+     ],
+     "sections": 1,
+     "refused": "no published usable area (not a dwelling)"
+    },
+    {
+     "url": "https://www.archon.pl/projekty-domow/projekt-willa-eliza-4-g2-md3321e3aee92e",
+     "opened": true,
+     "package": "archon-projekt-willa-eliza.package.json",
+     "elevations": [
+      "SIDE_UNSPECIFIED",
+      "SIDE_UNSPECIFIED",
+      "FRONT",
+      "REAR"
+     ],
+     "plans": [
+      "GROUND",
+      "UPPER",
+      "GROUND",
+      "UPPER",
+      "GROUND",
+      "UPPER",
+      "GROUND",
+      "UPPER"
+     ],
+     "sections": 1,
+     "refused": "no published usable area (not a dwelling)"
+    },
+    {
+     "url": "https://www.archon.pl/projekty-domow/projekt-willa-eliza-5-g2-ma4a24c40addc8",
+     "opened": true,
+     "package": "archon-projekt-willa-eliza.package.json",
+     "elevations": [
+      "SIDE_UNSPECIFIED",
+      "SIDE_UNSPECIFIED",
+      "FRONT",
+      "REAR"
+     ],
+     "plans": [
+      "GROUND",
+      "UPPER",
+      "UPPER",
+      "GROUND",
+      "UPPER",
+      "GROUND",
+      "UPPER",
+      "GROUND"
+     ],
+     "sections": 1
+    },
+    {
+     "url": "https://www.archon.pl/projekty-domow/projekt-willa-eliza-m529df5c2a0c77",
+     "opened": false,
+     "refused": "a variant of the accepted family projekt-willa-eliza"
+    },
+    {
+     "url": "https://www.archon.pl/projekty-domow/projekt-willa-elwira-m91e22305c9b13",
+     "opened": true,
+     "package": "archon-projekt-willa-elwira.package.json",
+     "elevations": [
+      "SIDE_UNSPECIFIED",
+      "SIDE_UNSPECIFIED",
+      "FRONT",
+      "REAR"
+     ],
+     "plans": [
+      "GROUND",
+      "UPPER",
+      "UPPER",
+      "GROUND",
+      "UPPER",
+      "GROUND",
+      "GROUND",
+      "UPPER"
+     ],
+     "sections": 1,
+     "refused": "no published usable area (not a dwelling)"
+    },
+    {
+     "url": "https://www.archon.pl/projekty-domow/projekt-willa-emilia-m580208271ea40",
+     "opened": true,
+     "package": "archon-projekt-willa-emilia.package.json",
+     "elevations": [
+      "SIDE_UNSPECIFIED",
+      "SIDE_UNSPECIFIED",
+      "FRONT",
+      "REAR"
+     ],
+     "plans": [
+      "GROUND",
+      "UPPER",
+      "UPPER",
+      "GROUND",
+      "UPPER",
+      "GROUND",
+      "GROUND",
+      "UPPER"
+     ],
+     "sections": 1,
+     "refused": "no published usable area (not a dwelling)"
+    },
+    {
+     "url": "https://www.archon.pl/projekty-domow/projekt-willa-emma-mb9521022c9adf",
+     "opened": true,
+     "package": "archon-projekt-willa-emma.package.json",
+     "elevations": [
+      "SIDE_UNSPECIFIED",
+      "SIDE_UNSPECIFIED",
+      "FRONT",
+      "REAR"
+     ],
+     "plans": [
+      "GROUND",
+      "UPPER",
+      "UPPER",
+      "UPPER",
+      "GROUND",
+      "GROUND"
+     ],
+     "sections": 1,
+     "refused": "no published usable area (not a dwelling)"
+    },
+    {
+     "url": "https://www.archon.pl/projekty-domow/projekt-willa-gaja-mfdb261f33adf3",
+     "opened": true,
+     "package": "archon-projekt-willa-gaja.package.json",
+     "elevations": [
+      "SIDE_UNSPECIFIED",
+      "SIDE_UNSPECIFIED",
+      "FRONT",
+      "REAR"
+     ],
+     "plans": [
+      "GROUND",
+      "UPPER",
+      "GROUND",
+      "UPPER",
+      "UPPER",
+      "GROUND"
+     ],
+     "sections": 1,
+     "refused": "no published usable area (not a dwelling)"
+    },
+    {
+     "url": "https://www.archon.pl/projekty-domow/projekt-willa-gracja-e-m54928e4ccd78b",
+     "opened": true,
+     "package": "archon-projekt-willa-gracja-e.package.json",
+     "elevations": [
+      "SIDE_UNSPECIFIED",
+      "SIDE_UNSPECIFIED",
+      "FRONT",
+      "REAR"
+     ],
+     "plans": [
+      "GROUND",
+      "UPPER",
+      "UPPER",
+      "GROUND",
+      "UPPER",
+      "GROUND",
+      "GROUND",
+      "UPPER"
+     ],
+     "sections": 1,
+     "refused": "no published usable area (not a dwelling)"
+    },
+    {
+     "url": "https://www.archon.pl/projekty-domow/projekt-willa-gracja-ge-m9d829175d6f21",
+     "opened": true,
+     "package": "archon-projekt-willa-gracja.package.json",
+     "elevations": [
+      "SIDE_UNSPECIFIED",
+      "SIDE_UNSPECIFIED",
+      "FRONT",
+      "REAR"
+     ],
+     "plans": [
+      "GROUND",
+      "UPPER",
+      "UPPER",
+      "GROUND",
+      "UPPER",
+      "UPPER",
+      "GROUND",
+      "GROUND"
+     ],
+     "sections": 1,
+     "refused": "no published usable area (not a dwelling)"
+    },
+    {
+     "url": "https://www.archon.pl/projekty-domow/projekt-willa-irma-mfa7208db59797",
+     "opened": true,
+     "package": "archon-projekt-willa-irma.package.json",
+     "elevations": [
+      "SIDE_UNSPECIFIED",
+      "SIDE_UNSPECIFIED",
+      "FRONT",
+      "REAR"
+     ],
+     "plans": [
+      "GROUND",
+      "UPPER",
+      "UPPER",
+      "GROUND",
+      "UPPER",
+      "GROUND",
+      "UPPER",
+      "GROUND"
+     ],
+     "sections": 1,
+     "refused": "no published usable area (not a dwelling)"
+    },
+    {
+     "url": "https://www.archon.pl/projekty-domow/projekt-willa-julia-10-r2-ver-2-m1512958b4ffa7",
+     "opened": true,
+     "package": "archon-projekt-willa-julia-10-r2-ver.package.json",
+     "elevations": [
+      "SIDE_UNSPECIFIED",
+      "SIDE_UNSPECIFIED",
+      "FRONT",
+      "REAR"
+     ],
+     "plans": [
+      "GROUND",
+      "UPPER",
+      "ATTIC",
+      "GROUND",
+      "UPPER",
+      "ATTIC",
+      "UPPER",
+      "GROUND",
+      "ATTIC",
+      "UPPER",
+      "ATTIC",
+      "GROUND"
+     ],
+     "sections": 1,
+     "refused": "no published usable area (not a dwelling)"
+    }
+   ],
+   "chosen": "https://www.archon.pl/projekty-domow/projekt-willa-eliza-5-g2-ma4a24c40addc8",
+   "accepted": [
+    "https://www.archon.pl/projekty-domow/projekt-willa-eliza-5-g2-ma4a24c40addc8"
+   ]
+  }
+ }
+}

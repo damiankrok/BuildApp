@@ -58,3 +58,18 @@ rozwojowy (nie dowód transferu). Ślepa ocena X/Y na znanych domach nie zastęp
 - Zmiana reguły odczytu jest najpierw sprawdzana na wszystkich nagranych domach DEV (regresje wypisane).
 - Limit kosztu etapu: 14,00 USD z tej samej księgi (stan wejściowy 37,778557 / pułap 68,542857 USD; bez nowej puli).
 - Timeout, słaby kandydat, błąd modułu = diagnoza, nie koniec rundy.
+
+## 6. Wynik losowania i poprawka przed analizą (2026-11-24)
+
+Pierwsze przejście: Studio Atrium → Aletta New, Amarylis; Lipińscy → Novara, Oban III; Dobre Domy → Jarzębina, Juliusz
+Nowy; ARCHON → nic (pula tekstowa z poprzednich etapów jest wyczerpana wykluczeniami: otwarto 2, garaż i stronę bez
+powierzchni użytkowej). **Poprawka zapisana przed jakąkolwiek analizą:** pula ARCHON została zastąpiona adresami
+z publicznej mapy strony wydawcy (3288 adresów projektów; po odrzuceniu każdej strony, której nazwa zaczyna się od
+rodziny widzianej wcześniej, oraz stron innych niż „projekt-dom-…"/„projekt-willa-…": 356 adresów,
+`trial/archon-pool-2.txt`), to samo ziarno i ta sama reguła. Wynik (`trial/selection-archon.json`): 14 otwartych,
+1 przyjęty — Willa Eliza 5 G2 (13 odrzuconych: strona nie publikuje powierzchni użytkowej w formie, którą czyta pakiet).
+
+- **NEW-D (pierwszy pomiar):** Aletta New, Novara, Jarzębina, Willa Eliza 5 G2.
+- **NEW-E (odłożona, nieotwierana do zamrożenia):** Amarylis, Oban III, Juliusz Nowy (pula ARCHON nie dała drugiego domu).
+
+Cechy referencyjne NEW-D: `references/NEW-D.md` (spisane ze źródeł przed obejrzeniem modeli).

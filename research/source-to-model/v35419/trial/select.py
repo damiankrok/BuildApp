@@ -18,7 +18,10 @@ out = {'commit': commit, 'rule': 'TRIAL_SELECTION.md', 'publishers': {}}
 # v3.54.17: the ARCHON pool is exhausted by the exclusions, so the Studio Atrium walk gives both families (TRIAL_SELECTION.md)
 want = {'studioatrium': 2, 'lipinscy': 2, 'archon': 2, 'dobredomy': 2}
 os.makedirs(work, exist_ok=True)
-for publisher, pool_file in (('studioatrium', 'studioatrium-pool.txt'), ('lipinscy', 'lipinscy-pool.txt'), ('archon', 'archon-pool.txt'), ('dobredomy', 'dobredomy-pool.txt')):
+POOLS = (('studioatrium', 'studioatrium-pool.txt'), ('lipinscy', 'lipinscy-pool.txt'), ('archon', 'archon-pool.txt'), ('dobredomy', 'dobredomy-pool.txt'))
+# v3.54.19 correction before any analysis: `select.py <commit> <work> archon=archon-pool-2.txt` walks one publisher's replaced pool
+if len(sys.argv) > 3: POOLS = tuple(tuple(a.split('=')) for a in sys.argv[3:])
+for publisher, pool_file in POOLS:
     pool = [l.strip() for l in open(os.path.join(here, pool_file)) if l.strip()]
     seed = hashlib.sha256(f'{commit}:V35419-TRIAL:{publisher}'.encode()).hexdigest()
     start = int(seed, 16) % len(pool)
@@ -69,4 +72,4 @@ for publisher, pool_file in (('studioatrium', 'studioatrium-pool.txt'), ('lipins
         if len(rec['accepted']) >= want.get(publisher, 1): break
     out['publishers'][publisher] = rec
     print(publisher, rec['chosen'] or 'NONE ACCEPTED', f"({sum(1 for o in rec['opened'] if o.get('opened'))} opened)")
-json.dump(out, open(os.path.join(work, 'selection.json'), 'w'), indent=1)
+json.dump(out, open(os.path.join(work, 'selection.json' if len(sys.argv) <= 3 else 'selection-' + '-'.join(p for p, _ in POOLS) + '.json'), 'w'), indent=1)
