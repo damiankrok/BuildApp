@@ -10,13 +10,13 @@ const KEYS = ['sakura-r2-v35418', 'alberto-r2-v35418', 'alaska-r2-v35418', 'ball
 
 describe('v3.54.18 R2 scenes', () => {
   it('the four R2 scenes come first, each labelled R2; the kept failures are named', () => {
-    expect(SCENES.slice(4, 8).map((s) => s.key)).toEqual(KEYS)
-    for (const s of SCENES.slice(4, 8)) expect(s.subtitle).toContain('R2')
-    expect(SCENES[5].subtitle).toContain('NIEPOWODZENIA ZACHOWANE')
-    expect(SCENES[6].subtitle).toContain('NIEPOWODZENIE ZACHOWANE')
+    expect(SCENES.slice(26, 30).map((s) => s.key)).toEqual(KEYS)
+    for (const s of SCENES.slice(26, 30)) expect(s.subtitle).toContain('R2')
+    expect(SCENES[27].subtitle).toContain('NIEPOWODZENIA ZACHOWANE')
+    expect(SCENES[28].subtitle).toContain('NIEPOWODZENIE ZACHOWANE')
   })
   it('the hip roof is four roof planes over level walls, with no parametric roof, and compiles closed', () => {
-    const m = SCENES[4].build()
+    const m = SCENES[26].build()
     expect(m.roofs).toHaveLength(0)
     expect(m.roofPlanes.map((p) => p.id).sort()).toEqual(['roof-mass-main-maxX', 'roof-mass-main-maxZ', 'roof-mass-main-minX', 'roof-mass-main-minZ'])
     expect(m.walls.every((w) => !w.topProfile)).toBe(true)
@@ -24,7 +24,7 @@ describe('v3.54.18 R2 scenes', () => {
     expect(geometryClosureAudit(m, scene).findings.filter((f) => f.severity === 'ERROR' && f.objects.some((o) => o.startsWith('roof-mass-main')))).toEqual([])
   })
   it('no R2 scene holds an opening the compiler does not cut', () => {
-    for (const s of SCENES.slice(4, 8)) {
+    for (const s of SCENES.slice(26, 30)) {
       const uncut = compileBuilding(s.build()).diagnostics.filter((d) => d.code === 'OPENING_ABOVE_WALL_TOP')
       expect(uncut.map((d) => d.objectId), s.key).toEqual([])
     }

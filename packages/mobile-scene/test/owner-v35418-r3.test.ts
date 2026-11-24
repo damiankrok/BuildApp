@@ -10,12 +10,12 @@ const KEYS = ['alaska-r3-v35418', 'g6-r3-v35418', 'aurora-r3-v35418', 'alberto-r
 
 describe('v3.54.18 R3 scenes', () => {
   it('the four R3 scenes come first, each labelled R3; the kept failures are named', () => {
-    expect(SCENES.slice(0, 4).map((s) => s.key)).toEqual(KEYS)
-    for (const s of SCENES.slice(0, 4)) expect(s.subtitle).toContain('R3')
-    for (const i of [1, 2, 3]) expect(SCENES[i].subtitle).toContain('NIEPOWODZENIA ZACHOWANE')
+    expect(SCENES.slice(22, 26).map((s) => s.key)).toEqual(KEYS)
+    for (const s of SCENES.slice(22, 26)) expect(s.subtitle).toContain('R3')
+    for (const i of [23, 24, 25]) expect(SCENES[i].subtitle).toContain('NIEPOWODZENIA ZACHOWANE')
   })
   it('Alaska stands with its entrance gable as the front: the body is narrower than deep and the front wall holds the door', () => {
-    const m = SCENES[0].build()
+    const m = SCENES[22].build()
     const xs = m.walls.flatMap((w) => [w.start.x, w.end.x])
     const zs = m.walls.flatMap((w) => [w.start.z, w.end.z])
     expect(Math.max(...xs) - Math.min(...xs)).toBeLessThan(Math.max(...zs) - Math.min(...zs))
@@ -24,8 +24,8 @@ describe('v3.54.18 R3 scenes', () => {
     expect(m.roofs[0].ridgeAxis).toBe('Z')
   })
   it('G6 is roofed by four hip planes; no R3 scene holds an opening the compiler does not cut', () => {
-    expect(SCENES[1].build().roofPlanes).toHaveLength(4)
-    for (const s of SCENES.slice(0, 4)) {
+    expect(SCENES[23].build().roofPlanes).toHaveLength(4)
+    for (const s of SCENES.slice(22, 26)) {
       const uncut = compileBuilding(s.build()).diagnostics.filter((d) => d.code === 'OPENING_ABOVE_WALL_TOP')
       expect(uncut.map((d) => d.objectId), s.key).toEqual([])
     }

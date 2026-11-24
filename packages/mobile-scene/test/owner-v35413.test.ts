@@ -37,9 +37,9 @@ describe('v3.54.13 scenes', () => {
   })
   it('the scenes draw the outlines as finish skins, listed first, labelled as delivered and as an experiment', () => {
     const index = JSON.parse(readFileSync(join(ASSET_DIR, 'index.json'), 'utf8')) as Array<{ key: string; title: string; subtitle: string }>
-    expect(index.slice(32, 34).map((e) => e.key)).toEqual(['marcowki-c-v35413', 'marcowki-c-live-v35413'])
-    expect(index[32].subtitle).toContain('ODDANY')
-    expect(index[33].subtitle).toContain('EKSPERYMENT')
+    expect(index.slice(54, 56).map((e) => e.key)).toEqual(['marcowki-c-v35413', 'marcowki-c-live-v35413'])
+    expect(index[54].subtitle).toContain('ODDANY')
+    expect(index[55].subtitle).toContain('EKSPERYMENT')
     const scene = JSON.parse(readFileSync(join(ASSET_DIR, 'marcowki-c-v35413.scene.json'), 'utf8')) as { scene: { meshes: Array<{ objectId: string }> } }
     expect(scene.scene.meshes.some((m) => m.objectId === 'appearance-front-ring-main-1-w0-timber-0')).toBe(true)
   })
