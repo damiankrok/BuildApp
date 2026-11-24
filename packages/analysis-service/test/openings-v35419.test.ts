@@ -8,7 +8,7 @@ import { applyCommands } from '@buildapp/commands'
 import type { BuildingCommand } from '@buildapp/commands'
 import { createEmptyModel } from '@buildapp/model'
 import type { CanonicalBuildingModel } from '@buildapp/model'
-import { executeCorrections, modelRevision } from '../src/consult/correct/execute.js'
+import { cuttableTopM, executeCorrections, modelRevision } from '../src/consult/correct/execute.js'
 import type { BindPicture, BindView, CorrectionProposal, PlanGap } from '../src/consult/correct/execute.js'
 import { GLAZED_WALL_FLOOR_M, proposalsFromSketch } from '../src/consult/correct/from-sketch.js'
 import type { ElevationSketch } from '../src/appearance/elevation-sketch.js'
@@ -113,5 +113,21 @@ describe('v3.54.19 GLAZED_WALL has a consumer', () => {
     const unknown = proposalsFromSketch(sk([{ id: 'x', kind: 'SHUTTER', polygon: poly(1, 2, 0.9, 2.1) }]), 'FRONT', m, [view], modelRevision(m))
     expect(unknown.proposals).toHaveLength(0)
     expect(unknown.skipped.length).toBeGreaterThan(0)
+  })
+})
+
+describe('v3.54.19 R2 the top of a wall where an opening can still be cut', () => {
+  const level = { id: 'l0', elevation: 0, height: 5.4 }
+  const roof = { id: 'r', levelId: 'l0', kind: 'GABLE', ridgeAxis: 'X', pitchDeg: 30, eaveOffset: 3.0, thickness: 0.25 }
+  const wall = (start: { x: number; z: number }, end: { x: number; z: number }, follow: boolean) => ({ id: 'w', levelId: 'l0', baseOffset: 0, height: 5.4, start, end, ...(follow ? { topProfile: { kind: 'FOLLOW_ROOF', roofId: 'r' } } : {}) })
+  const m = { levels: [level], roofs: [roof] } as unknown as CanonicalBuildingModel
+  type W = Parameters<typeof cuttableTopM>[1]
+
+  it('under a gable roof\'s eaves the wall ends at the roof\'s underside, not at the ridge height it carries', () => {
+    expect(cuttableTopM(m, wall({ x: 0, z: 0 }, { x: 10, z: 0 }, true) as unknown as W)).toBeCloseTo(3.0 - 0.25 / Math.cos(Math.PI / 6), 6)
+  })
+  it('the gable end of the same roof, and a wall that follows no roof, keep their own height', () => {
+    expect(cuttableTopM(m, wall({ x: 0, z: 0 }, { x: 0, z: 8 }, true) as unknown as W)).toBe(5.4)
+    expect(cuttableTopM(m, wall({ x: 0, z: 0 }, { x: 10, z: 0 }, false) as unknown as W)).toBe(5.4)
   })
 })

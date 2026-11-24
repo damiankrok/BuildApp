@@ -18,7 +18,7 @@ import { reserveOf } from './cost.js'
 import { pictureOf } from './metric-read.js'
 import type { OutlineObservation } from './massing/massing.js'
 
-export const PLAN_OUTLINE_VERSION = '1.4.0' as const
+export const PLAN_OUTLINE_VERSION = '1.5.0' as const
 export const PLAN_OUTLINE_PROMPT_VERSION = 'plan-outline/3' as const
 /** The main entrance is taken to stand on a side when its point lies within this share of the outline's extent from that side's edge. */
 const ENTRANCE_NEAR_SHARE = 0.15
@@ -70,6 +70,8 @@ export type PlanOutlineRead = {
    * second drawing's observation: it never adds an opening; it tells two side elevations apart.
    */
   openings?: PlanSideOpening[]
+  /** plan-outline 1.5.0: oblique edges squared to the corner outside them (a named convention). */
+  squared?: { edges: number; addedPx2: number; why: string }
   observation?: OutlineObservation
   /** The area of the outline at the analyzer's scale against the published footprint: a check, never an anchor. */
   check?: { areaM2: number; publishedM2?: number; share?: number }
@@ -80,8 +82,51 @@ export type PlanSideOpening = { side: 'FRONT' | 'RIGHT' | 'REAR' | 'LEFT'; u0: n
 
 const toolInput = (turn: ModelTurn, name: string): unknown => (turn.content as Array<{ type: string; name?: string; input?: unknown }>).find((b) => b.type === 'tool_use' && b.name === name)?.input
 
+/**
+ * plan-outline 1.5.0 — an oblique edge of small extent (a bay window's splayed side, a chamfered corner) is replaced by
+ * the two axis-parallel edges through the corner on the OUTSIDE of the outline: a bay becomes its bounding step (which
+ * the body's builder then treats like any small step), a chamfer its square corner. A named MINIATURE CONVENTION, held
+ * to a share of the outline's bounding rectangle per edge and in all — an outline whose oblique walls are a real part of
+ * its form is refused as before (v3.54.19: a house with one splayed bay had no outline, no scale and no model).
+ */
+export const OBLIQUE_SQUARING = { edgeShare: 0.02, totalShare: 0.05 } as const
+export function squareOblique(pts: ReadonlyArray<readonly [number, number]>): { outline: Array<[number, number]>; squared: number; addedPx2: number } {
+  const n = pts.length
+  const area2 = (v: ReadonlyArray<readonly [number, number]>): number => v.reduce((a, p, i) => a + p[0] * v[(i + 1) % v.length][1] - v[(i + 1) % v.length][0] * p[1], 0)
+  const xs = pts.map((p) => p[0])
+  const ys = pts.map((p) => p[1])
+  const box = (Math.max(...xs) - Math.min(...xs)) * (Math.max(...ys) - Math.min(...ys))
+  const sign = Math.sign(area2(pts)) || 1
+  const out: Array<[number, number]> = []
+  let squared = 0
+  let added = 0
+  for (let i = 0; i < n; i += 1) {
+    const a = pts[i]
+    const b = pts[(i + 1) % n]
+    out.push([a[0], a[1]])
+    const ang = (Math.atan2(Math.abs(b[1] - a[1]), Math.abs(b[0] - a[0])) * 180) / Math.PI
+    if (ang <= MAX_OFF_AXIS_DEG || ang >= 90 - MAX_OFF_AXIS_DEG) continue
+    // the corner that lies OUTSIDE: the one whose triangle (a, corner, b) turns against the outline's own sense
+    const cands: Array<[number, number]> = [[a[0], b[1]], [b[0], a[1]]]
+    const outside = cands.find((c) => Math.sign((c[0] - a[0]) * (b[1] - a[1]) - (b[0] - a[0]) * (c[1] - a[1])) === sign) ?? cands[0]
+    const tri = Math.abs((b[0] - a[0]) * (b[1] - a[1])) / 2
+    if (tri > OBLIQUE_SQUARING.edgeShare * box) return { outline: pts.map((p) => [p[0], p[1]] as [number, number]), squared: 0, addedPx2: 0 }
+    out.push(outside)
+    squared += 1
+    added += tri
+  }
+  if (added > OBLIQUE_SQUARING.totalShare * box) return { outline: pts.map((p) => [p[0], p[1]] as [number, number]), squared: 0, addedPx2: 0 }
+  return { outline: out, squared, addedPx2: Math.round(added) }
+}
+
 /** Snap a traced outline to the plan's axes (each edge within 8°), dropping collinear corners; or say why not. */
-export function orthogonalise(pts: ReadonlyArray<readonly [number, number]>): { outline: Array<[number, number]> } | { refused: string } {
+export function orthogonalise(traced: ReadonlyArray<readonly [number, number]>): { outline: Array<[number, number]>; squared?: { edges: number; addedPx2: number } } | { refused: string } {
+  const sq = squareOblique(traced)
+  const pts = sq.outline
+  const done = orthogonaliseSquare(pts)
+  return 'refused' in done ? done : { ...done, ...(sq.squared > 0 ? { squared: { edges: sq.squared, addedPx2: sq.addedPx2 } } : {}) }
+}
+function orthogonaliseSquare(pts: ReadonlyArray<readonly [number, number]>): { outline: Array<[number, number]> } | { refused: string } {
   const n = pts.length
   const dir: Array<'H' | 'V'> = []
   for (let i = 0; i < n; i += 1) {
@@ -145,7 +190,7 @@ export async function readPlanOutline(ctx: Ctx, f: PlanOutlineInput): Promise<Pl
   if (framePts.some(([x, y]) => x < -5 || y < -5 || x > f.raster.width + 5 || y > f.raster.height + 5)) return { ...base, raw, usd, ...rid, refused: ['the outline leaves the picture'] }
   const o = orthogonalise(framePts)
   if ('refused' in o) return { ...base, raw, usd, ...rid, parts: p.data.parts, refused: [o.refused] }
-  const read: PlanOutlineRead = { ...base, raw, usd, ...rid, outlinePx: o.outline, parts: p.data.parts, refused: [] }
+  const read: PlanOutlineRead = { ...base, raw, usd, ...rid, outlinePx: o.outline, parts: p.data.parts, refused: [], ...(o.squared ? { squared: { ...o.squared, why: `MINIATURE_CONVENTION: ${o.squared.edges} oblique edge(s) of the traced outline (a bay's splayed side, a chamfered corner) are squared to the corner outside them (${o.squared.addedPx2} px² added): the traced outline is kept in the raw answer` } } : {}) }
   if (p.data.entrance) {
     const [ex, ey] = [p.data.entrance[0] * pic.scale, p.data.entrance[1] * pic.scale]
     const xs = o.outline.map((q) => q[0])

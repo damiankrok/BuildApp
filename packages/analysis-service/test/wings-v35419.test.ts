@@ -3,7 +3,7 @@
  * Controlled outlines and numbers (not a benchmark house); every rule with its counter-trial.
  */
 import { describe, expect, it } from 'vitest'
-import { solveMassing, wingsOf } from '../src/consult/massing/massing.js'
+import { partitionOf, registerByPlan, solveMassing, wallEndsPx, wingsOf } from '../src/consult/massing/massing.js'
 import type { OutlineObservation, SilhouetteObservation } from '../src/consult/massing/massing.js'
 import { outlineScale } from '../src/consult/plan-outline.js'
 import { literalMetres } from '../src/consult/site-dimensions.js'
@@ -127,5 +127,94 @@ describe('v3.54.19 the site plan\'s printed building dimensions', () => {
     expect(sc?.why).toMatch(/printed on the site plan/)
     // counter-trial: the roof's outline (0.8 m more on one axis only) does not agree with the walls' outline: no scale
     expect(outlineScale(o, { overallM: [11.74, 13.4] })).toBeUndefined()
+  })
+})
+
+describe('v3.54.19 (massing 1.8.0) an outline is partitioned exactly into its bodies', () => {
+  // a 9.6 × 10.2 m house with a 6 × 6.6 m garage standing against the MIDDLE of its left side, 1.8 m in from either end
+  // (each of the two steps is 6.8 % of the bounding rectangle: more than a small step, so no convention closes them)
+  const MID: P[] = [{ x: 0, z: 1.8 }, { x: 6, z: 1.8 }, { x: 6, z: 0 }, { x: 15.6, z: 0 }, { x: 15.6, z: 10.2 }, { x: 6, z: 10.2 }, { x: 6, z: 8.4 }, { x: 0, z: 8.4 }]
+  it('REPRODUCES the loss: the largest rectangle that fits inside is the band house and garage share — the rest of the house is then dropped', () => {
+    const w = wingsOf(MID, 0.12 * 15.6 * 10.2, 2) as NonNullable<ReturnType<typeof wingsOf>>
+    expect(w.rects[0]).toEqual({ minX: 0, maxX: 15.6, minZ: 1.8, maxZ: 8.4 })
+    expect(w.outlineM2 - w.coveredM2).toBeGreaterThan(25)
+  })
+  it('the exact partition is the garage and the house: two rectangles, nothing left over', () => {
+    const p = partitionOf(MID) as NonNullable<ReturnType<typeof partitionOf>>
+    expect(p).toHaveLength(2)
+    expect(p).toContainEqual({ minX: 6, maxX: 15.6, minZ: 0, maxZ: 10.2 })
+    expect(p).toContainEqual({ minX: 0, maxX: 6, minZ: 1.8, maxZ: 8.4 })
+    expect(p.map(area).reduce((a, b) => a + b, 0)).toBeCloseTo(9.6 * 10.2 + 6 * 6.6, 6)
+  })
+  it('a T is its bar and its stem, a U its base and legs, a rectangle itself; counter-trial: a comb of five teeth has no partition into four', () => {
+    expect(partitionOf(T)).toHaveLength(2)
+    expect(partitionOf(U)).toHaveLength(3)
+    expect(partitionOf([{ x: 0, z: 0 }, { x: 4, z: 0 }, { x: 4, z: 3 }, { x: 0, z: 3 }])).toEqual([{ minX: 0, maxX: 4, minZ: 0, maxZ: 3 }])
+    const comb: P[] = [{ x: 0, z: 5 }, { x: 0, z: 9 }, { x: 20, z: 9 }, { x: 20, z: 5 }]
+    for (let k = 4; k >= 0; k -= 1) comb.push({ x: k * 4 + 3, z: 5 }, { x: k * 4 + 3, z: 0 }, { x: k * 4 + 1, z: 0 }, { x: k * 4 + 1, z: 5 })
+    expect(partitionOf(comb)).toBeUndefined()
+  })
+  it('the massing builds the house and the garage as two bodies whose bounding box is the outline\'s', () => {
+    const MPP = 0.02
+    const ZERO = 400
+    const obs = (side: SilhouetteObservation['side'], lo: number, hi: number): SilhouetteObservation => {
+      const c = (a: number): number => 100 + (a - lo) / MPP
+      const r = (y: number): number => ZERO - y / MPP
+      return { observationId: `sk-${side}`, side, frameId: `f-${side}`, sourceByteHash: '', groundRow: ZERO, walls: [[[c(lo), r(0)], [c(hi), r(0)], [c(hi), r(3)], [c(lo), r(3)]]], roofs: [[[c(lo), r(3)], [c(hi), r(3)], [c(hi), r(3.2)], [c(lo), r(3.2)]]] }
+    }
+    const outline: OutlineObservation = { observationId: 'o', frameId: 'plan', sourceByteHash: '', outline: MID, by: 'API_PLAN_OUTLINE', fidelity: 'SOURCE_TRACED', why: 'test' }
+    const h = solveMassing({ outline, silhouettes: [obs('FRONT', 0, 15.6), obs('RIGHT', 0, 10.2)] })
+    expect(h.status).toBe('BUILDABLE')
+    expect(h.bodies.map((b) => b.rect)).toEqual([{ minX: 6, maxX: 15.6, minZ: 0, maxZ: 10.2 }, { minX: 0, maxX: 6, minZ: 1.8, maxZ: 8.4 }])
+    expect(h.alternatives.join(' ')).toMatch(/partitioned exactly/)
+  })
+})
+
+describe('v3.54.19 (massing 1.8.0) the building\'s width on an elevation is taken half-way up the storey', () => {
+  const ZERO = 450
+  // a 7.9 m gable end drawn 548 px wide (x 222..770), eaves row 240, apex row 78; a stone plinth and terrace wall 66 px
+  // high run on past it at the ground (x 50..875)
+  const gable: Array<[number, number]> = [[222, 380], [222, 240], [496, 78], [770, 240], [770, 380]]
+  const plinth: Array<[number, number]> = [[50, ZERO], [875, ZERO], [875, 380], [50, 380]]
+  const roof: Array<[number, number]> = [[188, 240], [496, 53], [803, 240], [770, 240], [496, 78], [222, 240]]
+  it('REPRODUCES the loss: over everything drawn as wall the gable is 825 px wide; half-way up the storey it is the house\'s own 548 px', () => {
+    const all = [gable, plinth].flatMap((p) => p.map((q) => q[0]))
+    expect(Math.max(...all) - Math.min(...all)).toBe(825)
+    const e = wallEndsPx([gable, plinth], [roof], ZERO) as { x0: number; x1: number }
+    expect(e.x1 - e.x0).toBeCloseTo(548, 0)
+    const reg = registerByPlan({ observationId: 'o', side: 'LEFT', frameId: 'f', sourceByteHash: '', groundRow: ZERO, walls: [gable, plinth], roofs: [roof] }, { lo: 0, hi: 7.9 })
+    expect('view' in reg && reg.view.projection.mpp).toBeCloseTo(7.9 / 548, 4)
+  })
+  it('counter-trials: plain walls from the ground to the eaves measure as before; with no roof drawn, or walls not drawn at that height, the whole extent stands', () => {
+    const wall: Array<[number, number]> = [[100, ZERO], [600, ZERO], [600, 300], [100, 300]]
+    const band: Array<[number, number]> = [[80, 300], [620, 300], [620, 200], [80, 200]]
+    expect(wallEndsPx([wall], [band], ZERO)).toEqual({ x0: 100, x1: 600 })
+    expect(wallEndsPx([gable, plinth], [], ZERO)).toEqual({ x0: 50, x1: 875 })
+    // only a low wall is drawn (nothing at mid-storey height): the extent of what is drawn
+    expect(wallEndsPx([plinth], [roof], ZERO)).toEqual({ x0: 50, x1: 875 })
+  })
+})
+
+describe('v3.54.19 R2 a partition whose every rectangle is a body comes before the largest rectangle', () => {
+  // a 15.6 m front: a garage wing on the left, a deeper middle part, a shallower right part — three tops at three depths
+  const STEPPED = [{ x: 0, z: 7.4 }, { x: 6, z: 7.4 }, { x: 6, z: 9.2 }, { x: 12, z: 9.2 }, { x: 12, z: 6.8 }, { x: 15.6, z: 6.8 }, { x: 15.6, z: 0 }, { x: 0, z: 0 }]
+  const aBody = (q: { minX: number; maxX: number; minZ: number; maxZ: number }): boolean => Math.min(q.maxX - q.minX, q.maxZ - q.minZ) >= 2 && (q.maxX - q.minX) * (q.maxZ - q.minZ) >= 0.12 * 15.6 * 9.2
+
+  it('without the rule the largest rectangle slices all three parts and leaves a 0.6 m strip', () => {
+    const p = partitionOf(STEPPED) as NonNullable<ReturnType<typeof partitionOf>>
+    expect(p).toHaveLength(3)
+    expect(Math.min(...p.map((q) => Math.min(q.maxX - q.minX, q.maxZ - q.minZ)))).toBeCloseTo(0.6, 6)
+  })
+
+  it('with it the three parts stand side by side, each from the front to its own rear wall', () => {
+    const p = partitionOf(STEPPED, 4, aBody) as NonNullable<ReturnType<typeof partitionOf>>
+    expect([...p].sort((a, b) => a.minX - b.minX)).toEqual([{ minX: 0, maxX: 6, minZ: 0, maxZ: 7.4 }, { minX: 6, maxX: 12, minZ: 0, maxZ: 9.2 }, { minX: 12, maxX: 15.6, minZ: 0, maxZ: 6.8 }])
+  })
+
+  it('an outline with no such cover still gets its fewest-rectangle cover (the caller refuses the sliver)', () => {
+    const NOTCH = [{ x: 0, z: 0 }, { x: 10, z: 0 }, { x: 10, z: 8 }, { x: 9, z: 8 }, { x: 9, z: 8.5 }, { x: 0, z: 8.5 }]
+    const p = partitionOf(NOTCH, 4, aBody) as NonNullable<ReturnType<typeof partitionOf>>
+    expect(p).toHaveLength(2)
+    expect(p.every(aBody)).toBe(false)
   })
 })

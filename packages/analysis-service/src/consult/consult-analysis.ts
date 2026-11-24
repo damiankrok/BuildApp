@@ -52,7 +52,7 @@ import { renderStoreyCut } from './model-views.js'
 import { CORRECTION_REGISTRY_VERSION } from './correct/registry.js'
 import { CORRECTION_EXECUTOR_VERSION, elementExists, executeCorrections, modelRevision, PLAN_SPAN_AGREE, planGapsOf, preferredView, registerFromSketch, sideOfFacade, sideOpeningSpans, sideRange, viewsOfRun } from './correct/execute.js'
 import { CHIMNEY_FUSION_VERSION, fuseChimneys } from './correct/chimney-fusion.js'
-import { MASSING_VERSION, bodiesOf, pointWithFront } from './massing/massing.js'
+import { MASSING_VERSION, OUTLINE_SIMPLIFICATION, bodiesOf, pointWithFront, wallEndsPx } from './massing/massing.js'
 import { readSiteDimensions, SITE_DIMENSIONS_VERSION } from './site-dimensions.js'
 import { FACADE_METRIC_VERSION, readFacadeMetric } from './facade-metric.js'
 import { FORM_READ_VERSION, flatVolumesOf, formVerdict, readForm } from './form-read.js'
@@ -157,8 +157,8 @@ export type SketchSummary = { reading: Omit<SketchReading, 'elevationSketches'>;
 /** v3.54.18: tolerances of the body arbitration, fixed before any result (a printed dimension, a published height). */
 /** v3.54.18 R2: which source pictures get a frame changed (a content-disputed orthographic elevation keeps its frame): part of the accepted-revision key. */
 export const SOURCE_FRAMES_RULE = 'frames2' as const
-export const BODY_ARBITRATION = { version: '1.2.0', dimAgreeM: 0.3, dimAgreeShare: 0.04, heightAgreeM: 0.6, heightAgreeShare: 0.1 } as const
-export type BodyEvidence = { bodies: number; registrations: Array<{ frameId: string; side: string; ok: boolean; code: string; why?: string }>; printed: Array<{ literal: string; valueM: number; modelM: number; agrees: boolean }>; height?: { publishedM: number; modelRidgeM: number; agrees: boolean }; /** v3.54.19: what the typed form of the house (form-read) says of this body's roofs. */ form?: { verdict: 'CONTRADICTS' | 'AGREES' | 'SILENT'; flatVolumes: number; reportedFlatVolumes: number; reportedMainRoof: string; reportedVolumes: number }; contradictions: number; supports: number }
+export const BODY_ARBITRATION = { version: '1.3.0', dimAgreeM: 0.3, dimAgreeShare: 0.04, heightAgreeM: 0.6, heightAgreeShare: 0.1 } as const
+export type BodyEvidence = { bodies: number; registrations: Array<{ frameId: string; side: string; ok: boolean; code: string; why?: string }>; printed: Array<{ literal: string; valueM: number; modelM: number; agrees: boolean; /** arbitration 1.3.0: the traced outline's own extent, where the dimension agrees with it and the body leaves out only the small steps the massing's convention names */ outlineM?: number }>; height?: { publishedM: number; modelRidgeM: number; agrees: boolean }; /** v3.54.19: what the typed form of the house (form-read) says of this body's roofs. */ form?: { verdict: 'CONTRADICTS' | 'AGREES' | 'SILENT'; flatVolumes: number; reportedFlatVolumes: number; reportedMainRoof: string; reportedVolumes: number }; contradictions: number; supports: number }
 export type BodyArbitration = { version: string; local: BodyEvidence; /** LOCAL's body was judged with this many roof corrections from the same elevations applied (on a copy). */ localAfterRoofCorrections?: number; alternative?: BodyEvidence; massing?: { decision: string; why: string; usd: number }; /** 1.2.0: elevations that register on neither body, set aside on both sides. */ setAside?: { frames: string[]; why: string }; decision: 'LOCAL_STANDS' | 'REPLACED_BY_SOURCE_BODY'; why: string }
 
 /** v3.54.17: the no-model path's delivery: a mass built from the source, or the anchors it lacks. */
@@ -1291,8 +1291,10 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
       const side = sketchSideOf?.[x.frameId] ?? sideOfFacade(x.facade)
       if (!sk || !side || typeof sk.groundRow !== 'number' || sk.walls.length === 0 || sk.roofs.length === 0) return []
       const pts = sk.walls.flatMap((w) => w.polygon as Array<[number, number]>)
-      const x0 = Math.min(...pts.map((q) => q[0]))
-      const x1 = Math.max(...pts.map((q) => q[0]))
+      // massing 1.8.0: the walls' ends half-way up the storey (a plinth or a terrace wall running past the house is not its width)
+      const ends = wallEndsPx(sk.walls.map((w) => w.polygon as Array<[number, number]>), sk.roofs.map((r) => r.polygon as Array<[number, number]>), sk.groundRow)
+      const x0 = ends?.x0 ?? Math.min(...pts.map((q) => q[0]))
+      const x1 = ends?.x1 ?? Math.max(...pts.map((q) => q[0]))
       // the eaves row is where the walls meet the roof at their outer corners (the top of the drawn walls there): not the
       // roof's lowest edge, which an overhang carries lower by its reach times the slope
       const near = Math.max(2, 0.02 * (x1 - x0))
@@ -1401,7 +1403,7 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
     const publishedHeight = pkg0.publishedFacts.find((f) => f.key === 'building_height' && f.unit === 'm')?.value
     const TURNED_FWD: Record<Side, Side> = { FRONT: 'RIGHT', RIGHT: 'REAR', REAR: 'LEFT', LEFT: 'FRONT' }
     const TURNED_BACK: Record<Side, Side> = { FRONT: 'LEFT', LEFT: 'REAR', REAR: 'RIGHT', RIGHT: 'FRONT' }
-    const evidenceOf = (model: CanonicalBuildingModel, heldViews: readonly BindView[], planFront?: Side): BodyEvidence => {
+    const evidenceOf = (model: CanonicalBuildingModel, heldViews: readonly BindView[], planFront?: Side, traced?: ReadonlyArray<{ x: number; z: number }>): BodyEvidence => {
       // a body built a quarter turn against the plan sheet has the sheet's horizontal along its depth
       const quarterTurned = planFront === 'LEFT' || planFront === 'RIGHT'
       const built = measureBuilt(model, compileBuilding(model))
@@ -1410,7 +1412,21 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
       const tryAll = (turn: boolean) => labelled.map((a) => { const r = registerFromSketch({ model, views: [...heldViews], pictures: pics, witnesses: [] }, turn ? { ...a, side: TURNED[a.side] } : a); return { frameId: a.frameId, side: turn ? TURNED[a.side] : a.side, ok: !('status' in r), code: 'status' in r ? r.code ?? r.status : 'REGISTERED', ...('status' in r ? { why: r.why.slice(0, 400) } : {}) } })
       const [asL, asT] = [tryAll(false), tryAll(true)]
       const regs = asT.filter((q) => q.ok).length > asL.filter((q) => q.ok).length ? asT : asL
-      const dims = printedDims.map((d) => { const ext = (d.axis === 'HORIZONTAL') !== quarterTurned ? built.outlineX : built.outlineZ; return { literal: d.literal, valueM: d.valueM, modelM: Math.round(ext * 100) / 100, agrees: Math.abs(ext - d.valueM) <= Math.max(BODY_ARBITRATION.dimAgreeM, BODY_ARBITRATION.dimAgreeShare * d.valueM) } })
+      // arbitration 1.3.0: a printed dimension measures the SOURCE's outline. A body built from that outline with its small
+      // steps left out by the massing's own named convention is shorter by those steps, not at another scale: where the
+      // body's bounding rectangle keeps all but `OUTLINE_SIMPLIFICATION.totalShare` of the traced outline's, the dimension
+      // is held against the traced extent (a body that dropped a wing does not pass: its rectangle is far smaller).
+      const tx = traced && traced.length >= 4 ? { x: Math.max(...traced.map((p) => p.x)) - Math.min(...traced.map((p) => p.x)), z: Math.max(...traced.map((p) => p.z)) - Math.min(...traced.map((p) => p.z)) } : undefined
+      const keepsOutline = tx !== undefined && Math.abs(tx.x * tx.z - built.outlineX * built.outlineZ) <= OUTLINE_SIMPLIFICATION.totalShare * tx.x * tx.z
+      const dims = printedDims.map((d) => {
+        const alongX = (d.axis === 'HORIZONTAL') !== quarterTurned
+        const ext = alongX ? built.outlineX : built.outlineZ
+        const tol = Math.max(BODY_ARBITRATION.dimAgreeM, BODY_ARBITRATION.dimAgreeShare * d.valueM)
+        const own = Math.abs(ext - d.valueM) <= tol
+        const src = tx && keepsOutline ? (alongX ? tx.x : tx.z) : undefined
+        const bySource = !own && src !== undefined && Math.abs(src - d.valueM) <= tol
+        return { literal: d.literal, valueM: d.valueM, modelM: Math.round(ext * 100) / 100, agrees: own || bySource, ...(bySource && src !== undefined ? { outlineM: Math.round(src * 100) / 100 } : {}) }
+      })
       const height = typeof publishedHeight === 'number' && typeof built.ridge === 'number' ? { publishedM: publishedHeight, modelRidgeM: Math.round(built.ridge * 100) / 100, agrees: Math.abs(built.ridge - publishedHeight) <= Math.max(BODY_ARBITRATION.heightAgreeM, BODY_ARBITRATION.heightAgreeShare * publishedHeight) } : undefined
       const contradictions = regs.filter((q) => !q.ok).length + dims.filter((d) => !d.agrees).length + (height && !height.agrees ? 1 : 0)
       const supports = regs.filter((q) => q.ok).length + dims.filter((d) => d.agrees).length + (height?.agrees ? 1 : 0)
@@ -1463,7 +1479,7 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
       if (!mb.built?.run) arb.why = `LOCAL's body is contradicted (${localEv.contradictions}), but the other body could not be built (${mb.delivery.why.slice(0, 200)}): LOCAL's stands, the contradiction named`
       else {
         const altFront = massingOf.get(mb.built)?.planFront
-        const altEv = evidenceOf(mb.built.run.reconstruction.model, massingViews(mb.built) ?? [], altFront)
+        const altEv = evidenceOf(mb.built.run.reconstruction.model, massingViews(mb.built) ?? [], altFront, mb.delivery.plan?.observation?.outline)
         withForm(altEv, roofsOf(mb.built.run.reconstruction.model))
         arb.alternative = altEv
         // v3.54.18 arbitration 1.1.0: the body that replaces LOCAL's must itself be UNCONTRADICTED. One the same sources

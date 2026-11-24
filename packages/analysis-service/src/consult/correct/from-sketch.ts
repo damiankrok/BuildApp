@@ -16,6 +16,7 @@
 import type { CanonicalBuildingModel } from '@buildapp/model'
 import type { ElevationSketch } from '../../appearance/elevation-sketch.js'
 import { iou, isRaked } from './source-gate.js'
+import { wallEndsPx } from '../massing/massing.js'
 import type { Box, Shape } from './source-gate.js'
 import { kindOfOpening, openingBoxes, openingSpan, OVERHANG_MIN_CHANGE_M, preferredView, shapeOfOpening, sideOfFacade, sideOfWall, sideRoof } from './execute.js'
 
@@ -329,7 +330,9 @@ export function proposalsFromSketch(s: ElevationSketch, facade: string, model: C
     const main = [...s.roofs].sort((a, b) => area(b.polygon) - area(a.polygon))[0].polygon
     const rx = main.map((q) => q[0])
     const wx = s.walls.flatMap((w) => w.polygon.map((q) => q[0]))
-    const [roofLeftX, roofRightX, wallLeftX, wallRightX] = [Math.min(...rx), Math.max(...rx), Math.min(...wx), Math.max(...wx)]
+    // massing 1.8.0: the walls' ends half-way up the storey (not a plinth running past the house)
+    const ends = wallEndsPx(s.walls.map((w) => w.polygon as Array<[number, number]>), s.roofs.map((r) => r.polygon as Array<[number, number]>), s.groundRow ?? null)
+    const [roofLeftX, roofRightX, wallLeftX, wallRightX] = [Math.min(...rx), Math.max(...rx), ends?.x0 ?? Math.min(...wx), ends?.x1 ?? Math.max(...wx)]
     const drawn = ((wallLeftX - roofLeftX + roofRightX - wallRightX) / 2) * view.projection.mpp
     if (Math.abs(drawn - roof.overhang) >= OVERHANG_MIN_CHANGE_M) out.proposals.push({ proposalId: pid('overhang', roof.id), baseRevision, operation: 'SET_ROOF_OVERHANG', targetId: roof.id, frameId: s.frameId, patch: { roofLeftX, roofRightX, wallLeftX, wallRightX }, origin: 'SKETCH', uncertainty: 'MEDIUM', justification: `the sketch of this elevation draws the roof ${(((wallLeftX - roofLeftX) * view.projection.mpp)).toFixed(2)} / ${(((roofRightX - wallRightX) * view.projection.mpp)).toFixed(2)} m past the walls; the model's ${roof.id} has ${roof.overhang.toFixed(2)} m` })
   }

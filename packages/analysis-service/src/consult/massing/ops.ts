@@ -24,7 +24,7 @@ import { targetBodies } from '../correct/resolve.js'
 import { area, bodiesOf, bodyCommands, extentOn, outlineWithFront, pointWithFront, HIP_PLANE_SIDES, hipPlaneCommands, hipSpecFrom, hipWallTopM, MASSING_TOLERANCES, MAX_OVERHANG_M, MASSING_VERSION, massingCommands, MINIATURE_CONVENTIONS, profileOver, readableStretch, registerByPlan, solveMassing, wallCornerTopM } from './massing.js'
 import type { BodySpec, Fidelity, MassingHypothesis, ModelBody, OutlineObservation, Rect, RoofSpec, SilhouetteObservation } from './massing.js'
 
-export const MASSING_OPS_VERSION = '1.9.0' as const
+export const MASSING_OPS_VERSION = '1.10.0' as const
 /** v3.54.17 R2: the most overhang a drawn roof may have past its body on a side, and the steepest pitch the kernel builds. */
 export { MAX_OVERHANG_M }
 /** v3.54.18 (ops 1.6.0): an opening whose height the model ASSUMED comes down under a roof the source draws — to this far under the wall top, and only while at least this much of it is left (else the roof patch is refused, as before). */
@@ -796,7 +796,7 @@ export function orientationOf(sketches: readonly SketchForMassing[], m: Canonica
       const side = turn ? (hints.entranceSide === TURN_BACK.FRONT ? TURN_BACK[lab] : TURN[lab]) : lab
       const all = bodies.map((q) => extentOn(q.rect, side))
       const ext = { lo: Math.min(...all.map((e) => e.lo)), hi: Math.max(...all.map((e) => e.hi)) }
-      const r = registerByPlan({ observationId: 'o', side, frameId: s.frameId, sourceByteHash: '', groundRow: s.groundRow, walls: s.walls, roofs: [] }, ext)
+      const r = registerByPlan({ observationId: 'o', side, frameId: s.frameId, sourceByteHash: '', groundRow: s.groundRow, walls: s.walls, roofs: s.roofs }, ext)
       if (!('view' in r)) continue
       for (const b of bodies) {
         const others = bodies.filter((q) => q !== b)
@@ -932,7 +932,7 @@ export function roofProposalsFromSketches(sketches: readonly SketchForMassing[],
       const view = reg ?? (xs.length > 0 ? (() => {
         // the whole house's walls in the sketch against the model's whole extent on that side (the body's own may be hidden)
         const all = bodies.map((q) => extentOn(q.rect, side))
-        const r = registerByPlan({ observationId: `sk-${s.frameId}`, side, frameId: s.frameId, sourceByteHash: '', groundRow: s.groundRow, walls: s.walls, roofs: [] }, { lo: Math.min(...all.map((e) => e.lo)), hi: Math.max(...all.map((e) => e.hi)) })
+        const r = registerByPlan({ observationId: `sk-${s.frameId}`, side, frameId: s.frameId, sourceByteHash: '', groundRow: s.groundRow, walls: s.walls, roofs: s.roofs }, { lo: Math.min(...all.map((e) => e.lo)), hi: Math.max(...all.map((e) => e.hi)) })
         return 'view' in r ? r.view : undefined
       })() : undefined)
       if (!view) {

@@ -24,7 +24,7 @@ import type { CanonicalBuildingModel, Wall } from '@buildapp/model'
 import type { BindView, Projection, Side } from '../correct/execute.js'
 import type { Poly } from '../correct/source-gate.js'
 
-export const MASSING_VERSION = '1.7.0' as const
+export const MASSING_VERSION = '1.8.0' as const
 
 export type Rect = { minX: number; maxX: number; minZ: number; maxZ: number }
 export type Fidelity = 'SOURCE_EXACT' | 'SOURCE_DERIVED' | 'SOURCE_TRACED' | 'DISPLAY_ASSUMPTION' | 'TRACE_UNCERTAIN'
@@ -150,11 +150,31 @@ export function readableStretch(rect: Rect, others: readonly Rect[], s: Side): {
 }
 
 /**
+ * massing 1.8.0 — the building's width on an elevation, in pixels. It is the walls' extent HALF-WAY UP THE STOREY (the row
+ * midway between the ground row and the lowest roof edge), not the extent of everything drawn as wall: a stone plinth, a
+ * terrace wall or a retaining wall runs on past the house at the ground, and taken into the width it put a 7.9 m gable
+ * end over 825 px instead of 548 — every height of that view came out at two thirds, and a plain rectangular house had
+ * its eaves "at 1.59 m: not a storey" and no model at all. Where no roof is drawn, or the walls are not drawn at that
+ * row (or only a fragment of them is), the whole extent stands as before.
+ */
+export function wallEndsPx(walls: readonly Poly[], roofs: readonly Poly[], groundRow: number | null | undefined): { x0: number; x1: number } | undefined {
+  const all = pxRange(walls)
+  if (!all || groundRow === null || groundRow === undefined || !Number.isFinite(groundRow) || roofs.length === 0) return all
+  const edges = roofs.flatMap((p) => p.map((q) => q[1])).filter((y) => y < groundRow - 4)
+  if (edges.length === 0) return all
+  const row = (groundRow + Math.max(...edges)) / 2
+  const e = rowExtent(walls, row)
+  if (!e || e[1] - e[0] < WALL_ENDS_MIN_SHARE * (all.x1 - all.x0)) return all
+  return { x0: e[0], x1: e[1] }
+}
+export const WALL_ENDS_MIN_SHARE = 0.4
+
+/**
  * 1. An elevation registered by the plan: its building's width in pixels against the outline's extent along that side.
  * The vertical scale is the horizontal one (isotropic drawing, DISPLAY_ASSUMPTION until two sides agree on a height).
  */
 export function registerByPlan(obs: SilhouetteObservation, extent: { lo: number; hi: number }): { view: BindView; why: string } | { refused: string } {
-  const px = pxRange(obs.walls.length > 0 ? obs.walls : obs.silhouette ? [obs.silhouette] : [])
+  const px = obs.walls.length > 0 ? wallEndsPx(obs.walls, obs.roofs, obs.groundRow) : pxRange(obs.silhouette ? [obs.silhouette] : [])
   if (!px || px.x1 - px.x0 < 20) return { refused: `the ${obs.side.toLowerCase()} elevation draws no building width to register` }
   if (obs.groundRow === null || !Number.isFinite(obs.groundRow)) return { refused: `the ${obs.side.toLowerCase()} elevation names no ground row` }
   const span = extent.hi - extent.lo
@@ -352,7 +372,7 @@ function attribute(obs: SilhouetteObservation, view: BindView, stretches: Readon
  * an entrance recess under the same roof go; a third wing of real size does not (the outline stays unsupported, by name).
  */
 export const OUTLINE_SIMPLIFICATION = { stepShare: 0.06, totalShare: 0.12, corners: 6 } as const
-export function simplifyOutline(outline: ReadonlyArray<{ x: number; z: number }>): { outline: Array<{ x: number; z: number }>; steps: Array<{ areaM2: number; at: { x: number; z: number } }>; changedM2: number; share: number } | undefined {
+export function simplifyOutline(outline: ReadonlyArray<{ x: number; z: number }>, /** massing 1.8.0: take out every step that is small enough and stop there, whatever number of corners is left */ partial = false): { outline: Array<{ x: number; z: number }>; steps: Array<{ areaM2: number; at: { x: number; z: number } }>; changedM2: number; share: number } | undefined {
   const clean = (v: Array<{ x: number; z: number }>): Array<{ x: number; z: number }> => {
     let pts = v.filter((p, i) => Math.hypot(p.x - v[(i + 1) % v.length].x, p.z - v[(i + 1) % v.length].z) > 1e-6)
     for (let changed = true; changed && pts.length > 4; ) {
@@ -393,12 +413,66 @@ export function simplifyOutline(outline: ReadonlyArray<{ x: number; z: number }>
         best = { cost, next: clean(next), at: { x: r6((e0.x + e1.x) / 2), z: r6((e0.z + e1.z) / 2) } }
       }
     }
-    if (!best || best.next.length >= pts.length || best.cost > OUTLINE_SIMPLIFICATION.stepShare * total || changed + best.cost > OUTLINE_SIMPLIFICATION.totalShare * total || !orth(best.next)) return undefined
+    if (!best || best.next.length >= pts.length || best.cost > OUTLINE_SIMPLIFICATION.stepShare * total || changed + best.cost > OUTLINE_SIMPLIFICATION.totalShare * total || !orth(best.next)) { if (partial) break; return undefined }
     changed += best.cost
     steps.push({ areaM2: r6(best.cost), at: best.at })
     pts = best.next
   }
   return { outline: pts.map((p) => ({ x: r6(p.x), z: r6(p.z) })), steps, changedM2: r6(changed), share: r6(changed / total) }
+}
+
+/**
+ * massing 1.8.0 — an orthogonal outline as an EXACT partition into at most `max` rectangles: none overlapping, nothing of
+ * the outline left over, the fewest rectangles possible (of two such partitions, the one with the larger main rectangle).
+ * `wingsOf` takes the largest rectangle that fits inside first; on a house with a wing standing against the MIDDLE of
+ * its side that rectangle is the band the two share, and what is left of the house above and below it is then "too
+ * small to be a body" — a 15.6 × 9.65 m house was built 14.7 × 6.1 m. A partition has no such band: the wing is one
+ * rectangle and the house the other. Undefined where no partition into `max` rectangles exists.
+ */
+export function partitionOf(outline: ReadonlyArray<{ x: number; z: number }>, max: number = WINGS.maxBodies, valid?: (r: Rect) => boolean): Rect[] | undefined {
+  const uniq = (v: number[]): number[] => [...v].sort((a, b) => a - b).filter((q, i, w) => i === 0 || q - w[i - 1] > 1e-6)
+  const xs = uniq(outline.map((p) => p.x))
+  const zs = uniq(outline.map((p) => p.z))
+  const [nx, nz] = [xs.length - 1, zs.length - 1]
+  if (nx < 1 || nz < 1 || nx * nz > 400) return undefined
+  const inside = (x: number, z: number): boolean => {
+    let c = false
+    for (let i = 0, j = outline.length - 1; i < outline.length; j = i, i += 1) {
+      const [a, b] = [outline[i], outline[j]]
+      if (a.z > z !== b.z > z && x < ((b.x - a.x) * (z - a.z)) / (b.z - a.z) + a.x) c = !c
+    }
+    return c
+  }
+  const cell = Array.from({ length: nx }, (_, i) => Array.from({ length: nz }, (_, j) => inside((xs[i] + xs[i + 1]) / 2, (zs[j] + zs[j + 1]) / 2)))
+  const used = cell.map((col) => col.map(() => false))
+  let best: Rect[] | undefined
+  // R2: a cover whose every rectangle is a body in its own right (`valid`) before one that leaves a sliver — the largest
+  // rectangle first would slice a house and its wing across both and leave a strip; then the fewest, then the largest main
+  const whole = (a: Rect[]): boolean => !valid || a.every(valid)
+  const better = (a: Rect[], b: Rect[] | undefined): boolean => !b || (whole(a) !== whole(b) ? whole(a) : a.length < b.length || (a.length === b.length && Math.max(...a.map(area)) > Math.max(...b.map(area)) + 1e-9))
+  const search = (acc: Rect[]): void => {
+    // the first free cell, column by column: it is the low corner of the rectangle that covers it
+    let fi = -1
+    let fj = -1
+    outer: for (let i = 0; i < nx; i += 1) for (let j = 0; j < nz; j += 1) if (cell[i][j] && !used[i][j]) { fi = i; fj = j; break outer }
+    if (fi < 0) { if (better(acc, best)) best = acc.map((r) => ({ ...r })); return }
+    if (acc.length >= max || (best && whole(best) && acc.length + 1 > best.length)) return
+    let maxJ = nz
+    for (let i = fi; i < nx; i += 1) {
+      // how far up this column is free from fj
+      let j = fj
+      while (j < maxJ && cell[i][j] && !used[i][j]) j += 1
+      if (j === fj) break
+      maxJ = j
+      for (let top = fj + 1; top <= maxJ; top += 1) {
+        for (let a = fi; a <= i; a += 1) for (let b = fj; b < top; b += 1) used[a][b] = true
+        search([...acc, { minX: xs[fi], maxX: xs[i + 1], minZ: zs[fj], maxZ: zs[top] }])
+        for (let a = fi; a <= i; a += 1) for (let b = fj; b < top; b += 1) used[a][b] = false
+      }
+    }
+  }
+  search([])
+  return best
 }
 
 /** 2. An orthogonal outline as one rectangle or two joined rectangles (both splits of an L). */
@@ -506,6 +580,19 @@ export function solveMassing(input: MassingInput): MassingHypothesis {
     if (simple) {
       split = rectanglesOf(simple.outline)
       if (split.splits.length > 0) base.alternatives.push(`MINIATURE_CONVENTION: the outline's ${simple.steps.length} small step(s) (${simple.changedM2.toFixed(1)} m², ${(simple.share * 100).toFixed(1)} % of its bounding rectangle) are not modelled — the body is ${split.why}; the drawn outline is kept in the observation`)
+    }
+  }
+  if (split.splits.length === 0) {
+    // massing 1.8.0: the outline with every small step taken out, as an exact partition into bodies — each a rectangle
+    // of a body's size, nothing of the outline left over
+    const part = simplifyOutline(input.outline.outline, true)
+    const total0 = area(bb)
+    const aBody = (q: Rect): boolean => Math.min(q.maxX - q.minX, q.maxZ - q.minZ) >= MASSING_TOLERANCES.minBodyM && area(q) >= MASSING_TOLERANCES.minWingShare * total0
+    const exact = part ? partitionOf(part.outline, WINGS.maxBodies, aBody) : undefined
+    if (part && exact && exact.length >= 2 && exact.every(aBody)) {
+      const rects = [...exact].sort((p, q) => area(q) - area(p))
+      split = { splits: [rects], why: `an outline of ${input.outline.outline.length} corners as ${rects.length} bodies` }
+      base.alternatives.push(`the outline (${input.outline.outline.length} corners) is read as ${rects.length} bodies — ${part.steps.length > 0 ? `MINIATURE_CONVENTION: its ${part.steps.length} small step(s) (${part.changedM2.toFixed(1)} m², ${(part.share * 100).toFixed(1)} % of its bounding rectangle) are not modelled; ` : ''}what is left is partitioned exactly into rectangles, nothing left over (${rects.map((q) => `${(q.maxX - q.minX).toFixed(2)} × ${(q.maxZ - q.minZ).toFixed(2)} m`).join(', ')})`)
     }
   }
   if (split.splits.length === 0) {

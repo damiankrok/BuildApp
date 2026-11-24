@@ -32,6 +32,7 @@ for house, title, pub, st, url, cache, old in H:
     vs = [{'key': 'baseline1351', 'label': 'kod APK 1351 (baseline)', 'kind': 'LIVE' if st != 'DEV' else 'REPLAY', 'run': old, 'commit': BASE}]
     if os.path.isdir(new): vs.append({'key': 'final', 'label': 'kod końcowy v3.54.19' + (' (na żywo, pierwszy bieg)' if live else ' (odczyty elewacji nagrane, recenzja na żywo)'), 'kind': 'LIVE' if live else 'REPLAY', 'run': new, 'commit': C})
     pkg = next((os.path.join(v['run'], 'source-package.json') for v in reversed(vs) if os.path.exists(os.path.join(v['run'], 'source-package.json'))), None)
+    if pkg is None: pkg = {'oban': f'{R9}/trial/lipinscy-oban.package.json', 'juliusz': f'{R9}/trial/dobredomy-juliusznowy.package.json', 'amarylis': f'{R9}/trial/studioatrium-amarylis.package.json', 'eliza': f'{R9}/trial/archon-projekt-willa-eliza.package.json'}.get(house)  # a house without a model in any variant: the package of the selection step (the same source bytes)
     sk = next((v['run'] for v in reversed(vs) if os.path.isdir(os.path.join(v['run'], 'sketches'))), vs[-1]['run'])
     houses.append({'house': house, 'title': title, 'publisher': pub, 'set': st, 'url': url, 'package': pkg, 'cache': cache, 'sketchRun': sk, 'variants': vs})
 print(json.dumps({'commit': C, 'title': 'BuildPlan v3.54.19 — bryła, otwory i wnętrze z rzutu: 1351 obok kodu końcowego', 'houses': houses, 'extras': {}}, ensure_ascii=False, indent=1))

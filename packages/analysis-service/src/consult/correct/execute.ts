@@ -49,7 +49,7 @@ import type { MassingObservations } from '../massing/ops.js'
 import { bindBuildInterior } from './interior.js'
 import type { InteriorObservation } from './interior.js'
 
-export const CORRECTION_EXECUTOR_VERSION = '1.9.0' as const
+export const CORRECTION_EXECUTOR_VERSION = '1.10.0' as const
 
 export type Side = 'FRONT' | 'RIGHT' | 'REAR' | 'LEFT'
 export const SIDES: readonly Side[] = ['FRONT', 'RIGHT', 'REAR', 'LEFT']
@@ -394,6 +394,22 @@ function elevationOf(ctx: Ctx, p: CorrectionProposal, n: number | undefined, nee
 }
 
 /** The exterior wall on `side` that the along range and height range fall on: the outermost one that holds them. */
+/**
+ * v3.54.19 R2: the top of a wall where an opening can still be cut. A wall that follows a pitched roof carries the
+ * ridge's height as its own; on the roof's eaves side it really ends at the roof's underside (the eaves line less the
+ * roof's slab along the vertical). Every other wall ends at its own height.
+ */
+export function cuttableTopM(m: CanonicalBuildingModel, w: Wall): number {
+  const nominal = levelOf(m, w.levelId).elevation + w.baseOffset + w.height
+  if (w.topProfile?.kind !== 'FOLLOW_ROOF') return nominal
+  const roofId = w.topProfile.roofId
+  const roof = m.roofs.find((r) => r.id === roofId)
+  if (!roof || !(roof.pitchDeg > 0) || roof.kind !== 'GABLE') return nominal
+  const alongX = Math.abs(w.end.x - w.start.x) >= Math.abs(w.end.z - w.start.z)
+  if ((roof.ridgeAxis === 'X') !== alongX) return nominal
+  return Math.min(nominal, levelOf(m, roof.levelId).elevation + roof.eaveOffset - (roof.thickness ?? 0) / Math.cos((roof.pitchDeg * Math.PI) / 180))
+}
+
 function hostWall(m: CanonicalBuildingModel, side: Side, a0: number, a1: number, y0: number, y1: number): Wall | undefined {
   const ax = alongAxis(side)
   const perp = ax === 'x' ? 'z' : 'x'
@@ -506,11 +522,15 @@ function bindOpening(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
   // garage lost its gate over a few centimetres. Its head is cut to the wall's top, named in the record; a box that
   // overshoots by more than a quarter of its own height is not this case and is refused as before.
   let headCut: { fromM: number; toM: number; wallId: string } | undefined
-  if (!existing && (kind === 'DOOR' || kind === 'GLAZED_DOOR' || kind === 'GARAGE_DOOR') && !hostWall(m, view.side, a0, a1, y0, y1)) {
+  // R2: the same under a pitched roof's eaves, for a window too — the wall there ends at the roof's underside, lower
+  // than the height the wall carries (a row of windows drawn up to the soffit was refused whole as OPENING_NOT_CUT).
+  if (!existing) {
+    const door = kind === 'DOOR' || kind === 'GLAZED_DOOR' || kind === 'GARAGE_DOOR'
     const lower = exteriorWalls(m).filter((w) => { if (sideOfWall(m, w) !== view.side) return false; const ax = alongAxis(view.side); const lo = Math.min(w.start[ax], w.end[ax]); const hi = Math.max(w.start[ax], w.end[ax]); const base = levelOf(m, w.levelId).elevation + w.baseOffset; return a0 >= lo - 0.02 && a1 <= hi + 0.02 && y0 >= base - 0.05 && y0 < base + w.height - 0.1 })
-    const top = lower.length > 0 ? Math.max(...lower.map((w) => levelOf(m, w.levelId).elevation + w.baseOffset + w.height)) : undefined
-    if (top !== undefined && y1 > top && y1 - top <= HEAD_CUT_MAX_SHARE * (y1 - y0) && top - 0.03 - y0 >= 1.6) {
-      headCut = { fromM: y1, toM: r6(top - 0.03), wallId: lower.sort((p, q) => levelOf(m, q.levelId).elevation + q.baseOffset + q.height - (levelOf(m, p.levelId).elevation + p.baseOffset + p.height))[0].id }
+    const underRoof = lower.length > 0 && lower.every((w) => cuttableTopM(m, w) < levelOf(m, w.levelId).elevation + w.baseOffset + w.height - 1e-6)
+    const top = lower.length > 0 && (underRoof || (door && !hostWall(m, view.side, a0, a1, y0, y1))) ? Math.max(...lower.map((w) => cuttableTopM(m, w))) : undefined
+    if (top !== undefined && y1 > top - 0.03 && y1 - top <= HEAD_CUT_MAX_SHARE * (y1 - y0) && top - 0.03 - y0 >= (door ? 1.6 : 0.4)) {
+      headCut = { fromM: y1, toM: r6(top - 0.03), wallId: lower.sort((p, q) => cuttableTopM(m, q) - cuttableTopM(m, p))[0].id }
       y1 = headCut.toM
       box = { ...box, y0: pyOf(pr, y1) }
     }
@@ -675,10 +695,11 @@ function bindPlanOpening(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
   const y0 = r6((level?.elevation ?? 0) + Math.max(0, f.sillM))
   let y1 = r6(y0 + f.heightM)
   let host = hostWall(m, f.side, f.a0, f.a1, y0, y1)
-  if (!host) {
+  {
     const lower = exteriorWalls(m).filter((w) => { if (sideOfWall(m, w) !== f.side) return false; const ax = alongAxis(f.side); const lo = Math.min(w.start[ax], w.end[ax]); const hi = Math.max(w.start[ax], w.end[ax]); const base = levelOf(m, w.levelId).elevation + w.baseOffset; return f.a0 >= lo - 0.02 && f.a1 <= hi + 0.02 && y0 >= base - 0.05 && y0 < base + w.height - 0.1 })
-    const top = lower.length > 0 ? Math.max(...lower.map((w) => levelOf(m, w.levelId).elevation + w.baseOffset + w.height)) : undefined
-    if (top !== undefined && y1 > top && y1 - top <= HEAD_CUT_MAX_SHARE * (y1 - y0) && top - 0.03 - y0 >= (f.kind === 'WINDOW' ? 0.4 : 1.6)) {
+    const underRoof = lower.length > 0 && lower.every((w) => cuttableTopM(m, w) < levelOf(m, w.levelId).elevation + w.baseOffset + w.height - 1e-6)
+    const top = lower.length > 0 && (underRoof || !host) ? Math.max(...lower.map((w) => cuttableTopM(m, w))) : undefined
+    if (top !== undefined && y1 > top - 0.03 && y1 - top <= HEAD_CUT_MAX_SHARE * (y1 - y0) && top - 0.03 - y0 >= (f.kind === 'WINDOW' ? 0.4 : 1.6)) {
       y1 = r6(top - 0.03)
       host = hostWall(m, f.side, f.a0, f.a1, y0, y1)
     }
