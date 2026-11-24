@@ -97,6 +97,19 @@ odtworzyć nakładkę modelu na rzut).
 Konsument `GLAZED_WALL`; drzwi ze świadkiem z rzutu; nadproże drzwi lub bramy wystające ≤ 25 % ponad ścianę jest
 docinane do ściany; otwór w ≥ 85 % mieszczący się w ścianie jest docinany do jej końca; stabilne identyfikatory.
 
+### 2.5 Runda R2 — po pierwszym pomiarze odłożonym (NEW-E: 0 → 0)
+
+Pierwszy pomiar transferu wypadł źle (§6.2) i wskazał trzy przyczyny w budowie bryły z obrysu. Każda została naprawiona
+ogólnie (bez nazw domów, bez współrzędnych), z testem i kontrpróbą; dwie dalsze znalazłem na powtórkach tych samych nagrań.
+
+| Przyczyna (dom, na którym wyszła) | Reguła po R2 | Kontrpróba w teście |
+|---|---|---|
+| Szerokość budynku na elewacji brana z rozpiętości **wszystkich** wielokątów ścian — cokół z kamienia i murek tarasu wybiegające poza dom dawały 825 px zamiast 548, skalę 2/3 prawdziwej i „okap na 1,59 m: to nie kondygnacja" (Oban III) | `wallEndsPx`: szerokość w wierszu w połowie wysokości kondygnacji (między gruntem a najniższą krawędzią dachu); ta sama funkcja we wszystkich rejestracjach, także w `orientationOf`, które przekazywało pustą listę dachów i przez to zostawało przy starej szerokości (znalezione na powtórce) | wiersz przecinający < 40 % starej rozpiętości niczego nie zmienia; elewacja bez dachu zostaje przy pełnej rozpiętości |
+| Obrys ze skośnym wykuszem (33°) odrzucany jako „poza obsługiwaną formą" (Juliusz Nowy) | `squareOblique`: skośna krawędź zastępowana narożnikiem **na zewnątrz** obrysu; granica 2 % prostokąta opisanego na krawędź i 5 % łącznie; zapis `squared {edges, addedPx2}` | ściana skośna przez pół domu (ponad granicę) nadal jest odmową po nazwie |
+| Obrys z wieloma uskokami cięty „największym prostokątem" tracił skrzydło: bryła 14,70 × 6,08 m przy drukowanych 15,60 × 9,65 (Amarylis) | częściowe uproszczenie małych uskoków, potem **dokładny podział** na ≤ 4 prostokąty bez reszty (`partitionOf`); pierwszeństwo ma podział, w którym każdy prostokąt jest pełnoprawną bryłą | obrys bez takiego podziału dostaje podział z paskiem, a wywołujący go odrzuca i wraca do `wingsOf` |
+| Okno narysowane pod sam okap odrzucane w całości (`OPENING_NOT_CUT`): ściana „niosła" wysokość kalenicy, a kompilator kończy ją na spodzie dachu (Oban III — trzy okna frontu) | `cuttableTopM`: pod okapem dachu dwuspadowego ściana kończy się na spodzie połaci; nadproże wystające najwyżej o ¼ wysokości otworu jest przycinane (okna i drzwi), z zapisem `headCut` | ściana szczytowa i ściana bez dachu zachowują własną wysokość; > 25 % ponad ścianę → odmowa jak dotąd |
+| Wymiar drukowany porównywany z bryłą, w której konwencja świadomie pominęła małe uskoki (9,16 m wobec 9,65 m) — bryła „sprzeczna ze źródłem" (Amarylis) | arbitraż 1.3.0: wymiar porównywany z obrysem odrysowanym, gdy prostokąt bryły zachowuje wszystko poza `totalShare` (12 %) prostokąta obrysu; zapis `outlineM` obok `modelM` | bryła, która zgubiła skrzydło, nadal jest sprzeczna |
+
 ## 3. Rysunek kontra JSON z wymiarami — eksperyment na prośbę OWNER-a
 
 Pytanie: czy opis z API jako lista elementów z pozycjami i wymiarami niesie więcej niż „minimalistyczny obraz" (szkic
