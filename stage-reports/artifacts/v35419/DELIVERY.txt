@@ -1,0 +1,24 @@
+BuildPlan v3.54.19 — private delivery (publisher drawings inside: not for publication). Built 2026-11-24T20:05Z from the tree at 4d8e9d5.
+Every ZIP is an ordinary independent archive below 30,000,000 B with one top folder BuildPlan-V35419/, its own README-<part>.txt and MANIFEST-<part>.sha256.
+Unpack all parts into the same directory (folders merge), then open BuildPlan-V35419/gallery.html (offline, relative links).
+Verified after extraction of all nine parts together: 3787 manifest entries, 0 mismatches; gallery 852 links, 0 missing; provider key 0 occurrences in the archives and in their contents.
+
+bytes  sha256  file
+14161796  e5d1ef62ed29d9009b6a851d548eb9a62d84afd2c3c265ba2f6b33de94ca108a  BuildPlan-V35419-01-RAPORT-GALERIA.zip
+21279288  fee178c2159e2223ca26e537c2f540032fdf1f931fa437e30cdcb0b5c7d3ed96  BuildPlan-V35419-02-OCENA-SLEPA-PLANSZE.zip
+26281999  e7970f977d3e8aa96781409d2c3569532e863cacd77aefd445f9cbb642a3aa0e  BuildPlan-V35419-03-DOMY.zip
+23477282  7c98c80d870bbdc12c76ebfcd412ecdd49b0ce3d63fb7d8456c41cde34002762  BuildPlan-V35419-04-DOMY.zip
+23731307  d072df11f1140d3a3344eda9203d436bc16eeb4a20990d9db7cd1d4ee1684873  BuildPlan-V35419-05-DOMY.zip
+27963257  7713940ed2231ff75dc2de096d0b4f1eb833bbf2d0c32cfde75677139e8e9557  BuildPlan-V35419-06-DOMY.zip
+20086292  8fe51f265e949d5d07fd3d7fdfc193a07c3fba5e13bd39b9d32816956aff5297  BuildPlan-V35419-07-DOMY.zip
+20125822  3f496efb92f386542241eb6b55c7dbfbb6c455d50a783fca778c252cb62828b6  BuildPlan-V35419-08-DOMY.zip
+27708649  fb91159341fad24f3a5d5b7305aad59af3fa1c07e2963a7d4e26d410aca95875  BuildPlan-V35419-09-DOMY.zip
+
+01 report, owner note, ADR, protocol, references, hand-off, gallery.html, one board per house, blind scores + draw keys + tables, host records
+02 the boards the two blind graders saw (exterior: grading/pack, interior on the plan: grading/interior)
+03 NEW-F Ametyst New, Skagen + NEW-E Amarylis    04 NEW-F Fabia, Dom pod pomarańczą 2 + NEW-D Aletta New
+05 NEW-E Oban III, Juliusz Nowy + NEW-D Novara    06 NEW-D Willa Eliza 5 G2 + DEV Dom pod sakurą E
+07 DEV Alaska, Aurora + NEW-D Jarzębina          08 DEV Ballina, Alberto, G6          09 DEV Medulin, Mindelo, Domek nad jeziorkiem
+Per house: sources (publisher), sketches PNG/SVG/JSON per elevation, runs/<variant> (model, scene, corrections, events, observation fates), renders, the interior on the plan (overlay).
+
+APK (separate file, not in a ZIP): BuildPlan-Model-Preview-1352-arm64-v8a.apk  54009346 B  sha256 aefd2b7640cbbba2c22c765fcbe64c06418b786633451004d42fd383025a09e0  — ANDROID_UI_NOT_VERIFIED
