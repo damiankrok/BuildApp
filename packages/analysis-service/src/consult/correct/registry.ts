@@ -7,7 +7,7 @@
  * change is NOT offered as an operation: the reviewer may still report it as a defect (`UNSUPPORTED_FAMILIES`), and the
  * record says so with the reason — it never reads as something the system can correct.
  */
-export const CORRECTION_REGISTRY_VERSION = '1.5.0' as const
+export const CORRECTION_REGISTRY_VERSION = '1.6.0' as const
 
 export const PATCH_OPERATIONS = ['ASSIGN_VIEW', 'SET_PARAMETER', 'ADD_OPENING', 'UPDATE_OPENING', 'REMOVE_OPENING', 'ADD_CHIMNEY', 'UPDATE_CHIMNEY', 'SET_FINISH', 'ROOF_FEATURE', 'BUILD_MASSING', 'SET_ROOF', 'SET_OUTLINE', 'SET_ROOF_OVERHANG', 'ADD_ROOF_WINDOW'] as const
 export type PatchOperation = (typeof PATCH_OPERATIONS)[number]
@@ -122,10 +122,10 @@ export const CAPABILITIES: Record<PatchOperation, Capability> = {
   SET_ROOF: {
     op: 'SET_ROOF',
     family: 'ROOF_FORM',
-    consumer: "commands/removeFeature (the body's roofs and planes) + setProperty (the top storey's wall heights and profiles) + createRoof GABLE|FLAT with capWallIds (massing/ops.ts bindSetRoof)",
+    consumer: "commands/removeFeature (the body's roofs and planes) + setProperty (the top storey's wall heights and profiles) + createRoof GABLE|FLAT with capWallIds, or four createRoofPlane for a HIP (massing/ops.ts bindSetRoof)",
     measure: "the model's roof and the proposal's roof as the source elevation draws them, held against the original picture (polygon gate); openings above the new eaves refuse the patch; the built roof drawn back (overlap ≥ 0.8, support)",
     params: ['picture', 'roofKind', 'roofPolygon', 'side', 'wallLeftX', 'wallRightX', 'groundY'],
-    prompt: "SET_ROOF — a body's roof has the wrong form, ridge direction or heights (e.g. flat where the elevation draws a gable): targetId (the body's roof, roof plane or wall id from the MODEL ELEMENT INDEX), picture (a SOURCE elevation), roofKind (GABLE or FLAT), roofPolygon (the roof's outline in that picture: [[x,y],…], a triangle for a gable end, a band for the slopes). If the picture has no registration with heights, also side, wallLeftX/wallRightX (that body's wall ends, or the whole house's with extent HOUSE) and groundY. A hip roof is UNSUPPORTED.",
+    prompt: "SET_ROOF — a body's roof has the wrong form, ridge direction or heights (e.g. flat where the elevation draws a gable): targetId (the body's roof, roof plane or wall id from the MODEL ELEMENT INDEX), picture (a SOURCE elevation), roofKind (GABLE, HIP or FLAT), roofPolygon (the roof's outline in that picture: [[x,y],…], a triangle for a gable end, a band for a gable's slopes, a trapezoid for a hip seen along its ridge). If the picture has no registration with heights, also side, wallLeftX/wallRightX (that body's wall ends, or the whole house's with extent HOUSE) and groundY. A HIP is stated on an elevation ALONG its ridge (the one whose roof top is shorter than its eaves at both ends): a hip end alone does not say how long the ridge is.",
   },
   SET_OUTLINE: {
     op: 'SET_OUTLINE',
@@ -192,7 +192,7 @@ export const PATCH_SCHEMA = {
     sourcePicture: { type: 'integer' },
     host: { type: 'string' },
     material: { type: 'string', enum: [...FINISH_CLASSES] },
-    roofKind: { type: 'string', enum: ['GABLE', 'FLAT'] },
+    roofKind: { type: 'string', enum: ['GABLE', 'HIP', 'FLAT'] },
     roofLeftX: { type: 'number' },
     roofRightX: { type: 'number' },
     roofPolygon: { type: 'array', items: { type: 'array', items: { type: 'number' } } },
@@ -270,7 +270,7 @@ export type PatchFields = {
   sourcePicture?: number
   host?: string
   material?: FinishClass
-  roofKind?: 'GABLE' | 'FLAT'
+  roofKind?: 'GABLE' | 'HIP' | 'FLAT'
   roofPolygon?: Array<[number, number]>
 }
 

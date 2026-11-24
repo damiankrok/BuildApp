@@ -148,7 +148,7 @@ export type SketchSummary = { reading: Omit<SketchReading, 'elevationSketches'>;
 /** v3.54.18 R2: which source pictures get a frame changed (a content-disputed orthographic elevation keeps its frame): part of the accepted-revision key. */
 export const SOURCE_FRAMES_RULE = 'frames2' as const
 export const BODY_ARBITRATION = { version: '1.1.0', dimAgreeM: 0.3, dimAgreeShare: 0.04, heightAgreeM: 0.6, heightAgreeShare: 0.1 } as const
-export type BodyEvidence = { bodies: number; registrations: Array<{ frameId: string; side: string; ok: boolean; code: string }>; printed: Array<{ literal: string; valueM: number; modelM: number; agrees: boolean }>; height?: { publishedM: number; modelRidgeM: number; agrees: boolean }; contradictions: number; supports: number }
+export type BodyEvidence = { bodies: number; registrations: Array<{ frameId: string; side: string; ok: boolean; code: string; why?: string }>; printed: Array<{ literal: string; valueM: number; modelM: number; agrees: boolean }>; height?: { publishedM: number; modelRidgeM: number; agrees: boolean }; contradictions: number; supports: number }
 export type BodyArbitration = { version: string; local: BodyEvidence; /** LOCAL's body was judged with this many roof corrections from the same elevations applied (on a copy). */ localAfterRoofCorrections?: number; alternative?: BodyEvidence; massing?: { decision: string; why: string; usd: number }; decision: 'LOCAL_STANDS' | 'REPLACED_BY_SOURCE_BODY'; why: string }
 
 /** v3.54.17: the no-model path's delivery: a mass built from the source, or the anchors it lacks. */
@@ -661,7 +661,7 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
     const b = consultBinding({
       sourcePackageHash: local.pkg.contentHash,
       analyzer: `${ANALYSIS_SERVICE_VERSION}/${SOLVER_V2_VERSION}`,
-      consultant: [CONSULTANT_CONTRACT_VERSION, CONSULTANT_PROMPT_VERSION, METRIC_READ_PROMPT_VERSION, METRIC_VERIFY_PROMPT_VERSION, METRIC_RESOLVER_VERSION, ELEVATION_SKETCH_PROMPT_VERSION, `parser${ELEVATION_SKETCH_PARSER_VERSION}`, SKETCH_STEP_VERSION, CHOOSE_VERSION, ACCEPTED_CONSULT_VERSION, `registry${CORRECTION_REGISTRY_VERSION}`, `executor${CORRECTION_EXECUTOR_VERSION}`, `gate${SOURCE_GATE_VERSION}`, `sketchProposals${SKETCH_PROPOSALS_VERSION}`, `quality${QUALITY_VERSION}`, `massing${MASSING_OPS_VERSION}`, `massingBody${MASSING_VERSION}`, `bodyArbitration${BODY_ARBITRATION.version}`, SOURCE_FRAMES_RULE].join(','),
+      consultant: [CONSULTANT_CONTRACT_VERSION, CONSULTANT_PROMPT_VERSION, METRIC_READ_PROMPT_VERSION, METRIC_VERIFY_PROMPT_VERSION, METRIC_RESOLVER_VERSION, ELEVATION_SKETCH_PROMPT_VERSION, `parser${ELEVATION_SKETCH_PARSER_VERSION}`, SKETCH_STEP_VERSION, CHOOSE_VERSION, ACCEPTED_CONSULT_VERSION, `registry${CORRECTION_REGISTRY_VERSION}`, `executor${CORRECTION_EXECUTOR_VERSION}`, `gate${SOURCE_GATE_VERSION}`, `sketchProposals${SKETCH_PROPOSALS_VERSION}`, `quality${QUALITY_VERSION}`, `massing${MASSING_OPS_VERSION}`, `massingBody${MASSING_VERSION}`, `bodyArbitration${BODY_ARBITRATION.version}`, SOURCE_FRAMES_RULE, `outline${PLAN_OUTLINE_VERSION}`].join(','),
       models: { ROUNDS: wiring.model.model, ...(wiring.metricRead === 'ON' ? { METRIC: (wiring.metricModel ?? wiring.model).model } : {}), ...(wiring.sketches === 'ON' ? { SKETCH: (wiring.sketchModel ?? wiring.model).model } : {}) },
       settings: `strict=${wiring.model.strict === true || wiring.metricModel?.strict === true || wiring.sketchModel?.strict === true ? 'on' : 'off'};variant=${wiring.variant};metric=${wiring.metricRead ?? 'OFF'};sketches=${wiring.sketches ?? 'OFF'};rounds=${maxRounds};geometryRounds=${wiring.maxGeometryRounds ?? '-'};check=${wiring.check ?? 'ON'};sketchCorrections=${wiring.sketchCorrections ?? 'ON'}`,
     })
@@ -789,7 +789,7 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
         usd += plan.usd
         delivery.usd += plan.usd
         delivery.plan = plan
-        record({ at: now().toISOString(), kind: 'PLAN_OUTLINE', frameId: f.id, refused: plan.refused, check: plan.check ?? null, usd: plan.usd })
+        record({ at: now().toISOString(), kind: 'PLAN_OUTLINE', frameId: f.id, refused: plan.refused, check: plan.check ?? null, entrance: plan.entrance ?? null, usd: plan.usd })
         if (!plan.observation) delivery.why = `the plan outline gives no outline in metres: ${plan.refused.join('; ') || 'no read'}${strong ? '' : '; PLAN_SCALE: the analyzer\'s plan scale is not STRONG/CONFIRMED'}`
         else {
           const silhouettes = A.sketches.flatMap((x) => {
@@ -805,7 +805,7 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
           }
           stage('BUILD_MASSING')
           const empty = createEmptyModel(`massing-${f.variantByteHash.slice(0, 12)}`, (asset?.caption ?? 'house').slice(0, 60))
-          const out = executeCorrections({ model: empty, views: [], pictures, proposals: [{ proposalId: `massing-${f.variantByteHash.slice(0, 12)}`, baseRevision: modelRevision(empty), operation: 'BUILD_MASSING', targetId: 'WHOLE', origin: 'SKETCH', uncertainty: 'MEDIUM', justification: A.why }], massing: { outline: plan.observation, silhouettes } })
+          const out = executeCorrections({ model: empty, views: [], pictures, proposals: [{ proposalId: `massing-${f.variantByteHash.slice(0, 12)}`, baseRevision: modelRevision(empty), operation: 'BUILD_MASSING', targetId: 'WHOLE', origin: 'SKETCH', uncertainty: 'MEDIUM', justification: A.why }], massing: { outline: plan.observation, silhouettes, ...(plan.entrance?.side ? { entranceSide: plan.entrance.side } : {}) } })
           delivery.records = out.records
           delivery.transactions = out.transactions
           const rec0 = out.records[0]
@@ -850,6 +850,8 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
   // v3.54.16 §7: no model — the labelled elevations are still read into observations, with the missing anchors named
   let unregisteredSketches: Awaited<ReturnType<typeof readUnregisteredSketches>> | undefined
   let massingDelivery: MassingDelivery | undefined
+  /** The side the plan read marks the main entrance on (any plan outline read of this run, whether or not its body stands). */
+  let planEntranceSide: Side | undefined
   if (wiring.sketches === 'ON' && !good.run && good.pkg && good.graph) {
     const pkg0 = good.pkg
     const graph0 = good.graph
@@ -882,6 +884,7 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
       const strong = diag.metricConfidence === 'STRONG' && diag.metricRelation === 'CONFIRMED'
       const mb = await buildMassing({ pkg0, graph0, sketches: unregisteredSketches.sketches, ...(planFrame ? { planFrame } : {}), ...(cmPerPx !== undefined ? { cmPerPx } : {}), strong, diag, ...(local.error ? { localFailure: local.error.failure() } : {}), why: 'LOCAL built no model; the plan outline and the elevations are read' })
       massingDelivery = mb.delivery
+      planEntranceSide = mb.delivery.plan?.entrance?.side ?? planEntranceSide
       if (mb.built?.run) {
         good = mb.built
         goodState = stateOf(mb.built)
@@ -1252,11 +1255,13 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
     const pics = await allPicturesOf(good)
     const printedDims = (metricRead?.reads ?? []).flatMap((r) => r.observations.filter((o) => o.kind === 'LENGTH' && o.scope === 'WHOLE_HOUSE' && o.reference === 'OUTER_FACE' && o.status === 'PRINTED' && typeof o.value === 'number' && (o.axis === 'HORIZONTAL' || o.axis === 'VERTICAL')).map((o) => ({ literal: o.literal, valueM: o.value as number, axis: o.axis as 'HORIZONTAL' | 'VERTICAL' })))
     const publishedHeight = pkg0.publishedFacts.find((f) => f.key === 'building_height' && f.unit === 'm')?.value
-    const TURNED: Record<Side, Side> = { FRONT: 'RIGHT', RIGHT: 'REAR', REAR: 'LEFT', LEFT: 'FRONT' }
+    const TURNED_FWD: Record<Side, Side> = { FRONT: 'RIGHT', RIGHT: 'REAR', REAR: 'LEFT', LEFT: 'FRONT' }
+    const TURNED_BACK: Record<Side, Side> = { FRONT: 'LEFT', LEFT: 'REAR', REAR: 'RIGHT', RIGHT: 'FRONT' }
     const evidenceOf = (model: CanonicalBuildingModel, heldViews: readonly BindView[]): BodyEvidence => {
       const built = measureBuilt(model, compileBuilding(model))
       const labelled = sketchAnchors().filter((a) => (sketchSummary?.reading.sketches ?? []).some((x) => x.frameId === a.frameId && x.facade !== 'SIDE_UNSPECIFIED'))
-      const tryAll = (turn: boolean) => labelled.map((a) => { const r = registerFromSketch({ model, views: [...heldViews], pictures: pics, witnesses: [] }, turn ? { ...a, side: TURNED[a.side] } : a); return { frameId: a.frameId, side: turn ? TURNED[a.side] : a.side, ok: !('status' in r), code: 'status' in r ? r.code ?? r.status : 'REGISTERED' } })
+      const TURNED = planEntranceSide === 'LEFT' ? TURNED_BACK : TURNED_FWD
+      const tryAll = (turn: boolean) => labelled.map((a) => { const r = registerFromSketch({ model, views: [...heldViews], pictures: pics, witnesses: [] }, turn ? { ...a, side: TURNED[a.side] } : a); return { frameId: a.frameId, side: turn ? TURNED[a.side] : a.side, ok: !('status' in r), code: 'status' in r ? r.code ?? r.status : 'REGISTERED', ...('status' in r ? { why: r.why.slice(0, 400) } : {}) } })
       const [asL, asT] = [tryAll(false), tryAll(true)]
       const regs = asT.filter((q) => q.ok).length > asL.filter((q) => q.ok).length ? asT : asL
       const dims = printedDims.map((d) => { const ext = d.axis === 'HORIZONTAL' ? built.outlineX : built.outlineZ; return { literal: d.literal, valueM: d.valueM, modelM: Math.round(ext * 100) / 100, agrees: Math.abs(ext - d.valueM) <= Math.max(BODY_ARBITRATION.dimAgreeM, BODY_ARBITRATION.dimAgreeShare * d.valueM) } })
@@ -1284,6 +1289,7 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
       const conf = st.metric?.confidence ?? 'INCONCLUSIVE'
       const mb = await buildMassing({ pkg0, graph0, sketches: sketchSummary.reading.sketches, ...(good.plans?.selectedPlanFrameId ? { planFrame: good.plans.selectedPlanFrameId } : {}), ...(typeof st.metric?.cmPerPixelX === 'number' ? { cmPerPx: st.metric.cmPerPixelX } : {}), strong: (CONF_RANK[conf] ?? 0) >= 2, diag: { metricConfidence: conf, metricRelation: st.metric?.relation ?? '?' }, localFailure: { code: 'LOCAL_BODY_CONTRADICTED', reasonCode: 'BODY_ARBITRATION' }, why: `LOCAL's body is contradicted by ${localEv.contradictions} source statement(s); the plan outline and the elevations are read` })
       arb.massing = { decision: mb.delivery.decision, why: mb.delivery.why.slice(0, 400), usd: mb.delivery.usd }
+      planEntranceSide = mb.delivery.plan?.entrance?.side ?? planEntranceSide
       if (!mb.built?.run) arb.why = `LOCAL's body is contradicted (${localEv.contradictions}), but the other body could not be built (${mb.delivery.why.slice(0, 200)}): LOCAL's stands, the contradiction named`
       else {
         const altEv = evidenceOf(mb.built.run.reconstruction.model, massingOf.get(mb.built)?.views ?? [])
@@ -1296,7 +1302,7 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
           arb.why = `the sources contradict LOCAL's body ${localEv.contradictions} time(s) and support it ${localEv.supports}; the body built from the plan outline and the elevations: ${altEv.contradictions} and ${altEv.supports}. The source body stands; LOCAL's interior is not carried over (NOT_CHECKED)`
           massingDelivery = mb.delivery
           replacedPlanGaps = good.run ? planGapsOf(good.run.reconstruction.model) : []
-          if (replacedPlanGaps.length > 0) record({ at: now().toISOString(), kind: 'PLAN_GAPS_KEPT_AS_WITNESS', gaps: replacedPlanGaps.length, sides: [...new Set(replacedPlanGaps.map((g) => g.side))], why: 'the replaced LOCAL body traced these openings on the plan: where the elevation reading draws an opening of the same span on the same side and storey, two drawings agree (applied as a cross-witness, never source-verified)' })
+          if (replacedPlanGaps.length > 0) record({ at: now().toISOString(), kind: 'PLAN_GAPS_KEPT_AS_WITNESS', gaps: replacedPlanGaps.length, sides: [...new Set(replacedPlanGaps.map((g) => g.side))], spans: replacedPlanGaps.map((g) => ({ side: g.side, a0: Math.round(g.a0 * 100) / 100, a1: Math.round(g.a1 * 100) / 100, storeyLo: Math.round(g.storeyLo * 100) / 100 })), why: 'the replaced LOCAL body traced these openings on the plan: where the elevation reading draws an opening of the same span on the same side and storey, two drawings agree (applied as a cross-witness, never source-verified)' })
           good = mb.built
           goodState = stateOf(mb.built)
           basis = mb.built
@@ -1312,7 +1318,9 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
     const held = massingOf.get(good)?.views ?? viewsOfRun(run.reconstruction.facadeAlignment.views)
     // v3.54.17: the bodies' roofs first — a roof the sketches draw and the model lacks (or has wrong) is a SET_ROOF
     const sketchInputs = () => sketchSummary.reading.sketches.filter((x) => x.sketch).map((x) => ({ facade: x.facade, frameId: x.frameId, groundRow: x.sketch?.groundRow ?? null, walls: (x.sketch?.walls ?? []).map((w) => w.polygon as Array<[number, number]>), roofs: (x.sketch?.roofs ?? []).map((r) => r.polygon as Array<[number, number]>) }))
-    let roofs = roofProposalsFromSketches(sketchInputs(), run.reconstruction.model, held, rev, sideOfFacade)
+    // v3.54.18 R2: what the plan read says of the main entrance decides WHICH quarter turn a turned set of elevations is
+    const orientationHints = planEntranceSide ? { entranceSide: planEntranceSide } : {}
+    let roofs = roofProposalsFromSketches(sketchInputs(), run.reconstruction.model, held, rev, sideOfFacade, orientationHints)
     // v3.54.17 R2: ONE side mapping for every consumer of the sketches — under a TURNED_90 hypothesis the openings are not
     // bound through the analyzer's registrations made as labelled (that would bind them to the other side)
     const turnedSides = roofs.orientation.assignment === 'TURNED_90'
@@ -1389,7 +1397,7 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
     const printed: CorrectionProposal[] = mainWall ? (metricRead?.reads ?? []).flatMap((r) => r.observations.filter((o) => o.kind === 'LENGTH' && o.scope === 'WHOLE_HOUSE' && o.reference === 'OUTER_FACE' && o.status === 'PRINTED' && typeof o.value === 'number' && o.ends).map((o) => ({ proposalId: `printed:${o.id}`, baseRevision: rev, operation: 'SET_OUTLINE', targetId: mainWall, patch: { printed: { valueM: o.value as number, literal: o.literal, planFrameId: r.frameId, from: (o.ends as NonNullable<typeof o.ends>).from, to: (o.ends as NonNullable<typeof o.ends>).to, sourceByteHash: frameHash.get(r.frameId) ?? '' } }, origin: 'METRIC' as const, uncertainty: 'LOW' as const, justification: `the plan prints "${o.literal}" as the house's overall ${o.axis === 'HORIZONTAL' ? 'width' : 'depth'} to the outer faces${o.hostHint ? ` (${o.hostHint})` : ''}` }))) : []
     record({ at: now().toISOString(), kind: 'PRINTED_OUTLINE', mainWall: mainWall ?? null, proposals: printed.map((x) => x.proposalId), dimensions: (metricRead?.reads ?? []).reduce((n, r) => n + r.observations.length, 0) })
     await phase('PRINTED_OUTLINE', printed)
-    if (stood !== good && stood.run) roofs = roofProposalsFromSketches(sketchInputs(), stood.run.reconstruction.model, massingOf.get(stood)?.views ?? viewsOfRun(stood.run.reconstruction.facadeAlignment.views), modelRevision(stood.run.reconstruction.model), sideOfFacade)
+    if (stood !== good && stood.run) roofs = roofProposalsFromSketches(sketchInputs(), stood.run.reconstruction.model, massingOf.get(stood)?.views ?? viewsOfRun(stood.run.reconstruction.facadeAlignment.views), modelRevision(stood.run.reconstruction.model), sideOfFacade, orientationHints)
     sem.massing = roofs.accounts
     sem.orientation = roofs.orientation
     record({ at: now().toISOString(), kind: 'SKETCH_ROOFS', orientation: roofs.orientation.assignment, proposals: roofs.proposals.map((x) => x.proposalId), accounts: roofs.accounts.map((a) => ({ frameId: a.frameId, side: a.side ?? null, proposed: a.proposed.length, skipped: a.skipped.map((k) => k.why.slice(0, 220)) })) })

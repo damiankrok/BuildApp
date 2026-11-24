@@ -47,7 +47,7 @@ import { resolveWitness, WITNESS_RESOLVER_VERSION } from './resolve.js'
 import { bindBuildMassing, bindSetOutline, bindSetRoof, MAX_OVERHANG_M } from '../massing/ops.js'
 import type { MassingObservations } from '../massing/ops.js'
 
-export const CORRECTION_EXECUTOR_VERSION = '1.7.0' as const
+export const CORRECTION_EXECUTOR_VERSION = '1.8.0' as const
 
 export type Side = 'FRONT' | 'RIGHT' | 'REAR' | 'LEFT'
 export const SIDES: readonly Side[] = ['FRONT', 'RIGHT', 'REAR', 'LEFT']
@@ -1091,7 +1091,12 @@ export function registerFromSketch(ctx: Ctx, a: SketchAnchors): { view: BindView
 /** v3.54.17 R3: the top of the main pitched roof over `side` (its ridge, the slope's top surface), above ±0.00. */
 export function sideRidgeM(m: CanonicalBuildingModel, side: Side): number | undefined {
   const r = sideRoof(m, side)
-  if (!r || r.kind !== 'GABLE') return undefined
+  if (!r) {
+    // executor 1.8.0: a house roofed in planes alone (a hip): the planes' highest point is its ridge
+    const ys = m.roofPlanes.flatMap((pl) => pl.boundary.map((v) => pl.datum.y - Math.tan((pl.pitchDeg * Math.PI) / 180) * ((v.x - pl.datum.x) * pl.downslope.x + (v.z - pl.datum.z) * pl.downslope.z)))
+    return ys.length > 0 ? Math.max(...ys) : undefined
+  }
+  if (r.kind !== 'GABLE') return undefined
   const f = r.footprint
   const half = (r.ridgeAxis === 'Z' ? f.maxX - f.minX : f.maxZ - f.minZ) / 2
   return levelOf(m, r.levelId).elevation + r.eaveOffset + half * Math.tan((r.pitchDeg * Math.PI) / 180)
