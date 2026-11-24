@@ -238,7 +238,7 @@ export function readPlanSkeleton(input: PlanSkeletonInput): PlanSkeleton {
   const base = { version: PLAN_SKELETON_VERSION, frameId: input.frameId, sourceByteHash: input.sourceByteHash, mPerPx: s, ink, tracedPx: traced }
   const empty = { outlinePx: traced, snapped: [], wallPx: 0, walls: [], doors: [], gaps: [] }
   if (!(s > 0) || traced.length < 4) return { ...base, ...empty, refused: ['PLAN_SKELETON: no outline at a scale'] }
-  if (!ink.filled && ink.luma >= PLAN_SKELETON.paperLuma) return { ...base, ...empty, refused: [`WALL_STYLE: ${ink.why}`] }
+  if (!ink.filled) return { ...base, ...empty, refused: [`WALL_STYLE: ${ink.why}`] }
   const painted = paintWalls(input.raster, ink)
   const snap = snapOutline(painted, traced)
   const outline = snap.outlinePx
