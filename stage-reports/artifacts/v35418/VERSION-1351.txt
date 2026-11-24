@@ -1,0 +1,15 @@
+applicationId=com.buildplan.preview
+versionCode=1351
+versionName=0.1351.0-owner
+versionSource=-PpreviewVersionCode=1351 (owner test build)
+commit=a9a97c42a32fadc7815850018a022a83682ae385
+signingKeystore=apps/android/keystore/preview.keystore
+signingKeyAlias=buildplan-preview
+signerCertSha256=6e48fac4afaa3d70e70de5bc608aa4c4194206a9e6bc993dab56382b921ca0da (the same signer as 1349 and 1350: installs over them)
+apkFile=BuildPlan-Model-Preview-1351-arm64-v8a.apk
+apkSha256=a12402a9fa75e7363daa9990a36ad76e2cb419a9aa35e8718bb9c4d6d103d883
+apkBytes=53153150
+abi=arm64-v8a (the phone artifact of the normal previewApks build; armeabi-v7a, x86_64 and universal were built too and are not delivered)
+scenesInApk=48 bundles + index.json, byte-identical to apps/android/app/src/main/assets/scenes at the commit above; the four R3 scenes first (alaska-r3, g6-r3, aurora-r3, alberto-r3), then the four of R2
+providerKeyOccurrences=0 in the APK file, 0 in its unpacked contents
+deviceCheck=ANDROID_UI_NOT_VERIFIED (no device or emulator in this session)

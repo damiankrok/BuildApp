@@ -98,3 +98,30 @@ przyczynę fizyczną w rysunku, test z kontrpróbą (`packages/analysis-service/
 Odrzucone w R2: wykorzystanie luk rzutu LOCAL do rozstrzygania stron (na Alasce LOCAL wypełnił całe ściany lukami —
 fantomy nie są świadkiem); próg „ściana niższa niż kondygnacja nie jest odczytem" (Jeziorko ma prawdziwe 1,9 m);
 poluzowanie tolerancji rejestracji okapu (Aurora: pusty szczyt nadal odłożony, 13 px przy tolerancji 8 px).
+
+## R3 (2026-11-24): układ bryły, strony i skala rzutu — z rysunku
+
+1. **Bryła ze źródeł stoi w układzie elewacji.** Układ modelu obiecuje „lico fasady frontowej to z = 0". Gdy elewacje
+   rysują boki rzutu obrócone o ćwierć obrotu, obrys rzutu jest obracany sztywno (nigdy lustrzanie) tak, żeby bok
+   rysowany przez elewację frontową był frontem; każda elewacja jest potem czytana na stronie z podpisu i żadne
+   „obrócone" mapowanie stron nie idzie przez potok. Który koniec jest frontem, mówi wejście główne z rzutu; bez niego
+   pierwszy obrót zostaje nazwaną konwencją. Model, który ma już bryły (LOCAL), zachowuje swój układ i dawne mapowanie.
+   Arkusz rzutu jest wtedy obrócony względem modelu — recenzent dostaje to w podpisie obrazu, wymiary drukowane zamieniają
+   osie, a luki rzutu LOCAL (podane w układzie rzutu) nie są przenoszone.
+2. **Strona, której nie podaje podpis, nie jest stroną ze źródła.** Dwie elewacje podpisane tymi samymi słowami są
+   przypisywane jak niepodpisane: tym, co się rejestruje, otworami modelu, a potem otworami, które RZUT rysuje na każdym
+   boku (drugi rysunek; dopasowanie odcinków 0..1 widzianych z zewnątrz, margines 1,5 otworu netto). Etykieta LOCAL jest
+   konwencją ostatniej szansy. Otwory z rzutu niczego w modelu nie dodają ani nie usuwają.
+3. **Skala rzutu może pochodzić z jego własnego obrysu.** Dwa wymiary gabarytowe (wydrukowane z osiami albo podane na
+   stronie) nad dwiema rozpiętościami obrysu — przyjęte tylko, gdy obie skale zgadzają się do 3 %. Sama powierzchnia
+   zabudowy nad polem obrysu jest HIPOTEZĄ: bryła na niej powstaje, ale jest oddawana tylko wtedy, gdy wysokość budynku
+   ze strony zgadza się z kalenicą, którą dają elewacje przy tej skali (fakt spoza rzutu).
+4. **Widoki wyłącznie wzdłuż kalenicy dają dolne ograniczenie ściany**, nie jej szczyt: kąt dachu ze strony stawia
+   ścianę, gdy narysowane ściany na to pozwalają; inaczej bierze się najwyższą z nich i nazywa ograniczeniem.
+5. **„L" z cienkim drugim prostokątem** to jedna bryła z wyjętym narożnikiem: oddaje się mniejsze z dwojga (narożnik
+   albo pas), nazwane konwencją miniatury.
+
+Rozważone i odrzucone w R3: przypisywanie stron z wizualizacji perspektywicznej (obraz perspektywiczny nie ustala strony
+metrycznie); użycie otworów z rzutu jako świadka do DODAWANIA otworów (dwa odczyty API różnych rysunków to nadal nie
+rysunek wydawcy trzymany na oryginale — zostawione do osobnego pomiaru); obniżenie progu „skrzydło to bryła" (12 %
+obrysu), żeby Sakura dostała skrzydło — bez odczytu jego dachu byłaby to bryła zgadnięta.

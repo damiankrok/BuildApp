@@ -63,3 +63,27 @@ swapped). The plan must say it (window count per side from the plan read), or th
 z 0.39). 5) LOCAL's interior is not carried to a source body (Alberto lost 69 interior walls for a correct roof and
 clean elevations). 6) Hip roofs: no roof windows, no overhang correction, one rectangle only (an L under one hip is
 its main rectangle). 7) Finishes on a source body are undone by the reviewer as often as kept.
+
+## R3 (2026-11-24) — second continuation after APK 1350
+
+**Code.** `massing.ts` 1.5.0 (`outlineWithFront`, `planFront` on the hypothesis; in-line step split of one rectangle;
+bound-only eaves with `publishedPitchDeg`; a thin L closes its corner), `ops.ts` 1.9.0 (BUILD_MASSING builds a turned
+body in the elevations' frame when the model has no bodies), `plan-outline.ts` 1.3.0 (`plan-outline/3`: `openings`;
+`scaleOutline`, `outlineScale`), `plan-openings.ts` 1.0.0 (`stretchAgreement`, `planSideInModel`, `drawnStretches`),
+`consult-analysis.ts` (plan-front label for the review, printed-dimension axes, `massingViews`, weak side labels,
+`PLAN_SCALE_FROM_OUTLINE`, `PLAN_SCALE_HYPOTHESIS`, `BODY_BUILT_IN_ELEVATION_FRAME`). All in the accepted-revision key.
+
+**Runs (private).** `rd/v35418/r4/<nine houses>` on `58ff26a` (recorded elevation reads; the plan read of prompt 3 was
+made live once in `r3/` and is replayed from `r3/<house>/outline-turns.json`; review live). `r3/alaska-try1` = the
+run before the registrations followed the decided sides (four windows on the wrong long wall). Disk: `cleanup.py`-style
+pruning removed renders and packages of stages before v3.54.14; byte caches, recordings and models are kept.
+
+**Open after R3, most valuable first.** 1) Entrance doors the gate refuses (Alberto z 0.39, G6 z −1.26): the plan read
+now sees the door on the plan — a second drawing that could witness a door the elevation draws faintly; kept out until
+measured on new houses. 2) Multi-wing bodies (Medulin, Mindelo): unchanged; the plan outline read returns `parts`, and
+the in-line split exists, but an L/U with roofs of its own per wing is not built. 3) A wing below 12 % of the outline
+(Sakura) is not modelled, so side elevations that span it do not register on the body (9.84 m against 12.3 m drawn).
+4) LOCAL's interior is not carried to a source body (Alberto, Aurora, Alaska, Ballina, G6). 5) `apps/analyzer-api/test/
+worker.test.ts`: two timing tests fail inside the full matrix and pass alone — the host's code is unchanged; the
+timeouts want a look. 6) Hip roofs: no roof windows, no overhang correction. 7) The blind-grader comparison in R2 and
+R3 is on the nine houses the rules were found on: a fresh blind set is owed before any claim of transfer.

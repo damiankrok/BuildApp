@@ -27,6 +27,13 @@
   Host on the final commit: all checks passed (reuse 0 USD / 0 requests; no token → 0 requests), one job FAILED on a
   fresh read (kept). Stage cost 4.951829 USD (books 34.452762 of 68.542857). Matrix 4536: 16 failures, the same 16 as the R3 base list (none new). APK 1349 from `ba41dbe`
   (same signer as 1348; ANDROID_UI_NOT_VERIFIED — no device in the session).
+- **v3.54.18 R3 (2026-11-24): the body's frame, its sides and the plan's scale read from the drawings — APK 1351.**
+  Report §17; ADR and hand-off sections R3. A body built from the sources stands in the elevations' frame (the entrance
+  side is the model's front); side elevations a caption does not tell apart are placed by the openings the plan draws;
+  a plan without a measured scale takes one from its own traced outline (two overall dimensions, or the footprint area
+  confirmed by the published height). Alaska faces its entrance, G6 has its hip roof on a source body, Aurora has a
+  source body. Kept failures: Medulin, Mindelo, entrance doors of Alberto and G6, interiors lost with replaced bodies.
+  No threshold was loosened.
 - **v3.54.18 R2 (2026-11-24): roof form and house sides read from the drawings — APK 1350.** Report §16 of
   `stage-reports/SOURCE_TO_MODEL_V35418.md`; ADR section R2; hand-off section R2. Hip roofs are read (a trapezoid on
   the sides along the ridge) and built as four roof planes through the same source gate; a gable end drawn as its
