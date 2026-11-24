@@ -16,7 +16,7 @@ import { executeCorrections, modelRevision } from '../src/consult/correct/execut
 import type { CorrectionProposal } from '../src/consult/correct/execute.js'
 import { interiorRuns, planGapsFromSkeleton, resolveOverlaps, skeletonInModel } from '../src/consult/correct/interior.js'
 import { bodyCommands, pointWithFront } from '../src/consult/massing/massing.js'
-import { edgesOf, insetOutline, objectsAmong, paintWalls, readPlanSkeleton, slabsOf, snapOutline, wallInkOf } from '../src/consult/plan-skeleton.js'
+import { edgesOf, insetOutline, objectsAmong, outerFaceOutline, paintWalls, readPlanSkeleton, slabsOf, snapOutline, wallInkOf } from '../src/consult/plan-skeleton.js'
 import type { SkeletonDoor, SkeletonWall } from '../src/consult/plan-skeleton.js'
 
 const S = 0.03 // m per px
@@ -348,5 +348,31 @@ describe('v3.54.19 (skeleton 1.1.0) objects drawn in the wall\'s tone are not pa
   it('a group too small to hold anything is an object whatever its shape', () => {
     const legs = [W('V', 400, 700, 740, 8), W('H', 704, 396, 430, 10)]
     expect(objects(legs)).toEqual(legs.map((w) => w.id).sort())
+  })
+})
+
+describe('v3.54.19 (skeleton 1.2.0) the walls\' outer line', () => {
+  // the sheet above with an outer wall layer: a thin dark line 7 px outside the core on every side
+  const layered = (lines: { top?: boolean; bottom?: boolean; left?: boolean; right?: boolean }): Raster => {
+    const r = sheet()
+    const set = (x: number, y: number): void => { const i = (y * r.width + x) * 4; r.data[i] = 20; r.data[i + 1] = 20; r.data[i + 2] = 20 }
+    if (lines.top) for (let x = X0 - 7; x <= X1 + 7; x += 1) set(x, Y0 - 7)
+    if (lines.bottom) for (let x = X0 - 7; x <= X1 + 7; x += 1) set(x, Y1 + 7)
+    if (lines.left) for (let y = Y0 - 7; y <= Y1 + 7; y += 1) set(X0 - 7, y)
+    if (lines.right) for (let y = Y0 - 7; y <= Y1 + 7; y += 1) set(X1 + 7, y)
+    return r
+  }
+  it('each edge traced on the core is moved out onto the thin line that closes the wall; an edge already on it stays', () => {
+    // traced: top and bottom on the core's outer edge, left and right already on the outer line
+    const traced: Array<[number, number]> = [[X0 - 7, Y0], [X1 + 7, Y0], [X1 + 7, Y1], [X0 - 7, Y1]]
+    const out = outerFaceOutline(layered({ top: true, bottom: true, left: true, right: true }), traced) as NonNullable<ReturnType<typeof outerFaceOutline>>
+    expect(out.outline).toEqual([[X0 - 7, Y0 - 7], [X1 + 7, Y0 - 7], [X1 + 7, Y1 + 7], [X0 - 7, Y1 + 7]])
+    expect(out.moved.map((m) => m.byPx)).toEqual([7, 7])
+  })
+  it('counter-trials: a sheet with no outer line moves nothing; a short stroke outside the wall (a step, a label) is not the wall\'s line', () => {
+    expect(outerFaceOutline(sheet(), OUTLINE)).toBeUndefined()
+    const r = sheet()
+    for (let x = 100; x <= 160; x += 1) { const i = ((Y0 - 7) * r.width + x) * 4; r.data[i] = 20; r.data[i + 1] = 20; r.data[i + 2] = 20 }
+    expect(outerFaceOutline(r, OUTLINE)).toBeUndefined()
   })
 })

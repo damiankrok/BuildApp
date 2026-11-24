@@ -13,10 +13,11 @@
 
 | File | What |
 |---|---|
-| `plan-skeleton.ts` | the plan sheet read inside the outline: wall colour, exterior gaps, partitions, interior doors, objects dropped (`objectsAmong`) |
+| `plan-skeleton.ts` | the plan sheet read inside the outline: wall colour, exterior gaps, partitions, interior doors, objects dropped (`objectsAmong`), the walls' outer line (`outerFaceOutline`) |
 | `correct/interior.ts` | the skeleton in the model's frame; `BUILD_INTERIOR`; plan gaps as witnesses |
 | `correct/execute.ts` | `ADD_PLAN_OPENING`, door kinds on a plan gap, head cut, end clip, stable ids, `elementExists` |
 | `facade-metric.ts` | an elevation's openings as a typed list in metres (prompt `facade-metric/1`) |
+| `form-read.ts` | the typed form of the house from all captioned elevations (prompt `form-read/1`): a witness of the body arbitration |
 | `site-dimensions.ts` | the building's two printed dimensions on the site plan (prompt `site-dimensions/1`) |
 | `massing/massing.ts` | `wingsOf`, the in-line split on the plan's wall, the wing-under-another-roof guard, the fascia line as the wall's top |
 | `massing/ops.ts` | the page's building height as the witness of the quarter turn (BUILD_MASSING and `orientationOf`) |
@@ -35,6 +36,7 @@ scripts; it is never an argument. Every billed request is booked in the ONE cont
 - The model's ground storey on the publisher's plan: `npx vite-node research/source-to-model/v35419/plan-overlay.ts -- --run <run dir> --cache <byte cache> --out <dir> --name <label>`
 - Plan gaps covered by the model's openings: `npx vite-node research/source-to-model/v35419/gap-coverage.ts -- <run dir>...`
 - Sketch against typed lists against the plan's gaps: `research/source-to-model/v35419/read-compare.ts` (billed; see its header)
+- The typed form of the house against the built model: `research/source-to-model/v35419/form-read.ts` (billed, about 0.014 USD a house)
 - Delivery: `delivery/manifest.py <final commit> <final run root> > manifest.json`, then
   `delivery/make_delivery.py manifest.json <out>` (gallery with the interior on the plan), `../v35418/delivery/grader_pack.py`
   (`GRADER_KEYS=baseline1351,final`), `delivery/interior_pack.py`, `../v35418/delivery/pack.py` (`BUILDPLAN_PACK_TOP`).

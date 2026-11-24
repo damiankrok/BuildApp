@@ -63,6 +63,26 @@ replaced LOCAL's. Nothing about a partition depends on who placed the outer wall
     and not every wall top is drawn: taken as the roof's top surface at the wall, a steep roof stood in its own walls and
     every door under it went uncut. **A lower body's roof steeper than 60°** is the roof of the body behind it: it takes
     the first body's pitch from its own walls, unconfirmed.
+15. **The typed FORM of the house is a witness of the body arbitration** (`form-read.ts`, one request with all captioned
+    elevations: storeys, volumes under their own roofs, the main roof's kind and ridge direction, lower parts). Measured
+    first, as an experiment, on the thirteen development houses: it named the main roof's kind and ridge direction as the
+    drawings show them on every one, where the delivered models had flat-roofed boxes beside a gable on three and two
+    steep gables for a low hip on a fourth. It is asked only where it can say what the other witnesses cannot — LOCAL's
+    body is a pitched house with flat-roofed volumes beside it — and it only contradicts or supports a body; the body
+    that replaces LOCAL's is still built by the same solver from the outline and the silhouettes, and no dimension is
+    taken from the typed answer. Not taken (yet): the form as a PRIOR of the solver (hip against gable, two storeys):
+    the measured next step.
+16. **The outline stands on the walls' outer line where the printed dimensions say so** (skeleton 1.2.0,
+    `outerFaceOutline`): a sheet that draws layered walls prints its overall dimensions on the thin outer line; a tracing
+    follows the dark core on one side and the outer line on another. Where the plan's two printed overall dimensions
+    disagree over the traced outline (more than the 3 % any pair is held to) and agree over the outline moved onto the
+    outermost wall line, the moved outline is the body's and the pair its scale. The skeleton still reads along the
+    traced outline — the walls' filled core. This is decision 2 (the body keeps the traced outline) with its exception
+    stated by evidence, not a reversal of it.
+17. **In-line bodies are read where the elevations draw the step and built on the plan's wall**: the taller roof's verge
+    overhangs the lower body; read over its plan extent, the lower body took that roof for its own.
+18. **A look that omits its verdicts on the applied corrections is asked for them once more** (the field is optional in
+    the contract; two of thirteen live looks of one batch left a whole revision "not reviewed").
 
 ## Considered and not taken
 

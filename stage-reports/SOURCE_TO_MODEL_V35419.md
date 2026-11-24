@@ -78,6 +78,17 @@ odtworzyć nakładkę modelu na rzut).
   obu stronach, po nazwie; bryła zastępująca LOCAL nadal musi być niesprzeczna ze wszystkim innym.
 - **Dolna krawędź dachu to wierzch ściany, nie wierzch dachu**, gdy żaden szczyt nie daje uzgodnionego narożnika:
   brana jako wierzch połaci stawiała stromy dach 0,4 m w jego własnych ścianach i żadne drzwi pod nim nie były wycinane.
+- **Typowany opis formy domu jako świadek arbitrażu** (`form-read.ts`, jedno żądanie, wszystkie podpisane elewacje):
+  pytany tylko wtedy, gdy bryła LOCAL to dom ze spadzistym dachem i płaskimi „pudełkami" obok (LOCAL buduje cofnięty
+  front jako osobną bryłę pod płaskim dachem; rejestracja elewacji po końcach ścian i wymiary drukowane zgadzają się
+  z taką bryłą równie dobrze). Pomiar, który do tego doprowadził: §3.2.
+- **Obrys na zewnętrznej linii ścian tam, gdzie mówią to wymiary drukowane** (`outerFaceOutline`): arkusz rysujący ścianę
+  warstwami (ciemny rdzeń, jaśniejsza warstwa zewnętrzna zamknięta cienką linią) ma wymiary całkowite na tej cienkiej
+  linii, a odrys API szedł raz po rdzeniu, raz po linii. Gdy dwa wymiary drukowane nie zgadzają się na obrysie
+  odrysowanym (> 3 %), a zgadzają na obrysie dosuniętym do zewnętrznej linii — bryła staje na tej linii, w skali z pary
+  wymiarów (Novara: 4,0 % → 0,1 %). Szkielet nadal czyta po rdzeniu.
+- **Dwa korpusy w linii są czytane tam, gdzie elewacje rysują uskok, a budowane na ścianie z rzutu** (okap wyższego dachu
+  nachodzi na niższy korpus; czytany po rozpiętości z rzutu, niższy korpus brał cudzy dach za własny).
 - **Skala z wymiarów budynku drukowanych na planie sytuacyjnym** (`site-dimensions.ts`): jeden mały typowany odczyt,
   używany tylko jako para zgodna na obu rozpiętościach obrysu (≤ 3 %). Progu nie ruszono dla domu, któremu zabrakło 0,3 %.
 
@@ -97,7 +108,25 @@ przerw narysowanych w ścianie tej strony na rzucie parteru (`read-compare.ts`).
 - **JSON-B** — jedno żądanie, z podaną szerokością elewacji w metrach (z rzutu): każdy otwór w metrach od lewego
   narożnika, z szerokością, parapetem i wysokością.
 
-<!-- READCMP -->
+### 3.1 Otwory: szkic kontra lista JSON
+
+| Dom | Elewacja | Przerwy rzutu | SZKIC: trafione | JSON-A: trafione | JSON-B: trafione |
+|---|---|---|---|---|---|
+| alaska | REAR | 1 | 1/1 | 1/1 | 1/1 |
+| alberto | FRONT | 4 | 2/4 (+1 poza przerwami) | 4/4 (+1 poza przerwami) | 4/4 (+1 poza przerwami) |
+| alberto | REAR | 4 | 4/4 | 4/4 | 4/4 |
+| aletta | FRONT | 4 | 4/4 (+1 poza przerwami) | 4/4 (+1 poza przerwami) | 4/4 (+1 poza przerwami) |
+| aletta | REAR | 4 | 3/4 (+1 poza przerwami) | 3/4 (+1 poza przerwami) | 3/4 (+1 poza przerwami) |
+| aurora | FRONT | 4 | 4/4 (+1 poza przerwami) | 4/4 (+1 poza przerwami) | 4/4 (+1 poza przerwami) |
+| aurora | REAR | 3 | 3/3 (+1 poza przerwami) | 3/3 (+1 poza przerwami) | 3/3 (+1 poza przerwami) |
+| ballina | REAR | 4 | 3/4 | 3/4 | 3/4 |
+| ballina | FRONT | 5 | 5/5 | 5/5 | 5/5 |
+| sakura | FRONT | 5 | 5/5 | 5/5 | 5/5 |
+| sakura | REAR | 4 | 4/4 | 4/4 | 4/4 |
+| **razem** | 11 elewacji | 42 | 38/42 | 40/42 | 40/42 |
+
+Koszt eksperymentu: 0.2000 USD (11 elewacji × 2 żądania, Sonnet 5.5).
+
 
 Wniosek, bez upiększania: lista JSON **nie wykrywa więcej** niż szkic na większości elewacji — jest równa, a na jednej
 (front Alberto) lepsza. Jej przewaga jest gdzie indziej: pozycja wzdłuż ściany w metrach nie przechodzi przez
@@ -106,5 +135,43 @@ przerwy rzutu; kosztuje ok. 0,02 USD za elewację. Dlatego nie zastąpiła szkic
 i kształt ścian, których lista nie ma), tylko została **drugim, niezależnym odczytem** używanym do jednej rzeczy:
 zapełnienia przerwy rzutu, której model po szkicu nadal nie pokrywa. Kolejność LOCAL/API/szkic nie jest założona
 z góry: rzut (deterministycznie) daje rozpiętość, szkic lub lista dają rodzaj i wysokości, a źródłowa bramka rozstrzyga.
+
+### 3.2 Forma domu: sylwetki ze szkiców kontra jeden typowany opis JSON
+
+Drugie pytanie z tej samej wskazówki: czy **forma** domu — ile brył, jaki dach, w którą stronę kalenica, ile kondygnacji —
+nie ginie na drodze „szkic konturowy → sylwetka każdej elewacji osobno → solver bryły"? Jedno żądanie ze wszystkimi
+podpisanymi elewacjami i typowaną odpowiedzią (`research/source-to-model/v35419/form-read.ts`), obok tego, co z tych
+samych obrazów zbudował potok:
+
+| Dom | Opis JSON formy (jedno żądanie, wszystkie elewacje) | Co zbudował potok ze szkiców (partia a4) |
+|---|---|---|
+| alaska | parter + poddasze; brył 1; dach dwuspadowy 42°, kalenica prostopadle do frontu; części niższe: —; lukarny 0, kominy 2, okna poł. 8 | brył 1; dwuspadowy 38.2°; kominy 2, okna poł. 8 |
+| aurora | parter; brył 1; dach dwuspadowy 35°, kalenica równolegle do frontu; części niższe: —; lukarny 0, kominy 3, okna poł. 1 | brył 1; dwuspadowy 35°; kominy 3, okna poł. 1 |
+| ballina | parter; brył 1; dach dwuspadowy 30°, kalenica równolegle do frontu; części niższe: —; lukarny 0, kominy 0, okna poł. 0 | brył 1; dwuspadowy 30.8°; kominy 0, okna poł. 0 |
+| alberto | parter; brył 1; dach dwuspadowy 30°, kalenica równolegle do frontu; części niższe: —; lukarny 0, kominy 2, okna poł. 1 | brył 1; dwuspadowy 25.2°; kominy 2, okna poł. 0 |
+| medulin | parter + poddasze; brył 1; dach dwuspadowy 45°, kalenica prostopadle do frontu; części niższe: —; lukarny 0, kominy 1, okna poł. 0 | brył 3; płaski, płaski, płaski, dwuspadowy 45°; kominy 0, okna poł. 0 |
+| jeziorko | parter; brył 1; dach dwuspadowy 30°, kalenica równolegle do frontu; części niższe: —; lukarny 0, kominy 1, okna poł. 0 | brył 1; dwuspadowy 30°; kominy 1, okna poł. 0 |
+| mindelo | parter; brył 1; dach dwuspadowy 40°, kalenica równolegle do frontu; części niższe: —; lukarny 0, kominy 2, okna poł. 0 | brył 2; płaski, płaski, płaski, płaski, dwuspadowy 30°; kominy 2, okna poł. 0 |
+| sakura | parter; brył 1; dach czterospadowy 30°, kalenica równolegle do frontu; części niższe: —; lukarny 0, kominy 2, okna poł. 0 | brył 1; 4 połacie (czterospadowy); kominy 2, okna poł. 0 |
+| g6 | parter; brył 1; dach czterospadowy 35°, kalenica równolegle do frontu; części niższe: —; lukarny 0, kominy 0, okna poł. 0 | brył 1; 4 połacie (czterospadowy); kominy 0, okna poł. 0 |
+| aletta | parter + poddasze; brył 2; dach dwuspadowy 40°, kalenica równolegle do frontu; części niższe: garage (dwuspadowy, left); lukarny 0, kominy 2, okna poł. 5 | brył 2; dwuspadowy 43.7°, dwuspadowy 35°; kominy 2, okna poł. 8 |
+| novara | parter; brył 1; dach dwuspadowy 35°, kalenica równolegle do frontu; części niższe: —; lukarny 0, kominy 0, okna poł. 0 | brył 1; płaski, płaski, dwuspadowy 30°; kominy 0, okna poł. 0 |
+| jarzebina | parter + poddasze; brył 2; dach dwuspadowy 40°, kalenica równolegle do frontu; części niższe: garage (dwuspadowy, right); lukarny 1, kominy 2, okna poł. 3 | brył 2; BRAK DACHU; kominy 0, okna poł. 0 |
+| eliza | dwie kondygnacje; brył 2; dach czterospadowy 22°, kalenica równolegle do frontu; części niższe: garage (czterospadowy, right); lukarny 0, kominy 3, okna poł. 0 | brył 2; dwuspadowy 28.8°, dwuspadowy 66.3°; kominy 6, okna poł. 0 |
+
+Koszt: 0.1712 USD za 13 domów (Sonnet 5.5).
+
+Sprawdzone z cechami referencyjnymi spisanymi ze źródeł (`references/`): rodzaj dachu głównego i kierunek kalenicy są
+w opisie JSON zgodne ze źródłem **na 13 z 13 domów**. Potok ze szkiców mylił formę na czterech: Novara, Medulin
+i Mindelo dostały płaskie „pudełka" obok dachu dwuspadowego (rysunki ich nie pokazują), Willa Eliza — dwa strome dachy
+dwuspadowe zamiast niskiego czterospadowego nad dwiema kondygnacjami; Jarzębina w kodzie 1351 nie miała dachu wcale.
+Liczba brył w opisie JSON jest mniej pewna (Mindelo: poprzeczny szczyt garażu policzony jako ta sama bryła) i nie jest
+używana.
+
+**To jest ta informacja, którą obrazy-szkice gubiły, i tu OWNER miał rację.** Wdrożone od razu, w najwęższej bezpiecznej
+roli: opis formy jest **świadkiem w arbitrażu brył** (§2.3) — bryła LOCAL z płaskimi „pudełkami", których opis nie
+zgłasza, jest przez niego podważona; bryłę zastępczą nadal buduje ten sam solver z obrysu i sylwetek, a żaden wymiar nie
+pochodzi z opisu. Skutek zmierzony na Novarze (§6). Niewdrożone w tej rundzie i nazwane jako następny krok: opis formy
+jako **założenie wstępne solvera** (czterospad kontra dwuspad, dwie kondygnacje) — to by naprawiło Willę Elizę.
 
 <!-- REST -->
