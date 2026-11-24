@@ -46,8 +46,10 @@ import type { Box, FillVerdict, HypothesisVerdict, Shape } from './source-gate.j
 import { resolveWitness, WITNESS_RESOLVER_VERSION } from './resolve.js'
 import { bindBuildMassing, bindSetOutline, bindSetRoof, MAX_OVERHANG_M } from '../massing/ops.js'
 import type { MassingObservations } from '../massing/ops.js'
+import { bindBuildInterior } from './interior.js'
+import type { InteriorObservation } from './interior.js'
 
-export const CORRECTION_EXECUTOR_VERSION = '1.8.0' as const
+export const CORRECTION_EXECUTOR_VERSION = '1.9.0' as const
 
 export type Side = 'FRONT' | 'RIGHT' | 'REAR' | 'LEFT'
 export const SIDES: readonly Side[] = ['FRONT', 'RIGHT', 'REAR', 'LEFT']
@@ -102,7 +104,8 @@ export type CorrectionProposal = {
   uncertainty?: 'LOW' | 'MEDIUM' | 'HIGH'
   justification?: string
   /** METRIC (v3.54.17 R3): made by the analyzer from the independent metric read's printed dimensions. */
-  origin: 'REVIEW' | 'SKETCH' | 'CONTROL' | 'METRIC'
+  /** PLAN (v3.54.19): made by the analyzer from the plan skeleton (BUILD_INTERIOR). */
+  origin: 'REVIEW' | 'SKETCH' | 'CONTROL' | 'METRIC' | 'PLAN'
 }
 
 export type PatchStatus = 'COMMITTED' | 'REJECTED_BY_SOURCE' | 'NEEDS_EVIDENCE' | 'UNSUPPORTED_OPERATION' | 'INVALID' | 'STALE_REVISION' | 'DUPLICATE' | 'HELD' | 'ROLLED_BACK' | 'GROUP_ROLLED_BACK' | 'DEFERRED_ROOF_FEATURE' | 'NO_EFFECT'
@@ -334,7 +337,7 @@ export type Refusal = { status: PatchStatus; code: string; why: string; record?:
 export type BindPlan = { frameId: string; toWorld: (px: number, py: number) => { x: number; z: number } }
 /** v3.54.17 R3: facts the publisher's page states in words (not printed on a drawing): the roof's pitch. */
 export type PageFacts = { roofPitchDeg?: number }
-export type Ctx = { model: CanonicalBuildingModel; views: BindView[]; pictures: readonly BindPicture[]; witnesses: readonly PrintedWitness[]; planGaps?: readonly PlanGap[]; massing?: MassingObservations; plans?: readonly BindPlan[]; facts?: PageFacts; claims?: FacadeClaims; adopted?: ReadonlySet<string> }
+export type Ctx = { model: CanonicalBuildingModel; views: BindView[]; pictures: readonly BindPicture[]; witnesses: readonly PrintedWitness[]; planGaps?: readonly PlanGap[]; massing?: MassingObservations; /** v3.54.19: the plan skeleton in the model's frame (BUILD_INTERIOR). */ interior?: InteriorObservation; plans?: readonly BindPlan[]; facts?: PageFacts; claims?: FacadeClaims; adopted?: ReadonlySet<string> }
 /** v3.54.18 (gate 1.3.0): per source frame, every opening box the reading of that picture draws (frame pixels) — the places it does NOT call plain wall. */
 export type FacadeClaims = ReadonlyMap<string, readonly Box[]>
 
@@ -1199,6 +1202,8 @@ export type ExecuteInput = {
   plans?: readonly BindPlan[]
   /** v3.54.17 R3: facts of the project page (SET_ROOF reads the stated pitch). */
   facts?: PageFacts
+  /** v3.54.19: the plan skeleton in the model's frame — what BUILD_INTERIOR builds from. */
+  interior?: InteriorObservation
 }
 
 /** v3.54.17 R2: the operations whose targetId must name an element of the model (the element index's ids). */
@@ -1245,7 +1250,8 @@ export function executeCorrections(input: ExecuteInput): CorrectionOutcome {
       continue
     }
     seen.add(p.proposalId)
-    if (!isPatchOperation(p.operation)) {
+    // v3.54.19: BUILD_INTERIOR is the analyzer's own operation (origin PLAN): never offered to a reviewer, so not in the registry
+    if (!isPatchOperation(p.operation) && !(p.operation === 'BUILD_INTERIOR' && p.origin === 'PLAN')) {
       rec(p, 'UNSUPPORTED_OPERATION', 'NOT_IN_REGISTRY', `${p.operation} is not an operation of registry ${CORRECTION_REGISTRY_VERSION}: the analyzer cannot execute it; the defect stays open and named`)
       continue
     }
@@ -1289,7 +1295,7 @@ export function executeCorrections(input: ExecuteInput): CorrectionOutcome {
     const pending: Array<{ p: CorrectionProposal; bound?: Bound; view?: BindView; extra: Partial<PatchRecord> }> = []
     let refusal: { p: CorrectionProposal; r: Refusal } | undefined
     for (const p of ordered) {
-      const ctx: Ctx = { model: working, views: workingViews, pictures: input.pictures, witnesses: input.witnesses ?? [], ...(input.planGaps ? { planGaps: input.planGaps } : {}), ...(input.massing ? { massing: input.massing } : {}), ...(input.plans ? { plans: input.plans } : {}), ...(input.facts ? { facts: input.facts } : {}), ...(input.claims ? { claims: input.claims } : {}), ...(input.adopted ? { adopted: input.adopted } : {}) }
+      const ctx: Ctx = { model: working, views: workingViews, pictures: input.pictures, witnesses: input.witnesses ?? [], ...(input.planGaps ? { planGaps: input.planGaps } : {}), ...(input.massing ? { massing: input.massing } : {}), ...(input.interior ? { interior: input.interior } : {}), ...(input.plans ? { plans: input.plans } : {}), ...(input.facts ? { facts: input.facts } : {}), ...(input.claims ? { claims: input.claims } : {}), ...(input.adopted ? { adopted: input.adopted } : {}) }
       if (p.operation === 'ASSIGN_VIEW') {
         const b = bindView(ctx, p)
         if ('status' in b) {
@@ -1301,7 +1307,7 @@ export function executeCorrections(input: ExecuteInput): CorrectionOutcome {
         continue
       }
       const op = p.operation as PatchOperation
-      const b = op === 'SET_FINISH' ? bindFinish(ctx, p) : op === 'SET_PARAMETER' ? bindParameter(ctx, p) : op === 'ADD_CHIMNEY' || op === 'UPDATE_CHIMNEY' ? bindChimney(ctx, p) : op === 'BUILD_MASSING' ? bindBuildMassing(ctx, p) : op === 'SET_ROOF' ? bindSetRoof(ctx, p) : op === 'SET_OUTLINE' ? bindSetOutline(ctx, p) : op === 'SET_ROOF_OVERHANG' ? bindOverhang(ctx, p) : op === 'ADD_ROOF_WINDOW' ? bindRoofWindow(ctx, p) : bindOpening(ctx, p)
+      const b = (p.operation as string) === 'BUILD_INTERIOR' ? bindBuildInterior(ctx, p) : op === 'SET_FINISH' ? bindFinish(ctx, p) : op === 'SET_PARAMETER' ? bindParameter(ctx, p) : op === 'ADD_CHIMNEY' || op === 'UPDATE_CHIMNEY' ? bindChimney(ctx, p) : op === 'BUILD_MASSING' ? bindBuildMassing(ctx, p) : op === 'SET_ROOF' ? bindSetRoof(ctx, p) : op === 'SET_OUTLINE' ? bindSetOutline(ctx, p) : op === 'SET_ROOF_OVERHANG' ? bindOverhang(ctx, p) : op === 'ADD_ROOF_WINDOW' ? bindRoofWindow(ctx, p) : bindOpening(ctx, p)
       if ('status' in b) {
         refusal = { p, r: b }
         break

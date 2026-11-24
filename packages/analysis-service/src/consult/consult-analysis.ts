@@ -52,7 +52,11 @@ import { renderStoreyCut } from './model-views.js'
 import { CORRECTION_REGISTRY_VERSION } from './correct/registry.js'
 import { CORRECTION_EXECUTOR_VERSION, elementExists, executeCorrections, modelRevision, planGapsOf, preferredView, registerFromSketch, sideOfFacade, viewsOfRun } from './correct/execute.js'
 import { CHIMNEY_FUSION_VERSION, fuseChimneys } from './correct/chimney-fusion.js'
-import { MASSING_VERSION, bodiesOf } from './massing/massing.js'
+import { MASSING_VERSION, bodiesOf, pointWithFront } from './massing/massing.js'
+import { PLAN_SKELETON_VERSION, paintWalls, readPlanSkeleton, snapOutline, wallInkOf } from './plan-skeleton.js'
+import type { PlanSkeleton } from './plan-skeleton.js'
+import { INTERIOR_OPS_VERSION, planGapsFromSkeleton, skeletonInModel } from './correct/interior.js'
+import type { InteriorObservation } from './correct/interior.js'
 import type { FusionRecord, SketchedStack } from './correct/chimney-fusion.js'
 import { elementIndexOf } from './element-index.js'
 import type { ElementIndex } from './element-index.js'
@@ -158,6 +162,8 @@ export type MassingDelivery = {
   decision: 'BUILT' | 'NOT_BUILT' | 'NOT_RUN'
   why: string
   plan?: Omit<PlanOutlineRead, 'raw'> & { raw?: unknown }
+  /** v3.54.19: the plan read on the sheet inside that outline (wall colour, outer faces, exterior gaps, partitions, interior doors). */
+  skeleton?: PlanSkeleton
   records: PatchRecord[]
   transactions: TransactionRecord[]
   model?: CanonicalBuildingModel
@@ -403,7 +409,9 @@ const lineage = new WeakMap<Local, { input: AnalysisInput; options: AnalysisOpti
  */
 /** v3.54.17 R2: an element index as the defect ledger reads it (id → type). */
 const listedOf = (index: ElementIndex | undefined): ListedElements | undefined => (index ? new Map(index.elements.map((e) => [e.id, e.type])) : undefined)
-const massingOf = new WeakMap<Local, { views: BindView[]; rebuild: (model: CanonicalBuildingModel) => Local | undefined; /** the side of the plan sheet that is this body's front (a body built in the elevations' frame); absent: the sheet's foot */ planFront?: Side }>()
+const massingOf = new WeakMap<Local, { views: BindView[]; rebuild: (model: CanonicalBuildingModel) => Local | undefined; /** the side of the plan sheet that is this body's front (a body built in the elevations' frame); absent: the sheet's foot */ planFront?: Side; /** v3.54.19: the plan skeleton in this body's frame (interior, exterior gaps) */ interior?: InteriorObservation; /** the sheet → model map as three mapped points of the plan frame: (0,0), (1000,0), (0,1000) px */ planMap?: PlanFrameOfModel }>()
+/** v3.54.19: where the plan sheet lies in the delivered model's frame (an affine map stated by three points), for any overlay of the model on its plan. */
+export type PlanFrameOfModel = { frameId: string; basis: 'OUTLINE_SCALE' | 'LOCAL_PLAN_REGISTRATION'; o: { x: number; z: number }; x1000: { x: number; z: number }; y1000: { x: number; z: number } }
 async function attempt(input: AnalysisInput, options: AnalysisOptions): Promise<Local> {
   const l = await attemptRaw(input, options)
   lineage.set(l, { input, options })
@@ -666,7 +674,7 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
     const b = consultBinding({
       sourcePackageHash: local.pkg.contentHash,
       analyzer: `${ANALYSIS_SERVICE_VERSION}/${SOLVER_V2_VERSION}`,
-      consultant: [CONSULTANT_CONTRACT_VERSION, CONSULTANT_PROMPT_VERSION, METRIC_READ_PROMPT_VERSION, METRIC_VERIFY_PROMPT_VERSION, METRIC_RESOLVER_VERSION, ELEVATION_SKETCH_PROMPT_VERSION, `parser${ELEVATION_SKETCH_PARSER_VERSION}`, SKETCH_STEP_VERSION, CHOOSE_VERSION, ACCEPTED_CONSULT_VERSION, `registry${CORRECTION_REGISTRY_VERSION}`, `executor${CORRECTION_EXECUTOR_VERSION}`, `gate${SOURCE_GATE_VERSION}`, `sketchProposals${SKETCH_PROPOSALS_VERSION}`, `quality${QUALITY_VERSION}`, `massing${MASSING_OPS_VERSION}`, `massingBody${MASSING_VERSION}`, `bodyArbitration${BODY_ARBITRATION.version}`, SOURCE_FRAMES_RULE, `outline${PLAN_OUTLINE_VERSION}`, `planOpenings${PLAN_OPENINGS_VERSION}`].join(','),
+      consultant: [CONSULTANT_CONTRACT_VERSION, CONSULTANT_PROMPT_VERSION, METRIC_READ_PROMPT_VERSION, METRIC_VERIFY_PROMPT_VERSION, METRIC_RESOLVER_VERSION, ELEVATION_SKETCH_PROMPT_VERSION, `parser${ELEVATION_SKETCH_PARSER_VERSION}`, SKETCH_STEP_VERSION, CHOOSE_VERSION, ACCEPTED_CONSULT_VERSION, `registry${CORRECTION_REGISTRY_VERSION}`, `executor${CORRECTION_EXECUTOR_VERSION}`, `gate${SOURCE_GATE_VERSION}`, `sketchProposals${SKETCH_PROPOSALS_VERSION}`, `quality${QUALITY_VERSION}`, `massing${MASSING_OPS_VERSION}`, `massingBody${MASSING_VERSION}`, `bodyArbitration${BODY_ARBITRATION.version}`, SOURCE_FRAMES_RULE, `outline${PLAN_OUTLINE_VERSION}`, `planOpenings${PLAN_OPENINGS_VERSION}`, `skeleton${PLAN_SKELETON_VERSION}`, `interior${INTERIOR_OPS_VERSION}`].join(','),
       models: { ROUNDS: wiring.model.model, ...(wiring.metricRead === 'ON' ? { METRIC: (wiring.metricModel ?? wiring.model).model } : {}), ...(wiring.sketches === 'ON' ? { SKETCH: (wiring.sketchModel ?? wiring.model).model } : {}) },
       settings: `strict=${wiring.model.strict === true || wiring.metricModel?.strict === true || wiring.sketchModel?.strict === true ? 'on' : 'off'};variant=${wiring.variant};metric=${wiring.metricRead ?? 'OFF'};sketches=${wiring.sketches ?? 'OFF'};rounds=${maxRounds};geometryRounds=${wiring.maxGeometryRounds ?? '-'};check=${wiring.check ?? 'ON'};sketchCorrections=${wiring.sketchCorrections ?? 'ON'}`,
     })
@@ -794,6 +802,17 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
         usd += plan.usd
         delivery.usd += plan.usd
         delivery.plan = plan
+        // v3.54.19: the traced outline is put on the sheet's own wall bands before anything is measured on it — a traced
+        // corner is a reading a few pixels off, the band is the drawing (and the scale from the outline is taken on it)
+        if (plan.outlinePx) {
+          const ink = wallInkOf(fr.raster, plan.outlinePx)
+          const snap = ink.filled ? snapOutline(paintWalls(fr.raster, ink), plan.outlinePx) : undefined
+          record({ at: now().toISOString(), kind: 'PLAN_OUTLINE_ON_WALL_BANDS', frameId: f.id, ink, moved: snap?.snapped ?? [], wallPx: snap?.wallPx ?? null, why: snap && snap.snapped.length > 0 ? `${snap.snapped.length} edge(s) of the traced outline moved onto the outer face of the wall band they run along (by ${snap.snapped.map((q) => q.byPx).join(', ')} px)` : ink.filled ? 'every edge already runs on its band, or finds none' : ink.why })
+          if (snap && snap.snapped.length > 0) {
+            plan.outlinePx = snap.outlinePx.map((q) => [Math.round(q[0] * 10) / 10, Math.round(q[1] * 10) / 10] as [number, number])
+            if (plan.observation && cmPerPx && strong) scaleOutline(plan, { frameId: f.id, sourceByteHash: f.variantByteHash, ...(typeof published === 'number' ? { publishedFootprintM2: published } : {}) }, { mPerPx: cmPerPx / 100, why: `${cmPerPx} cm/px, ${String(diag.metricConfidence)} / ${String(diag.metricRelation)} with ${String(diag.independentWitnesses ?? '?')} independent witnesses` })
+          }
+        }
         // v3.54.18 R3: a plan the analyzer measured no scale on is put in metres from its own traced outline — the two
         // overall dimensions over the outline's two extents (they must agree), or, as a hypothesis the published height has
         // to confirm on the built body, the published footprint area over the outline's area
@@ -827,6 +846,12 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
             const r = fx ? await frameRaster(pkg0, graph0, fx.id, options) : undefined
             if (fx && r?.raster) pictures.push({ n: i + 1, frameId: fx.id, projection: String(fx.roles.projection), transform: { x0: 0, y0: 0, scale: 1 }, raster: r.raster, sourceByteHash: fx.variantByteHash })
           }
+          // v3.54.19: what the plan draws inside that outline, read on the sheet (0 USD): the body that stands takes it
+          const skeleton = plan.outlinePx && cmPerPx ? readPlanSkeleton({ frameId: f.id, sourceByteHash: f.variantByteHash, raster: fr.raster, outlinePx: plan.outlinePx, mPerPx: cmPerPx / 100 }) : undefined
+          if (skeleton) {
+            delivery.skeleton = skeleton
+            record({ at: now().toISOString(), kind: 'PLAN_SKELETON', version: PLAN_SKELETON_VERSION, frameId: f.id, ink: skeleton.ink, wallM: Math.round(skeleton.wallPx * skeleton.mPerPx * 100) / 100, walls: skeleton.walls.length, doors: skeleton.doors.length, gaps: skeleton.gaps.length, refused: skeleton.refused })
+          }
           stage('BUILD_MASSING')
           const pitchFact = pkg0.publishedFacts.find((x) => x.key === 'roof_pitch' && x.unit === 'deg')?.value
           const empty = createEmptyModel(`massing-${f.variantByteHash.slice(0, 12)}`, (asset?.caption ?? 'house').slice(0, 60))
@@ -859,7 +884,29 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
               if (!mr) return undefined
               const l: Local = { run: mr.run, pkg: pkg0, graph: graph0, ...(good.metrics ? { metrics: good.metrics } : {}), ...(good.plans ? { plans: good.plans } : {}) }
               const planFront = (rec0.massing as { hypothesis?: { planFront?: Side } } | undefined)?.hypothesis?.planFront
-              massingOf.set(l, { views: mr.views, rebuild: (m) => build(m), ...(planFront ? { planFront } : {}) })
+              // the sheet → this body's frame: the outline's own metres (x from its left edge, z up from its foot), turned
+              // with the outline where the body was built in the elevations' frame
+              let interior: InteriorObservation | undefined
+              if (skeleton && plan.observation && plan.outlinePx && skeleton.refused.every((q) => !q.startsWith('WALL_STYLE') && !q.startsWith('EXTERIOR_BAND: no'))) {
+                const sM = skeleton.mPerPx
+                const [minXpx, maxYpx] = [Math.min(...plan.outlinePx.map((q) => q[0])), Math.max(...plan.outlinePx.map((q) => q[1]))]
+                const frameOutline = plan.observation.outline
+                const toModel = (px: number, py: number): { x: number; z: number } => {
+                  const p = { x: (px - minXpx) * sM, z: (maxYpx - py) * sM }
+                  // the turn is the outline's: the point is turned as one more corner of it
+                  return planFront ? pointWithFront(p, planFront, frameOutline) : p
+                }
+                interior = skeletonInModel(skeleton, toModel)
+              }
+              let planMap: PlanFrameOfModel | undefined
+              if (plan.observation && plan.outlinePx && cmPerPx) {
+                const sM = cmPerPx / 100
+                const [minXpx, maxYpx] = [Math.min(...plan.outlinePx.map((q) => q[0])), Math.max(...plan.outlinePx.map((q) => q[1]))]
+                const frameOutline = plan.observation.outline
+                const at = (px: number, py: number): { x: number; z: number } => { const p = { x: (px - minXpx) * sM, z: (maxYpx - py) * sM }; return planFront ? pointWithFront(p, planFront, frameOutline) : p }
+                planMap = { frameId: f.id, basis: 'OUTLINE_SCALE', o: at(0, 0), x1000: at(1000, 0), y1000: at(0, 1000) }
+              }
+              massingOf.set(l, { views: mr.views, rebuild: (m) => build(m), ...(planFront ? { planFront } : {}), ...(interior ? { interior } : {}), ...(planMap ? { planMap } : {}) })
               return l
             }
             const m0 = build()
@@ -1225,6 +1272,8 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
     new Map(allSketches().filter((x) => x.sketch).map((x) => [x.frameId, (x.sketch?.openings ?? []).map((o) => { const ps = o.polygon as Array<[number, number]>; return { x0: Math.min(...ps.map((q) => q[0])), y0: Math.min(...ps.map((q) => q[1])), x1: Math.max(...ps.map((q) => q[0])), y1: Math.max(...ps.map((q) => q[1])) } })]))
   // v3.54.18 R2: the plan gaps of a LOCAL body the arbitration replaced (a second drawing's witness for the elevation reading)
   let replacedPlanGaps: PlanGap[] = []
+  /** v3.54.19: the plan skeleton read inside a LOCAL body that has no interior of its own (through LOCAL's plan registration). */
+  let localInterior: InteriorObservation | undefined
   const executeOn = async (l: Local, proposals: readonly CorrectionProposal[], stage: string, seen: Set<string> = seenPatch): Promise<CorrectionOutcome | undefined> => {
     if (!l.run) return undefined
     const pictures = await allPicturesOf(l)
@@ -1233,7 +1282,11 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
     const held = viewsOfRun(l.run.reconstruction.facadeAlignment.views)
     const plans = (l.run.reconstruction.registrations.plans ?? []).map((q) => ({ frameId: q.frameId, toWorld: q.toWorld }))
     const pitch = (l.pkg ?? l.run.pkg)?.publishedFacts.find((f) => f.key === 'roof_pitch' && f.unit === 'deg')?.value
-    const out = executeCorrections({ model: m0, claims: facadeClaims(), adopted: adoptedFrames, ...(replacedPlanGaps.length > 0 ? { planGaps: replacedPlanGaps } : {}), views: massingViews(l) ?? held, derivedViews: (m: CanonicalBuildingModel, h: readonly BindView[]) => sketchViewsOf(m, pictures, h), ...(plans.length > 0 ? { plans } : {}), ...(typeof pitch === 'number' ? { facts: { roofPitchDeg: pitch } } : {}), pictures, proposals, witnesses: witnessesOf(l), seen, ...(retiredIds.size > 0 ? { retiredIds } : {}) })
+    // v3.54.19: the plan skeleton of the body that stands: its exterior gaps witness an opening the elevation reading adds
+    const interior = massingOf.get(l)?.interior ?? (massingOf.has(l) ? undefined : localInterior)
+    const skeletonGaps = interior && massingOf.has(l) ? planGapsFromSkeleton(m0, interior) : []
+    const gaps = [...replacedPlanGaps, ...skeletonGaps]
+    const out = executeCorrections({ model: m0, claims: facadeClaims(), adopted: adoptedFrames, ...(gaps.length > 0 ? { planGaps: gaps } : {}), ...(interior ? { interior } : {}), views: massingViews(l) ?? held, derivedViews: (m: CanonicalBuildingModel, h: readonly BindView[]) => sketchViewsOf(m, pictures, h), ...(plans.length > 0 ? { plans } : {}), ...(typeof pitch === 'number' ? { facts: { roofPitchDeg: pitch } } : {}), pictures, proposals, witnesses: witnessesOf(l), seen, ...(retiredIds.size > 0 ? { retiredIds } : {}) })
     correctionRuns.push({ stage, baseRevision: out.baseRevision, revision: out.revision, delivered: false, records: out.records, transactions: out.transactions })
     record({ at: now().toISOString(), kind: 'CORRECTIONS', stage, baseRevision: out.baseRevision, revision: out.revision, records: out.records.map((r) => ({ proposalId: r.proposalId, operation: r.operation, status: r.status, code: r.code ?? null })), transactions: out.transactions.map((t) => ({ txId: t.txId, decision: t.decision, why: t.why })) })
     return out
@@ -1469,6 +1522,39 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
     sem.orientation = roofs.orientation
     record({ at: now().toISOString(), kind: 'SKETCH_ROOFS', orientation: roofs.orientation.assignment, proposals: roofs.proposals.map((x) => x.proposalId), accounts: roofs.accounts.map((a) => ({ frameId: a.frameId, side: a.side ?? null, proposed: a.proposed.length, skipped: a.skipped.map((k) => k.why.slice(0, 220)) })) })
     await phase('SKETCH_ROOF', roofs.proposals)
+    // v3.54.19: the interior the plan draws, inside the body that now stands (a body built from the sources had none;
+    // one that replaced LOCAL's lost it). After the roofs: the partitions stay under the eaves that stand.
+    {
+      const mI = stood.run?.reconstruction.model
+      const ground = mI ? [...mI.levels].sort((a, b) => a.elevation - b.elevation)[0] : undefined
+      const bare = !!mI && !!ground && !mI.walls.some((w) => w.kind === 'INTERIOR' && w.levelId === ground.id)
+      // a LOCAL body without partitions: the same reading, inside each of its ground-storey bodies, through LOCAL's own
+      // registration of the plan sheet (its `PlanFrameV2`)
+      if (bare && mI && ground && !massingOf.has(stood) && stood.run && stood.pkg && stood.graph) {
+        const pf = stood.run.reconstruction.registrations.plans.find((q) => q.frameId === stood.plans?.selectedPlanFrameId) ?? stood.run.reconstruction.registrations.plans.find((q) => q.storeyIndex === 0)
+        const fx = pf ? stood.graph.coordinateFrames.find((q) => q.id === pf.frameId) : undefined
+        const fr = pf && fx ? await frameRaster(stood.pkg, stood.graph, pf.frameId, options) : undefined
+        if (pf && fx && fr?.raster) {
+          const parts: InteriorObservation[] = []
+          const refusedAll: string[] = []
+          for (const [k, b] of bodiesOf(mI).filter((q) => q.levelIds.includes(ground.id) && q.wallIds.length > 0).entries()) {
+            const c = [pf.toPixel(b.rect.minX, b.rect.maxZ), pf.toPixel(b.rect.maxX, b.rect.maxZ), pf.toPixel(b.rect.maxX, b.rect.minZ), pf.toPixel(b.rect.minX, b.rect.minZ)]
+            const sk = readPlanSkeleton({ frameId: pf.frameId, sourceByteHash: fx.variantByteHash, raster: fr.raster, outlinePx: c.map((q) => [q.x, q.y] as [number, number]), mPerPx: (pf.mppX + pf.mppY) / 2 })
+            refusedAll.push(...sk.refused)
+            if (sk.refused.some((q) => q.startsWith('WALL_STYLE') || q.startsWith('EXTERIOR_BAND: no'))) continue
+            const o = skeletonInModel(sk, (px, py) => pf.toWorld(px, py))
+            parts.push({ ...o, walls: o.walls.map((w) => ({ ...w, id: k > 0 ? `${w.id}-m${k}` : w.id })), doors: o.doors.map((d) => ({ ...d, id: k > 0 ? `${d.id}-m${k}` : d.id })) })
+          }
+          if (parts.length > 0) localInterior = { ...parts[0], walls: parts.flatMap((q) => q.walls), doors: parts.flatMap((q) => q.doors), gaps: [], why: `the ground-floor plan ${pf.frameId} read on the sheet in its own wall colour inside ${parts.length} body/bodies of the model LOCAL built without partitions: ${parts.reduce((t, q) => t + q.walls.length, 0)} partition piece(s), ${parts.reduce((t, q) => t + q.doors.length, 0)} interior door gap(s)` }
+          record({ at: now().toISOString(), kind: 'PLAN_SKELETON', version: PLAN_SKELETON_VERSION, frameId: pf.frameId, basis: 'LOCAL_PLAN_REGISTRATION', bodies: parts.length, walls: localInterior?.walls.length ?? 0, doors: localInterior?.doors.length ?? 0, refused: refusedAll })
+        }
+      }
+      const io = massingOf.get(stood)?.interior ?? (massingOf.has(stood) ? undefined : localInterior)
+      if (io && mI && bare && io.walls.length > 0) {
+        record({ at: now().toISOString(), kind: 'PLAN_INTERIOR', version: INTERIOR_OPS_VERSION, frameId: io.frameId, walls: io.walls.length, doors: io.doors.length, gaps: io.gaps.length, why: io.why })
+        await phase('PLAN_INTERIOR', [{ proposalId: `interior:${io.frameId.slice(-12)}`, baseRevision: modelRevision(mI), operation: 'BUILD_INTERIOR', targetId: 'WHOLE', origin: 'PLAN', uncertainty: 'MEDIUM', justification: io.why }])
+      }
+    }
     // the heights the roof phase corrected may let an unlabelled elevation register now
     await decideSides((stood.run ?? run).reconstruction.model, massingViews(stood) ?? viewsOfRun((stood.run ?? run).reconstruction.facadeAlignment.views), stood, true)
     const m2 = stood.run?.reconstruction.model ?? run.reconstruction.model
@@ -1873,6 +1959,13 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
   // v3.54.18: openings the delivered model holds and the compiler does not cut (no viewer shows them) — named, never silent
   const uncutOpenings = good.run ? compileBuilding(good.run.reconstruction.model).diagnostics.filter((d) => d.severity === 'ERROR' && (d.code === 'OPENING_ABOVE_WALL_TOP' || d.code === 'OPENING_OPEN_END_UNSUPPORTED') && d.objectId).map((d) => ({ id: d.objectId as string, code: d.code })) : []
   if (uncutOpenings.length > 0) record({ at: now().toISOString(), kind: 'DELIVERED_OPENINGS_NOT_CUT', openings: uncutOpenings, why: 'the delivered model holds these openings and the compiler does not cut them (above the top of their wall, or run through a skewed end): no view shows them — a known defect of the delivered revision' })
+  // v3.54.19: where the plan sheet lies in the delivered model (three mapped points): any overlay of the model on its plan
+  if (good.run) {
+    const mm = massingOf.get(good)?.planMap
+    const pf = mm ? undefined : (good.run.reconstruction.registrations.plans.find((q) => q.frameId === good.plans?.selectedPlanFrameId) ?? good.run.reconstruction.registrations.plans.find((q) => q.storeyIndex === 0))
+    const planFrame: PlanFrameOfModel | undefined = mm ?? (pf ? { frameId: pf.frameId, basis: 'LOCAL_PLAN_REGISTRATION', o: pf.toWorld(0, 0), x1000: pf.toWorld(1000, 0), y1000: pf.toWorld(0, 1000) } : undefined)
+    if (planFrame) record({ at: now().toISOString(), kind: 'PLAN_FRAME_OF_MODEL', ...planFrame })
+  }
   record({ at: now().toISOString(), kind: 'FINAL', local: localState, final: finalState, usd, readings, roofFeatures: features, sourceCheck: sourceCheck ?? null })
   return { ...(bodyArbitration ? { bodyArbitration } : {}), contract: CONSULTANT_CONTRACT_VERSION, prompt: CONSULTANT_PROMPT_VERSION, variant: wiring.variant, ...(good.run ? { run: good.run } : {}), ...(good.error ? { error: good.error } : {}), local: localState, ...(wiring.keepLocalModel && local.run ? { localModel: local.run.reconstruction.model } : {}), final: finalState, rounds, readings: good === local ? [] : readings, spans: good === local ? [] : spans, usd, ...(boundary ? { boundary } : {}), geometry, roofFeatures: features, ...(sourceCheck ? { sourceCheck } : {}), consultation, ...(metricRead ? { metricRead } : {}), ...(sketchSummary ? { sketches: sketchSummary } : {}), ...(unregisteredSketches ? { sketchesWithoutModel: unregisteredSketches } : {}), ...(massingDelivery ? { massing: massingDelivery } : {}), globalDescription: 'DISABLED' }
 }

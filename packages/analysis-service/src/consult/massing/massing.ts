@@ -206,12 +206,16 @@ export type RoofProfile = {
  * foot is on the right hand; facing its right side, the sheet's head is.
  */
 export function outlineWithFront(outline: ReadonlyArray<{ x: number; z: number }>, front: Side): Array<{ x: number; z: number }> {
-  const [minX, maxX, minZ, maxZ] = [Math.min(...outline.map((p) => p.x)), Math.max(...outline.map((p) => p.x)), Math.min(...outline.map((p) => p.z)), Math.max(...outline.map((p) => p.z))]
+  return outline.map((p) => pointWithFront(p, front, outline))
+}
+/** massing 1.6.0: one point of the plan's frame turned with its outline (the same rigid turn, about the outline's own box — the point may lie outside it). */
+export function pointWithFront(p: { x: number; z: number }, front: Side, outline: ReadonlyArray<{ x: number; z: number }>): { x: number; z: number } {
+  const [minX, maxX, minZ, maxZ] = [Math.min(...outline.map((q) => q.x)), Math.max(...outline.map((q) => q.x)), Math.min(...outline.map((q) => q.z)), Math.max(...outline.map((q) => q.z))]
   const r = (v: number): number => Math.round(v * 1e4) / 1e4
-  if (front === 'LEFT') return outline.map((p) => ({ x: r(maxZ - p.z), z: r(p.x - minX) }))
-  if (front === 'RIGHT') return outline.map((p) => ({ x: r(p.z - minZ), z: r(maxX - p.x) }))
-  if (front === 'REAR') return outline.map((p) => ({ x: r(maxX - p.x), z: r(maxZ - p.z) }))
-  return outline.map((p) => ({ x: p.x, z: p.z }))
+  if (front === 'LEFT') return { x: r(maxZ - p.z), z: r(p.x - minX) }
+  if (front === 'RIGHT') return { x: r(p.z - minZ), z: r(maxX - p.x) }
+  if (front === 'REAR') return { x: r(maxX - p.x), z: r(maxZ - p.z) }
+  return { x: p.x, z: p.z }
 }
 /** The stretch a set of polygons spans on one pixel row (leftmost to rightmost edge crossing), or none. */
 export function rowExtent(polys: readonly Poly[], row: number): [number, number] | undefined {
