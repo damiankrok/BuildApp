@@ -1,0 +1,962 @@
+{
+  "assemblies": [],
+  "balconies": [],
+  "building": {
+    "id": "building",
+    "name": "massing"
+  },
+  "chimneys": [],
+  "constraints": [],
+  "doors": [
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "kind": "PANEL"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-front-12fd37-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-gate",
+      "openAngle": 0,
+      "openingId": "op-fix-front-12fd37",
+      "swing": "IN",
+      "usage": "GARAGE"
+    }
+  ],
+  "evidenceSources": [
+    {
+      "id": "src-frame-asset-garaz-g6-elewacja-przod-60de2b9445-0648be2886",
+      "kind": "DRAWING",
+      "label": "frame-asset-garaz-g6-elewacja-przod-60de2b9445-0648be2886",
+      "note": "frame frame-asset-garaz-g6-elewacja-przod-60de2b9445-0648be2886"
+    },
+    {
+      "id": "src-frame-asset-garaz-g6-elewacja-ty-3236192817-6abdcb951c",
+      "kind": "DRAWING",
+      "label": "frame-asset-garaz-g6-elewacja-ty-3236192817-6abdcb951c",
+      "note": "frame frame-asset-garaz-g6-elewacja-ty-3236192817-6abdcb951c"
+    },
+    {
+      "id": "src-frame-asset-garaz-g6-rzut-parter-84630c4567-46f6f7baab",
+      "kind": "DRAWING",
+      "label": "frame-asset-garaz-g6-rzut-parter-84630c4567-46f6f7baab",
+      "note": "frame frame-asset-garaz-g6-rzut-parter-84630c4567-46f6f7baab"
+    }
+  ],
+  "frame": {
+    "handedness": "LEFT_HANDED_AS_SPECIFIED",
+    "origin": "finished ground-floor level is y = 0; the front facade outer face is z = 0",
+    "viewerNote": "renderers working in a right-handed frame mirror z when building their scene",
+    "wallConvention": "a wall runs from start to end along its OUTER face at its base; its outward normal is up x u, so exterior rings are traversed counter-clockwise on a plan drawn with the front facade at the bottom and material lies to the left of the direction of travel",
+    "x": "right when looking at the front facade",
+    "y": "up (vertical)",
+    "z": "away from the front facade, into the building"
+  },
+  "id": "m-analysis-u1e6cd513281f",
+  "levels": [
+    {
+      "buildingId": "building",
+      "elevation": 0,
+      "height": 5.9893,
+      "id": "lvl-0",
+      "index": 0,
+      "name": "Massing"
+    }
+  ],
+  "linearSolids": [],
+  "materials": [
+    {
+      "color": "#9a7b66",
+      "id": "mat-brick",
+      "name": "Facing brick"
+    },
+    {
+      "color": "#6d6a66",
+      "id": "mat-chimney",
+      "name": "Chimney"
+    },
+    {
+      "color": "#55585c",
+      "id": "mat-gate",
+      "name": "Garage door"
+    },
+    {
+      "color": "#9fc3d8",
+      "id": "mat-glass",
+      "name": "Glazing",
+      "opacity": 0.35
+    },
+    {
+      "color": "#5a5550",
+      "id": "mat-roof",
+      "name": "Roof covering (tone not read: miniature convention)"
+    },
+    {
+      "color": "#b07a4a",
+      "id": "mat-timber",
+      "name": "Timber (door leaf, cladding)"
+    },
+    {
+      "color": "#e8e4dc",
+      "id": "mat-wall",
+      "name": "Rendered wall (tone not read: miniature convention)"
+    }
+  ],
+  "meta": {
+    "createdWith": "buildapp",
+    "notes": []
+  },
+  "name": "Garaż G6 (analysis)",
+  "openings": [
+    {
+      "height": 2.199672,
+      "id": "op-fix-front-12fd37",
+      "kind": "DOOR",
+      "offset": 2.007024,
+      "sill": 0,
+      "wallId": "ring-mass-main-w0",
+      "width": 5.314536
+    },
+    {
+      "height": 1.351406,
+      "id": "op-fix-left-309854",
+      "kind": "WINDOW",
+      "offset": 4.086788,
+      "sill": 1.025766,
+      "wallId": "ring-mass-main-w3",
+      "width": 0.748972
+    },
+    {
+      "height": 1.321596,
+      "id": "op-fix-right-1e7b58",
+      "kind": "WINDOW",
+      "offset": 3.198302,
+      "sill": 0.620008,
+      "wallId": "ring-mass-main-w1",
+      "width": 0.750536
+    },
+    {
+      "height": 1.321596,
+      "id": "op-fix-right-fd1902",
+      "kind": "WINDOW",
+      "offset": 4.079366,
+      "sill": 0.620008,
+      "wallId": "ring-mass-main-w1",
+      "width": 0.766852
+    },
+    {
+      "evidence": {
+        "interpretation": "a gap the ground-floor plan draws in this wall (plan-gap-8-198: 4.15..4.71 m), where the model had no opening; its kind, sill and height follow one metric reading of this side's elevation (frame-asset-garaz-g6-elewacja-boczna-b8e38fae3c-2faf85e9da, 75 % of the span shared): not located in the elevation's pixels, not source-verified",
+        "properties": {
+          "height": "VISUAL_INFERRED",
+          "offset": "SOURCE_DERIVED",
+          "sill": "VISUAL_INFERRED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-garaz-g6-elewacja-boczna-b8e38fae3c-2faf85e9da",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 1.3,
+      "id": "op-plan-left-54611a",
+      "kind": "WINDOW",
+      "offset": 3.332855,
+      "sill": 1.03,
+      "wallId": "ring-mass-main-w3",
+      "width": 0.555477
+    }
+  ],
+  "platforms": [],
+  "railings": [],
+  "relationships": [],
+  "roofEdges": [],
+  "roofOpenings": [],
+  "roofPlanes": [
+    {
+      "boundary": [
+        {
+          "x": 12.097734,
+          "z": -0.77
+        },
+        {
+          "x": 12.097734,
+          "z": 8.8133
+        },
+        {
+          "x": 7.054467,
+          "z": 4.02165
+        }
+      ],
+      "datum": {
+        "x": 12.097734,
+        "y": 2.61894,
+        "z": -0.77
+      },
+      "downslope": {
+        "x": 1,
+        "z": 0
+      },
+      "evidence": {
+        "interpretation": "a hip, ridge along X: the side(s) along it draw a trapezoid, the ridge ends 4.27 / 4.20 m in from the end walls (4.23 m taken); main pitch 35.1° from the drawn roof's lowest edge at 2.31 m up to the ridge over 4.79 m (half the span and the 0.77 m the eaves are drawn past the walls), hip ends 33.8°; the roof's top surface at the wall face 3.16 m, the walls end under it at 2.85 m",
+        "properties": {
+          "datum": "UNRESOLVED",
+          "pitchDeg": "UNRESOLVED"
+        },
+        "source": "frame-asset-garaz-g6-rzut-parter-84630c4567-46f6f7baab + frame-asset-garaz-g6-elewacja-przod-60de2b9445-0648be2886 + frame-asset-garaz-g6-elewacja-ty-3236192817-6abdcb951c",
+        "sourceIds": [
+          "src-frame-asset-garaz-g6-rzut-parter-84630c4567-46f6f7baab",
+          "src-frame-asset-garaz-g6-elewacja-przod-60de2b9445-0648be2886",
+          "src-frame-asset-garaz-g6-elewacja-ty-3236192817-6abdcb951c"
+        ],
+        "status": "UNRESOLVED"
+      },
+      "id": "roof-mass-main-maxX",
+      "levelId": "lvl-0",
+      "materialId": "mat-roof",
+      "pitchDeg": 33.7544,
+      "thickness": 0.25
+    },
+    {
+      "boundary": [
+        {
+          "x": 12.097734,
+          "z": 8.8133
+        },
+        {
+          "x": -0.810434,
+          "z": 8.8133
+        },
+        {
+          "x": 4.232833,
+          "z": 4.02165
+        },
+        {
+          "x": 7.054467,
+          "z": 4.02165
+        }
+      ],
+      "datum": {
+        "x": -0.810434,
+        "y": 2.61894,
+        "z": 8.8133
+      },
+      "downslope": {
+        "x": 0,
+        "z": 1
+      },
+      "evidence": {
+        "interpretation": "a hip, ridge along X: the side(s) along it draw a trapezoid, the ridge ends 4.27 / 4.20 m in from the end walls (4.23 m taken); main pitch 35.1° from the drawn roof's lowest edge at 2.31 m up to the ridge over 4.79 m (half the span and the 0.77 m the eaves are drawn past the walls), hip ends 33.8°; the roof's top surface at the wall face 3.16 m, the walls end under it at 2.85 m",
+        "properties": {
+          "datum": "UNRESOLVED",
+          "pitchDeg": "UNRESOLVED"
+        },
+        "source": "frame-asset-garaz-g6-rzut-parter-84630c4567-46f6f7baab + frame-asset-garaz-g6-elewacja-przod-60de2b9445-0648be2886 + frame-asset-garaz-g6-elewacja-ty-3236192817-6abdcb951c",
+        "sourceIds": [
+          "src-frame-asset-garaz-g6-rzut-parter-84630c4567-46f6f7baab",
+          "src-frame-asset-garaz-g6-elewacja-przod-60de2b9445-0648be2886",
+          "src-frame-asset-garaz-g6-elewacja-ty-3236192817-6abdcb951c"
+        ],
+        "status": "UNRESOLVED"
+      },
+      "id": "roof-mass-main-maxZ",
+      "levelId": "lvl-0",
+      "materialId": "mat-roof",
+      "pitchDeg": 35.1219,
+      "thickness": 0.25
+    },
+    {
+      "boundary": [
+        {
+          "x": -0.810434,
+          "z": 8.8133
+        },
+        {
+          "x": -0.810434,
+          "z": -0.77
+        },
+        {
+          "x": 4.232833,
+          "z": 4.02165
+        }
+      ],
+      "datum": {
+        "x": -0.810434,
+        "y": 2.61894,
+        "z": -0.77
+      },
+      "downslope": {
+        "x": -1,
+        "z": 0
+      },
+      "evidence": {
+        "interpretation": "a hip, ridge along X: the side(s) along it draw a trapezoid, the ridge ends 4.27 / 4.20 m in from the end walls (4.23 m taken); main pitch 35.1° from the drawn roof's lowest edge at 2.31 m up to the ridge over 4.79 m (half the span and the 0.77 m the eaves are drawn past the walls), hip ends 33.8°; the roof's top surface at the wall face 3.16 m, the walls end under it at 2.85 m",
+        "properties": {
+          "datum": "UNRESOLVED",
+          "pitchDeg": "UNRESOLVED"
+        },
+        "source": "frame-asset-garaz-g6-rzut-parter-84630c4567-46f6f7baab + frame-asset-garaz-g6-elewacja-przod-60de2b9445-0648be2886 + frame-asset-garaz-g6-elewacja-ty-3236192817-6abdcb951c",
+        "sourceIds": [
+          "src-frame-asset-garaz-g6-rzut-parter-84630c4567-46f6f7baab",
+          "src-frame-asset-garaz-g6-elewacja-przod-60de2b9445-0648be2886",
+          "src-frame-asset-garaz-g6-elewacja-ty-3236192817-6abdcb951c"
+        ],
+        "status": "UNRESOLVED"
+      },
+      "id": "roof-mass-main-minX",
+      "levelId": "lvl-0",
+      "materialId": "mat-roof",
+      "pitchDeg": 33.7544,
+      "thickness": 0.25
+    },
+    {
+      "boundary": [
+        {
+          "x": -0.810434,
+          "z": -0.77
+        },
+        {
+          "x": 12.097734,
+          "z": -0.77
+        },
+        {
+          "x": 7.054467,
+          "z": 4.02165
+        },
+        {
+          "x": 4.232833,
+          "z": 4.02165
+        }
+      ],
+      "datum": {
+        "x": -0.810434,
+        "y": 2.61894,
+        "z": -0.77
+      },
+      "downslope": {
+        "x": 0,
+        "z": -1
+      },
+      "evidence": {
+        "interpretation": "a hip, ridge along X: the side(s) along it draw a trapezoid, the ridge ends 4.27 / 4.20 m in from the end walls (4.23 m taken); main pitch 35.1° from the drawn roof's lowest edge at 2.31 m up to the ridge over 4.79 m (half the span and the 0.77 m the eaves are drawn past the walls), hip ends 33.8°; the roof's top surface at the wall face 3.16 m, the walls end under it at 2.85 m",
+        "properties": {
+          "datum": "UNRESOLVED",
+          "pitchDeg": "UNRESOLVED"
+        },
+        "source": "frame-asset-garaz-g6-rzut-parter-84630c4567-46f6f7baab + frame-asset-garaz-g6-elewacja-przod-60de2b9445-0648be2886 + frame-asset-garaz-g6-elewacja-ty-3236192817-6abdcb951c",
+        "sourceIds": [
+          "src-frame-asset-garaz-g6-rzut-parter-84630c4567-46f6f7baab",
+          "src-frame-asset-garaz-g6-elewacja-przod-60de2b9445-0648be2886",
+          "src-frame-asset-garaz-g6-elewacja-ty-3236192817-6abdcb951c"
+        ],
+        "status": "UNRESOLVED"
+      },
+      "id": "roof-mass-main-minZ",
+      "levelId": "lvl-0",
+      "materialId": "mat-roof",
+      "pitchDeg": 35.1219,
+      "thickness": 0.25
+    }
+  ],
+  "rooflights": [],
+  "roofs": [],
+  "rooms": [],
+  "schema": "buildapp.canonical-building-model",
+  "schemaVersion": "1.9.0",
+  "slabs": [],
+  "stairs": [],
+  "stepRuns": [],
+  "surfaceRegions": [
+    {
+      "evidence": {
+        "interpretation": "a brick outline from finish-c03d78 (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-mass-main-w1",
+      "id": "appearance-east-ring-mass-main-w1-brick-0",
+      "materialId": "mat-brick",
+      "outline": [
+        {
+          "a": 2.45,
+          "b": 2.329305
+        },
+        {
+          "a": 5.57,
+          "b": 2.329305
+        },
+        {
+          "a": 5.57,
+          "b": 2.309305
+        },
+        {
+          "a": 5.61,
+          "b": 2.309305
+        },
+        {
+          "a": 5.61,
+          "b": 2.289305
+        },
+        {
+          "a": 5.63,
+          "b": 2.289305
+        },
+        {
+          "a": 5.63,
+          "b": 0.009305
+        },
+        {
+          "a": 5.61,
+          "b": 0.009305
+        },
+        {
+          "a": 5.61,
+          "b": 0
+        },
+        {
+          "a": 2.41,
+          "b": 0
+        },
+        {
+          "a": 2.41,
+          "b": 0.009305
+        },
+        {
+          "a": 2.39,
+          "b": 0.009305
+        },
+        {
+          "a": 2.39,
+          "b": 2.269305
+        },
+        {
+          "a": 2.41,
+          "b": 2.269305
+        },
+        {
+          "a": 2.41,
+          "b": 2.289305
+        },
+        {
+          "a": 2.43,
+          "b": 2.289305
+        },
+        {
+          "a": 2.43,
+          "b": 2.309305
+        },
+        {
+          "a": 2.45,
+          "b": 2.309305
+        }
+      ],
+      "rect": {
+        "a0": 2.39,
+        "a1": 5.63,
+        "b0": 0,
+        "b1": 2.329305
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a brick outline from finish-5286e7 (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-mass-main-w0",
+      "id": "appearance-front-ring-mass-main-w0-brick-0",
+      "materialId": "mat-brick",
+      "outline": [
+        {
+          "a": 0.009566,
+          "b": 2.329305
+        },
+        {
+          "a": 11.2873,
+          "b": 2.329305
+        },
+        {
+          "a": 11.2873,
+          "b": 0.389305
+        },
+        {
+          "a": 0.009566,
+          "b": 0.389305
+        },
+        {
+          "a": 0.009566,
+          "b": 0.409305
+        },
+        {
+          "a": 0,
+          "b": 0.409305
+        },
+        {
+          "a": 0,
+          "b": 2.309305
+        },
+        {
+          "a": 0.009566,
+          "b": 2.309305
+        }
+      ],
+      "rect": {
+        "a0": 0,
+        "a1": 11.2873,
+        "b0": 0.389305,
+        "b1": 2.329305
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a brick outline from finish-c721e7 (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-mass-main-w2",
+      "id": "appearance-rear-ring-mass-main-w2-brick-0",
+      "materialId": "mat-brick",
+      "outline": [
+        {
+          "a": 11.277734,
+          "b": 2.069305
+        },
+        {
+          "a": 0,
+          "b": 2.069305
+        },
+        {
+          "a": 0,
+          "b": 0
+        },
+        {
+          "a": 11.277734,
+          "b": 0
+        },
+        {
+          "a": 11.277734,
+          "b": 0.009305
+        },
+        {
+          "a": 11.2873,
+          "b": 0.009305
+        },
+        {
+          "a": 11.2873,
+          "b": 2.049305
+        },
+        {
+          "a": 11.277734,
+          "b": 2.049305
+        }
+      ],
+      "rect": {
+        "a0": 0,
+        "a1": 11.2873,
+        "b0": 0,
+        "b1": 2.069305
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a brick outline from finish-3f0607 (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-mass-main-w3",
+      "id": "appearance-west-ring-mass-main-w3-brick-0",
+      "materialId": "mat-brick",
+      "outline": [
+        {
+          "a": 7.7333,
+          "b": 2.329305
+        },
+        {
+          "a": 0.2933,
+          "b": 2.329305
+        },
+        {
+          "a": 0.2933,
+          "b": 2.309305
+        },
+        {
+          "a": 0.2733,
+          "b": 2.309305
+        },
+        {
+          "a": 0.2733,
+          "b": 0.449305
+        },
+        {
+          "a": 0.2933,
+          "b": 0.449305
+        },
+        {
+          "a": 0.2933,
+          "b": 0.429305
+        },
+        {
+          "a": 7.7333,
+          "b": 0.429305
+        },
+        {
+          "a": 7.7333,
+          "b": 0.449305
+        },
+        {
+          "a": 7.7533,
+          "b": 0.449305
+        },
+        {
+          "a": 7.7533,
+          "b": 2.309305
+        },
+        {
+          "a": 7.7333,
+          "b": 2.309305
+        }
+      ],
+      "rect": {
+        "a0": 0.2733,
+        "a1": 7.7533,
+        "b0": 0.429305,
+        "b1": 2.329305
+      }
+    }
+  ],
+  "terraces": [],
+  "units": {
+    "angle": "deg",
+    "length": "m"
+  },
+  "wallJunctions": [
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w3"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w0"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-garaz-g6-rzut-parter-84630c4567-46f6f7baab (GARAGE), at the analyzer's own scale: 2.221908 cm/px from the traced outline: 11.32 m over the outline's 508 px and 8.02 m over its 362 px (the building's two overall dimensions printed on the site plan, the longer over the longer extent): 2.228 and 2.215 cm/px, 0.6 % apart; heights: 2 registered elevation(s) give eaves (the walls' corner tops) 2.50 / 2.05 m and top 6.20 / 5.78 m (they disagree by 0.45 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-garaz-g6-rzut-parter-84630c4567-46f6f7baab + frame-asset-garaz-g6-elewacja-przod-60de2b9445-0648be2886 + frame-asset-garaz-g6-elewacja-ty-3236192817-6abdcb951c",
+        "sourceIds": [
+          "src-frame-asset-garaz-g6-rzut-parter-84630c4567-46f6f7baab",
+          "src-frame-asset-garaz-g6-elewacja-przod-60de2b9445-0648be2886",
+          "src-frame-asset-garaz-g6-elewacja-ty-3236192817-6abdcb951c"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j0",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w0"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w1"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-garaz-g6-rzut-parter-84630c4567-46f6f7baab (GARAGE), at the analyzer's own scale: 2.221908 cm/px from the traced outline: 11.32 m over the outline's 508 px and 8.02 m over its 362 px (the building's two overall dimensions printed on the site plan, the longer over the longer extent): 2.228 and 2.215 cm/px, 0.6 % apart; heights: 2 registered elevation(s) give eaves (the walls' corner tops) 2.50 / 2.05 m and top 6.20 / 5.78 m (they disagree by 0.45 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-garaz-g6-rzut-parter-84630c4567-46f6f7baab + frame-asset-garaz-g6-elewacja-przod-60de2b9445-0648be2886 + frame-asset-garaz-g6-elewacja-ty-3236192817-6abdcb951c",
+        "sourceIds": [
+          "src-frame-asset-garaz-g6-rzut-parter-84630c4567-46f6f7baab",
+          "src-frame-asset-garaz-g6-elewacja-przod-60de2b9445-0648be2886",
+          "src-frame-asset-garaz-g6-elewacja-ty-3236192817-6abdcb951c"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j1",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w1"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w2"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-garaz-g6-rzut-parter-84630c4567-46f6f7baab (GARAGE), at the analyzer's own scale: 2.221908 cm/px from the traced outline: 11.32 m over the outline's 508 px and 8.02 m over its 362 px (the building's two overall dimensions printed on the site plan, the longer over the longer extent): 2.228 and 2.215 cm/px, 0.6 % apart; heights: 2 registered elevation(s) give eaves (the walls' corner tops) 2.50 / 2.05 m and top 6.20 / 5.78 m (they disagree by 0.45 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-garaz-g6-rzut-parter-84630c4567-46f6f7baab + frame-asset-garaz-g6-elewacja-przod-60de2b9445-0648be2886 + frame-asset-garaz-g6-elewacja-ty-3236192817-6abdcb951c",
+        "sourceIds": [
+          "src-frame-asset-garaz-g6-rzut-parter-84630c4567-46f6f7baab",
+          "src-frame-asset-garaz-g6-elewacja-przod-60de2b9445-0648be2886",
+          "src-frame-asset-garaz-g6-elewacja-ty-3236192817-6abdcb951c"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j2",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w2",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w2"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w3"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-garaz-g6-rzut-parter-84630c4567-46f6f7baab (GARAGE), at the analyzer's own scale: 2.221908 cm/px from the traced outline: 11.32 m over the outline's 508 px and 8.02 m over its 362 px (the building's two overall dimensions printed on the site plan, the longer over the longer extent): 2.228 and 2.215 cm/px, 0.6 % apart; heights: 2 registered elevation(s) give eaves (the walls' corner tops) 2.50 / 2.05 m and top 6.20 / 5.78 m (they disagree by 0.45 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-garaz-g6-rzut-parter-84630c4567-46f6f7baab + frame-asset-garaz-g6-elewacja-przod-60de2b9445-0648be2886 + frame-asset-garaz-g6-elewacja-ty-3236192817-6abdcb951c",
+        "sourceIds": [
+          "src-frame-asset-garaz-g6-rzut-parter-84630c4567-46f6f7baab",
+          "src-frame-asset-garaz-g6-elewacja-przod-60de2b9445-0648be2886",
+          "src-frame-asset-garaz-g6-elewacja-ty-3236192817-6abdcb951c"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j3",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w2",
+      "tolerance": 0.001
+    }
+  ],
+  "wallPanels": [],
+  "wallRings": [
+    {
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-garaz-g6-rzut-parter-84630c4567-46f6f7baab (GARAGE), at the analyzer's own scale: 2.221908 cm/px from the traced outline: 11.32 m over the outline's 508 px and 8.02 m over its 362 px (the building's two overall dimensions printed on the site plan, the longer over the longer extent): 2.228 and 2.215 cm/px, 0.6 % apart; heights: 2 registered elevation(s) give eaves (the walls' corner tops) 2.50 / 2.05 m and top 6.20 / 5.78 m (they disagree by 0.45 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-garaz-g6-rzut-parter-84630c4567-46f6f7baab + frame-asset-garaz-g6-elewacja-przod-60de2b9445-0648be2886 + frame-asset-garaz-g6-elewacja-ty-3236192817-6abdcb951c",
+        "sourceIds": [
+          "src-frame-asset-garaz-g6-rzut-parter-84630c4567-46f6f7baab",
+          "src-frame-asset-garaz-g6-elewacja-przod-60de2b9445-0648be2886",
+          "src-frame-asset-garaz-g6-elewacja-ty-3236192817-6abdcb951c"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main",
+      "junctionIds": [
+        "ring-mass-main-j0",
+        "ring-mass-main-j1",
+        "ring-mass-main-j2",
+        "ring-mass-main-j3"
+      ],
+      "levelId": "lvl-0",
+      "wallIds": [
+        "ring-mass-main-w0",
+        "ring-mass-main-w1",
+        "ring-mass-main-w2",
+        "ring-mass-main-w3"
+      ]
+    }
+  ],
+  "walls": [
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 11.2873,
+        "z": 0
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-garaz-g6-rzut-parter-84630c4567-46f6f7baab (GARAGE), at the analyzer's own scale: 2.221908 cm/px from the traced outline: 11.32 m over the outline's 508 px and 8.02 m over its 362 px (the building's two overall dimensions printed on the site plan, the longer over the longer extent): 2.228 and 2.215 cm/px, 0.6 % apart; heights: 2 registered elevation(s) give eaves (the walls' corner tops) 2.50 / 2.05 m and top 6.20 / 5.78 m (they disagree by 0.45 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-garaz-g6-rzut-parter-84630c4567-46f6f7baab + frame-asset-garaz-g6-elewacja-przod-60de2b9445-0648be2886 + frame-asset-garaz-g6-elewacja-ty-3236192817-6abdcb951c",
+        "sourceIds": [
+          "src-frame-asset-garaz-g6-rzut-parter-84630c4567-46f6f7baab",
+          "src-frame-asset-garaz-g6-elewacja-przod-60de2b9445-0648be2886",
+          "src-frame-asset-garaz-g6-elewacja-ty-3236192817-6abdcb951c"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 2.854894,
+      "id": "ring-mass-main-w0",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 0,
+        "z": 0
+      },
+      "thickness": 0.3
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 11.2873,
+        "z": 8.0433
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-garaz-g6-rzut-parter-84630c4567-46f6f7baab (GARAGE), at the analyzer's own scale: 2.221908 cm/px from the traced outline: 11.32 m over the outline's 508 px and 8.02 m over its 362 px (the building's two overall dimensions printed on the site plan, the longer over the longer extent): 2.228 and 2.215 cm/px, 0.6 % apart; heights: 2 registered elevation(s) give eaves (the walls' corner tops) 2.50 / 2.05 m and top 6.20 / 5.78 m (they disagree by 0.45 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-garaz-g6-rzut-parter-84630c4567-46f6f7baab + frame-asset-garaz-g6-elewacja-przod-60de2b9445-0648be2886 + frame-asset-garaz-g6-elewacja-ty-3236192817-6abdcb951c",
+        "sourceIds": [
+          "src-frame-asset-garaz-g6-rzut-parter-84630c4567-46f6f7baab",
+          "src-frame-asset-garaz-g6-elewacja-przod-60de2b9445-0648be2886",
+          "src-frame-asset-garaz-g6-elewacja-ty-3236192817-6abdcb951c"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 2.859856,
+      "id": "ring-mass-main-w1",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 11.2873,
+        "z": 0
+      },
+      "thickness": 0.3
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0,
+        "z": 8.0433
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-garaz-g6-rzut-parter-84630c4567-46f6f7baab (GARAGE), at the analyzer's own scale: 2.221908 cm/px from the traced outline: 11.32 m over the outline's 508 px and 8.02 m over its 362 px (the building's two overall dimensions printed on the site plan, the longer over the longer extent): 2.228 and 2.215 cm/px, 0.6 % apart; heights: 2 registered elevation(s) give eaves (the walls' corner tops) 2.50 / 2.05 m and top 6.20 / 5.78 m (they disagree by 0.45 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-garaz-g6-rzut-parter-84630c4567-46f6f7baab + frame-asset-garaz-g6-elewacja-przod-60de2b9445-0648be2886 + frame-asset-garaz-g6-elewacja-ty-3236192817-6abdcb951c",
+        "sourceIds": [
+          "src-frame-asset-garaz-g6-rzut-parter-84630c4567-46f6f7baab",
+          "src-frame-asset-garaz-g6-elewacja-przod-60de2b9445-0648be2886",
+          "src-frame-asset-garaz-g6-elewacja-ty-3236192817-6abdcb951c"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 2.854894,
+      "id": "ring-mass-main-w2",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 11.2873,
+        "z": 8.0433
+      },
+      "thickness": 0.3
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0,
+        "z": 0
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-garaz-g6-rzut-parter-84630c4567-46f6f7baab (GARAGE), at the analyzer's own scale: 2.221908 cm/px from the traced outline: 11.32 m over the outline's 508 px and 8.02 m over its 362 px (the building's two overall dimensions printed on the site plan, the longer over the longer extent): 2.228 and 2.215 cm/px, 0.6 % apart; heights: 2 registered elevation(s) give eaves (the walls' corner tops) 2.50 / 2.05 m and top 6.20 / 5.78 m (they disagree by 0.45 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-garaz-g6-rzut-parter-84630c4567-46f6f7baab + frame-asset-garaz-g6-elewacja-przod-60de2b9445-0648be2886 + frame-asset-garaz-g6-elewacja-ty-3236192817-6abdcb951c",
+        "sourceIds": [
+          "src-frame-asset-garaz-g6-rzut-parter-84630c4567-46f6f7baab",
+          "src-frame-asset-garaz-g6-elewacja-przod-60de2b9445-0648be2886",
+          "src-frame-asset-garaz-g6-elewacja-ty-3236192817-6abdcb951c"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 2.859856,
+      "id": "ring-mass-main-w3",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 0,
+        "z": 8.0433
+      },
+      "thickness": 0.3
+    }
+  ],
+  "windows": [
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-left-309854-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-left-309854"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-right-1e7b58-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-right-1e7b58"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-right-fd1902-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-right-fd1902"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-plan-left-54611a-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-plan-left-54611a"
+    }
+  ]
+}

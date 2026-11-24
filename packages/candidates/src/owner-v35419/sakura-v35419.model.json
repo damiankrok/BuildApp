@@ -1,0 +1,1721 @@
+{
+  "assemblies": [],
+  "balconies": [],
+  "building": {
+    "id": "building",
+    "name": "massing"
+  },
+  "chimneys": [
+    {
+      "baseOffset": 0,
+      "footprint": {
+        "maxX": 6.0788,
+        "maxZ": 7.888895,
+        "minX": 5.4275,
+        "minZ": 7.237595
+      },
+      "height": 7.0641,
+      "id": "chimney-fix-front-71cbff",
+      "levelId": "lvl-0",
+      "materialId": "mat-chimney"
+    },
+    {
+      "baseOffset": 0,
+      "footprint": {
+        "maxX": 9.519,
+        "maxZ": 7.109665,
+        "minX": 8.9011,
+        "minZ": 6.491765
+      },
+      "height": 7.0641,
+      "id": "chimney-fix-front-b2d441",
+      "levelId": "lvl-0",
+      "materialId": "mat-chimney"
+    },
+    {
+      "baseOffset": 0,
+      "footprint": {
+        "maxX": 3.987597,
+        "maxZ": 5.76923,
+        "minX": 2.860293,
+        "minZ": 4.641926
+      },
+      "height": 7.04565,
+      "id": "chimney-fix-left-731505",
+      "levelId": "lvl-0",
+      "materialId": "mat-chimney"
+    }
+  ],
+  "constraints": [],
+  "doors": [
+    {
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-front-515eef-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "op-fix-front-515eef",
+      "swing": "IN"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "glazing": "FULL",
+            "hinge": "LEFT",
+            "kind": "LEAF"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-rear-00ada4-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-glass",
+      "openAngle": 0,
+      "openingId": "op-fix-rear-00ada4",
+      "swing": "IN"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "glazing": "FULL",
+            "hinge": "LEFT",
+            "kind": "LEAF"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-rear-30be86-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-glass",
+      "openAngle": 0,
+      "openingId": "op-fix-rear-30be86",
+      "swing": "IN"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "glazing": "FULL",
+            "hinge": "LEFT",
+            "kind": "LEAF"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-rear-4d3bd6-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-glass",
+      "openAngle": 0,
+      "openingId": "op-fix-rear-4d3bd6",
+      "swing": "IN"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "glazing": "FULL",
+            "hinge": "LEFT",
+            "kind": "LEAF"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-rear-fa430b-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-glass",
+      "openAngle": 0,
+      "openingId": "op-fix-rear-fa430b",
+      "swing": "IN"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "glazing": "FULL",
+            "hinge": "LEFT",
+            "kind": "LEAF"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-plan-front-242c75-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-glass",
+      "openAngle": 0,
+      "openingId": "op-plan-front-242c75",
+      "swing": "IN"
+    }
+  ],
+  "evidenceSources": [
+    {
+      "id": "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-2c43fda48e",
+      "kind": "DRAWING",
+      "label": "frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-2c43fda48e",
+      "note": "frame frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-2c43fda48e"
+    },
+    {
+      "id": "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-e0a839cd59",
+      "kind": "DRAWING",
+      "label": "frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-e0a839cd59",
+      "note": "frame frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-e0a839cd59"
+    },
+    {
+      "id": "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-f-cfcd2a763e",
+      "kind": "DRAWING",
+      "label": "frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-f-cfcd2a763e",
+      "note": "frame frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-f-cfcd2a763e"
+    },
+    {
+      "id": "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-o-935b97bf81",
+      "kind": "DRAWING",
+      "label": "frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-o-935b97bf81",
+      "note": "frame frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-o-935b97bf81"
+    },
+    {
+      "id": "src-frame-asset-rzut-517a301bc4-b6b68d3555",
+      "kind": "DRAWING",
+      "label": "frame-asset-rzut-517a301bc4-b6b68d3555",
+      "note": "frame frame-asset-rzut-517a301bc4-b6b68d3555"
+    }
+  ],
+  "frame": {
+    "handedness": "LEFT_HANDED_AS_SPECIFIED",
+    "origin": "finished ground-floor level is y = 0; the front facade outer face is z = 0",
+    "viewerNote": "renderers working in a right-handed frame mirror z when building their scene",
+    "wallConvention": "a wall runs from start to end along its OUTER face at its base; its outward normal is up x u, so exterior rings are traversed counter-clockwise on a plan drawn with the front facade at the bottom and material lies to the left of the direction of travel",
+    "x": "right when looking at the front facade",
+    "y": "up (vertical)",
+    "z": "away from the front facade, into the building"
+  },
+  "id": "m-analysis-m92728cdae273a",
+  "levels": [
+    {
+      "buildingId": "building",
+      "elevation": 0,
+      "height": 6.760012,
+      "id": "lvl-0",
+      "index": 0,
+      "name": "Massing"
+    }
+  ],
+  "linearSolids": [],
+  "materials": [
+    {
+      "color": "#6d6a66",
+      "id": "mat-chimney",
+      "name": "Chimney"
+    },
+    {
+      "color": "#55585c",
+      "id": "mat-gate",
+      "name": "Garage door"
+    },
+    {
+      "color": "#9fc3d8",
+      "id": "mat-glass",
+      "name": "Glazing",
+      "opacity": 0.35
+    },
+    {
+      "color": "#d9d5cc",
+      "id": "mat-partition",
+      "name": "Partition"
+    },
+    {
+      "color": "#5a5550",
+      "id": "mat-roof",
+      "name": "Roof covering (tone not read: miniature convention)"
+    },
+    {
+      "color": "#b07a4a",
+      "id": "mat-timber",
+      "name": "Timber (door leaf, cladding)"
+    },
+    {
+      "color": "#e8e4dc",
+      "id": "mat-wall",
+      "name": "Rendered wall (tone not read: miniature convention)"
+    }
+  ],
+  "meta": {
+    "createdWith": "buildapp",
+    "notes": []
+  },
+  "name": "Dom pod sakurą (E) Opis projektu (analysis)",
+  "openings": [
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-517a301bc4-b6b68d3555",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-H362-333",
+      "kind": "DOOR",
+      "offset": 0.809424,
+      "sill": 0,
+      "wallId": "iw-H362-292",
+      "width": 0.89936
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-517a301bc4-b6b68d3555",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-H362-546",
+      "kind": "DOOR",
+      "offset": 6.282672,
+      "sill": 0,
+      "wallId": "iw-H362-292",
+      "width": 0.89936
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-517a301bc4-b6b68d3555",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-H362-640",
+      "kind": "DOOR",
+      "offset": 8.698096,
+      "sill": 0,
+      "wallId": "iw-H362-292",
+      "width": 0.89936
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-517a301bc4-b6b68d3555",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-H415-471",
+      "kind": "DOOR",
+      "offset": 2.543904,
+      "sill": 0,
+      "wallId": "iw-H415-372",
+      "width": 0.89936
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-517a301bc4-b6b68d3555",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-H415-564",
+      "kind": "DOOR",
+      "offset": 4.933632,
+      "sill": 0,
+      "wallId": "iw-H415-372",
+      "width": 0.89936
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-517a301bc4-b6b68d3555",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-H415-643",
+      "kind": "DOOR",
+      "offset": 6.963616,
+      "sill": 0,
+      "wallId": "iw-H415-372",
+      "width": 0.89936
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-517a301bc4-b6b68d3555",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-H443-701",
+      "kind": "DOOR",
+      "offset": 0.398288,
+      "sill": 0,
+      "wallId": "iw-H443-682",
+      "width": 0.796576
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-517a301bc4-b6b68d3555",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-V325-365",
+      "kind": "DOOR",
+      "offset": 1.567456,
+      "sill": 0,
+      "wallId": "iw-V321-399",
+      "width": 0.826512
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-517a301bc4-b6b68d3555",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-V378-422",
+      "kind": "DOOR",
+      "offset": 2.081376,
+      "sill": 0,
+      "wallId": "iw-V378-527-x",
+      "width": 0.89936
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-517a301bc4-b6b68d3555",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-V378-492",
+      "kind": "DOOR",
+      "offset": 0.282656,
+      "sill": 0,
+      "wallId": "iw-V378-527-x",
+      "width": 0.89936
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-517a301bc4-b6b68d3555",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-V632-544",
+      "kind": "DOOR",
+      "offset": 0.188252,
+      "sill": 0,
+      "wallId": "iw-V632-413",
+      "width": 0.950752
+    },
+    {
+      "height": 2.1877,
+      "id": "op-fix-front-0270ca",
+      "kind": "WINDOW",
+      "offset": 13.1596,
+      "sill": 0.0835,
+      "wallId": "ring-mass-main-w0",
+      "width": 0.6179
+    },
+    {
+      "height": 2.2879,
+      "id": "op-fix-front-515eef",
+      "kind": "DOOR",
+      "offset": 7.4649,
+      "sill": 0.0334,
+      "wallId": "ring-mass-main-w0",
+      "width": 1.0354
+    },
+    {
+      "height": 1.2692,
+      "id": "op-fix-front-96b57b",
+      "kind": "WINDOW",
+      "offset": 1.2692,
+      "sill": 1.002,
+      "wallId": "ring-mass-main-w0",
+      "width": 2.9559
+    },
+    {
+      "height": 2.1877,
+      "id": "op-fix-front-c0e4ba",
+      "kind": "WINDOW",
+      "offset": 10.0534,
+      "sill": 0.0835,
+      "wallId": "ring-mass-main-w0",
+      "width": 0.5845
+    },
+    {
+      "height": 2.218906,
+      "id": "op-fix-rear-00ada4",
+      "kind": "DOOR",
+      "offset": 13.164445,
+      "sill": 0.099354,
+      "wallId": "ring-mass-main-w2",
+      "width": 3.427713
+    },
+    {
+      "height": 2.218906,
+      "id": "op-fix-rear-30be86",
+      "kind": "DOOR",
+      "offset": 5.547305,
+      "sill": 0.099354,
+      "wallId": "ring-mass-main-w2",
+      "width": 1.689018
+    },
+    {
+      "height": 2.218906,
+      "id": "op-fix-rear-4d3bd6",
+      "kind": "DOOR",
+      "offset": 1.506909,
+      "sill": 0.099354,
+      "wallId": "ring-mass-main-w2",
+      "width": 1.738695
+    },
+    {
+      "height": 2.218906,
+      "id": "op-fix-rear-fa430b",
+      "kind": "DOOR",
+      "offset": 9.521465,
+      "sill": 0.099354,
+      "wallId": "ring-mass-main-w2",
+      "width": 1.689018
+    },
+    {
+      "height": 2.2244,
+      "id": "op-fix-right-557f3b",
+      "kind": "WINDOW",
+      "offset": 6.706953,
+      "sill": 0.0664,
+      "wallId": "ring-mass-main-w1",
+      "width": 1.7264
+    },
+    {
+      "height": 2.2244,
+      "id": "op-fix-right-a97a92",
+      "kind": "WINDOW",
+      "offset": 4.050953,
+      "sill": 0.0664,
+      "wallId": "ring-mass-main-w1",
+      "width": 1.7596
+    },
+    {
+      "evidence": {
+        "interpretation": "a gap the ground-floor plan draws in this wall (plan-gap-1-662: 14.57..16.37 m), where the model had no opening; its kind, sill and height follow one metric reading of this side's elevation (frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-f-cfcd2a763e, 95 % of the span shared): not located in the elevation's pixels, not source-verified",
+        "properties": {
+          "height": "VISUAL_INFERRED",
+          "offset": "SOURCE_DERIVED",
+          "sill": "VISUAL_INFERRED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-f-cfcd2a763e",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.15,
+      "id": "op-plan-front-242c75",
+      "kind": "DOOR",
+      "offset": 14.569632,
+      "sill": 0.1,
+      "wallId": "ring-mass-main-w0",
+      "width": 1.79872
+    }
+  ],
+  "platforms": [],
+  "railings": [],
+  "relationships": [],
+  "roofEdges": [],
+  "roofOpenings": [],
+  "roofPlanes": [
+    {
+      "boundary": [
+        {
+          "x": 18.478078,
+          "z": 1.5097
+        },
+        {
+          "x": 18.478078,
+          "z": 13.2141
+        },
+        {
+          "x": 12.650629,
+          "z": 7.3619
+        }
+      ],
+      "datum": {
+        "x": 18.478078,
+        "y": 3.424184,
+        "z": 1.5097
+      },
+      "downslope": {
+        "x": 1,
+        "z": 0
+      },
+      "evidence": {
+        "interpretation": "a hip, ridge along X: the side(s) along it draw a trapezoid, the ridge ends 4.93 / 4.97 m in from the end walls (4.95 m taken); main pitch 29.7° from the drawn roof's lowest edge at 3.14 m up to the ridge over 5.85 m (half the span and the 0.88 m the eaves are drawn past the walls), hip ends 29.8°; the roof's top surface at the wall face 3.93 m, the walls end under it at 3.64 m",
+        "properties": {
+          "datum": "SOURCE_DERIVED",
+          "pitchDeg": "UNRESOLVED"
+        },
+        "source": "frame-asset-rzut-517a301bc4-b6b68d3555 + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-f-cfcd2a763e + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-o-935b97bf81 + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-2c43fda48e + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-e0a839cd59",
+        "sourceIds": [
+          "src-frame-asset-rzut-517a301bc4-b6b68d3555",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-f-cfcd2a763e",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-o-935b97bf81",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-2c43fda48e",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-e0a839cd59"
+        ],
+        "status": "UNRESOLVED"
+      },
+      "id": "roof-mass-main-maxX",
+      "levelId": "lvl-0",
+      "materialId": "mat-roof",
+      "pitchDeg": 29.7883,
+      "thickness": 0.25
+    },
+    {
+      "boundary": [
+        {
+          "x": 18.478078,
+          "z": 13.2141
+        },
+        {
+          "x": -0.876278,
+          "z": 13.2141
+        },
+        {
+          "x": 4.951171,
+          "z": 7.3619
+        },
+        {
+          "x": 12.650629,
+          "z": 7.3619
+        }
+      ],
+      "datum": {
+        "x": -0.876278,
+        "y": 3.424184,
+        "z": 13.2141
+      },
+      "downslope": {
+        "x": 0,
+        "z": 1
+      },
+      "evidence": {
+        "interpretation": "a hip, ridge along X: the side(s) along it draw a trapezoid, the ridge ends 4.93 / 4.97 m in from the end walls (4.95 m taken); main pitch 29.7° from the drawn roof's lowest edge at 3.14 m up to the ridge over 5.85 m (half the span and the 0.88 m the eaves are drawn past the walls), hip ends 29.8°; the roof's top surface at the wall face 3.93 m, the walls end under it at 3.64 m",
+        "properties": {
+          "datum": "SOURCE_DERIVED",
+          "pitchDeg": "UNRESOLVED"
+        },
+        "source": "frame-asset-rzut-517a301bc4-b6b68d3555 + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-f-cfcd2a763e + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-o-935b97bf81 + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-2c43fda48e + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-e0a839cd59",
+        "sourceIds": [
+          "src-frame-asset-rzut-517a301bc4-b6b68d3555",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-f-cfcd2a763e",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-o-935b97bf81",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-2c43fda48e",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-e0a839cd59"
+        ],
+        "status": "UNRESOLVED"
+      },
+      "id": "roof-mass-main-maxZ",
+      "levelId": "lvl-0",
+      "materialId": "mat-roof",
+      "pitchDeg": 29.6837,
+      "thickness": 0.25
+    },
+    {
+      "boundary": [
+        {
+          "x": -0.876278,
+          "z": 13.2141
+        },
+        {
+          "x": -0.876278,
+          "z": 1.5097
+        },
+        {
+          "x": 4.951171,
+          "z": 7.3619
+        }
+      ],
+      "datum": {
+        "x": -0.876278,
+        "y": 3.424184,
+        "z": 1.5097
+      },
+      "downslope": {
+        "x": -1,
+        "z": 0
+      },
+      "evidence": {
+        "interpretation": "a hip, ridge along X: the side(s) along it draw a trapezoid, the ridge ends 4.93 / 4.97 m in from the end walls (4.95 m taken); main pitch 29.7° from the drawn roof's lowest edge at 3.14 m up to the ridge over 5.85 m (half the span and the 0.88 m the eaves are drawn past the walls), hip ends 29.8°; the roof's top surface at the wall face 3.93 m, the walls end under it at 3.64 m",
+        "properties": {
+          "datum": "SOURCE_DERIVED",
+          "pitchDeg": "UNRESOLVED"
+        },
+        "source": "frame-asset-rzut-517a301bc4-b6b68d3555 + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-f-cfcd2a763e + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-o-935b97bf81 + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-2c43fda48e + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-e0a839cd59",
+        "sourceIds": [
+          "src-frame-asset-rzut-517a301bc4-b6b68d3555",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-f-cfcd2a763e",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-o-935b97bf81",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-2c43fda48e",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-e0a839cd59"
+        ],
+        "status": "UNRESOLVED"
+      },
+      "id": "roof-mass-main-minX",
+      "levelId": "lvl-0",
+      "materialId": "mat-roof",
+      "pitchDeg": 29.7883,
+      "thickness": 0.25
+    },
+    {
+      "boundary": [
+        {
+          "x": -0.876278,
+          "z": 1.5097
+        },
+        {
+          "x": 18.478078,
+          "z": 1.5097
+        },
+        {
+          "x": 12.650629,
+          "z": 7.3619
+        },
+        {
+          "x": 4.951171,
+          "z": 7.3619
+        }
+      ],
+      "datum": {
+        "x": -0.876278,
+        "y": 3.424184,
+        "z": 1.5097
+      },
+      "downslope": {
+        "x": 0,
+        "z": -1
+      },
+      "evidence": {
+        "interpretation": "a hip, ridge along X: the side(s) along it draw a trapezoid, the ridge ends 4.93 / 4.97 m in from the end walls (4.95 m taken); main pitch 29.7° from the drawn roof's lowest edge at 3.14 m up to the ridge over 5.85 m (half the span and the 0.88 m the eaves are drawn past the walls), hip ends 29.8°; the roof's top surface at the wall face 3.93 m, the walls end under it at 3.64 m",
+        "properties": {
+          "datum": "SOURCE_DERIVED",
+          "pitchDeg": "UNRESOLVED"
+        },
+        "source": "frame-asset-rzut-517a301bc4-b6b68d3555 + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-f-cfcd2a763e + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-o-935b97bf81 + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-2c43fda48e + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-e0a839cd59",
+        "sourceIds": [
+          "src-frame-asset-rzut-517a301bc4-b6b68d3555",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-f-cfcd2a763e",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-o-935b97bf81",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-2c43fda48e",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-e0a839cd59"
+        ],
+        "status": "UNRESOLVED"
+      },
+      "id": "roof-mass-main-minZ",
+      "levelId": "lvl-0",
+      "materialId": "mat-roof",
+      "pitchDeg": 29.6837,
+      "thickness": 0.25
+    }
+  ],
+  "rooflights": [],
+  "roofs": [],
+  "rooms": [],
+  "schema": "buildapp.canonical-building-model",
+  "schemaVersion": "1.9.0",
+  "slabs": [],
+  "stairs": [],
+  "stepRuns": [],
+  "surfaceRegions": [],
+  "terraces": [],
+  "units": {
+    "angle": "deg",
+    "length": "m"
+  },
+  "wallJunctions": [
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w3"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w0"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-517a301bc4-b6b68d3555 (MAIN), at the analyzer's own scale: 2.5696 cm/px, STRONG / CONFIRMED with 5 independent witnesses; heights: 4 registered elevation(s) give eaves 3.14 / 3.15 / 3.13 / 3.10 m and top 6.78 / 6.76 / 6.76 / 6.76 m (they agree)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-517a301bc4-b6b68d3555 + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-f-cfcd2a763e + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-o-935b97bf81 + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-2c43fda48e + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-e0a839cd59",
+        "sourceIds": [
+          "src-frame-asset-rzut-517a301bc4-b6b68d3555",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-f-cfcd2a763e",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-o-935b97bf81",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-2c43fda48e",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-e0a839cd59"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j0",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w0"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w1"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-517a301bc4-b6b68d3555 (MAIN), at the analyzer's own scale: 2.5696 cm/px, STRONG / CONFIRMED with 5 independent witnesses; heights: 4 registered elevation(s) give eaves 3.14 / 3.15 / 3.13 / 3.10 m and top 6.78 / 6.76 / 6.76 / 6.76 m (they agree)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-517a301bc4-b6b68d3555 + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-f-cfcd2a763e + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-o-935b97bf81 + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-2c43fda48e + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-e0a839cd59",
+        "sourceIds": [
+          "src-frame-asset-rzut-517a301bc4-b6b68d3555",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-f-cfcd2a763e",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-o-935b97bf81",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-2c43fda48e",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-e0a839cd59"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j1",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w1"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w2"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-517a301bc4-b6b68d3555 (MAIN), at the analyzer's own scale: 2.5696 cm/px, STRONG / CONFIRMED with 5 independent witnesses; heights: 4 registered elevation(s) give eaves 3.14 / 3.15 / 3.13 / 3.10 m and top 6.78 / 6.76 / 6.76 / 6.76 m (they agree)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-517a301bc4-b6b68d3555 + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-f-cfcd2a763e + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-o-935b97bf81 + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-2c43fda48e + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-e0a839cd59",
+        "sourceIds": [
+          "src-frame-asset-rzut-517a301bc4-b6b68d3555",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-f-cfcd2a763e",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-o-935b97bf81",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-2c43fda48e",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-e0a839cd59"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j2",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w2",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w2"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w3"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-517a301bc4-b6b68d3555 (MAIN), at the analyzer's own scale: 2.5696 cm/px, STRONG / CONFIRMED with 5 independent witnesses; heights: 4 registered elevation(s) give eaves 3.14 / 3.15 / 3.13 / 3.10 m and top 6.78 / 6.76 / 6.76 / 6.76 m (they agree)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-517a301bc4-b6b68d3555 + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-f-cfcd2a763e + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-o-935b97bf81 + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-2c43fda48e + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-e0a839cd59",
+        "sourceIds": [
+          "src-frame-asset-rzut-517a301bc4-b6b68d3555",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-f-cfcd2a763e",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-o-935b97bf81",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-2c43fda48e",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-e0a839cd59"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j3",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w2",
+      "tolerance": 0.001
+    }
+  ],
+  "wallPanels": [],
+  "wallRings": [
+    {
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-517a301bc4-b6b68d3555 (MAIN), at the analyzer's own scale: 2.5696 cm/px, STRONG / CONFIRMED with 5 independent witnesses; heights: 4 registered elevation(s) give eaves 3.14 / 3.15 / 3.13 / 3.10 m and top 6.78 / 6.76 / 6.76 / 6.76 m (they agree)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-517a301bc4-b6b68d3555 + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-f-cfcd2a763e + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-o-935b97bf81 + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-2c43fda48e + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-e0a839cd59",
+        "sourceIds": [
+          "src-frame-asset-rzut-517a301bc4-b6b68d3555",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-f-cfcd2a763e",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-o-935b97bf81",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-2c43fda48e",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-e0a839cd59"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main",
+      "junctionIds": [
+        "ring-mass-main-j0",
+        "ring-mass-main-j1",
+        "ring-mass-main-j2",
+        "ring-mass-main-j3"
+      ],
+      "levelId": "lvl-0",
+      "wallIds": [
+        "ring-mass-main-w0",
+        "ring-mass-main-w1",
+        "ring-mass-main-w2",
+        "ring-mass-main-w3"
+      ]
+    }
+  ],
+  "walls": [
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 17.3018,
+        "z": 8.441136
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-517a301bc4-b6b68d3555), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-517a301bc4-b6b68d3555",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-H362-292",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 5.306224,
+        "z": 8.441136
+      },
+      "thickness": 0.12848
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 5.691664,
+        "z": 7.079248
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-517a301bc4-b6b68d3555), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-517a301bc4-b6b68d3555",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-H415-292",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 5.306224,
+        "z": 7.079248
+      },
+      "thickness": 0.12848
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 15.060768,
+        "z": 7.079248
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-517a301bc4-b6b68d3555), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-517a301bc4-b6b68d3555",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-H415-372",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 7.117792,
+        "z": 7.079248
+      },
+      "thickness": 0.12848
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 17.3018,
+        "z": 6.35976
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-517a301bc4-b6b68d3555), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-517a301bc4-b6b68d3555",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-H443-682",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 15.173488,
+        "z": 6.35976
+      },
+      "thickness": 0.12848
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 8.877968,
+        "z": 5.871536
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-517a301bc4-b6b68d3555), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-517a301bc4-b6b68d3555",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-H463-376",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 7.336208,
+        "z": 5.871536
+      },
+      "thickness": 0.102784
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 13.87584,
+        "z": 4.663824
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-517a301bc4-b6b68d3555), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-517a301bc4-b6b68d3555",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-H509-564",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 12.051424,
+        "z": 4.663824
+      },
+      "thickness": 0.12848
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 12.179904,
+        "z": 4.252688
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-517a301bc4-b6b68d3555), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-517a301bc4-b6b68d3555",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-H525-524",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 11.139216,
+        "z": 4.252688
+      },
+      "thickness": 0.12848
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 7.349056,
+        "z": 3.8544
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-517a301bc4-b6b68d3555), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-517a301bc4-b6b68d3555",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-H541-292",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 5.062112,
+        "z": 3.8544
+      },
+      "thickness": 0.12848
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 5.306224,
+        "z": 9.89296
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-517a301bc4-b6b68d3555), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-517a301bc4-b6b68d3555",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-V297-308",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 5.306224,
+        "z": 6.860832
+      },
+      "thickness": 0.25696
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 5.768752,
+        "z": 3.8544
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-517a301bc4-b6b68d3555), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-517a301bc4-b6b68d3555",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-V317-539",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 5.768752,
+        "z": 2.6897
+      },
+      "thickness": 0.12848
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 5.897232,
+        "z": 8.441136
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-517a301bc4-b6b68d3555), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-517a301bc4-b6b68d3555",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-V321-399",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 5.897232,
+        "z": 5.987168
+      },
+      "thickness": 0.205568
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 7.336208,
+        "z": 3.8544
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-517a301bc4-b6b68d3555), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-517a301bc4-b6b68d3555",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-V378-527",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 7.336208,
+        "z": 3.648832
+      },
+      "thickness": 0.12848
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 7.336208,
+        "z": 7.043616
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-517a301bc4-b6b68d3555), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-517a301bc4-b6b68d3555",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-V378-527-x",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 7.336208,
+        "z": 3.98288
+      },
+      "thickness": 0.12848
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 9.006448,
+        "z": 7.079248
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-517a301bc4-b6b68d3555), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-517a301bc4-b6b68d3555",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-V443-413",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 9.006448,
+        "z": 2.6897
+      },
+      "thickness": 0.12848
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 9.289104,
+        "z": 12.0341
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-517a301bc4-b6b68d3555), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-517a301bc4-b6b68d3555",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-V455-232",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 9.289104,
+        "z": 8.569616
+      },
+      "thickness": 0.102784
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 11.139216,
+        "z": 7.079248
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-517a301bc4-b6b68d3555), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-517a301bc4-b6b68d3555",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-V526-413",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 11.139216,
+        "z": 2.6897
+      },
+      "thickness": 0.12848
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 13.29768,
+        "z": 12.0341
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-517a301bc4-b6b68d3555), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-517a301bc4-b6b68d3555",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-V610-232",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 13.29768,
+        "z": 8.569616
+      },
+      "thickness": 0.12848
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 13.862992,
+        "z": 4.663824
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-517a301bc4-b6b68d3555), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-517a301bc4-b6b68d3555",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-V632-413",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 13.862992,
+        "z": 2.6897
+      },
+      "thickness": 0.12848
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 13.862992,
+        "z": 7.079248
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-517a301bc4-b6b68d3555), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-517a301bc4-b6b68d3555",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-V632-413-x",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 13.862992,
+        "z": 4.792304
+      },
+      "thickness": 0.12848
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 15.173488,
+        "z": 8.441136
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-517a301bc4-b6b68d3555), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-517a301bc4-b6b68d3555",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-V684-360",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 15.173488,
+        "z": 6.346912
+      },
+      "thickness": 0.102784
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 17.6018,
+        "z": 2.3897
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-517a301bc4-b6b68d3555 (MAIN), at the analyzer's own scale: 2.5696 cm/px, STRONG / CONFIRMED with 5 independent witnesses; heights: 4 registered elevation(s) give eaves 3.14 / 3.15 / 3.13 / 3.10 m and top 6.78 / 6.76 / 6.76 / 6.76 m (they agree)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-517a301bc4-b6b68d3555 + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-f-cfcd2a763e + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-o-935b97bf81 + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-2c43fda48e + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-e0a839cd59",
+        "sourceIds": [
+          "src-frame-asset-rzut-517a301bc4-b6b68d3555",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-f-cfcd2a763e",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-o-935b97bf81",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-2c43fda48e",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-e0a839cd59"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 3.638033,
+      "id": "ring-mass-main-w0",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 0,
+        "z": 2.3897
+      },
+      "thickness": 0.3
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 17.6018,
+        "z": 12.3341
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-517a301bc4-b6b68d3555 (MAIN), at the analyzer's own scale: 2.5696 cm/px, STRONG / CONFIRMED with 5 independent witnesses; heights: 4 registered elevation(s) give eaves 3.14 / 3.15 / 3.13 / 3.10 m and top 6.78 / 6.76 / 6.76 / 6.76 m (they agree)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-517a301bc4-b6b68d3555 + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-f-cfcd2a763e + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-o-935b97bf81 + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-2c43fda48e + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-e0a839cd59",
+        "sourceIds": [
+          "src-frame-asset-rzut-517a301bc4-b6b68d3555",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-f-cfcd2a763e",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-o-935b97bf81",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-2c43fda48e",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-e0a839cd59"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 3.637732,
+      "id": "ring-mass-main-w1",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 17.6018,
+        "z": 2.3897
+      },
+      "thickness": 0.3
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0,
+        "z": 12.3341
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-517a301bc4-b6b68d3555 (MAIN), at the analyzer's own scale: 2.5696 cm/px, STRONG / CONFIRMED with 5 independent witnesses; heights: 4 registered elevation(s) give eaves 3.14 / 3.15 / 3.13 / 3.10 m and top 6.78 / 6.76 / 6.76 / 6.76 m (they agree)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-517a301bc4-b6b68d3555 + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-f-cfcd2a763e + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-o-935b97bf81 + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-2c43fda48e + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-e0a839cd59",
+        "sourceIds": [
+          "src-frame-asset-rzut-517a301bc4-b6b68d3555",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-f-cfcd2a763e",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-o-935b97bf81",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-2c43fda48e",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-e0a839cd59"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 3.638033,
+      "id": "ring-mass-main-w2",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 17.6018,
+        "z": 12.3341
+      },
+      "thickness": 0.3
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0,
+        "z": 2.3897
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-517a301bc4-b6b68d3555 (MAIN), at the analyzer's own scale: 2.5696 cm/px, STRONG / CONFIRMED with 5 independent witnesses; heights: 4 registered elevation(s) give eaves 3.14 / 3.15 / 3.13 / 3.10 m and top 6.78 / 6.76 / 6.76 / 6.76 m (they agree)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-517a301bc4-b6b68d3555 + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-f-cfcd2a763e + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-o-935b97bf81 + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-2c43fda48e + frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-e0a839cd59",
+        "sourceIds": [
+          "src-frame-asset-rzut-517a301bc4-b6b68d3555",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-f-cfcd2a763e",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-o-935b97bf81",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-2c43fda48e",
+          "src-frame-asset-gotowy-projekt-dom-pod-sakura-e-elewacja-b-e0a839cd59"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 3.637732,
+      "id": "ring-mass-main-w3",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 0,
+        "z": 12.3341
+      },
+      "thickness": 0.3
+    }
+  ],
+  "windows": [
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-front-0270ca-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-front-0270ca"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-front-96b57b-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-front-96b57b"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-front-c0e4ba-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-front-c0e4ba"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-right-557f3b-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-right-557f3b"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-right-a97a92-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-right-a97a92"
+    }
+  ]
+}

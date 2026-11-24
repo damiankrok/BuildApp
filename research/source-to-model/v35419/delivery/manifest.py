@@ -38,7 +38,7 @@ for house, title, pub, st, url, cache, old in H:
     live = st == 'NEW-F' or (st == 'NEW-E' and not FIN_E)
     vs = [{'key': 'baseline1351', 'label': 'kod APK 1351 (baseline)', 'kind': 'LIVE' if st != 'DEV' else 'REPLAY', 'run': old, 'commit': BASE}]
     if st == 'NEW-E' and FIN_E and os.path.isdir(f'{R9}/newe/final/{house}'): vs.append({'key': 'freeze1', 'label': 'zamrożenie 1 (pierwszy pomiar odłożony, na żywo)', 'kind': 'LIVE', 'run': f'{R9}/newe/final/{house}', 'commit': FREEZE1})
-    if os.path.isdir(new): vs.append({'key': 'final', 'label': 'kod końcowy v3.54.19' + (' (na żywo, pierwszy bieg)' if live else ' (odczyty elewacji nagrane, recenzja na żywo)'), 'kind': 'LIVE' if live else 'REPLAY', 'run': new, 'commit': C})
+    if os.path.isdir(new): vs.append({'key': 'final', 'label': 'kod końcowy v3.54.19 (zamrożenie 2)' + (' — na żywo, jedyny bieg' if live else ' — nagrania biegu zamrożenia 1, odczyty przerw rzutu i recenzja na żywo' if st == 'NEW-E' else ' — odczyty i recenzja nagrane'), 'kind': 'LIVE' if live else 'REPLAY', 'run': new, 'commit': C})
     pkg = next((os.path.join(v['run'], 'source-package.json') for v in reversed(vs) if os.path.exists(os.path.join(v['run'], 'source-package.json'))), None)
     if pkg is None: pkg = {'oban': f'{R9}/trial/lipinscy-oban.package.json', 'juliusz': f'{R9}/trial/dobredomy-juliusznowy.package.json', 'amarylis': f'{R9}/trial/studioatrium-amarylis.package.json', 'eliza': f'{R9}/trial/archon-projekt-willa-eliza.package.json'}.get(house)  # a house without a model in any variant: the package of the selection step (the same source bytes)
     sk = next((v['run'] for v in reversed(vs) if os.path.isdir(os.path.join(v['run'], 'sketches'))), vs[-1]['run'])

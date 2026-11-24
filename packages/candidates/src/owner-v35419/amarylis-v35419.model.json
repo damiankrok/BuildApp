@@ -1,0 +1,1785 @@
+{
+  "assemblies": [],
+  "balconies": [],
+  "building": {
+    "id": "building",
+    "name": "massing"
+  },
+  "chimneys": [],
+  "constraints": [],
+  "doors": [
+    {
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-front-6a9170-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "op-fix-front-6a9170",
+      "swing": "IN"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "kind": "PANEL"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-front-ca3fdf-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-gate",
+      "openAngle": 0,
+      "openingId": "op-fix-front-ca3fdf",
+      "swing": "IN",
+      "usage": "GARAGE"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "glazing": "FULL",
+            "hinge": "LEFT",
+            "kind": "LEAF"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-front-dacc2f-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-glass",
+      "openAngle": 0,
+      "openingId": "op-fix-front-dacc2f",
+      "swing": "IN"
+    }
+  ],
+  "evidenceSources": [
+    {
+      "id": "src-frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b",
+      "kind": "DRAWING",
+      "label": "frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b",
+      "note": "frame frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b"
+    },
+    {
+      "id": "src-frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f",
+      "kind": "DRAWING",
+      "label": "frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f",
+      "note": "frame frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f"
+    }
+  ],
+  "frame": {
+    "handedness": "LEFT_HANDED_AS_SPECIFIED",
+    "origin": "finished ground-floor level is y = 0; the front facade outer face is z = 0",
+    "viewerNote": "renderers working in a right-handed frame mirror z when building their scene",
+    "wallConvention": "a wall runs from start to end along its OUTER face at its base; its outward normal is up x u, so exterior rings are traversed counter-clockwise on a plan drawn with the front facade at the bottom and material lies to the left of the direction of travel",
+    "x": "right when looking at the front facade",
+    "y": "up (vertical)",
+    "z": "away from the front facade, into the building"
+  },
+  "id": "m-analysis-u3f4703808701",
+  "levels": [
+    {
+      "buildingId": "building",
+      "elevation": 0,
+      "height": 8.3742,
+      "id": "lvl-0",
+      "index": 0,
+      "name": "Massing"
+    }
+  ],
+  "linearSolids": [],
+  "materials": [
+    {
+      "color": "#6d6a66",
+      "id": "mat-chimney",
+      "name": "Chimney"
+    },
+    {
+      "color": "#55585c",
+      "id": "mat-gate",
+      "name": "Garage door"
+    },
+    {
+      "color": "#9fc3d8",
+      "id": "mat-glass",
+      "name": "Glazing",
+      "opacity": 0.35
+    },
+    {
+      "color": "#d9d5cc",
+      "id": "mat-partition",
+      "name": "Partition"
+    },
+    {
+      "color": "#3a3a3c",
+      "id": "mat-render-dark",
+      "name": "Dark render"
+    },
+    {
+      "color": "#5a5550",
+      "id": "mat-roof",
+      "name": "Roof covering (tone not read: miniature convention)"
+    },
+    {
+      "color": "#b07a4a",
+      "id": "mat-timber",
+      "name": "Timber (door leaf, cladding)"
+    },
+    {
+      "color": "#e8e4dc",
+      "id": "mat-wall",
+      "name": "Rendered wall (tone not read: miniature convention)"
+    }
+  ],
+  "meta": {
+    "createdWith": "buildapp",
+    "notes": []
+  },
+  "name": "Amarylis (analysis)",
+  "openings": [
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-H441-187",
+      "kind": "DOOR",
+      "offset": 0.138282,
+      "sill": 0,
+      "wallId": "iw-H441-263-b1",
+      "width": 1.074497
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-H571-810",
+      "kind": "DOOR",
+      "offset": 2.89523,
+      "sill": 0,
+      "wallId": "iw-H571-570",
+      "width": 1.159326
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-H652-463",
+      "kind": "DOOR",
+      "offset": 0.176726,
+      "sill": 0,
+      "wallId": "iw-H654-669-b1",
+      "width": 0.763458
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-H653-619",
+      "kind": "DOOR",
+      "offset": 0.19485,
+      "sill": 0,
+      "wallId": "iw-H654-669",
+      "width": 0.706906
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-H813-794",
+      "kind": "DOOR",
+      "offset": 0.629146,
+      "sill": 0,
+      "wallId": "iw-H816-739",
+      "width": 0.805872
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-V376-727",
+      "kind": "DOOR",
+      "offset": 0.325177,
+      "sill": 0,
+      "wallId": "iw-V376-794-b1",
+      "width": 0.947254
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-V631-275",
+      "kind": "DOOR",
+      "offset": 1.526917,
+      "sill": 0,
+      "wallId": "iw-V631-323",
+      "width": 0.67863
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-V903-672",
+      "kind": "DOOR",
+      "offset": 1.109842,
+      "sill": 0,
+      "wallId": "iw-V902-560-x",
+      "width": 0.74932
+    },
+    {
+      "height": 1.37928,
+      "id": "op-fix-front-2b4002",
+      "kind": "WINDOW",
+      "offset": 2.776252,
+      "sill": 4.13784,
+      "wallId": "ring-mass-main-w0",
+      "width": 0.9852
+    },
+    {
+      "height": 2.305368,
+      "id": "op-fix-front-6a9170",
+      "kind": "DOOR",
+      "offset": 2.677732,
+      "sill": 0.413784,
+      "wallId": "ring-mass-main-w0",
+      "width": 0.945792
+    },
+    {
+      "height": 1.9704,
+      "id": "op-fix-front-ca3fdf",
+      "kind": "DOOR",
+      "offset": 0.847232,
+      "sill": 0,
+      "wallId": "ring-mass-wing-1-w0",
+      "width": 2.75856
+    },
+    {
+      "height": 2.108328,
+      "id": "op-fix-front-dacc2f",
+      "kind": "DOOR",
+      "offset": 4.805764,
+      "sill": 3.389088,
+      "wallId": "ring-mass-main-w0",
+      "width": 0.926088
+    },
+    {
+      "height": 1.339872,
+      "id": "op-fix-front-f5002d",
+      "kind": "WINDOW",
+      "offset": 0.221256,
+      "sill": 1.359576,
+      "wallId": "ring-mass-wing-2-w0",
+      "width": 2.187144
+    }
+  ],
+  "platforms": [],
+  "railings": [],
+  "relationships": [],
+  "roofEdges": [],
+  "roofOpenings": [
+    {
+      "footprint": {
+        "maxX": 2.699408,
+        "maxZ": 2.362152,
+        "minX": 1.911248,
+        "minZ": 1.311744
+      },
+      "id": "rw-fix-front-be5273",
+      "kind": "ROOFLIGHT",
+      "roofId": "roof-mass-wing-1"
+    }
+  ],
+  "roofPlanes": [],
+  "rooflights": [
+    {
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "rw-fix-front-be5273-light",
+      "roofOpeningId": "rw-fix-front-be5273"
+    }
+  ],
+  "roofs": [
+    {
+      "eaveOffset": 6.35034,
+      "evidence": {
+        "interpretation": "ridge along Z (slopes seen on the sides along it, the gable end across it); pitch 33.9° from a 2.02 m rise over half of 6.02 m (the walls end at 6.05 m: the roof's underside there)",
+        "properties": {
+          "eaveOffset": "UNRESOLVED",
+          "pitchDeg": "UNRESOLVED"
+        },
+        "source": "frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f + frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f",
+          "src-frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b"
+        ],
+        "status": "UNRESOLVED"
+      },
+      "footprint": {
+        "maxX": 12.074,
+        "maxZ": 9.5856,
+        "minX": 6.0511,
+        "minZ": 0.4241
+      },
+      "id": "roof-mass-main",
+      "kind": "GABLE",
+      "levelId": "lvl-0",
+      "materialId": "mat-roof",
+      "overhang": 0,
+      "pitchDeg": 33.9,
+      "ridgeAxis": "Z",
+      "thickness": 0.25
+    },
+    {
+      "eaveOffset": 3.437122,
+      "evidence": {
+        "interpretation": "ridge along X (slopes seen on the sides along it, the gable end across it); pitch 42° from a 3.36 m rise over half of 7.46 m; no view shows the wall's corner under the roof: the page's 42° from the drawn ridge puts the wall's top at 3.10 m, the drawn walls end at 2.76 m behind the fascia (within what an overhang hides)",
+        "properties": {
+          "eaveOffset": "UNRESOLVED",
+          "pitchDeg": "UNRESOLVED"
+        },
+        "source": "frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f + frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f",
+          "src-frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b"
+        ],
+        "status": "UNRESOLVED"
+      },
+      "footprint": {
+        "maxX": 6.0511,
+        "maxZ": 7.8891,
+        "minX": 0,
+        "minZ": 0.4241
+      },
+      "id": "roof-mass-wing-1",
+      "kind": "GABLE",
+      "levelId": "lvl-0",
+      "materialId": "mat-roof",
+      "overhang": 0,
+      "pitchDeg": 42,
+      "ridgeAxis": "X",
+      "thickness": 0.25
+    },
+    {
+      "eaveOffset": 5.73387,
+      "evidence": {
+        "interpretation": "ridge along X (slopes seen on the sides along it, the gable end across it); pitch 25° from a 1.60 m rise over half of 6.84 m; no view shows the wall's corner under the roof and the page's 42° does not fit the drawn walls (it would put their top at 3.91 m, they are drawn to 5.46 m): the highest drawn wall top is taken, unconfirmed",
+        "properties": {
+          "eaveOffset": "UNRESOLVED",
+          "pitchDeg": "UNRESOLVED"
+        },
+        "source": "frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f + frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f",
+          "src-frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b"
+        ],
+        "status": "UNRESOLVED"
+      },
+      "footprint": {
+        "maxX": 15.665,
+        "maxZ": 7.267,
+        "minX": 12.074,
+        "minZ": 0.4241
+      },
+      "id": "roof-mass-wing-2",
+      "kind": "GABLE",
+      "levelId": "lvl-0",
+      "materialId": "mat-roof",
+      "overhang": 0,
+      "pitchDeg": 25,
+      "ridgeAxis": "X",
+      "thickness": 0.25
+    }
+  ],
+  "rooms": [],
+  "schema": "buildapp.canonical-building-model",
+  "schemaVersion": "1.9.0",
+  "slabs": [],
+  "stairs": [],
+  "stepRuns": [],
+  "surfaceRegions": [
+    {
+      "evidence": {
+        "interpretation": "a dark render outline from finish-41fec4 (MANUAL_DIAGNOSTIC): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-mass-main-w0",
+      "id": "appearance-front-ring-mass-main-w0-dark-render-0",
+      "materialId": "mat-render-dark",
+      "outline": [
+        {
+          "a": 3.6089,
+          "b": 2.77395
+        },
+        {
+          "a": 6.0229,
+          "b": 2.77395
+        },
+        {
+          "a": 6.0229,
+          "b": 0
+        },
+        {
+          "a": 3.5889,
+          "b": 0
+        },
+        {
+          "a": 3.5889,
+          "b": 2.75395
+        },
+        {
+          "a": 3.6089,
+          "b": 2.75395
+        }
+      ],
+      "rect": {
+        "a0": 3.5889,
+        "a1": 6.0229,
+        "b0": 0,
+        "b1": 2.77395
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a dark render outline from finish-41fec4 (MANUAL_DIAGNOSTIC): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-mass-wing-2-w0",
+      "id": "appearance-front-ring-mass-wing-2-w0-dark-render-0",
+      "materialId": "mat-render-dark",
+      "outline": [
+        {
+          "a": 0.006,
+          "b": 2.77395
+        },
+        {
+          "a": 2.606,
+          "b": 2.77395
+        },
+        {
+          "a": 2.606,
+          "b": 2.75395
+        },
+        {
+          "a": 2.626,
+          "b": 2.75395
+        },
+        {
+          "a": 2.626,
+          "b": 0
+        },
+        {
+          "a": 0,
+          "b": 0
+        },
+        {
+          "a": 0,
+          "b": 2.75395
+        },
+        {
+          "a": 0.006,
+          "b": 2.75395
+        }
+      ],
+      "rect": {
+        "a0": 0,
+        "a1": 2.626,
+        "b0": 0,
+        "b1": 2.77395
+      }
+    }
+  ],
+  "terraces": [],
+  "units": {
+    "angle": "deg",
+    "length": "m"
+  },
+  "wallJunctions": [
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w3"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w0"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f (MAIN, GARAGE), at the analyzer's own scale: 1.413812 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 1 registered elevation(s) give eaves (the walls' corner tops) 6.05 m and top 8.37 m — the gable-end view(s) (FRONT) show the wall corner under the roof: 6.05 m is taken (one view draws that line)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f + frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f",
+          "src-frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j0",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w0"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w1"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f (MAIN, GARAGE), at the analyzer's own scale: 1.413812 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 1 registered elevation(s) give eaves (the walls' corner tops) 6.05 m and top 8.37 m — the gable-end view(s) (FRONT) show the wall corner under the roof: 6.05 m is taken (one view draws that line)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f + frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f",
+          "src-frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j1",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w1"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w2"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f (MAIN, GARAGE), at the analyzer's own scale: 1.413812 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 1 registered elevation(s) give eaves (the walls' corner tops) 6.05 m and top 8.37 m — the gable-end view(s) (FRONT) show the wall corner under the roof: 6.05 m is taken (one view draws that line)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f + frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f",
+          "src-frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j2",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w2",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w2"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w3"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f (MAIN, GARAGE), at the analyzer's own scale: 1.413812 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 1 registered elevation(s) give eaves (the walls' corner tops) 6.05 m and top 8.37 m — the gable-end view(s) (FRONT) show the wall corner under the roof: 6.05 m is taken (one view draws that line)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f + frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f",
+          "src-frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j3",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w2",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-wing-1-w3"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-wing-1-w0"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f (MAIN, GARAGE), at the analyzer's own scale: 1.413812 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 1 registered elevation(s) give eaves 2.76 m and top 6.80 m (one view: the vertical scale is the horizontal one, unconfirmed)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f + frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f",
+          "src-frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-wing-1-j0",
+      "kind": "CORNER",
+      "owner": "ring-mass-wing-1-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-wing-1-w0"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-wing-1-w1"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f (MAIN, GARAGE), at the analyzer's own scale: 1.413812 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 1 registered elevation(s) give eaves 2.76 m and top 6.80 m (one view: the vertical scale is the horizontal one, unconfirmed)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f + frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f",
+          "src-frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-wing-1-j1",
+      "kind": "CORNER",
+      "owner": "ring-mass-wing-1-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-wing-1-w1"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-wing-1-w2"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f (MAIN, GARAGE), at the analyzer's own scale: 1.413812 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 1 registered elevation(s) give eaves 2.76 m and top 6.80 m (one view: the vertical scale is the horizontal one, unconfirmed)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f + frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f",
+          "src-frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-wing-1-j2",
+      "kind": "CORNER",
+      "owner": "ring-mass-wing-1-w2",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-wing-1-w2"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-wing-1-w3"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f (MAIN, GARAGE), at the analyzer's own scale: 1.413812 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 1 registered elevation(s) give eaves 2.76 m and top 6.80 m (one view: the vertical scale is the horizontal one, unconfirmed)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f + frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f",
+          "src-frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-wing-1-j3",
+      "kind": "CORNER",
+      "owner": "ring-mass-wing-1-w2",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-wing-2-w3"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-wing-2-w0"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f (MAIN, GARAGE), at the analyzer's own scale: 1.413812 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 1 registered elevation(s) give eaves (the walls' corner tops) 5.46 m and top 7.33 m (one view: the vertical scale is the horizontal one, unconfirmed)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f + frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f",
+          "src-frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-wing-2-j0",
+      "kind": "CORNER",
+      "owner": "ring-mass-wing-2-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-wing-2-w0"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-wing-2-w1"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f (MAIN, GARAGE), at the analyzer's own scale: 1.413812 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 1 registered elevation(s) give eaves (the walls' corner tops) 5.46 m and top 7.33 m (one view: the vertical scale is the horizontal one, unconfirmed)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f + frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f",
+          "src-frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-wing-2-j1",
+      "kind": "CORNER",
+      "owner": "ring-mass-wing-2-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-wing-2-w1"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-wing-2-w2"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f (MAIN, GARAGE), at the analyzer's own scale: 1.413812 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 1 registered elevation(s) give eaves (the walls' corner tops) 5.46 m and top 7.33 m (one view: the vertical scale is the horizontal one, unconfirmed)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f + frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f",
+          "src-frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-wing-2-j2",
+      "kind": "CORNER",
+      "owner": "ring-mass-wing-2-w2",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-wing-2-w2"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-wing-2-w3"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f (MAIN, GARAGE), at the analyzer's own scale: 1.413812 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 1 registered elevation(s) give eaves (the walls' corner tops) 5.46 m and top 7.33 m (one view: the vertical scale is the horizontal one, unconfirmed)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f + frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f",
+          "src-frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-wing-2-j3",
+      "kind": "CORNER",
+      "owner": "ring-mass-wing-2-w2",
+      "tolerance": 0.001
+    }
+  ],
+  "wallPanels": [],
+  "wallRings": [
+    {
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f (MAIN, GARAGE), at the analyzer's own scale: 1.413812 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 1 registered elevation(s) give eaves (the walls' corner tops) 6.05 m and top 8.37 m — the gable-end view(s) (FRONT) show the wall corner under the roof: 6.05 m is taken (one view draws that line)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f + frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f",
+          "src-frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main",
+      "junctionIds": [
+        "ring-mass-main-j0",
+        "ring-mass-main-j1",
+        "ring-mass-main-j2",
+        "ring-mass-main-j3"
+      ],
+      "levelId": "lvl-0",
+      "wallIds": [
+        "ring-mass-main-w0",
+        "ring-mass-main-w1",
+        "ring-mass-main-w2",
+        "ring-mass-main-w3"
+      ]
+    },
+    {
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f (MAIN, GARAGE), at the analyzer's own scale: 1.413812 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 1 registered elevation(s) give eaves 2.76 m and top 6.80 m (one view: the vertical scale is the horizontal one, unconfirmed)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f + frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f",
+          "src-frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-wing-1",
+      "junctionIds": [
+        "ring-mass-wing-1-j0",
+        "ring-mass-wing-1-j1",
+        "ring-mass-wing-1-j2",
+        "ring-mass-wing-1-j3"
+      ],
+      "levelId": "lvl-0",
+      "wallIds": [
+        "ring-mass-wing-1-w0",
+        "ring-mass-wing-1-w1",
+        "ring-mass-wing-1-w2",
+        "ring-mass-wing-1-w3"
+      ]
+    },
+    {
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f (MAIN, GARAGE), at the analyzer's own scale: 1.413812 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 1 registered elevation(s) give eaves (the walls' corner tops) 5.46 m and top 7.33 m (one view: the vertical scale is the horizontal one, unconfirmed)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f + frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f",
+          "src-frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-wing-2",
+      "junctionIds": [
+        "ring-mass-wing-2-j0",
+        "ring-mass-wing-2-j1",
+        "ring-mass-wing-2-j2",
+        "ring-mass-wing-2-j3"
+      ],
+      "levelId": "lvl-0",
+      "wallIds": [
+        "ring-mass-wing-2-w0",
+        "ring-mass-wing-2-w1",
+        "ring-mass-wing-2-w2",
+        "ring-mass-wing-2-w3"
+      ]
+    }
+  ],
+  "walls": [
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 3.067972,
+        "z": 6.736814
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-H441-263-b1",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 0.3,
+        "z": 6.736814
+      },
+      "thickness": 0.183796
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 11.774,
+        "z": 4.835237
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-H571-570",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 6.3511,
+        "z": 4.835237
+      },
+      "thickness": 0.311039
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 8.808049,
+        "z": 3.718325
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-H654-669",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 6.3511,
+        "z": 3.718325
+      },
+      "thickness": 0.212072
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 5.7511,
+        "z": 3.718325
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-H654-669-b1",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 4.163677,
+        "z": 3.718325
+      },
+      "thickness": 0.212072
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 8.398043,
+        "z": 2.438826
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-H741-597",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 6.3511,
+        "z": 2.438826
+      },
+      "thickness": 0.296901
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 10.744971,
+        "z": 1.350191
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-H816-739",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 8.390975,
+        "z": 1.350191
+      },
+      "thickness": 0.353453
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 3.15987,
+        "z": 2.86521
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-V376-794-b1",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 3.15987,
+        "z": 1.512779
+      },
+      "thickness": 0.098967
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 4.163677,
+        "z": 7.5891
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-V444-396-b1",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 4.163677,
+        "z": 3.930397
+      },
+      "thickness": 0.183796
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 6.779229,
+        "z": 9.2856
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-V631-323",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 6.779229,
+        "z": 6.970093
+      },
+      "thickness": 0.141381
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 8.390975,
+        "z": 1.350191
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-V744-810",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 8.390975,
+        "z": 0.7241
+      },
+      "thickness": 0.155519
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 10.695489,
+        "z": 1.350191
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-V902-560",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 10.695489,
+        "z": 0.7241
+      },
+      "thickness": 0.296901
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 10.695489,
+        "z": 4.835237
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-V902-560-x",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 10.695489,
+        "z": 1.703644
+      },
+      "thickness": 0.296901
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 12.074,
+        "z": 0.4241
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f (MAIN, GARAGE), at the analyzer's own scale: 1.413812 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 1 registered elevation(s) give eaves (the walls' corner tops) 6.05 m and top 8.37 m — the gable-end view(s) (FRONT) show the wall corner under the roof: 6.05 m is taken (one view draws that line)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f + frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f",
+          "src-frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 8.3742,
+      "id": "ring-mass-main-w0",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 6.0511,
+        "z": 0.4241
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-mass-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 12.074,
+        "z": 9.5856
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f (MAIN, GARAGE), at the analyzer's own scale: 1.413812 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 1 registered elevation(s) give eaves (the walls' corner tops) 6.05 m and top 8.37 m — the gable-end view(s) (FRONT) show the wall corner under the roof: 6.05 m is taken (one view draws that line)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f + frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f",
+          "src-frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 8.3742,
+      "id": "ring-mass-main-w1",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 12.074,
+        "z": 0.4241
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-mass-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 6.0511,
+        "z": 9.5856
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f (MAIN, GARAGE), at the analyzer's own scale: 1.413812 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 1 registered elevation(s) give eaves (the walls' corner tops) 6.05 m and top 8.37 m — the gable-end view(s) (FRONT) show the wall corner under the roof: 6.05 m is taken (one view draws that line)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f + frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f",
+          "src-frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 8.3742,
+      "id": "ring-mass-main-w2",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 12.074,
+        "z": 9.5856
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-mass-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 6.0511,
+        "z": 0.4241
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f (MAIN, GARAGE), at the analyzer's own scale: 1.413812 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 1 registered elevation(s) give eaves (the walls' corner tops) 6.05 m and top 8.37 m — the gable-end view(s) (FRONT) show the wall corner under the roof: 6.05 m is taken (one view draws that line)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f + frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f",
+          "src-frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 8.3742,
+      "id": "ring-mass-main-w3",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 6.0511,
+        "z": 9.5856
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-mass-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 6.0511,
+        "z": 0.4241
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f (MAIN, GARAGE), at the analyzer's own scale: 1.413812 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 1 registered elevation(s) give eaves 2.76 m and top 6.80 m (one view: the vertical scale is the horizontal one, unconfirmed)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f + frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f",
+          "src-frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 6.79788,
+      "id": "ring-mass-wing-1-w0",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 0,
+        "z": 0.4241
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-mass-wing-1"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 6.0511,
+        "z": 7.8891
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f (MAIN, GARAGE), at the analyzer's own scale: 1.413812 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 1 registered elevation(s) give eaves 2.76 m and top 6.80 m (one view: the vertical scale is the horizontal one, unconfirmed)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f + frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f",
+          "src-frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 6.79788,
+      "id": "ring-mass-wing-1-w1",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 6.0511,
+        "z": 0.4241
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-mass-wing-1"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0,
+        "z": 7.8891
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f (MAIN, GARAGE), at the analyzer's own scale: 1.413812 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 1 registered elevation(s) give eaves 2.76 m and top 6.80 m (one view: the vertical scale is the horizontal one, unconfirmed)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f + frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f",
+          "src-frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 6.79788,
+      "id": "ring-mass-wing-1-w2",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 6.0511,
+        "z": 7.8891
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-mass-wing-1"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0,
+        "z": 0.4241
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f (MAIN, GARAGE), at the analyzer's own scale: 1.413812 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 1 registered elevation(s) give eaves 2.76 m and top 6.80 m (one view: the vertical scale is the horizontal one, unconfirmed)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f + frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f",
+          "src-frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 6.79788,
+      "id": "ring-mass-wing-1-w3",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 0,
+        "z": 7.8891
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-mass-wing-1"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 15.665,
+        "z": 0.4241
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f (MAIN, GARAGE), at the analyzer's own scale: 1.413812 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 1 registered elevation(s) give eaves (the walls' corner tops) 5.46 m and top 7.33 m (one view: the vertical scale is the horizontal one, unconfirmed)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f + frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f",
+          "src-frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 7.329888,
+      "id": "ring-mass-wing-2-w0",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 12.074,
+        "z": 0.4241
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-mass-wing-2"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 15.665,
+        "z": 7.267
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f (MAIN, GARAGE), at the analyzer's own scale: 1.413812 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 1 registered elevation(s) give eaves (the walls' corner tops) 5.46 m and top 7.33 m (one view: the vertical scale is the horizontal one, unconfirmed)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f + frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f",
+          "src-frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 7.329888,
+      "id": "ring-mass-wing-2-w1",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 15.665,
+        "z": 0.4241
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-mass-wing-2"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 12.074,
+        "z": 7.267
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f (MAIN, GARAGE), at the analyzer's own scale: 1.413812 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 1 registered elevation(s) give eaves (the walls' corner tops) 5.46 m and top 7.33 m (one view: the vertical scale is the horizontal one, unconfirmed)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f + frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f",
+          "src-frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 7.329888,
+      "id": "ring-mass-wing-2-w2",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 15.665,
+        "z": 7.267
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-mass-wing-2"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 12.074,
+        "z": 0.4241
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f (MAIN, GARAGE), at the analyzer's own scale: 1.413812 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 1 registered elevation(s) give eaves (the walls' corner tops) 5.46 m and top 7.33 m (one view: the vertical scale is the horizontal one, unconfirmed)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f + frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-amarylis-c72d29e2c1-a4f82ceb1f",
+          "src-frame-asset-elewacja-frontowa-domu-amarylis-f623e0b119-ec4f06949b"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 7.329888,
+      "id": "ring-mass-wing-2-w3",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 12.074,
+        "z": 7.267
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-mass-wing-2"
+      }
+    }
+  ],
+  "windows": [
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-front-2b4002-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-front-2b4002"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-front-f5002d-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-front-f5002d"
+    }
+  ]
+}
