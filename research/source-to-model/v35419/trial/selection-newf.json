@@ -1,0 +1,123 @@
+{
+ "commit": "9ac25b629e8f370c95be50008408f0471be5c0f6",
+ "rule": "TRIAL_SELECTION.md",
+ "publishers": {
+  "studioatrium": {
+   "seed": "41bbdfe674c1db7ea1288fd029ba101141c954ee1113931c20351645d49c8a50",
+   "start": 62,
+   "poolSize": 106,
+   "opened": [
+    {
+     "url": "https://www.studioatrium.pl/projekty-domow/Ametyst-new,1761.html",
+     "opened": true,
+     "package": "studioatrium-ametyst-new.package.json",
+     "elevations": [
+      "SIDE_UNSPECIFIED",
+      "SIDE_UNSPECIFIED",
+      "FRONT",
+      "REAR",
+      "REAR"
+     ],
+     "plans": [
+      "GROUND"
+     ],
+     "sections": 0
+    }
+   ],
+   "chosen": "https://www.studioatrium.pl/projekty-domow/Ametyst-new,1761.html",
+   "accepted": [
+    "https://www.studioatrium.pl/projekty-domow/Ametyst-new,1761.html"
+   ]
+  },
+  "lipinscy": {
+   "seed": "14fba94701444fba2b5055d1615449f000310e4fdc127df47907426400a82172",
+   "start": 54,
+   "poolSize": 65,
+   "opened": [
+    {
+     "url": "https://lipinscy.pl/projekt/skagen",
+     "opened": true,
+     "package": "lipinscy-skagen.package.json",
+     "elevations": [
+      "SIDE_LEFT",
+      "SIDE_RIGHT",
+      "FRONT",
+      "REAR",
+      "SIDE_LEFT",
+      "REAR",
+      "FRONT",
+      "SIDE_RIGHT"
+     ],
+     "plans": [
+      "GROUND",
+      "UPPER",
+      "GROUND",
+      "GROUND",
+      "UPPER",
+      "UPPER"
+     ],
+     "sections": 3
+    }
+   ],
+   "chosen": "https://lipinscy.pl/projekt/skagen",
+   "accepted": [
+    "https://lipinscy.pl/projekt/skagen"
+   ]
+  },
+  "dobredomy": {
+   "seed": "13ecf03383550915eedd625da56123a46aad693334d599848c3a0429d33e3961",
+   "start": 37,
+   "poolSize": 77,
+   "opened": [
+    {
+     "url": "https://www.dobredomy.pl/projekt/fabia",
+     "opened": true,
+     "package": "dobredomy-fabia.package.json",
+     "elevations": [
+      "SIDE_UNSPECIFIED",
+      "SIDE_UNSPECIFIED",
+      "FRONT",
+      "REAR"
+     ],
+     "plans": [
+      "GROUND"
+     ],
+     "sections": 1
+    }
+   ],
+   "chosen": "https://www.dobredomy.pl/projekt/fabia",
+   "accepted": [
+    "https://www.dobredomy.pl/projekt/fabia"
+   ]
+  },
+  "archon": {
+   "seed": "db528ff50cfde4428d6c988004cf99e493727f350be56b63d666580fba2fbc51",
+   "start": 193,
+   "poolSize": 356,
+   "opened": [
+    {
+     "url": "https://www.archon.pl/projekty-domow/projekt-dom-pod-pomarancza-2-m91824fd4a5412",
+     "opened": true,
+     "package": "archon-projekt-dom-pod-pomarancza.package.json",
+     "elevations": [
+      "SIDE_UNSPECIFIED",
+      "SIDE_UNSPECIFIED",
+      "FRONT",
+      "REAR"
+     ],
+     "plans": [
+      "GROUND",
+      "GROUND",
+      "GROUND",
+      "GROUND"
+     ],
+     "sections": 1
+    }
+   ],
+   "chosen": "https://www.archon.pl/projekty-domow/projekt-dom-pod-pomarancza-2-m91824fd4a5412",
+   "accepted": [
+    "https://www.archon.pl/projekty-domow/projekt-dom-pod-pomarancza-2-m91824fd4a5412"
+   ]
+  }
+ }
+}

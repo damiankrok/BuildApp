@@ -112,3 +112,17 @@ drukowany a obrys z pominiętymi małymi uskokami). Poprawa na NEW-E po R2 jest 
   wynik jest słaby, jest raportowany jako słaby, a poprawki należą do następnego etapu.
 - Miara ta sama (§3): cały wynik = zewnętrze użyteczne ORAZ wnętrze zgodne z rzutem. Próba ma najwyżej 4 domy, więc
   wynik jest liczbą domów, nie odsetkiem; cel z §4 (≥ +2 całe wyniki, bez pogorszeń) stosuje się do niej bez zmian.
+
+### 8.1 Losowanie NEW-F i zamrożenie 2 (zapisane przed pierwszym biegiem NEW-F, 2026-11-24)
+
+- **NEW-F** (`trial/selection-newf.json`; w każdej puli przyjęty został pierwszy otwarty kandydat): Studio Atrium →
+  **Ametyst New**; Lipińscy → **Skagen**; Dobre Domy → **Fabia**; ARCHON → **Dom pod pomarańczą 2**. Cztery domy.
+- **Regresja DEV + NEW-D na `af7db0e`** (powtórka nagrań, 0 USD, `dev/a7` wobec biegu końcowego zamrożenia 1 `dev/a6`):
+  9 z 13 modeli bez zmiany liczby ścian, otworów i dachów; Aletta New +3 otwory (okna szczytów przycięte do okapu),
+  Novara +1; Alberto, Sakura i G6 po −1 otworze, każdy z nich to otwór z przerwy rzutu (`op-plan-…`), którego odczyt
+  w tej powtórce nie był odtwarzany (bieg `a6` czytał go na żywo) — nie zmiana kodu; Willa Eliza: inny podział bryły
+  (3 korpusy zamiast 2), w obu wariantach nadal niezgodna ze źródłem. Pogorszenia wynikającego z kodu nie znalazłem.
+- **Zamrożenie 2 = `af7db0e`** (kod analizy; późniejsze commity do końca etapu zmieniają tylko dokumenty i narzędzia
+  dostawy — gdyby było inaczej, ten zapis by o tym mówił).
+- Kolejność: baseline (`9ac25b6`) i zamrożenie 2 uruchamiane równolegle, każdy raz; potem eksport źródeł,
+  `references/NEW-F.md` z samych rysunków wydawcy, dopiero wtedy otwarcie modeli.
