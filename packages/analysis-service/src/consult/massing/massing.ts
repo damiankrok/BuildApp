@@ -24,8 +24,9 @@ import type { CanonicalBuildingModel, Wall } from '@buildapp/model'
 import type { BindView, Projection, Side } from '../correct/execute.js'
 import type { Poly } from '../correct/source-gate.js'
 
-export const MASSING_VERSION = '1.8.0' as const
+export const MASSING_VERSION = '1.9.0' as const
 
+import type { BuildStructure, StructureSide } from '../structure.js'
 export type Rect = { minX: number; maxX: number; minZ: number; maxZ: number }
 export type Fidelity = 'SOURCE_EXACT' | 'SOURCE_DERIVED' | 'SOURCE_TRACED' | 'DISPLAY_ASSUMPTION' | 'TRACE_UNCERTAIN'
 export type Prov = { fidelity: Fidelity; source: string; why: string }
@@ -553,7 +554,126 @@ export function wingsOf(outline: ReadonlyArray<{ x: number; z: number }>, minAre
   return { rects, coveredM2: r6(rects.reduce((t, q) => t + area(q), 0)), outlineM2: r6(outlineM2) }
 }
 
-export type MassingInput = { outline: OutlineObservation; silhouettes: readonly SilhouetteObservation[]; wallThicknessM?: { value: number; prov: Prov }; /** the roof pitch the page publishes (degrees): used only where no view shows the wall's corner under the roof, and only when the drawn walls allow it */ publishedPitchDeg?: number; /** massing 1.7.0: the partitions the plan draws inside the outline, in the outline's own frame (metres): where two bodies in line meet */ planWalls?: ReadonlyArray<{ a: { x: number; z: number }; b: { x: number; z: number } }> }
+export type MassingInput = { outline: OutlineObservation; silhouettes: readonly SilhouetteObservation[]; /** massing 1.9.0: the agreed structure (structure.ts) — the parts that are bodies of their own, the roof's kind and ridge, the storeys under the eaves */ structure?: BuildStructure; wallThicknessM?: { value: number; prov: Prov }; /** the roof pitch the page publishes (degrees): used only where no view shows the wall's corner under the roof, and only when the drawn walls allow it */ publishedPitchDeg?: number; /** massing 1.7.0: the partitions the plan draws inside the outline, in the outline's own frame (metres): where two bodies in line meet */ planWalls?: ReadonlyArray<{ a: { x: number; z: number }; b: { x: number; z: number } }> }
+
+/**
+ * massing 1.9.0: the rectangle that steps out of an orthogonal outline on one side — the outline's longest edge on that
+ * side's extreme line, back to the nearer of the two corners its neighbours run in to — and the outline without it. Not a
+ * wing when the edge is (nearly) the whole of that side (nothing steps out: two bodies in line are told apart by the
+ * elevations) or the step is narrower than a body.
+ */
+export function wingOnSide(outline: ReadonlyArray<{ x: number; z: number }>, side: StructureSide, minM: number = MASSING_TOLERANCES.minBodyM): { rect: Rect; rest: Array<{ x: number; z: number }> } | undefined {
+  const n = outline.length
+  if (n < 6) return undefined
+  const bb = rectOfOutline(outline)
+  const ax: 'x' | 'z' = side === 'LEFT' || side === 'RIGHT' ? 'x' : 'z'
+  const ot: 'x' | 'z' = ax === 'x' ? 'z' : 'x'
+  const ext = side === 'LEFT' ? bb.minX : side === 'RIGHT' ? bb.maxX : side === 'FRONT' ? bb.minZ : bb.maxZ
+  const inward = side === 'RIGHT' || side === 'REAR' ? -1 : 1
+  let at = -1
+  let len = 0
+  for (let i = 0; i < n; i += 1) {
+    const [a, b] = [outline[i], outline[(i + 1) % n]]
+    if (Math.abs(a[ax] - ext) < 1e-6 && Math.abs(b[ax] - ext) < 1e-6 && Math.abs(a[ot] - b[ot]) > len) { at = i; len = Math.abs(a[ot] - b[ot]) }
+  }
+  if (at < 0) return undefined
+  const [p, a, b, q] = [outline[(at - 1 + n) % n], outline[at], outline[(at + 1) % n], outline[(at + 2) % n]]
+  if (Math.abs(p[ot] - a[ot]) > 1e-6 || Math.abs(q[ot] - b[ot]) > 1e-6) return undefined
+  const depth = Math.min(Math.abs(p[ax] - ext), Math.abs(q[ax] - ext))
+  const whole = ax === 'x' ? bb.maxZ - bb.minZ : bb.maxX - bb.minX
+  if (depth < minM || len < minM || len > whole - 0.5) return undefined
+  const inner = ext + inward * depth
+  const [lo, hi] = [Math.min(a[ot], b[ot]), Math.max(a[ot], b[ot])]
+  const rect: Rect = ax === 'x' ? { minX: Math.min(ext, inner), maxX: Math.max(ext, inner), minZ: lo, maxZ: hi } : { minX: lo, maxX: hi, minZ: Math.min(ext, inner), maxZ: Math.max(ext, inner) }
+  const moved = outline.map((v, i) => (i === at || i === (at + 1) % n ? { ...v, [ax]: inner } : { ...v }))
+  // drop repeated corners and corners on a straight run
+  let rest = moved.filter((v, i) => { const u = moved[(i - 1 + moved.length) % moved.length]; return Math.abs(u.x - v.x) > 1e-6 || Math.abs(u.z - v.z) > 1e-6 })
+  for (let changed = true; changed && rest.length > 4; ) {
+    changed = false
+    for (let i = 0; i < rest.length; i += 1) {
+      const [u, v, t] = [rest[(i - 1 + rest.length) % rest.length], rest[i], rest[(i + 1) % rest.length]]
+      if ((Math.abs(u.x - v.x) < 1e-6 && Math.abs(v.x - t.x) < 1e-6) || (Math.abs(u.z - v.z) < 1e-6 && Math.abs(v.z - t.z) < 1e-6)) { rest = rest.filter((_, k) => k !== i); changed = true; break }
+    }
+  }
+  if (rest.length < 4) return undefined
+  return { rect, rest }
+}
+
+/** Two full storeys of walls end no lower than this above the floor; one storey's no higher (the miniature's bounds of a storey, metres). */
+export const STOREY_WALLS = { twoMinM: 4.4, oneMaxM: 4.6, oneMinM: 2.0 } as const
+
+/**
+ * massing 1.9.0: a body's roof as the silhouettes solved it, corrected by the agreed structure — each change named:
+ *  - the KIND: a hip the silhouettes read as a gable (a hip seen from its short side IS a triangle) is built as a hip
+ *    with one pitch all round (its ridge along the longer side; DISPLAY_ASSUMPTION: the hip run is half the span);
+ *    a gable they read as a hip is built as a gable;
+ *  - the RIDGE's direction of a gable, the heights kept (the pitch follows the new span);
+ *  - the STOREYS: walls that end below two storeys under a roof reported over two full storeys (the silhouettes took a
+ *    band, a canopy or a lower part's roof for the eaves) are raised to where the agreed pitch from the drawn ridge puts
+ *    them, else to the eaves the read states as printed or derived; the same, downwards, for one storey.
+ * A flat reading is left alone (no height to build a pitched roof from), and so is a pitched one the structure calls flat.
+ */
+export function roofByStructure(roof: RoofSpec, want: { kind?: 'GABLE' | 'HIP' | 'FLAT'; axis?: 'X' | 'Z'; full?: 1 | 2; pitchDeg?: number; eavesM?: { m: number; status: string } }, rect: Rect): { roof: RoofSpec; notes: string[] } {
+  const notes: string[] = []
+  if (want.kind === 'FLAT') return { roof, notes }
+  const t = MINIATURE_CONVENTIONS.roofThicknessM
+  const [dx, dz] = [rect.maxX - rect.minX, rect.maxZ - rect.minZ]
+  if (roof.kind === 'FLAT' || roof.ridgeM === undefined) {
+    // the silhouettes found nothing rising above the walls (a gable wall sketched as a wall up to the ridge and no roof
+    // surface told apart), the agreed structure reports a pitched roof: the drawn top is its ridge, and the walls end
+    // where the agreed pitch from that ridge puts them — else where the read states the eaves as printed or derived
+    if (roof.kind !== 'FLAT' || (want.kind !== 'GABLE' && want.kind !== 'HIP')) return { roof, notes }
+    const axis0: 'X' | 'Z' = want.kind === 'HIP' ? (dx >= dz ? 'X' : 'Z') : want.axis ?? (dx >= dz ? 'X' : 'Z')
+    const span0 = axis0 === 'X' ? dz : dx
+    const ridge0 = roof.eavesM
+    const top0 = (e: number): number => e - t / Math.cos(Math.atan2(Math.max(0.01, ridge0 - e), span0 / 2))
+    const fits0 = (e: number): boolean => ridge0 - e >= MASSING_TOLERANCES.flatRiseM && top0(e) >= STOREY_WALLS.oneMinM && (want.full === 2 ? top0(e) >= STOREY_WALLS.twoMinM : want.full === 1 ? top0(e) <= STOREY_WALLS.oneMaxM : true)
+    const byPitch0 = want.pitchDeg !== undefined ? ridge0 - (span0 / 2) * Math.tan((want.pitchDeg * Math.PI) / 180) : undefined
+    const stated0 = want.eavesM && want.eavesM.status !== 'ESTIMATED' && want.eavesM.status !== 'UNKNOWN' ? want.eavesM.m + t : undefined
+    const e0 = byPitch0 !== undefined && fits0(byPitch0) ? byPitch0 : stated0 !== undefined && fits0(stated0) ? stated0 : undefined
+    if (e0 === undefined) return { roof, notes }
+    notes.push(`the silhouettes read nothing rising above the walls (drawn to ${ridge0.toFixed(2)} m); the structure reports a ${want.kind.toLowerCase()}: that top is its ridge and the walls end at ${top0(e0).toFixed(2)} m (${e0 === byPitch0 ? `the agreed ${want.pitchDeg}° down from it` : `the eaves the read states as ${want.eavesM?.status}`})`)
+    const pitch0 = Math.round(((Math.atan2(ridge0 - e0, span0 / 2) * 180) / Math.PI) * 10) / 10
+    if (want.kind === 'HIP') { notes.push(`a hip with one pitch all round — the ridge ends half the span (${(span0 / 2).toFixed(2)} m) in from the end walls: DISPLAY_ASSUMPTION`); return { roof: { kind: 'HIP', ridgeAxis: axis0, pitchDeg: pitch0, eavesM: r6(e0), ridgeM: r6(ridge0), hipRunM: r6(Math.min(span0 / 2, (axis0 === 'X' ? dx : dz) / 2)) }, notes } }
+    return { roof: { kind: 'GABLE', ridgeAxis: axis0, pitchDeg: pitch0, eavesM: r6(e0), ridgeM: r6(ridge0) }, notes }
+  }
+  const kind = want.kind ?? roof.kind
+  let axis: 'X' | 'Z' = roof.ridgeAxis ?? 'X'
+  if (kind === 'HIP') {
+    const longer: 'X' | 'Z' = dx >= dz ? 'X' : 'Z'
+    if (roof.kind !== 'HIP' && axis !== longer) { notes.push(`a hip's ridge runs along the longer side (${longer}), not ${axis}`); axis = longer }
+  } else if (want.axis && want.axis !== axis) { notes.push(`the ridge runs along ${want.axis} (the silhouettes gave ${axis})`); axis = want.axis }
+  const span = axis === 'X' ? dz : dx
+  const length = axis === 'X' ? dx : dz
+  const ridge = roof.ridgeM
+  let eaves = roof.eavesM
+  const pitchOf = (e: number): number => Math.atan2(Math.max(0.01, ridge - e), span / 2)
+  const wallTop = (e: number): number => e - t / Math.cos(pitchOf(e))
+  if (want.full !== undefined) {
+    const low = want.full === 2 && wallTop(eaves) < STOREY_WALLS.twoMinM
+    const high = want.full === 1 && wallTop(eaves) > STOREY_WALLS.oneMaxM
+    if (low || high) {
+      const fits = (e: number): boolean => ridge - e >= MASSING_TOLERANCES.flatRiseM && (want.full === 2 ? wallTop(e) >= STOREY_WALLS.twoMinM : wallTop(e) <= STOREY_WALLS.oneMaxM && wallTop(e) >= STOREY_WALLS.oneMinM)
+      const byPitch = want.pitchDeg !== undefined ? ridge - (span / 2) * Math.tan((want.pitchDeg * Math.PI) / 180) : undefined
+      const stated = want.eavesM && want.eavesM.status !== 'ESTIMATED' && want.eavesM.status !== 'UNKNOWN' ? want.eavesM.m : undefined
+      let byStated: number | undefined
+      if (stated !== undefined) { let e = stated; for (let k = 0; k < 6; k += 1) e = stated + t / Math.cos(pitchOf(e)); byStated = e }
+      const was = wallTop(eaves)
+      if (byPitch !== undefined && fits(byPitch)) { eaves = byPitch; notes.push(`${want.full === 2 ? 'two full storeys' : 'one storey'} under the eaves: the walls end at ${wallTop(eaves).toFixed(2)} m (the agreed ${want.pitchDeg}° down from the drawn ridge at ${ridge.toFixed(2)} m), not at ${was.toFixed(2)} m`) }
+      else if (byStated !== undefined && fits(byStated)) { eaves = byStated; notes.push(`${want.full === 2 ? 'two full storeys' : 'one storey'} under the eaves: the walls end at ${wallTop(eaves).toFixed(2)} m (the eaves the read states as ${want.eavesM?.status}), not at ${was.toFixed(2)} m`) }
+    }
+  }
+  const pitchDeg = Math.round(((pitchOf(eaves) * 180) / Math.PI) * 10) / 10
+  if (kind === 'HIP') {
+    if (roof.kind === 'HIP' && notes.length === 0) return { roof, notes }
+    if (roof.kind !== 'HIP') notes.push(`a hip (no gable wall), built with one pitch all round — the ridge ends half the span (${(span / 2).toFixed(2)} m) in from the end walls: DISPLAY_ASSUMPTION`)
+    const run = roof.kind === 'HIP' && roof.hipRunM !== undefined && roof.ridgeAxis === axis ? roof.hipRunM : span / 2
+    return { roof: { kind: 'HIP', ridgeAxis: axis, pitchDeg, eavesM: r6(eaves), ridgeM: r6(ridge), hipRunM: r6(Math.min(run, length / 2)) }, notes }
+  }
+  if (roof.kind === 'HIP') notes.push('a gable (the read reports gable walls), not a hip')
+  if (notes.length === 0) return { roof, notes }
+  return { roof: { kind: 'GABLE', ridgeAxis: axis, pitchDeg, eavesM: r6(eaves), ridgeM: r6(ridge) }, notes }
+}
 
 /** 3. The mass the observations support, or exactly what they lack. */
 export function solveMassing(input: MassingInput): MassingHypothesis {
@@ -573,10 +693,23 @@ export function solveMassing(input: MassingInput): MassingHypothesis {
     base.views_used.push({ side: s.side, frameId: s.frameId, used: true, why: reg.why })
   }
   if (byView.size === 0) return { ...base, status: 'INSUFFICIENT', bodies: [], views, missing: [{ anchor: 'ELEVATION_SILHOUETTE', why: 'no elevation could be registered by the plan: no height and no roof form can be read' }], why: 'the outline alone gives a footprint, not a mass' }
-  let split = rectanglesOf(input.outline.outline)
+  // massing 1.9.0: a part the agreed structure names as a volume of its own (a garage, a wing) on one side of the house,
+  // where the outline steps out on that side, is a body — before any small-step convention can close its two steps (a
+  // 3.6 m garage against a 10 m house is two steps of 4 % each: taken out as "small", the house and its garage became
+  // one body under one roof). What is left of the outline is read as before.
+  let src: ReadonlyArray<{ x: number; z: number }> = input.outline.outline
+  const wingBodies: Array<{ rect: Rect; part: BuildStructure['parts'][number] }> = []
+  for (const part of input.structure?.parts ?? []) {
+    const wg = wingOnSide(src, part.where)
+    if (!wg) { base.alternatives.push(`STRUCTURE: the ${part.what.toLowerCase()} reported on the ${part.where.toLowerCase()} has no step of the outline on that side to stand on: not a body of its own here`); continue }
+    wingBodies.push({ rect: wg.rect, part })
+    src = wg.rest
+    base.alternatives.push(`STRUCTURE: the ${part.what.toLowerCase()} reported on the ${part.where.toLowerCase()} stands where the outline steps out on that side (${(wg.rect.maxX - wg.rect.minX).toFixed(2)} × ${(wg.rect.maxZ - wg.rect.minZ).toFixed(2)} m): a body of its own`)
+  }
+  let split = rectanglesOf(src)
   if (split.splits.length === 0) {
     // v3.54.18: small steps of the outline (a terrace notch, a bay) are taken out as a named miniature convention
-    const simple = simplifyOutline(input.outline.outline)
+    const simple = simplifyOutline(src)
     if (simple) {
       split = rectanglesOf(simple.outline)
       if (split.splits.length > 0) base.alternatives.push(`MINIATURE_CONVENTION: the outline's ${simple.steps.length} small step(s) (${simple.changedM2.toFixed(1)} m², ${(simple.share * 100).toFixed(1)} % of its bounding rectangle) are not modelled — the body is ${split.why}; the drawn outline is kept in the observation`)
@@ -585,7 +718,7 @@ export function solveMassing(input: MassingInput): MassingHypothesis {
   if (split.splits.length === 0) {
     // massing 1.8.0: the outline with every small step taken out, as an exact partition into bodies — each a rectangle
     // of a body's size, nothing of the outline left over
-    const part = simplifyOutline(input.outline.outline, true)
+    const part = simplifyOutline(src, true)
     const total0 = area(bb)
     const aBody = (q: Rect): boolean => Math.min(q.maxX - q.minX, q.maxZ - q.minZ) >= MASSING_TOLERANCES.minBodyM && area(q) >= MASSING_TOLERANCES.minWingShare * total0
     const exact = part ? partitionOf(part.outline, WINGS.maxBodies, aBody) : undefined
@@ -598,7 +731,7 @@ export function solveMassing(input: MassingInput): MassingHypothesis {
   if (split.splits.length === 0) {
     // massing 1.6.0: an outline no small step reduces to a rectangle or an L is taken as its own bodies, largest first
     const total0 = area(bb)
-    const w = wingsOf(input.outline.outline, MASSING_TOLERANCES.minWingShare * total0, MASSING_TOLERANCES.minBodyM)
+    const w = wingsOf(src, MASSING_TOLERANCES.minWingShare * total0, MASSING_TOLERANCES.minBodyM)
     if (w && w.rects.length >= 1) {
       split = { splits: [w.rects], why: `an outline of ${input.outline.outline.length} corners as ${w.rects.length} bodies` }
       base.alternatives.push(`the outline (${input.outline.outline.length} corners, ${w.outlineM2.toFixed(1)} m²) is read as ${w.rects.length} bodies — the largest rectangle that fits inside it, then the largest in what is left (${w.rects.map((q) => `${(q.maxX - q.minX).toFixed(2)} × ${(q.maxZ - q.minZ).toFixed(2)} m`).join(', ')})${w.outlineM2 - w.coveredM2 > 0.5 ? `; MINIATURE_CONVENTION: ${(w.outlineM2 - w.coveredM2).toFixed(1)} m² of it (${(((w.outlineM2 - w.coveredM2) / w.outlineM2) * 100).toFixed(0)} %) lies in no body and is not modelled` : ''}`)
@@ -659,7 +792,7 @@ export function solveMassing(input: MassingInput): MassingHypothesis {
   // along the side (a gable seen from its end slopes through such a place and a hip end slopes down to it: neither
   // jumps). Both views must put the jump at the same place of the plan and the lower part on the same side of it.
   const builtOn = new Map<Rect, Rect>()
-  if (rects.length === 1) {
+  if (rects.length === 1 && wingBodies.length === 0) {
     const rect = rects[0]
     const jumpOn = (obs: SilhouetteObservation, view: BindView): { at: number; lowAbove: boolean; by: number } | undefined => {
       const e = extentOn(rect, obs.side)
@@ -704,6 +837,7 @@ export function solveMassing(input: MassingInput): MassingHypothesis {
     }
   }
   rects.sort((a, b) => area(b) - area(a))
+  rects = [...rects, ...wingBodies.map((q) => q.rect)]
   const bodies: BodySpec[] = []
   for (const [i, rect] of rects.entries()) {
     const id = i === 0 ? 'mass-main' : `mass-wing-${i}`
@@ -858,6 +992,18 @@ export function solveMassing(input: MassingInput): MassingHypothesis {
     }
     // a body read at the elevations' step and built on the plan's wall: its heights stand; a gable across the moved side
     // keeps its ridge height over the new span (the pitch follows)
+    if (input.structure) {
+      const st = input.structure
+      const wing = wingBodies.find((q) => q.rect === rect)?.part
+      const want = wing ? { ...(wing.roof ? { kind: wing.roof } : {}), ...(wing.ridge ? { axis: wing.ridge } : {}), full: wing.fullStoreys, ...(st.pitchDeg !== undefined ? { pitchDeg: st.pitchDeg } : {}) }
+        : { ...(st.mainRoof ? { kind: st.mainRoof } : {}), ...(i === 0 && st.mainRidge ? { axis: st.mainRidge } : {}), ...(st.fullStoreys ? { full: st.fullStoreys } : {}), ...(st.pitchDeg !== undefined ? { pitchDeg: st.pitchDeg } : {}), ...(i === 0 && st.eavesM ? { eavesM: st.eavesM } : {}) }
+      const applied = roofByStructure(roof, want, rect)
+      if (applied.notes.length > 0) {
+        roof = applied.roof
+        for (const n of applied.notes) base.alternatives.push(`STRUCTURE ${id}: ${n}`)
+        roofProv = { fidelity: 'TRACE_UNCERTAIN', source: `${roofProv.source} + STRUCTURE_READ`, why: `${roofProv.why}; the agreed structure: ${applied.notes.join('; ')}` }
+      }
+    }
     const onPlan = builtOn.get(rect)
     if (onPlan && roof.kind === 'GABLE' && roof.ridgeM !== undefined) {
       const spanNow = roof.ridgeAxis === 'X' ? onPlan.maxZ - onPlan.minZ : onPlan.maxX - onPlan.minX

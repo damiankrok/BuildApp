@@ -24,7 +24,7 @@ import { targetBodies } from '../correct/resolve.js'
 import { area, bodiesOf, bodyCommands, extentOn, outlineWithFront, pointWithFront, HIP_PLANE_SIDES, hipPlaneCommands, hipSpecFrom, hipWallTopM, MASSING_TOLERANCES, MAX_OVERHANG_M, MASSING_VERSION, massingCommands, MINIATURE_CONVENTIONS, profileOver, readableStretch, registerByPlan, solveMassing, wallCornerTopM } from './massing.js'
 import type { BodySpec, Fidelity, MassingHypothesis, ModelBody, OutlineObservation, Rect, RoofSpec, SilhouetteObservation } from './massing.js'
 
-export const MASSING_OPS_VERSION = '1.10.0' as const
+export const MASSING_OPS_VERSION = '1.11.0' as const
 /** v3.54.17 R2: the most overhang a drawn roof may have past its body on a side, and the steepest pitch the kernel builds. */
 export { MAX_OVERHANG_M }
 /** v3.54.18 (ops 1.6.0): an opening whose height the model ASSUMED comes down under a roof the source draws — to this far under the wall top, and only while at least this much of it is left (else the roof patch is refused, as before). */
@@ -665,7 +665,8 @@ export function bindBuildMassing(ctx: Ctx, p: CorrectionProposal): Bound | Refus
   // reading whose views agree on every body's heights is taken (ties stay as labelled); the other is kept named
   const pitchFact = ctx.facts?.roofPitchDeg !== undefined ? { publishedPitchDeg: ctx.facts.roofPitchDeg } : {}
   const agreeing = (x: MassingHypothesis): number => x.bodies.filter((b) => b.provenance.height?.fidelity === 'SOURCE_DERIVED').length
-  const wallsFact = obs.planWalls && obs.planWalls.length > 0 ? { planWalls: obs.planWalls } : {}
+  const structureFact = ctx.facts?.structure ? { structure: ctx.facts.structure } : {}
+  const wallsFact = { ...(obs.planWalls && obs.planWalls.length > 0 ? { planWalls: obs.planWalls } : {}), ...structureFact }
   const asLabelled = solveMassing({ outline: obs.outline, silhouettes: obs.silhouettes, ...pitchFact, ...wallsFact })
   // ops 1.7.0: the same quarter turn the orientation hypothesis takes (the plan's main entrance decides which), so the
   // views this body is built through carry the sides every later consumer reads them on
@@ -679,7 +680,7 @@ export function bindBuildMassing(ctx: Ctx, p: CorrectionProposal): Bound | Refus
   const ownFrame = !bodiesOf(m).some((b) => b.ringIds.length > 0)
   const quarter = planFront === 'LEFT' ? TURN_BACK : TURN
   const frame0 = obs.outline.outline
-  const turnedH = ownFrame ? solveMassing({ outline: { ...obs.outline, outline: outlineWithFront(obs.outline.outline, planFront) }, silhouettes: obs.silhouettes, ...pitchFact, ...(obs.planWalls && obs.planWalls.length > 0 ? { planWalls: obs.planWalls.map((w) => ({ a: pointWithFront(w.a, planFront, frame0), b: pointWithFront(w.b, planFront, frame0) })) } : {}) }) : solveMassing({ outline: obs.outline, silhouettes: obs.silhouettes.map((q) => ({ ...q, side: quarter[q.side] })), ...pitchFact, ...wallsFact })
+  const turnedH = ownFrame ? solveMassing({ outline: { ...obs.outline, outline: outlineWithFront(obs.outline.outline, planFront) }, silhouettes: obs.silhouettes, ...pitchFact, ...structureFact, ...(obs.planWalls && obs.planWalls.length > 0 ? { planWalls: obs.planWalls.map((w) => ({ a: pointWithFront(w.a, planFront, frame0), b: pointWithFront(w.b, planFront, frame0) })) } : {}) }) : solveMassing({ outline: obs.outline, silhouettes: obs.silhouettes.map((q) => ({ ...q, side: quarter[q.side] })), ...pitchFact, ...wallsFact })
   // ops 1.9.0: which reading the page's own building height fits. The two readings put the same drawn heights over
   // different widths, so their ridges differ by the outline's aspect; where the page states the building's height and
   // exactly one reading's top agrees with it, that reading is taken — a fact from outside the drawings decides before

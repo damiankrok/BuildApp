@@ -56,6 +56,9 @@ import { MASSING_VERSION, OUTLINE_SIMPLIFICATION, bodiesOf, pointWithFront, wall
 import { readSiteDimensions, SITE_DIMENSIONS_VERSION } from './site-dimensions.js'
 import { FACADE_METRIC_VERSION, readFacadeMetric } from './facade-metric.js'
 import { FORM_READ_VERSION, flatVolumesOf, formVerdict, readForm } from './form-read.js'
+import { STRUCTURE_VERSION, agreeStructure, buildStructureOf, wallToApex } from './structure.js'
+import type { AgreedStructure, BuildStructure, StructureSide } from './structure.js'
+import type { Raster } from '@buildapp/source-cv'
 import type { FormRead } from './form-read.js'
 import { outerFaceOutline, PLAN_SKELETON_VERSION, readPlanSkeleton } from './plan-skeleton.js'
 import type { PlanSkeleton } from './plan-skeleton.js'
@@ -157,7 +160,7 @@ export type SketchSummary = { reading: Omit<SketchReading, 'elevationSketches'>;
 /** v3.54.18: tolerances of the body arbitration, fixed before any result (a printed dimension, a published height). */
 /** v3.54.18 R2: which source pictures get a frame changed (a content-disputed orthographic elevation keeps its frame): part of the accepted-revision key. */
 export const SOURCE_FRAMES_RULE = 'frames2' as const
-export const BODY_ARBITRATION = { version: '1.3.0', dimAgreeM: 0.3, dimAgreeShare: 0.04, heightAgreeM: 0.6, heightAgreeShare: 0.1 } as const
+export const BODY_ARBITRATION = { version: '1.4.0', dimAgreeM: 0.3, dimAgreeShare: 0.04, heightAgreeM: 0.6, heightAgreeShare: 0.1 } as const
 export type BodyEvidence = { bodies: number; registrations: Array<{ frameId: string; side: string; ok: boolean; code: string; why?: string }>; printed: Array<{ literal: string; valueM: number; modelM: number; agrees: boolean; /** arbitration 1.3.0: the traced outline's own extent, where the dimension agrees with it and the body leaves out only the small steps the massing's convention names */ outlineM?: number }>; height?: { publishedM: number; modelRidgeM: number; agrees: boolean }; /** v3.54.19: what the typed form of the house (form-read) says of this body's roofs. */ form?: { verdict: 'CONTRADICTS' | 'AGREES' | 'SILENT'; flatVolumes: number; reportedFlatVolumes: number; reportedMainRoof: string; reportedVolumes: number }; contradictions: number; supports: number }
 export type BodyArbitration = { version: string; local: BodyEvidence; /** LOCAL's body was judged with this many roof corrections from the same elevations applied (on a copy). */ localAfterRoofCorrections?: number; alternative?: BodyEvidence; massing?: { decision: string; why: string; usd: number }; /** 1.2.0: elevations that register on neither body, set aside on both sides. */ setAside?: { frames: string[]; why: string }; decision: 'LOCAL_STANDS' | 'REPLACED_BY_SOURCE_BODY'; why: string }
 
@@ -678,7 +681,7 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
     const b = consultBinding({
       sourcePackageHash: local.pkg.contentHash,
       analyzer: `${ANALYSIS_SERVICE_VERSION}/${SOLVER_V2_VERSION}`,
-      consultant: [CONSULTANT_CONTRACT_VERSION, CONSULTANT_PROMPT_VERSION, METRIC_READ_PROMPT_VERSION, METRIC_VERIFY_PROMPT_VERSION, METRIC_RESOLVER_VERSION, ELEVATION_SKETCH_PROMPT_VERSION, `parser${ELEVATION_SKETCH_PARSER_VERSION}`, SKETCH_STEP_VERSION, CHOOSE_VERSION, ACCEPTED_CONSULT_VERSION, `registry${CORRECTION_REGISTRY_VERSION}`, `executor${CORRECTION_EXECUTOR_VERSION}`, `gate${SOURCE_GATE_VERSION}`, `sketchProposals${SKETCH_PROPOSALS_VERSION}`, `quality${QUALITY_VERSION}`, `massing${MASSING_OPS_VERSION}`, `massingBody${MASSING_VERSION}`, `bodyArbitration${BODY_ARBITRATION.version}`, SOURCE_FRAMES_RULE, `outline${PLAN_OUTLINE_VERSION}`, `planOpenings${PLAN_OPENINGS_VERSION}`, `skeleton${PLAN_SKELETON_VERSION}`, `interior${INTERIOR_OPS_VERSION}`, `site${SITE_DIMENSIONS_VERSION}`, `facadeMetric${FACADE_METRIC_VERSION}`, `form${FORM_READ_VERSION}`, `arbitration${BODY_ARBITRATION.version}`].join(','),
+      consultant: [CONSULTANT_CONTRACT_VERSION, CONSULTANT_PROMPT_VERSION, METRIC_READ_PROMPT_VERSION, METRIC_VERIFY_PROMPT_VERSION, METRIC_RESOLVER_VERSION, ELEVATION_SKETCH_PROMPT_VERSION, `parser${ELEVATION_SKETCH_PARSER_VERSION}`, SKETCH_STEP_VERSION, CHOOSE_VERSION, ACCEPTED_CONSULT_VERSION, `registry${CORRECTION_REGISTRY_VERSION}`, `executor${CORRECTION_EXECUTOR_VERSION}`, `gate${SOURCE_GATE_VERSION}`, `sketchProposals${SKETCH_PROPOSALS_VERSION}`, `quality${QUALITY_VERSION}`, `massing${MASSING_OPS_VERSION}`, `massingBody${MASSING_VERSION}`, `bodyArbitration${BODY_ARBITRATION.version}`, SOURCE_FRAMES_RULE, `outline${PLAN_OUTLINE_VERSION}`, `planOpenings${PLAN_OPENINGS_VERSION}`, `skeleton${PLAN_SKELETON_VERSION}`, `interior${INTERIOR_OPS_VERSION}`, `site${SITE_DIMENSIONS_VERSION}`, `facadeMetric${FACADE_METRIC_VERSION}`, `form${FORM_READ_VERSION}`, `structure${STRUCTURE_VERSION}`, `arbitration${BODY_ARBITRATION.version}`].join(','),
       models: { ROUNDS: wiring.model.model, ...(wiring.metricRead === 'ON' ? { METRIC: (wiring.metricModel ?? wiring.model).model } : {}), ...(wiring.sketches === 'ON' ? { SKETCH: (wiring.sketchModel ?? wiring.model).model } : {}) },
       settings: `strict=${wiring.model.strict === true || wiring.metricModel?.strict === true || wiring.sketchModel?.strict === true ? 'on' : 'off'};variant=${wiring.variant};metric=${wiring.metricRead ?? 'OFF'};sketches=${wiring.sketches ?? 'OFF'};rounds=${maxRounds};geometryRounds=${wiring.maxGeometryRounds ?? '-'};check=${wiring.check ?? 'ON'};sketchCorrections=${wiring.sketchCorrections ?? 'ON'}`,
     })
@@ -772,6 +775,51 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
    * registrations — one function for both uses: LOCAL built no model, or (v3.54.18) LOCAL built a body the sources
    * contradict. It builds and wraps the candidate; whether it stands is the caller's decision.
    */
+  // v3.54.20: the STRUCTURE read — asked once of all the sheets (the sketched elevations, the ground-floor plan, a
+  // section, the page's facts), agreed property by property with witnesses that are not this answer (structure.ts), and
+  // taken by the body builder, by the arbitration and by the assignment of unlabelled elevations. Not asked with fewer
+  // than two sketched elevations.
+  type StructureMemo = { read: FormRead; frames: string[]; agreed?: AgreedStructure; build?: BuildStructure }
+  let structureMemo: StructureMemo | undefined
+  const structureOf = async (A: { pkg0: SourcePackage; graph0: SourceObservationGraph; sketches: SketchReading['sketches']; planRaster?: Raster; planParts?: readonly string[] }): Promise<StructureMemo | undefined> => {
+    if (structureMemo) return structureMemo
+    const sketched = A.sketches.filter((x) => x.sketch)
+    if (sketched.length < 2) return undefined
+    const pictures: Array<{ caption: string; raster: Raster; frameId: string }> = []
+    for (const x of sketched) {
+      const r = await frameRaster(A.pkg0, A.graph0, x.frameId, options)
+      if (r?.raster) pictures.push({ caption: x.facade === 'SIDE_UNSPECIFIED' ? 'SIDE (which side is not captioned)' : x.facade, raster: r.raster, frameId: x.frameId })
+    }
+    if (pictures.length < 2) return undefined
+    const roleOf = (assetId: string): { document?: string; storey?: string } => ((A.pkg0.assets.find((q) => q.id === assetId) as { roles?: { document?: string; storey?: string } } | undefined)?.roles ?? {})
+    let section: Raster | undefined
+    for (const f of A.graph0.coordinateFrames) {
+      if (roleOf(f.assetId).document !== 'SECTION') continue
+      const r = await frameRaster(A.pkg0, A.graph0, f.id, options)
+      if (r?.raster && (!section || r.raster.width * r.raster.height > section.width * section.height)) section = r.raster
+    }
+    const planStoreys = [...new Set(A.pkg0.assets.map((q) => (q as { roles?: { document?: string; storey?: string } }).roles).filter((r) => r?.document === 'FLOOR_PLAN').map((r) => r?.storey ?? 'UNKNOWN'))]
+    const facts = [...A.pkg0.publishedFacts.filter((q) => typeof q.value === 'number' || typeof q.value === 'string').map((q) => `${q.key}: ${String(q.value)}${q.unit && q.unit !== 'none' ? ` ${q.unit}` : ''}`), `floor plans published for: ${planStoreys.join(', ') || 'none'}`]
+    stage('STRUCTURE_READ')
+    const read = await readForm({ model: wiring.outlineModel ?? wiring.metricModel ?? wiring.model, price: wiring.outlinePrice ?? wiring.metricPrice ?? wiring.price, ...(wiring.spend ? { spend: wiring.spend } : {}), ...(options.signal ? { signal: options.signal } : {}) }, pictures, { ...(A.planRaster ? { plan: A.planRaster } : {}), ...(section ? { section } : {}), facts })
+    usd += read.usd
+    const memo: StructureMemo = { read, frames: pictures.map((p) => p.frameId) }
+    if (read.form) {
+      const height = A.pkg0.publishedFacts.find((q) => q.key === 'building_height' && q.unit === 'm')?.value
+      const pitch = A.pkg0.publishedFacts.find((q) => q.key === 'roof_pitch' && q.unit === 'deg')?.value
+      const gableWalls = sketched.flatMap((x) => {
+        const sk = x.sketch as NonNullable<typeof x.sketch>
+        const up = wallToApex(sk.walls.map((q) => q.polygon as Array<[number, number]>), sk.roofs.map((q) => q.polygon as Array<[number, number]>), sk.groundRow)
+        const side = sideOfFacade(x.facade)
+        return up === undefined ? [] : [{ frameId: x.frameId, ...(side ? { side: side as StructureSide } : {}), wallToApex: up }]
+      })
+      memo.agreed = agreeStructure(read.form, { planStoreys, ...(typeof height === 'number' ? { buildingHeightM: height } : {}), ...(typeof pitch === 'number' ? { publishedPitchDeg: pitch } : {}), ...(A.planParts ? { planParts: A.planParts } : {}), gableWalls })
+      memo.build = buildStructureOf(memo.agreed)
+    }
+    record({ at: now().toISOString(), kind: 'STRUCTURE_READ', version: FORM_READ_VERSION, promptVersion: read.promptVersion, structureVersion: STRUCTURE_VERSION, sheets: { elevations: pictures.map((p, i) => ({ n: i + 1, frameId: p.frameId, caption: p.caption })), plan: !!A.planRaster, section: !!section, facts }, form: read.form ?? null, raw: read.form ? undefined : read.raw, refused: read.refused, agreed: memo.agreed ?? null, taken: memo.build ?? null, usd: read.usd, why: 'the sheets are asked, as a whole, what volumes, storeys and roofs the house has; each property is held against witnesses that are not this answer, and only what is not disputed is taken' })
+    structureMemo = memo
+    return memo
+  }
   const buildMassing = async (A: { pkg0: SourcePackage; graph0: SourceObservationGraph; sketches: SketchReading['sketches']; planFrame?: string; cmPerPx?: number; strong: boolean; diag: Record<string, unknown>; localFailure?: { code?: string; reasonCode?: string | null }; why: string }): Promise<{ delivery: MassingDelivery; built?: Local }> => {
     const { pkg0, graph0, planFrame, diag } = A
     let { cmPerPx, strong } = A
@@ -904,7 +952,8 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
           const heightFact = pkg0.publishedFacts.find((x) => x.key === 'building_height' && x.unit === 'm')?.value
           const pitchFact = pkg0.publishedFacts.find((x) => x.key === 'roof_pitch' && x.unit === 'deg')?.value
           const empty = createEmptyModel(`massing-${f.variantByteHash.slice(0, 12)}`, (asset?.caption ?? 'house').slice(0, 60))
-          const out = executeCorrections({ model: empty, views: [], pictures, proposals: [{ proposalId: `massing-${f.variantByteHash.slice(0, 12)}`, baseRevision: modelRevision(empty), operation: 'BUILD_MASSING', targetId: 'WHOLE', origin: 'SKETCH', uncertainty: 'MEDIUM', justification: A.why }], massing: { outline: plan.observation, silhouettes, ...(plan.entrance?.side ? { entranceSide: plan.entrance.side } : {}), ...(planWalls.length > 0 ? { planWalls } : {}) }, facts: { ...(typeof pitchFact === 'number' ? { roofPitchDeg: pitchFact } : {}), ...(typeof heightFact === 'number' ? { buildingHeightM: heightFact } : {}) } })
+          const structure = await structureOf({ pkg0, graph0, sketches: A.sketches, planRaster: fr.raster, ...(plan.parts ? { planParts: plan.parts } : {}) })
+          const out = executeCorrections({ model: empty, views: [], pictures, proposals: [{ proposalId: `massing-${f.variantByteHash.slice(0, 12)}`, baseRevision: modelRevision(empty), operation: 'BUILD_MASSING', targetId: 'WHOLE', origin: 'SKETCH', uncertainty: 'MEDIUM', justification: A.why }], massing: { outline: plan.observation, silhouettes, ...(plan.entrance?.side ? { entranceSide: plan.entrance.side } : {}), ...(planWalls.length > 0 ? { planWalls } : {}) }, facts: { ...(typeof pitchFact === 'number' ? { roofPitchDeg: pitchFact } : {}), ...(typeof heightFact === 'number' ? { buildingHeightM: heightFact } : {}), ...(structure?.build ? { structure: structure.build } : {}) } })
           delivery.records = out.records
           delivery.transactions = out.transactions
           const rec0 = out.records[0]
@@ -1448,20 +1497,25 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
     // overall dimensions agree with such a body just as well). One request, all captioned elevations; no dimension taken.
     const roofsOf = (model: CanonicalBuildingModel): { flatVolumes: number; pitchedKinds: string[] } => ({ flatVolumes: model.roofs.filter((r) => r.kind === 'FLAT').length, pitchedKinds: [...model.roofs.filter((r) => r.kind !== 'FLAT').map((r) => r.kind as string), ...(model.roofPlanes.length > 0 ? ['HIP'] : [])] })
     const localRoofs = roofsOf(tried && roofFixed > 0 ? tried.model : mL0)
+    // v3.54.20: the structure read is asked of every house with two sketched elevations — not only where LOCAL carries
+    // flat boxes beside a pitched roof — and what it says of a body's roofs counts only where the agreed structure does
+    // not dispute it (a hip the sketches' gable walls contradict is not held against anyone).
     let formRead: FormRead | undefined
+    let agreedForm: AgreedStructure | undefined
     const withForm = (ev: BodyEvidence, roofs: { flatVolumes: number; pitchedKinds: string[] }): void => {
-      if (!formRead?.form) return
+      if (!formRead?.form || agreedForm?.mainRoof.standing === 'DISPUTED') return
       const verdict = formVerdict(formRead.form, roofs)
       ev.form = { verdict, flatVolumes: roofs.flatVolumes, reportedFlatVolumes: flatVolumesOf(formRead.form), reportedMainRoof: formRead.form.mainRoof.kind, reportedVolumes: formRead.form.volumes }
       if (verdict === 'CONTRADICTS') ev.contradictions += 1
       if (verdict === 'AGREES') ev.supports += 1
     }
-    if (localRoofs.flatVolumes > 0 && localRoofs.pitchedKinds.length > 0) {
-      const formPics = sketchSummary.reading.sketches.filter((x) => x.sketch).flatMap((x) => { const p = pics.find((q) => q.frameId === x.frameId); return p ? [{ caption: x.facade === 'SIDE_UNSPECIFIED' ? 'SIDE (which side is not captioned)' : x.facade, raster: p.raster }] : [] })
-      if (formPics.length >= 2) {
-        formRead = await readForm({ model: wiring.outlineModel ?? wiring.metricModel ?? wiring.model, price: wiring.outlinePrice ?? wiring.metricPrice ?? wiring.price, ...(wiring.spend ? { spend: wiring.spend } : {}), ...(options.signal ? { signal: options.signal } : {}) }, formPics)
-        usd += formRead.usd
-        record({ at: now().toISOString(), kind: 'FORM_READ', version: FORM_READ_VERSION, promptVersion: formRead.promptVersion, pictures: formRead.pictures, form: formRead.form ?? null, refused: formRead.refused, usd: formRead.usd, localRoofs, why: `LOCAL's body has ${localRoofs.flatVolumes} flat-roofed volume(s) beside a pitched roof: the elevations are asked, as a whole, what volumes and roofs the house has` })
+    {
+      const planId = good.plans?.selectedPlanFrameId
+      const planR = planId ? await frameRaster(pkg0, graph0, planId, options) : undefined
+      const st = await structureOf({ pkg0, graph0, sketches: sketchSummary.reading.sketches, ...(planR?.raster ? { planRaster: planR.raster } : {}) })
+      if (st?.read.form) {
+        formRead = st.read
+        agreedForm = st.agreed
         withForm(localEv, localRoofs)
       }
     }
@@ -1551,8 +1605,8 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
       const unspecified = unlabelled.filter((x) => free.some((sd) => registersOn(x, sd)))
       const setAside = unlabelled.filter((x) => !unspecified.includes(x))
       if (setAside.length > 0 && final) record({ at: now().toISOString(), kind: 'UNLABELLED_PICTURES_SET_ASIDE', frames: setAside.map((x) => x.frameId), free, refusals: refusals.filter((q) => setAside.some((x) => x.frameId === q.frameId)), why: 'registers on no free side of the model (wall ends, ground and eaves or ridge): not an elevation of this house at this scale — read, not used' })
-      if (unspecified.length > 0 && unspecified.length <= free.length && unspecified.length <= 2) {
-        const perms: Side[][] = unspecified.length === 1 ? free.map((f) => [f]) : free.flatMap((f1) => free.filter((f2) => f2 !== f1).map((f2) => [f1, f2]))
+      if (unspecified.length > 0 && unspecified.length <= free.length && unspecified.length <= 3) {
+        const perms: Side[][] = unspecified.length === 1 ? free.map((f) => [f]) : unspecified.length === 2 ? free.flatMap((f1) => free.filter((f2) => f2 !== f1).map((f2) => [f1, f2])) : free.flatMap((f1) => free.filter((f2) => f2 !== f1).flatMap((f2) => free.filter((f3) => f3 !== f1 && f3 !== f2).map((f3) => [f1, f2, f3])))
         const scored = perms.map((perm) => {
           const regs = unspecified.map((x, i) => { const a = anchorsFor(x.frameId, perm[i]); return a ? registerFromSketch({ model, views: [...heldViews], pictures: pics, witnesses: [] }, a) : undefined })
           const ok = regs.every((r) => r && !('status' in r))
@@ -1564,7 +1618,12 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
         const bySupport = scored.length === 1 || (scored.length > 1 && scored[0].score - scored[1].score >= 1) ? scored[0] : undefined
         const planRanked = [...scored].filter((q) => q.plan !== null).sort((a, b) => (b.plan as number) - (a.plan as number))
         const byPlan = !bySupport && planRanked.length > 1 && (planRanked[0].plan as number) - (planRanked[1].plan as number) >= SIDE_MARGIN ? planRanked[0] : undefined
-        const decided = bySupport ?? byPlan
+        // v3.54.20: the structure read was shown every elevation beside the plan and says which side each shows; where
+        // the registrations and the plan's openings do not tell the assignments apart, its word is taken before the
+        // source order — a read side, named as such (STRUCTURE_READ), on an assignment that registers
+        const saidSide = (frameId: string): Side | undefined => { const n = (structureMemo?.frames ?? []).indexOf(frameId) + 1; const sd = n > 0 ? structureMemo?.agreed?.pictures.find((q) => q.n === n)?.shows : undefined; return sd && sd !== 'NONE' ? (sd as Side) : undefined }
+        const byStructure = !bySupport && !byPlan && unspecified.every((x) => saidSide(x.frameId) !== undefined) ? scored.find((q) => q.perm.every((sd, i) => sd === saidSide(unspecified[i].frameId))) : undefined
+        const decided = bySupport ?? byPlan ?? byStructure
         // v3.54.18: where several assignments register and nothing tells them apart, the source's own order is taken as an
         // explicit MINIATURE CONVENTION (first unlabelled side elevation = LEFT when LEFT is free, the next free side after
         // it) — recorded as a convention, never as a read side: the sides keep their facades instead of none of them
@@ -1574,7 +1633,7 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
         const byLocal = !decided && final && scored.length > 1 && localSaid.some((v) => v) ? scored.find((q) => q.perm.every((sd, i) => localSaid[i] === undefined || localSaid[i] === sd)) : undefined
         const byOrder = byLocal ?? (!decided && final && scored.length > 1 ? scored.find((q) => q.perm.every((sd, i) => sd === (['LEFT', 'RIGHT', 'REAR', 'FRONT'] as Side[]).filter((f) => free.includes(f))[i])) : undefined)
         const pick = decided ?? byOrder
-        if (pick) for (const x of unspecified) sideBasisOf.set(x.frameId, byPlan && pick === byPlan ? 'PLAN_OPENINGS' : decided ? 'EVIDENCE' : byLocal ? 'CONVENTION_LOCAL_LABEL_NOT_IN_CAPTION' : 'MINIATURE_CONVENTION_SOURCE_ORDER')
+        if (pick) for (const x of unspecified) sideBasisOf.set(x.frameId, byPlan && pick === byPlan ? 'PLAN_OPENINGS' : byStructure && pick === byStructure ? 'STRUCTURE_READ' : decided ? 'EVIDENCE' : byLocal ? 'CONVENTION_LOCAL_LABEL_NOT_IN_CAPTION' : 'MINIATURE_CONVENTION_SOURCE_ORDER')
         record({ at: now().toISOString(), kind: 'SIDE_OF_UNLABELLED_ELEVATIONS', frames: unspecified.map((x) => x.frameId), options: scored.map((q) => ({ sides: q.perm, support: Math.round(q.score * 100) / 100, ...(q.plan !== null ? { planOpenings: Math.round(q.plan * 100) / 100 } : {}) })), chosen: pick?.perm ?? null, basis: byPlan && pick === byPlan ? 'PLAN_OPENINGS' : decided ? 'EVIDENCE' : byLocal ? 'CONVENTION_LOCAL_LABEL_NOT_IN_CAPTION' : byOrder ? 'MINIATURE_CONVENTION_SOURCE_ORDER' : 'NONE', planOpeningsVersion: PLAN_OPENINGS_VERSION, why: byPlan && pick === byPlan ? `the openings the plan draws on each side agree with these elevations' own by a clear margin (${(planRanked[0].plan as number).toFixed(1)} against ${(planRanked[1].plan as number).toFixed(1)} net matched openings; the margin is ${SIDE_MARGIN})` : decided ? (scored.length === 1 ? 'the only assignment under which every one registers' : 'the drawn openings support it by a clear margin') : byOrder ? 'several assignments register and the drawings do not tell them apart: the source order is taken as a named miniature convention (the side is NOT read; mirrored sides are possible)' : scored.length === 0 ? 'no assignment registers them all' : 'two assignments register and the drawings do not tell them apart: left unassigned for now (named, not chosen)' })
         if (pick) sketchSideOf = { ...(sketchSideOf ?? {}), ...Object.fromEntries(unspecified.map((x, i) => [x.frameId, pick.perm[i]])) }
         if (byOrder) for (const x of unspecified) sidesByConvention.add(x.frameId)
