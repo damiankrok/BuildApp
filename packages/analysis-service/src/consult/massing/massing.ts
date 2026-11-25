@@ -556,13 +556,15 @@ export function wingsOf(outline: ReadonlyArray<{ x: number; z: number }>, minAre
 
 export type MassingInput = { outline: OutlineObservation; silhouettes: readonly SilhouetteObservation[]; /** massing 1.9.0: the agreed structure (structure.ts) — the parts that are bodies of their own, the roof's kind and ridge, the storeys under the eaves */ structure?: BuildStructure; wallThicknessM?: { value: number; prov: Prov }; /** the roof pitch the page publishes (degrees): used only where no view shows the wall's corner under the roof, and only when the drawn walls allow it */ publishedPitchDeg?: number; /** massing 1.7.0: the partitions the plan draws inside the outline, in the outline's own frame (metres): where two bodies in line meet */ planWalls?: ReadonlyArray<{ a: { x: number; z: number }; b: { x: number; z: number } }> }
 
+/** A reported part is a body only where the outline steps out by at least this (metres): a garage holds a car between two walls; a 2 m slab of the main house's own wall line is not one. */
+export const STRUCTURE_WING_MIN_M = 2.8
 /**
  * massing 1.9.0: the rectangle that steps out of an orthogonal outline on one side — the outline's longest edge on that
  * side's extreme line, back to the nearer of the two corners its neighbours run in to — and the outline without it. Not a
  * wing when the edge is (nearly) the whole of that side (nothing steps out: two bodies in line are told apart by the
  * elevations) or the step is narrower than a body.
  */
-export function wingOnSide(outline: ReadonlyArray<{ x: number; z: number }>, side: StructureSide, minM: number = MASSING_TOLERANCES.minBodyM): { rect: Rect; rest: Array<{ x: number; z: number }> } | undefined {
+export function wingOnSide(outline: ReadonlyArray<{ x: number; z: number }>, side: StructureSide, minM: number = STRUCTURE_WING_MIN_M): { rect: Rect; rest: Array<{ x: number; z: number }> } | undefined {
   const n = outline.length
   if (n < 6) return undefined
   const bb = rectOfOutline(outline)
@@ -1002,7 +1004,7 @@ export function solveMassing(input: MassingInput): MassingHypothesis {
       const st = input.structure
       const wing = wingBodies.find((q) => q.rect === rect)?.part
       const want = wing ? { ...(wing.roof ? { kind: wing.roof } : {}), ...(wing.ridge ? { axis: wing.ridge } : {}), full: wing.fullStoreys, ...(st.pitchDeg !== undefined ? { pitchDeg: st.pitchDeg } : {}), drawnTopsM: reads.map((q) => q.wallTopM ?? q.p.eavesM).filter((v) => Number.isFinite(v)) }
-        : { ...(st.mainRoof ? { kind: st.mainRoof } : {}), ...(i === 0 && st.mainRidge ? { axis: st.mainRidge } : {}), ...(st.fullStoreys ? { full: st.fullStoreys } : {}), ...(st.pitchDeg !== undefined ? { pitchDeg: st.pitchDeg } : {}), ...(i === 0 && st.eavesM ? { eavesM: st.eavesM } : {}), drawnTopsM: reads.map((q) => q.wallTopM ?? q.p.eavesM).filter((v) => Number.isFinite(v)) }
+        : { ...(st.mainRoof ? { kind: st.mainRoof } : {}), ...(i === 0 && st.mainRidge ? { axis: st.mainRidge } : {}), ...(i === 0 && st.fullStoreys ? { full: st.fullStoreys } : {}), ...(st.pitchDeg !== undefined ? { pitchDeg: st.pitchDeg } : {}), ...(i === 0 && st.eavesM ? { eavesM: st.eavesM } : {}), drawnTopsM: reads.map((q) => q.wallTopM ?? q.p.eavesM).filter((v) => Number.isFinite(v)) }
       const applied = roofByStructure(roof, want, rect)
       if (applied.notes.length > 0) {
         roof = applied.roof

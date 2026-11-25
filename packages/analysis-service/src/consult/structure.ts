@@ -150,7 +150,9 @@ const axisOf = (a: 'FRONT' | 'SIDE' | 'NONE'): 'X' | 'Z' | undefined => (a === '
 export function buildStructureOf(a: AgreedStructure): BuildStructure {
   const ok = <T>(q: Witnessed<T>): boolean => q.standing !== 'DISPUTED'
   const kind = ok(a.mainRoof) ? buildable(a.mainRoof.value.kind) : undefined
-  const ridge = ok(a.mainRidge) ? axisOf(a.mainRidge.value.along) : undefined
+  // the ridge's direction comes from the same answer as the roof's kind: where the kind is disputed, the direction is
+  // taken only if its own witness agrees with it
+  const ridge = ok(a.mainRidge) && (ok(a.mainRoof) || a.mainRidge.standing === 'AGREED') ? axisOf(a.mainRidge.value.along) : undefined
   return {
     ...(ok(a.storeys) ? { fullStoreys: a.storeys.value.full } : {}),
     ...(kind ? { mainRoof: kind } : {}),
