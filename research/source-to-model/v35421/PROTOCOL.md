@@ -182,3 +182,16 @@ Debora (KRZYŻUJĄCE) → **wzięta**; Dom pod morwą ver. 2 (PROSTY + NIŻSZY_P
 cztery pule, obie wymagane warstwy obecne (KRZYŻUJĄCE: Anna II, Debora; NIŻSZY_PRZY_ŚCIANIE: Lyon, Morwa); warstwy
 HIP w próbie nie ma (Dom pod osiką, HIP + KRZYŻUJĄCE, jest ósmy w kolejności — poza limitem, bo żadnej wymaganej warstwy
 nie brakuje). Argos, Newcastle II, Elsa III, Dom pod osiką: opisane, poza próbą.
+
+### 7a. Budżet — informacja OWNER-a w trakcie etapu (dopisane 2026-11-25, po ramionach B i F@B, przed dalszymi zakupami)
+
+OWNER: „nadal jest około 40 dolarów na API do użycia". To ta sama istniejąca pula (to samo konto, ta sama usługa, klucz
+ze środowiska) — nie nowa pula i nie jej podniesienie; księga wycenia żądania szacunkiem cennikowym i jej pułap
+68,542857 USD był zapisem wcześniejszego stanu konta. Zasady od tego miejsca:
+
+- limit etapu podniesiony z 9,5 do **25 USD** (licząc od 56,290453), rezerwa ≥ 10 USD z podanych ok. 40 nietykana;
+  pułap księgi (`--ceiling`) przesuwany dopiero, gdy jest potrzebny, i zawsze z wpisem w księdze;
+- dodatkowe środki idą na: piąty dom NEW-H z warstwą HIP (§5 dopuszcza piąty, gdy budżet pozwala, a warstwy brakuje —
+  w próbie nie ma HIP; kolejny w wylosowanym porządku z HIP: Dom pod osiką), poprawki usterek znalezionych w próbie
+  i ponowne biegi tych domów (od tej chwili DEV; pierwsze wyniki zachowane), host na ostatecznej rewizji;
+- stan w chwili wpisu: księga 60,360809 USD, etap 4,070356 USD.
