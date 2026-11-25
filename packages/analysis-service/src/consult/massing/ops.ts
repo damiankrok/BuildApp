@@ -737,6 +737,8 @@ function withEvidence(cmds: BuildingCommand[], b: BodySpec, frames: string[]): B
 
 /** ops 1.9.0: a reading's top agrees with the page's building height within this (the page measures from the ground, the model from its floor). */
 export const PAGE_HEIGHT_AGREE = { m: 0.6, share: 0.1 } as const
+/** ops 1.13.0: the registered views of one reading are at one scale within `same` (largest over smallest); they are not beyond `apart`. */
+export const SCALE_AGREE = { same: 1.12, apart: 1.3 } as const
 
 /**
  * ops 1.12.0: the hypothesis BUILD_MASSING takes from the observations — solved as labelled and turned by a quarter, the
@@ -771,10 +773,28 @@ export function massingHypothesisOf(obs: MassingObservations & { outline: NonNul
   const pageH = facts?.buildingHeightM
   const fits = (x: MassingHypothesis): boolean => { const t = topOf(x); return pageH !== undefined && t !== undefined && Math.abs(t - pageH) <= Math.max(PAGE_HEIGHT_AGREE.m, PAGE_HEIGHT_AGREE.share * pageH) }
   const byHeight = pageH !== undefined && fits(asLabelled) !== fits(turnedH) ? (fits(turnedH) ? 'TURNED' : 'LABELLED') : undefined
-  const turn = byHeight ? byHeight === 'TURNED' : agreeing(turnedH) > agreeing(asLabelled)
+  // ops 1.13.0: which reading the DRAWINGS' OWN SCALES fit. Each registered view's scale is the body's extent on that side
+  // over the drawn walls' width: read on the right sides, the elevations of one house come out at one scale (they are one
+  // set of drawings); read a quarter turn off, the front and rear are stretched over the side's length and the sides over
+  // the front's, and the scales part by the outline's aspect. Where one reading's views agree in scale (within
+  // `SCALE_AGREE.same`) and the other's differ (beyond `SCALE_AGREE.apart`), on views of BOTH directions, the agreeing
+  // reading is taken — after the page's height (a fact from outside the drawings), before a count of agreeing heights
+  // (two views stretched alike agree with each other). A near-square outline has no such difference and decides nothing.
+  const scaleSpread = (x: MassingHypothesis): number | undefined => {
+    const vs = x.status === 'BUILDABLE' ? x.views.filter((v) => Number.isFinite(v.projection.mpp) && v.projection.mpp > 0) : []
+    const alongX = vs.filter((v) => v.side === 'FRONT' || v.side === 'REAR')
+    const alongZ = vs.filter((v) => v.side === 'LEFT' || v.side === 'RIGHT')
+    if (alongX.length === 0 || alongZ.length === 0 || vs.length < 3) return undefined
+    return Math.max(...vs.map((v) => v.projection.mpp)) / Math.min(...vs.map((v) => v.projection.mpp))
+  }
+  const [sL, sT] = [scaleSpread(asLabelled), scaleSpread(turnedH)]
+  const byScale = !byHeight && sL !== undefined && sT !== undefined && Math.min(sL, sT) <= SCALE_AGREE.same && Math.max(sL, sT) >= SCALE_AGREE.apart ? (sT < sL ? 'TURNED' : 'LABELLED') : undefined
+  const turn = byHeight ? byHeight === 'TURNED' : byScale ? byScale === 'TURNED' : agreeing(turnedH) > agreeing(asLabelled)
+  const scaleNote = sL !== undefined && sT !== undefined ? [`the drawings' scales: as labelled the registered views differ by a factor of ${sL.toFixed(2)}, turned by 90° by ${sT.toFixed(2)}${byScale ? ` — the reading whose views share one scale is taken (${byScale === 'TURNED' ? 'turned by 90°' : 'as labelled'})` : byHeight ? ' (the page\'s height decided)' : ' (no decision: both alike, or neither one scale)'}`] : []
   const heightNote = byHeight ? [`the page states the building ${pageH} m high: ${byHeight === 'TURNED' ? 'turned by 90°' : 'as labelled'} the top stands at ${(topOf(byHeight === 'TURNED' ? turnedH : asLabelled) as number).toFixed(2)} m, ${byHeight === 'TURNED' ? 'as labelled' : 'turned by 90°'} at ${topOf(byHeight === 'TURNED' ? asLabelled : turnedH)?.toFixed(2) ?? 'no'} m — the reading the page's height fits is taken (heights agreeing: ${agreeing(asLabelled)} as labelled, ${agreeing(turnedH)} turned)`] : []
   const h: MassingHypothesis = turn && !ownFrame ? { ...turnedH, alternatives: [...turnedH.alternatives, `the elevations draw the model's sides turned by 90° from their labels: ${agreeing(turnedH)} body/bodies' heights agree so against ${agreeing(asLabelled)} as labelled (the labelled reading is kept as an alternative)`] } : turn ? { ...turnedH, planFront, alternatives: [...turnedH.alternatives, `the body is built in the elevations' frame, the plan sheet's ${planFront.toLowerCase()} side as its front (${obs.entranceSide === undefined ? 'which end is a convention: the plan read marks no main entrance' : obs.entranceSide === planFront ? 'the plan marks its main entrance there' : `the plan marks its main entrance on its ${obs.entranceSide.toLowerCase()} side, where neither quarter turn puts the front: a convention`}) — the elevations draw the plan's sides turned by 90° from their labels: ${agreeing(turnedH)} body/bodies' heights agree so against ${agreeing(asLabelled)} as labelled (the labelled reading is kept as an alternative)`] } : { ...asLabelled, alternatives: [...asLabelled.alternatives, ...(agreeing(turnedH) === agreeing(asLabelled) && turnedH.status === 'BUILDABLE' ? [`turned by 90° the elevations agree as well (${agreeing(turnedH)} body/bodies): the labels are kept`] : [])] }
   if (heightNote.length > 0) h.alternatives = [...h.alternatives, ...heightNote]
+  if (scaleNote.length > 0) h.alternatives = [...h.alternatives, ...scaleNote]
   return { h, turn }
 }
 

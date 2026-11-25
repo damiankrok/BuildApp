@@ -111,6 +111,23 @@ def house(name, run, base):
         for k in ('exteriorWalls', 'interiorWalls', 'exteriorOpenings', 'interiorOpenings', 'windows', 'doors', 'chimneys', 'roofWindows'):
             if a[k] < b[k]:
                 drops.append({'what': k, 'baseline': b[k], 'after': a[k]})
+    # every drop with the records that explain it: the observations of that kind that are not in the delivered model
+    rows = (of or {}).get('rows', []) if of else []
+    def causes(pred):
+        c = collections.Counter(f"{r.get('fate')}{'/' + str(r.get('code')) if r.get('code') else ''}: {(r.get('why') or '')[:140]}" for r in rows if pred(r) and r.get('fate') not in ('BUILT', 'AGREES_WITH_MODEL'))
+        return [f"{n}× {k}" for k, n in c.most_common(4)]
+    kind_pred = {
+        'exteriorOpenings': lambda r: r.get('operation') in ('ADD_OPENING', 'UPDATE_OPENING'), 'windows': lambda r: r.get('operation') in ('ADD_OPENING', 'UPDATE_OPENING'), 'doors': lambda r: r.get('operation') in ('ADD_OPENING', 'UPDATE_OPENING'),
+        'chimneys': lambda r: 'CHIMNEY' in str(r.get('operation')) or 'CHIMNEY' in str(r.get('kind')), 'roofWindows': lambda r: 'ROOF_WINDOW' in str(r.get('operation')) or 'ROOF_WINDOW' in str(r.get('kind')),
+    }
+    interior = [e for e in ev if e.get('kind') in ('PLAN_SKELETON', 'INTERIOR_BUILT', 'BUILD_INTERIOR')]
+    for d in drops:
+        if d['what'] in kind_pred:
+            d['records'] = causes(kind_pred[d['what']]) or ['no observation of this kind was refused in this run: the baseline\'s element came from a reading or an operation this run did not make (see the arbitration and the review above)']
+        elif d['what'] in ('interiorWalls', 'interiorOpenings'):
+            d['records'] = [x for x in [(e.get('why') or '')[:300] for e in interior[-2:]] if x] or ([f"{arb.get('decision')}: {(arb.get('why') or '')[:300]}"] if arb else None) or ['the interior is built from the plan skeleton into the body that stands: see BODY_ARBITRATION (a replaced body does not carry LOCAL\'s interior)']
+        else:
+            d['records'] = [(arb or {}).get('why', 'the body differs: see section 3')[:300]]
     out['drops'] = drops
     fin = last('FINAL')
     out['final'] = None if not fin else {k: fin.get(k) for k in ('decision', 'status', 'why') if k in fin}
@@ -188,7 +205,12 @@ def md(h):
     L += ['### 6. Liczby: baseline → po', '']
     if c['baseline'] and c['after']:
         L += ['| | baseline | po |', '|---|---|---|'] + [f"| {k} | {c['baseline'][k]} | {c['after'][k]} |" for k in c['after']]
-        L += ['', ('Spadki: ' + '; '.join(f"**{d['what']} {d['baseline']} → {d['after']}**" for d in h['drops']) + ' — przyczyny w sekcji 5 i w raporcie etapu.') if h['drops'] else 'Żaden licznik ścian ani otworów nie spadł względem baseline.']
+        if h['drops']:
+            L += ['', 'Spadki względem baseline, każdy z zapisami, które go tłumaczą:', '']
+            for d in h['drops']:
+                L += [f"- **{d['what']} {d['baseline']} → {d['after']}**: " + ' | '.join(d.get('records') or ['—'])]
+        else:
+            L += ['', 'Żaden licznik ścian ani otworów nie spadł względem baseline.']
     elif c['after']:
         L += [f"Po: {c['after']} (brak modelu baseline do porównania)."]
     L.append('')

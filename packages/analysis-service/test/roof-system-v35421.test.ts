@@ -8,6 +8,7 @@ import { applyCommands } from '@buildapp/commands'
 import { compileBuilding } from '@buildapp/geometry'
 import { createEmptyModel } from '@buildapp/model'
 import { gableWallOver, massingCommands, roofSystemOf, settleRoof, solveMassing } from '../src/consult/massing/massing.js'
+import { massingHypothesisOf } from '../src/consult/massing/ops.js'
 import type { MassingHypothesis, OutlineObservation, RoofSpec, SilhouetteObservation } from '../src/consult/massing/massing.js'
 import type { BuildStructure } from '../src/consult/structure.js'
 import type { Poly } from '../src/consult/correct/source-gate.js'
@@ -295,5 +296,32 @@ describe('readback 1.1.0: every bound roof and every taken number is measured on
     // one winding, one hand — the notch's walls included (1.0.0 named them RIGHT against the centroid of all walls)
     expect(new Set(rb.openings.map((o) => o.startIs)).size).toBe(1)
     expect(rb.openings[0].startIs).toBe('LEFT')
+  })
+})
+
+describe('ops 1.13.0: the reading whose elevations share one scale decides which side is the front', () => {
+  // the 12 × 8 m house of this file: slopes drawn 12 m wide, gable ends 8 m wide, all at 40 px a metre
+  const said = (side: SilhouetteObservation['side'], v: SilhouetteObservation): SilhouetteObservation => ({ ...v, side, observationId: side, frameId: side.toLowerCase() })
+  it('captions a quarter turn off: the views read as labelled are at two scales, turned they are at one — the body is built turned, by name', () => {
+    const { h, turn } = massingHypothesisOf({ outline: HOUSE, silhouettes: [said('LEFT', slope('FRONT')), said('RIGHT', slope('REAR')), said('FRONT', gableEnd('LEFT')), said('REAR', gableEnd('RIGHT'))] }, undefined, true)
+    expect(turn).toBe(true)
+    expect(h.status).toBe('BUILDABLE')
+    const r = h.bodies[0].rect
+    expect([Math.round(r.maxX - r.minX), Math.round(r.maxZ - r.minZ)]).toEqual([8, 12])
+    expect(h.alternatives.some((a) => /share one scale is taken \(turned by 90°\)/.test(a))).toBe(true)
+  })
+  it('counter-trial: the same drawings under their right captions stay as labelled, for the same reason', () => {
+    const { h, turn } = massingHypothesisOf({ outline: HOUSE, silhouettes: [slope('FRONT'), slope('REAR'), gableEnd('LEFT'), gableEnd('RIGHT')] }, undefined, true)
+    expect(turn).toBe(false)
+    const r = h.bodies[0].rect
+    expect([Math.round(r.maxX - r.minX), Math.round(r.maxZ - r.minZ)]).toEqual([12, 8])
+    expect(h.alternatives.some((a) => /share one scale is taken \(as labelled\)/.test(a))).toBe(true)
+  })
+  it('counter-trial: a near-square house gives the scales nothing to decide (both readings alike) — the earlier rule stands', () => {
+    const SQUARE = outlineOf([[0, 0], [10, 0], [10, 9.6], [0, 9.6]])
+    const sl = (side: 'FRONT' | 'REAR'): SilhouetteObservation => view(side, [box(0, 10, 0, 3)], [box(0, 10, 3, 7)])
+    const ge = (side: 'LEFT' | 'RIGHT'): SilhouetteObservation => view(side, [[[px(0), 400], [px(9.6), 400], [px(9.6), row(3)], [px(4.8), row(7)], [px(0), row(3)]]], [[[px(0), row(3)], [px(4.8), row(7.2)], [px(9.6), row(3)], [px(9.6), row(2.8)], [px(4.8), row(7)], [px(0), row(2.8)]]])
+    const { h } = massingHypothesisOf({ outline: SQUARE, silhouettes: [sl('FRONT'), sl('REAR'), ge('LEFT'), ge('RIGHT')] }, undefined, true)
+    expect(h.alternatives.some((a) => /no decision: both alike/.test(a))).toBe(true)
   })
 })
