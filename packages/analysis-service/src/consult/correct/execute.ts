@@ -1080,14 +1080,22 @@ function bindRoofWindow(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
   const a1 = r6(Math.max(...xs))
   const h0 = yOf(pr, box.y1)
   const h1 = yOf(pr, box.y0)
-  const roof = sideRoof(m, view.side, { lo: a0, hi: a1 })
-  if (!roof) return { status: 'NEEDS_EVIDENCE', code: 'NO_PITCHED_ROOF', why: `the model has no pitched roof over ${a0.toFixed(2)}..${a1.toFixed(2)} m of the ${view.side.toLowerCase()} side` }
   const ax = alongAxis(view.side)
-  if ((roof.ridgeAxis === 'X') !== (ax === 'x')) return { status: 'NEEDS_EVIDENCE', code: 'SLOPE_SEEN_EDGE_ON', why: `${roof.id}'s ridge runs across the ${view.side.toLowerCase()} side (a gable end): its slopes are seen edge-on there, and a window in a slope is placed from the elevation that sees the slope face-on` }
-  const eaves = levelOf(m, roof.levelId).elevation + roof.eaveOffset
+  const legacy = sideRoof(m, view.side, { lo: a0, hi: a1 })
+  // v3.54.21: a slope stated as a roof PLANE (a hip, or a roof of a roof system) hosts a roof window as a parametric
+  // gable does — the plane that falls towards this side over the box's stretch. Until now only a parametric gable did:
+  // a house whose roofs were joined in valleys, or hipped, lost every roof window it had.
+  const plane = legacy ? undefined : slopePlane(m, view.side, { lo: a0, hi: a1 })
+  if (!legacy && !plane) return { status: 'NEEDS_EVIDENCE', code: 'NO_PITCHED_ROOF', why: `the model has no pitched roof over ${a0.toFixed(2)}..${a1.toFixed(2)} m of the ${view.side.toLowerCase()} side` }
+  if (legacy && (legacy.ridgeAxis === 'X') !== (ax === 'x')) return { status: 'NEEDS_EVIDENCE', code: 'SLOPE_SEEN_EDGE_ON', why: `${legacy.id}'s ridge runs across the ${view.side.toLowerCase()} side (a gable end): its slopes are seen edge-on there, and a window in a slope is placed from the elevation that sees the slope face-on` }
+  // one host, however the roof is stated: its eaves line and height, its pitch, its depth in plan and its run along the side
+  const roof = legacy
+    ? { id: legacy.id, coll: 'roofs' as const, pitchDeg: legacy.pitchDeg, eaves: levelOf(m, legacy.levelId).elevation + legacy.eaveOffset, footprint: legacy.footprint, half: (ax === 'x' ? legacy.footprint.maxZ - legacy.footprint.minZ : legacy.footprint.maxX - legacy.footprint.minX) / 2, boundary: undefined as ReadonlyArray<{ x: number; z: number }> | undefined }
+    : (() => { const q = plane as NonNullable<typeof plane>; const xs = q.boundary.map((v) => v.x); const zs = q.boundary.map((v) => v.z); const footprint = { minX: Math.min(...xs), maxX: Math.max(...xs), minZ: Math.min(...zs), maxZ: Math.max(...zs) }; return { id: q.id, coll: 'roofPlanes' as const, pitchDeg: q.pitchDeg, eaves: q.datum.y, footprint, half: ax === 'x' ? footprint.maxZ - footprint.minZ : footprint.maxX - footprint.minX, boundary: q.boundary as ReadonlyArray<{ x: number; z: number }> } })()
+  const eaves = roof.eaves
   const tan = Math.tan((roof.pitchDeg * Math.PI) / 180)
   const fp = roof.footprint
-  const half = (ax === 'x' ? fp.maxZ - fp.minZ : fp.maxX - fp.minX) / 2
+  const half = roof.half
   const t0 = r6((h0 - eaves) / tan)
   const t1 = r6((h1 - eaves) / tan)
   const [lo, hi] = ax === 'x' ? [fp.minX, fp.maxX] : [fp.minZ, fp.maxZ]
@@ -1097,6 +1105,13 @@ function bindRoofWindow(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
   const near = view.side === 'FRONT' || view.side === 'LEFT'
   const [p0, p1] = ax === 'x' ? (near ? [fp.minZ + u0, fp.minZ + t1] : [fp.maxZ - t1, fp.maxZ - u0]) : near ? [fp.minX + u0, fp.minX + t1] : [fp.maxX - t1, fp.maxX - u0]
   const footprint = ax === 'x' ? { minX: a0, maxX: a1, minZ: r6(p0), maxZ: r6(p1) } : { minX: r6(p0), maxX: r6(p1), minZ: a0, maxZ: a1 }
+  // on a plane the window must lie on the plane itself (a slope cut by a valley is not its bounding rectangle)
+  if (roof.boundary) {
+    const poly = roof.boundary
+    const inside = (x: number, z: number): boolean => { let c = false; for (let i = 0, j = poly.length - 1; i < poly.length; j = i, i += 1) if (poly[i].z > z !== poly[j].z > z && x < ((poly[j].x - poly[i].x) * (z - poly[i].z)) / (poly[j].z - poly[i].z) + poly[i].x) c = !c; return c }
+    const e = 0.03
+    if (![[footprint.minX + e, footprint.minZ + e], [footprint.maxX - e, footprint.minZ + e], [footprint.maxX - e, footprint.maxZ - e], [footprint.minX + e, footprint.maxZ - e]].every(([x, z]) => inside(x, z))) return { status: 'INVALID', code: 'NOT_ON_THE_SLOPE', why: `the box does not lie wholly on ${roof.id} (the slope is cut there by a hip or a valley)`, record }
+  }
   const clash = m.roofOpenings.find((o) => { const q = (o as { footprint?: { minX: number; maxX: number; minZ: number; maxZ: number } }).footprint; return !!q && Math.min(q.maxX, footprint.maxX) - Math.max(q.minX, footprint.minX) > 0.02 && Math.min(q.maxZ, footprint.maxZ) - Math.max(q.minZ, footprint.minZ) > 0.02 })
   if (clash) return { status: 'DUPLICATE', code: 'ROOF_OPENING_ALREADY_THERE', why: `${clash.id} already stands on that part of ${roof.id}: a roof opening is never doubled`, record }
   // the source gate on the roof's own band: the slope's rows (eaves to ridge) across the roof's run on this side
@@ -1113,7 +1128,17 @@ function bindRoofWindow(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
     const lit = working.rooflights.some((l) => (l as { roofOpeningId?: string }).roofOpeningId === id)
     return { ...(built && lit ? {} : { failure: `${id} was not built with its light on ${roof.id}` }), measure: { sourceVerified: built && lit ? true : null, builtSupportZ: sup.z, why: built && lit ? `${id} (ROOFLIGHT) cut in ${roof.id} ${t0.toFixed(2)}..${t1.toFixed(2)} m in from the eaves, with its light; the box is supported by the source (z ${sup.z})` : `${id} is not in the candidate` } }
   }
-  return { commands: [{ type: 'cutRoofOpening', id, roofId: roof.id, kind: 'ROOFLIGHT', footprint }, { type: 'placeRooflight', id: `${id}-light`, roofOpeningId: id }] as BuildingCommand[], allowed: [`roofOpenings:${id}`, `rooflights:${id}-light`, `roofs:${roof.id}`], expect: { kind: 'CUSTOM', measure }, record: rec }
+  return { commands: [{ type: 'cutRoofOpening', id, roofId: roof.id, kind: 'ROOFLIGHT', footprint }, { type: 'placeRooflight', id: `${id}-light`, roofOpeningId: id }] as BuildingCommand[], allowed: [`roofOpenings:${id}`, `rooflights:${id}-light`, `${roof.coll}:${roof.id}`], expect: { kind: 'CUSTOM', measure }, record: rec }
+}
+
+/** v3.54.21: the roof PLANE that falls towards `side` over a stretch of it (the slope an elevation of that side sees face-on), the largest share first. */
+export function slopePlane(m: CanonicalBuildingModel, side: Side, range: { lo: number; hi: number }): CanonicalBuildingModel['roofPlanes'][number] | undefined {
+  const ax = alongAxis(side)
+  const towards = side === 'FRONT' ? { x: 0, z: -1 } : side === 'REAR' ? { x: 0, z: 1 } : side === 'LEFT' ? { x: -1, z: 0 } : { x: 1, z: 0 }
+  return m.roofPlanes.filter((q) => q.pitchDeg > 0 && q.downslope.x * towards.x + q.downslope.z * towards.z > 0.9).map((q) => {
+    const vs = q.boundary.map((v) => (ax === 'x' ? v.x : v.z))
+    return { q, share: Math.max(0, Math.min(Math.max(...vs), range.hi) - Math.max(Math.min(...vs), range.lo)) }
+  }).filter((o) => o.share > 0).sort((a, b) => b.share - a.share || a.q.id.localeCompare(b.q.id))[0]?.q
 }
 
 /** v3.54.17 R3: the most the two ends of one drawn roof may differ in overhang before it is not read as one overhang. */

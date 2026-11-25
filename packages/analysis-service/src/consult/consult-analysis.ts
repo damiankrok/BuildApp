@@ -58,7 +58,8 @@ import { readSiteDimensions, SITE_DIMENSIONS_VERSION } from './site-dimensions.j
 import { FACADE_METRIC_VERSION, readFacadeMetric } from './facade-metric.js'
 import { FORM_READ_VERSION, flatVolumesOf, formVerdict, readForm } from './form-read.js'
 import { STRUCTURE_VERSION, agreeStructure, buildStructureOf, structureAgainstBody, wallToApex } from './structure.js'
-import { readbackOpenings, readbackStructure, regionOfPlane } from './readback.js'
+import { mainBodyOf, readbackOpenings, readbackStructure, regionOfPlane } from './readback.js'
+import type { BoundRoofs } from './readback.js'
 import { FEATURE_MAP_VERSION, countFeaturesOf, featureMapOf, featureMapText, traceFeatures } from './feature-map.js'
 import type { SourceFeature } from './feature-map.js'
 import type { AgreedStructure, BuildStructure, StructureSide } from './structure.js'
@@ -406,6 +407,8 @@ export type ConsultedAnalysis = {
    * (BUILD_MASSING on the empty model): the read, the executor's record, and — when committed — the model and its scene.
    */
   massing?: MassingDelivery
+  /** the source body that did not replace LOCAL's (v3.54.21): on the record, not delivered */
+  massingRejected?: MassingDelivery
 }
 
 const CONF_RANK: Record<string, number> = { INCONCLUSIVE: 0, WEAK: 1, SUPPORTED: 2, STRONG: 3 }
@@ -1126,6 +1129,8 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
   // v3.54.16 §7: no model — the labelled elevations are still read into observations, with the missing anchors named
   let unregisteredSketches: Awaited<ReturnType<typeof readUnregisteredSketches>> | undefined
   let massingDelivery: MassingDelivery | undefined
+  /** v3.54.21: the body built from the sources that did NOT replace LOCAL's — kept on the record (its hypothesis, fates and model), so the cause of the refusal can be reproduced */
+  let massingRejected: MassingDelivery | undefined
   /** The side the plan read marks the main entrance on (any plan outline read of this run, whether or not its body stands). */
   let planEntranceSide: Side | undefined
   /** v3.54.18 R3: the openings the plan read saw in the exterior walls, by the side of the PLAN (a second drawing's observation). */
@@ -1613,10 +1618,13 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
     // arbitration 1.5.0: the agreed storeys and ridge direction are held against the body too (the host built a one-storey
     // LOCAL body with its ridge across where two storeys and a ridge along the front were agreed, and the roofs' kinds
     // alone answered AGREES). A roof kind the sketches dispute is still held against no one; the storeys still are.
-    const withForm = (ev: BodyEvidence, roofs: { flatVolumes: number; pitchedKinds: string[] }, body: CanonicalBuildingModel): void => {
+    const withForm = (ev: BodyEvidence, roofs: { flatVolumes: number; pitchedKinds: string[] }, body: CanonicalBuildingModel, bound?: BoundRoofs): void => {
       if (!formRead?.form) return
       const rb = readbackStructure(body, undefined, STOREY_WALLS)
-      const main = [...rb.bodies].sort((p, q) => q.widthM * q.depthM - p.widthM * p.depthM)[0]
+      // v3.54.21: the main roof's description is held against the body the builder bound it to (by that body's own views),
+      // not against the largest rectangle — the arbitration refused a body for carrying the cross wing's ridge on the
+      // largest rectangle, exactly where the sources draw it
+      const main = mainBodyOf(rb.bodies, bound)
       const against = agreedForm ? structureAgainstBody(agreedForm, main, STOREY_WALLS) : []
       if (agreedForm?.mainRoof.standing === 'DISPUTED' && against.length === 0) return
       const kinds = agreedForm?.mainRoof.standing === 'DISPUTED' ? 'SILENT' as const : formVerdict(formRead.form, roofs)
@@ -1650,7 +1658,9 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
       else {
         const altFront = massingOf.get(mb.built)?.planFront
         const altEv = evidenceOf(mb.built.run.reconstruction.model, massingViews(mb.built) ?? [], altFront, mb.delivery.plan?.observation?.outline)
-        withForm(altEv, roofsOf(mb.built.run.reconstruction.model), mb.built.run.reconstruction.model)
+        const altHyp = massingOf.get(mb.built)?.hypothesis
+        withForm(altEv, roofsOf(mb.built.run.reconstruction.model), mb.built.run.reconstruction.model, altHyp ? { bodies: altHyp.bodies } : undefined)
+        if (arb.decision !== 'REPLACED_BY_SOURCE_BODY') massingRejected = mb.delivery
         arb.alternative = altEv
         // v3.54.18 arbitration 1.1.0: the body that replaces LOCAL's must itself be UNCONTRADICTED. One the same sources
         // contradict "less" is still a body they contradict — and it costs the interior and the plan's openings (Jeziorko,
@@ -1674,6 +1684,7 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
           arb.decision = 'REPLACED_BY_SOURCE_BODY'
           arb.why = altC === 0 ? `the sources contradict LOCAL's body ${localEv.contradictions} time(s) and support it ${localEv.supports}; the body built from the plan outline and the elevations: ${altEv.contradictions} and ${altEv.supports}${failsBoth.length > 0 ? ` (${failsBoth.length} elevation(s) that register on neither body set aside)` : ''}. The source body stands; LOCAL's interior is not carried over (NOT_CHECKED)` : `the agreed structure contradicts LOCAL's body (${localEv.form?.flatVolumes ?? 0} flat-roofed volume(s) against ${localEv.form?.reportedFlatVolumes ?? 0} reported, main roof reported ${localEv.form?.reportedMainRoof}) and agrees with the body built from the plan outline and the elevations; that body is contradicted no more than LOCAL's (${altC} against ${localC}${failsBoth.length > 0 ? `, ${failsBoth.length} elevation(s) that register on neither set aside` : ''}), its printed dimensions are no worse and the page's height does not refute it: the structure decides. The source body stands with its ${altC} contradiction(s) named; LOCAL's interior is not carried over (NOT_CHECKED)`
           massingDelivery = mb.delivery
+          massingRejected = undefined
           // the plan gaps are stated on the plan's sides: on a body built turned against the sheet they are not carried (named)
           replacedPlanGaps = good.run && !altFront ? planGapsOf(good.run.reconstruction.model) : []
           if (altFront) { record({ at: now().toISOString(), kind: 'BODY_BUILT_IN_ELEVATION_FRAME', planFront: altFront, why: `the elevations draw the plan's sides a quarter turn from their labels: the body is built with the plan sheet's ${altFront.toLowerCase()} side as its front, so every elevation is read on the side its caption names; LOCAL's plan gaps (stated on the plan's sides) are not carried over` }); planEntranceSide = undefined }
@@ -2344,7 +2355,7 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
     if (planFrame) record({ at: now().toISOString(), kind: 'PLAN_FRAME_OF_MODEL', ...planFrame })
   }
   record({ at: now().toISOString(), kind: 'FINAL', local: localState, final: finalState, usd, readings, roofFeatures: features, sourceCheck: sourceCheck ?? null })
-  return { ...(bodyArbitration ? { bodyArbitration } : {}), contract: CONSULTANT_CONTRACT_VERSION, prompt: CONSULTANT_PROMPT_VERSION, variant: wiring.variant, ...(good.run ? { run: good.run } : {}), ...(good.error ? { error: good.error } : {}), local: localState, ...(wiring.keepLocalModel && local.run ? { localModel: local.run.reconstruction.model } : {}), final: finalState, rounds, readings: good === local ? [] : readings, spans: good === local ? [] : spans, usd, ...(boundary ? { boundary } : {}), geometry, roofFeatures: features, ...(sourceCheck ? { sourceCheck } : {}), consultation, ...(metricRead ? { metricRead } : {}), ...(sketchSummary ? { sketches: sketchSummary } : {}), ...(unregisteredSketches ? { sketchesWithoutModel: unregisteredSketches } : {}), ...(massingDelivery ? { massing: massingDelivery } : {}), globalDescription: 'DISABLED' }
+  return { ...(bodyArbitration ? { bodyArbitration } : {}), contract: CONSULTANT_CONTRACT_VERSION, prompt: CONSULTANT_PROMPT_VERSION, variant: wiring.variant, ...(good.run ? { run: good.run } : {}), ...(good.error ? { error: good.error } : {}), local: localState, ...(wiring.keepLocalModel && local.run ? { localModel: local.run.reconstruction.model } : {}), final: finalState, rounds, readings: good === local ? [] : readings, spans: good === local ? [] : spans, usd, ...(boundary ? { boundary } : {}), geometry, roofFeatures: features, ...(sourceCheck ? { sourceCheck } : {}), consultation, ...(metricRead ? { metricRead } : {}), ...(sketchSummary ? { sketches: sketchSummary } : {}), ...(unregisteredSketches ? { sketchesWithoutModel: unregisteredSketches } : {}), ...(massingDelivery ? { massing: massingDelivery } : {}), ...(massingRejected ? { massingRejected } : {}), globalDescription: 'DISABLED' }
 }
 
 /** What the looks established, for the result: the delivered revision, the findings still open, each correction's fate. */

@@ -232,6 +232,12 @@ if (r.massing) {
   if (st) writeFileSync(join(out, 'massing-scene.json'), st)
   console.log(`${house}: massing ${r.massing.decision} — ${r.massing.why.slice(0, 300)}`)
 }
+if (r.massingRejected) {
+  const { model: mm, sceneText: st, plan, ...rest } = r.massingRejected
+  writeFileSync(join(out, 'massing-rejected.json'), `${stableJson({ ...rest, plan: plan ?? null })}\n`)
+  if (mm) writeFileSync(join(out, 'massing-rejected-model.json'), serializeModel(mm))
+  if (st) writeFileSync(join(out, 'massing-rejected-scene.json'), st)
+}
 if (r.run) {
   mkdirSync(join(out, 'views'), { recursive: true })
   for (const v of renderModelViews(r.run.result.scene)) writeFileSync(join(out, 'views', `${v.name}.png`), v.png)

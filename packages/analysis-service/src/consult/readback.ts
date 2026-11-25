@@ -137,7 +137,7 @@ export type StructureReadback = {
 export const STRUCTURE_READBACK_TOLERANCES = { pitchDeg: 3, heightM: 0.35, heightShare: 0.08 } as const
 export type BoundRoofs = {
   /** each body the builder solved, with what it took for its roof and what became of each taken property */
-  bodies: ReadonlyArray<{ id: string; roof: { kind: string; ridgeAxis?: 'X' | 'Z'; pitchDeg?: number; eavesM: number; ridgeM?: number }; fates?: ReadonlyArray<{ property: string; fate: string; taken?: string; built?: string; residual?: number; why: string }> }>
+  bodies: ReadonlyArray<{ id: string; describes?: string; roof: { kind: string; ridgeAxis?: 'X' | 'Z'; pitchDeg?: number; eavesM: number; ridgeM?: number }; fates?: ReadonlyArray<{ property: string; fate: string; taken?: string; built?: string; residual?: number; why: string }> }>
   crossRoofs?: ReadonlyArray<{ id: string; over: string; ridgeAxis: 'X' | 'Z'; eavesM: number; ridgeM: number; pitchDeg: number }>
   /** how the solver said the roofs meet (`roofSystemOf`): the relations the delivered model must show */
   relations?: ReadonlyArray<{ a: string; b: string; kind: string }>
@@ -146,6 +146,22 @@ export type BoundRoofs = {
 const planeTop = (p: CanonicalBuildingModel['roofPlanes'][number], q: { x: number; z: number }): number => p.datum.y - Math.tan((p.pitchDeg * Math.PI) / 180) * ((q.x - p.datum.x) * p.downslope.x + (q.z - p.datum.z) * p.downslope.z)
 /** The roof region a plane belongs to, by its stable name: `<region>-<side it drains to>[-<piece>]`. */
 export const regionOfPlane = (planeId: string): string => planeId.replace(/-(minX|maxX|minZ|maxZ)(-\d+)?$/, '')
+
+/**
+ * The body the MAIN roof's description is of: the one the builder bound it to (its record of fates), else the largest.
+ * One rule for the readback and for the arbitration — a description held against the largest rectangle where the builder
+ * bound it to another body by that body's own views would contradict a body for doing what the sources say.
+ */
+export function mainBodyOf<B extends { id: string; widthM: number; depthM: number }>(bodies: readonly B[], bound?: BoundRoofs): B | undefined {
+  const largest = [...bodies].sort((a, b) => b.widthM * b.depthM - a.widthM * a.depthM)[0]
+  if (!bound || bound.bodies.length < 2) return largest
+  const stated = bound.bodies.find((b) => b.describes === 'MAIN')
+  if (stated) return bodies.find((q) => q.id === `ring-${stated.id}`) ?? largest
+  const isPart = (b: BoundRoofs['bodies'][number]): boolean => (b.fates ?? []).some((f) => f.property === 'part' && f.fate === 'APPLIED' && /^mass-|^ring-/.test(f.built ?? ''))
+  if (!bound.bodies.some((b) => (b.fates ?? []).some((f) => f.property === 'part'))) return largest
+  const rest = bound.bodies.filter((b) => !isPart(b)).map((b) => bodies.find((q) => q.id === `ring-${b.id}`)).filter((q): q is B => q !== undefined)
+  return [...rest].sort((a, b) => b.widthM * b.depthM - a.widthM * a.depthM)[0] ?? largest
+}
 
 /**
  * The delivered model's roofs as they stand — each ring of exterior walls with the roof over it (a parametric gable or
@@ -211,8 +227,7 @@ export function readbackStructure(m: CanonicalBuildingModel, taken: { fullStorey
   const near = (a: number, b: number): boolean => Math.abs(a - b) <= Math.max(T.heightM, T.heightShare * Math.max(a, b))
   if (taken && main) {
     // the body the main roof's description was bound to (the builder's record), else the largest
-    const mainBound = bound?.bodies.find((b) => (b.fates ?? []).some((f) => f.property === 'part')) && bound.bodies.length > 1 ? bound.bodies.find((b) => !(b.fates ?? []).some((f) => f.property === 'part' && f.fate === 'APPLIED' && /^mass-|^ring-/.test(f.built ?? ''))) : undefined
-    const mainBody = (mainBound ? bodies.find((b) => b.id === `ring-${mainBound.id}`) : undefined) ?? main
+    const mainBody = mainBodyOf(bodies, bound) ?? main
     if (taken.mainRoof) checks.push({ property: 'mainRoof.kind', taken: taken.mainRoof, built: mainBody.roof, agrees: taken.mainRoof === mainBody.roof })
     if (taken.mainRidge && (taken.mainRoof === 'GABLE' || taken.mainRoof === 'HIP')) checks.push({ property: 'mainRoof.ridge', taken: taken.mainRidge, built: mainBody.ridgeAxis ?? '—', agrees: taken.mainRidge === mainBody.ridgeAxis })
     if (taken.fullStoreys && mainBody.wallTopM !== undefined) checks.push({ property: 'storeys', taken: `${taken.fullStoreys} full`, built: `walls to ${mainBody.wallTopM.toFixed(2)} m`, agrees: taken.fullStoreys === 2 ? mainBody.wallTopM >= storeyWalls.twoMinM : mainBody.wallTopM <= storeyWalls.oneMaxM })

@@ -235,6 +235,11 @@ export function bindSetRoof(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
   const { body, bodies } = ob
   if (body.wallIds.length === 0) return { status: 'UNSUPPORTED_OPERATION', code: 'NO_WALLS', why: `${body.id} has no walls: a roof is set on a body; build the body first (BUILD_MASSING)` }
   if (!rectangular(m, body)) return { status: 'UNSUPPORTED_OPERATION', code: 'NOT_RECTANGULAR', why: `${body.id}'s rings are not four-walled: a roof over a non-rectangular body is beyond this version` }
+  // ops 1.12.0: a roof that is one region of a ROOF SYSTEM (its planes are cut by the roofs it meets, and theirs by it)
+  // is not changed alone — the system would have to be solved again from every region, and no operation does that yet.
+  // Refused by name (never applied half: a wing's roof replaced while the main slope keeps the notch of the old one)
+  const system = m.assemblies.find((q) => q.kind === 'ROOF' && q.id === ROOF_SYSTEM_ID)
+  if (system && system.kind === 'ROOF' && body.planeIds.some((id) => system.planeIds.includes(id))) return { status: 'UNSUPPORTED_OPERATION', code: 'ROOF_SYSTEM_MEMBER', why: `${body.id}'s roof is one region of the roof system ${ROOF_SYSTEM_ID} (${system.planeIds.length} planes, cut where the roofs meet): changing it means solving the whole system again from its regions — no operation of this version does; the difference stays open, by name` }
   const pic = pictureOf(ctx, p, f.picture)
   if (!pic) return { status: 'INVALID', code: 'NOT_A_SOURCE_PICTURE', why: `picture ${String(f.picture ?? p.frameId)} is not a source picture of this check` }
   if (pic.projection !== 'ORTHOGRAPHIC_ELEVATION') return { status: 'INVALID', code: 'NOT_ORTHOGRAPHIC', why: `picture ${pic.n} is ${pic.projection}: a perspective draws no metric roof` }

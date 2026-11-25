@@ -54,7 +54,7 @@ export type RoofSpec = { kind: RoofForm; ridgeAxis?: 'X' | 'Z'; pitchDeg?: numbe
  *   UNRESOLVED              nothing decides.
  */
 export type PropertyFate = { property: string; fate: 'APPLIED' | 'RETAINED_WITH_CONFLICT' | 'REJECTED' | 'UNUSED_UNSUPPORTED' | 'UNRESOLVED'; taken?: string; built?: string; residual?: number; why: string }
-export type BodySpec = { id: string; rect: Rect; roof: RoofSpec; provenance: Record<string, Prov>; fates?: PropertyFate[] }
+export type BodySpec = { id: string; rect: Rect; roof: RoofSpec; provenance: Record<string, Prov>; fates?: PropertyFate[]; /** which description of the agreed structure this body carries (the binding the builder made; absent: no structure was agreed) */ describes?: 'MAIN' | 'MAIN_BESIDE' | 'PART' | 'NONE' }
 /** A description is bound to a body by its own views when at least this many more of them draw one ridge direction than the other. */
 export const BIND_BY_VIEWS = 2
 /** A built pitch agrees with a stated one within this (degrees); a height within `MASSING_TOLERANCES.heightAgreeM` / share. */
@@ -1275,7 +1275,7 @@ export function solveMassing(input: MassingInput): MassingHypothesis {
       } else roof = settled.roof
       if (partOf.has(rect) && !wingBodies.some((q) => q.rect === rect)) fates.push({ property: 'part', fate: 'APPLIED', taken: `${partOf.get(rect)?.what}@${partOf.get(rect)?.where} ridge ${partOf.get(rect)?.ridge ?? '—'}`, built: `${id} ${roof.kind} along ${roof.ridgeAxis ?? '—'}`, why: 'bound to the body whose own elevations draw this ridge' })
     }
-    bodies.push({ id, ...(fates.length > 0 ? { fates } : {}), rect: { minX: r6(built.minX), maxX: r6(built.maxX), minZ: r6(built.minZ), maxZ: r6(built.maxZ) }, roof, provenance: { outline: { fidelity: input.outline.fidelity, source: input.outline.by, why: input.outline.why }, height: hProv, roof: roofProv, wallThickness: input.wallThicknessM?.prov ?? { fidelity: 'DISPLAY_ASSUMPTION', source: 'MINIATURE', why: `${MINIATURE_CONVENTIONS.wallThicknessM} m: no wall thickness was measured` } } })
+    bodies.push({ id, ...(fates.length > 0 ? { fates } : {}), ...(input.structure ? { describes: partOf.has(rect) ? 'PART' as const : rect === mainRep ? 'MAIN' as const : mainRects.has(rect) ? 'MAIN_BESIDE' as const : 'NONE' as const } : {}), rect: { minX: r6(built.minX), maxX: r6(built.maxX), minZ: r6(built.minZ), maxZ: r6(built.maxZ) }, roof, provenance: { outline: { fidelity: input.outline.fidelity, source: input.outline.by, why: input.outline.why }, height: hProv, roof: roofProv, wallThickness: input.wallThicknessM?.prov ?? { fidelity: 'DISPLAY_ASSUMPTION', source: 'MINIATURE', why: `${MINIATURE_CONVENTIONS.wallThicknessM} m: no wall thickness was measured` } } })
   }
   if (bodies.length === 0) return { ...base, status: 'INSUFFICIENT', bodies, views, why: `no body has its height and roof read (${base.missing.map((m) => m.anchor).join(', ')})` }
   const crossRoofs: CrossRoofSpec[] = []

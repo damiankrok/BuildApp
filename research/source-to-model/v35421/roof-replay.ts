@@ -25,7 +25,8 @@ mkdirSync(out, { recursive: true })
 const summary: Record<string, unknown> = {}
 for (const arg of argv.filter((a) => a.includes('='))) {
   const [name, dir] = arg.split('=')
-  const file = join(dir, 'massing.json')
+  // (a body that did not replace LOCAL's is recorded as `massing-rejected.json`)
+  const file = existsSync(join(dir, 'massing.json')) ? join(dir, 'massing.json') : join(dir, 'massing-rejected.json')
   if (!existsSync(file)) { summary[name] = { why: 'no massing.json: the run built no body from the sources' }; continue }
   type Rec = { status?: string; massing?: { hypothesis?: MassingHypothesis; input?: Parameters<typeof massingHypothesisOf>[0] & { facts?: { roofPitchDeg?: number; buildingHeightM?: number; structure?: BuildStructure }; ownFrame?: boolean } } }
   const ms = JSON.parse(readFileSync(file, 'utf8')) as { records?: Rec[] }
