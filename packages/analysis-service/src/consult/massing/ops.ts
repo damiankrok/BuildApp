@@ -21,10 +21,10 @@ import type { Poly } from '../correct/source-gate.js'
 import { facadePx, levelOf, openingBoxes, pictureOf, tolPxOf, toFrameX, toFrameY, viewOf } from '../correct/execute.js'
 import type { BindPicture, BindView, Bound, Ctx, CorrectionProposal, Refusal, Side } from '../correct/execute.js'
 import { targetBodies } from '../correct/resolve.js'
-import { area, bodiesOf, bodyCommands, extentOn, outlineWithFront, pointWithFront, HIP_PLANE_SIDES, hipPlaneCommands, hipSpecFrom, hipWallTopM, MASSING_TOLERANCES, MAX_OVERHANG_M, MASSING_VERSION, massingCommands, MINIATURE_CONVENTIONS, profileOver, readableStretch, registerByPlan, solveMassing, wallCornerTopM } from './massing.js'
+import { area, bodiesOf, bodyCommands, extentOn, joinedBodiesOf, roofSystemOf, ROOF_SYSTEM_ID, outlineWithFront, pointWithFront, HIP_PLANE_SIDES, hipPlaneCommands, hipSpecFrom, hipWallTopM, MASSING_TOLERANCES, MAX_OVERHANG_M, MASSING_VERSION, massingCommands, MINIATURE_CONVENTIONS, profileOver, readableStretch, registerByPlan, solveMassing, wallCornerTopM } from './massing.js'
 import type { BodySpec, Fidelity, MassingHypothesis, ModelBody, OutlineObservation, Rect, RoofSpec, SilhouetteObservation } from './massing.js'
 
-export const MASSING_OPS_VERSION = '1.11.0' as const
+export const MASSING_OPS_VERSION = '1.12.0' as const
 /** v3.54.17 R2: the most overhang a drawn roof may have past its body on a side, and the steepest pitch the kernel builds. */
 export { MAX_OVERHANG_M }
 /** v3.54.18 (ops 1.6.0): an opening whose height the model ASSUMED comes down under a roof the source draws — to this far under the wall top, and only while at least this much of it is left (else the roof patch is refused, as before). */
@@ -156,7 +156,7 @@ function bodyWallSilhouette(m: CanonicalBuildingModel, b: ModelBody, view: BindV
   const floor = Math.min(...ws.map((w) => levelOf(m, w.levelId).elevation + w.baseOffset))
   // the walls' top where they stop level (a flat roof's parapet); where they follow a roof, that roof's eaves
   const level = ws.filter((w) => !w.topProfile).map((w) => levelOf(m, w.levelId).elevation + w.baseOffset + w.height)
-  const eaves = m.roofs.filter((r) => b.roofIds.includes(r.id)).map((r) => levelOf(m, r.levelId).elevation + r.eaveOffset)
+  const eaves = [...m.roofs.filter((r) => b.roofIds.includes(r.id)).map((r) => levelOf(m, r.levelId).elevation + r.eaveOffset), ...m.roofPlanes.filter((pl) => b.planeIds.includes(pl.id)).map((pl) => pl.datum.y)]
   const top = level.length > 0 ? Math.min(...level) : Math.min(...eaves)
   if (!Number.isFinite(top)) return undefined
   const e = extentOn(rect, view.side)
@@ -663,7 +663,7 @@ export function bindBuildMassing(ctx: Ctx, p: CorrectionProposal): Bound | Refus
   if (!obs?.outline) return { status: 'NEEDS_EVIDENCE', code: 'NO_OUTLINE', why: 'BUILD_MASSING needs the plan outline (a plan frame read at a measured scale, or the walls of a model): none was observed' }
   // §6: the side each labelled elevation draws is a hypothesis of its own — solved as labelled and turned by 90°, the
   // reading whose views agree on every body's heights is taken (ties stay as labelled); the other is kept named
-  const pitchFact = ctx.facts?.roofPitchDeg !== undefined ? { publishedPitchDeg: ctx.facts.roofPitchDeg } : {}
+  const pitchFact = { ...(ctx.facts?.roofPitchDeg !== undefined ? { publishedPitchDeg: ctx.facts.roofPitchDeg } : {}), ...(ctx.facts?.buildingHeightM !== undefined ? { publishedHeightM: ctx.facts.buildingHeightM } : {}) }
   const agreeing = (x: MassingHypothesis): number => x.bodies.filter((b) => b.provenance.height?.fidelity === 'SOURCE_DERIVED').length
   const structureFact = ctx.facts?.structure ? { structure: ctx.facts.structure } : {}
   const wallsFact = { ...(obs.planWalls && obs.planWalls.length > 0 ? { planWalls: obs.planWalls } : {}), ...structureFact }
@@ -693,7 +693,10 @@ export function bindBuildMassing(ctx: Ctx, p: CorrectionProposal): Bound | Refus
   const heightNote = byHeight ? [`the page states the building ${pageH} m high: ${byHeight === 'TURNED' ? 'turned by 90°' : 'as labelled'} the top stands at ${(topOf(byHeight === 'TURNED' ? turnedH : asLabelled) as number).toFixed(2)} m, ${byHeight === 'TURNED' ? 'as labelled' : 'turned by 90°'} at ${topOf(byHeight === 'TURNED' ? asLabelled : turnedH)?.toFixed(2) ?? 'no'} m — the reading the page's height fits is taken (heights agreeing: ${agreeing(asLabelled)} as labelled, ${agreeing(turnedH)} turned)`] : []
   const h: MassingHypothesis = turn && !ownFrame ? { ...turnedH, alternatives: [...turnedH.alternatives, `the elevations draw the model's sides turned by 90° from their labels: ${agreeing(turnedH)} body/bodies' heights agree so against ${agreeing(asLabelled)} as labelled (the labelled reading is kept as an alternative)`] } : turn ? { ...turnedH, planFront, alternatives: [...turnedH.alternatives, `the body is built in the elevations' frame, the plan sheet's ${planFront.toLowerCase()} side as its front (${obs.entranceSide === undefined ? 'which end is a convention: the plan read marks no main entrance' : obs.entranceSide === planFront ? 'the plan marks its main entrance there' : `the plan marks its main entrance on its ${obs.entranceSide.toLowerCase()} side, where neither quarter turn puts the front: a convention`}) — the elevations draw the plan's sides turned by 90° from their labels: ${agreeing(turnedH)} body/bodies' heights agree so against ${agreeing(asLabelled)} as labelled (the labelled reading is kept as an alternative)`] } : { ...asLabelled, alternatives: [...asLabelled.alternatives, ...(agreeing(turnedH) === agreeing(asLabelled) && turnedH.status === 'BUILDABLE' ? [`turned by 90° the elevations agree as well (${agreeing(turnedH)} body/bodies): the labels are kept`] : [])] }
   if (heightNote.length > 0) h.alternatives = [...h.alternatives, ...heightNote]
-  const record = { massing: { version: MASSING_OPS_VERSION, hypothesis: h } as Record<string, unknown>, ...(obs.outline.frameId ? { source: { frameId: obs.outline.frameId, sourceByteHash: obs.outline.sourceByteHash } } : {}) }
+  // ops 1.12.0: the observations the hypothesis was solved from are part of the record — the body can be solved again
+  // offline from the record alone (a failed or a disputed body is reproduced without buying its readings a second time)
+  const input = { outline: obs.outline, silhouettes: obs.silhouettes, ...(obs.planWalls ? { planWalls: obs.planWalls } : {}), ...(obs.entranceSide ? { entranceSide: obs.entranceSide } : {}), facts: { ...(ctx.facts?.roofPitchDeg !== undefined ? { roofPitchDeg: ctx.facts.roofPitchDeg } : {}), ...(ctx.facts?.buildingHeightM !== undefined ? { buildingHeightM: ctx.facts.buildingHeightM } : {}), ...(ctx.facts?.structure ? { structure: ctx.facts.structure } : {}) }, ownFrame, taken: turn ? 'TURNED_90' : 'AS_LABELLED' }
+  const record = { massing: { version: MASSING_OPS_VERSION, hypothesis: h, input } as Record<string, unknown>, ...(obs.outline.frameId ? { source: { frameId: obs.outline.frameId, sourceByteHash: obs.outline.sourceByteHash } } : {}) }
   if (h.status !== 'BUILDABLE') return { status: h.status === 'UNSUPPORTED_FORM' ? 'UNSUPPORTED_OPERATION' : 'NEEDS_EVIDENCE', code: h.status === 'UNSUPPORTED_FORM' ? 'MASSING_UNSUPPORTED_FORM' : 'MASSING_MISSING_ANCHORS', why: `${h.why}; missing: ${h.missing.map((x) => `${x.anchor} (${x.why})`).join('; ') || 'none'}`, record }
   const existing = bodiesOf(m).filter((b) => b.ringIds.length > 0)
   const iouR = (a: Rect, b: Rect): number => {
@@ -718,7 +721,10 @@ export function bindBuildMassing(ctx: Ctx, p: CorrectionProposal): Bound | Refus
     cmds = missing.flatMap((b) => withEvidence(bodyCommands(b, lv.id, lv.elevation, rects.filter((r) => r !== b.rect), h.wallThicknessM), b, frames))
   }
   cmds = [...sources, ...cmds]
-  const allowed = [...missing.flatMap((b) => [`walls:ring-${b.id}*`, `wallRings:ring-${b.id}`, `wallJunctions:ring-${b.id}*`, `roofs:roof-${b.id}`, ...HIP_PLANE_SIDES.map((sd) => `roofPlanes:roof-${b.id}-${sd}`)]), 'evidenceSources:src-*', 'levels:*', 'materials:mat-*', ...(m.building ? [] : ['building', 'building:*'])]
+  // ops 1.12.0: a body under the roof system has its planes cut by the others' (a slope in two pieces is `-<side>-<n>`), a cross gable its own planes, and the system its creases, free edges and one ROOF assembly
+  const sol = roofSystemOf(h)
+  const joined = joinedBodiesOf(sol)
+  const allowed = [...missing.flatMap((b) => [`walls:ring-${b.id}*`, `wallRings:ring-${b.id}`, `wallJunctions:ring-${b.id}*`, `roofs:roof-${b.id}`, ...HIP_PLANE_SIDES.map((sd) => `roofPlanes:roof-${b.id}-${sd}`), ...(joined.has(b.id) ? [`roofPlanes:roof-${b.id}-*`] : [])]), ...(joined.size > 0 ? ['roofEdges:*', `assemblies:${ROOF_SYSTEM_ID}`] : []), 'evidenceSources:src-*', 'levels:*', 'materials:mat-*', ...(m.building ? [] : ['building', 'building:*'])]
   const viewsUsed = h.views
   const measure = (working: CanonicalBuildingModel, _b: CanonicalBuildingModel, pictures: readonly BindPicture[]): { failure?: string; measure: { sourceVerified: boolean | null; why: string } } => {
     const built = bodiesOf(working)
@@ -726,7 +732,7 @@ export function bindBuildMassing(ctx: Ctx, p: CorrectionProposal): Bound | Refus
     let verified: boolean | null = true
     for (const b of missing) {
       const nb = built.find((q) => q.id === `ring-${b.id}`)
-      if (!nb || (b.roof.kind === 'HIP' ? nb.planeIds.length !== HIP_PLANE_SIDES.length : nb.roofIds.length !== 1)) return { failure: `${b.id} was not built as a walled body with its roof`, measure: { sourceVerified: false, why: `${b.id} missing in the candidate` } }
+      if (!nb || (joined.has(b.id) ? nb.planeIds.length < 2 : b.roof.kind === 'HIP' ? nb.planeIds.length !== HIP_PLANE_SIDES.length : nb.roofIds.length !== 1)) return { failure: `${b.id} was not built as a walled body with its roof`, measure: { sourceVerified: false, why: `${b.id} missing in the candidate` } }
       let yes = 0
       let no = 0
       for (const v of viewsUsed) {

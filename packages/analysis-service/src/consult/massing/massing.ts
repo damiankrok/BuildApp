@@ -21,10 +21,12 @@
  */
 import type { BuildingCommand } from '@buildapp/commands'
 import type { CanonicalBuildingModel, Wall } from '@buildapp/model'
+import { pointInPoly, ROOF_SYSTEM_TOLERANCES, solveRoofSystem } from '@buildapp/reconstruction'
+import type { RoofRegion, RoofSystemSolution } from '@buildapp/reconstruction'
 import type { BindView, Projection, Side } from '../correct/execute.js'
 import type { Poly } from '../correct/source-gate.js'
 
-export const MASSING_VERSION = '1.10.0' as const
+export const MASSING_VERSION = '1.11.0' as const
 
 import type { BuildStructure, StructureSide } from '../structure.js'
 export type Rect = { minX: number; maxX: number; minZ: number; maxZ: number }
@@ -43,7 +45,99 @@ export type RoofForm = 'GABLE' | 'FLAT' | 'HIP'
  * the walls on the sides along the ridge (the hip ends reach so far that the fascia stays level all round).
  */
 export type RoofSpec = { kind: RoofForm; ridgeAxis?: 'X' | 'Z'; pitchDeg?: number; eavesM: number; ridgeM?: number; hipRunM?: number; overhangM?: number }
-export type BodySpec = { id: string; rect: Rect; roof: RoofSpec; provenance: Record<string, Prov> }
+/**
+ * massing 1.11.0: what became of ONE property of a roof — a value taken from a read or a page beside what was built.
+ *   APPLIED                 the built value is the taken one (within the stated tolerance), or was derived from it;
+ *   RETAINED_WITH_CONFLICT  the drawn value stands, the taken one disagrees — both on the record, with the difference;
+ *   REJECTED                the taken value was not used, by a named reason;
+ *   UNUSED_UNSUPPORTED      no consumer exists for it;
+ *   UNRESOLVED              nothing decides.
+ */
+export type PropertyFate = { property: string; fate: 'APPLIED' | 'RETAINED_WITH_CONFLICT' | 'REJECTED' | 'UNUSED_UNSUPPORTED' | 'UNRESOLVED'; taken?: string; built?: string; residual?: number; why: string }
+export type BodySpec = { id: string; rect: Rect; roof: RoofSpec; provenance: Record<string, Prov>; fates?: PropertyFate[] }
+/** A description is bound to a body by its own views when at least this many more of them draw one ridge direction than the other. */
+export const BIND_BY_VIEWS = 2
+/** A built pitch agrees with a stated one within this (degrees); a height within `MASSING_TOLERANCES.heightAgreeM` / share. */
+export const PITCH_AGREE_DEG = 6
+/** …and is THE stated pitch within this (degrees). */
+export const PITCH_SAME_DEG = 3
+export type SettleInput = {
+  /** A pitch stated for this roof from outside its own silhouettes, and by whom. */
+  pitch?: { deg: number; from: string; /** stated for THIS roof: a disagreement with it is acted on. Otherwise it is only what a roof whose own heights make no roof falls back to (a lower roof need not have the main roof's pitch). */ binding: boolean }
+  /** The eaves are a line two views draw (a wall's corner under the roof); else only a lower bound of the wall's top. */
+  eavesHeld: boolean
+  drawnEavesM: number
+  /** The drawn top is this roof's own ridge (a view across the ridge draws the roof narrowing to it). */
+  topOwn: boolean
+  /** A height of the house's top from outside the silhouettes (the ridge the read states as printed, the page's building height), metres. */
+  topWitnessM?: number
+  statedRidge?: { m: number; status: string }
+  statedEaves?: { m: number; status: string }
+}
+/**
+ * massing 1.11.0 — pitch, eaves and ridge of ONE roof agreed again over its FINAL span. `ridge = eaves + half·tan(pitch)`
+ * always holds for what is built; the question is which two of the three are held and which follows:
+ *  - the built pitch is within a roof's range and agrees with the stated one (or none is stated): nothing changes;
+ *  - else, with a stated pitch: where the eaves are only a lower bound and the top is this roof's own, the EAVES follow
+ *    from the ridge (a cross gable's walls stand higher than the eaves line of the roof beside it); where the top is not
+ *    this roof's own (a band drawn over a narrow body is the roof behind it), the RIDGE follows from the eaves; where
+ *    both are held and the pitch is a roof's, the drawing stands and the stated pitch is kept as a conflict — with the
+ *    span the stated numbers WOULD close over, which says whether this rectangle is that roof's at all;
+ *  - a pitch outside a roof's range is never built and never clipped to the limit: the heights and the span are not one
+ *    roof's, and the ridge follows from the eaves at the stated pitch, by name.
+ */
+export function settleRoof(roof: RoofSpec, rect: Rect, w: SettleInput): { roof: RoofSpec; notes: string[]; fates: PropertyFate[] } {
+  const notes: string[] = []
+  const fates: PropertyFate[] = []
+  if (roof.kind === 'FLAT' || roof.ridgeM === undefined) return { roof, notes, fates }
+  const R = ROOF_SYSTEM_TOLERANCES
+  const axis = roof.ridgeAxis ?? 'X'
+  const half = (axis === 'X' ? rect.maxZ - rect.minZ : rect.maxX - rect.minX) / 2
+  const length = axis === 'X' ? rect.maxX - rect.minX : rect.maxZ - rect.minZ
+  const degOf = (e: number, r: number): number => (Math.atan2(r - e, half) * 180) / Math.PI
+  let [eaves, ridge] = [roof.eavesM, roof.ridgeM]
+  const was = degOf(eaves, ridge)
+  const P = w.pitch
+  const tanP = P ? Math.tan((P.deg * Math.PI) / 180) : 0
+  const inRange = (d: number): boolean => d >= R.minPitchDeg && d <= R.maxPitchDeg
+  const off = P !== undefined && P.binding && Math.abs(was - P.deg) > PITCH_AGREE_DEG
+  const t = MINIATURE_CONVENTIONS.roofThicknessM
+  if (P && (off || !inRange(was))) {
+    const eavesFromRidge = ridge - half * tanP
+    const ridgeFromEaves = eaves + half * tanP
+    const wallUnder = eavesFromRidge - t / Math.cos((P.deg * Math.PI) / 180)
+    // the ridge is held where something outside the silhouettes puts the house's top there too
+    const ridgeHeld = w.topWitnessM !== undefined && Math.abs(ridge - w.topWitnessM) <= Math.max(0.6, 0.1 * w.topWitnessM)
+    if (!w.eavesHeld && w.topOwn && ridgeHeld && wallUnder >= w.drawnEavesM - Math.max(MASSING_TOLERANCES.heightAgreeM, MASSING_TOLERANCES.heightAgreeShare * w.drawnEavesM) && wallUnder >= STOREY_WALLS.oneMinM && ridge - eavesFromRidge >= MASSING_TOLERANCES.flatRiseM) {
+      notes.push(`${was.toFixed(1)}° over the ${(2 * half).toFixed(2)} m span it now has against ${P.deg}° (${P.from}): the ridge at ${ridge.toFixed(2)} m is this roof's own (a view across it draws the roof narrowing to it; ${w.topWitnessM} m is stated for the house's top from outside the silhouettes) and its eaves were only a lower bound (${w.drawnEavesM.toFixed(2)} m, the lowest edge drawn there) — the eaves follow from the ridge: ${eavesFromRidge.toFixed(2)} m, the walls under them to ${wallUnder.toFixed(2)} m`)
+      fates.push({ property: 'pitchDeg', fate: 'APPLIED', taken: `${P.deg}° (${P.from})`, built: `${P.deg.toFixed(1)}°`, residual: 0, why: 'the eaves were derived from the drawn ridge at this pitch' })
+      eaves = eavesFromRidge
+    } else if (!w.topOwn || !inRange(was)) {
+      notes.push(`${was.toFixed(1)}° over the ${(2 * half).toFixed(2)} m span it now has${inRange(was) ? ` against ${P.deg}° (${P.from})` : ` — outside ${R.minPitchDeg}–${R.maxPitchDeg}°: these heights and this span are not one roof's`}: ${w.topOwn ? 'the heights were read over another span' : 'no view across the ridge draws this roof narrowing to the top drawn over it (it is the roof behind it)'} — the ridge follows from this body's own eaves at ${P.deg}° (${P.from}): ${ridgeFromEaves.toFixed(2)} m, not ${ridge.toFixed(2)} m`)
+      fates.push({ property: 'pitchDeg', fate: 'APPLIED', taken: `${P.deg}° (${P.from})`, built: `${P.deg.toFixed(1)}°`, residual: 0, why: 'the ridge was derived from the eaves at this pitch' }, { property: 'ridgeM', fate: 'REJECTED', taken: `${ridge.toFixed(2)} m (the top drawn over this body)`, built: `${ridgeFromEaves.toFixed(2)} m`, residual: r6(ridgeFromEaves - ridge), why: w.topOwn ? 'with this span the drawn heights make no roof' : 'the drawn top is not this roof\'s own' })
+      ridge = ridgeFromEaves
+    } else {
+      const closes = (ridge - eaves) / Math.max(1e-6, tanP)
+      fates.push({ property: 'pitchDeg', fate: 'RETAINED_WITH_CONFLICT', taken: `${P.deg}° (${P.from})`, built: `${was.toFixed(1)}°`, residual: r6(was - P.deg), why: `the eaves (${eaves.toFixed(2)} m) and the ridge (${ridge.toFixed(2)} m) are both drawn and held; at ${P.deg}° they would close over a ${(2 * closes).toFixed(2)} m span, this body's is ${(2 * half).toFixed(2)} m — the stated pitch is of another span (or this rectangle is not that roof's)` })
+    }
+  } else if (!inRange(was)) {
+    fates.push({ property: 'pitchDeg', fate: 'UNRESOLVED', built: `${was.toFixed(1)}°`, why: `${was.toFixed(1)}° is outside ${R.minPitchDeg}–${R.maxPitchDeg}° and no pitch is stated for this roof from outside its silhouettes` })
+  } else if (P?.binding) fates.push(Math.abs(was - P.deg) <= PITCH_SAME_DEG ? { property: 'pitchDeg', fate: 'APPLIED', taken: `${P.deg}° (${P.from})`, built: `${was.toFixed(1)}°`, residual: r6(was - P.deg), why: `the built pitch is the stated one within ${PITCH_SAME_DEG}°` } : { property: 'pitchDeg', fate: 'RETAINED_WITH_CONFLICT', taken: `${P.deg}° (${P.from})`, built: `${was.toFixed(1)}°`, residual: r6(was - P.deg), why: `the drawn heights give ${was.toFixed(1)}°; within ${PITCH_AGREE_DEG}° of the stated pitch nothing is moved (the difference is within what a registration reads), and it is kept on the record` })
+  const tolH = (v: number): number => Math.max(MASSING_TOLERANCES.heightAgreeM, MASSING_TOLERANCES.heightAgreeShare * v)
+  if (w.statedRidge) { const d = ridge - w.statedRidge.m; fates.push({ property: 'ridgeM', fate: Math.abs(d) <= tolH(ridge) ? 'APPLIED' : 'RETAINED_WITH_CONFLICT', taken: `${w.statedRidge.m} m (${w.statedRidge.status}, above the floor)`, built: `${ridge.toFixed(2)} m`, residual: r6(d), why: Math.abs(d) <= tolH(ridge) ? 'the drawn ridge agrees with the stated one' : 'the ridge is the one the registered elevations draw; the stated one differs (its datum or its roof may be another)' }) }
+  if (w.statedEaves) { const wallTop = eaves - t / Math.cos(Math.atan2(ridge - eaves, half)); const d = wallTop - w.statedEaves.m; fates.push({ property: 'eavesM', fate: Math.abs(d) <= tolH(wallTop) ? 'APPLIED' : 'RETAINED_WITH_CONFLICT', taken: `${w.statedEaves.m} m (${w.statedEaves.status}, top of the walls above the floor)`, built: `${wallTop.toFixed(2)} m`, residual: r6(d), why: Math.abs(d) <= tolH(wallTop) ? 'the built wall top agrees with the stated one' : 'the wall top is the one the registered elevations draw; the stated one differs' }) }
+  const pitchDeg = Math.round(degOf(eaves, ridge) * 10) / 10
+  if (eaves === roof.eavesM && ridge === roof.ridgeM && pitchDeg === roof.pitchDeg) return { roof, notes, fates }
+  const next: RoofSpec = { ...roof, pitchDeg, eavesM: r6(eaves), ridgeM: r6(ridge), ...(roof.kind === 'HIP' ? { hipRunM: r6(Math.min(roof.hipRunM ?? half, length / 2)) } : {}) }
+  // a stale pitch (the heights kept, the span changed) is corrected without a note of its own: the pitch always follows the heights
+  return { roof: next, notes, fates }
+}
+/**
+ * massing 1.11.0: a roof region that is NOT the roof of a rectangle of walls — a cross gable standing on a body's own
+ * walls, a second ridge across its roof. The outline has no step under it; the roof has. It has its own identity
+ * (`roof-<body>-cross-<side>`), its own extent, its own heights and pitch, and is hosted by the body it stands on.
+ */
+export type CrossRoofSpec = { id: string; over: string; side: Side; rect: Rect; ridgeAxis: 'X' | 'Z'; eavesM: number; ridgeM: number; pitchDeg: number; provenance: Prov }
 export type MassingStatus = 'BUILDABLE' | 'INSUFFICIENT' | 'UNSUPPORTED_FORM'
 export type MassingHypothesis = {
   version: string
@@ -64,6 +158,10 @@ export type MassingHypothesis = {
    * — the model's own frame says "the front facade outer face is z = 0" — and the plan sheet is then turned against it.
    */
   planFront?: Side
+  /** massing 1.11.0: roof regions that are not a body's own roof (cross gables), each hosted by a body of `bodies`. */
+  crossRoofs?: CrossRoofSpec[]
+  /** massing 1.11.0: pairs of bodies whose roofs the source shows apart (a wall between them): never joined in a valley. */
+  separateRoofs?: Array<[string, string]>
   why: string
 }
 
@@ -554,7 +652,7 @@ export function wingsOf(outline: ReadonlyArray<{ x: number; z: number }>, minAre
   return { rects, coveredM2: r6(rects.reduce((t, q) => t + area(q), 0)), outlineM2: r6(outlineM2) }
 }
 
-export type MassingInput = { outline: OutlineObservation; silhouettes: readonly SilhouetteObservation[]; /** massing 1.9.0: the agreed structure (structure.ts) — the parts that are bodies of their own, the roof's kind and ridge, the storeys under the eaves */ structure?: BuildStructure; wallThicknessM?: { value: number; prov: Prov }; /** the roof pitch the page publishes (degrees): used only where no view shows the wall's corner under the roof, and only when the drawn walls allow it */ publishedPitchDeg?: number; /** massing 1.7.0: the partitions the plan draws inside the outline, in the outline's own frame (metres): where two bodies in line meet */ planWalls?: ReadonlyArray<{ a: { x: number; z: number }; b: { x: number; z: number } }> }
+export type MassingInput = { outline: OutlineObservation; silhouettes: readonly SilhouetteObservation[]; /** massing 1.9.0: the agreed structure (structure.ts) — the parts that are bodies of their own, the roof's kind and ridge, the storeys under the eaves */ structure?: BuildStructure; wallThicknessM?: { value: number; prov: Prov }; /** the roof pitch the page publishes (degrees): used only where no view shows the wall's corner under the roof, and only when the drawn walls allow it */ publishedPitchDeg?: number; /** massing 1.11.0: the building's height the page publishes (metres, from the ground): a witness of the house's top from outside the silhouettes */ publishedHeightM?: number; /** massing 1.7.0: the partitions the plan draws inside the outline, in the outline's own frame (metres): where two bodies in line meet */ planWalls?: ReadonlyArray<{ a: { x: number; z: number }; b: { x: number; z: number } }> }
 
 /** A reported part is a body only where the outline steps out by at least this (metres): a garage holds a car between two walls; a 2 m slab of the main house's own wall line is not one. */
 export const STRUCTURE_WING_MIN_M = 2.8
@@ -681,6 +779,43 @@ export function roofByStructure(roof: RoofSpec, want: { kind?: 'GABLE' | 'HIP' |
   if (roof.kind === 'HIP') notes.push('a gable (the read reports gable walls), not a hip')
   if (notes.length === 0) return { roof, notes }
   return { roof: { kind: 'GABLE', ridgeAxis: axis, pitchDeg, eavesM: r6(eaves), ridgeM: r6(ridge) }, notes }
+}
+
+/**
+ * massing 1.11.0 — a GABLE WALL drawn over a part of a stretch of one elevation: a wall polygon that keeps its width up
+ * to its shoulders and then narrows to a point at least `CROSS_GABLE.minRiseM` higher. Returned in metres along the side
+ * (its extent at the shoulders) with the shoulders' and the apex's heights; undefined where no such wall is drawn, or
+ * where it spans (nearly) the whole stretch — then it is the body's own gable end, not a second ridge across its roof.
+ */
+export const CROSS_GABLE = { minRiseM: 0.8, minWidthM: 2.0, maxShare: 0.85, shoulderShare: 0.97, pointShare: 0.4 } as const
+export function gableWallOver(view: BindView, stretch: { lo: number; hi: number }, walls: readonly Poly[], groundRow: number | null): { lo: number; hi: number; shoulderM: number; apexM: number } | undefined {
+  if (groundRow === null || !Number.isFinite(groundRow)) return undefined
+  const p = view.projection
+  const alongOf = (x: number): number => p.alongAtPx0 + p.alongSign * p.mpp * x
+  let best: { lo: number; hi: number; shoulderM: number; apexM: number } | undefined
+  for (const poly of walls) {
+    const top = Math.min(...poly.map((q) => q[1]))
+    const foot = Math.max(...poly.map((q) => q[1]))
+    if (foot - top < 20) continue
+    const widthAt = (row: number): number => { const e = rowExtent([poly], row); return e ? e[1] - e[0] : 0 }
+    const base = Math.max(widthAt(foot - 0.1 * (foot - top)), widthAt(foot - 0.3 * (foot - top)))
+    if (base <= 0) continue
+    // the shoulders: the highest row at which the wall still has its width
+    let shoulder = foot
+    for (let k = 0; k <= 240; k += 1) { const row = foot - ((foot - top) * k) / 240; if (widthAt(row) >= CROSS_GABLE.shoulderShare * base) shoulder = row; else if (row < shoulder - 0.15 * (foot - top)) break }
+    const rise = yOfRow(p, top) - yOfRow(p, shoulder)
+    if (rise < CROSS_GABLE.minRiseM) continue
+    if (widthAt(shoulder - 0.8 * (shoulder - top)) > CROSS_GABLE.pointShare * base) continue
+    // its extent where it has its full width (below the shoulders)
+    const e = rowExtent([poly], shoulder + 0.25 * (foot - shoulder))
+    if (!e) continue
+    const [a, b] = [Math.min(alongOf(e[0]), alongOf(e[1])), Math.max(alongOf(e[0]), alongOf(e[1]))]
+    const [lo, hi] = [Math.max(a, stretch.lo), Math.min(b, stretch.hi)]
+    if (hi - lo < CROSS_GABLE.minWidthM || hi - lo < 0.8 * (b - a) || hi - lo > CROSS_GABLE.maxShare * (stretch.hi - stretch.lo)) continue
+    const cand = { lo: r6(lo), hi: r6(hi), shoulderM: r6(yOfRow(p, shoulder)), apexM: r6(yOfRow(p, top)) }
+    if (!best || cand.hi - cand.lo > best.hi - best.lo) best = cand
+  }
+  return best
 }
 
 /** 3. The mass the observations support, or exactly what they lack. */
@@ -847,9 +982,9 @@ export function solveMassing(input: MassingInput): MassingHypothesis {
   rects.sort((a, b) => area(b) - area(a))
   rects = [...rects, ...wingBodies.map((q) => q.rect)]
   const bodies: BodySpec[] = []
-  for (const [i, rect] of rects.entries()) {
-    const id = i === 0 ? 'mass-main' : `mass-wing-${i}`
-    const reads: Array<{ side: Side; p: RoofProfile; ext: { lo: number; hi: number }; wallTopM?: number }> = []
+  type BodyRead = { side: Side; p: RoofProfile; ext: { lo: number; hi: number }; wallTopM?: number }
+  const readsOf = (i: number, rect: Rect): BodyRead[] => {
+    const reads: BodyRead[] = []
     for (const { obs, view } of byView.values()) {
       const e = extentOn(rect, obs.side)
       // a body hidden behind another on this side (its whole stretch inside the other's, and further back) is not read there
@@ -860,6 +995,55 @@ export function solveMassing(input: MassingInput): MassingHypothesis {
       const wt = p && p.shape !== 'NONE' ? wallCornerTopM(view, e.lo, e.hi, own.walls, obs.groundRow) : undefined
       if (p) reads.push({ side: obs.side, p, ext: e, ...(wt !== undefined ? { wallTopM: wt } : {}) })
     }
+    return reads
+  }
+  const allReads = rects.map((rect, i) => readsOf(i, rect))
+  const axisOfSide = (sd: Side): 'X' | 'Z' => (along(sd) === 'x' ? 'X' : 'Z')
+  /** What a body's own views say of its ridge: slopes (a band) on the sides along it, a gable end (a triangle) across it. */
+  const drawnAxis = (reads: readonly BodyRead[]): { X: number; Z: number } => {
+    const v = { X: 0, Z: 0 }
+    for (const r of reads) { if (r.p.shape === 'BAND') v[axisOfSide(r.side)] += 1; if (r.p.shape === 'TRIANGLE') v[axisOfSide(r.side) === 'X' ? 'Z' : 'X'] += 1 }
+    return v
+  }
+  // massing 1.11.0 — which body each description of the agreed structure is OF. The read describes roofs ("the main
+  // roof, its ridge parallel to the front"; "a wing on the front, its ridge front-to-back"); it does not say which
+  // rectangle of the outline carries which. Until now the main roof's description went to the largest rectangle. Where
+  // that rectangle's own elevations draw, on every side, the ridge of a reported PART instead (a gable on the front and
+  // the rear, slopes on both sides: the cross wing itself), the part is that body's description — and the main roof's
+  // is the bodies' beside it. Nothing is turned against four views of its own because a larger label was nearer.
+  const partOf = new Map<Rect, BuildStructure['parts'][number]>(wingBodies.map((q) => [q.rect, q.part]))
+  let mainRects = new Set<Rect>(rects.length > 0 ? [rects[0]] : [])
+  if (input.structure && rects.length > 1 && !partOf.has(rects[0])) {
+    const st = input.structure
+    const v0 = drawnAxis(allReads[0])
+    const own0: 'X' | 'Z' | undefined = v0.X - v0.Z >= BIND_BY_VIEWS ? 'X' : v0.Z - v0.X >= BIND_BY_VIEWS ? 'Z' : undefined
+    const reaches = (r: Rect, side: StructureSide): boolean => (side === 'FRONT' ? rects.every((o) => r.minZ <= o.minZ + 0.05) : side === 'REAR' ? rects.every((o) => r.maxZ >= o.maxZ - 0.05) : side === 'LEFT' ? rects.every((o) => r.minX <= o.minX + 0.05) : rects.every((o) => r.maxX >= o.maxX - 0.05))
+    const free = st.parts.filter((q) => ![...partOf.values()].includes(q))
+    const explains = own0 && st.mainRidge && st.mainRidge !== own0 ? free.find((q) => q.ridge === own0 && reaches(rects[0], q.where)) : undefined
+    if (explains && own0) {
+      partOf.set(rects[0], explains)
+      mainRects = new Set(rects.filter((r) => !partOf.has(r)))
+      base.alternatives.push(`STRUCTURE: the ${explains.what.toLowerCase()} reported on the ${explains.where.toLowerCase()} with its ridge along ${own0} is the body whose own elevations draw that ridge (mass-main: ${Math.max(v0.X, v0.Z)} view(s) to ${Math.min(v0.X, v0.Z)}) and which stands furthest out on that side; the main roof's description (ridge along ${st.mainRidge}) is of the ${mainRects.size} bod${mainRects.size === 1 ? 'y' : 'ies'} beside it, not of the largest rectangle`)
+    }
+  }
+  const mainRep = [...mainRects].sort((p, q) => area(q) - area(p))[0]
+  // massing 1.11.0 — a reported part with NO step of the outline and no body of its own: a cross gable on the main
+  // body's own walls, where the elevation of its side draws a gable wall over a part of that body's stretch (a wall
+  // rising above its own shoulders to a point). The read says THAT a second ridge is there; the drawing says WHERE.
+  const crossCands: Array<{ part: BuildStructure['parts'][number]; side: Side; lo: number; hi: number; shoulderM: number; apexM: number }> = []
+  const unbuiltParts: Array<{ part: BuildStructure['parts'][number]; why: string }> = []
+  for (const part of input.structure?.parts ?? []) {
+    if ([...partOf.values()].includes(part)) continue
+    const side = part.where as Side
+    const seen = byView.get(side)
+    if (!mainRep || !seen) { unbuiltParts.push({ part, why: `no registered elevation of the ${side.toLowerCase()} side to place it on` }); continue }
+    const g = gableWallOver(seen.view, extentOn(mainRep, side), seen.obs.walls, seen.obs.groundRow)
+    if (!g) { unbuiltParts.push({ part, why: `the ${side.toLowerCase()} elevation draws no gable wall over a part of the main body's stretch: where it stands is not known` }); continue }
+    crossCands.push({ part, side, ...g })
+  }
+  for (const [i, rect] of rects.entries()) {
+    const id = i === 0 ? 'mass-main' : `mass-wing-${i}`
+    const reads = allReads[i]
     if (reads.length === 0) {
       base.missing.push({ anchor: `HEIGHT:${id}`, why: `no registered elevation shows ${id}` })
       continue
@@ -1000,15 +1184,27 @@ export function solveMassing(input: MassingInput): MassingHypothesis {
     }
     // a body read at the elevations' step and built on the plan's wall: its heights stand; a gable across the moved side
     // keeps its ridge height over the new span (the pitch follows)
+    const fates: PropertyFate[] = []
     if (input.structure) {
       const st = input.structure
-      const wing = wingBodies.find((q) => q.rect === rect)?.part
+      const wing = partOf.get(rect)
       // no body of a house rises a storey above its main volume unless the read reports such a part: under a one-storey
       // main volume the other bodies' walls stay within one storey too (never the other way: a wing beside a two-storey
       // main volume is as high as its own elevations draw it)
       const oneStoreyHouse = st.fullStoreys === 1 && st.parts.every((q) => q.fullStoreys !== 2)
+      // a body beside the main one takes the main ridge's direction only where its own views do not draw the other
+      const ownAxisAgainst = (ax: 'X' | 'Z'): boolean => { const v = drawnAxis(reads); return (ax === 'X' ? v.Z - v.X : v.X - v.Z) >= BIND_BY_VIEWS }
+      // a description is executed whole or not at all: "the main ridge along A, and a cross wing with its ridge along B"
+      // turns the main ridge away from B only when that cross wing is built too. With the wing left unbuilt, the turn
+      // would take away the one gable the drawings do show.
+      const cross = unbuiltParts.find((q) => q.part.ridge !== undefined && q.part.ridge !== st.mainRidge)
+      const halfDescription = rect === mainRep && roof.kind === 'GABLE' && st.mainRidge !== undefined && roof.ridgeAxis !== st.mainRidge && cross !== undefined && cross.part.ridge === roof.ridgeAxis
+      if (halfDescription && cross) {
+        base.alternatives.push(`STRUCTURE ${id}: the read reports the main ridge along ${st.mainRidge} AND a ${cross.part.what.toLowerCase()} on the ${cross.part.where.toLowerCase()} with its ridge along ${cross.part.ridge}; that part cannot be built here (${cross.why}) — the main ridge is NOT turned for half of the description: the ridge the elevations draw (${roof.ridgeAxis}) stands`)
+        fates.push({ property: 'mainRidge', fate: 'RETAINED_WITH_CONFLICT', taken: `along ${st.mainRidge}`, built: `along ${roof.ridgeAxis}`, why: `turning it needs the reported ${cross.part.what.toLowerCase()} (ridge ${cross.part.ridge}) built with it, and that part has no place: ${cross.why}` })
+      }
       const want = wing ? { ...(wing.roof ? { kind: wing.roof } : {}), ...(wing.ridge ? { axis: wing.ridge } : {}), full: wing.fullStoreys, ...(st.pitchDeg !== undefined ? { pitchDeg: st.pitchDeg } : {}), drawnTopsM: reads.map((q) => q.wallTopM ?? q.p.eavesM).filter((v) => Number.isFinite(v)) }
-        : { ...(st.mainRoof ? { kind: st.mainRoof } : {}), ...(i === 0 && st.mainRidge ? { axis: st.mainRidge } : {}), ...(st.fullStoreys && (i === 0 || oneStoreyHouse) ? { full: st.fullStoreys } : {}), ...(st.pitchDeg !== undefined ? { pitchDeg: st.pitchDeg } : {}), ...(i === 0 && st.eavesM ? { eavesM: st.eavesM } : {}), drawnTopsM: reads.map((q) => q.wallTopM ?? q.p.eavesM).filter((v) => Number.isFinite(v)) }
+        : { ...(st.mainRoof ? { kind: st.mainRoof } : {}), ...(mainRects.has(rect) && st.mainRidge && (rect === mainRep || !ownAxisAgainst(st.mainRidge)) && !halfDescription ? { axis: st.mainRidge } : {}), ...(st.fullStoreys && (rect === mainRep || oneStoreyHouse) ? { full: st.fullStoreys } : {}), ...(st.pitchDeg !== undefined ? { pitchDeg: st.pitchDeg } : {}), ...(rect === mainRep && st.eavesM ? { eavesM: st.eavesM } : {}), drawnTopsM: reads.map((q) => q.wallTopM ?? q.p.eavesM).filter((v) => Number.isFinite(v)) }
       const applied = roofByStructure(roof, want, rect)
       if (applied.notes.length > 0) {
         roof = applied.roof
@@ -1022,10 +1218,72 @@ export function solveMassing(input: MassingInput): MassingHypothesis {
       roof = { ...roof, pitchDeg: Math.round(((Math.atan2(roof.ridgeM - roof.eavesM, spanNow / 2) * 180) / Math.PI) * 10) / 10 }
     }
     const built = onPlan ?? rect
-    bodies.push({ id, rect: { minX: r6(built.minX), maxX: r6(built.maxX), minZ: r6(built.minZ), maxZ: r6(built.maxZ) }, roof, provenance: { outline: { fidelity: input.outline.fidelity, source: input.outline.by, why: input.outline.why }, height: hProv, roof: roofProv, wallThickness: input.wallThicknessM?.prov ?? { fidelity: 'DISPLAY_ASSUMPTION', source: 'MINIATURE', why: `${MINIATURE_CONVENTIONS.wallThicknessM} m: no wall thickness was measured` } } })
+    // massing 1.11.0 — AFTER the last change of kind, axis, span and height: pitch, eaves and ridge are agreed again over
+    // the span the roof now has (a limit checked before the ridge was turned does not hold after it)
+    if (roof.kind !== 'FLAT' && roof.ridgeM !== undefined) {
+      const st = input.structure
+      const bound = partOf.has(rect) ? 'PART' : rect === mainRep ? 'MAIN' : mainRects.has(rect) ? 'MAIN_BESIDE' : 'NONE'
+      const lead = bodies[0]?.roof.pitchDeg
+      const P0 = input.publishedPitchDeg
+      // the roof the read's (and the page's) pitch is OF: the main roof's body, and any body that carries the house's top
+      // (its own drawn ridge at the height stated for the house from outside the silhouettes). For every other roof a
+      // pitch from elsewhere is only what it falls back to when its own heights make no roof.
+      const topWitnessM = st?.ridgeM && st.ridgeM.status !== 'ESTIMATED' ? st.ridgeM.m : input.publishedHeightM
+      const carriesTop = topWitnessM !== undefined && Math.abs((roof.ridgeM ?? 0) - topWitnessM) <= Math.max(0.6, 0.1 * topWitnessM)
+      const own = bound === 'MAIN' || carriesTop
+      const witness: SettleInput['pitch'] = st?.pitchDeg !== undefined && (own || bound !== 'NONE') ? { deg: st.pitchDeg, from: own ? 'the pitch the structure read states for the main roof' : 'the pitch the structure read states (for the main roof: a fallback here)', binding: own }
+        : P0 !== undefined && P0 >= 10 && P0 <= 60 ? { deg: P0, from: 'the pitch the page publishes', binding: own }
+          : lead !== undefined && lead >= ROOF_SYSTEM_TOLERANCES.minPitchDeg && lead <= ROOF_SYSTEM_TOLERANCES.maxPitchDeg ? { deg: lead, from: 'the first body\'s pitch (a fallback: no pitch is stated for this roof)', binding: false } : undefined
+      const axis = roof.ridgeAxis ?? 'X'
+      const ends = reads.filter((r) => axisOfSide(r.side) !== axis)
+      const settled = settleRoof(roof, built, {
+        ...(witness ? { pitch: witness } : {}),
+        // the eaves are a wall corner two views draw (or a wall top the storeys rule took from the views): held; else a lower bound
+        eavesHeld: hProv.fidelity === 'SOURCE_DERIVED' || /the wall top \d+ elevation\(s\) draw within the storey/.test(roofProv.why),
+        drawnEavesM: Math.min(...reads.map((r) => r.wallTopM ?? r.p.eavesM)),
+        // the top is this roof's own where a view across its ridge draws it narrowing to it (a gable end, a hip end)
+        topOwn: ends.length === 0 ? i === 0 : ends.some((r) => r.p.shape === 'TRIANGLE' || r.p.shape === 'TRAPEZOID'),
+        ...(topWitnessM !== undefined ? { topWitnessM } : {}),
+        ...(st?.ridgeM && bound === 'MAIN' ? { statedRidge: st.ridgeM } : {}),
+        ...(st?.eavesM && bound === 'MAIN' ? { statedEaves: st.eavesM } : {}),
+      })
+      fates.push(...settled.fates)
+      if (settled.notes.length > 0) {
+        roof = settled.roof
+        for (const n of settled.notes) base.alternatives.push(`AGREED AGAIN ${id}: ${n}`)
+        roofProv = { fidelity: 'TRACE_UNCERTAIN', source: roofProv.source, why: `${roofProv.why}; agreed again after the last change: ${settled.notes.join('; ')}` }
+      } else roof = settled.roof
+      if (partOf.has(rect) && !wingBodies.some((q) => q.rect === rect)) fates.push({ property: 'part', fate: 'APPLIED', taken: `${partOf.get(rect)?.what}@${partOf.get(rect)?.where} ridge ${partOf.get(rect)?.ridge ?? '—'}`, built: `${id} ${roof.kind} along ${roof.ridgeAxis ?? '—'}`, why: 'bound to the body whose own elevations draw this ridge' })
+    }
+    bodies.push({ id, ...(fates.length > 0 ? { fates } : {}), rect: { minX: r6(built.minX), maxX: r6(built.maxX), minZ: r6(built.minZ), maxZ: r6(built.maxZ) }, roof, provenance: { outline: { fidelity: input.outline.fidelity, source: input.outline.by, why: input.outline.why }, height: hProv, roof: roofProv, wallThickness: input.wallThicknessM?.prov ?? { fidelity: 'DISPLAY_ASSUMPTION', source: 'MINIATURE', why: `${MINIATURE_CONVENTIONS.wallThicknessM} m: no wall thickness was measured` } } })
   }
   if (bodies.length === 0) return { ...base, status: 'INSUFFICIENT', bodies, views, why: `no body has its height and roof read (${base.missing.map((m) => m.anchor).join(', ')})` }
-  return { ...base, status: 'BUILDABLE', bodies, views, why: `${bodies.length} body/bodies: ${bodies.map((b) => `${b.id} ${(b.rect.maxX - b.rect.minX).toFixed(2)} × ${(b.rect.maxZ - b.rect.minZ).toFixed(2)} m, ${b.roof.kind}${b.roof.ridgeAxis ? ` along ${b.roof.ridgeAxis}` : ''} eaves ${b.roof.eavesM.toFixed(2)}${b.roof.ridgeM ? ` ridge ${b.roof.ridgeM.toFixed(2)}` : ''}`).join('; ')}` }
+  const crossRoofs: CrossRoofSpec[] = []
+  const hostSpec = mainRep ? bodies.find((b) => b.id === (rects.indexOf(mainRep) === 0 ? 'mass-main' : `mass-wing-${rects.indexOf(mainRep)}`)) : undefined
+  for (const c of crossCands) {
+    const name = `the ${c.part.what.toLowerCase()} reported on the ${c.side.toLowerCase()}`
+    const refuse = (why: string): void => { unbuiltParts.push({ part: c.part, why }); base.alternatives.push(`STRUCTURE: ${name} is not built as a cross gable: ${why}`) }
+    if (!hostSpec || hostSpec.roof.kind === 'FLAT' || hostSpec.roof.ridgeM === undefined) { refuse('the main body has no pitched roof to stand it on'); continue }
+    const crossAxis: 'X' | 'Z' = along(c.side) === 'x' ? 'Z' : 'X'
+    if ((hostSpec.roof.ridgeAxis ?? 'X') === crossAxis) { refuse(`the main ridge runs along ${crossAxis} itself: the gable wall drawn on that side is the main roof's own`); continue }
+    const r = hostSpec.rect
+    const e = extentOn(r, c.side)
+    const [lo, hi] = [Math.max(e.lo, c.lo), Math.min(e.hi, c.hi)]
+    const half = (hi - lo) / 2
+    if (half < MASSING_TOLERANCES.minBodyM / 2) { refuse(`the gable wall drawn there is ${(2 * half).toFixed(2)} m wide`); continue }
+    // its eaves are the main roof's (the same walls); its pitch is the drawn gable wall's own (shoulders to apex over its half width)
+    const tan = (c.apexM - c.shoulderM) / half
+    const pitch = (Math.atan(tan) * 180) / Math.PI
+    if (pitch < ROOF_SYSTEM_TOLERANCES.minPitchDeg || pitch > ROOF_SYSTEM_TOLERANCES.maxPitchDeg) { refuse(`the gable wall drawn there rises ${(c.apexM - c.shoulderM).toFixed(2)} m over half of ${(2 * half).toFixed(2)} m (${pitch.toFixed(1)}°): not a roof's pitch`); continue }
+    const ridge = hostSpec.roof.eavesM + half * tan
+    const mid = along(c.side) === 'x' ? (r.minZ + r.maxZ) / 2 : (r.minX + r.maxX) / 2
+    const rect: Rect = c.side === 'FRONT' ? { minX: r6(lo), maxX: r6(hi), minZ: r.minZ, maxZ: r6(mid) } : c.side === 'REAR' ? { minX: r6(lo), maxX: r6(hi), minZ: r6(mid), maxZ: r.maxZ } : c.side === 'LEFT' ? { minX: r.minX, maxX: r6(mid), minZ: r6(lo), maxZ: r6(hi) } : { minX: r6(mid), maxX: r.maxX, minZ: r6(lo), maxZ: r6(hi) }
+    crossRoofs.push({ id: `roof-${hostSpec.id}-cross-${c.side.toLowerCase()}`, over: hostSpec.id, side: c.side, rect, ridgeAxis: crossAxis, eavesM: hostSpec.roof.eavesM, ridgeM: r6(ridge), pitchDeg: Math.round(pitch * 10) / 10, provenance: { fidelity: 'TRACE_UNCERTAIN', source: `STRUCTURE_READ + ${c.side}`, why: `${name} has no step of the outline: a cross gable on the main body's own walls, where the ${c.side.toLowerCase()} elevation draws a gable wall from ${lo.toFixed(2)} to ${hi.toFixed(2)} m along that side (shoulders ${c.shoulderM.toFixed(2)} m, apex ${c.apexM.toFixed(2)} m: ${pitch.toFixed(1)}°); its eaves are the main roof's, its ridge ${ridge.toFixed(2)} m, dying into the main slope` } })
+    hostSpec.fates = [...(hostSpec.fates ?? []), { property: 'part', fate: 'APPLIED', taken: `${c.part.what}@${c.part.where} ridge ${c.part.ridge ?? '—'}`, built: `roof-${hostSpec.id}-cross-${c.side.toLowerCase()} (${(2 * half).toFixed(2)} m wide, ${pitch.toFixed(1)}°, ridge ${ridge.toFixed(2)} m)`, why: 'a cross gable on the main body\'s walls where its side\'s elevation draws a gable wall' }]
+    base.alternatives.push(`STRUCTURE: ${name} has no step of the outline to stand on — built as a CROSS GABLE over ${hostSpec.id}: ${lo.toFixed(2)}–${hi.toFixed(2)} m along the ${c.side.toLowerCase()}, ${pitch.toFixed(1)}°, ridge ${ridge.toFixed(2)} m along ${crossAxis} (the ${c.side.toLowerCase()} elevation draws its gable wall there)`)
+  }
+  if (hostSpec) for (const u of unbuiltParts) hostSpec.fates = [...(hostSpec.fates ?? []), { property: 'part', fate: 'UNRESOLVED', taken: `${u.part.what}@${u.part.where} ridge ${u.part.ridge ?? '—'}`, why: u.why }]
+  return { ...base, status: 'BUILDABLE', bodies, views, ...(crossRoofs.length > 0 ? { crossRoofs } : {}), why: `${bodies.length} body/bodies: ${bodies.map((b) => `${b.id} ${(b.rect.maxX - b.rect.minX).toFixed(2)} × ${(b.rect.maxZ - b.rect.minZ).toFixed(2)} m, ${b.roof.kind}${b.roof.ridgeAxis ? ` along ${b.roof.ridgeAxis}` : ''} eaves ${b.roof.eavesM.toFixed(2)}${b.roof.ridgeM ? ` ridge ${b.roof.ridgeM.toFixed(2)}` : ''}`).join('; ')}` }
 }
 
 /** A rectangle's sides shared with another body (a party line): where a flat plate runs to the face and bears nothing more. */
@@ -1137,7 +1395,87 @@ export function bodyCommands(b: BodySpec, levelId: string, levelElevation: numbe
   ] as BuildingCommand[]
 }
 
-/** BUILD_MASSING: the whole mass from nothing (no model, or no exterior walls): one level, one ring and one roof per body. */
+/**
+ * massing 1.11.0 — the house's pitched roofs as ONE roof system (`@buildapp/reconstruction` `solveRoofSystem`, the same
+ * solver for the drawings' models and for a body built from a read): one region per pitched body, one per cross gable.
+ * The solver says how they meet — a valley where a wing's ridge runs into another slope, an abutment where a lower roof
+ * meets a wall, nothing where the source shows them apart — and returns every plane cut to what is seen of it.
+ */
+export function roofRegionsOf(h: Pick<MassingHypothesis, 'bodies' | 'crossRoofs' | 'separateRoofs'>): RoofRegion[] {
+  const apart = (id: string): string[] => (h.separateRoofs ?? []).flatMap(([a, b]) => (a === id ? [`roof-${b}`] : b === id ? [`roof-${a}`] : []))
+  const box = (r: Rect): RoofRegion['rect'] => ({ x0: r.minX, z0: r.minZ, x1: r.maxX, z1: r.maxZ })
+  const out: RoofRegion[] = []
+  for (const b of h.bodies) {
+    if (b.roof.kind === 'FLAT' || b.roof.ridgeM === undefined) continue
+    const sep = apart(b.id)
+    out.push({ id: `roof-${b.id}`, hostBodyId: b.id, rect: box(b.rect), kind: b.roof.kind, ridgeAxis: b.roof.ridgeAxis ?? 'X', eaveY: b.roof.eavesM, ridgeY: b.roof.ridgeM, ...(b.roof.kind === 'HIP' && b.roof.hipRunM !== undefined ? { hipRunM: b.roof.hipRunM } : {}), thicknessM: MINIATURE_CONVENTIONS.roofThicknessM, ...(sep.length > 0 ? { separateFrom: sep } : {}) })
+  }
+  for (const c of h.crossRoofs ?? []) if (out.some((r) => r.id === `roof-${c.over}`)) out.push({ id: c.id, hostBodyId: c.over, rect: box(c.rect), kind: 'GABLE', ridgeAxis: c.ridgeAxis, eaveY: c.eavesM, ridgeY: c.ridgeM, thicknessM: MINIATURE_CONVENTIONS.roofThicknessM, over: `roof-${c.over}` })
+  return out
+}
+export function roofSystemOf(h: Pick<MassingHypothesis, 'bodies' | 'crossRoofs' | 'separateRoofs'>): RoofSystemSolution {
+  return solveRoofSystem(roofRegionsOf(h))
+}
+/** The bodies whose roofs are laid out in planes together: a joined region with no violation, and every region it meets. */
+export function joinedBodiesOf(sol: RoofSystemSolution): Set<string> {
+  const bad = new Set(sol.violations.map((v) => v.regionId))
+  return new Set(sol.regions.filter((r) => r.joined && !bad.has(r.id)).map((r) => r.hostBodyId))
+}
+export const ROOF_SYSTEM_ID = 'roofsys-main' as const
+
+/**
+ * The commands of the joined part of a roof system: every plane as the solver cut it (`createRoofPlane`), the creases
+ * between them with their kinds and segments (`connectRoofPlanes`: RIDGE, HIP, VALLEY), the free edges (`createRoofEdge`:
+ * EAVE, VERGE, ABUTMENT), the walls under them following the planes that cover them, and one ROOF assembly that names
+ * the planes and edges as one roof. The same statements the drawings' solver emits for its valley-cut roofs.
+ */
+export function roofSystemCommands(sol: RoofSystemSolution, bodies: readonly BodySpec[], levelId: string, t: number): BuildingCommand[] {
+  const joined = joinedBodiesOf(sol)
+  const regions = sol.regions.filter((r) => joined.has(r.hostBodyId))
+  const ids = new Set(regions.map((r) => r.id))
+  const planes = sol.planes.filter((p) => ids.has(p.regionId))
+  if (planes.length === 0) return []
+  const cmds: BuildingCommand[] = []
+  for (const p of planes) cmds.push({ type: 'createRoofPlane', id: p.id, levelId, boundary: p.boundary, datum: p.datum, pitchDeg: p.pitchDeg, downslope: p.downslope, thickness: p.thicknessM } as BuildingCommand)
+  const planeIds = new Set(planes.map((p) => p.id))
+  const edgeIds: string[] = []
+  for (const c of sol.creases) {
+    if (!planeIds.has(c.planeIds[0]) || !planeIds.has(c.planeIds[1])) continue
+    cmds.push({ type: 'connectRoofPlanes', id: c.id, kind: c.kind, planeIds: c.planeIds, segment: { start: c.start, end: c.end } } as BuildingCommand)
+    edgeIds.push(c.id)
+  }
+  for (const e of sol.freeEdges) {
+    if (!planeIds.has(e.planeId)) continue
+    cmds.push({ type: 'createRoofEdge', id: e.id, kind: e.kind, planeId: e.planeId, start: e.start, end: e.end } as BuildingCommand)
+    edgeIds.push(e.id)
+  }
+  // each wall of a joined body dies into the planes that stand over it (sampled inside its own thickness: a plane that
+  // only touches the wall's outer line — a lower roof meeting it from outside — is not over it)
+  for (const b of bodies) {
+    if (!joined.has(b.id)) continue
+    const r = b.rect
+    const lines: Array<[{ x: number; z: number }, { x: number; z: number }, { x: number; z: number }]> = [
+      [{ x: r.minX, z: r.minZ }, { x: r.maxX, z: r.minZ }, { x: 0, z: 1 }],
+      [{ x: r.maxX, z: r.minZ }, { x: r.maxX, z: r.maxZ }, { x: -1, z: 0 }],
+      [{ x: r.maxX, z: r.maxZ }, { x: r.minX, z: r.maxZ }, { x: 0, z: -1 }],
+      [{ x: r.minX, z: r.maxZ }, { x: r.minX, z: r.minZ }, { x: 1, z: 0 }],
+    ]
+    lines.forEach(([a, e, inward], i) => {
+      const over = new Set<string>()
+      for (let k = 0; k <= 24; k += 1) for (const c of [0.02, t / 2, t - 0.02]) {
+        const f = 0.005 + (0.99 * k) / 24
+        const q = { x: a.x + (e.x - a.x) * f + inward.x * c, z: a.z + (e.z - a.z) * f + inward.z * c }
+        for (const p of planes) if (pointInPoly(q, p.boundary, 1e-9)) over.add(p.id)
+      }
+      if (over.size > 0) cmds.push({ type: 'setProperty', targetId: `ring-${b.id}-w${i}`, property: 'topProfile', value: { kind: 'FOLLOW_ROOF_PLANES', planeIds: [...over].sort() } } as BuildingCommand)
+    })
+  }
+  const kinds = new Set(regions.map((r) => r.kind))
+  cmds.push({ type: 'createAssembly', assembly: { id: ROOF_SYSTEM_ID, kind: 'ROOF', classification: sol.creases.some((c) => c.kind === 'VALLEY' && planeIds.has(c.planeIds[0])) ? 'INTERSECTING' : kinds.size > 1 ? 'COMPOSITE' : kinds.has('HIP') ? 'HIP' : 'GABLE', planeIds: [...planeIds], edgeIds, openingIds: [], dormerIds: [], chimneyIds: [], trimIds: [], hostIds: bodies.filter((b) => joined.has(b.id)).map((b) => `ring-${b.id}`), quality: 'COMPLETE' } } as BuildingCommand)
+  return cmds
+}
+
+/** BUILD_MASSING: the whole mass from nothing (no model, or no exterior walls): one level, one ring per body and the roofs — each body's own, or the house's roof system where roofs meet. */
 export function massingCommands(h: MassingHypothesis, model: CanonicalBuildingModel): BuildingCommand[] {
   const top = Math.max(...h.bodies.map((b) => (b.roof.kind !== 'FLAT' ? b.roof.ridgeM ?? b.roof.eavesM : b.roof.eavesM)))
   const cmds: BuildingCommand[] = []
@@ -1145,11 +1483,22 @@ export function massingCommands(h: MassingHypothesis, model: CanonicalBuildingMo
   const levelId = model.levels[0]?.id ?? 'lvl-0'
   if (model.levels.length === 0) cmds.push({ type: 'createLevel', id: levelId, name: 'Massing', index: 0, elevation: 0, height: r6(top) } as BuildingCommand)
   const rects = h.bodies.map((b) => b.rect)
+  const levelElevation = model.levels[0]?.elevation ?? 0
   // v3.54.18 (massing 1.1.0): the roof covering's material, as the drawings' solver names it. Its tone is NOT read from
   // the source here (the sketch contract carries no roof finish): a named miniature convention, so the roof is not left
   // without a material (a pale roof on a body built without LOCAL — R3's open item 4).
   for (const mat of MINIATURE_PALETTE) if (!model.materials.some((x) => x.id === mat.id)) cmds.push({ type: 'defineMaterial', ...mat } as BuildingCommand)
-  for (const b of h.bodies) cmds.push(...bodyCommands(b, levelId, model.levels[0]?.elevation ?? 0, rects.filter((r) => r !== b.rect), h.wallThicknessM).map((c) => (c.type === 'createRoof' || c.type === 'createRoofPlane' ? ({ ...c, materialId: MINIATURE_CONVENTIONS.roofMaterialId } as BuildingCommand) : c.type === 'createWallRing' ? ({ ...c, materialId: 'mat-wall' } as BuildingCommand) : c)))
+  const sol = roofSystemOf(h)
+  const joined = joinedBodiesOf(sol)
+  const dress = (c: BuildingCommand): BuildingCommand => (c.type === 'createRoof' || c.type === 'createRoofPlane' ? ({ ...c, materialId: MINIATURE_CONVENTIONS.roofMaterialId } as BuildingCommand) : c.type === 'createWallRing' ? ({ ...c, materialId: 'mat-wall' } as BuildingCommand) : c)
+  for (const b of h.bodies) {
+    if (!joined.has(b.id)) { cmds.push(...bodyCommands(b, levelId, levelElevation, rects.filter((r) => r !== b.rect), h.wallThicknessM).map(dress)); continue }
+    // a body under the roof system: its ring to the highest ridge it carries; its walls then die into the planes over them
+    const r = b.rect
+    const ridge = Math.max(...sol.regions.filter((q) => q.hostBodyId === b.id).map((q) => q.ridgeY))
+    cmds.push(dress({ type: 'createWallRing', id: `ring-${b.id}`, levelId, polygon: [{ x: r.minX, z: r.minZ }, { x: r.maxX, z: r.minZ }, { x: r.maxX, z: r.maxZ }, { x: r.minX, z: r.maxZ }], thickness: h.wallThicknessM, height: r6(ridge - levelElevation), baseOffset: 0, kind: 'EXTERIOR', cornerOwnership: 'ALTERNATE' } as BuildingCommand))
+  }
+  cmds.push(...roofSystemCommands(sol, h.bodies, levelId, h.wallThicknessM).map(dress))
   return cmds
 }
 

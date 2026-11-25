@@ -400,8 +400,36 @@ function elevationOf(ctx: Ctx, p: CorrectionProposal, n: number | undefined, nee
  * ridge's height as its own; on the roof's eaves side it really ends at the roof's underside (the eaves line less the
  * roof's slab along the vertical). Every other wall ends at its own height.
  */
-export function cuttableTopM(m: CanonicalBuildingModel, w: Wall): number {
+export function cuttableTopM(m: CanonicalBuildingModel, w: Wall, /** v3.54.21: the stretch of the wall the opening takes, along the wall's own axis in plan (metres) */ a0?: number, a1?: number): number {
   const nominal = levelOf(m, w.levelId).elevation + w.baseOffset + w.height
+  if (w.topProfile?.kind === 'FOLLOW_ROOF_PLANES') {
+    // v3.54.21: a wall under the planes of a roof system ends at the underside of the planes over it — read over the
+    // opening's own stretch (a wall under a cross gable is higher there than along its eaves), inside its thickness
+    const ids = new Set(w.topProfile.planeIds)
+    const planes = m.roofPlanes.filter((q) => ids.has(q.id))
+    const alongX = Math.abs(w.end.x - w.start.x) >= Math.abs(w.end.z - w.start.z)
+    const [lo, hi] = alongX ? [Math.min(w.start.x, w.end.x), Math.max(w.start.x, w.end.x)] : [Math.min(w.start.z, w.end.z), Math.max(w.start.z, w.end.z)]
+    const [s0, s1] = [Math.max(lo, a0 ?? lo), Math.min(hi, a1 ?? hi)]
+    const len = Math.hypot(w.end.x - w.start.x, w.end.z - w.start.z)
+    if (planes.length === 0 || !(len > 0) || !(s1 > s0)) return nominal
+    const n = { x: -(w.end.z - w.start.z) / len, z: (w.end.x - w.start.x) / len }
+    let low = Infinity
+    for (let k = 0; k <= 16; k += 1) {
+      const at = s0 + ((s1 - s0) * k) / 16
+      for (const sign of [1, -1]) {
+        // a point inside the wall's thickness, on either side of its line (the ring's line is its outer face)
+        const q = alongX ? { x: at, z: w.start.z + sign * n.z * (w.thickness / 2) } : { x: w.start.x + sign * n.x * (w.thickness / 2), z: at }
+        for (const pl of planes) {
+          let inside = false
+          for (let i = 0, j = pl.boundary.length - 1; i < pl.boundary.length; j = i, i += 1) { const [u, v] = [pl.boundary[i], pl.boundary[j]]; if (u.z > q.z !== v.z > q.z && q.x < ((v.x - u.x) * (q.z - u.z)) / (v.z - u.z) + u.x) inside = !inside }
+          if (!inside) continue
+          const top = pl.datum.y - Math.tan((pl.pitchDeg * Math.PI) / 180) * ((q.x - pl.datum.x) * pl.downslope.x + (q.z - pl.datum.z) * pl.downslope.z)
+          low = Math.min(low, top - pl.thickness / Math.cos((pl.pitchDeg * Math.PI) / 180))
+        }
+      }
+    }
+    return Number.isFinite(low) ? Math.min(nominal, low) : nominal
+  }
   if (w.topProfile?.kind !== 'FOLLOW_ROOF') return nominal
   const roofId = w.topProfile.roofId
   const roof = m.roofs.find((r) => r.id === roofId)
@@ -528,10 +556,10 @@ function bindOpening(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
   if (!existing) {
     const door = kind === 'DOOR' || kind === 'GLAZED_DOOR' || kind === 'GARAGE_DOOR'
     const lower = exteriorWalls(m).filter((w) => { if (sideOfWall(m, w) !== view.side) return false; const ax = alongAxis(view.side); const lo = Math.min(w.start[ax], w.end[ax]); const hi = Math.max(w.start[ax], w.end[ax]); const base = levelOf(m, w.levelId).elevation + w.baseOffset; return a0 >= lo - 0.02 && a1 <= hi + 0.02 && y0 >= base - 0.05 && y0 < base + w.height - 0.1 })
-    const underRoof = lower.length > 0 && lower.every((w) => cuttableTopM(m, w) < levelOf(m, w.levelId).elevation + w.baseOffset + w.height - 1e-6)
-    const top = lower.length > 0 && (underRoof || (door && !hostWall(m, view.side, a0, a1, y0, y1))) ? Math.max(...lower.map((w) => cuttableTopM(m, w))) : undefined
+    const underRoof = lower.length > 0 && lower.every((w) => cuttableTopM(m, w, a0, a1) < levelOf(m, w.levelId).elevation + w.baseOffset + w.height - 1e-6)
+    const top = lower.length > 0 && (underRoof || (door && !hostWall(m, view.side, a0, a1, y0, y1))) ? Math.max(...lower.map((w) => cuttableTopM(m, w, a0, a1))) : undefined
     if (top !== undefined && y1 > top - 0.03 && y1 - top <= HEAD_CUT_MAX_SHARE * (y1 - y0) && top - 0.03 - y0 >= (door ? 1.6 : 0.4)) {
-      headCut = { fromM: y1, toM: r6(top - 0.03), wallId: lower.sort((p, q) => cuttableTopM(m, q) - cuttableTopM(m, p))[0].id }
+      headCut = { fromM: y1, toM: r6(top - 0.03), wallId: lower.sort((p, q) => cuttableTopM(m, q, a0, a1) - cuttableTopM(m, p, a0, a1))[0].id }
       y1 = headCut.toM
       box = { ...box, y0: pyOf(pr, y1) }
     }
@@ -698,8 +726,8 @@ function bindPlanOpening(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
   let host = hostWall(m, f.side, f.a0, f.a1, y0, y1)
   {
     const lower = exteriorWalls(m).filter((w) => { if (sideOfWall(m, w) !== f.side) return false; const ax = alongAxis(f.side); const lo = Math.min(w.start[ax], w.end[ax]); const hi = Math.max(w.start[ax], w.end[ax]); const base = levelOf(m, w.levelId).elevation + w.baseOffset; return f.a0 >= lo - 0.02 && f.a1 <= hi + 0.02 && y0 >= base - 0.05 && y0 < base + w.height - 0.1 })
-    const underRoof = lower.length > 0 && lower.every((w) => cuttableTopM(m, w) < levelOf(m, w.levelId).elevation + w.baseOffset + w.height - 1e-6)
-    const top = lower.length > 0 && (underRoof || !host) ? Math.max(...lower.map((w) => cuttableTopM(m, w))) : undefined
+    const underRoof = lower.length > 0 && lower.every((w) => cuttableTopM(m, w, f.a0, f.a1) < levelOf(m, w.levelId).elevation + w.baseOffset + w.height - 1e-6)
+    const top = lower.length > 0 && (underRoof || !host) ? Math.max(...lower.map((w) => cuttableTopM(m, w, f.a0, f.a1))) : undefined
     if (top !== undefined && y1 > top - 0.03 && y1 - top <= HEAD_CUT_MAX_SHARE * (y1 - y0) && top - 0.03 - y0 >= (f.kind === 'WINDOW' ? 0.4 : 1.6)) {
       y1 = r6(top - 0.03)
       host = hostWall(m, f.side, f.a0, f.a1, y0, y1)

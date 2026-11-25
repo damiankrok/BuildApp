@@ -52,7 +52,8 @@ import { renderStoreyCut } from './model-views.js'
 import { CORRECTION_REGISTRY_VERSION } from './correct/registry.js'
 import { CORRECTION_EXECUTOR_VERSION, elementExists, executeCorrections, modelRevision, PLAN_SPAN_AGREE, planGapsOf, preferredView, registerFromSketch, sideOfFacade, sideOpeningSpans, sideRange, viewsOfRun } from './correct/execute.js'
 import { CHIMNEY_FUSION_VERSION, fuseChimneys } from './correct/chimney-fusion.js'
-import { MASSING_VERSION, OUTLINE_SIMPLIFICATION, STOREY_WALLS, bodiesOf, pointWithFront, wallEndsPx } from './massing/massing.js'
+import { MASSING_VERSION, OUTLINE_SIMPLIFICATION, STOREY_WALLS, bodiesOf, pointWithFront, roofSystemOf, wallEndsPx } from './massing/massing.js'
+import type { MassingHypothesis } from './massing/massing.js'
 import { readSiteDimensions, SITE_DIMENSIONS_VERSION } from './site-dimensions.js'
 import { FACADE_METRIC_VERSION, readFacadeMetric } from './facade-metric.js'
 import { FORM_READ_VERSION, flatVolumesOf, formVerdict, readForm } from './form-read.js'
@@ -417,7 +418,7 @@ const lineage = new WeakMap<Local, { input: AnalysisInput; options: AnalysisOpti
  */
 /** v3.54.17 R2: an element index as the defect ledger reads it (id → type). */
 const listedOf = (index: ElementIndex | undefined): ListedElements | undefined => (index ? new Map(index.elements.map((e) => [e.id, e.type])) : undefined)
-const massingOf = new WeakMap<Local, { views: BindView[]; rebuild: (model: CanonicalBuildingModel) => Local | undefined; /** the side of the plan sheet that is this body's front (a body built in the elevations' frame); absent: the sheet's foot */ planFront?: Side; /** v3.54.19: the plan skeleton in this body's frame (interior, exterior gaps) */ interior?: InteriorObservation; /** the sheet → model map as three mapped points of the plan frame: (0,0), (1000,0), (0,1000) px */ planMap?: PlanFrameOfModel }>()
+const massingOf = new WeakMap<Local, { views: BindView[]; rebuild: (model: CanonicalBuildingModel) => Local | undefined; /** the side of the plan sheet that is this body's front (a body built in the elevations' frame); absent: the sheet's foot */ planFront?: Side; /** v3.54.19: the plan skeleton in this body's frame (interior, exterior gaps) */ interior?: InteriorObservation; /** the sheet → model map as three mapped points of the plan frame: (0,0), (1000,0), (0,1000) px */ planMap?: PlanFrameOfModel; /** v3.54.21: the hypothesis the body was built from (its bodies, their roofs and fates, its cross gables) */ hypothesis?: MassingHypothesis }>()
 /** v3.54.19: where the plan sheet lies in the delivered model's frame (an affine map stated by three points), for any overlay of the model on its plan. */
 export type PlanFrameOfModel = { frameId: string; basis: 'OUTLINE_SCALE' | 'LOCAL_PLAN_REGISTRATION'; o: { x: number; z: number }; x1000: { x: number; z: number }; y1000: { x: number; z: number } }
 async function attempt(input: AnalysisInput, options: AnalysisOptions): Promise<Local> {
@@ -1022,7 +1023,8 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
               // (a registration made on a side the structure read named served the body's heights; which side that picture's
               // OPENINGS stand on is decided afterwards, like every unlabelled elevation's, by what registers and by the
               // plan's openings — so it is not carried as a held view)
-              massingOf.set(l, { views: mr.views, rebuild: (m) => build(m), ...(planFront ? { planFront } : {}), ...(interior ? { interior } : {}), ...(planMap ? { planMap } : {}) })
+              const hyp = (rec0.massing as { hypothesis?: MassingHypothesis } | undefined)?.hypothesis
+              massingOf.set(l, { views: mr.views, rebuild: (m) => build(m), ...(planFront ? { planFront } : {}), ...(interior ? { interior } : {}), ...(planMap ? { planMap } : {}), ...(hyp ? { hypothesis: hyp } : {}) })
               return l
             }
             const m0 = build()
@@ -2227,8 +2229,14 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
     const mD = good.run.reconstruction.model
     const ob = readbackOpenings(mD, (sketchSummary?.semantic?.records ?? []) as Parameters<typeof readbackOpenings>[1])
     record({ at: now().toISOString(), kind: 'OPENINGS_READBACK', version: ob.version, frame: ob.frame, counts: ob.counts, openings: ob.openings, why: `${ob.counts.built} exterior opening(s) in the delivered model: ${ob.counts.agree} as the executor bound them, ${ob.counts.differ} different, ${ob.counts.unbound} without a bound record (the analyzer's own); ${ob.counts.sumFailures} wall(s) whose stretches do not add up, ${ob.counts.outsideWall} opening(s) past a wall's end` })
-    const sb = readbackStructure(mD, structureMemo?.build, STOREY_WALLS)
-    record({ at: now().toISOString(), kind: 'STRUCTURE_READBACK', version: sb.version, taken: structureMemo?.build ?? null, bodies: sb.bodies, checks: sb.checks, why: structureMemo?.build ? `${sb.checks.filter((q) => q.agrees).length} of ${sb.checks.length} taken structure properties are in the delivered model${sb.checks.some((q) => !q.agrees) ? ` (not: ${sb.checks.filter((q) => !q.agrees).map((q) => `${q.property} taken ${q.taken}, built ${q.built}`).join('; ')})` : ''}` : 'no structure was taken (not read, refused, or fewer than two sketched elevations): the bodies are listed as built' })
+    // v3.54.21: every roof the builder bound (its kind, ridge, pitch, eaves, ridge height), every relation the roof system
+    // solved and every number taken for the main roof are measured on the delivered model — not four facts of the largest rectangle
+    const hypD = massingOf.get(good)?.hypothesis
+    const solD = hypD ? roofSystemOf(hypD) : undefined
+    const boundD = hypD && solD ? { bodies: hypD.bodies, ...(hypD.crossRoofs ? { crossRoofs: hypD.crossRoofs } : {}), relations: solD.relations.map((q) => ({ a: q.a, b: q.b, kind: q.kind })) } : undefined
+    const sb = readbackStructure(mD, structureMemo?.build, STOREY_WALLS, boundD)
+    if (hypD && solD) record({ at: now().toISOString(), kind: 'ROOF_SYSTEM', version: solD.version, regions: solD.regions, relations: solD.relations, adjustments: solD.adjustments, violations: solD.violations, creases: solD.creases.map((q) => ({ id: q.id, kind: q.kind, planeIds: q.planeIds, regionIds: q.regionIds, start: q.start, end: q.end, startM: q.startY, endM: q.endY })), fates: hypD.bodies.flatMap((b) => (b.fates ?? []).map((f) => ({ bodyId: b.id, ...f }))), crossRoofs: hypD.crossRoofs ?? [], why: `the roofs of the body as one system: ${solD.regions.length} region(s), ${solD.relations.map((q) => `${q.a} → ${q.b} ${q.kind}`).join('; ') || 'no two roofs meet'}; ${solD.creases.filter((q) => q.kind === 'VALLEY').length} valley(s) computed from the planes; ${solD.adjustments.length} adjustment(s) within the stated tolerances; ${solD.violations.length} violation(s)` })
+    record({ at: now().toISOString(), kind: 'STRUCTURE_READBACK', version: sb.version, taken: structureMemo?.build ?? null, bodies: sb.bodies, roofs: sb.roofs, joins: sb.joins, checks: sb.checks, why: structureMemo?.build ? `${sb.checks.filter((q) => q.agrees).length} of ${sb.checks.length} taken structure properties are in the delivered model${sb.checks.some((q) => !q.agrees) ? ` (not: ${sb.checks.filter((q) => !q.agrees).map((q) => `${q.property} taken ${q.taken}, built ${q.built}`).join('; ')})` : ''}` : 'no structure was taken (not read, refused, or fewer than two sketched elevations): the bodies are listed as built' })
   }
   // v3.54.19: where the plan sheet lies in the delivered model (three mapped points): any overlay of the model on its plan
   if (good.run) {
