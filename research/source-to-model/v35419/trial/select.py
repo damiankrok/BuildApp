@@ -8,12 +8,22 @@ import hashlib, json, os, re, subprocess, sys
 commit, work = sys.argv[1], sys.argv[2]
 here = os.path.dirname(os.path.abspath(__file__))
 seen = {l.strip() for l in open(os.path.join(here, 'seen-families.txt')) if l.strip()}
-fam = lambda n: re.sub(r'(-(i|ii|iii|iv|v|vi|vii|viii|ix|x|\d+[a-z]?|g\d?e?|oze|t|n|p|a|b|duo|plus|lux|bis))+$', '', n.lower())
+# v3.54.21 correction before any analysis (NEW-H): a Roman numeral is a variant marker whatever its size — the list stopped
+# at X, so Amber XII and Amber XIV passed as two new families beside the Amber seen in DEV (i … xxxix, in one rule)
+ROMAN = r'(?=[ivx])x{0,3}(?:ix|iv|v?i{0,3})'
+# the same correction: an edition marker (`new`, `nowy`, `nowa`) is a variant of the family it renews (Ametyst New is Ametyst)
+fam = lambda n: re.sub(r'(-(' + ROMAN + r'|\d+[a-z]?|g\d?e?|oze|t|n|p|a|b|duo|plus|lux|bis|new|nowy|nowa))+$', '', n.lower())
 def family(url):
     n = url.rstrip('/').split('/')[-1]
     n = re.sub(r',\d+\.html$', '', n)
     n = re.sub(r'-m[0-9a-f]{10,}$', '', n)
+    # the same correction: a capital Roman numeral written onto the name is a variant too (`dunkanII` is Dunkan II)
+    n = re.sub(r'(?<=[a-z])(?=(?:X{0,3}(?:IX|IV|V?I{0,3}))$)(?=[IVX])', '-', n)
     return fam(n)
+coreOf = lambda f: '-'.join(t for t in f.split('-') if not re.fullmatch(r'(' + ROMAN + r'|\d+[a-z]?|bis|sz|oze|t|n|p|a|b|duo|plus|lux|g\d?[a-z]?e?|new|nowy|nowa)', t))
+# the same correction: a family seen before is compared by the same rule as a candidate (the list keeps names as written:
+# `ametyst-new` is the family `ametyst`)
+seen = seen | {fam(x) for x in seen} | {coreOf(fam(x)) for x in seen}
 out = {'commit': commit, 'rule': 'TRIAL_SELECTION.md', 'publishers': {}}
 # v3.54.17: the ARCHON pool is exhausted by the exclusions, so the Studio Atrium walk gives both families (TRIAL_SELECTION.md)
 want = {'studioatrium': 2, 'lipinscy': 2, 'archon': 2, 'dobredomy': 2}
@@ -32,7 +42,7 @@ for publisher, pool_file in POOLS:
     opened = 0
     for step in range(len(pool)):
         url = pool[(start + step) % len(pool)]
-        core = lambda u: '-'.join(t for t in family(u).split('-') if not re.fullmatch(r'(i|ii|iii|iv|v|vi|vii|viii|ix|x|\d+[a-z]?|bis|sz|oze|t|n|p|a|b|duo|plus|lux|g\d?[a-z]?e?)', t))
+        core = lambda u: coreOf(family(u))
         if any(core(url) == core(a) for a in rec.get('accepted', [])):
             rec['opened'].append({'url': url, 'opened': False, 'refused': f'a variant of the accepted family {core(url)}'})
             continue

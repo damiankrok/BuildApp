@@ -157,3 +157,17 @@ Kryteria §3 i oczekiwania §6 bez zmian. Zamrożenie: commit wpisany w §9 prze
 - Kontrola DEV na tym kodzie (`d4`, 24 domy, 0 USD, nagrane odczyty) biegnie równolegle z próbą: jej wynik jest
   raportowany taki, jaki jest — wada znaleziona po zamrożeniu jest nazwana, nie poprawiana przed końcem próby.
 - Losowanie: `newh/select.sh 4c1d1a2` (etykieta ziarna `V35421-NEWH`, pule i reguły z §5 bez zmian).
+
+### 9a. Korekta narzędzia losowania przed jakąkolwiek analizą (dopisane 2026-11-25)
+
+Pierwsze losowanie na `4c1d1a2` przyjęło z Studio Atrium **Amber XII** i **Amber XIV** — warianty rodziny Amber, która
+jest w DEV — bo reguła wariantu znała liczby rzymskie tylko do X. Drugie (po poprawce liczb) przyjęło **Ametyst** (rodzina
+DEV „Ametyst New": lista widzianych trzyma nazwy, jak zapisano, i nie była porównywana tą samą regułą co kandydat) oraz
+**DunkanII** (Dunkan jest na liście widzianych; numer dopisany do nazwy bez łącznika). Trzy poprawki ogólne w
+`v35419/trial/select.py`, bez zmiany ziarna, pul ani reguł przyjęcia: liczba rzymska dowolnej wielkości (i … xxxix) jest
+oznaczeniem wariantu; `new` / `nowy` / `nowa` jest wydaniem tej samej rodziny; wielka liczba rzymska dopisana do nazwy
+jest wariantem; rodziny widziane są porównywane po tej samej normalizacji co kandydaci. Oba wcześniejsze wyniki
+zachowane (`newh/trial/selection-first-draw-roman-defect.json`, `selection-second-draw-seen-defects.json`).
+Trzecie losowanie (to samo ziarno): Studio Atrium — Anna II, Argos; Lipińscy — Lyon, Newcastle II; Dobre Domy —
+Debora, Elsa III; ARCHON — Dom pod Morwą (ver. 2), Dom pod Osiką. Żadna z tych rodzin nie jest na liście widzianych.
+Skład próby (§5) wyznaczają opisy referencyjne spisane z oryginałów tych ośmiu pakietów przed jakąkolwiek analizą.
