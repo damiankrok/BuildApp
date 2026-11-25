@@ -1,0 +1,30 @@
+BuildPlan v3.54.20 — private delivery (not in Git; sent to the OWNER as files). Verified after extraction into one directory:
+4333 manifest entries, 0 bad; 1080 gallery links, 0 missing; provider key occurrences: 0 in every archive and in the extracted tree.
+
+APK (separate): BuildPlan-Model-Preview-1353-arm64-v8a.apk  54966896 B  sha256 371c7721cd3f14f946f74df5345f6ab0dbec1eb9484c5fa90d6c42e76c3900da
+
+Archives (each an independent ZIP below 30,000,000 B; unpack all into the same directory -> BuildPlan-V35420/):
+BuildPlan-V35420-01-RAPORT-GALERIA.zip  16413348 B  sha256 076ea3386ff2ae48917469d7263f1a75bcf14eddcfe631c1374b54bac3509f1c
+BuildPlan-V35420-02-OCENA-SLEPA-PLANSZE.zip  25364715 B  sha256 9a1ba940ed9569356b7120ea01e3d93fe763efdab3e99a4e41bc987e28908674
+BuildPlan-V35420-03-DOMY.zip  23011090 B  sha256 50dbe52c34af3f5c9ea7a717f0a211972bffdc22f1b1370b983cf9c912d8dbd4
+BuildPlan-V35420-04-DOMY.zip  17907237 B  sha256 8c6c96fd681d95cd61b5f0e4dbaf55883d2f6582348f9b7aac2167efc58a69d0
+BuildPlan-V35420-05-DOMY.zip  22569058 B  sha256 1826b079b30968d2fadaaa559fd8472b87afe6da0173b3383d49fc239886113b
+BuildPlan-V35420-06-DOMY.zip  21321298 B  sha256 ba32771c4c093cd9a879a4d3b188b3e557c1ec247b785fb81415c133d0bdcdb9
+BuildPlan-V35420-07-DOMY.zip  25882946 B  sha256 45d1a23e9fb22cd380d0a78194414ab129f406cf86b3d6582861c52b980e344b
+BuildPlan-V35420-08-DOMY.zip  26016846 B  sha256 94f6367259623da8bc0c8f0edd171066c72e83686de0f9e780705232789a1df6
+BuildPlan-V35420-09-DOMY.zip  22250794 B  sha256 56cfc53a3d86e29719d1873861f72c25294fa85f6681723f7f487192db887ebd
+BuildPlan-V35420-10-DOMY.zip  20275484 B  sha256 5bbc87c19173e533a561825dccf160e219e30f42e3f74f1a7a3c78b8396b1620
+BuildPlan-V35420-11-DOMY.zip  25418905 B  sha256 e9133a1eab5d0f610e8c2c9832987a11542ad8049768a49bbe8b47a0bfd7de70
+
+Houses per archive:
+  03-DOMY: amber, rockville, basiaiadam
+  04-DOMY: jarzab
+  05-DOMY: skagen, fabia, medulin
+  06-DOMY: mindelo, eliza
+  07-DOMY: amarylis, ametyst, aletta, juliusz
+  08-DOMY: g6, oban, novara, jarzebina
+  09-DOMY: pomarancza, alaska
+  10-DOMY: aurora, ballina, alberto
+  11-DOMY: sakura, jeziorko
+  01-RAPORT-GALERIA: gallery.html, docs (report, owner note, ADR, protocol, hand-off, references, version, test failures, arbitration-neutral), boards, host (two runs), grading tables and scores and keys, newg-aux
+  02-OCENA-SLEPA-PLANSZE: the blind grading boards (exterior pack, interior overlays)
