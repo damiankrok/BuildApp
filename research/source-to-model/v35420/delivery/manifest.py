@@ -23,8 +23,11 @@ if os.path.exists(f'{R0}/newg/houses.json'):
         vs = []
         for key, label, d, c in (('baseline1352', 'kod APK 1352 (baseline) — na żywo, jedyny bieg', f"{R0}/newg/base/{q['house']}", BASE), ('final', 'kod końcowy v3.54.20 (zamrożony) — na żywo, jedyny bieg', f"{R0}/newg/final/{q['house']}", C)):
             if os.path.isdir(d): vs.append({'key': key, 'label': label, 'kind': 'LIVE', 'run': d, 'commit': c})
+        fb = f"{R0}/newg/fonb/{q['house']}"
+        if os.path.isdir(fb): vs.append({'key': 'finalOnBase', 'label': 'kod końcowy na nagranych odczytach biegu baseline (F@B, pomocnicze)', 'kind': 'REPLAY', 'run': fb, 'commit': C})
         if not vs: continue
-        sk = next((v['run'] for v in reversed(vs) if os.path.isdir(os.path.join(v['run'], 'sketches'))), vs[-1]['run'])
+        fin = [v for v in vs if v['key'] == 'final'] or vs
+        sk = next((v['run'] for v in reversed(fin) if os.path.isdir(os.path.join(v['run'], 'sketches'))), vs[-1]['run'])
         pkg = next((os.path.join(v['run'], 'source-package.json') for v in reversed(vs) if os.path.exists(os.path.join(v['run'], 'source-package.json'))), q.get('package'))
         houses.append({'house': q['house'], 'title': q['title'], 'publisher': q['publisher'], 'set': 'NEW-G', 'url': q['url'], 'package': pkg, 'cache': f'{R0}/newg/trial/cache', 'sketchRun': sk, 'variants': vs})
 print(json.dumps({'commit': C, 'title': 'BuildPlan v3.54.20 — opis struktury z API steruje budową bryły: 1352 obok kodu końcowego', 'houses': houses, 'extras': {}}, ensure_ascii=False, indent=1))
