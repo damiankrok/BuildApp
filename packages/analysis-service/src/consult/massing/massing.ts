@@ -101,7 +101,11 @@ export function settleRoof(roof: RoofSpec, rect: Rect, w: SettleInput): { roof: 
   const degOf = (e: number, r: number): number => (Math.atan2(r - e, half) * 180) / Math.PI
   let [eaves, ridge] = [roof.eavesM, roof.ridgeM]
   const was = degOf(eaves, ridge)
-  const P = w.pitch
+  // a stated pitch outside the range a roof is built in (8–62°) is not acted on: it is named REJECTED and the drawn
+  // heights stand (a 5° "gable" would be built 0.35 m high, a 70° one twice the house)
+  const rangeOk = (d: number): boolean => Number.isFinite(d) && d >= ROOF_SYSTEM_TOLERANCES.minPitchDeg && d <= ROOF_SYSTEM_TOLERANCES.maxPitchDeg
+  if (w.pitch && !rangeOk(w.pitch.deg)) fates.push({ property: 'pitchDeg', fate: 'REJECTED', taken: `${w.pitch.deg}° (${w.pitch.from})`, built: `${was.toFixed(1)}°`, why: `${w.pitch.deg}° is outside ${ROOF_SYSTEM_TOLERANCES.minPitchDeg}–${ROOF_SYSTEM_TOLERANCES.maxPitchDeg}°: not a pitch this roof is built at` })
+  const P = w.pitch && rangeOk(w.pitch.deg) ? w.pitch : undefined
   const tanP = P ? Math.tan((P.deg * Math.PI) / 180) : 0
   const inRange = (d: number): boolean => d >= R.minPitchDeg && d <= R.maxPitchDeg
   const off = P !== undefined && P.binding && Math.abs(was - P.deg) > PITCH_AGREE_DEG
@@ -1070,10 +1074,16 @@ export function solveMassing(input: MassingInput): MassingHypothesis {
     const spanOf = (c: NonNullable<BuildStructure['cross']>[number]): { lo: number; hi: number } | undefined => { if (!c.span) return undefined; const e = whole(c.side); return signOf(c.side) === 1 ? { lo: e.lo + c.span.fromShare * (e.hi - e.lo), hi: e.lo + c.span.toShare * (e.hi - e.lo) } : { lo: e.hi - c.span.toShare * (e.hi - e.lo), hi: e.hi - c.span.fromShare * (e.hi - e.lo) } }
     const covers = (c: NonNullable<BuildStructure['cross']>[number]): boolean => { const sp = spanOf(c); if (!sp) return true; const e = extentOn(rects[0], c.side); return Math.min(e.hi, sp.hi) - Math.max(e.lo, sp.lo) >= CROSS_AS_BODY.minCover * (e.hi - e.lo) }
     const crossOwn = own0 && st.mainRidge && st.mainRidge !== own0 && !free.some((q) => q.ridge === own0 && reaches(rects[0], q.where)) ? (st.cross ?? []).find((c) => c.ridge === own0 && reaches(rects[0], c.side) && covers(c)) : undefined
-    if (crossOwn) { boundCross.add(crossOwn.id); free.push({ what: 'CROSS_ROOF', where: crossOwn.side, fullStoreys: st.fullStoreys ?? 1, roof: 'GABLE', ridge: crossOwn.ridge, ...(crossOwn.pitchDeg !== undefined ? { pitchDeg: crossOwn.pitchDeg } : {}), ...(crossOwn.ridgeM ? { ridgeM: crossOwn.ridgeM } : {}), roofId: crossOwn.id }) }
+    // (an ESTIMATED pitch of the cross roof is not carried into the body's description: an estimate does not bind a body)
+    const crossPart = crossOwn ? { what: 'CROSS_ROOF', where: crossOwn.side, fullStoreys: st.fullStoreys ?? 1, roof: 'GABLE' as const, ridge: crossOwn.ridge, ...(crossOwn.pitchDeg !== undefined && crossOwn.pitchStatus !== 'ESTIMATED' ? { pitchDeg: crossOwn.pitchDeg } : {}), ...(crossOwn.ridgeM ? { ridgeM: crossOwn.ridgeM } : {}), roofId: crossOwn.id } : undefined
+    if (crossPart) free.push(crossPart)
     const explains = own0 && st.mainRidge && st.mainRidge !== own0 ? free.find((q) => q.ridge === own0 && reaches(rects[0], q.where)) : undefined
-    if (explains && own0) {
+    // (only while another rectangle that is not a part remains to carry the main roof's description: else rects[0] stays MAIN, the conflict named)
+    const carrierLeft = rects.some((r) => r !== rects[0] && !partOf.has(r))
+    if (explains && own0 && !carrierLeft) base.alternatives.push(`STRUCTURE: mass-main's own views draw the ridge of the ${explains.what.toLowerCase()} reported on the ${explains.where.toLowerCase()}, but every other body is a part already: the main roof's description stays with mass-main, the conflict named`)
+    if (explains && own0 && carrierLeft) {
       partOf.set(rects[0], explains)
+      if (crossOwn && explains === crossPart) boundCross.add(crossOwn.id)
       mainRects = new Set(rects.filter((r) => !partOf.has(r)))
       base.alternatives.push(`STRUCTURE: the ${explains.what.toLowerCase()} reported on the ${explains.where.toLowerCase()} with its ridge along ${own0} is the body whose own elevations draw that ridge (mass-main: ${Math.max(v0.X, v0.Z)} view(s) to ${Math.min(v0.X, v0.Z)}) and which stands furthest out on that side; the main roof's description (ridge along ${st.mainRidge}) is of the ${mainRects.size} bod${mainRects.size === 1 ? 'y' : 'ies'} beside it, not of the largest rectangle`)
     }
@@ -1365,14 +1375,28 @@ export function solveMassing(input: MassingInput): MassingHypothesis {
     if (!id || !part.join || !hostSpec || id === hostSpec.id) continue
     if (part.join === 'APART') separateRoofs.push([id, hostSpec.id])
   }
-  const solved = solveRoofSystem(roofRegionsOf({ bodies, crossRoofs, separateRoofs }))
+  let solved = solveRoofSystem(roofRegionsOf({ bodies, crossRoofs, separateRoofs }))
+  // massing 1.13.0: a cross gable the roof system refuses (its ridge above its host's, its pitch out of range) is not
+  // built and not claimed: its fate is REJECTED with the solver's reason, and the system is the one without it
+  const refusedCross = crossRoofs.filter((c) => solved.violations.some((v) => v.regionId === c.id))
+  if (refusedCross.length > 0 && hostSpec) {
+    for (const c of refusedCross) {
+      const v = solved.violations.find((q) => q.regionId === c.id)
+      hostSpec.fates = (hostSpec.fates ?? []).map((f) => (f.property === 'part' && f.fate === 'APPLIED' && (f.built ?? '').startsWith(c.id) ? { ...f, fate: 'REJECTED' as const, built: undefined, why: `the roof system refuses it: ${v?.why ?? ''}` } : f)).map((f) => { if (f.built === undefined) { const { built: _b, ...rest } = f; return rest as PropertyFate } return f })
+    }
+    crossRoofs.splice(0, crossRoofs.length, ...crossRoofs.filter((c) => !refusedCross.includes(c)))
+    solved = solveRoofSystem(roofRegionsOf({ bodies, crossRoofs, separateRoofs }))
+  }
   for (const [rect, part] of partOf) {
     const id = idOf(rect)
     const b = bodies.find((q) => q.id === id)
     if (!b || !part.join || !hostSpec || b.id === hostSpec.id) continue
     const rel = solved.relations.find((q) => (q.a === `roof-${b.id}` && q.b === `roof-${hostSpec.id}`) || (q.b === `roof-${b.id}` && q.a === `roof-${hostSpec.id}`))
     const builtAs = rel?.kind ?? 'no common line (the two roofs do not touch)'
-    const same = part.join === 'APART' ? rel?.kind === 'SEPARATE' || !rel : part.join === 'VALLEY' ? rel?.kind === 'VALLEY' : part.join === 'ABUTS_WALL' ? rel?.kind === 'ABUTMENT' || rel?.kind === 'IN_LINE' || !rel : true
+    // SAME_PLANE (one slope running on over both bodies) is a relation the solver does not build or check: named
+    // UNRESOLVED with what was built, never APPLIED by default
+    if (part.join === 'SAME_PLANE') { b.fates = [...(b.fates ?? []), { property: 'join', fate: 'UNRESOLVED', taken: `SAME_PLANE with the main roof${part.roofId ? ` (${part.roofId})` : ''}`, built: builtAs, why: 'one slope over both bodies is a relation the roof system does not build or check: what the heights make is recorded, the statement is not confirmed' }]; continue }
+    const same = part.join === 'APART' ? rel?.kind === 'SEPARATE' || !rel : part.join === 'VALLEY' ? rel?.kind === 'VALLEY' : rel?.kind === 'ABUTMENT' || rel?.kind === 'IN_LINE' || !rel
     b.fates = [...(b.fates ?? []), { property: 'join', fate: same ? 'APPLIED' : 'RETAINED_WITH_CONFLICT', taken: `${part.join} with the main roof${part.roofId ? ` (${part.roofId})` : ''}`, built: builtAs, why: same ? (part.join === 'APART' ? 'the two roofs are stated apart and are not joined' : 'the heights give the same relation the read states') : `the heights the elevations give make it ${builtAs}${rel ? ` (${rel.why})` : ''}; the read's statement is kept on the record, the geometry stands` }]
   }
   for (const v of solved.violations) base.alternatives.push(`ROOF SYSTEM: ${v.why}`)

@@ -30,7 +30,7 @@
 import { round6 } from '@buildapp/source-common'
 import type { PlanBox, Vec2 } from './attached-roof-form.js'
 
-export const ROOF_SYSTEM_VERSION = '1.0.0' as const
+export const ROOF_SYSTEM_VERSION = '1.0.1' as const
 
 export type RoofRegionKind = 'GABLE' | 'HIP'
 export type RoofRegion = {
@@ -307,6 +307,20 @@ function ridgeEndAgainst(a: RoofRegion, b: RoofRegion): { end: 'MIN' | 'MAX'; de
 // ---------------------------------------------------------------------------
 
 export function solveRoofSystem(input: readonly RoofRegion[]): RoofSystemSolution {
+  // 1.0.1: a region whose pitch comes out of range (as read, or after an eave snapped to a neighbour's) takes no part in
+  // the system — solved again WITHOUT it, so no neighbour keeps a cut, a run-on or a valley made against a roof that is
+  // then not built in planes (it left a hole in the main slope). Its violation is kept; its body is roofed apart.
+  const excluded = new Map<string, RoofViolation>()
+  for (let k = 0; k <= input.length; k += 1) {
+    const s = solveOnce(input, new Set(excluded.keys()))
+    const fresh = s.violations.filter((v) => v.property === 'pitchDeg' && !excluded.has(v.regionId))
+    if (fresh.length === 0) return { ...s, violations: [...excluded.values(), ...s.violations.filter((v) => !excluded.has(v.regionId))] }
+    for (const v of fresh) excluded.set(v.regionId, { ...v, why: `${v.why}; the system is solved without it (no neighbour is cut by it) and its body is roofed apart` })
+  }
+  return solveOnce(input, new Set(excluded.keys()))
+}
+
+function solveOnce(input: readonly RoofRegion[], excluded: ReadonlySet<string>): RoofSystemSolution {
   const T = ROOF_SYSTEM_TOLERANCES
   const byId = new Map(input.map((r) => [r.id, r]))
   const relations: RoofRelation[] = []
@@ -323,7 +337,9 @@ export function solveRoofSystem(input: readonly RoofRegion[]): RoofSystemSolutio
     if (!(f.u1 - f.u0 > 0.2) || !(f.t1 - f.t0 > 0.2)) violations.push({ regionId: r.id, property: 'rect', value: Math.min(f.u1 - f.u0, f.t1 - f.t0), why: `${r.id} is ${(f.u1 - f.u0).toFixed(2)} × ${(f.t1 - f.t0).toFixed(2)} m: not a roof region` })
     if (!(r.ridgeY > r.eaveY + 1e-3)) violations.push({ regionId: r.id, property: 'ridgeY', value: r.ridgeY, why: `${r.id}: the ridge (${r.ridgeY.toFixed(2)} m) is not above the eaves (${r.eaveY.toFixed(2)} m)` })
   }
-  const sound = (r: RoofRegion): boolean => !violations.some((v) => v.regionId === r.id)
+  const sound = (r: RoofRegion): boolean => !excluded.has(r.id) && !violations.some((v) => v.regionId === r.id)
+  const halfOf = (r: RoofRegion): number => { const f = frame(r); return (f.u1 - f.u0) / 2 }
+  const pitchOk = (r: RoofRegion, e: number, top: number): boolean => { const p = deg((top - e) / Math.max(1e-6, halfOf(r))); return p >= T.minPitchDeg && p <= T.maxPitchDeg }
 
   // 1. a region standing over another (a cross gable): its eaves and ridge held to the roof it stands on
   for (const a of input) {
@@ -332,10 +348,13 @@ export function solveRoofSystem(input: readonly RoofRegion[]): RoofSystemSolutio
     if (!b || !sound(b)) { relations.push({ a: a.id, b: a.over, kind: 'SEPARATE', why: `${a.id} is stated over ${a.over}, which is not a roof region of this system` }); continue }
     const rb = ridge.get(b.id) as number
     const ra = ridge.get(a.id) as number
+    // 1.0.1: a cross gable stands on the host's slope and dies into it below the host's ridge: one read above that ridge
+    // (beyond the snap) would end in the air over it, an open triangle — not built, by name
+    if (ra > rb + T.ridgeSnapM) { violations.push({ regionId: a.id, property: 'ridgeY', value: ra, why: `${a.id} is stated over ${b.id} with its ridge at ${ra.toFixed(2)} m, above ${b.id}'s ridge (${rb.toFixed(2)} m): a cross gable dies into the slope below that ridge — this one would end in the air; not built` }); continue }
     if (ra > rb && ra - rb <= T.ridgeSnapM) { adjustments.push({ regionId: a.id, property: 'ridgeY', from: ra, to: rb, why: `read ${(ra - rb).toFixed(2)} m above the ridge of ${b.id} it runs into: within the reading's tolerance, the two ridges meet` }); ridge.set(a.id, rb) }
     const eb = eave.get(b.id) as number
     const ea = eave.get(a.id) as number
-    if (Math.abs(ea - eb) <= T.eaveSnapM && ea !== eb) { adjustments.push({ regionId: a.id, property: 'eaveY', from: ea, to: eb, why: `read ${Math.abs(ea - eb).toFixed(2)} m off the eaves of ${b.id}: within the reading's tolerance, the eaves are level` }); eave.set(a.id, eb) }
+    if (Math.abs(ea - eb) <= T.eaveSnapM && ea !== eb && pitchOk(a, eb, ridge.get(a.id) as number)) { adjustments.push({ regionId: a.id, property: 'eaveY', from: ea, to: eb, why: `read ${Math.abs(ea - eb).toFixed(2)} m off the eaves of ${b.id}: within the reading's tolerance, the eaves are level` }); eave.set(a.id, eb) }
     relations.push({ a: a.id, b: b.id, kind: 'CROSS_GABLE', why: `${a.id} stands over ${b.id} on the same walls: a second ridge across it, dying into its slope` })
   }
 
@@ -360,7 +379,8 @@ export function solveRoofSystem(input: readonly RoofRegion[]): RoofSystemSolutio
       if (ra <= eb + T.showM) { relations.push({ a: a.id, b: b.id, kind: 'ABUTMENT', why: `${a.id}'s ridge (${ra.toFixed(2)} m) is not above ${b.id}'s eaves (${eb.toFixed(2)} m): its roof meets ${b.id}'s wall and nothing of it shows over that roof` }); continue }
       if (ra > rb) { adjustments.push({ regionId: a.id, property: 'ridgeY', from: ra, to: rb, why: `read ${(ra - rb).toFixed(2)} m above the ridge of ${b.id} it runs into: within the reading's tolerance, the two ridges meet` }); ridge.set(a.id, rb); ra = rb }
       const ea = eave.get(a.id) as number
-      if (Math.abs(ea - eb) <= T.eaveSnapM && ea !== eb && ra - eb > 0.3) { adjustments.push({ regionId: a.id, property: 'eaveY', from: ea, to: eb, why: `read ${Math.abs(ea - eb).toFixed(2)} m off the eaves of ${b.id}: within the reading's tolerance, the eaves are level and the valleys start in the corner` }); eave.set(a.id, eb) }
+      // (1.0.1: never a snap that would put the pitch out of range — the eaves then stay as read, a cheek or a step named)
+      if (Math.abs(ea - eb) <= T.eaveSnapM && ea !== eb && ra - eb > 0.3 && pitchOk(a, eb, ra)) { adjustments.push({ regionId: a.id, property: 'eaveY', from: ea, to: eb, why: `read ${Math.abs(ea - eb).toFixed(2)} m off the eaves of ${b.id}: within the reading's tolerance, the eaves are level and the valleys start in the corner` }); eave.set(a.id, eb) }
       const d = domain.get(a.id) as PlanBox
       if (a.ridgeAxis === 'Z') { if (hit.end === 'MAX') d.z1 = a.rect.z1 + hit.depth; else d.z0 = a.rect.z0 - hit.depth } else if (hit.end === 'MAX') d.x1 = a.rect.x1 + hit.depth; else d.x0 = a.rect.x0 - hit.depth
       const o = open.get(a.id) as { min: boolean; max: boolean }

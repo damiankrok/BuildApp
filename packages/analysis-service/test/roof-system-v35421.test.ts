@@ -369,3 +369,19 @@ describe('massing 1.13.0: one set of elevations is at one scale', () => {
     expect(h.alternatives.join('\n')).not.toMatch(/ONE_SCALE: the/)
   })
 })
+
+describe('massing 1.13.0: stated numbers the roof cannot take are named, not built', () => {
+  it('a binding pitch outside 8–62° is REJECTED and the drawn heights stand', () => {
+    const roof: RoofSpec = { kind: 'GABLE', ridgeAxis: 'X', pitchDeg: 38.7, eavesM: 3, ridgeM: 7 }
+    for (const deg of [5, 0, 70]) {
+      const s = settleRoof(roof, { minX: 0, maxX: 10, minZ: 0, maxZ: 8 }, { pitch: { deg, from: 'a control', binding: true }, eavesHeld: true, drawnEavesM: 3, topOwn: false })
+      expect([s.roof.eavesM, s.roof.ridgeM]).toEqual([3, 7])
+      expect(s.fates.find((f) => f.property === 'pitchDeg')?.fate).toBe('REJECTED')
+    }
+  })
+  it('counter-trial: a binding pitch in range still settles the roof', () => {
+    const roof: RoofSpec = { kind: 'GABLE', ridgeAxis: 'X', pitchDeg: 38.7, eavesM: 3, ridgeM: 7 }
+    const s = settleRoof(roof, { minX: 0, maxX: 10, minZ: 0, maxZ: 8 }, { pitch: { deg: 25, from: 'a control', binding: true }, eavesHeld: true, drawnEavesM: 3, topOwn: false })
+    expect(s.roof.ridgeM).toBeCloseTo(3 + 4 * Math.tan((25 * Math.PI) / 180), 3)
+  })
+})

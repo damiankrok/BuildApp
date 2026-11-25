@@ -170,7 +170,7 @@ export type BuildStructure = {
   /** structure 2.0.0: a part carries its OWN roof numbers and how its roof meets the main one, where the read states them and nothing disputes them */
   parts: Array<{ what: string; where: StructureSide; fullStoreys: 1 | 2; roof?: StructureRoof; ridge?: 'X' | 'Z'; pitchDeg?: number; eavesM?: { m: number; status: ValueStatus }; ridgeM?: { m: number; status: ValueStatus }; join?: 'VALLEY' | 'ABUTS_WALL' | 'SAME_PLANE' | 'APART'; roofId?: string }>
   /** structure 2.0.0: second ridges on the main volume's own walls (cross gables), where the read states them */
-  cross?: Array<{ id: string; side: StructureSide; ridge: 'X' | 'Z'; span?: { fromShare: number; toShare: number }; pitchDeg?: number; ridgeM?: { m: number; status: ValueStatus } }>
+  cross?: Array<{ id: string; side: StructureSide; ridge: 'X' | 'Z'; span?: { fromShare: number; toShare: number }; pitchDeg?: number; /** v3.54.21: the status of the stated pitch (an ESTIMATED one places an estimated cross gable, it never binds a body) */ pitchStatus?: ValueStatus; ridgeM?: { m: number; status: ValueStatus } }>
 }
 const buildable = (k: string): StructureRoof | undefined => (k === 'GABLE' || k === 'HIP' || k === 'FLAT' ? k : undefined)
 const axisOf = (a: 'FRONT' | 'SIDE' | 'NONE'): 'X' | 'Z' | undefined => (a === 'FRONT' ? 'X' : a === 'SIDE' ? 'Z' : undefined)
@@ -197,7 +197,7 @@ export function buildStructureOf(a: AgreedStructure): BuildStructure {
       const num = own ? { ...(ok(own.pitchDeg) && own.pitchDeg.value.deg !== null && own.pitchDeg.value.status !== 'ESTIMATED' ? { pitchDeg: own.pitchDeg.value.deg } : {}), ...(ok(own.eavesM) && own.eavesM.value.m !== null ? { eavesM: { m: own.eavesM.value.m, status: own.eavesM.value.status } } : {}), ...(ok(own.ridgeM) && own.ridgeM.value.m !== null ? { ridgeM: { m: own.ridgeM.value.m, status: own.ridgeM.value.status } } : {}), ...(ok(own.join) && own.join.value.join !== 'NONE' ? { join: own.join.value.join as 'VALLEY' | 'ABUTS_WALL' | 'SAME_PLANE' | 'APART' } : {}), roofId: own.id } : {}
       return { what: p.value.what, where: p.value.where, fullStoreys: p.value.full, ...(k ? { roof: k } : {}), ...(r ? { ridge: r } : {}), ...num }
     }),
-    ...((a.roofs ?? []).some((q) => q.of === 'CROSS') ? { cross: (a.roofs ?? []).filter((q) => q.of === 'CROSS' && q.seenOn !== 'NONE' && ok(q.kind) && ok(q.ridgeAlong) && (q.kind.value.kind === 'GABLE' || q.kind.value.kind === 'HIP')).map((q) => ({ id: q.id, side: q.seenOn as StructureSide, ridge: (q.seenOn === 'FRONT' || q.seenOn === 'REAR' ? 'Z' : 'X') as 'X' | 'Z', ...(q.span ? { span: q.span } : {}), ...(ok(q.pitchDeg) && q.pitchDeg.value.deg !== null ? { pitchDeg: q.pitchDeg.value.deg } : {}), ...(ok(q.ridgeM) && q.ridgeM.value.m !== null ? { ridgeM: { m: q.ridgeM.value.m, status: q.ridgeM.value.status } } : {}) })) } : {}),
+    ...((a.roofs ?? []).some((q) => q.of === 'CROSS') ? { cross: (a.roofs ?? []).filter((q) => q.of === 'CROSS' && q.seenOn !== 'NONE' && ok(q.kind) && ok(q.ridgeAlong) && (q.kind.value.kind === 'GABLE' || q.kind.value.kind === 'HIP')).map((q) => ({ id: q.id, side: q.seenOn as StructureSide, ridge: (q.seenOn === 'FRONT' || q.seenOn === 'REAR' ? 'Z' : 'X') as 'X' | 'Z', ...(q.span ? { span: q.span } : {}), ...(ok(q.pitchDeg) && q.pitchDeg.value.deg !== null ? { pitchDeg: q.pitchDeg.value.deg, pitchStatus: q.pitchDeg.value.status } : {}), ...(ok(q.ridgeM) && q.ridgeM.value.m !== null ? { ridgeM: { m: q.ridgeM.value.m, status: q.ridgeM.value.status } } : {}) })) } : {}),
   }
 }
 

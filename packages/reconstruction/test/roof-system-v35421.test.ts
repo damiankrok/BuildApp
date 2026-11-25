@@ -279,3 +279,34 @@ describe('roof system: parameters after the last transformation', () => {
     expect(s.planes.every((p) => p.regionId === 'roof-main')).toBe(true)
   })
 })
+
+describe('roof system 1.0.1: a region the system cannot build cuts no neighbour', () => {
+  it('a flat wing whose eaves would snap to the main\'s (6.6°) keeps its own eaves (10.4°) and joins; the main slope has no hole', () => {
+    const flat: RoofRegion = { id: 'roof-wing', hostBodyId: 'wing', rect: { x0: 3, z0: -5, x1: 9, z1: 0 }, kind: 'GABLE', ridgeAxis: 'Z', eaveY: 2.8, ridgeY: 3.35, thicknessM: T }
+    const s = solveRoofSystem([MAIN, flat])
+    expect(s.violations).toEqual([])
+    expect(s.adjustments.filter((a) => a.property === 'eaveY')).toEqual([])
+    // the plan is covered: the main's 96 m² and the wing's 30 m², no more, no less
+    expect(total(s)).toBeCloseTo(96 + 30, 4)
+    for (const [x, z] of [[6, 0.3], [3.5, 0.2], [8.5, 0.2]] as const) expect(roofSystemTopAt(s, x, z)).toBeDefined()
+  })
+  it('a region whose own heights are out of range is solved out of the system: violation named, every neighbour whole', () => {
+    const tooFlat: RoofRegion = { ...WING, id: 'roof-wing', eaveY: 3, ridgeY: 3.25 }
+    const s = solveRoofSystem([MAIN, tooFlat])
+    expect(s.violations.map((v) => [v.regionId, v.property])).toEqual([['roof-wing', 'pitchDeg']])
+    expect(s.regions.map((r) => r.id)).toEqual(['roof-main'])
+    expect(s.planes.every((p) => p.regionId === 'roof-main')).toBe(true)
+    expect(total(s)).toBeCloseTo(96, 6)
+    expect(s.relations.filter((r) => r.kind === 'VALLEY')).toEqual([])
+  })
+  it('a cross gable read above its host\'s ridge is refused by name (it would end in the air); one at the ridge is built', () => {
+    const over = (ridgeY: number): RoofRegion => ({ id: 'roof-main-cross-front', hostBodyId: 'main', rect: { x0: 4, z0: 0, x1: 8, z1: 4 }, kind: 'GABLE', ridgeAxis: 'Z', eaveY: 3, ridgeY, thicknessM: T, over: 'roof-main' })
+    const high = solveRoofSystem([MAIN, over(8)])
+    expect(high.violations.map((v) => [v.regionId, v.property])).toEqual([['roof-main-cross-front', 'ridgeY']])
+    expect(high.planes.every((p) => p.regionId === 'roof-main')).toBe(true)
+    expect(high.relations.some((r) => r.kind === 'CROSS_GABLE')).toBe(false)
+    const ok = solveRoofSystem([MAIN, over(5)])
+    expect(ok.violations).toEqual([])
+    expect(ok.relations.some((r) => r.kind === 'CROSS_GABLE')).toBe(true)
+  })
+})

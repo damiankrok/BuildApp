@@ -51,7 +51,7 @@ describe('structure 2.0.0: each property of each roof has its own standing', () 
     const b = buildStructureOf(a)
     expect(b.parts[0]).toMatchObject({ pitchDeg: 30, eavesM: { m: 2.6, status: 'ESTIMATED' }, ridgeM: { m: 4.2, status: 'ESTIMATED' }, join: 'ABUTS_WALL', roofId: 'R2' })
     expect(b.pitchDeg).toBe(45)
-    expect(b.cross).toEqual([{ id: 'R3', side: 'REAR', ridge: 'Z', span: { fromShare: 0.3, toShare: 0.6 }, pitchDeg: 45 }])
+    expect(b.cross).toEqual([{ id: 'R3', side: 'REAR', ridge: 'Z', span: { fromShare: 0.3, toShare: 0.6 }, pitchDeg: 45, pitchStatus: 'ESTIMATED' }])
   })
   it('counter-trials: a statement the read\'s own heights contradict is disputed — that property only', () => {
     const valley = agreeStructure(parseForm({ ...V3, roofs: [V3.roofs[0], roof({ id: 'R2', of: 'PART', part: 1, ridgeM: 2.4, ridgeStatus: 'ESTIMATED', eavesM: 2.0, eavesStatus: 'ESTIMATED', seenOn: 'FRONT', meets: 'R1', join: 'VALLEY' })] }, 2).form as never, witnesses)
