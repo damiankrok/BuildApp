@@ -19,7 +19,7 @@
  */
 import type { CanonicalBuildingModel } from '@buildapp/model'
 
-export const READBACK_VERSION = '1.1.0' as const
+export const READBACK_VERSION = '1.1.1' as const
 /** A built value agrees with the bound one within this (metres): the executor rounds to a micrometre, the kernel does not move an opening. */
 export const READBACK_TOLERANCE_M = 0.005
 
@@ -176,7 +176,7 @@ export function readbackStructure(m: CanonicalBuildingModel, taken: { fullStorey
   const levelOf = (id: string): number => m.levels.find((l) => l.id === id)?.elevation ?? 0
   const byRegion = new Map<string, CanonicalBuildingModel['roofPlanes']>()
   for (const p of m.roofPlanes) byRegion.set(regionOfPlane(p.id), [...(byRegion.get(regionOfPlane(p.id)) ?? []), p])
-  const measured = (id: string, hostId: string, planes: CanonicalBuildingModel['roofPlanes']): RoofReadback => {
+  const measured = (id: string, hostId: string, planes: CanonicalBuildingModel['roofPlanes'], ring?: { rect: { minX: number; maxX: number; minZ: number; maxZ: number }; walls: CanonicalBuildingModel['walls'] }): RoofReadback => {
     // the planes along the ridge fall across it: the two directions most of the area drains to
     const fall = (p: CanonicalBuildingModel['roofPlanes'][number]): 'X' | 'Z' => (Math.abs(p.downslope.x) >= Math.abs(p.downslope.z) ? 'X' : 'Z')
     const areaOf = (p: CanonicalBuildingModel['roofPlanes'][number]): number => Math.abs(p.boundary.reduce((t, a, i) => { const b = p.boundary[(i + 1) % p.boundary.length]; return t + a.x * b.z - b.x * a.z }, 0)) / 2
@@ -186,10 +186,22 @@ export function readbackStructure(m: CanonicalBuildingModel, taken: { fullStorey
     const ridgeAxis: 'X' | 'Z' = aZ >= aX ? 'X' : 'Z'
     const main = planes.filter((p) => fall(p) !== ridgeAxis)
     const pitch = main.length > 0 ? main.reduce((t, p) => t + p.pitchDeg * areaOf(p), 0) / main.reduce((t, p) => t + areaOf(p), 0) : undefined
-    const eaves = main.length > 0 ? Math.min(...main.map((p) => p.datum.y)) : undefined
+    // readback 1.1.1: the eaves where each slope crosses its ring's wall face (the datum of a hip with an eaves overhang is
+    // its fascia, lower by the overhang × tan pitch); a cross gable, with no ring of its own, at its datum
+    const atFace = (p: CanonicalBuildingModel['roofPlanes'][number]): number => {
+      if (!ring) return p.datum.y
+      const r = ring.rect
+      const q = Math.abs(p.downslope.z) >= Math.abs(p.downslope.x) ? { x: p.datum.x, z: p.downslope.z < 0 ? r.minZ : r.maxZ } : { x: p.downslope.x < 0 ? r.minX : r.maxX, z: p.datum.z }
+      return planeTop(p, q)
+    }
+    const eaves = main.length > 0 ? Math.min(...main.map(atFace)) : undefined
     const ridge = Math.max(...planes.flatMap((p) => p.boundary.map((q) => planeTop(p, q))))
     const drop = main[0] ? main[0].thickness / Math.cos((main[0].pitchDeg * Math.PI) / 180) : 0
-    return { id, hostId, stated: 'PLANES', roof: planes.every((p) => p.pitchDeg === 0) ? 'FLAT' : dirs.size >= 3 ? 'HIP' : 'GABLE', ridgeAxis, ...(pitch !== undefined ? { pitchDeg: r3(pitch) } : {}), ...(eaves !== undefined ? { eavesM: r3(eaves), wallTopM: r3(eaves - drop) } : {}), ridgeM: r3(ridge), planeIds: planes.map((p) => p.id).sort() }
+    // the wall top: a ring whose walls stand level (a hip roofed apart) has its own; walls that die into planes end at the
+    // planes' underside at the face
+    const level = (ring?.walls ?? []).filter((w) => !w.topProfile && main.some((p) => Math.abs(p.downslope.z) >= Math.abs(p.downslope.x) ? Math.abs(w.start.x - w.end.x) > 1e-6 : Math.abs(w.start.z - w.end.z) > 1e-6))
+    const wallTop = level.length > 0 ? Math.min(...level.map((w) => levelOf(w.levelId) + w.baseOffset + w.height)) : eaves !== undefined ? eaves - drop : undefined
+    return { id, hostId, stated: 'PLANES', roof: planes.every((p) => p.pitchDeg === 0) ? 'FLAT' : dirs.size >= 3 ? 'HIP' : 'GABLE', ridgeAxis, ...(pitch !== undefined ? { pitchDeg: r3(pitch) } : {}), ...(eaves !== undefined ? { eavesM: r3(eaves), wallTopM: r3(wallTop as number) } : {}), ridgeM: r3(ridge), planeIds: planes.map((p) => p.id).sort() }
   }
   for (const ring of m.wallRings) {
     const walls = m.walls.filter((w) => ring.wallIds.includes(w.id))
@@ -213,7 +225,7 @@ export function readbackStructure(m: CanonicalBuildingModel, taken: { fullStorey
       bodies.push(body)
       roofs.push({ id: roof.id, hostId: ring.id, stated: 'ROOF', roof: body.roof as 'FLAT' | 'GABLE', ...(pitched ? { ...(body.ridgeAxis ? { ridgeAxis: body.ridgeAxis } : {}), ...(body.pitchDeg !== undefined ? { pitchDeg: body.pitchDeg } : {}), eavesM: r3(eaves), ...(body.wallTopM !== undefined ? { wallTopM: body.wallTopM } : {}), ...(body.ridgeM !== undefined ? { ridgeM: body.ridgeM } : {}) } : { eavesM: r3(eaves), wallTopM: r3(eaves) }), planeIds: [] })
     } else if (planes.length >= 2) {
-      const q = measured(name, ring.id, planes)
+      const q = measured(name, ring.id, planes, { rect, walls })
       bodies.push({ ...size, roof: q.roof, ...(q.ridgeAxis ? { ridgeAxis: q.ridgeAxis } : {}), ...(q.pitchDeg !== undefined ? { pitchDeg: q.pitchDeg } : {}), ...(q.wallTopM !== undefined ? { wallTopM: q.wallTopM } : {}), ...(q.ridgeM !== undefined ? { ridgeM: q.ridgeM } : {}) })
       roofs.push(q)
     } else bodies.push({ ...size, roof: 'NONE' })

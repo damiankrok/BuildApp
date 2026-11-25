@@ -408,6 +408,17 @@ export function bindSetRoof(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
     const before = joinedBodiesOf(rec.solution)
     const after = joinedBodiesOf(sol)
     if (before.size !== after.size || [...before].some((id) => !after.has(id))) return { status: 'UNSUPPORTED_OPERATION', code: 'ROOF_SYSTEM_MEMBERSHIP_CHANGES', why: `with ${body.id}'s roof as proposed the roofs that meet are no longer the same (${[...before].sort().join(', ')} → ${[...after].sort().join(', ') || 'none'}): a body leaving or entering the system is rebuilt with its walls, which this operation does not do`, record }
+    // ops 1.13.0: every body of the system takes the solved heights (a neighbour's eaves may snap to the corrected
+    // region): an opening in an eaves wall of ANY of them must stay under that wall's new top, or the change is refused
+    // by name — the transaction moves no opening it was not asked about
+    for (const g of sol.regions.filter((q) => after.has(q.hostBodyId))) {
+      const gb = bodies.find((q) => q.id === `ring-${g.hostBodyId}`)
+      if (!gb) continue
+      const wallTop = g.eaveY - MINIATURE_CONVENTIONS.roofThicknessM / Math.cos((g.pitchDeg * Math.PI) / 180)
+      const eavesWalls = m.walls.filter((w) => gb.wallIds.includes(w.id) && (g.ridgeAxis === 'X' ? Math.abs(w.end.x - w.start.x) > 1e-6 : Math.abs(w.end.z - w.start.z) > 1e-6))
+      const high = m.openings.filter((o) => eavesWalls.some((w) => w.id === o.wallId && levelOf(m, w.levelId).elevation + w.baseOffset + o.sill + o.height > wallTop + 1e-3) && !yields.some((y) => y.id === o.id))
+      if (high.length > 0) return { status: 'NEEDS_EVIDENCE', code: 'OPENING_ABOVE_EAVES', why: `with ${body.id}'s roof as proposed the roof system puts ${g.id}'s eaves at ${g.eaveY.toFixed(2)} m (wall top ${wallTop.toFixed(2)} m): ${high.map((o) => o.id).join(', ')} would rise above it — the roof and the openings disagree, and the change moves neither`, record }
+    }
     const oldPlanes = m.roofPlanes.filter((pl) => rec.planeIds.includes(pl.id))
     const levelId = oldPlanes[0].levelId
     const material = oldPlanes.find((pl) => pl.materialId)?.materialId

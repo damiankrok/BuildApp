@@ -93,7 +93,7 @@ describe('the feature map is made from the sources alone, and each feature is fo
     expect(row('F-R1-PITCH')).toMatchObject({ result: 'BUILT_AS_STATED' })
     expect(row('F-PART-1')).toMatchObject({ result: 'BUILT_AS_STATED' })
     // the read said "ends against a wall"; the heights make a valley: the geometry stands and the conflict is on the record
-    expect(row('F-R2-JOIN')).toMatchObject({ result: 'BUILT_DIFFERENT', cause: 'CONFLICT_WITH_DRAWING', measure: { built: 'VALLEY' } })
+    expect(row('F-R2-JOIN')).toMatchObject({ result: 'BUILT_DIFFERENT', cause: 'CONFLICT_WITH_DRAWING', measure: { built: expect.stringMatching(/^VALLEY; in the model: 2 VALLEY edge/) } })
     expect(row('F-R2')).toMatchObject({ result: 'BUILT_DIFFERENT', cause: 'CONFLICT_WITH_DRAWING' })
     // a cross roof the read states and nothing could place: lost in binding, by name — never silently
     expect(row('F-R3')).toMatchObject({ result: 'NOT_BUILT', cause: 'LOST_IN_BINDING' })

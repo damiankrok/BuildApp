@@ -416,9 +416,11 @@ export function cuttableTopM(m: CanonicalBuildingModel, w: Wall, /** v3.54.21: t
     let low = Infinity
     for (let k = 0; k <= 16; k += 1) {
       const at = s0 + ((s1 - s0) * k) / 16
-      for (const sign of [1, -1]) {
-        // a point inside the wall's thickness, on either side of its line (the ring's line is its outer face)
-        const q = alongX ? { x: at, z: w.start.z + sign * n.z * (w.thickness / 2) } : { x: w.start.x + sign * n.x * (w.thickness / 2), z: at }
+      // the compiler cuts an opening only where its head clears the top at BOTH faces: sampled at the outer face (the ring's
+      // line, a hair inside) and at the inner one, on either side of the line (one side lies outside every plane) — the
+      // middle of the wall overstated the top of an eaves wall by half its thickness × the pitch
+      for (const [sign, c] of [[1, 1e-4], [1, w.thickness - 1e-4], [-1, 1e-4], [-1, w.thickness - 1e-4]] as const) {
+        const q = alongX ? { x: at, z: w.start.z + sign * n.z * c } : { x: w.start.x + sign * n.x * c, z: at }
         for (const pl of planes) {
           let inside = false
           for (let i = 0, j = pl.boundary.length - 1; i < pl.boundary.length; j = i, i += 1) { const [u, v] = [pl.boundary[i], pl.boundary[j]]; if (u.z > q.z !== v.z > q.z && q.x < ((v.x - u.x) * (q.z - u.z)) / (v.z - u.z) + u.x) inside = !inside }
@@ -1040,8 +1042,8 @@ export function sideEavesM(m: CanonicalBuildingModel, side: Side, range?: { lo: 
     const share = r ? Math.max(0, Math.min(hi, r.hi) - Math.max(lo, r.lo)) : hi - lo
     return { x, share, area: (f.maxX - f.minX) * (f.maxZ - f.minZ) }
   }).filter((o) => o.share > 0).sort((a, b) => b.share - a.share || b.area - a.area)[0]
-  if (over) return levelOf(m, over.x.levelId).elevation + over.x.eaveOffset
   const walls = exteriorWalls(m).filter((w) => sideOfWall(m, w) === side)
+  const overEaves = over ? levelOf(m, over.x.levelId).elevation + over.x.eaveOffset : undefined
   // executor 1.9.0 (v3.54.21): walls that die into the planes of a roof system carry no top of their own (the ring stands
   // to the highest ridge and is cut by the planes) — read as a wall height they put the "eaves" at the ridge, and every
   // elevation then failed to register on a body whose roofs meet. The eaves seen on this side are the eaves of the plane
@@ -1054,8 +1056,11 @@ export function sideEavesM(m: CanonicalBuildingModel, side: Side, range?: { lo: 
     const cands = m.roofPlanes.filter((pl) => followed.has(pl.id) && pl.pitchDeg > 0 && run(pl) > 0)
     const facing = cands.filter((pl) => pl.downslope.x * out.x + pl.downslope.z * out.z > 0.7)
     const pick = [...(facing.length > 0 ? facing : cands)].sort((a, b) => run(b) - run(a) || areaOf(b) - areaOf(a) || a.id.localeCompare(b.id))[0]
-    if (pick) return pick.datum.y
+    // (a parametric roof — a garage or wing roofed apart — and the planes are ranked by ONE rule: the longest run over
+    // the range, then the larger area; a small separate roof no longer stands for the side of a house roofed in planes)
+    if (pick && (!over || run(pick) > over.share + 1e-6 || (Math.abs(run(pick) - over.share) <= 1e-6 && areaOf(pick) >= over.area))) return pick.datum.y
   }
+  if (overEaves !== undefined) return overEaves
   return Math.max(...walls.map((w) => { const lv = levelOf(m, w.levelId); return lv.elevation + w.baseOffset + (w.topProfile ? lv.height : w.height) }))
 }
 
@@ -1095,11 +1100,18 @@ function bindRoofWindow(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
   const h0 = yOf(pr, box.y1)
   const h1 = yOf(pr, box.y0)
   const ax = alongAxis(view.side)
-  const legacy = sideRoof(m, view.side, { lo: a0, hi: a1 })
+  const legacy0 = sideRoof(m, view.side, { lo: a0, hi: a1 })
   // v3.54.21: a slope stated as a roof PLANE (a hip, or a roof of a roof system) hosts a roof window as a parametric
   // gable does — the plane that falls towards this side over the box's stretch. Until now only a parametric gable did:
   // a house whose roofs were joined in valleys, or hipped, lost every roof window it had.
-  const plane = legacy ? undefined : slopePlane(m, view.side, { lo: a0, hi: a1 })
+  const plane0 = slopePlane(m, view.side, { lo: a0, hi: a1 })
+  // where both a roof apart and a plane run over the box's stretch, the host is the one whose heights hold the box
+  // (between its eaves and its top); no kind of roof has priority over the other
+  const holds = (eaves: number, top: number): boolean => h0 >= eaves - 0.15 && h1 <= top + 0.05
+  const legacyHolds = legacy0 ? holds(levelOf(m, legacy0.levelId).elevation + legacy0.eaveOffset, levelOf(m, legacy0.levelId).elevation + legacy0.eaveOffset + Math.tan((legacy0.pitchDeg * Math.PI) / 180) * ((legacy0.ridgeAxis === 'X' ? legacy0.footprint.maxZ - legacy0.footprint.minZ : legacy0.footprint.maxX - legacy0.footprint.minX) / 2)) : false
+  const planeHolds = plane0 ? holds(plane0.datum.y, Math.max(...plane0.boundary.map((v) => plane0.datum.y - Math.tan((plane0.pitchDeg * Math.PI) / 180) * ((v.x - plane0.datum.x) * plane0.downslope.x + (v.z - plane0.datum.z) * plane0.downslope.z)))) : false
+  const legacy = legacy0 && (!plane0 || legacyHolds || !planeHolds) ? legacy0 : undefined
+  const plane = legacy ? undefined : plane0
   if (!legacy && !plane) return { status: 'NEEDS_EVIDENCE', code: 'NO_PITCHED_ROOF', why: `the model has no pitched roof over ${a0.toFixed(2)}..${a1.toFixed(2)} m of the ${view.side.toLowerCase()} side` }
   if (legacy && (legacy.ridgeAxis === 'X') !== (ax === 'x')) return { status: 'NEEDS_EVIDENCE', code: 'SLOPE_SEEN_EDGE_ON', why: `${legacy.id}'s ridge runs across the ${view.side.toLowerCase()} side (a gable end): its slopes are seen edge-on there, and a window in a slope is placed from the elevation that sees the slope face-on` }
   // one host, however the roof is stated: its eaves line and height, its pitch, its depth in plan and its run along the side
