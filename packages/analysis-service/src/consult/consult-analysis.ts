@@ -643,7 +643,12 @@ async function checkSources(l: Local, options: AnalysisOptions, perspectives: Re
   // v3.54.21: the perspective pictures the structure read was asked of, as a QUALITATIVE witness: how volumes and roofs
   // relate (a recess, a porch, the depth of a balcony, where two roofs meet) is often plainer there than on an elevation.
   // Nothing is placed or sized from one — its camera is not recovered — and the label says so, with the corner it looks at.
-  for (const q of perspectives.slice(0, CHECK_PERSPECTIVES)) await add(q.frameId, 'OTHER_SOURCE', `a PERSPECTIVE rendering of the finished house (not an elevation, not to scale${q.corner && q.corner !== 'OTHER' ? `; it looks at the house's ${q.corner.replace('_', '-')} — compare it with the model's axonometric from that corner` : ''}${q.mirrored ? '; it shows the house MIRRORED against the elevations' : ''}): use it only for how volumes and roofs relate — a recess, a porch, the eaves' run, where two roofs meet. A difference you see only here is a qualitative finding: name it, but never give a position or a size from this picture`)
+  // v3.54.21: of the perspectives the structure read was given, the reviewer gets those looking at DIFFERENT corners first
+  // (the third of three renderings, the only one showing the rear terrace's glazed doors, was left out by frame order)
+  const byCorner: Array<(typeof perspectives)[number]> = []
+  for (const q of perspectives) if (!byCorner.some((p) => p.corner && p.corner !== 'OTHER' && p.corner === q.corner)) byCorner.push(q)
+  for (const q of perspectives) if (!byCorner.includes(q)) byCorner.push(q)
+  for (const q of byCorner.slice(0, CHECK_PERSPECTIVES)) await add(q.frameId, 'OTHER_SOURCE', `a PERSPECTIVE rendering of the finished house (not an elevation, not to scale${q.corner && q.corner !== 'OTHER' ? `; it looks at the house's ${q.corner.replace('_', '-')} — compare it with the model's axonometric from that corner` : ''}${q.mirrored ? '; it shows the house MIRRORED against the elevations' : ''}): use it only for how volumes and roofs relate — a recess, a porch, the eaves' run, where two roofs meet. A difference you see only here is a qualitative finding: name it, but never give a position or a size from this picture`)
   return out
 }
 
@@ -2031,7 +2036,7 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
       return []
     }
   }
-  let lastApplied: Array<{ id: string; what: string; kind: 'ROOF_FEATURE' | 'PATCH'; proposalId?: string }> = []
+  let lastApplied: Array<{ id: string; what: string; kind: 'ROOF_FEATURE' | 'PATCH'; proposalId?: string; /** v3.54.21: where the patch came from (PLAN: the ground plan draws it) */ origin?: string }> = []
   let lastRefused: Array<{ targetId: string; why: string }> = []
   let previous: { good: Local; state: RunState; features: RoofFeatureCorrection[] } | undefined
   const seenG = new Set<string>()
@@ -2050,7 +2055,7 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
   // v3.54.16: the sketch channel's patches are what the first look reviews as applied — each is settled by that look
   const sketchKept = (sketchSummary?.semantic?.decision === 'APPLIED' ? sketchSummary.semantic.records : []).filter((r) => r.status === 'COMMITTED' && committed.some((p) => p.proposalId === r.proposalId))
   if (sketchKept.length > 0) {
-    lastApplied = sketchKept.map((r) => ({ id: r.bound?.ids[0] ?? r.targetId, what: `${r.operation} on the ${(r.bound?.side ?? r.targetId).toLowerCase()} side (${r.bound?.ids[0] ?? r.targetId}), from the sketch of that elevation`, kind: 'PATCH' as const, proposalId: r.proposalId }))
+    lastApplied = sketchKept.map((r) => ({ id: r.bound?.ids[0] ?? r.targetId, what: r.origin === 'PLAN' ? `${r.operation} on the ${(r.bound?.side ?? r.targetId).toLowerCase()} side (${r.bound?.ids[0] ?? r.targetId}), from a gap the ground-floor plan draws in that wall (its kind, sill and height from that side's elevation reading)` : `${r.operation} on the ${(r.bound?.side ?? r.targetId).toLowerCase()} side (${r.bound?.ids[0] ?? r.targetId}), from the sketch of that elevation`, kind: 'PATCH' as const, proposalId: r.proposalId, ...(r.origin ? { origin: r.origin } : {}) }))
     prevLook = { look: 0, defects: sketchKept.map((r) => ({ id: `S:${r.proposalId.slice(-24)}`, about: `${r.operation} ${r.targetId} from the sketch of ${r.bound?.side ?? '?'}`, scope: (r.bound?.side ?? 'WHOLE') as 'FRONT', severity: 'MAJOR' as const, certainty: 'LIKELY' as const, operation: r.operation as 'ADD_OPENING' })), proposals: sketchKept.map((r) => ({ proposalId: r.proposalId, defectId: `S:${r.proposalId.slice(-24)}` })), records: sketchKept }
   }
   if ((wiring.check ?? 'ON') === 'ON' && good.run && good.pkg && good.graph) {
@@ -2104,7 +2109,7 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
       prevLook = undefined
       // what the look says of the features and patches the round before applied: one the source does not show is undone
       if (lastApplied.length > 0) {
-        rec.reviewed = reviewOutcome(lastApplied.map((a) => a.id), res.review.appliedReview)
+        rec.reviewed = reviewOutcome(lastApplied.map((a) => a.id), res.review.appliedReview, new Set(lastApplied.filter((a) => a.kind === 'PATCH' && a.origin === 'PLAN').map((a) => a.id)))
         record({ at: now().toISOString(), kind: 'APPLIED_REVIEW', round: g, reviewed: rec.reviewed })
         const drop = rec.reviewed.filter((r) => !r.keep).map((r) => r.id)
         const dropFeatures = drop.filter((id) => lastApplied.some((a) => a.id === id && a.kind === 'ROOF_FEATURE'))

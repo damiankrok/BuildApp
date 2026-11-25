@@ -26,7 +26,7 @@ import type { RoofRegion, RoofSystemSolution } from '@buildapp/reconstruction'
 import type { BindView, Projection, Side } from '../correct/execute.js'
 import type { Poly } from '../correct/source-gate.js'
 
-export const MASSING_VERSION = '1.12.0' as const
+export const MASSING_VERSION = '1.13.0' as const
 
 import type { BuildStructure, StructureSide } from '../structure.js'
 export type Rect = { minX: number; maxX: number; minZ: number; maxZ: number }
@@ -57,6 +57,8 @@ export type PropertyFate = { property: string; fate: 'APPLIED' | 'RETAINED_WITH_
 export type BodySpec = { id: string; rect: Rect; roof: RoofSpec; provenance: Record<string, Prov>; fates?: PropertyFate[]; /** which description of the agreed structure this body carries (the binding the builder made; absent: no structure was agreed) */ describes?: 'MAIN' | 'MAIN_BESIDE' | 'PART' | 'NONE' }
 /** A description is bound to a body by its own views when at least this many more of them draw one ridge direction than the other. */
 export const BIND_BY_VIEWS = 2
+/** massing 1.13.0: elevations of one set are at one scale — a direction's registrations agree within `same`; two directions parting by more than `same` and at most `apart` (with the drawn tops agreeing in pixels and no quarter turn explaining it) are one scale read from different widths. */
+export const ONE_SCALE = { same: 1.12, apart: 1.3 } as const
 /** massing 1.12.0: a cross roof of the read is a body's own roof where its stated span covers at least this share of that body's stretch on the side it is seen on. */
 export const CROSS_AS_BODY = { minCover: 0.6 } as const
 /** A built pitch agrees with a stated one within this (degrees); a height within `MASSING_TOLERANCES.heightAgreeM` / share. */
@@ -838,6 +840,42 @@ export function solveMassing(input: MassingInput): MassingHypothesis {
     base.views_used.push({ side: s.side, frameId: s.frameId, used: true, why: reg.why })
   }
   if (byView.size === 0) return { ...base, status: 'INSUFFICIENT', bodies: [], views, missing: [{ anchor: 'ELEVATION_SILHOUETTE', why: 'no elevation could be registered by the plan: no height and no roof form can be read' }], why: 'the outline alone gives a footprint, not a mass' }
+  // massing 1.13.0 — ONE SET OF ELEVATIONS, ONE SCALE: the house's top is one height and every elevation draws it. Where the
+  // drawn tops agree in pixels on views of both directions while the registrations of the two directions part beyond
+  // SCALE_SAME, the drawings ARE at one scale and the widths are what differ: an elevation draws at least the walls of the
+  // outline (never less), and may draw more (posts of a covered terrace, a fence). The only common scale that draws no
+  // direction narrower than its walls is the larger one: the other direction's heights are read at it.
+  {
+    const SCALE_SAME = ONE_SCALE.same
+    const fam = (dir: 'x' | 'z') => [...byView.values()].filter((q) => along(q.obs.side) === dir)
+    const [fx, fz] = [fam('x'), fam('z')]
+    const topPx = (o: SilhouetteObservation): number | undefined => { const ys = [...o.walls, ...o.roofs].flatMap((q) => q.map((t) => t[1])); return o.groundRow !== null && o.groundRow !== undefined && ys.length > 0 ? o.groundRow - Math.min(...ys) : undefined }
+    const tops = [...byView.values()].map((q) => topPx(q.obs))
+    const spread = (v: number[]): number => Math.max(...v) / Math.min(...v)
+    const med = (v: number[]): number => { const q = [...v].sort((a, b) => a - b); return (q[Math.floor((q.length - 1) / 2)] + q[Math.ceil((q.length - 1) / 2)]) / 2 }
+    if (fx.length > 0 && fz.length > 0 && tops.every((t): t is number => t !== undefined && t > 0)) {
+      const mx = fx.map((q) => q.view.projection.mpp)
+      const mz = fz.map((q) => q.view.projection.mpp)
+      const pxAgree = spread(tops as number[]) <= 1 + MASSING_TOLERANCES.heightAgreeShare
+      const [sx, sz] = [med(mx), med(mz)]
+      // a quarter turn parts the scales too (by the outline's aspect, squared): where the same widths over the OTHER side's
+      // extents put every view at one scale, the turn is the question (the turn decision answers it), not a width
+      const wPx = (q: { obs: SilhouetteObservation; view: BindView }): number => { const e = extentOn(bb, q.obs.side); return (e.hi - e.lo) / q.view.projection.mpp }
+      const turnedMpp = [...byView.values()].map((q) => { const e = extentOn(bb, along(q.obs.side) === 'x' ? 'LEFT' : 'FRONT'); return (e.hi - e.lo) / wPx(q) })
+      const turnExplains = spread(turnedMpp) <= SCALE_SAME
+      const ratio = Math.max(sx, sz) / Math.min(sx, sz)
+      if (ratio <= SCALE_SAME) { /* the two directions already share one scale: nothing to reconcile */ } else if (turnExplains || ratio > ONE_SCALE.apart) base.alternatives.push(`ONE_SCALE not applied: ${turnExplains ? 'turned by 90° the widths share one scale' : `the directions part by ${ratio.toFixed(2)}, more than anything standing beyond the walls widens a view`}`)
+      else if (pxAgree && spread(mx) <= SCALE_SAME && spread(mz) <= SCALE_SAME && ratio > SCALE_SAME) {
+        const set = Math.max(sx, sz)
+        const off = sx < sz ? fx : fz
+        for (const q of off) {
+          const was = q.view.projection.mpp
+          q.view.projection = { ...q.view.projection, mppV: r6(set) }
+          base.alternatives.push(`ONE_SCALE: the ${q.obs.side.toLowerCase()} elevation draws the house's top ${(topPx(q.obs) as number).toFixed(0)} px high like every other view, but its walls' width puts it at ${(was * 100).toFixed(2)} cm/px against ${(set * 100).toFixed(2)} for the other direction: it draws ${((was === 0 ? 0 : (set / was - 1)) * 100).toFixed(0)} % more than the outline's walls (something standing beyond them); its heights are read at the set's scale`)
+        }
+      }
+    }
+  }
   // massing 1.9.0: a part the agreed structure names as a volume of its own (a garage, a wing) on one side of the house,
   // where the outline steps out on that side, is a body — before any small-step convention can close its two steps (a
   // 3.6 m garage against a 10 m house is two steps of 4 % each: taken out as "small", the house and its garage became

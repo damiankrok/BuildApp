@@ -150,13 +150,19 @@ export function compareGeometry(before: GeometryState, after: GeometryState | un
 }
 
 /** What the consultant's review of the new revision says of each applied feature: keep it, or take it out again. */
-export function reviewOutcome(applied: readonly string[], review: readonly AppliedReview[] | undefined): Array<{ id: string; verdict: AppliedReview['verdict'] | 'NOT_REVIEWED'; keep: boolean; note: string }> {
+export function reviewOutcome(applied: readonly string[], review: readonly AppliedReview[] | undefined, heldByPlan: ReadonlySet<string> = new Set()): Array<{ id: string; verdict: AppliedReview['verdict'] | 'NOT_REVIEWED'; keep: boolean; note: string }> {
   return applied.map((id) => {
     const r = (review ?? []).find((x) => x.id === id)
     if (!r) return { id, verdict: 'NOT_REVIEWED' as const, keep: true, note: 'the review did not name it: it stays, marked not reviewed' }
     // a feature in the wrong place or of the wrong size is still the feature the source shows; one of the wrong kind,
     // or one the source does not show, is not
-    const keep = r.verdict !== 'SHOULD_NOT_EXIST' && r.verdict !== 'WRONG_KIND'
-    return { id, verdict: r.verdict, keep, note: r.note }
+    const against = r.verdict === 'SHOULD_NOT_EXIST' || r.verdict === 'WRONG_KIND'
+    // v3.54.21: an element whose EXISTENCE the plan draws (a gap of the ground plan built as an opening, the interior from
+    // the plan skeleton) is not taken out on a look's word: a look is a reading of pictures, not a source measure, and
+    // WRONG_KIND disputes the kind or the finish, not the hole (a live look removed a glazed door the plan draws on an
+    // UNSURE observation, and a garage door for its colour). The verdict stays on the record as an open disagreement; a
+    // removal goes through REMOVE_OPENING and the source gate like any other change.
+    if (against && heldByPlan.has(id)) return { id, verdict: r.verdict, keep: true, note: `${r.note} — kept: the ground plan draws it; a look's verdict is not a source measure, the disagreement stays open (REMOVE_OPENING is gated by the source)` }
+    return { id, verdict: r.verdict, keep: !against, note: r.note }
   })
 }

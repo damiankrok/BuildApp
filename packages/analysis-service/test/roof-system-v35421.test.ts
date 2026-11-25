@@ -342,3 +342,30 @@ describe('ops 1.13.0: the reading whose elevations share one scale decides which
     expect(h.alternatives.some((a) => /no decision: both alike/.test(a))).toBe(true)
   })
 })
+
+describe('massing 1.13.0: one set of elevations is at one scale', () => {
+  // the 12 × 8 m house of this file; each gable end ALSO draws a post of a covered terrace 1.5–2 m beyond its wall
+  // (open gap between): registered by its drawn walls' width, a gable-end view comes out at 0.02 m/px against 0.025
+  const POST: Poly = box(9.5, 10, 0, 2.6)
+  const withPost = (side: 'LEFT' | 'RIGHT'): SilhouetteObservation => { const v = gableEnd(side); return { ...v, walls: [...v.walls, POST] } }
+  it('the views draw the top at one height in pixels: the side views\' heights are read at the set\'s scale, the ridge is the drawn 7 m', () => {
+    const h = solveMassing({ outline: HOUSE, silhouettes: [slope('FRONT'), slope('REAR'), withPost('LEFT'), withPost('RIGHT')] })
+    const plain = solveMassing({ outline: HOUSE, silhouettes: [slope('FRONT'), slope('REAR'), gableEnd('LEFT'), gableEnd('RIGHT')] })
+    expect(h.status).toBe('BUILDABLE')
+    // the same body as without the posts (the top read at 0.02 m/px would be 20 % lower on the two end views)
+    expect(h.bodies[0].roof.ridgeM).toBeCloseTo(plain.bodies[0].roof.ridgeM as number, 2)
+    expect(Math.abs(h.bodies[0].roof.eavesM - plain.bodies[0].roof.eavesM)).toBeLessThan(0.1)
+    expect(h.bodies[0].rect).toEqual(plain.bodies[0].rect)
+    expect(h.alternatives.join('\n')).toMatch(/ONE_SCALE: the (left|right) elevation draws the house's top/)
+  })
+  it('counter-trial: without the posts nothing is reconciled and the body is the same', () => {
+    const h = solveMassing({ outline: HOUSE, silhouettes: [slope('FRONT'), slope('REAR'), gableEnd('LEFT'), gableEnd('RIGHT')] })
+    expect(h.bodies[0].roof.ridgeM).toBeCloseTo(7.1, 1)
+    expect(h.alternatives.join('\n')).not.toMatch(/ONE_SCALE/)
+  })
+  it('counter-trial: drawings that disagree on the top in pixels are not forced to one scale', () => {
+    const tall = (side: 'LEFT' | 'RIGHT'): SilhouetteObservation => { const v = withPost(side); return { ...v, roofs: v.roofs.map((p) => p.map(([x, y]) => [x, y < row(5) ? y - 60 : y] as [number, number])) } }
+    const h = solveMassing({ outline: HOUSE, silhouettes: [slope('FRONT'), slope('REAR'), tall('LEFT'), tall('RIGHT')] })
+    expect(h.alternatives.join('\n')).not.toMatch(/ONE_SCALE: the/)
+  })
+})

@@ -117,3 +117,21 @@ describe('the feature map is made from the sources alone, and each feature is fo
     expect(local.rows.find((q) => q.feature.id === 'F-R3')).toMatchObject({ cause: 'NOT_ASKED' })
   })
 })
+
+describe('v3.54.21: an element the ground plan draws is not taken out on a look\'s word', () => {
+  it('WRONG_KIND / SHOULD_NOT_EXIST keep a plan-drawn patch (the disagreement stays open), and still take out a sketch-only one', async () => {
+    const { reviewOutcome } = await import('../src/consult/geometry.js')
+    const review = [
+      { id: 'op-plan-rear-1', verdict: 'WRONG_KIND' as const, note: 'glazed door doubtful' },
+      { id: 'op-fix-front-2', verdict: 'WRONG_KIND' as const, note: 'a window, not a door' },
+      { id: 'op-plan-front-3', verdict: 'SHOULD_NOT_EXIST' as const, note: 'not drawn' },
+      { id: 'op-fix-left-4', verdict: 'MATCHES' as const, note: 'ok' },
+    ]
+    const out = reviewOutcome(['op-plan-rear-1', 'op-fix-front-2', 'op-plan-front-3', 'op-fix-left-4'], review as never, new Set(['op-plan-rear-1', 'op-plan-front-3']))
+    expect(out.map((o) => [o.id, o.keep])).toEqual([['op-plan-rear-1', true], ['op-fix-front-2', false], ['op-plan-front-3', true], ['op-fix-left-4', true]])
+    expect(out[0].verdict).toBe('WRONG_KIND')
+    expect(out[0].note).toMatch(/kept: the ground plan draws it/)
+    // counter-trial: without the plan's witness the same verdicts take both out, as before
+    expect(reviewOutcome(['op-plan-rear-1', 'op-plan-front-3'], review as never).map((o) => o.keep)).toEqual([false, false])
+  })
+})
