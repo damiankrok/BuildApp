@@ -1019,7 +1019,10 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
                 const at = (px: number, py: number): { x: number; z: number } => { const p = { x: (px - minXpx) * sM, z: (maxYpx - py) * sM }; return planFront ? pointWithFront(p, planFront, frameOutline) : p }
                 planMap = { frameId: f.id, basis: 'OUTLINE_SCALE', o: at(0, 0), x1000: at(1000, 0), y1000: at(0, 1000) }
               }
-              massingOf.set(l, { views: mr.views, rebuild: (m) => build(m), ...(planFront ? { planFront } : {}), ...(interior ? { interior } : {}), ...(planMap ? { planMap } : {}) })
+              // (a registration made on a side the structure read named served the body's heights; which side that picture's
+              // OPENINGS stand on is decided afterwards, like every unlabelled elevation's, by what registers and by the
+              // plan's openings — so it is not carried as a held view)
+              massingOf.set(l, { views: mr.views.filter((v) => !sidesByRead.some((q) => q.frameId === v.frameId)), rebuild: (m) => build(m), ...(planFront ? { planFront } : {}), ...(interior ? { interior } : {}), ...(planMap ? { planMap } : {}) })
               return l
             }
             const m0 = build()
@@ -1637,7 +1640,13 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
           // the plan's word: the openings the plan draws on the side each elevation would stand on, against the ones it draws
           const planFront = massingOf.get(from)?.planFront
           const plan = planOpenings ? unspecified.reduce((t, x, i) => t + stretchAgreement(planOpenings.filter((o) => planSideInModel(o.side, planFront) === perm[i]), drawnStretches(x.sketch as NonNullable<typeof x.sketch>)).score, 0) : null
-          return { perm, ok, score: regs.reduce((t, r) => t + (r && !('status' in r) ? r.support ?? 0 : 0), 0), plan }
+          // v3.54.20: and the plan SHEET's word — the gaps the skeleton read in the exterior walls (pixels of the plan, not
+          // an answer), as stretches of each side seen from outside
+          const io = massingOf.get(from)?.interior
+          const sheetGaps = io ? planGapsFromSkeleton(model, io) : []
+          const gapStretches = (sd: Side): Array<{ u0: number; u1: number }> => { const rg = sideRange(model, sd); if (!rg || !(rg.hi - rg.lo > 0.5)) return []; const w = rg.hi - rg.lo; return sheetGaps.filter((g) => g.side === sd).map((g) => (sd === 'FRONT' || sd === 'RIGHT' ? { u0: (g.a0 - rg.lo) / w, u1: (g.a1 - rg.lo) / w } : { u0: (rg.hi - g.a1) / w, u1: (rg.hi - g.a0) / w })) }
+          const sheet = sheetGaps.length > 0 ? unspecified.reduce((t, x, i) => t + stretchAgreement(gapStretches(perm[i]), drawnStretches(x.sketch as NonNullable<typeof x.sketch>)).score, 0) : null
+          return { perm, ok, score: regs.reduce((t, r) => t + (r && !('status' in r) ? r.support ?? 0 : 0), 0), plan, sheet }
         }).filter((q) => q.ok).sort((a, b) => b.score - a.score)
         const bySupport = scored.length === 1 || (scored.length > 1 && scored[0].score - scored[1].score >= 1) ? scored[0] : undefined
         const planRanked = [...scored].filter((q) => q.plan !== null).sort((a, b) => (b.plan as number) - (a.plan as number))
@@ -1646,8 +1655,10 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
         // the registrations and the plan's openings do not tell the assignments apart, its word is taken before the
         // source order — a read side, named as such (STRUCTURE_READ), on an assignment that registers
         const saidSide = (frameId: string): Side | undefined => { const n = (structureMemo?.frames ?? []).indexOf(frameId) + 1; const sd = n > 0 ? structureMemo?.agreed?.pictures.find((q) => q.n === n)?.shows : undefined; return sd && sd !== 'NONE' ? (sd as Side) : undefined }
-        const byStructure = !bySupport && !byPlan && unspecified.every((x) => saidSide(x.frameId) !== undefined) ? scored.find((q) => q.perm.every((sd, i) => sd === saidSide(unspecified[i].frameId))) : undefined
-        const decided = bySupport ?? byPlan ?? byStructure
+        const sheetRanked = [...scored].filter((q) => q.sheet !== null).sort((a, b) => (b.sheet as number) - (a.sheet as number))
+        const bySheet = !bySupport && !byPlan && sheetRanked.length > 1 && (sheetRanked[0].sheet as number) - (sheetRanked[1].sheet as number) >= SIDE_MARGIN ? sheetRanked[0] : undefined
+        const byStructure = !bySupport && !byPlan && !bySheet && unspecified.every((x) => saidSide(x.frameId) !== undefined) ? scored.find((q) => q.perm.every((sd, i) => sd === saidSide(unspecified[i].frameId))) : undefined
+        const decided = bySupport ?? byPlan ?? bySheet ?? byStructure
         // v3.54.18: where several assignments register and nothing tells them apart, the source's own order is taken as an
         // explicit MINIATURE CONVENTION (first unlabelled side elevation = LEFT when LEFT is free, the next free side after
         // it) — recorded as a convention, never as a read side: the sides keep their facades instead of none of them
@@ -1661,8 +1672,8 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
         const contradictsRead = (q: { perm: Side[] }): boolean => q.perm.some((sd, i) => { const said = saidSide(unspecified[i].frameId); return said !== undefined && said !== sd })
         const byOrder = byLocal ?? (!decided && final && scored.length > 1 ? scored.find((q) => !contradictsRead(q) && q.perm.every((sd, i) => sd === (['LEFT', 'RIGHT', 'REAR', 'FRONT'] as Side[]).filter((f) => free.includes(f))[i])) : undefined)
         const pick = decided ?? byOrder
-        if (pick) for (const x of unspecified) sideBasisOf.set(x.frameId, byPlan && pick === byPlan ? 'PLAN_OPENINGS' : byStructure && pick === byStructure ? 'STRUCTURE_READ' : decided ? 'EVIDENCE' : byLocal ? 'CONVENTION_LOCAL_LABEL_NOT_IN_CAPTION' : 'MINIATURE_CONVENTION_SOURCE_ORDER')
-        record({ at: now().toISOString(), kind: 'SIDE_OF_UNLABELLED_ELEVATIONS', frames: unspecified.map((x) => x.frameId), options: scored.map((q) => ({ sides: q.perm, support: Math.round(q.score * 100) / 100, ...(q.plan !== null ? { planOpenings: Math.round(q.plan * 100) / 100 } : {}) })), chosen: pick?.perm ?? null, basis: byPlan && pick === byPlan ? 'PLAN_OPENINGS' : decided ? 'EVIDENCE' : byLocal ? 'CONVENTION_LOCAL_LABEL_NOT_IN_CAPTION' : byOrder ? 'MINIATURE_CONVENTION_SOURCE_ORDER' : 'NONE', planOpeningsVersion: PLAN_OPENINGS_VERSION, why: byPlan && pick === byPlan ? `the openings the plan draws on each side agree with these elevations' own by a clear margin (${(planRanked[0].plan as number).toFixed(1)} against ${(planRanked[1].plan as number).toFixed(1)} net matched openings; the margin is ${SIDE_MARGIN})` : decided ? (scored.length === 1 ? 'the only assignment under which every one registers' : 'the drawn openings support it by a clear margin') : byOrder ? 'several assignments register and the drawings do not tell them apart: the source order is taken as a named miniature convention (the side is NOT read; mirrored sides are possible)' : scored.length === 0 ? 'no assignment registers them all' : 'two assignments register and the drawings do not tell them apart: left unassigned for now (named, not chosen)' })
+        if (pick) for (const x of unspecified) sideBasisOf.set(x.frameId, byPlan && pick === byPlan ? 'PLAN_OPENINGS' : bySheet && pick === bySheet ? 'PLAN_SHEET_GAPS' : byStructure && pick === byStructure ? 'STRUCTURE_READ' : decided ? 'EVIDENCE' : byLocal ? 'CONVENTION_LOCAL_LABEL_NOT_IN_CAPTION' : 'MINIATURE_CONVENTION_SOURCE_ORDER')
+        record({ at: now().toISOString(), kind: 'SIDE_OF_UNLABELLED_ELEVATIONS', frames: unspecified.map((x) => x.frameId), options: scored.map((q) => ({ sides: q.perm, support: Math.round(q.score * 100) / 100, ...(q.plan !== null ? { planOpenings: Math.round(q.plan * 100) / 100 } : {}), ...(q.sheet !== null ? { sheetGaps: Math.round(q.sheet * 100) / 100 } : {}) })), chosen: pick?.perm ?? null, basis: byPlan && pick === byPlan ? 'PLAN_OPENINGS' : bySheet && pick === bySheet ? 'PLAN_SHEET_GAPS' : byStructure && pick === byStructure ? 'STRUCTURE_READ' : decided ? 'EVIDENCE' : byLocal ? 'CONVENTION_LOCAL_LABEL_NOT_IN_CAPTION' : byOrder ? 'MINIATURE_CONVENTION_SOURCE_ORDER' : 'NONE', planOpeningsVersion: PLAN_OPENINGS_VERSION, why: byPlan && pick === byPlan ? `the openings the plan draws on each side agree with these elevations' own by a clear margin (${(planRanked[0].plan as number).toFixed(1)} against ${(planRanked[1].plan as number).toFixed(1)} net matched openings; the margin is ${SIDE_MARGIN})` : decided ? (scored.length === 1 ? 'the only assignment under which every one registers' : 'the drawn openings support it by a clear margin') : byOrder ? 'several assignments register and the drawings do not tell them apart: the source order is taken as a named miniature convention (the side is NOT read; mirrored sides are possible)' : scored.length === 0 ? 'no assignment registers them all' : 'two assignments register and the drawings do not tell them apart: left unassigned for now (named, not chosen)' })
         if (pick) sketchSideOf = { ...(sketchSideOf ?? {}), ...Object.fromEntries(unspecified.map((x, i) => [x.frameId, pick.perm[i]])) }
         if (byOrder) for (const x of unspecified) sidesByConvention.add(x.frameId)
       }
