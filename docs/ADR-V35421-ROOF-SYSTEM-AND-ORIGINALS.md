@@ -86,6 +86,38 @@ rectangle.
 11. **A body that does not replace LOCAL's stays on the record** (`massing-rejected.json` with its hypothesis, fates and
     model): the refusal is reproducible, and the omission trace names it.
 
+## Addendum after the fresh trial NEW-H (post-trial, DEV from here; code `5d5ea2c`)
+
+The first trial results stay as they came out and were graded blind before any of this. Each change is a general rule
+with a test; the houses where the defect was found are DEV from then on.
+
+12. **A weak side label is a hypothesis, not a caption.** Two elevations with an identical caption get WEST/EAST from
+    LOCAL only as a guess; a `form-read/3` read (originals and perspectives) that sets each such picture on a side of its
+    own decides it, and that one side map then serves openings, chimneys, finishes and roofs alike (no mirrored
+    assignment downstream). A weak label still in force keeps its side: no other uncaptioned picture is read onto it.
+    A `form-read/2` answer (sketch-era) does not override a weak label — on the recorded Mindelo it set the sides the
+    wrong way round.
+13. **A measured opening is held against `WRONG_KIND`.** An opening whose built box the source gate measured is not
+    removed on a look's word that it is the wrong kind (a garage door judged by its colour); the dispute stays open.
+    A roof window is held only against `SHOULD_NOT_EXIST`.
+14. **The main body is never left an open box.** A main body with no evidence of a pitched roof (no stated pitch, no
+    ridge level, a stated FLAT kind) gets the attached bodies' flat plate: at the slab and parapet the section reads where
+    it reads them, otherwise at the wall head as `ASSUMED_FOR_RENDERING`; the pocket walls under it are capped. The
+    decision is taken before chimneys and facade bands.
+15. **A printed roof angle below 3° on the roof's own line is a flat roof's fall**, not a pitch. The specification reader
+    anchors the roof line (not another body's roof, not the covering, not roof windows; a flat TILE is no flat roof),
+    reads inflected Polish forms on that line only, and leaves a fall beside a stated pitched kind unread.
+
+16. **A refusal by the books is one request's BUDGET answer, never the job's failure** (found on the host: a structure
+    read refused at the host's ceiling failed the whole job as INTERNAL_ERROR). Every reading step takes its reservation
+    inside its own `try` (`reserveOrUnavailable`): nothing sent, nothing settled, the step answers BUDGET and the analysis
+    goes on without that read; the refusal is written to the exchange log (`RESERVATION_REFUSED`).
+
+Named after the post-trial review, not changed: side decision at registration still takes the `form-read/2` side for a
+weak label; the read receives LOCAL's label as the caption of an uncaptioned elevation; a held element with no defect id
+leaves no open registry entry; pocket walls of ATTACHED bodies under a plate; the compiler's wall-top band where a plane
+vertex falls inside a wall section; a source body does not carry LOCAL's interior (Anna II: 26 → 17 interior walls).
+
 ## Not done (named, not guessed)
 
 Eaves overhangs on a joined system; cheeks where a wing's eave stands above the slope (reported as `cheekM`); flat roofs

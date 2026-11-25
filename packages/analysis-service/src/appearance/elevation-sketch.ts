@@ -19,7 +19,7 @@ import { encodePng } from '../diagnostics.js'
 import { fillPolygon, grid } from './mask.js'
 import { APPEARANCE_OBSERVATION_SCHEMA, APPEARANCE_OBSERVATION_VERSION } from './contract.js'
 import type { AppearanceObservation } from './contract.js'
-import { ConsultantUnavailable, settledOf } from '../consult/loop.js'
+import { ConsultantUnavailable, reserveOrUnavailable, settledOf } from '../consult/loop.js'
 import { reserveOf } from '../consult/cost.js'
 import type { ConsultSpend, ConsultantModel, ModelTurn, Price } from '../consult/loop.js'
 
@@ -134,9 +134,10 @@ export async function readElevationSketch(ctx: Ctx, f: SketchFrame): Promise<Ske
     { type: 'image', source: { type: 'base64', media_type: 'image/png', data: Buffer.from(pic.png).toString('base64') } },
   ]
   const reserveUsd = reserveOf(ctx.price, Math.ceil((ELEVATION_SKETCH_SYSTEM.length + JSON.stringify(TOOL).length) / 2.5) + 2600, ctx.model.maxOutputTokens, ctx.model.cache)
-  const reservation = ctx.spend?.reserve(ctx.model.model, reserveUsd, `elevation sketch ${f.frameId}`)
+  let reservation: { id: string; usd: number } | undefined
   let turn: ModelTurn
   try {
+    reservation = reserveOrUnavailable(ctx.spend, ctx.model.model, reserveUsd, `elevation sketch ${f.frameId}`)
     turn = await ctx.model.send({ system: ELEVATION_SKETCH_SYSTEM, messages: [{ role: 'user', content }], tools: [TOOL], ...(ctx.signal ? { signal: ctx.signal } : {}) })
   } catch (e) {
     const reason = e instanceof ConsultantUnavailable ? e.reason : 'TRANSPORT'

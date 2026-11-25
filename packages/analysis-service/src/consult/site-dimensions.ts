@@ -13,7 +13,7 @@
  */
 import { z } from 'zod'
 import type { Raster } from '@buildapp/source-cv'
-import { ConsultantUnavailable, settledOf } from './loop.js'
+import { ConsultantUnavailable, reserveOrUnavailable, settledOf } from './loop.js'
 import type { ConsultSpend, ConsultantModel, ModelTurn, Price } from './loop.js'
 import { reserveOf } from './cost.js'
 import { pictureOf } from './metric-read.js'
@@ -67,10 +67,11 @@ export async function readSiteDimensions(ctx: Ctx, f: { frameId: string; raster:
     { type: 'image', source: { type: 'base64', media_type: 'image/png', data: Buffer.from(pic.png).toString('base64') } },
   ]
   const reserveUsd = reserveOf(ctx.price, Math.ceil((SITE_DIMENSIONS_SYSTEM.length + JSON.stringify(TOOL).length + 200) / 2.5) + 2600, Math.min(ctx.model.maxOutputTokens, 600), ctx.model.cache)
-  const reservation = ctx.spend?.reserve(ctx.model.model, reserveUsd, `site dimensions ${f.frameId}`)
+  let reservation: { id: string; usd: number } | undefined
   let turn: ModelTurn
   let usd = 0
   try {
+    reservation = reserveOrUnavailable(ctx.spend, ctx.model.model, reserveUsd, `site dimensions ${f.frameId}`)
     turn = await ctx.model.send({ system: SITE_DIMENSIONS_SYSTEM, messages: [{ role: 'user', content }], tools: [TOOL], ...(ctx.signal ? { signal: ctx.signal } : {}) })
     const settled = settledOf(ctx.price, turn.usage)
     usd = settled.usd

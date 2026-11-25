@@ -127,6 +127,12 @@ if (argv.includes('--loop-live')) {
   const loopTurns: Recorded[] = []
   loopTransport = { ...live, send: async (req) => { try { const t = await live.send(req); loopTurns.push({ request: { systemSha: req.system.slice(0, 40), note: 'loop' }, turn: t }); writeFileSync(join(out, 'loop-turns.json'), `${JSON.stringify(loopTurns, null, 1)}\n`); return t } catch (e) { writeFileSync(join(out, 'loop-error.txt'), `${String((e as Error).message)}\n`); throw e } } }
 }
+// v3.54.21: the label rounds replayed in order (e.g. a host job's recorded rounds, to reproduce its failure at 0 USD)
+else if (opt('loop-replay')) {
+  const rec = JSON.parse(readFileSync(opt('loop-replay') as string, 'utf8')) as Recorded[]
+  let k = 0
+  loopTransport = { id: 'replay', model: rec[0]?.turn.model ?? 'claude-sonnet-5-5', maxOutputTokens: 16000, send: async () => { const r = rec[k++]; if (!r) throw new Error('loop replay: no recorded turn left'); return { ...r.turn, usage: { inputTokens: 0, outputTokens: 0 } } } }
+}
 // v3.54.16: the reviewer of the built model (the post-build check that may change it), live or replayed in order
 const checkTurns: Recorded[] = []
 let checkTransport: ConsultantModel | undefined

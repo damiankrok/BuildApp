@@ -29,12 +29,16 @@ def jload(p, d=None):
     except Exception: return d
 
 cards = []
+# REDO=<house,house>: only these houses are exported and rendered again; every other house's renders, overlays, tiles and
+# board are taken as the previous pass of this script wrote them into the same <out> (the gallery is always rebuilt whole)
+REDO = set(filter(None, os.environ.get('REDO', '').split(','))) or None
 for h in man['houses']:
     name = h['house']
     hd = os.path.join(out, 'houses', name)
     src = os.path.join(hd, 'sources')
+    redo = REDO is None or name in REDO or not os.path.exists(os.path.join(hd, 'board-spec.json'))
     os.makedirs(hd, exist_ok=True)
-    subprocess.run(PY + [os.path.join(old, 'export_sources.py'), h['package'], h['cache'], src], check=True, capture_output=True)
+    if redo: subprocess.run(PY + [os.path.join(old, 'export_sources.py'), h['package'], h['cache'], src], check=True, capture_output=True)
     # sketches: every frame the sketch run read, by frame
     sk_out = os.path.join(hd, 'sketches')
     os.makedirs(sk_out, exist_ok=True)
@@ -59,10 +63,10 @@ for h in man['houses']:
         if os.path.isdir(ex): shutil.copytree(ex, os.path.join(rd, 'exchanges'), dirs_exist_ok=True, ignore=(None if not (v['key'].startswith('baseline') or v.get('noImg')) else shutil.ignore_patterns('img')))
         ren = os.path.join(hd, 'renders')
         os.makedirs(ren, exist_ok=True)
-        if os.path.exists(os.path.join(v['run'], 'model.json')):
+        if redo and os.path.exists(os.path.join(v['run'], 'model.json')):
             subprocess.run(['npx', 'vite-node', 'research/source-to-model/v35418/render.ts', '--', '--model', os.path.join(v['run'], 'model.json'), '--out', ren, '--name', v['key'], '--tile', '900'], cwd=root, check=True, capture_output=True)
         # v3.54.21: the roof from above with its joins, and the structure read's packet
-        if os.path.exists(os.path.join(v['run'], 'model.json')):
+        if redo and os.path.exists(os.path.join(v['run'], 'model.json')):
             subprocess.run(PY + [os.path.join(here, 'roof_plan.py'), os.path.join(v['run'], 'model.json'), os.path.join(ren, f"{v['key']}-ROOFPLAN.png"), f"{h['title']} — {v['label']}"], capture_output=True)
         sr = os.path.join(v['run'], 'structure-read')
         # the packet's pictures are the exchange log's own files (named by their SHA-256): kept once, the packet's JSON names them
@@ -82,7 +86,7 @@ for h in man['houses']:
         ov = os.path.join(hd, 'overlay')
         os.makedirs(ov, exist_ok=True)
         other = next((w['run'] for w in h['variants'] if w is not v and os.path.exists(os.path.join(w['run'], 'events.json'))), None)
-        subprocess.run(['npx', 'vite-node', 'research/source-to-model/v35419/plan-overlay.ts', '--', '--run', v['run'], '--cache', h['cache'], '--out', ov, '--name', v['key']] + (['--frame-from', other, '--fit-from', other] if other else []), cwd=root, capture_output=True)
+        if redo: subprocess.run(['npx', 'vite-node', 'research/source-to-model/v35419/plan-overlay.ts', '--', '--run', v['run'], '--cache', h['cache'], '--out', ov, '--name', v['key']] + (['--frame-from', other, '--fit-from', other] if other else []), cwd=root, capture_output=True)
         overlay = jload(os.path.join(ov, f"{v['key']}-plan-overlay.json"), {}) or {}
         res = jload(os.path.join(v['run'], 'result.json'), {}) or {}
         q = (jload(os.path.join(v['run'], 'quality.json'), {}) or {}).get('quality') or {}
@@ -92,7 +96,7 @@ for h in man['houses']:
         variants.append({**v, 'render': ren, 'name': v['key'], 'modelFileSha256_12': rev, 'usd': res.get('usd'), 'seconds': res.get('seconds'), 'final': res.get('final'), 'quality': q.get('state'), 'qualityWhy': (q.get('why') or '')[:400], 'counts': info.get('counts'), 'overlay': overlay, 'noModel': not os.path.exists(model_file)})
     spec = {'house': name, 'title': h['title'], 'publisher': h['publisher'], 'set': h['set'], 'url': h['url'], 'sources': src, 'sketchRun': h['sketchRun'], 'variants': [{k: v[k] for k in ('key', 'label', 'kind', 'render', 'name')} | {'commit': v.get('commit'), 'revision': v.get('modelFileSha256_12')} for v in variants]}
     json.dump(spec, open(os.path.join(hd, 'board-spec.json'), 'w'), indent=1, ensure_ascii=False)
-    subprocess.run(PY + [os.path.join(old, 'boards.py'), os.path.join(hd, 'board-spec.json'), out], check=True)
+    if redo: subprocess.run(PY + [os.path.join(old, 'boards.py'), os.path.join(hd, 'board-spec.json'), out], check=True)
     # v3.54.21: the omission trace of the delivered variant against the baseline, from the runs' own records
     last, first = h['variants'][-1], h['variants'][0]
     om = OM.house(name, last['run'], first['run'] if first is not last else None)

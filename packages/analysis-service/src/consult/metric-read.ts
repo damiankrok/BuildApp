@@ -30,7 +30,7 @@ import type { Raster } from '@buildapp/source-cv'
 import { encodePng } from '../diagnostics.js'
 import type { CompiledScene } from '@buildapp/geometry'
 import { MAX_SIDE } from './tools.js'
-import { ConsultantUnavailable, settledOf } from './loop.js'
+import { ConsultantUnavailable, reserveOrUnavailable, settledOf } from './loop.js'
 import { reserveOf } from './cost.js'
 import type { ConsultSpend, ConsultantModel, ModelTurn, Price } from './loop.js'
 
@@ -222,8 +222,9 @@ export function pictureOf(raster: Raster, mark?: (data: Uint8ClampedArray, w: nu
 async function send(ctx: Ctx, note: string, system: string, content: unknown[], tool: unknown, pictures: number): Promise<{ turn: ModelTurn; usd: number } | { failed: string }> {
   const textChars = system.length + JSON.stringify(content.filter((c) => (c as { type: string }).type === 'text')).length + JSON.stringify(tool).length
   const reserveUsd = reserveOf(ctx.price, Math.ceil(textChars / 2.5) + pictures * 2600, ctx.model.maxOutputTokens, ctx.model.cache)
-  const reservation = ctx.spend?.reserve(ctx.model.model, reserveUsd, note)
+  let reservation: { id: string; usd: number } | undefined
   try {
+    reservation = reserveOrUnavailable(ctx.spend, ctx.model.model, reserveUsd, note)
     const turn = await ctx.model.send({ system, messages: [{ role: 'user', content }], tools: [tool], ...(ctx.signal ? { signal: ctx.signal } : {}) })
     const settled = settledOf(ctx.price, turn.usage)
     const usd = settled.usd

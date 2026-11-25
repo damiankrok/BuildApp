@@ -11,7 +11,7 @@
  */
 import { z } from 'zod'
 import type { Raster } from '@buildapp/source-cv'
-import { ConsultantUnavailable, settledOf } from './loop.js'
+import { ConsultantUnavailable, reserveOrUnavailable, settledOf } from './loop.js'
 import type { ConsultSpend, ConsultantModel, ModelTurn, Price } from './loop.js'
 import { reserveOf } from './cost.js'
 import { encodePng } from '../diagnostics.js'
@@ -135,7 +135,7 @@ export function formOf(raw: RawForm): HouseForm {
   const sideOf = (pick: (p: RawForm['pictures'][number]) => boolean): (typeof SIDES)[number] => raw.pictures.find((p) => pick(p) && p.shows !== 'NONE')?.shows ?? 'NONE'
   return { ...raw, mainRoof: { kind: raw.main.roof.kind, ridgeAlong: raw.main.roof.ridgeAlong, pitchDeg: raw.main.pitch.deg ?? 0 }, lowerParts: raw.parts.map((p) => ({ what: p.what, roof: p.roof.kind, where: p.where })), volumes: 1 + raw.parts.length, garageDoor: sideOf((p) => p.garageDoor), entrance: sideOf((p) => p.entranceDoor) }
 }
-export type FormRead = { version: string; promptVersion: string; pictures: number; raw: unknown; usd: number; requestId?: string; form?: HouseForm; refused: string[]; /** form-read/3: the request as it left — every picture's exact PNG bytes with the text that introduced it (the packet a delivery shows; never logged) */ sent?: Array<{ label: string; png: Uint8Array; width: number; height: number }>; sentText?: string[]; /** v3.54.21: who answered — the transport's id (`replay`: a recorded answer, given to the pictures of ITS request, not necessarily `sent`) and the contract the answer's own shape is of (a form-read/2 answer has no `roofs`) */ answeredBy?: { transport: string; contract: 'form-read/2' | 'form-read/3' | 'NONE'; /** the answer was bought in this run (it carries the provider's token counts); a replayed recording carries none */ live: boolean; /** v3.54.21 review F6: no answer came — the transport failed or the provider refused (`contract` is then NONE; `live` says whether the refusal was billed) */ unanswered?: 'TRANSPORT_FAILED' | 'REFUSED' } }
+export type FormRead = { version: string; promptVersion: string; pictures: number; raw: unknown; usd: number; requestId?: string; form?: HouseForm; refused: string[]; /** form-read/3: the request as it left — every picture's exact PNG bytes with the text that introduced it (the packet a delivery shows; never logged) */ sent?: Array<{ label: string; png: Uint8Array; width: number; height: number }>; sentText?: string[]; /** v3.54.21: who answered — the transport's id (`replay`: a recorded answer, given to the pictures of ITS request, not necessarily `sent`) and the contract the answer's own shape is of (a form-read/2 answer has no `roofs`) */ answeredBy?: { transport: string; contract: 'form-read/2' | 'form-read/3' | 'NONE'; /** the answer was bought in this run (it carries the provider's token counts); a replayed recording carries none */ live: boolean; /** v3.54.21 review F6: no answer came — the transport failed or the provider refused (`contract` is then NONE; `live` says whether the refusal was billed) */ unanswered?: 'TRANSPORT_FAILED' | 'REFUSED' | 'BUDGET_REFUSED' } }
 type Ctx = { model: ConsultantModel; price: Price; spend?: ConsultSpend; signal?: AbortSignal }
 
 const toolInput = (turn: ModelTurn, name: string): unknown => (turn.content as Array<{ type: string; name?: string; input?: unknown }>).find((b) => b.type === 'tool_use' && b.name === name)?.input
@@ -219,10 +219,11 @@ export async function readForm(ctx: Ctx, pictures: ReadonlyArray<{ caption: stri
   base.sentText = content.filter((c) => (c as { type: string }).type === 'text').map((c) => (c as { text: string }).text)
   const sheetsN = pictures.length + Number(!!sheets.plan) + Number(!!sheets.section) + (sheets.perspectives ?? []).length
   const reserveUsd = reserveOf(ctx.price, Math.ceil((FORM_READ_SYSTEM.length + JSON.stringify(TOOL).length + 600) / 2.5) + 2600 * Math.max(1, sheetsN), Math.min(ctx.model.maxOutputTokens, 2800), ctx.model.cache)
-  const reservation = ctx.spend?.reserve(ctx.model.model, reserveUsd, `structure read (${sheetsN} sheets)`)
+  let reservation: { id: string; usd: number } | undefined
   let turn: ModelTurn
   let usd = 0
   try {
+    reservation = reserveOrUnavailable(ctx.spend, ctx.model.model, reserveUsd, `structure read (${sheetsN} sheets)`)
     turn = await ctx.model.send({ system: FORM_READ_SYSTEM, messages: [{ role: 'user', content }], tools: [TOOL], ...(ctx.signal ? { signal: ctx.signal } : {}) })
     const settled = settledOf(ctx.price, turn.usage)
     usd = settled.usd
@@ -230,7 +231,7 @@ export async function readForm(ctx: Ctx, pictures: ReadonlyArray<{ caption: stri
   } catch (e) {
     const reason = e instanceof ConsultantUnavailable ? e.reason : 'TRANSPORT'
     if (reservation) ctx.spend?.settle(reservation, reason === 'NO_CREDENTIALS' || reason === 'REJECTED_UNBILLED' || reason === 'BUDGET' ? 'NOT_SENT' : { usd: reserveUsd, inputTokens: 0, outputTokens: 0 }, reason)
-    return { ...base, answeredBy: { ...base.answeredBy, unanswered: 'TRANSPORT_FAILED' }, raw: null, usd: 0, refused: [`${reason}: ${(e as Error).message.slice(0, 200)}`] }
+    return { ...base, answeredBy: { ...base.answeredBy, unanswered: reason === 'BUDGET' ? 'BUDGET_REFUSED' : 'TRANSPORT_FAILED' }, raw: null, usd: 0, refused: [`${reason}: ${(e as Error).message.slice(0, 200)}`] }
   }
   const raw = toolInput(turn, TOOL.name)
   const rid = turn.requestId ? { requestId: turn.requestId } : {}

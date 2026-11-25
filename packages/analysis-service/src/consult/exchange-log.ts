@@ -182,7 +182,14 @@ export function exchangeLog(sink: ExchangeSink, meta: { jobId?: string | null; n
     }),
     wrapSpend: (spend) => ({
       reserve: (m, usd, note) => {
-        const r = spend.reserve(m, usd, note)
+        let r: { id: string; usd: number }
+        try {
+          r = spend.reserve(m, usd, note)
+        } catch (e) {
+          // v3.54.21: a refusal by the books is on the record (what was asked, what it would have reserved, why refused)
+          line('RESERVATION_REFUSED', { model: m, usd, note: note.slice(0, 120), cause: sanitizedCause(e) })
+          throw e
+        }
         line('RESERVED', { reservationId: r.id, model: m, usd: r.usd, note: note.slice(0, 120) })
         return r
       },

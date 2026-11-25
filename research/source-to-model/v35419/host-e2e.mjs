@@ -171,10 +171,21 @@ try {
     writeFileSync(join(dir, 'record.json'), `${scrub(JSON.stringify(record, null, 1))}\n`)
   }
 
+  // v3.54.21: --first-from <an earlier out dir of the same commit and data dir>: the first URL's fresh run is the one
+  // recorded there (not bought again); the repeat is then checked against it
+  const firstFrom = value('first-from')
   let n = 0
-  for (const url of urls) await runOne(url, `job-${(n += 1)}`, true)
+  for (const url of urls) {
+    n += 1
+    if (firstFrom && n === 1) {
+      const prior = JSON.parse(readFileSync(join(firstFrom, 'job-1', 'record.json'), 'utf8'))
+      check(prior.url === url && prior.status === 'COMPLETED', `job-1: the fresh run recorded in ${firstFrom} is this URL's and completed (${prior.status}, ${prior.seconds} s, +${prior.booksDeltaUsd} USD)`)
+      continue
+    }
+    await runOne(url, `job-${n}`, true)
+  }
   if (argv.includes('--repeat') && urls[0]) {
-    const first = JSON.parse(readFileSync(join(out, 'job-1', 'record.json'), 'utf8'))
+    const first = JSON.parse(readFileSync(join(firstFrom ?? out, 'job-1', 'record.json'), 'utf8'))
     await runOne(urls[0], 'job-1-repeat', true)
     const again = JSON.parse(readFileSync(join(out, 'job-1-repeat', 'record.json'), 'utf8'))
     check(first.consultation?.accepted?.state === 'ACCEPTED_NOW', `the first run's consultation was accepted (${first.consultation?.accepted?.state}${first.consultation?.accepted?.why ? `: ${first.consultation.accepted.why}` : ''})`)

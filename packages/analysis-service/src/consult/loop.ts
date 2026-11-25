@@ -55,6 +55,19 @@ export type ConsultSpend = {
   reserve(model: string, usd: number, note: string): { id: string; usd: number }
   settle(reservation: { id: string; usd: number }, actual: SettledUsage | 'NOT_SENT', note?: string): void
 }
+/**
+ * v3.54.21 (found on the host, NEW-H Anna II): the books' refusal of a reservation (the host's ceiling, the day's request
+ * count) is THIS request's BUDGET unavailability, taken inside the step's own `try` and answered like any other unavailable
+ * transport — never an escape that fails the whole job. Nothing was reserved, so nothing is settled.
+ */
+export function reserveOrUnavailable(spend: ConsultSpend | undefined, model: string, usd: number, note: string): { id: string; usd: number } | undefined {
+  if (!spend) return undefined
+  try {
+    return spend.reserve(model, usd, note)
+  } catch (e) {
+    throw new ConsultantUnavailable('BUDGET', `the books refused the reservation, nothing was sent: ${(e as Error).message.slice(0, 300)}`)
+  }
+}
 /** v3.54.15: what a settled request cost, with the cache split (`cost.ts`). */
 export type SettledUsage = { usd: number; inputTokens: number; outputTokens: number; cacheReadInputTokens?: number; cacheCreation5mInputTokens?: number; cacheCreation1hInputTokens?: number }
 export type { Price } from './cost.js'
@@ -279,9 +292,10 @@ async function send(input: ConsultInput, messages: unknown[], tools: unknown[], 
   let attempt = 0
   for (;;) {
     attempt += 1
-    const reservation = input.spend?.reserve(input.model.model, reserveUsd, note)
-    input.record({ at: now().toISOString(), kind: 'REQUEST', note, attempt, model: input.model.model, pictures, reservedUsd: reserveUsd })
+    let reservation: { id: string; usd: number } | undefined
     try {
+      reservation = reserveOrUnavailable(input.spend, input.model.model, reserveUsd, note)
+      input.record({ at: now().toISOString(), kind: 'REQUEST', note, attempt, model: input.model.model, pictures, reservedUsd: reserveUsd })
       const turn = await input.model.send({ system, messages, tools, ...(input.signal ? { signal: input.signal } : {}) })
       const it = turn.usage.inputTokens
       const ot = turn.usage.outputTokens

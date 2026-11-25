@@ -201,3 +201,22 @@ ze środowiska) — nie nowa pula i nie jej podniesienie; księga wycenia żąda
 Po czterech domach w próbie nie ma warstwy HIP, a budżet (§7a) na piąty pozwala: §5 dopuszcza piąty dom w tej sytuacji.
 Pierwszy dom z HIP w wylosowanym porządku: **Dom pod osiką** (ARCHON; HIP + KRZYŻUJĄCE, oba czytelniki zgodne). Te same
 ramiona B / F@B / F@B/2, te same reguły; pozostałe trzy opisane pakiety (Argos, Newcastle II, Elsa III) zostają poza próbą.
+
+### 10. Po próbie: poprawki (DEV) i host (dopisane przed drugą sesją hosta)
+
+- Po ocenie ślepej i diagnozie pierwszych wyników NEW-H poprawione cztery usterki kodu (boki elewacji o identycznym
+  podpisie, zmierzony otwór wobec WRONG_KIND, płyta bryły głównej bez dachu spadzistego, czytnik spadku) i recenzja
+  poprawek — kod `5d5ea2c`. Anna II, Debora i Lyon są od tej chwili **DEV**; ich pierwsze wyniki zostają w raporcie.
+- **Host, sesja 1** (`5d5ea2c`, pułap hosta ustawiony na księgę + 1,5 USD): Debora — świeży bieg ukończony (686 s,
+  0,978251 USD, 20 żądań; układ T, brama garażowa); Anna II — **ANALYSIS_FAILED / INTERNAL_ERROR** po 12 żądaniach
+  (0,371605 USD). Przyczyna z dziennika wymian: rezerwacja odczytu struktury odmówiona przez księgę hosta (pułap
+  przekroczyłby 63,975156 USD), a odmowa wydostała się z kroku i przerwała całe zadanie. Sesję przerwał restart
+  procesu roboczego w trakcie powtórki (powtórka i bieg bez tokenu niewykonane, `server.log` niezapisany).
+- **Usterka produktu, nie tylko za ciasnego pułapu**: każdy krok czytający (struktura, obrys, wymiary działki, otwory
+  elewacji, odczyt metryczny, szkic) brał rezerwację poza własnym `try`. Poprawka: rezerwacja w `try`, odmowa księgi =
+  BUDGET tego jednego żądania (nic nie wysłane, nic nie rozliczone), analiza idzie dalej bez tego odczytu; odmowa jest
+  zapisywana w dzienniku wymian (`RESERVATION_REFUSED`). Test przyczynowy `budget-refusal-v35421` (4/4 czerwone przed,
+  zielone po). Biegi bez księgi (odtworzenia) nie zmieniają się: ścieżka dotyczy wyłącznie odmowy.
+- **Host, sesja 2** (rewizja z tą poprawką, ten sam katalog danych, pułap = księga hosta + 3 USD): powtórka zaakceptowanej
+  Debory z sesji 1 (oczekiwane: 0 żądań, te same bajty), Anna II na świeżo, Lyon bez tokenu (0 żądań). Osobno, 0 USD:
+  host z księgą już na pułapie — zadanie ma się ukończyć bez żądań (każda rezerwacja odmówiona), nie paść.
