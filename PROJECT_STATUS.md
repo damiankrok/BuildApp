@@ -12,6 +12,26 @@
 
 ## Current summary (read first)
 
+- **v3.54.20 (2026-11-25): the API's structure description drives the build — APK 1353.** Report
+  `stage-reports/SOURCE_TO_MODEL_V35420.md`, owner note `stage-reports/README_V35420.md`, ADR
+  `docs/ADR-V35420-STRUCTURE-CONTRACT.md`, protocol / references / hand-off under `research/source-to-model/v35420/`.
+  Baseline = APK 1352 code (`af7db0e`); delivered code `108611e`. One typed structure read per house (`form-read/2`:
+  storeys, roof kind, ridge, parts, not-volumes, the side of every elevation; numbers with PRINTED / DERIVED / ESTIMATED /
+  UNKNOWN) is agreed with witnesses that are not the read (plan storeys, page pitch and height, plan parts, sketched
+  gable walls): AGREED / UNWITNESSED are built by the massing solver (wings cut off the outline, hip ↔ gable, ridge axis,
+  storeys rule), AGREED storeys and ridge are held against any body in the arbitration, DISPUTED is not taken. Every
+  delivered model is read back (`OPENINGS_READBACK`: offset + width + rest = wall length, sill above the level's floor,
+  the hand of the wall's start seen from outside; `STRUCTURE_READBACK`). **Held-out NEW-G (4 houses, 4 publishers):
+  whole result 1 → 2, exterior useful 1 → 2, interior 2 → 3, none worse; pre-stated expectation (a) NOT met** (form in
+  four facts 3 → 3: the one failing house has perspective "elevations" and got no read). DEV (20 houses, same recorded
+  sketches): form 13 → 18, whole 8 → 9, but blind "closer to the source" 6 final / 7 baseline / 7 tie. **Regressions of
+  this stage kept, not fixed:** Ametyst New rotated (a body hypothesis needing two drawing scales won), Amarylis lost
+  its front gable, G6 5 → 3 openings, Aletta's garage roof too flat, a spurious chimney on three houses, Medulin's
+  plan-true outline. Process: three freezes (`024e2b7`, `10ce107` after a DEV-batch regression, `108611e` after the host
+  kept a wrong LOCAL body); NEW-G models byte-identical between the first held-out run and the graded code. Host on the
+  final revision: Skagen live two storeys + garage; reuse 0 requests; no token 0 requests. Stage cost 6.611434 USD, books
+  56.290453 of 68.542857. `ANDROID_UI_NOT_VERIFIED`. Next: scale consistency across elevations, recesses with a
+  consumer, cross gables as roof elements, entrance doors before the contrast gate.
 - **v3.54.19 (2026-11-24): the interior from the plan sheet, openings witnessed by the plan, wider bodies — APK 1352.**
   Report `stage-reports/SOURCE_TO_MODEL_V35419.md`, owner note `stage-reports/README_V35419.md`, ADR
   `docs/ADR-V35419-PLAN-SKELETON.md`, protocol / references / hand-off under `research/source-to-model/v35419/`.

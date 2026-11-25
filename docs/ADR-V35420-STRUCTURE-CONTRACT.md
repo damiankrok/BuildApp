@@ -91,3 +91,24 @@ gable built where a hip was reported. The information existed and had no road to
 - **Building reported parts where the outline has no step**: two bodies in line are told apart by the elevations' step
   (unchanged); a reported garage with nowhere to stand is named, not invented.
 - **A second, targeted read to settle a dispute**: the right next step where a dispute costs a house; not started.
+
+## Addenda (after the first freeze; each recorded in `research/source-to-model/v35420/PROTOCOL.md` §5–8)
+
+10. **The plan sheet's own gaps come before the read's word on a side** (freeze 1): where registrations and the plan
+    read's openings do not tell two assignments of unlabelled elevations apart, the gaps the skeleton finds in the
+    exterior walls of the sheet are held against each elevation's openings; only then the side the structure read saw,
+    and the source-order convention last — never against the read.
+11. **Read-sided elevations stay registered for their openings** (freeze 2). Taking them out after the heights were
+    measured left their openings without a host on four houses.
+12. **No body rises a storey above a one-storey main volume** unless the read reports a two-storey part (massing 1.10.0,
+    freeze 2): the storeys rule reaches the other bodies only downwards. Beside a two-storey main volume a wing stays as
+    its own elevations draw it.
+13. **The agreed storeys and ridge direction are held against a body in the arbitration** (structure 1.1.0, arbitration
+    1.5.0, freeze 3): `structureAgainstBody` measures the body's main volume (wall top, ridge axis) against AGREED
+    properties only. A LOCAL body the host built one storey high with its ridge across, where two storeys and a ridge
+    along the front were agreed, no longer answers AGREES on the roofs' kinds alone.
+
+Known wrong results of these rules, kept (report §7): a body hypothesis that needs two drawing scales for one set of
+elevations can win on the count of registered views once read-sided elevations enter the solver (Ametyst New); a main
+ridge is turned for a reported cross wing that cannot be built (Amarylis); a chimney slid inside a wall is kept even
+where it was a wrong chimney (three houses).
