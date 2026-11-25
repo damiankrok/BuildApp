@@ -24,7 +24,7 @@ import type { CanonicalBuildingModel } from '@buildapp/model'
 import type { AgreedStructure, BuildStructure, Standing, StructureSide } from './structure.js'
 import type { StructureReadback } from './readback.js'
 
-export const FEATURE_MAP_VERSION = '1.0.0' as const
+export const FEATURE_MAP_VERSION = '1.0.1' as const
 
 export type FeatureKind = 'STOREYS' | 'MAIN_ROOF_KIND' | 'MAIN_RIDGE' | 'MAIN_PITCH' | 'MAIN_EAVES_HEIGHT' | 'MAIN_RIDGE_HEIGHT' | 'PART' | 'ROOF_REGION' | 'ROOF_JOIN' | 'CROSS_ROOF' | 'NOT_VOLUME' | 'ENTRANCE_DOOR' | 'GARAGE_DOOR' | 'DORMERS' | 'CHIMNEYS' | 'ROOF_WINDOWS'
 export type SourceFeature = {
@@ -171,6 +171,10 @@ export function traceFeatures(map: readonly SourceFeature[], x: TraceInput): Fea
         const measured = built ? x.readback.roofs.find((q) => q.id === built.id) : undefined
         const fate = fates.find((q) => q.property === 'part' && /CROSS_ROOF/.test(q.taken ?? '') && (q.taken ?? '').includes(`@${f.where}`))
         if (notConsumed) { rows.push({ feature: f, result: 'NOT_CHECKED', cause: 'NOT_ASKED', why: notConsumed }); break }
+        // feature-map 1.0.1: a cross roof the builder bound to a BODY of the outline (that body's own views draw its ridge)
+        // is built as that body's roof — measured there, not looked for as a cross gable on another body's walls
+        const asBody = fate?.fate === 'APPLIED' && /^mass-/.test(fate.built ?? '') ? x.readback.roofs.find((q) => q.id === `roof-${fate.bodyId}`) : undefined
+        if (asBody) { rows.push({ feature: f, ...(r ? { agreed: { standing: r.kind.standing, why: r.kind.why } } : {}), bound: { host: asBody.id, operation: 'BUILD_MASSING (bound to the body whose own views draw this ridge)' }, elements: asBody.planeIds.length > 0 ? asBody.planeIds : [asBody.id], measure: { built: `${asBody.roof} along ${asBody.ridgeAxis}, ${asBody.pitchDeg}°, ridge ${asBody.ridgeM} m` }, result: 'BUILT_AS_STATED', why: fate?.why ?? '' }); break }
         if (built && measured) rows.push({ feature: f, ...(r ? { agreed: { standing: r.kind.standing, why: r.kind.why } } : {}), bound: { host: built.id, operation: 'BUILD_MASSING (roof system)' }, elements: measured.planeIds, measure: { built: `${measured.roof} along ${measured.ridgeAxis}, ${measured.pitchDeg}°, ridge ${measured.ridgeM} m` }, result: 'BUILT_AS_STATED', why: fate?.why ?? 'a roof region on the main body\'s walls, cut into the main slope along two valleys' })
         else rows.push({ feature: f, result: 'NOT_BUILT', cause: built ? 'BUILD_ERROR' : 'LOST_IN_BINDING', why: built ? 'solved as a roof region, and the delivered model holds no planes under its name' : fate?.why ?? 'no place for it was found on the main body (no gable wall drawn there, no share stated)' })
         break
@@ -192,6 +196,16 @@ export function traceFeatures(map: readonly SourceFeature[], x: TraceInput): Fea
         const id = f.id.replace(/^F-/, '').replace(/-JOIN$/, '')
         const cross = (a.roofs ?? []).find((q) => q.id === id && q.of === 'CROSS')
         if (cross) {
+          const bodyFate = fates.find((q) => q.property === 'part' && q.fate === 'APPLIED' && /CROSS_ROOF/.test(q.taken ?? '') && (q.taken ?? '').includes(`@${cross.seenOn}`) && /^mass-/.test(q.built ?? ''))
+          if (bodyFate) {
+            // the cross roof is a body's roof: its join is every relation the solver found between that roof and another
+            const mine = (x.relations ?? []).filter((q) => q.a === `roof-${bodyFate.bodyId}` || q.b === `roof-${bodyFate.bodyId}`)
+            const cs = x.readback.checks.filter((q) => q.property.startsWith('join ') && q.property.includes(`roof-${bodyFate.bodyId}`))
+            const stated = cross.join.value.join
+            const same = mine.length > 0 && mine.every((q) => (stated === 'VALLEY') === (q.kind === 'VALLEY'))
+            rows.push(mine.length === 0 ? { feature: f, result: 'NOT_BUILT', cause: 'CONFLICT_WITH_DRAWING', why: `roof-${bodyFate.bodyId} carries this roof, and the solver finds no roof meeting it` } : { feature: f, bound: { host: `roof-${bodyFate.bodyId}`, operation: 'roof system' }, measure: { built: mine.map((q) => `${q.a} → ${q.b} ${q.kind}`).join('; ') }, result: same && cs.every((q) => q.agrees) ? 'BUILT_AS_STATED' : 'BUILT_DIFFERENT', ...(same && cs.every((q) => q.agrees) ? {} : { cause: (same ? 'BUILD_ERROR' : 'CONFLICT_WITH_DRAWING') as TraceCause }), why: `stated ${stated}; the heights of the bound roofs give ${mine.map((q) => q.kind).join(', ')}, read back from the model's roof edges (${cs.filter((q) => q.agrees).length} of ${cs.length} join check(s) agree)` })
+            break
+          }
           const built = (x.crossRoofs ?? []).find((c) => c.side === cross.seenOn)
           const c = built ? x.readback.checks.find((q) => q.property.startsWith(`join ${built.id} `)) : undefined
           rows.push(c ? { feature: f, bound: { host: built?.id ?? '', operation: 'roof system' }, measure: { built: c.built }, result: c.agrees ? 'BUILT_AS_STATED' : 'BUILT_DIFFERENT', ...(c.agrees ? {} : { cause: 'BUILD_ERROR' as const }), why: 'the valleys are computed where the two top surfaces meet, and read back from the model\'s roof edges' } : { feature: f, result: 'NOT_BUILT', cause: 'LOST_IN_BINDING', why: 'the cross roof it is the join of was not built' })

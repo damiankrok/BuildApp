@@ -55,7 +55,8 @@ for h in man['houses']:
         ex = os.path.join(v['run'], 'exchanges')
         # the pictures sent with each request are the sources and renders already in this delivery: kept once, for the
         # final / host variants (the request JSON names each by its hash); the answers are kept for every variant
-        if os.path.isdir(ex): shutil.copytree(ex, os.path.join(rd, 'exchanges'), dirs_exist_ok=True, ignore=(None if not v['key'].startswith('baseline') else shutil.ignore_patterns('img')))
+        # v3.54.21: a variant marked `noImg` (a 0 USD replay of pictures an earlier delivery already holds) keeps its requests and answers, not the pictures
+        if os.path.isdir(ex): shutil.copytree(ex, os.path.join(rd, 'exchanges'), dirs_exist_ok=True, ignore=(None if not (v['key'].startswith('baseline') or v.get('noImg')) else shutil.ignore_patterns('img')))
         ren = os.path.join(hd, 'renders')
         os.makedirs(ren, exist_ok=True)
         if os.path.exists(os.path.join(v['run'], 'model.json')):
@@ -64,7 +65,8 @@ for h in man['houses']:
         if os.path.exists(os.path.join(v['run'], 'model.json')):
             subprocess.run(PY + [os.path.join(here, 'roof_plan.py'), os.path.join(v['run'], 'model.json'), os.path.join(ren, f"{v['key']}-ROOFPLAN.png"), f"{h['title']} — {v['label']}"], capture_output=True)
         sr = os.path.join(v['run'], 'structure-read')
-        if os.path.isdir(sr): shutil.copytree(sr, os.path.join(rd, 'structure-read'), dirs_exist_ok=True)
+        # the packet's pictures are the exchange log's own files (named by their SHA-256): kept once, the packet's JSON names them
+        if os.path.isdir(sr): shutil.copytree(sr, os.path.join(rd, 'structure-read'), dirs_exist_ok=True, ignore=shutil.ignore_patterns('*.png'))
         for f in ('massing.json', 'massing-rejected.json'):
             if os.path.exists(os.path.join(v['run'], f)): shutil.copy2(os.path.join(v['run'], f), os.path.join(rd, f))
         # v3.54.19: the model's ground-storey walls on the publisher's ground plan, in the frame the run recorded (a baseline
@@ -153,7 +155,7 @@ for c in cards:
         doc.append('<table><tr><th>Rola</th><th>Podpis</th><th>px źródła → px wysłane</th><th>Skala</th><th>Wysłany obraz</th></tr>')
         pics = req.get('pictures') or []
         for k, i in enumerate(sr['sent']):
-            pf = f"{pk}/{pics[k]['file']}" if k < len(pics) else None
+            pf = f"houses/{name}/runs/{last['key']}/exchanges/img/{pics[k]['sha256']}.png" if k < len(pics) else None
             doc.append(f'<tr><td>{E(str(i["role"]))}{" " + str(i["n"]) if i.get("n") else ""}</td><td>{E(str(i["caption"]))}</td><td>{i["sourcePx"][0]}×{i["sourcePx"][1]} → {i["sentPx"][0]}×{i["sentPx"][1]}</td><td>1:{i["factor"]}</td><td>{img(pf, "wysłany obraz") if pf else "—"}</td></tr>')
         doc.append('</table>')
         if sr['skipped']: doc.append('<p><b>Pominięte, z przyczyną:</b></p><ul>' + ''.join(f'<li>{E(str(x.get("role")))} <code>{E(str(x.get("frameId", ""))[-28:])}</code> {E(str(x.get("px")))}: {E(str(x.get("why")))}</li>' for x in sr['skipped']) + '</ul>')
