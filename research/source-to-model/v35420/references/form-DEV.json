@@ -1,0 +1,23 @@
+{
+ "_": "Cztery fakty formy na dom, przepisane z cech F1–F3 arkuszy referencyjnych spisanych ze źródeł w etapach v3.54.18/19 (DEV-K, NEW-B…NEW-F). bodies = bryły pod własnym dachem (lista wartości dopuszczalnych, gdy źródło opisuje część pod dachem bryły głównej albo osobno); ridge: FRONT = kalenica równoległa do frontu, SIDE = prostopadła, null = źródło nie rozstrzyga jednego kierunku (kalenice krzyżujące się, koperta na rzucie bliskim kwadratu); storeys = pełne kondygnacje bryły głównej (poddasze użytkowe = 1).",
+ "alaska": {"bodies": [1], "roof": "GABLE", "ridge": "SIDE", "storeys": 1},
+ "aurora": {"bodies": [2], "roof": "GABLE", "ridge": "FRONT", "storeys": 1},
+ "ballina": {"bodies": [1], "roof": "GABLE", "ridge": "FRONT", "storeys": 1},
+ "alberto": {"bodies": [1], "roof": "GABLE", "ridge": "FRONT", "storeys": 1},
+ "medulin": {"bodies": [1], "roof": "GABLE", "ridge": "SIDE", "storeys": 1},
+ "jeziorko": {"bodies": [1], "roof": "GABLE", "ridge": "FRONT", "storeys": 1},
+ "mindelo": {"bodies": [2], "roof": "GABLE", "ridge": "FRONT", "storeys": 1},
+ "sakura": {"bodies": [1], "roof": "HIP", "ridge": "FRONT", "storeys": 1},
+ "g6": {"bodies": [1], "roof": "HIP", "ridge": null, "storeys": 1},
+ "aletta": {"bodies": [2], "roof": "GABLE", "ridge": "FRONT", "storeys": 1},
+ "novara": {"bodies": [1], "roof": "GABLE", "ridge": "FRONT", "storeys": 1},
+ "jarzebina": {"bodies": [1], "roof": "GABLE", "ridge": "FRONT", "storeys": 1},
+ "eliza": {"bodies": [2, 3], "roof": "HIP", "ridge": null, "storeys": 2},
+ "amarylis": {"bodies": [2], "roof": "GABLE", "ridge": null, "storeys": 1},
+ "oban": {"bodies": [1], "roof": "GABLE", "ridge": "FRONT", "storeys": 1},
+ "juliusz": {"bodies": [1, 2], "roof": "GABLE", "ridge": null, "storeys": 1},
+ "ametyst": {"bodies": [1], "roof": "GABLE", "ridge": "SIDE", "storeys": 1},
+ "skagen": {"bodies": [2], "roof": "GABLE", "ridge": "FRONT", "storeys": 2},
+ "fabia": {"bodies": [1], "roof": "HIP", "ridge": null, "storeys": 1},
+ "pomarancza": {"bodies": [1], "roof": "GABLE", "ridge": "SIDE", "storeys": 1}
+}
