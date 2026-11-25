@@ -54,7 +54,10 @@ for h in man['houses']:
             rows.append(band(f'WARIANT {lab} — {title}', [im]))
         rp = os.path.join(ren, f'{k}-ROOFPLAN.png')
         if os.path.exists(rp):
-            im = Image.open(rp).convert('RGB'); im.thumbnail((900, 900))
+            im = Image.open(rp).convert('RGB')
+            # blind: the roof plan's own title line names the variant (roof_plan.py draws it at the top) — blanked here
+            ImageDraw.Draw(im).rectangle([0, 0, im.width, 44], fill='white')
+            im.thumbnail((900, 900))
             rows.append(band(f'WARIANT {lab} — dach z góry (czerwone = kosz, pomarańczowe = dojście do ściany, czarne = kalenica, niebieskie = naroże; front u dołu)', [im]))
     o = Image.new('RGB', (W, sum(r.height for r in rows)), 'white'); y = 0
     for r in rows: o.paste(r, (0, y)); y += r.height
