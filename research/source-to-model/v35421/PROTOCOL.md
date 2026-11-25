@@ -139,5 +139,13 @@ Zmiany po obejrzeniu DEV (każda ogólna, z testem i kontrpróbą; żadnego waru
 7. dach poprzeczny z odczytu leżący nad bryłą rzutu jest dachem tej bryły (`CROSS_AS_BODY` 0,6);
 8. okap boku, którego ściany kończą się pod połaciami, czytany z połaci (nie z wysokości pierścienia = kalenicy);
 9. zapis, kto odpowiedział na odczyt struktury (zakupione w tym biegu / odtworzone nagranie i kontrakt odpowiedzi).
+10. recenzja niezależna (dwóch czytelników na ustalenie) granic odczytu: arbitraż ocenia LOCAL i ciało ze źródeł tą
+    samą regułą bryły głównej; podsumowanie `consultation.quality` mówi to, co bramka cech KEY; układ dachów i odczyt
+    zwrotny mierzone na modelu dostarczonym, gdy korekta go zmieniła; numery obrazów odtworzonej odpowiedzi
+    `form-read/2` czytane na liście żądania `/2`; części rzutu podane później uzgadniane ponownie (bez zapytania);
+    nieudany lub odmówiony odczyt zapisany jako brak odpowiedzi;
+11. cała aplikacja na zielono (polecenie OWNER-a): 16 odziedziczonych niepowodzeń testów i 5 testów Androida
+    rozwiązanych u przyczyny (lista w commicie `8cc0d47`), e2e przeglądarki 49/49 (`efdab37`), pokrycie dachu mierzy to,
+    co ułożyło, i zwiększa moduł o zmierzony nadmiar budżetu trójkątów.
 
 Kryteria §3 i oczekiwania §6 bez zmian. Zamrożenie: commit wpisany w §9 przed losowaniem.
