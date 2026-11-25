@@ -135,7 +135,7 @@ export function formOf(raw: RawForm): HouseForm {
   const sideOf = (pick: (p: RawForm['pictures'][number]) => boolean): (typeof SIDES)[number] => raw.pictures.find((p) => pick(p) && p.shows !== 'NONE')?.shows ?? 'NONE'
   return { ...raw, mainRoof: { kind: raw.main.roof.kind, ridgeAlong: raw.main.roof.ridgeAlong, pitchDeg: raw.main.pitch.deg ?? 0 }, lowerParts: raw.parts.map((p) => ({ what: p.what, roof: p.roof.kind, where: p.where })), volumes: 1 + raw.parts.length, garageDoor: sideOf((p) => p.garageDoor), entrance: sideOf((p) => p.entranceDoor) }
 }
-export type FormRead = { version: string; promptVersion: string; pictures: number; raw: unknown; usd: number; requestId?: string; form?: HouseForm; refused: string[] }
+export type FormRead = { version: string; promptVersion: string; pictures: number; raw: unknown; usd: number; requestId?: string; form?: HouseForm; refused: string[]; /** form-read/3: the request as it left — every picture's exact PNG bytes with the text that introduced it (the packet a delivery shows; never logged) */ sent?: Array<{ label: string; png: Uint8Array; width: number; height: number }>; sentText?: string[] }
 type Ctx = { model: ConsultantModel; price: Price; spend?: ConsultSpend; signal?: AbortSignal }
 
 const toolInput = (turn: ModelTurn, name: string): unknown => (turn.content as Array<{ type: string; name?: string; input?: unknown }>).find((b) => b.type === 'tool_use' && b.name === name)?.input
@@ -202,14 +202,21 @@ export function fitPicture(raster: Raster, maxSide: number): { png: Uint8Array; 
 }
 
 export async function readForm(ctx: Ctx, pictures: ReadonlyArray<{ caption: string; raster: Raster }>, sheets: FormSheets = {}): Promise<FormRead> {
-  const base = { version: FORM_READ_VERSION, promptVersion: FORM_READ_PROMPT_VERSION, pictures: pictures.length }
+  const sent: NonNullable<FormRead['sent']> = []
+  const base = { version: FORM_READ_VERSION, promptVersion: FORM_READ_PROMPT_VERSION, pictures: pictures.length, sent, sentText: [] as string[] }
   const content: unknown[] = [{ type: 'text', text: `The sheets of one house: ${pictures.length} elevation picture(s)${sheets.plan ? ', the ground-floor plan' : ''}${sheets.section ? ', a cross-section' : ''}${(sheets.perspectives ?? []).length > 0 ? `, ${(sheets.perspectives ?? []).length} perspective picture(s)` : ''}.` }]
-  const image = (r: Raster): unknown => ({ type: 'image', source: { type: 'base64', media_type: 'image/png', data: Buffer.from(fitPicture(r, MAX_SIDE).png).toString('base64') } })
-  pictures.forEach((p, i) => content.push({ type: 'text', text: `Elevation picture ${i + 1}, the publisher's caption: ${p.caption}` }, image(p.raster)))
-  if (sheets.plan) content.push({ type: 'text', text: 'The ground-floor plan (the publisher draws the front of the house at the foot of the sheet unless the sheet marks the entrance elsewhere):' }, image(sheets.plan))
-  if (sheets.section) content.push({ type: 'text', text: 'A cross-section:' }, image(sheets.section))
-  ;(sheets.perspectives ?? []).forEach((q, i) => content.push({ type: 'text', text: `Perspective picture P${i + 1} (${q.caption}; a rendering, NOT to scale):` }, image(q.raster)))
+  const image = (r: Raster): unknown => {
+    const fit = fitPicture(r, MAX_SIDE)
+    const before = content[content.length - 1] as { type?: string; text?: string } | undefined
+    sent.push({ label: before?.type === 'text' ? (before.text ?? '') : '', png: fit.png, width: fit.width, height: fit.height })
+    return { type: 'image', source: { type: 'base64', media_type: 'image/png', data: Buffer.from(fit.png).toString('base64') } }
+  }
+  pictures.forEach((p, i) => { content.push({ type: 'text', text: `Elevation picture ${i + 1}, the publisher's caption: ${p.caption}` }); content.push(image(p.raster)) })
+  if (sheets.plan) { content.push({ type: 'text', text: 'The ground-floor plan (the publisher draws the front of the house at the foot of the sheet unless the sheet marks the entrance elsewhere):' }); content.push(image(sheets.plan)) }
+  if (sheets.section) { content.push({ type: 'text', text: 'A cross-section:' }); content.push(image(sheets.section)) }
+  ;(sheets.perspectives ?? []).forEach((q, i) => { content.push({ type: 'text', text: `Perspective picture P${i + 1} (${q.caption}; a rendering, NOT to scale):` }); content.push(image(q.raster)) })
   if (sheets.facts && sheets.facts.length > 0) content.push({ type: 'text', text: `Facts the page states:\n${sheets.facts.join('\n')}` })
+  base.sentText = content.filter((c) => (c as { type: string }).type === 'text').map((c) => (c as { text: string }).text)
   const sheetsN = pictures.length + Number(!!sheets.plan) + Number(!!sheets.section) + (sheets.perspectives ?? []).length
   const reserveUsd = reserveOf(ctx.price, Math.ceil((FORM_READ_SYSTEM.length + JSON.stringify(TOOL).length + 600) / 2.5) + 2600 * Math.max(1, sheetsN), Math.min(ctx.model.maxOutputTokens, 2800), ctx.model.cache)
   const reservation = ctx.spend?.reserve(ctx.model.model, reserveUsd, `structure read (${sheetsN} sheets)`)

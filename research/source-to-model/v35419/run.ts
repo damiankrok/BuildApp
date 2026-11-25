@@ -232,6 +232,17 @@ if (r.massing) {
   if (st) writeFileSync(join(out, 'massing-scene.json'), st)
   console.log(`${house}: massing ${r.massing.decision} — ${r.massing.why.slice(0, 300)}`)
 }
+if (r.structureRead) {
+  // v3.54.21: the packet the structure read was sent (the exact PNG bytes, in order, with the text beside each), its raw
+  // answer and what was agreed from it — private run output, never in Git
+  const sd = join(out, 'structure-read')
+  mkdirSync(sd, { recursive: true })
+  const names = r.structureRead.sent.map((q, i) => `${String(i + 1).padStart(2, '0')}-${(/^(Elevation picture \d+|The ground-floor plan|A cross-section|Perspective picture P\d+)/.exec(q.label)?.[1] ?? 'picture').toLowerCase().replace(/[^a-z0-9]+/g, '-')}.png`)
+  r.structureRead.sent.forEach((q, i) => writeFileSync(join(sd, names[i]), q.png))
+  writeFileSync(join(sd, 'request.json'), `${stableJson({ promptVersion: r.structureRead.promptVersion, texts: r.structureRead.sentText, pictures: r.structureRead.sent.map((q, i) => ({ file: names[i], label: q.label, width: q.width, height: q.height, sha256: createHash('sha256').update(q.png).digest('hex') })) })}\n`)
+  writeFileSync(join(sd, 'answer-raw.json'), `${stableJson({ raw: r.structureRead.raw ?? null, refused: r.structureRead.refused })}\n`)
+  writeFileSync(join(sd, 'agreed.json'), `${stableJson({ agreed: r.structureRead.agreed ?? null, build: r.structureRead.build ?? null, features: r.structureRead.features ?? null })}\n`)
+}
 if (r.massingRejected) {
   const { model: mm, sceneText: st, plan, ...rest } = r.massingRejected
   writeFileSync(join(out, 'massing-rejected.json'), `${stableJson({ ...rest, plan: plan ?? null })}\n`)

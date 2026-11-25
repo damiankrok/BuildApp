@@ -409,6 +409,8 @@ export type ConsultedAnalysis = {
   massing?: MassingDelivery
   /** the source body that did not replace LOCAL's (v3.54.21): on the record, not delivered */
   massingRejected?: MassingDelivery
+  /** v3.54.21: the structure read as it left and came back — the exact pictures sent (PNG bytes), the texts beside them, the raw answer, the agreed structure and what the builder takes (a delivery shows the packet; nothing of it is logged) */
+  structureRead?: { promptVersion: string; sent: Array<{ label: string; png: Uint8Array; width: number; height: number }>; sentText: string[]; raw: unknown; refused: string[]; agreed?: unknown; build?: unknown; features?: unknown }
 }
 
 const CONF_RANK: Record<string, number> = { INCONCLUSIVE: 0, WEAK: 1, SUPPORTED: 2, STRONG: 3 }
@@ -2358,7 +2360,7 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
     if (planFrame) record({ at: now().toISOString(), kind: 'PLAN_FRAME_OF_MODEL', ...planFrame })
   }
   record({ at: now().toISOString(), kind: 'FINAL', local: localState, final: finalState, usd, readings, roofFeatures: features, sourceCheck: sourceCheck ?? null })
-  return { ...(bodyArbitration ? { bodyArbitration } : {}), contract: CONSULTANT_CONTRACT_VERSION, prompt: CONSULTANT_PROMPT_VERSION, variant: wiring.variant, ...(good.run ? { run: good.run } : {}), ...(good.error ? { error: good.error } : {}), local: localState, ...(wiring.keepLocalModel && local.run ? { localModel: local.run.reconstruction.model } : {}), final: finalState, rounds, readings: good === local ? [] : readings, spans: good === local ? [] : spans, usd, ...(boundary ? { boundary } : {}), geometry, roofFeatures: features, ...(sourceCheck ? { sourceCheck } : {}), consultation, ...(metricRead ? { metricRead } : {}), ...(sketchSummary ? { sketches: sketchSummary } : {}), ...(unregisteredSketches ? { sketchesWithoutModel: unregisteredSketches } : {}), ...(massingDelivery ? { massing: massingDelivery } : {}), ...(massingRejected ? { massingRejected } : {}), globalDescription: 'DISABLED' }
+  return { ...(bodyArbitration ? { bodyArbitration } : {}), contract: CONSULTANT_CONTRACT_VERSION, prompt: CONSULTANT_PROMPT_VERSION, variant: wiring.variant, ...(good.run ? { run: good.run } : {}), ...(good.error ? { error: good.error } : {}), local: localState, ...(wiring.keepLocalModel && local.run ? { localModel: local.run.reconstruction.model } : {}), final: finalState, rounds, readings: good === local ? [] : readings, spans: good === local ? [] : spans, usd, ...(boundary ? { boundary } : {}), geometry, roofFeatures: features, ...(sourceCheck ? { sourceCheck } : {}), consultation, ...(metricRead ? { metricRead } : {}), ...(sketchSummary ? { sketches: sketchSummary } : {}), ...(unregisteredSketches ? { sketchesWithoutModel: unregisteredSketches } : {}), ...(massingDelivery ? { massing: massingDelivery } : {}), ...(massingRejected ? { massingRejected } : {}), ...(structureMemo ? { structureRead: { promptVersion: structureMemo.read.promptVersion, sent: structureMemo.read.sent ?? [], sentText: structureMemo.read.sentText ?? [], raw: structureMemo.read.raw, refused: structureMemo.read.refused, ...(structureMemo.agreed ? { agreed: structureMemo.agreed } : {}), ...(structureMemo.build ? { build: structureMemo.build } : {}), ...(structureMemo.features ? { features: structureMemo.features } : {}) } } : {}), globalDescription: 'DISABLED' }
 }
 
 /** What the looks established, for the result: the delivered revision, the findings still open, each correction's fate. */
