@@ -40,7 +40,7 @@ const value = (name) => {
   const i = argv.indexOf(`--${name}`)
   return i >= 0 ? argv[i + 1] : undefined
 }
-const flags = new Set(['out', 'data', 'max-usd', 'spent-usd', 'timeout-s', 'default', 'commit'])
+const flags = new Set(['out', 'data', 'max-usd', 'spent-usd', 'timeout-s', 'default', 'commit', 'first-from'])
 const urls = argv.filter((a, i) => !a.startsWith('--') && !(i > 0 && argv[i - 1].startsWith('--') && flags.has(argv[i - 1].slice(2))))
 const out = value('out')
 const dataDir = value('data')
