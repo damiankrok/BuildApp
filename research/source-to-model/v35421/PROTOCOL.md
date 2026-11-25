@@ -171,3 +171,14 @@ zachowane (`newh/trial/selection-first-draw-roman-defect.json`, `selection-secon
 Trzecie losowanie (to samo ziarno): Studio Atrium — Anna II, Argos; Lipińscy — Lyon, Newcastle II; Dobre Domy —
 Debora, Elsa III; ARCHON — Dom pod Morwą (ver. 2), Dom pod Osiką. Żadna z tych rodzin nie jest na liście widzianych.
 Skład próby (§5) wyznaczają opisy referencyjne spisane z oryginałów tych ośmiu pakietów przed jakąkolwiek analizą.
+
+### 9b. Skład próby NEW-H (dopisane przed jakąkolwiek analizą)
+
+Opisy referencyjne ośmiu przyjętych pakietów: `references/NEWH-REFERENCES.md` (czytelnik z samych obrazów wydawcy +
+niezależny drugi czytelnik układu dachu; warstwy zgodne w 7 z 8 — Debora: „PROSTY + KRZYŻUJĄCE" wobec
+„KRZYŻUJĄCE", obaj widzą dach krzyżujący; niezgodność nazwana). Kolejność wylosowana, pula po puli, naprzemiennie:
+Anna II (KRZYŻUJĄCE) → **wzięta**; Lyon (PROSTY + NIŻSZY_PRZY_ŚCIANIE) → **wzięta** (nie jest wyłącznie PROSTY);
+Debora (KRZYŻUJĄCE) → **wzięta**; Dom pod morwą ver. 2 (PROSTY + NIŻSZY_PRZY_ŚCIANIE) → **wzięta**. Cztery domy,
+cztery pule, obie wymagane warstwy obecne (KRZYŻUJĄCE: Anna II, Debora; NIŻSZY_PRZY_ŚCIANIE: Lyon, Morwa); warstwy
+HIP w próbie nie ma (Dom pod osiką, HIP + KRZYŻUJĄCE, jest ósmy w kolejności — poza limitem, bo żadnej wymaganej warstwy
+nie brakuje). Argos, Newcastle II, Elsa III, Dom pod osiką: opisane, poza próbą.
