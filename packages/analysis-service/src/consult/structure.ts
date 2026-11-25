@@ -15,9 +15,9 @@
  * Sides: LEFT and RIGHT are those of a person standing OUTSIDE in front of the house looking at the front elevation —
  * the read is told so, and the body's frame says the same (x grows to that person's right, z from the front back).
  */
-import type { HouseForm, ValueStatus } from './form-read.js'
+import type { HouseForm, RoofRegionRead, ValueStatus } from './form-read.js'
 
-export const STRUCTURE_VERSION = '1.1.0' as const
+export const STRUCTURE_VERSION = '2.0.0' as const
 export type Standing = 'AGREED' | 'UNWITNESSED' | 'DISPUTED'
 export type Witnessed<T> = { value: T; standing: Standing; witnesses: string[]; why: string }
 export type StructureSide = 'FRONT' | 'LEFT' | 'RIGHT' | 'REAR'
@@ -48,8 +48,18 @@ export type AgreedStructure = {
   eavesM: Witnessed<{ m: number | null; status: ValueStatus }>
   ridgeM: Witnessed<{ m: number | null; status: ValueStatus }>
   parts: Array<Witnessed<{ what: 'GARAGE' | 'WING' | 'ANNEX'; where: StructureSide; full: 1 | 2; roof: HouseForm['mainRoof']['kind']; ridgeAlong: 'FRONT' | 'SIDE' | 'NONE'; lowerThanMain: boolean }>>
+  /**
+   * structure 2.0.0 (form-read/3): every roof region the read states beyond the main roof, each property with its OWN
+   * standing — a garage the plan names does not witness its roof's pitch, side or join. Witnesses a roof region can
+   * have here: the page's pitch (only for a region whose ridge is the house's top), its own consistency (ridge above
+   * eaves; a pitch a roof can have). Where it stands and whether a gable wall is drawn there is the body builder's to
+   * witness on the registered elevation.
+   */
+  roofs: Array<{ id: string; of: 'PART' | 'CROSS'; part?: number; kind: Witnessed<{ kind: HouseForm['mainRoof']['kind'] }>; ridgeAlong: Witnessed<{ along: 'FRONT' | 'SIDE' | 'NONE' }>; pitchDeg: Witnessed<{ deg: number | null; status: ValueStatus }>; eavesM: Witnessed<{ m: number | null; status: ValueStatus }>; ridgeM: Witnessed<{ m: number | null; status: ValueStatus }>; seenOn: StructureSide | 'NONE'; span?: { fromShare: number; toShare: number }; meets: string; join: Witnessed<{ join: RoofRegionRead['join'] }> }>
   /** named and NOT built as volumes (a recess, a porch, a bay, a dormer, a balcony, a canopy): the registry has no consumer for them yet */
-  notVolumes: Array<{ what: string; where: StructureSide }>
+  notVolumes: Array<{ what: string; where: StructureSide; covered?: string }>
+  /** form-read/3: the perspective pictures as the read placed them (qualitative witnesses: no number comes from them) */
+  perspectives?: Array<{ n: number; corner: string; mirrored: boolean }>
   /** the side each elevation picture shows, as the read tells it (1-based picture numbers, in the order the pictures were given) */
   pictures: Array<{ n: number; shows: StructureSide | 'NONE'; roofSeenAs: string; entranceDoor: boolean; garageDoor: boolean }>
 }
@@ -127,7 +137,22 @@ export function agreeStructure(f: HouseForm, x: StructureWitnesses): AgreedStruc
     const value = { what: p.what, where: p.where, full: (p.storeys === 'TWO' ? 2 : 1) as 1 | 2, roof: p.roof.kind, ridgeAlong: p.roof.ridgeAlong, lowerThanMain: p.lowerThanMain }
     return p.what === 'GARAGE' && (x.planParts ?? []).includes('GARAGE') ? w(value, 'AGREED', ['PLAN_PARTS'], `a garage on the ${p.where.toLowerCase()}, and the plan read names a garage inside its outline`) : w(value, 'UNWITNESSED', [], `a ${p.what.toLowerCase()} on the ${p.where.toLowerCase()} on the read alone (the plan read names ${(x.planParts ?? []).join(', ') || 'no parts'})`)
   })
-  return { version: STRUCTURE_VERSION, storeys, mainRoof, mainRidge, pitchDeg, eavesM, ridgeM, parts, notVolumes: f.notVolumes.map((n) => ({ what: n.what, where: n.where })), pictures: f.pictures.map((p) => ({ ...p })) }
+  // roof regions beyond the main roof — each property on its own
+  const roofs: AgreedStructure['roofs'] = (f.roofs ?? []).filter((q) => q.of !== 'MAIN').map((q) => {
+    const where = q.of === 'PART' && q.part !== null ? `the roof of part ${q.part} (${f.parts[q.part - 1]?.what.toLowerCase() ?? '?'})` : `a cross roof on the main walls (${q.seenOn.toLowerCase()})`
+    const partRoof = q.of === 'PART' && q.part !== null ? f.parts[q.part - 1]?.roof : undefined
+    const kindW = partRoof && partRoof.kind !== q.kind ? w({ kind: q.kind }, 'DISPUTED', ['READ_PARTS'], `${where}: ${q.kind} here, ${partRoof.kind} in the list of parts — the answer contradicts itself`) : w({ kind: q.kind }, 'UNWITNESSED', [], `${where}: ${q.kind} on the read alone`)
+    const ridgeW = partRoof && partRoof.ridgeAlong !== q.ridgeAlong ? w({ along: q.ridgeAlong }, 'DISPUTED', ['READ_PARTS'], `${where}: ridge ${q.ridgeAlong} here, ${partRoof.ridgeAlong} in the list of parts — the answer contradicts itself`) : w({ along: q.ridgeAlong }, 'UNWITNESSED', [], `${where}: ridge ${q.ridgeAlong} on the read alone`)
+    const pitchW = q.pitchDeg === null ? w({ deg: null, status: q.pitchStatus }, 'UNWITNESSED', [], 'no pitch reported for this region') : q.pitchDeg < 5 || q.pitchDeg > 62 ? w({ deg: q.pitchDeg, status: q.pitchStatus }, 'DISPUTED', ['ROOF_RANGE'], `${q.pitchDeg}° is not a pitched roof's pitch`) : w({ deg: q.pitchDeg, status: q.pitchStatus }, 'UNWITNESSED', [], `${q.pitchDeg}° (${q.pitchStatus}) for this region on the read alone`)
+    const heightsClash = q.eavesM !== null && q.ridgeM !== null && q.kind !== 'FLAT' && q.ridgeM <= q.eavesM
+    const eavesW = q.eavesM === null ? w({ m: null, status: q.eavesStatus }, 'UNWITNESSED', [], 'no eaves height reported for this region') : heightsClash ? w({ m: q.eavesM, status: q.eavesStatus }, 'DISPUTED', ['READ_ITSELF'], `eaves ${q.eavesM} m and ridge ${q.ridgeM} m: the ridge is not above the eaves`) : w({ m: q.eavesM, status: q.eavesStatus }, 'UNWITNESSED', [], `eaves ${q.eavesM} m (${q.eavesStatus}) on the read alone`)
+    const ridgeW2 = q.ridgeM === null ? w({ m: null, status: q.ridgeStatus }, 'UNWITNESSED', [], 'no ridge height reported for this region') : heightsClash ? w({ m: q.ridgeM, status: q.ridgeStatus }, 'DISPUTED', ['READ_ITSELF'], `eaves ${q.eavesM} m and ridge ${q.ridgeM} m: the ridge is not above the eaves`) : ridge.m !== null && q.ridgeM > ridge.m + T.ridgeAgreeM ? w({ m: q.ridgeM, status: q.ridgeStatus }, 'DISPUTED', ['READ_MAIN_RIDGE'], `ridge ${q.ridgeM} m reported above the main ridge (${ridge.m} m) for a region that is not the main roof`) : w({ m: q.ridgeM, status: q.ridgeStatus }, 'UNWITNESSED', [], `ridge ${q.ridgeM} m (${q.ridgeStatus}) on the read alone`)
+    // a join is witnessed by the read's own heights where it states them: a region whose ridge is below the other's eaves cannot fold into a valley with it
+    const other = q.meets === 'R1' ? { eaves: eaves.m, ridge: ridge.m } : (() => { const o = (f.roofs ?? []).find((x) => x.id === q.meets); return o ? { eaves: o.eavesM, ridge: o.ridgeM } : undefined })()
+    const joinW = q.join === 'VALLEY' && q.ridgeM !== null && other?.eaves !== null && other?.eaves !== undefined && q.ridgeM <= other.eaves ? w({ join: q.join }, 'DISPUTED', ['READ_HEIGHTS'], `a valley with ${q.meets} reported, but this region's ridge (${q.ridgeM} m) is not above that roof's eaves (${other.eaves} m): it meets a wall`) : q.join === 'ABUTS_WALL' && q.eavesM !== null && other?.eaves !== null && other?.eaves !== undefined && q.eavesM >= other.eaves - 0.25 && q.ridgeM !== null && other.ridge !== null && other.ridge !== undefined && q.ridgeM <= other.ridge ? w({ join: q.join }, 'DISPUTED', ['READ_HEIGHTS'], `it is reported to end against a wall of ${q.meets}, but its eaves (${q.eavesM} m) stand at that roof's eaves (${other.eaves} m): no wall rises above it there`) : w({ join: q.join }, 'UNWITNESSED', [], `${q.join} with ${q.meets} on the read alone`)
+    return { id: q.id, of: q.of as 'PART' | 'CROSS', ...(q.part !== null ? { part: q.part } : {}), kind: kindW, ridgeAlong: ridgeW, pitchDeg: pitchW, eavesM: eavesW, ridgeM: ridgeW2, seenOn: q.seenOn, ...(q.fromShare !== null && q.toShare !== null ? { span: { fromShare: q.fromShare, toShare: q.toShare } } : {}), meets: q.meets, join: joinW }
+  })
+  return { version: STRUCTURE_VERSION, storeys, mainRoof, mainRidge, pitchDeg, eavesM, ridgeM, parts, roofs, notVolumes: f.notVolumes.map((n) => ({ what: n.what, where: n.where, ...(n.covered ? { covered: n.covered } : {}) })), pictures: f.pictures.map((p) => ({ ...p })), ...(f.perspectives ? { perspectives: f.perspectives.map((p) => ({ ...p })) } : {}) }
 }
 
 /**
@@ -142,7 +167,10 @@ export type BuildStructure = {
   /** heights above the ground floor's floor, each with how the read knows it */
   eavesM?: { m: number; status: ValueStatus }
   ridgeM?: { m: number; status: ValueStatus }
-  parts: Array<{ what: string; where: StructureSide; fullStoreys: 1 | 2; roof?: StructureRoof; ridge?: 'X' | 'Z' }>
+  /** structure 2.0.0: a part carries its OWN roof numbers and how its roof meets the main one, where the read states them and nothing disputes them */
+  parts: Array<{ what: string; where: StructureSide; fullStoreys: 1 | 2; roof?: StructureRoof; ridge?: 'X' | 'Z'; pitchDeg?: number; eavesM?: { m: number; status: ValueStatus }; ridgeM?: { m: number; status: ValueStatus }; join?: 'VALLEY' | 'ABUTS_WALL' | 'SAME_PLANE' | 'APART'; roofId?: string }>
+  /** structure 2.0.0: second ridges on the main volume's own walls (cross gables), where the read states them */
+  cross?: Array<{ id: string; side: StructureSide; ridge: 'X' | 'Z'; span?: { fromShare: number; toShare: number }; pitchDeg?: number; ridgeM?: { m: number; status: ValueStatus } }>
 }
 const buildable = (k: string): StructureRoof | undefined => (k === 'GABLE' || k === 'HIP' || k === 'FLAT' ? k : undefined)
 const axisOf = (a: 'FRONT' | 'SIDE' | 'NONE'): 'X' | 'Z' | undefined => (a === 'FRONT' ? 'X' : a === 'SIDE' ? 'Z' : undefined)
@@ -161,7 +189,15 @@ export function buildStructureOf(a: AgreedStructure): BuildStructure {
     ...(ok(a.pitchDeg) && a.pitchDeg.value.deg !== null && a.pitchDeg.value.deg >= 5 && a.pitchDeg.value.deg <= 60 && (a.pitchDeg.standing === 'AGREED' || a.pitchDeg.value.status === 'PRINTED' || a.pitchDeg.value.status === 'DERIVED') ? { pitchDeg: a.pitchDeg.value.deg } : {}),
     ...(ok(a.eavesM) && a.eavesM.value.m !== null ? { eavesM: { m: a.eavesM.value.m, status: a.eavesM.value.status } } : {}),
     ...(ok(a.ridgeM) && a.ridgeM.value.m !== null ? { ridgeM: { m: a.ridgeM.value.m, status: a.ridgeM.value.status } } : {}),
-    parts: a.parts.filter(ok).map((p) => { const k = buildable(p.value.roof); const r = axisOf(p.value.ridgeAlong); return { what: p.value.what, where: p.value.where, fullStoreys: p.value.full, ...(k ? { roof: k } : {}), ...(r ? { ridge: r } : {}) } }),
+    parts: a.parts.map((p, i) => ({ p, i })).filter((q) => ok(q.p)).map(({ p, i }) => {
+      const k = buildable(p.value.roof)
+      const r = axisOf(p.value.ridgeAlong)
+      // this part's own roof region, property by property (a disputed property is not taken; the part still is)
+      const own = (a.roofs ?? []).find((q) => q.of === 'PART' && q.part === i + 1)
+      const num = own ? { ...(ok(own.pitchDeg) && own.pitchDeg.value.deg !== null && own.pitchDeg.value.status !== 'ESTIMATED' ? { pitchDeg: own.pitchDeg.value.deg } : {}), ...(ok(own.eavesM) && own.eavesM.value.m !== null ? { eavesM: { m: own.eavesM.value.m, status: own.eavesM.value.status } } : {}), ...(ok(own.ridgeM) && own.ridgeM.value.m !== null ? { ridgeM: { m: own.ridgeM.value.m, status: own.ridgeM.value.status } } : {}), ...(ok(own.join) && own.join.value.join !== 'NONE' ? { join: own.join.value.join as 'VALLEY' | 'ABUTS_WALL' | 'SAME_PLANE' | 'APART' } : {}), roofId: own.id } : {}
+      return { what: p.value.what, where: p.value.where, fullStoreys: p.value.full, ...(k ? { roof: k } : {}), ...(r ? { ridge: r } : {}), ...num }
+    }),
+    ...((a.roofs ?? []).some((q) => q.of === 'CROSS') ? { cross: (a.roofs ?? []).filter((q) => q.of === 'CROSS' && q.seenOn !== 'NONE' && ok(q.kind) && ok(q.ridgeAlong) && (q.kind.value.kind === 'GABLE' || q.kind.value.kind === 'HIP')).map((q) => ({ id: q.id, side: q.seenOn as StructureSide, ridge: (q.seenOn === 'FRONT' || q.seenOn === 'REAR' ? 'Z' : 'X') as 'X' | 'Z', ...(q.span ? { span: q.span } : {}), ...(ok(q.pitchDeg) && q.pitchDeg.value.deg !== null ? { pitchDeg: q.pitchDeg.value.deg } : {}), ...(ok(q.ridgeM) && q.ridgeM.value.m !== null ? { ridgeM: { m: q.ridgeM.value.m, status: q.ridgeM.value.status } } : {}) })) } : {}),
   }
 }
 

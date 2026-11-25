@@ -22,7 +22,7 @@ import type { AnalysisInput, AnalysisOptions, AnalysisRun } from '../run.js'
 import { CONSULTANT_CONTRACT_VERSION, CONSULTANT_PROMPT_VERSION } from './contract.js'
 import type { ConsultantReview } from './contract.js'
 import type { RoofFeatureCorrection, RoofFeatureOutcome } from '@buildapp/reconstruction'
-import { overviewOf } from './tools.js'
+import { MAX_SIDE, overviewOf } from './tools.js'
 import { DEFAULT_CONSULT_LIMITS, checkModel, consultBoundary, consultLabels, overviewScale, validateBoundary, validateProposals } from './loop.js'
 import type { BoundaryVerdict, CheckSource, ConsultEvent, ConsultLimits, ConsultOutcome, ConsultSpend, ConsultantModel, ModelCheckResult, Price, ProposalVerdict } from './loop.js'
 import { bindRoofFeature, compareGeometry, geometryStateOf, reviewOutcome } from './geometry.js'
@@ -58,7 +58,7 @@ import { readSiteDimensions, SITE_DIMENSIONS_VERSION } from './site-dimensions.j
 import { FACADE_METRIC_VERSION, readFacadeMetric } from './facade-metric.js'
 import { FORM_READ_VERSION, flatVolumesOf, formVerdict, readForm } from './form-read.js'
 import { STRUCTURE_VERSION, agreeStructure, buildStructureOf, structureAgainstBody, wallToApex } from './structure.js'
-import { readbackOpenings, readbackStructure } from './readback.js'
+import { readbackOpenings, readbackStructure, regionOfPlane } from './readback.js'
 import type { AgreedStructure, BuildStructure, StructureSide } from './structure.js'
 import type { Raster } from '@buildapp/source-cv'
 import type { FormRead } from './form-read.js'
@@ -418,6 +418,21 @@ const lineage = new WeakMap<Local, { input: AnalysisInput; options: AnalysisOpti
  */
 /** v3.54.17 R2: an element index as the defect ledger reads it (id → type). */
 const listedOf = (index: ElementIndex | undefined): ListedElements | undefined => (index ? new Map(index.elements.map((e) => [e.id, e.type])) : undefined)
+/** v3.54.21: the pictures a structure read is asked of — fixed before any result. */
+export const STRUCTURE_PICTURES = { minSidePx: 480, maxElevations: 6, maxPerspectives: 3, /** mean absolute difference of two 8 × 8 grey signatures (0–255) under which two pictures look the same */ sameLook: 6 } as const
+/** An 8 × 8 grey signature of a picture (its mean brightness per cell): two sizes or crops of one rendering have nearly the same. */
+export function pictureSignature(r: Raster): number[] {
+  const out: number[] = []
+  for (let gy = 0; gy < 8; gy += 1) for (let gx = 0; gx < 8; gx += 1) {
+    let sum = 0
+    let n = 0
+    const [x0, x1, y0, y1] = [Math.floor((gx * r.width) / 8), Math.floor(((gx + 1) * r.width) / 8), Math.floor((gy * r.height) / 8), Math.floor(((gy + 1) * r.height) / 8)]
+    const step = Math.max(1, Math.floor(Math.min(x1 - x0, y1 - y0) / 12))
+    for (let y = y0; y < y1; y += step) for (let x = x0; x < x1; x += step) { const i = (y * r.width + x) * 4; sum += 0.299 * r.data[i] + 0.587 * r.data[i + 1] + 0.114 * r.data[i + 2]; n += 1 }
+    out.push(n > 0 ? sum / n : 0)
+  }
+  return out
+}
 const massingOf = new WeakMap<Local, { views: BindView[]; rebuild: (model: CanonicalBuildingModel) => Local | undefined; /** the side of the plan sheet that is this body's front (a body built in the elevations' frame); absent: the sheet's foot */ planFront?: Side; /** v3.54.19: the plan skeleton in this body's frame (interior, exterior gaps) */ interior?: InteriorObservation; /** the sheet → model map as three mapped points of the plan frame: (0,0), (1000,0), (0,1000) px */ planMap?: PlanFrameOfModel; /** v3.54.21: the hypothesis the body was built from (its bodies, their roofs and fates, its cross gables) */ hypothesis?: MassingHypothesis }>()
 /** v3.54.19: where the plan sheet lies in the delivered model's frame (an affine map stated by three points), for any overlay of the model on its plan. */
 export type PlanFrameOfModel = { frameId: string; basis: 'OUTLINE_SCALE' | 'LOCAL_PLAN_REGISTRATION'; o: { x: number; z: number }; x1000: { x: number; z: number }; y1000: { x: number; z: number } }
@@ -783,27 +798,75 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
   // than two sketched elevations.
   type StructureMemo = { read: FormRead; frames: string[]; agreed?: AgreedStructure; build?: BuildStructure }
   let structureMemo: StructureMemo | undefined
-  const structureOf = async (A: { pkg0: SourcePackage; graph0: SourceObservationGraph; sketches: SketchReading['sketches']; planRaster?: Raster; planParts?: readonly string[] }): Promise<StructureMemo | undefined> => {
+  const structureOf = async (A: { pkg0: SourcePackage; graph0: SourceObservationGraph; sketches: SketchReading['sketches']; planRaster?: Raster; planFrameId?: string; planParts?: readonly string[] }): Promise<StructureMemo | undefined> => {
     if (structureMemo) return structureMemo
     const sketched = A.sketches.filter((x) => x.sketch)
-    if (sketched.length < 2) return undefined
+    // v3.54.21: the read is asked of the publisher's ORIGINAL elevation pictures, chosen from the package — not of the list
+    // of elevations a sketch succeeded on (a sketch is a view of the read and a witness of it, never the gate to it). Each
+    // side's largest picture is sent once; a thumbnail (< 480 px) or a second copy of the same bytes is not; every choice
+    // and every omission is recorded with its reason, and so is what the provider was actually sent (its pixels and factor).
+    const images: Array<{ role: 'ELEVATION' | 'PLAN' | 'SECTION' | 'PERSPECTIVE'; n?: number; frameId: string; caption: string; sourceByteHash: string; sourcePx: [number, number]; sentPx: [number, number]; factor: number; origin: string }> = []
+    const skipped: Array<{ role: string; frameId: string; px: [number, number]; why: string }> = []
+    const sentOf = (r: Raster): { sentPx: [number, number]; factor: number } => { const k = Math.max(1, Math.ceil(Math.max(r.width, r.height) / MAX_SIDE)); return { sentPx: [Math.floor(r.width / k), Math.floor(r.height / k)], factor: k } }
+    const originOf = (k: number): string => `the publisher's own picture, decoded and sent as PNG${k > 1 ? `, every ${k}th pixel (the provider keeps ${MAX_SIDE} px a side)` : ' at its own resolution'}`
+    const pxOf = (f: { size?: { width: number; height: number } }): [number, number] => [f.size?.width ?? 0, f.size?.height ?? 0]
+    const sketchOf = new Map(sketched.map((x) => [x.frameId, x]))
+    const elevFrames = A.graph0.coordinateFrames.filter((f) => f.roles.projection === 'ORTHOGRAPHIC_ELEVATION').sort((a, b) => Number(sketchOf.has(b.id)) - Number(sketchOf.has(a.id)) || pxOf(b)[0] * pxOf(b)[1] - pxOf(a)[0] * pxOf(a)[1] || a.id.localeCompare(b.id))
     const pictures: Array<{ caption: string; raster: Raster; frameId: string }> = []
-    for (const x of sketched) {
-      const r = await frameRaster(A.pkg0, A.graph0, x.frameId, options)
-      if (r?.raster) pictures.push({ caption: x.facade === 'SIDE_UNSPECIFIED' ? 'SIDE (which side is not captioned)' : x.facade, raster: r.raster, frameId: x.frameId })
+    const seenBytes = new Set<string>()
+    const perView = new Map<string, number>()
+    for (const f of elevFrames) {
+      const px = pxOf(f)
+      const view = sketchOf.get(f.id)?.facade ?? (f.roles.view && f.roles.view !== 'NOT_APPLICABLE' && f.roles.view !== 'UNKNOWN' ? f.roles.view : 'SIDE_UNSPECIFIED')
+      if (seenBytes.has(f.variantByteHash)) { skipped.push({ role: 'ELEVATION', frameId: f.id, px, why: 'the same bytes as a picture already chosen' }); continue }
+      if (Math.max(px[0], px[1]) < STRUCTURE_PICTURES.minSidePx) { skipped.push({ role: 'ELEVATION', frameId: f.id, px, why: `a thumbnail (${px[0]} × ${px[1]} px): not an elevation a roof can be read from` }); continue }
+      // one picture per captioned side; a side the caption does not tell apart may have two (the two side elevations)
+      const cap = view === 'SIDE_UNSPECIFIED' ? 2 : 1
+      if ((perView.get(view) ?? 0) >= cap) { skipped.push({ role: 'ELEVATION', frameId: f.id, px, why: `another picture captioned ${view} is already chosen (the larger, or the one a sketch was made of)` }); continue }
+      if (pictures.length >= STRUCTURE_PICTURES.maxElevations) { skipped.push({ role: 'ELEVATION', frameId: f.id, px, why: `${STRUCTURE_PICTURES.maxElevations} elevation pictures are already chosen` }); continue }
+      const r = await frameRaster(A.pkg0, A.graph0, f.id, options)
+      if (!r?.raster) { skipped.push({ role: 'ELEVATION', frameId: f.id, px, why: 'its bytes are not in the cache: not decoded' }); continue }
+      seenBytes.add(f.variantByteHash)
+      perView.set(view, (perView.get(view) ?? 0) + 1)
+      const caption = view === 'SIDE_UNSPECIFIED' ? 'SIDE (which side is not captioned)' : view
+      pictures.push({ caption, raster: r.raster, frameId: f.id })
+      images.push({ role: 'ELEVATION', n: pictures.length, frameId: f.id, caption, sourceByteHash: f.variantByteHash, sourcePx: [r.raster.width, r.raster.height], ...sentOf(r.raster), origin: originOf(sentOf(r.raster).factor) })
     }
-    if (pictures.length < 2) return undefined
+    // perspective pictures: a qualitative witness (a recess, a porch, how two roofs meet) — the largest few, no two alike
+    const perspectives: Array<{ caption: string; raster: Raster; frameId: string }> = []
+    const signatures: number[][] = []
+    const perspFrames = A.graph0.coordinateFrames.filter((f) => f.roles.projection === 'PERSPECTIVE').sort((a, b) => pxOf(b)[0] * pxOf(b)[1] - pxOf(a)[0] * pxOf(a)[1] || a.id.localeCompare(b.id))
+    for (const f of perspFrames) {
+      const px = pxOf(f)
+      if (seenBytes.has(f.variantByteHash)) { skipped.push({ role: 'PERSPECTIVE', frameId: f.id, px, why: 'the same bytes as a picture already chosen' }); continue }
+      if (Math.max(px[0], px[1]) < STRUCTURE_PICTURES.minSidePx) { skipped.push({ role: 'PERSPECTIVE', frameId: f.id, px, why: `a thumbnail (${px[0]} × ${px[1]} px)` }); continue }
+      if (perspectives.length >= STRUCTURE_PICTURES.maxPerspectives) { skipped.push({ role: 'PERSPECTIVE', frameId: f.id, px, why: `${STRUCTURE_PICTURES.maxPerspectives} perspective pictures are already chosen (the largest, no two alike)` }); continue }
+      const r = await frameRaster(A.pkg0, A.graph0, f.id, options)
+      if (!r?.raster) { skipped.push({ role: 'PERSPECTIVE', frameId: f.id, px, why: 'its bytes are not in the cache: not decoded' }); continue }
+      const sig = pictureSignature(r.raster)
+      if (signatures.some((q) => q.reduce((t, v, i) => t + Math.abs(v - sig[i]), 0) / q.length < STRUCTURE_PICTURES.sameLook)) { skipped.push({ role: 'PERSPECTIVE', frameId: f.id, px, why: 'it looks the same as a perspective already chosen (another size or crop of it)' }); continue }
+      signatures.push(sig)
+      seenBytes.add(f.variantByteHash)
+      perspectives.push({ caption: 'the publisher\'s rendering', raster: r.raster, frameId: f.id })
+      images.push({ role: 'PERSPECTIVE', n: perspectives.length, frameId: f.id, caption: 'PERSPECTIVE (a rendering, not to scale)', sourceByteHash: f.variantByteHash, sourcePx: [r.raster.width, r.raster.height], ...sentOf(r.raster), origin: originOf(sentOf(r.raster).factor) })
+    }
+    // nothing to read a structure from: no elevation and no perspective (the plan alone gives a footprint, not a roof)
+    if (pictures.length === 0 && perspectives.length === 0) return undefined
     const roleOf = (assetId: string): { document?: string; storey?: string } => ((A.pkg0.assets.find((q) => q.id === assetId) as { roles?: { document?: string; storey?: string } } | undefined)?.roles ?? {})
     let section: Raster | undefined
+    let sectionFrame: (typeof A.graph0.coordinateFrames)[number] | undefined
     for (const f of A.graph0.coordinateFrames) {
       if (roleOf(f.assetId).document !== 'SECTION') continue
       const r = await frameRaster(A.pkg0, A.graph0, f.id, options)
-      if (r?.raster && (!section || r.raster.width * r.raster.height > section.width * section.height)) section = r.raster
+      if (r?.raster && (!section || r.raster.width * r.raster.height > section.width * section.height)) { section = r.raster; sectionFrame = f }
     }
+    if (section && sectionFrame) images.push({ role: 'SECTION', frameId: sectionFrame.id, caption: 'SECTION', sourceByteHash: sectionFrame.variantByteHash, sourcePx: [section.width, section.height], ...sentOf(section), origin: originOf(sentOf(section).factor) })
+    if (A.planRaster) images.push({ role: 'PLAN', frameId: A.planFrameId ?? 'the plan the outline was read on', caption: 'GROUND-FLOOR PLAN', sourceByteHash: A.graph0.coordinateFrames.find((f) => f.id === A.planFrameId)?.variantByteHash ?? '', sourcePx: [A.planRaster.width, A.planRaster.height], ...sentOf(A.planRaster), origin: originOf(sentOf(A.planRaster).factor) })
+    const missingSides = (['FRONT', 'REAR'] as const).filter((sd) => !pictures.some((q) => q.caption === sd))
     const planStoreys = [...new Set(A.pkg0.assets.map((q) => (q as { roles?: { document?: string; storey?: string } }).roles).filter((r) => r?.document === 'FLOOR_PLAN').map((r) => r?.storey ?? 'UNKNOWN'))]
     const facts = [...A.pkg0.publishedFacts.filter((q) => typeof q.value === 'number' || typeof q.value === 'string').map((q) => `${q.key}: ${String(q.value)}${q.unit && q.unit !== 'none' ? ` ${q.unit}` : ''}`), `floor plans published for: ${planStoreys.join(', ') || 'none'}`]
     stage('STRUCTURE_READ')
-    const read = await readForm({ model: wiring.outlineModel ?? wiring.metricModel ?? wiring.model, price: wiring.outlinePrice ?? wiring.metricPrice ?? wiring.price, ...(wiring.spend ? { spend: wiring.spend } : {}), ...(options.signal ? { signal: options.signal } : {}) }, pictures, { ...(A.planRaster ? { plan: A.planRaster } : {}), ...(section ? { section } : {}), facts })
+    const read = await readForm({ model: wiring.outlineModel ?? wiring.metricModel ?? wiring.model, price: wiring.outlinePrice ?? wiring.metricPrice ?? wiring.price, ...(wiring.spend ? { spend: wiring.spend } : {}), ...(options.signal ? { signal: options.signal } : {}) }, pictures, { ...(A.planRaster ? { plan: A.planRaster } : {}), ...(section ? { section } : {}), ...(perspectives.length > 0 ? { perspectives } : {}), facts })
     usd += read.usd
     const memo: StructureMemo = { read, frames: pictures.map((p) => p.frameId) }
     if (read.form) {
@@ -818,7 +881,7 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
       memo.agreed = agreeStructure(read.form, { planStoreys, ...(typeof height === 'number' ? { buildingHeightM: height } : {}), ...(typeof pitch === 'number' ? { publishedPitchDeg: pitch } : {}), ...(A.planParts ? { planParts: A.planParts } : {}), gableWalls })
       memo.build = buildStructureOf(memo.agreed)
     }
-    record({ at: now().toISOString(), kind: 'STRUCTURE_READ', version: FORM_READ_VERSION, promptVersion: read.promptVersion, structureVersion: STRUCTURE_VERSION, sheets: { elevations: pictures.map((p, i) => ({ n: i + 1, frameId: p.frameId, caption: p.caption })), plan: !!A.planRaster, section: !!section, facts }, form: read.form ?? null, raw: read.form ? undefined : read.raw, refused: read.refused, agreed: memo.agreed ?? null, taken: memo.build ?? null, usd: read.usd, why: 'the sheets are asked, as a whole, what volumes, storeys and roofs the house has; each property is held against witnesses that are not this answer, and only what is not disputed is taken' })
+    record({ at: now().toISOString(), kind: 'STRUCTURE_READ', version: FORM_READ_VERSION, promptVersion: read.promptVersion, structureVersion: STRUCTURE_VERSION, sheets: { elevations: pictures.map((p, i) => ({ n: i + 1, frameId: p.frameId, caption: p.caption })), perspectives: perspectives.map((p, i) => ({ n: i + 1, frameId: p.frameId })), plan: !!A.planRaster, section: !!section, facts }, images, skipped, missing: [...missingSides.map((sd) => `no elevation picture captioned ${sd} in the package`), ...(pictures.length < 4 ? [`${pictures.length} elevation picture(s) of four sides`] : []), ...(sketched.length < 2 ? [`${sketched.length} elevation sketch(es): the sketches' own witness of gable walls is ${sketched.length === 0 ? 'absent' : 'thin'} — the read is asked all the same`] : [])], form: read.form ?? null, raw: read.form ? undefined : read.raw, refused: read.refused, agreed: memo.agreed ?? null, taken: memo.build ?? null, usd: read.usd, why: 'the sheets are asked, as a whole, what volumes, storeys and roofs the house has; each property is held against witnesses that are not this answer, and only what is not disputed is taken' })
     structureMemo = memo
     return memo
   }
@@ -925,7 +988,7 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
           // against the captioned ones only (one house's eaves came from its front alone, the gable wall of a cross wing,
           // while both side elevations drew them three metres lower). A captioned side is never overridden; two pictures
           // the read puts on one side are both left out (it does not know).
-          const structure = await structureOf({ pkg0, graph0, sketches: A.sketches, planRaster: fr.raster, ...(plan.parts ? { planParts: plan.parts } : {}) })
+          const structure = await structureOf({ pkg0, graph0, sketches: A.sketches, planRaster: fr.raster, planFrameId: plan.frameId, ...(plan.parts ? { planParts: plan.parts } : {}) })
           const captioned = new Set(A.sketches.map((x) => sideOfFacade(x.facade)).filter(Boolean))
           const readSide = (frameId: string): Side | undefined => {
             const n = (structure?.frames ?? []).indexOf(frameId) + 1
@@ -1516,7 +1579,16 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
     // something the other witnesses cannot: LOCAL's body is a pitched house with flat-roofed volumes beside it (LOCAL
     // builds a recessed front as a box of its own under a flat roof; elevations registered by wall ends and the printed
     // overall dimensions agree with such a body just as well). One request, all captioned elevations; no dimension taken.
-    const roofsOf = (model: CanonicalBuildingModel): { flatVolumes: number; pitchedKinds: string[] } => ({ flatVolumes: model.roofs.filter((r) => r.kind === 'FLAT').length, pitchedKinds: [...model.roofs.filter((r) => r.kind !== 'FLAT').map((r) => r.kind as string), ...(model.roofPlanes.length > 0 ? ['HIP'] : [])] })
+    // v3.54.21: a roof stated in planes is the kind its planes make (two falls: a gable; three or four: a hip) — measured per
+    // roof region by its planes' own directions. (Until now any plane meant "a hip": true while only hips were stated in
+    // planes; a gable joined to another roof is stated in planes too.)
+    const roofsOf = (model: CanonicalBuildingModel): { flatVolumes: number; pitchedKinds: string[] } => {
+      const byRegion = new Map<string, Set<string>>()
+      // (planes the drawings' solver names its own way are counted as before: a hip)
+      const named = model.roofPlanes.filter((pl) => regionOfPlane(pl.id) !== pl.id)
+      for (const pl of named) { const k = regionOfPlane(pl.id); byRegion.set(k, (byRegion.get(k) ?? new Set()).add(`${Math.round(pl.downslope.x)}:${Math.round(pl.downslope.z)}`)) }
+      return { flatVolumes: model.roofs.filter((r) => r.kind === 'FLAT').length, pitchedKinds: [...model.roofs.filter((r) => r.kind !== 'FLAT').map((r) => r.kind as string), ...[...byRegion.values()].map((d) => (d.size >= 3 ? 'HIP' : 'GABLE')), ...(named.length < model.roofPlanes.length ? ['HIP'] : [])] }
+    }
     const localRoofs = roofsOf(tried && roofFixed > 0 ? tried.model : mL0)
     // v3.54.20: the structure read is asked of every house with two sketched elevations — not only where LOCAL carries
     // flat boxes beside a pitched roof — and what it says of a body's roofs counts only where the agreed structure does

@@ -16,13 +16,17 @@ import type { ConsultSpend, ConsultantModel, ModelTurn, Price } from './loop.js'
 import { reserveOf } from './cost.js'
 import { pictureOf } from './metric-read.js'
 
-export const FORM_READ_VERSION = '2.0.0' as const
-export const FORM_READ_PROMPT_VERSION = 'form-read/2' as const
+export const FORM_READ_VERSION = '3.0.0' as const
+export const FORM_READ_PROMPT_VERSION = 'form-read/3' as const
 
 const ROOFS = ['GABLE', 'HIP', 'FLAT', 'SHED', 'MANSARD', 'OTHER'] as const
 const SIDES = ['FRONT', 'LEFT', 'RIGHT', 'REAR', 'NONE'] as const
 const STATUS = ['PRINTED', 'DERIVED', 'ESTIMATED', 'UNKNOWN'] as const
 const NOT_VOLUMES = ['RECESS', 'PORCH', 'BAY', 'DORMER', 'BALCONY', 'CANOPY', 'CARPORT', 'TERRACE'] as const
+const ROOF_OF = ['MAIN', 'PART', 'CROSS'] as const
+const JOINS = ['VALLEY', 'ABUTS_WALL', 'SAME_PLANE', 'APART', 'NONE'] as const
+const COVERED = ['MAIN_ROOF', 'OWN_ROOF', 'NONE'] as const
+const CORNERS = ['FRONT', 'FRONT_LEFT', 'FRONT_RIGHT', 'REAR', 'REAR_LEFT', 'REAR_RIGHT', 'OTHER'] as const
 
 /**
  * form-read/2 (v3.54.20) — the STRUCTURE of the house as one typed answer from ALL its sheets in one request: the
@@ -35,13 +39,23 @@ const NOT_VOLUMES = ['RECESS', 'PORCH', 'BAY', 'DORMER', 'BALCONY', 'CANOPY', 'C
  *  - every number carries how it is known: PRINTED (the sheets print it), DERIVED (computed from printed numbers),
  *    ESTIMATED (by eye from proportions), UNKNOWN (then no number) — heights from the ground floor's floor level.
  */
-export const FORM_READ_SYSTEM = `You are given the sheets of ONE house project: its orthographic elevations (numbered, each with the publisher's caption), then where available its ground-floor plan and a cross-section, and the facts the page states as text. Report the STRUCTURE of the house as typed facts the sheets agree on. Do not describe it in prose and do not guess what no sheet shows.
+/**
+ * form-read/3 (v3.54.21) — the same request, asked of the ORIGINAL sheets (the publisher's elevation pictures chosen from
+ * the package, not the list of elevations a sketch succeeded on), with perspective pictures as a qualitative witness of
+ * how volumes and roofs relate, and with every ROOF REGION stated on its own: its identity, what it is the roof of, its
+ * own pitch / eaves / ridge (never the main roof's copied down), where a cross gable stands on its elevation, and how
+ * it meets the roof beside it (a valley, a wall, apart). The first 40 characters of the system text are those of /2 on
+ * purpose: a recorded /2 answer is replayed for this request and parsed as a /3 answer without roof regions.
+ */
+export const FORM_READ_SYSTEM = `You are given the sheets of ONE house project: its orthographic elevations (numbered, each with the publisher's caption), then where available its ground-floor plan and a cross-section, perspective pictures of the finished house (numbered P1, P2, …: NOT to scale, use them only to understand how volumes and roofs relate), and the facts the page states as text. Report the STRUCTURE of the house as typed facts the sheets agree on. Do not describe it in prose and do not guess what no sheet shows.
 LEFT and RIGHT always mean the left and right of a person standing OUTSIDE in front of the house, looking at the FRONT elevation. Use the plan to tell which side elevation is which.
 "storeys": ONE (ground floor only, the roof space not lived in), ONE_WITH_ATTIC (ground floor and rooms in the roof: windows in the gables, roof windows or dormers; the eaves about one storey high), TWO (two FULL storeys of walls under the eaves), TWO_WITH_ATTIC. "storeysBasis": the sheet that settles it (SECTION, ELEVATIONS, PLANS).
 The MAIN volume: "mainRoofKind": GABLE (two slopes and two gable walls that rise to the ridge), HIP (slopes on all four sides, no gable wall), FLAT, SHED (one slope), MANSARD, OTHER. "mainRidgeAlong": FRONT when the main ridge runs parallel to the front elevation (the front shows a roof slope), SIDE when it runs front-to-back (the front shows a gable wall or, for a hip, the short hip slope), NONE for a flat roof. "pitchDeg", "eavesM", "ridgeM": the main roof's pitch in degrees, the height of the top of the walls under the eaves, and the height of the ridge, the two heights in metres ABOVE THE GROUND FLOOR'S FLOOR LEVEL (the section's ±0.00); each with its own status ("pitchStatus", "eavesStatus", "ridgeStatus"): PRINTED (a sheet or the page prints this number), DERIVED (computed from printed numbers), ESTIMATED (by eye from proportions), UNKNOWN (then the value is null).
 "parts": every OTHER volume standing under its OWN roof (a lower garage, a wing, an annex): what it is, "where" it stands relative to the main volume as seen from the front (LEFT, RIGHT, FRONT for one projecting forward, REAR), its own storeys (ONE or TWO), its roof kind and ridgeAlong, and "lowerThanMain". A part of the house under the MAIN roof is not a part.
-"notVolumes": things that are NOT volumes and must not be built as boxes: RECESS (a wall set back, an entrance niche), PORCH, BAY, DORMER, BALCONY, CANOPY, CARPORT, TERRACE (roofed or not), each with the side it is on.
+"roofs": every ROOF REGION of the house, the main roof first. "id": R1 for the main roof, then R2, R3, …. "of": MAIN; PART for the roof of a volume listed in "parts" ("part" = its number in that list, counted from 1); CROSS for a second ridge standing on the MAIN volume's own walls with no separate volume under it (a cross gable, a gabled wall dormer more than about 2 m wide) — the plan's outline has no step there. "kind" and "ridgeAlong" as for the main roof. "pitchDeg", "eavesM", "ridgeM" with their statuses are THIS region's own, measured as for the main roof — never copy the main roof's numbers to another region: where a region's own number is not printed and cannot be derived, estimate it from the elevation (ESTIMATED) or give null (UNKNOWN). "seenOn": the side whose elevation shows this region's gable wall or front (NONE for the main roof). "fromShare", "toShare": for a CROSS region, where its gable wall stands on that elevation as shares between 0 and 1 of the BUILDING's width, measured from the building's left edge AS THAT PICTURE DRAWS IT; null otherwise. "meets": the id of the roof region it meets (NONE for the main roof). "join": VALLEY (its ridge runs into the other roof's slope; the two fold into valleys), ABUTS_WALL (it ends against a wall that rises above it — a lower roof against a higher volume), SAME_PLANE (it continues the other roof's slope without a fold), APART (a wall or a step stands between the two roofs), NONE.
+"notVolumes": things that are NOT volumes and must not be built as boxes: RECESS (a wall set back, an entrance niche), PORCH, BAY, DORMER, BALCONY, CANOPY, CARPORT, TERRACE (roofed or not), each with the side it is on and "covered": MAIN_ROOF (the main roof runs on over it), OWN_ROOF (it has a small roof or slab of its own), NONE (open to the sky).
 "pictures": one entry for EVERY elevation picture, by its number: "shows" the side of the house it shows (FRONT, REAR, LEFT, RIGHT, or NONE if it cannot be told), "roofSeenAs" what the MAIN roof looks like on it (GABLE_END: a gable wall rising to the ridge; SLOPE: a roof slope with a level ridge as long as the eaves; HIP: a slope narrowing to a short ridge or a point; FLAT), and whether it shows the main entrance door and a garage door.
+"perspectives": one entry for every perspective picture, by its number (1 for P1): "corner" the corner or side of the house it looks at (FRONT, FRONT_LEFT, FRONT_RIGHT, REAR, REAR_LEFT, REAR_RIGHT, OTHER) and "mirrored": true when it shows the house mirrored against the elevations.
 "dormers", "chimneys", "roofWindows": counts over the whole house (a chimney seen on several elevations is one chimney).`
 
 const TOOL = {
@@ -50,7 +64,7 @@ const TOOL = {
   input_schema: {
     type: 'object',
     additionalProperties: false,
-    required: ['storeys', 'storeysBasis', 'mainRoofKind', 'mainRidgeAlong', 'pitchDeg', 'pitchStatus', 'eavesM', 'eavesStatus', 'ridgeM', 'ridgeStatus', 'parts', 'notVolumes', 'pictures', 'dormers', 'chimneys', 'roofWindows'],
+    required: ['storeys', 'storeysBasis', 'mainRoofKind', 'mainRidgeAlong', 'pitchDeg', 'pitchStatus', 'eavesM', 'eavesStatus', 'ridgeM', 'ridgeStatus', 'parts', 'roofs', 'notVolumes', 'pictures', 'perspectives', 'dormers', 'chimneys', 'roofWindows'],
     properties: {
       storeys: { type: 'string', enum: ['ONE', 'ONE_WITH_ATTIC', 'TWO', 'TWO_WITH_ATTIC'] },
       storeysBasis: { type: 'string', enum: ['SECTION', 'ELEVATIONS', 'PLANS'] },
@@ -63,7 +77,9 @@ const TOOL = {
       ridgeM: { type: ['number', 'null'] },
       ridgeStatus: { type: 'string', enum: STATUS },
       parts: { type: 'array', items: { type: 'object', additionalProperties: false, required: ['what', 'where', 'storeys', 'roof', 'lowerThanMain'], properties: { what: { type: 'string', enum: ['GARAGE', 'WING', 'ANNEX'] }, where: { type: 'string', enum: ['LEFT', 'RIGHT', 'FRONT', 'REAR'] }, storeys: { type: 'string', enum: ['ONE', 'TWO'] }, roof: { type: 'object', additionalProperties: false, required: ['kind', 'ridgeAlong'], properties: { kind: { type: 'string', enum: ROOFS }, ridgeAlong: { type: 'string', enum: ['FRONT', 'SIDE', 'NONE'] } } }, lowerThanMain: { type: 'boolean' } } } },
-      notVolumes: { type: 'array', items: { type: 'object', additionalProperties: false, required: ['what', 'where'], properties: { what: { type: 'string', enum: NOT_VOLUMES }, where: { type: 'string', enum: ['FRONT', 'LEFT', 'RIGHT', 'REAR'] } } } },
+      roofs: { type: 'array', items: { type: 'object', additionalProperties: false, required: ['id', 'of', 'part', 'kind', 'ridgeAlong', 'pitchDeg', 'pitchStatus', 'eavesM', 'eavesStatus', 'ridgeM', 'ridgeStatus', 'seenOn', 'fromShare', 'toShare', 'meets', 'join'], properties: { id: { type: 'string' }, of: { type: 'string', enum: ROOF_OF }, part: { type: ['integer', 'null'] }, kind: { type: 'string', enum: ROOFS }, ridgeAlong: { type: 'string', enum: ['FRONT', 'SIDE', 'NONE'] }, pitchDeg: { type: ['number', 'null'] }, pitchStatus: { type: 'string', enum: STATUS }, eavesM: { type: ['number', 'null'] }, eavesStatus: { type: 'string', enum: STATUS }, ridgeM: { type: ['number', 'null'] }, ridgeStatus: { type: 'string', enum: STATUS }, seenOn: { type: 'string', enum: SIDES }, fromShare: { type: ['number', 'null'] }, toShare: { type: ['number', 'null'] }, meets: { type: 'string' }, join: { type: 'string', enum: JOINS } } } },
+      notVolumes: { type: 'array', items: { type: 'object', additionalProperties: false, required: ['what', 'where', 'covered'], properties: { what: { type: 'string', enum: NOT_VOLUMES }, where: { type: 'string', enum: ['FRONT', 'LEFT', 'RIGHT', 'REAR'] }, covered: { type: 'string', enum: COVERED } } } },
+      perspectives: { type: 'array', items: { type: 'object', additionalProperties: false, required: ['n', 'corner', 'mirrored'], properties: { n: { type: 'integer' }, corner: { type: 'string', enum: CORNERS }, mirrored: { type: 'boolean' } } } },
       pictures: { type: 'array', items: { type: 'object', additionalProperties: false, required: ['n', 'shows', 'roofSeenAs', 'entranceDoor', 'garageDoor'], properties: { n: { type: 'integer' }, shows: { type: 'string', enum: SIDES }, roofSeenAs: { type: 'string', enum: ['GABLE_END', 'SLOPE', 'HIP', 'FLAT'] }, entranceDoor: { type: 'boolean' }, garageDoor: { type: 'boolean' } } } },
       dormers: { type: 'integer' },
       chimneys: { type: 'integer' },
@@ -86,7 +102,10 @@ const Raw = z.object({
   ridgeM: z.number().finite().min(0).max(25).nullable(),
   ridgeStatus: z.enum(STATUS),
   parts: z.array(z.object({ what: z.enum(['GARAGE', 'WING', 'ANNEX']), where: z.enum(['LEFT', 'RIGHT', 'FRONT', 'REAR']), storeys: z.enum(['ONE', 'TWO']), roof: RoofRaw, lowerThanMain: z.boolean() }).strict()).max(6),
-  notVolumes: z.array(z.object({ what: z.enum(NOT_VOLUMES), where: z.enum(['FRONT', 'LEFT', 'RIGHT', 'REAR']) }).strict()).max(24),
+  // form-read/3; absent in a recorded /2 answer (replayed for the same request): then no roof region is stated beyond the main roof and the parts
+  roofs: z.array(z.object({ id: z.string().min(1).max(8), of: z.enum(ROOF_OF), part: z.number().int().min(1).max(6).nullable(), kind: z.enum(ROOFS), ridgeAlong: z.enum(['FRONT', 'SIDE', 'NONE']), pitchDeg: z.number().finite().min(0).max(80).nullable(), pitchStatus: z.enum(STATUS), eavesM: z.number().finite().min(0).max(15).nullable(), eavesStatus: z.enum(STATUS), ridgeM: z.number().finite().min(0).max(25).nullable(), ridgeStatus: z.enum(STATUS), seenOn: z.enum(SIDES), fromShare: z.number().finite().min(0).max(1).nullable(), toShare: z.number().finite().min(0).max(1).nullable(), meets: z.string().max(8), join: z.enum(JOINS) }).strict()).max(10).optional(),
+  notVolumes: z.array(z.object({ what: z.enum(NOT_VOLUMES), where: z.enum(['FRONT', 'LEFT', 'RIGHT', 'REAR']), covered: z.enum(COVERED).optional() }).strict()).max(24),
+  perspectives: z.array(z.object({ n: z.number().int().min(1).max(8), corner: z.enum(CORNERS), mirrored: z.boolean() }).strict()).max(8).optional(),
   pictures: z.array(z.object({ n: z.number().int().min(1).max(12), shows: z.enum(SIDES), roofSeenAs: z.enum(['GABLE_END', 'SLOPE', 'HIP', 'FLAT']), entranceDoor: z.boolean(), garageDoor: z.boolean() }).strict()).max(12),
   dormers: z.number().int().min(0).max(20),
   chimneys: z.number().int().min(0).max(12),
@@ -137,18 +156,20 @@ export function formVerdict(f: HouseForm, body: { flatVolumes: number; pitchedKi
   return 'SILENT'
 }
 
-export type FormSheets = { /** the ground-floor plan, where the package has one */ plan?: Raster; /** a cross-section, where the package has one */ section?: Raster; /** the page's own facts, one per line (text the publisher states) */ facts?: readonly string[] }
+export type FormSheets = { /** the ground-floor plan, where the package has one */ plan?: Raster; /** a cross-section, where the package has one */ section?: Raster; /** form-read/3: perspective pictures of the finished house — a qualitative witness of how volumes and roofs relate, never a measure */ perspectives?: ReadonlyArray<{ caption: string; raster: Raster }>; /** the page's own facts, one per line (text the publisher states) */ facts?: readonly string[] }
+export type RoofRegionRead = NonNullable<z.infer<typeof Raw>['roofs']>[number]
 
 export async function readForm(ctx: Ctx, pictures: ReadonlyArray<{ caption: string; raster: Raster }>, sheets: FormSheets = {}): Promise<FormRead> {
   const base = { version: FORM_READ_VERSION, promptVersion: FORM_READ_PROMPT_VERSION, pictures: pictures.length }
-  const content: unknown[] = [{ type: 'text', text: `The sheets of one house: ${pictures.length} elevation picture(s)${sheets.plan ? ', the ground-floor plan' : ''}${sheets.section ? ', a cross-section' : ''}.` }]
+  const content: unknown[] = [{ type: 'text', text: `The sheets of one house: ${pictures.length} elevation picture(s)${sheets.plan ? ', the ground-floor plan' : ''}${sheets.section ? ', a cross-section' : ''}${(sheets.perspectives ?? []).length > 0 ? `, ${(sheets.perspectives ?? []).length} perspective picture(s)` : ''}.` }]
   const image = (r: Raster): unknown => ({ type: 'image', source: { type: 'base64', media_type: 'image/png', data: Buffer.from(pictureOf(r).png).toString('base64') } })
   pictures.forEach((p, i) => content.push({ type: 'text', text: `Elevation picture ${i + 1}, the publisher's caption: ${p.caption}` }, image(p.raster)))
   if (sheets.plan) content.push({ type: 'text', text: 'The ground-floor plan (the publisher draws the front of the house at the foot of the sheet unless the sheet marks the entrance elsewhere):' }, image(sheets.plan))
   if (sheets.section) content.push({ type: 'text', text: 'A cross-section:' }, image(sheets.section))
+  ;(sheets.perspectives ?? []).forEach((q, i) => content.push({ type: 'text', text: `Perspective picture P${i + 1} (${q.caption}; a rendering, NOT to scale):` }, image(q.raster)))
   if (sheets.facts && sheets.facts.length > 0) content.push({ type: 'text', text: `Facts the page states:\n${sheets.facts.join('\n')}` })
-  const sheetsN = pictures.length + Number(!!sheets.plan) + Number(!!sheets.section)
-  const reserveUsd = reserveOf(ctx.price, Math.ceil((FORM_READ_SYSTEM.length + JSON.stringify(TOOL).length + 600) / 2.5) + 2600 * Math.max(1, sheetsN), Math.min(ctx.model.maxOutputTokens, 1600), ctx.model.cache)
+  const sheetsN = pictures.length + Number(!!sheets.plan) + Number(!!sheets.section) + (sheets.perspectives ?? []).length
+  const reserveUsd = reserveOf(ctx.price, Math.ceil((FORM_READ_SYSTEM.length + JSON.stringify(TOOL).length + 600) / 2.5) + 2600 * Math.max(1, sheetsN), Math.min(ctx.model.maxOutputTokens, 2800), ctx.model.cache)
   const reservation = ctx.spend?.reserve(ctx.model.model, reserveUsd, `structure read (${sheetsN} sheets)`)
   let turn: ModelTurn
   let usd = 0
@@ -182,6 +203,15 @@ export function parseForm(raw: unknown, pictures: number): { raw: unknown; form?
   // a number and its status go together: UNKNOWN has no number, anything else has one
   for (const [name, v, st] of [['pitch', r.main.pitch.deg, r.main.pitch.status], ['eaves', r.main.eaves.m, r.main.eaves.status], ['ridge', r.main.ridge.m, r.main.ridge.status]] as const) if ((st === 'UNKNOWN') !== (v === null)) return { raw, refused: [`the answer contradicts itself: ${name} ${v === null ? 'without a number' : v} with status ${st}`] }
   if (r.main.eaves.m !== null && r.main.ridge.m !== null && r.main.roof.kind !== 'FLAT' && r.main.ridge.m <= r.main.eaves.m) return { raw, refused: [`the answer contradicts itself: the ridge (${r.main.ridge.m} m) is not above the eaves (${r.main.eaves.m} m)`] }
+  // form-read/3: a roof region and its own numbers — the same consistency as the main roof's, and its references hold
+  for (const q of r.roofs ?? []) {
+    if ((q.kind === 'FLAT') !== (q.ridgeAlong === 'NONE')) return { raw, refused: [`the answer contradicts itself: a ${q.kind} roof ${q.id} with ridgeAlong ${q.ridgeAlong}`] }
+    for (const [name, v, st] of [['pitch', q.pitchDeg, q.pitchStatus], ['eaves', q.eavesM, q.eavesStatus], ['ridge', q.ridgeM, q.ridgeStatus]] as const) if ((st === 'UNKNOWN') !== (v === null)) return { raw, refused: [`the answer contradicts itself: roof ${q.id} ${name} ${v === null ? 'without a number' : v} with status ${st}`] }
+    if (q.of === 'PART' && (q.part === null || q.part > r.parts.length)) return { raw, refused: [`roof ${q.id} is the roof of part ${q.part}, and ${r.parts.length} part(s) are listed`] }
+    if (q.meets !== 'NONE' && q.meets !== '' && !(r.roofs ?? []).some((o) => o.id === q.meets && o.id !== q.id)) return { raw, refused: [`roof ${q.id} meets ${q.meets}, which is not a roof of this answer`] }
+    if (q.fromShare !== null && q.toShare !== null && q.toShare <= q.fromShare) return { raw, refused: [`roof ${q.id} stands from ${q.fromShare} to ${q.toShare} of the width`] }
+  }
+  if (new Set((r.roofs ?? []).map((q) => q.id)).size !== (r.roofs ?? []).length) return { raw, refused: ['the answer names a roof region twice'] }
   if (r.pictures.some((q) => q.n > pictures) || new Set(r.pictures.map((q) => q.n)).size !== r.pictures.length) return { raw, refused: [`the answer names pictures that were not given, or one twice (${r.pictures.map((q) => q.n).join(', ')} of ${pictures})`] }
   return { raw, form: formOf(r), refused: [] }
 }
