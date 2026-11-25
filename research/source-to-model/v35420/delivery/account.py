@@ -35,7 +35,7 @@ keys = []
 for h in man['houses']:
     for x in h['variants']:
         if x['key'] not in keys: keys.append(x['key'])
-LAB = {'baseline1352': 'Kod 1352 (baseline)', 'final': 'Kod końcowy', 'finalOnBase': 'Kod końcowy na odczytach biegu baseline (F@B)'}
+LAB = {'baseline1352': 'Kod 1352 (baseline)', 'final': 'Kod oddawany (zamrożenie 2)', 'frozen1': 'Zamrożenie 1 — pierwszy wynik (F)', 'finalOnBase': 'Kod oddawany na odczytach biegu baseline (F2@B)'}
 print('### A. Forma oddanego modelu wobec czterech faktów ze źródeł\n')
 print('| Dom | Zbiór | Źródło: bryły / dach / kalenica / kondygnacje | ' + ' | '.join(LAB.get(k, k) for k in keys) + ' |')
 print('|---|---|---|' + '---|' * len(keys))
