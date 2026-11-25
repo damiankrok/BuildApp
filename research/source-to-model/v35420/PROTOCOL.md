@@ -44,3 +44,15 @@ w modelu w ≥ 90 %. Niespełnienie któregokolwiek punktu jest raportowane wpro
 Księga `research/ai-assist/spend-ledger-v35417r3.json`, bez nowej puli: 49,679019 z 68,542857 USD na początku etapu.
 Plan etapu: do 9 USD (odczyty struktury i listy otworów na DEV ≈ 2; NEW-G baseline + końcowy ≈ 2,5; host ≈ 1,5; rezerwa
 na diagnozę ≈ 3). Koszt odczytu struktury: 0,02–0,06 USD na dom.
+
+## 5. Zamrożenie (zapisane przed losowaniem NEW-G, 2026-11-25)
+
+- **Kod zamrożony = `024e2b7`** (kod analizy; późniejsze commity do końca etapu zmieniają tylko dokumenty, rejestr scen
+  i narzędzia dostawy — gdyby było inaczej, ten zapis by o tym mówił).
+- Rodziny NEW-F dopisane do `v35419/trial/seen-families.txt` przed losowaniem.
+- Stan DEV w chwili zamrożenia (te same nagrania co APK 1352): forma zmieniona w Medulinie, Mindelo (bryła ze źródeł
+  zamiast LOCAL z płaskimi przybudówkami), Skagen (dwie kondygnacje, garaż), Fabii (dach kopertowy), Amarylisie
+  (wysokości ścian, strony elewacji), Willi Elizie (dachy czterospadowe, dwie kondygnacje bryły głównej); znane ubytki
+  liczbowe: G6 5 → 3 otwory (strony dwóch elewacji bocznych zamienione przez odczyt struktury przy równym świadectwie
+  rzutu), Medulin i Mindelo mniej otworów i ścian niż bryła LOCAL, którą zastąpiono. Ocena ślepa rozstrzygnie, czy to
+  straty cech.
