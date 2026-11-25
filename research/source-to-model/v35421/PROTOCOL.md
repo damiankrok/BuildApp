@@ -149,3 +149,11 @@ Zmiany po obejrzeniu DEV (każda ogólna, z testem i kontrpróbą; żadnego waru
     co ułożyło, i zwiększa moduł o zmierzony nadmiar budżetu trójkątów.
 
 Kryteria §3 i oczekiwania §6 bez zmian. Zamrożenie: commit wpisany w §9 przed losowaniem.
+
+## 9. Zamrożenie (dopisane 2026-11-25 przed losowaniem NEW-H)
+
+- **Commit zamrożenia: `4c1d1a2c05dceeffe188501b250f0cde74b4781c`** (`4c1d1a2`). Kod pod `packages/` i `apps/` nie zmienia się do końca próby NEW-H;
+  zmiany po zamrożeniu dotyczą wyłącznie dostawy (sceny, raport, galerie) i są wymienione w raporcie.
+- Kontrola DEV na tym kodzie (`d4`, 24 domy, 0 USD, nagrane odczyty) biegnie równolegle z próbą: jej wynik jest
+  raportowany taki, jaki jest — wada znaleziona po zamrożeniu jest nazwana, nie poprawiana przed końcem próby.
+- Losowanie: `newh/select.sh 4c1d1a2` (etykieta ziarna `V35421-NEWH`, pule i reguły z §5 bez zmian).
