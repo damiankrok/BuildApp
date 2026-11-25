@@ -66,3 +66,34 @@ na diagnozę ≈ 3). Koszt odczytu struktury: 0,02–0,06 USD na dom.
   recenzja zmienionej rewizji). Służy wyłącznie do rozdzielenia wpływu kodu od zmienności świeżych szkiców: różnica
   F ↔ F@B jest zmiennością odczytów, różnica B ↔ F@B jest kodem. Tabela formy (§2.3) i liczby modeli (§2.5) podawane
   dla wszystkich trzech ramion.
+
+## 7. Zamrożenie 2 — po końcowym przebiegu DEV, nie po wyniku NEW-G (2026-11-25)
+
+**Co się stało.** Zamrożenie 1 (`024e2b7`) zawierało dwie zmiany wprowadzone po ostatnim pełnym przebiegu DEV (`d2`,
+kod `ce332dc`) i sprawdzone tylko na pojedynczych domach: (1) reguła kondygnacji ograniczona do bryły głównej i skrzydeł
+z odczytu (`c02626a`, dla Willi Elizy), (2) elewacje ustawione stroną z odczytu struktury zdejmowane z rejestracji po
+pomiarze wysokości (`024e2b7`, dla G6). Końcowy przebieg DEV na `024e2b7` (`d3`, te same nagrane odczyty) pokazał wobec
+`d2` utratę otworów zewnętrznych w czterech domach: Amarylis 10 → 6 (i ściany brył bocznych 6,3–6,9 m pod dachami 7–8°),
+Ametyst New 9 → 4, Aletta New 14 → 11, Fabia 11 → 8. To mój błąd procesu: zamrożenie bez pełnego przebiegu.
+
+**Poprawka (`10ce107`)** — wyłącznie na dowodzie DEV: (1) elewacje ustawione stroną z odczytu zostają zarejestrowane
+także dla otworów (zachowanie `d2`); (2) pod jednokondygnacyjną bryłą główną żadna inna bryła nie ma ścian wyższych niż
+jedna kondygnacja, chyba że odczyt zgłasza część dwukondygnacyjną (bryły 1.10.0; obok bryły dwukondygnacyjnej skrzydło
+zostaje takie, jak rysują je jego elewacje — przypadek Elizy). Test kontrolny z kontrpróbami w `structure-v35420.test.ts`.
+
+**Co wiedziałem o NEW-G w chwili poprawki.** Biegi B i F (zamrożenie 1) były zakończone. Znałem liczby z modeli
+(bryły, dach, kalenica, wierzch ścian, liczby ścian i otworów — tabela formy §2.3) i zapis szkieletu rzutu Rockville.
+**Nie otworzyłem żadnego renderu, sceny ani nakładki NEW-G.** Poprawka nie korzysta z żadnej obserwacji NEW-G; nie
+zmienia też niczego, co różniło B od F w tych liczbach.
+
+**Jak to jest rozliczane.**
+- Wynik pierwszy NEW-G = B ↔ F na zamrożeniu 1: zachowany w całości (modele, liczby, tabela formy) i raportowany jako
+  pierwszy wynik odłożony.
+- Kod oddawany (APK) = **zamrożenie 2 = `10ce107`**. Na NEW-G jest odtwarzany **na nagranych odczytach biegu F** (te
+  same szkice, ten sam odczyt metryczny, ten sam odczyt struktury; 0 USD poza nowymi listami) — ramię **F2**. Różnica
+  F ↔ F2 jest wyłącznie skutkiem poprawki. Ocena ślepa ogląda B i F2, bo recenzja ma oglądać rewizję rzeczywiście
+  oddaną; liczby F są podane obok. F2 nie jest wynikiem „pierwszego spojrzenia" i raport tak go nie nazywa.
+- Ramię pomocnicze F2@B (kod oddawany na odczytach biegu B) zastępuje F@B w rozdzieleniu wpływu kodu od odczytów;
+  F@B (zamrożenie 1) zostaje w zapisie.
+- DEV: wariant końcowy = przebieg `d4` na `10ce107` z połączonych nagrań (`d2` ∪ `d3`), 0 USD poza brakującymi odczytami.
+- Po zamrożeniu 2 nic nie jest strojone. Gdyby `d4` pokazał kolejną stratę wobec `d2`, zostaje zapisana, nie naprawiona.
