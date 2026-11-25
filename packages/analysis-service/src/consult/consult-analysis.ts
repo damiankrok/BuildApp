@@ -1047,24 +1047,28 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
           // other side, a corner stub the compiler could not close, and a flat garage the structure contradicted
           const captionIn = (frameId: string): string => { const fr = graph0.coordinateFrames.find((q) => q.id === frameId); return (pkg0.assets.find((a) => a.id === fr?.assetId)?.caption ?? '').trim().toLowerCase() }
           const weakIn = (x: { facade: string; frameId: string }): boolean => (x.facade === 'EAST' || x.facade === 'WEST') && captionIn(x.frameId) !== '' && A.sketches.some((y) => y.frameId !== x.frameId && (y.facade === 'EAST' || y.facade === 'WEST' || y.facade === 'SIDE_UNSPECIFIED') && captionIn(y.frameId) === captionIn(x.frameId))
-          const captioned = new Set(A.sketches.filter((x) => !weakIn(x)).map((x) => sideOfFacade(x.facade)).filter(Boolean))
-          const readSide = (frameId: string): Side | undefined => {
+          const captionedStrong = new Set(A.sketches.filter((x) => !weakIn(x)).map((x) => sideOfFacade(x.facade)).filter(Boolean))
+          const readSideAgainst = (frameId: string, taken: ReadonlySet<string | undefined>): Side | undefined => {
             const n = (structure?.frames ?? []).indexOf(frameId) + 1
             const sd = n > 0 ? structure?.agreed?.pictures.find((q) => q.n === n)?.shows : undefined
-            if (!sd || sd === 'NONE' || captioned.has(sd as Side)) return undefined
+            if (!sd || sd === 'NONE' || taken.has(sd as Side)) return undefined
             return (structure?.agreed?.pictures ?? []).filter((q) => q.shows === sd).length === 1 ? (sd as Side) : undefined
           }
           const sidesByRead: Array<{ frameId: string; side: Side; weakLabel?: string }> = []
           // the weak labels give way to the read only when it puts every one of those pictures on its own side; otherwise
           // LOCAL's labels stay, as before, the convention of last resort
           const weak = A.sketches.filter((x) => x.sketch && weakIn(x))
-          const weakRead = weak.map((x) => readSide(x.frameId))
+          const weakRead = weak.map((x) => readSideAgainst(x.frameId, captionedStrong))
           // … and only a read that saw the publisher's originals and perspectives (form-read/3): a form-read/2 answer was
           // asked of the sketches alone, and its sides are the ones the audit found mirrored (Mindelo)
           const readDecidesWeak = structure?.read.answeredBy?.contract === 'form-read/3' && weak.length > 0 && weakRead.every((v) => v !== undefined) && new Set(weakRead).size === weak.length
+          // the sides held once the weak labels are settled: the read's where it decides them, else the labels themselves —
+          // a side a weak label keeps is not read onto another picture (two drawings on one side)
+          const captioned = new Set<string | undefined>([...captionedStrong, ...(readDecidesWeak ? weakRead : A.sketches.filter((x) => weakIn(x)).map((x) => sideOfFacade(x.facade)))].filter(Boolean))
+          const readSide = (frameId: string): Side | undefined => readSideAgainst(frameId, captioned)
           const silhouettes = A.sketches.flatMap((x) => {
             const isWeak = !!x.sketch && weakIn(x)
-            const side = isWeak && readDecidesWeak ? readSide(x.frameId) : sideOfFacade(x.facade) ?? (x.sketch ? readSide(x.frameId) : undefined)
+            const side = isWeak && readDecidesWeak ? weakRead[weak.indexOf(x)] : sideOfFacade(x.facade) ?? (x.sketch ? readSide(x.frameId) : undefined)
             if (side && (!sideOfFacade(x.facade) || (isWeak && readDecidesWeak))) sidesByRead.push({ frameId: x.frameId, side, ...(isWeak ? { weakLabel: x.facade } : {}) })
             const fx = graph0.coordinateFrames.find((q) => q.id === x.frameId)
             return side && x.sketch ? [{ observationId: `sk-${x.frameId.slice(-12)}`, side, frameId: x.frameId, sourceByteHash: fx?.variantByteHash ?? '', groundRow: x.sketch.groundRow ?? null, walls: x.sketch.walls.map((w) => w.polygon as Array<[number, number]>), roofs: x.sketch.roofs.map((r) => r.polygon as Array<[number, number]>) }] : []
