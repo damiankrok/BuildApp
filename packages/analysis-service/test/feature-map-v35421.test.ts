@@ -135,3 +135,18 @@ describe('v3.54.21: an element the ground plan draws is not taken out on a look\
     expect(reviewOutcome(['op-plan-rear-1', 'op-plan-front-3'], review as never).map((o) => o.keep)).toEqual([false, false])
   })
 })
+
+describe('v3.54.21: an opening the source gate measured is not taken out on a look\'s SHOULD_NOT_EXIST', () => {
+  it('held against SHOULD_NOT_EXIST, not against WRONG_KIND; an unmeasured one goes as before', async () => {
+    const { reviewOutcome } = await import('../src/consult/geometry.js')
+    const held = new Map([['op-fix-front-1', { verdicts: ['SHOULD_NOT_EXIST'], why: 'the source gate measured this opening in the elevation' }]])
+    const review = [
+      { id: 'op-fix-front-1', verdict: 'SHOULD_NOT_EXIST' as const, note: 'the drawing shows three, the model four' },
+      { id: 'op-fix-front-2', verdict: 'SHOULD_NOT_EXIST' as const, note: 'not drawn' },
+    ]
+    const out = reviewOutcome(['op-fix-front-1', 'op-fix-front-2'], review as never, held)
+    expect(out.map((o) => o.keep)).toEqual([true, false])
+    expect(out[0].note).toMatch(/kept: the source gate measured/)
+    expect(reviewOutcome(['op-fix-front-1'], [{ id: 'op-fix-front-1', verdict: 'WRONG_KIND', note: 'a door' }] as never, held)[0].keep).toBe(false)
+  })
+})

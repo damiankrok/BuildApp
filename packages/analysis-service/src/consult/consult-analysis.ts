@@ -2036,7 +2036,7 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
       return []
     }
   }
-  let lastApplied: Array<{ id: string; what: string; kind: 'ROOF_FEATURE' | 'PATCH'; proposalId?: string; /** v3.54.21: where the patch came from (PLAN: the ground plan draws it) */ origin?: string }> = []
+  let lastApplied: Array<{ id: string; what: string; kind: 'ROOF_FEATURE' | 'PATCH'; proposalId?: string; /** v3.54.21: where the patch came from (PLAN: the ground plan draws it) */ origin?: string; /** v3.54.21: the operation, and whether its built element was drawn back into the source and supported there */ operation?: string; sourceVerified?: boolean }> = []
   let lastRefused: Array<{ targetId: string; why: string }> = []
   let previous: { good: Local; state: RunState; features: RoofFeatureCorrection[] } | undefined
   const seenG = new Set<string>()
@@ -2055,7 +2055,7 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
   // v3.54.16: the sketch channel's patches are what the first look reviews as applied — each is settled by that look
   const sketchKept = (sketchSummary?.semantic?.decision === 'APPLIED' ? sketchSummary.semantic.records : []).filter((r) => r.status === 'COMMITTED' && committed.some((p) => p.proposalId === r.proposalId))
   if (sketchKept.length > 0) {
-    lastApplied = sketchKept.map((r) => ({ id: r.bound?.ids[0] ?? r.targetId, what: r.origin === 'PLAN' ? `${r.operation} on the ${(r.bound?.side ?? r.targetId).toLowerCase()} side (${r.bound?.ids[0] ?? r.targetId}), from a gap the ground-floor plan draws in that wall (its kind, sill and height from that side's elevation reading)` : `${r.operation} on the ${(r.bound?.side ?? r.targetId).toLowerCase()} side (${r.bound?.ids[0] ?? r.targetId}), from the sketch of that elevation`, kind: 'PATCH' as const, proposalId: r.proposalId, ...(r.origin ? { origin: r.origin } : {}) }))
+    lastApplied = sketchKept.map((r) => ({ id: r.bound?.ids[0] ?? r.targetId, what: r.origin === 'PLAN' ? `${r.operation} on the ${(r.bound?.side ?? r.targetId).toLowerCase()} side (${r.bound?.ids[0] ?? r.targetId}), from a gap the ground-floor plan draws in that wall (its kind, sill and height from that side's elevation reading)` : `${r.operation} on the ${(r.bound?.side ?? r.targetId).toLowerCase()} side (${r.bound?.ids[0] ?? r.targetId}), from the sketch of that elevation`, kind: 'PATCH' as const, proposalId: r.proposalId, ...(r.origin ? { origin: r.origin } : {}), operation: r.operation, sourceVerified: (r.measure as { sourceVerified?: boolean | null } | undefined)?.sourceVerified === true }))
     prevLook = { look: 0, defects: sketchKept.map((r) => ({ id: `S:${r.proposalId.slice(-24)}`, about: `${r.operation} ${r.targetId} from the sketch of ${r.bound?.side ?? '?'}`, scope: (r.bound?.side ?? 'WHOLE') as 'FRONT', severity: 'MAJOR' as const, certainty: 'LIKELY' as const, operation: r.operation as 'ADD_OPENING' })), proposals: sketchKept.map((r) => ({ proposalId: r.proposalId, defectId: `S:${r.proposalId.slice(-24)}` })), records: sketchKept }
   }
   if ((wiring.check ?? 'ON') === 'ON' && good.run && good.pkg && good.graph) {
@@ -2109,7 +2109,15 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
       prevLook = undefined
       // what the look says of the features and patches the round before applied: one the source does not show is undone
       if (lastApplied.length > 0) {
-        rec.reviewed = reviewOutcome(lastApplied.map((a) => a.id), res.review.appliedReview, new Set(lastApplied.filter((a) => a.kind === 'PATCH' && a.origin === 'PLAN').map((a) => a.id)))
+        // v3.54.21: what a look's word alone does not take out — an element the ground plan draws (any verdict), and an
+        // opening whose built box the source gate measured in the elevation (SHOULD_NOT_EXIST; WRONG_KIND still applies)
+        const held = new Map<string, { verdicts: ReadonlyArray<string>; why: string }>()
+        for (const a of lastApplied) {
+          if (a.kind !== 'PATCH') continue
+          if (a.origin === 'PLAN') held.set(a.id, { verdicts: ['SHOULD_NOT_EXIST', 'WRONG_KIND'], why: 'the ground plan draws it' })
+          else if (a.sourceVerified && (a.operation === 'ADD_OPENING' || a.operation === 'ADD_ROOF_WINDOW')) held.set(a.id, { verdicts: ['SHOULD_NOT_EXIST'], why: 'the source gate measured this opening in the elevation (its built box drawn back and supported)' })
+        }
+        rec.reviewed = reviewOutcome(lastApplied.map((a) => a.id), res.review.appliedReview, held)
         record({ at: now().toISOString(), kind: 'APPLIED_REVIEW', round: g, reviewed: rec.reviewed })
         const drop = rec.reviewed.filter((r) => !r.keep).map((r) => r.id)
         const dropFeatures = drop.filter((id) => lastApplied.some((a) => a.id === id && a.kind === 'ROOF_FEATURE'))
@@ -2200,7 +2208,7 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
             goodState = stateOf(m)
             committed.push(...patchProposals.filter((p) => kept.some((r) => r.proposalId === p.proposalId)))
             committedForKey += patchProposals.filter((p) => p.defectId && keyDefects.has(p.defectId) && kept.some((r) => r.proposalId === p.proposalId)).length
-            appliedPatches = kept.map((r) => ({ id: r.bound?.ids[0] ?? r.targetId, what: `${r.operation} on the ${(r.bound?.side ?? r.targetId).toLowerCase()} side (${r.bound?.ids[0] ?? r.targetId})`, kind: 'PATCH' as const, proposalId: r.proposalId }))
+            appliedPatches = kept.map((r) => ({ id: r.bound?.ids[0] ?? r.targetId, what: `${r.operation} on the ${(r.bound?.side ?? r.targetId).toLowerCase()} side (${r.bound?.ids[0] ?? r.targetId})`, kind: 'PATCH' as const, proposalId: r.proposalId, ...(r.origin ? { origin: r.origin } : {}), operation: r.operation, sourceVerified: (r.measure as { sourceVerified?: boolean | null } | undefined)?.sourceVerified === true }))
           } else for (const r of kept) Object.assign(r, { status: 'ROLLED_BACK', code: 'NOT_DELIVERED', why: `${r.why}; the patched model could not be delivered through the run (its base did not rebuild byte for byte)` })
         }
       }
