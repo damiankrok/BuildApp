@@ -67,6 +67,14 @@ for h in man['houses']:
         sr = os.path.join(v['run'], 'structure-read')
         # the packet's pictures are the exchange log's own files (named by their SHA-256): kept once, the packet's JSON names them
         if os.path.isdir(sr): shutil.copytree(sr, os.path.join(rd, 'structure-read'), dirs_exist_ok=True, ignore=shutil.ignore_patterns('*.png'))
+        # the run where the read was BOUGHT (a later run replays its answer): its request is kept beside, and the two packets compared
+        if v.get('packetRun') and os.path.exists(os.path.join(v['packetRun'], 'structure-read', 'request.json')):
+            os.makedirs(os.path.join(rd, 'structure-read'), exist_ok=True)
+            shutil.copy2(os.path.join(v['packetRun'], 'structure-read', 'request.json'), os.path.join(rd, 'structure-read', 'request-bought.json'))
+            shutil.copy2(os.path.join(v['packetRun'], 'structure-read', 'answer-raw.json'), os.path.join(rd, 'structure-read', 'answer-raw-bought.json'))
+            a = [q['sha256'] for q in (jload(os.path.join(v['packetRun'], 'structure-read', 'request.json'), {}) or {}).get('pictures', [])]
+            b = [q['sha256'] for q in (jload(os.path.join(sr, 'request.json'), {}) or {}).get('pictures', [])]
+            json.dump({'boughtIn': os.path.basename(os.path.dirname(v['packetRun'].rstrip('/'))), 'samePictures': a == b, 'bought': a, 'replayedRunWouldSend': b}, open(os.path.join(rd, 'structure-read', 'packet-check.json'), 'w'), indent=1)
         for f in ('massing.json', 'massing-rejected.json'):
             if os.path.exists(os.path.join(v['run'], f)): shutil.copy2(os.path.join(v['run'], f), os.path.join(rd, f))
         # v3.54.19: the model's ground-storey walls on the publisher's ground plan, in the frame the run recorded (a baseline

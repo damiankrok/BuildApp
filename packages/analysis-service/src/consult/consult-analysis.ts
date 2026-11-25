@@ -631,7 +631,9 @@ async function checkSources(l: Local, options: AnalysisOptions, perspectives: Re
   // come first in the package (a 120 px copy shows the reviewer nothing a correction could be placed from)
   const registered = new Set((l.run?.reconstruction.facadeAlignment.views ?? []).map((v) => v.frameId))
   const area = (f: { size?: { width: number; height: number } }): number => (f.size?.width ?? 0) * (f.size?.height ?? 0)
-  const elevations = l.graph.coordinateFrames.filter((x) => x.roles.projection === 'ORTHOGRAPHIC_ELEVATION').sort((a, b) => Number(registered.has(b.id)) - Number(registered.has(a.id)) || area(b) - area(a) || a.id.localeCompare(b.id))
+  // v3.54.21: and not a thumbnail at all where it fills a slot of six — a 120 × 38 px copy was sent beside the large one
+  // on seven houses (its skip is recorded by the structure read's inventory, the same rule)
+  const elevations = l.graph.coordinateFrames.filter((x) => x.roles.projection === 'ORTHOGRAPHIC_ELEVATION' && Math.max(x.size?.width ?? 0, x.size?.height ?? 0) >= STRUCTURE_PICTURES.minSidePx / 2).sort((a, b) => Number(registered.has(b.id)) - Number(registered.has(a.id)) || area(b) - area(a) || a.id.localeCompare(b.id))
   for (const f of elevations.slice(0, 6)) {
     const role = f.roles.view && f.roles.view !== 'NOT_APPLICABLE' && f.roles.view !== 'UNKNOWN' ? `; the publisher's caption says ${f.roles.view}` : ''
     await add(f.id, 'ELEVATION', `a publisher's elevation drawing${role} (which model side it shows is for you to establish)`)
@@ -759,7 +761,8 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
     const base = local.plans?.selectedPlanFrameId ?? undefined
     if (base) await addFrame(base, 'PLAN')
     for (const pl of (local.run?.reconstruction.registrations.plans ?? []).filter((x) => x.frameId !== base).slice(0, 2)) await addFrame(pl.frameId, 'PLAN')
-    const sections = local.graph.coordinateFrames.filter((x) => x.roles.projection === 'ORTHOGRAPHIC_SECTION')
+    // v3.54.21: never a placeholder as the section (a 32 × 32 px loading image was read for dimensions)
+    const sections = local.graph.coordinateFrames.filter((x) => x.roles.projection === 'ORTHOGRAPHIC_SECTION' && Math.max(x.size?.width ?? 0, x.size?.height ?? 0) >= STRUCTURE_PICTURES.minSidePx / 2)
     const regSection = local.run?.reconstruction.registrations.section?.frameId
     const section = sections.find((x) => x.id === regSection) ?? sections[0]
     if (section) await addFrame(section.id, 'SECTION')
