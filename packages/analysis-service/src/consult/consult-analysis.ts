@@ -52,7 +52,7 @@ import { renderStoreyCut } from './model-views.js'
 import { CORRECTION_REGISTRY_VERSION } from './correct/registry.js'
 import { sideOfWall, CORRECTION_EXECUTOR_VERSION, elementExists, executeCorrections, modelRevision, PLAN_SPAN_AGREE, planGapsOf, preferredView, registerFromSketch, sideOfFacade, sideOpeningSpans, sideRange, viewsOfRun } from './correct/execute.js'
 import { CHIMNEY_FUSION_VERSION, fuseChimneys } from './correct/chimney-fusion.js'
-import { MASSING_VERSION, OUTLINE_SIMPLIFICATION, STOREY_WALLS, bodiesOf, pointWithFront, roofSystemOf, wallEndsPx } from './massing/massing.js'
+import { MASSING_VERSION, OUTLINE_SIMPLIFICATION, STOREY_WALLS, bodiesOf, pointWithFront, roofRegionsOfModel, roofSystemOf, wallEndsPx } from './massing/massing.js'
 import type { MassingHypothesis } from './massing/massing.js'
 import { readSiteDimensions, SITE_DIMENSIONS_VERSION } from './site-dimensions.js'
 import { FACADE_METRIC_VERSION, readFacadeMetric } from './facade-metric.js'
@@ -167,7 +167,7 @@ export type SketchSummary = { reading: Omit<SketchReading, 'elevationSketches'>;
 export const SOURCE_FRAMES_RULE = 'frames2' as const
 export const BODY_ARBITRATION = { version: '1.5.0', dimAgreeM: 0.3, dimAgreeShare: 0.04, heightAgreeM: 0.6, heightAgreeShare: 0.1 } as const
 export type BodyEvidence = { bodies: number; registrations: Array<{ frameId: string; side: string; ok: boolean; code: string; why?: string }>; printed: Array<{ literal: string; valueM: number; modelM: number; agrees: boolean; /** arbitration 1.3.0: the traced outline's own extent, where the dimension agrees with it and the body leaves out only the small steps the massing's convention names */ outlineM?: number }>; height?: { publishedM: number; modelRidgeM: number; agrees: boolean }; /** v3.54.19: what the typed form of the house (form-read) says of this body's roofs. */ form?: { verdict: 'CONTRADICTS' | 'AGREES' | 'SILENT'; flatVolumes: number; reportedFlatVolumes: number; reportedMainRoof: string; reportedVolumes: number; /** arbitration 1.5.0: what the AGREED structure holds against this body's main volume (storeys, ridge direction) */ structure?: string[] }; contradictions: number; supports: number }
-export type BodyArbitration = { version: string; local: BodyEvidence; /** LOCAL's body was judged with this many roof corrections from the same elevations applied (on a copy). */ localAfterRoofCorrections?: number; alternative?: BodyEvidence; massing?: { decision: string; why: string; usd: number }; /** 1.2.0: elevations that register on neither body, set aside on both sides. */ setAside?: { frames: string[]; why: string }; decision: 'LOCAL_STANDS' | 'REPLACED_BY_SOURCE_BODY'; why: string }
+export type BodyArbitration = { version: string; local: BodyEvidence; /** LOCAL's body was judged with this many roof corrections from the same elevations applied (on a copy). */ localAfterRoofCorrections?: number; alternative?: BodyEvidence; massing?: { decision: string; why: string; usd: number }; /** 1.2.0: elevations that register on neither body, set aside on both sides. */ setAside?: { frames: string[]; why: string }; /** v3.54.21 review F1: LOCAL's form judged again on the ring where the source body's MAIN stands (one main-body rule for both bodies) */ localForm?: { main: string; before: string; after: string }; decision: 'LOCAL_STANDS' | 'REPLACED_BY_SOURCE_BODY'; why: string }
 
 /** v3.54.17: the no-model path's delivery: a mass built from the source, or the anchors it lacks. */
 export type MassingDelivery = {
@@ -821,8 +821,19 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
   // than two sketched elevations.
   type StructureMemo = { read: FormRead; frames: string[]; agreed?: AgreedStructure; build?: BuildStructure; /** v3.54.21: the house's features as the sources state them, fixed here — before any model is judged */ features?: SourceFeature[]; /** the perspective pictures it was asked of, with the corner the read says each looks at */ perspectives?: Array<{ frameId: string; corner?: string; mirrored?: boolean }> }
   let structureMemo: StructureMemo | undefined
+  /** v3.54.21 review F5: the agreement of a memo made before the plan read named its parts, to run again (no request) when they come */
+  let structureReagree: ((planParts: readonly string[]) => void) | undefined
   const structureOf = async (A: { pkg0: SourcePackage; graph0: SourceObservationGraph; sketches: SketchReading['sketches']; planRaster?: Raster; planFrameId?: string; planParts?: readonly string[] }): Promise<StructureMemo | undefined> => {
-    if (structureMemo) return structureMemo
+    if (structureMemo) {
+      // the body arbitration asks first, before the plan read has named the plan's parts: when they come, the same answer
+      // is agreed again with them as a witness (a garage the plan names is then witnessed, as on the path that asks later)
+      if (A.planParts && structureReagree && structureMemo.read.form) {
+        structureReagree(A.planParts)
+        structureReagree = undefined
+        record({ at: now().toISOString(), kind: 'STRUCTURE_AGREED_AGAIN', planParts: A.planParts, agreed: structureMemo.agreed ?? null, taken: structureMemo.build ?? null, features: structureMemo.features ?? [], why: `the plan read named its parts (${A.planParts.join(', ') || 'none'}) after the structure was first agreed without them: the same answer agreed again with them as a witness — no request` })
+      }
+      return structureMemo
+    }
     const sketched = A.sketches.filter((x) => x.sketch)
     // v3.54.21: the read is asked of the publisher's ORIGINAL elevation pictures, chosen from the package — not of the list
     // of elevations a sketch succeeded on (a sketch is a view of the read and a witness of it, never the gate to it). Each
@@ -899,8 +910,14 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
     stage('STRUCTURE_READ')
     const read = await readForm({ model: wiring.outlineModel ?? wiring.metricModel ?? wiring.model, price: wiring.outlinePrice ?? wiring.metricPrice ?? wiring.price, ...(wiring.spend ? { spend: wiring.spend } : {}), ...(options.signal ? { signal: options.signal } : {}) }, pictures, { ...(A.planRaster ? { plan: A.planRaster } : {}), ...(section ? { section } : {}), ...(perspectives.length > 0 ? { perspectives } : {}), facts })
     usd += read.usd
-    const memo: StructureMemo = { read, frames: pictures.map((p) => p.frameId), perspectives: perspectives.map((p, i) => { const q = read.form?.perspectives?.find((x) => x.n === i + 1); return { frameId: p.frameId, ...(q ? { corner: q.corner, mirrored: q.mirrored } : {}) } }) }
-    if (read.form) {
+    // review F4: a picture number means the picture of the request that was ANSWERED. A replayed form-read/2 answer was
+    // given every sketched frame, in sketch order — not this selection, which drops thumbnails and copies and adds
+    // pictures no sketch was made of — so its numbers are read on that list
+    const replayedOf2 = read.answeredBy?.contract === 'form-read/2' && !read.answeredBy.live
+    const memo: StructureMemo = { read, frames: replayedOf2 ? sketched.map((x) => x.frameId) : pictures.map((p) => p.frameId), perspectives: perspectives.map((p, i) => { const q = read.form?.perspectives?.find((x) => x.n === i + 1); return { frameId: p.frameId, ...(q ? { corner: q.corner, mirrored: q.mirrored } : {}) } }) }
+    const form = read.form
+    const agree = (planParts?: readonly string[]): void => {
+      if (!form) return
       const height = A.pkg0.publishedFacts.find((q) => q.key === 'building_height' && q.unit === 'm')?.value
       const pitch = A.pkg0.publishedFacts.find((q) => q.key === 'roof_pitch' && q.unit === 'deg')?.value
       const gableWalls = sketched.flatMap((x) => {
@@ -909,11 +926,13 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
         const side = sideOfFacade(x.facade)
         return up === undefined ? [] : [{ frameId: x.frameId, ...(side ? { side: side as StructureSide } : {}), wallToApex: up }]
       })
-      memo.agreed = agreeStructure(read.form, { planStoreys, ...(typeof height === 'number' ? { buildingHeightM: height } : {}), ...(typeof pitch === 'number' ? { publishedPitchDeg: pitch } : {}), ...(A.planParts ? { planParts: A.planParts } : {}), gableWalls })
+      memo.agreed = agreeStructure(form, { planStoreys, ...(typeof height === 'number' ? { buildingHeightM: height } : {}), ...(typeof pitch === 'number' ? { publishedPitchDeg: pitch } : {}), ...(planParts ? { planParts } : {}), gableWalls })
       memo.build = buildStructureOf(memo.agreed)
-      memo.features = [...featureMapOf(memo.agreed, read.promptVersion, [...pictures.map((p) => p.frameId), ...perspectives.map((p) => p.frameId)]), ...countFeaturesOf({ dormers: read.form.dormers, chimneys: read.form.chimneys, roofWindows: read.form.roofWindows }, read.promptVersion, pictures.map((p) => p.frameId))]
+      memo.features = [...featureMapOf(memo.agreed, read.promptVersion, [...memo.frames, ...perspectives.map((p) => p.frameId)]), ...countFeaturesOf({ dormers: form.dormers, chimneys: form.chimneys, roofWindows: form.roofWindows }, read.promptVersion, memo.frames)]
     }
-    record({ at: now().toISOString(), kind: 'STRUCTURE_READ', version: FORM_READ_VERSION, promptVersion: read.promptVersion, ...(read.answeredBy ? { answeredBy: { ...read.answeredBy, ...(!read.answeredBy.live ? { note: `a RECORDED answer (${read.answeredBy.contract}) replayed: it was given the pictures of the request it was recorded for; the images listed here are the ones this code chooses and would send` } : {}) } } : {}), structureVersion: STRUCTURE_VERSION, sheets: { elevations: pictures.map((p, i) => ({ n: i + 1, frameId: p.frameId, caption: p.caption })), perspectives: perspectives.map((p, i) => ({ n: i + 1, frameId: p.frameId })), plan: !!A.planRaster, section: !!section, facts }, images, skipped, missing: [...missingSides.map((sd) => `no elevation picture captioned ${sd} in the package`), ...(pictures.length < 4 ? [`${pictures.length} elevation picture(s) of four sides`] : []), ...(sketched.length < 2 ? [`${sketched.length} elevation sketch(es): the sketches' own witness of gable walls is ${sketched.length === 0 ? 'absent' : 'thin'} — the read is asked all the same`] : [])], form: read.form ?? null, raw: read.form ? undefined : read.raw, refused: read.refused, agreed: memo.agreed ?? null, taken: memo.build ?? null, usd: read.usd, why: 'the sheets are asked, as a whole, what volumes, storeys and roofs the house has; each property is held against witnesses that are not this answer, and only what is not disputed is taken' })
+    agree(A.planParts)
+    if (!A.planParts && form) structureReagree = agree
+    record({ at: now().toISOString(), kind: 'STRUCTURE_READ', version: FORM_READ_VERSION, promptVersion: read.promptVersion, ...(read.answeredBy ? { answeredBy: { ...read.answeredBy, ...(read.answeredBy.unanswered ? { note: read.answeredBy.unanswered === 'REFUSED' ? `no answer: the provider refused it${read.answeredBy.live ? ' (billed)' : ''}; the images listed here are the ones sent` : 'no answer: the request did not complete; the images listed here are the ones this code chose' } : read.answeredBy.contract !== 'NONE' && !read.answeredBy.live ? { note: `a RECORDED answer (${read.answeredBy.contract}) replayed: it was given the pictures of the request it was recorded for; the images listed here are the ones this code chooses and would send` } : {}) } } : {}), structureVersion: STRUCTURE_VERSION, sheets: { elevations: pictures.map((p, i) => ({ n: i + 1, frameId: p.frameId, caption: p.caption })), perspectives: perspectives.map((p, i) => ({ n: i + 1, frameId: p.frameId })), plan: !!A.planRaster, section: !!section, facts }, images, skipped, missing: [...missingSides.map((sd) => `no elevation picture captioned ${sd} in the package`), ...(pictures.length < 4 ? [`${pictures.length} elevation picture(s) of four sides`] : []), ...(sketched.length < 2 ? [`${sketched.length} elevation sketch(es): the sketches' own witness of gable walls is ${sketched.length === 0 ? 'absent' : 'thin'} — the read is asked all the same`] : [])], form: read.form ?? null, raw: read.form ? undefined : read.raw, refused: read.refused, agreed: memo.agreed ?? null, taken: memo.build ?? null, usd: read.usd, why: 'the sheets are asked, as a whole, what volumes, storeys and roofs the house has; each property is held against witnesses that are not this answer, and only what is not disputed is taken' })
     if (memo.features) record({ at: now().toISOString(), kind: 'FEATURE_MAP', version: FEATURE_MAP_VERSION, features: memo.features, why: `${memo.features.length} feature(s) of the house as the sources state them, fixed before any model is judged (${memo.features.filter((q) => q.weight === 'KEY').length} KEY): the reviewer is handed this list, and each entry is followed to the delivered model` })
     structureMemo = memo
     return memo
@@ -1636,13 +1655,13 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
     // arbitration 1.5.0: the agreed storeys and ridge direction are held against the body too (the host built a one-storey
     // LOCAL body with its ridge across where two storeys and a ridge along the front were agreed, and the roofs' kinds
     // alone answered AGREES). A roof kind the sketches dispute is still held against no one; the storeys still are.
-    const withForm = (ev: BodyEvidence, roofs: { flatVolumes: number; pitchedKinds: string[] }, body: CanonicalBuildingModel, bound?: BoundRoofs): void => {
+    const withForm = (ev: BodyEvidence, roofs: { flatVolumes: number; pitchedKinds: string[] }, body: CanonicalBuildingModel, bound?: BoundRoofs, mainId?: string): void => {
       if (!formRead?.form) return
       const rb = readbackStructure(body, undefined, STOREY_WALLS)
       // v3.54.21: the main roof's description is held against the body the builder bound it to (by that body's own views),
       // not against the largest rectangle — the arbitration refused a body for carrying the cross wing's ridge on the
       // largest rectangle, exactly where the sources draw it
-      const main = mainBodyOf(rb.bodies, bound)
+      const main = (mainId ? rb.bodies.find((q) => q.id === mainId) : undefined) ?? mainBodyOf(rb.bodies, bound)
       const against = agreedForm ? structureAgainstBody(agreedForm, main, STOREY_WALLS) : []
       if (agreedForm?.mainRoof.standing === 'DISPUTED' && against.length === 0) return
       const kinds = agreedForm?.mainRoof.standing === 'DISPUTED' ? 'SILENT' as const : formVerdict(formRead.form, roofs)
@@ -1654,7 +1673,8 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
     {
       const planId = good.plans?.selectedPlanFrameId
       const planR = planId ? await frameRaster(pkg0, graph0, planId, options) : undefined
-      const st = await structureOf({ pkg0, graph0, sketches: sketchSummary.reading.sketches, ...(planR?.raster ? { planRaster: planR.raster } : {}) })
+      // review F5: the plan sent is named (its frame and bytes go into the inventory); its parts come later and agree again
+      const st = await structureOf({ pkg0, graph0, sketches: sketchSummary.reading.sketches, ...(planR?.raster ? { planRaster: planR.raster, ...(planId ? { planFrameId: planId } : {}) } : {}) })
       if (st?.read.form) {
         formRead = st.read
         agreedForm = st.agreed
@@ -1678,6 +1698,38 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
         const altEv = evidenceOf(mb.built.run.reconstruction.model, massingViews(mb.built) ?? [], altFront, mb.delivery.plan?.observation?.outline)
         const altHyp = massingOf.get(mb.built)?.hypothesis
         withForm(altEv, roofsOf(mb.built.run.reconstruction.model), mb.built.run.reconstruction.model, altHyp ? { bodies: altHyp.bodies } : undefined)
+        // review F1: one main-body rule for both bodies. LOCAL was judged before any binding existed, on its largest
+        // rectangle; the source body on the body its builder bound the main roof to. Where those are different parts of
+        // the house, LOCAL is judged again on its ring that stands where the source body's MAIN stands
+        if (altHyp && localEv.form && formRead?.form) {
+          const ringRect = (m: CanonicalBuildingModel, id: string): { minX: number; maxX: number; minZ: number; maxZ: number } | undefined => {
+            const ring = m.wallRings.find((r) => r.id === id)
+            const ws = ring ? m.walls.filter((w) => ring.wallIds.includes(w.id)) : []
+            if (ws.length === 0) return undefined
+            const xs = ws.flatMap((w) => [w.start.x, w.end.x])
+            const zs = ws.flatMap((w) => [w.start.z, w.end.z])
+            return { minX: Math.min(...xs), maxX: Math.max(...xs), minZ: Math.min(...zs), maxZ: Math.max(...zs) }
+          }
+          const altModel = mb.built.run.reconstruction.model
+          const localModel = tried && roofFixed > 0 ? tried.model : mL0
+          const altMain = mainBodyOf(readbackStructure(altModel, undefined, STOREY_WALLS).bodies, { bodies: altHyp.bodies })
+          const at = altMain ? ringRect(altModel, altMain.id) : undefined
+          const localBodies = readbackStructure(localModel, undefined, STOREY_WALLS).bodies
+          const largest = mainBodyOf(localBodies)
+          const overlap = (a: NonNullable<typeof at>, b: NonNullable<typeof at>): number => Math.max(0, Math.min(a.maxX, b.maxX) - Math.max(a.minX, b.minX)) * Math.max(0, Math.min(a.maxZ, b.maxZ) - Math.max(a.minZ, b.minZ))
+          const areaOf = (r: NonNullable<typeof at>): number => (r.maxX - r.minX) * (r.maxZ - r.minZ)
+          // the LOCAL ring most of whose area (or of the source MAIN's) the two share; none such: the rule cannot be applied
+          const there = at ? localBodies.map((q) => ({ q, r: ringRect(localModel, q.id) })).filter((x): x is { q: typeof x.q; r: NonNullable<typeof at> } => !!x.r).map((x) => ({ ...x, share: overlap(at, x.r) / Math.max(1e-9, Math.min(areaOf(at), areaOf(x.r))) })).filter((x) => x.share >= 0.5).sort((a, b) => b.share - a.share)[0] : undefined
+          if (there && largest && there.q.id !== largest.id) {
+            const before = localEv.form.verdict
+            if (before === 'CONTRADICTS') localEv.contradictions -= 1
+            if (before === 'AGREES') localEv.supports -= 1
+            delete localEv.form
+            withForm(localEv, localRoofs, localModel, undefined, there.q.id)
+            const judged = (e: BodyEvidence): BodyEvidence['form'] => e.form
+            arb.localForm = { main: there.q.id, before, after: judged(localEv)?.verdict ?? 'NOT_JUDGED' }
+          }
+        }
         if (arb.decision !== 'REPLACED_BY_SOURCE_BODY') massingRejected = mb.delivery
         arb.alternative = altEv
         // v3.54.18 arbitration 1.1.0: the body that replaces LOCAL's must itself be UNCONTRADICTED. One the same sources
@@ -2356,10 +2408,18 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
     // v3.54.21: every roof the builder bound (its kind, ridge, pitch, eaves, ridge height), every relation the roof system
     // solved and every number taken for the main roof are measured on the delivered model — not four facts of the largest rectangle
     const hypD = massingOf.get(good)?.hypothesis
-    const solD = hypD ? roofSystemOf(hypD) : undefined
+    const solH = hypD ? roofSystemOf(hypD) : undefined
+    // review F3: the body's roof system as DELIVERED. A committed correction (a SET_ROOF, a roof-system re-solve) is
+    // delivered by rebuilding the model, not the hypothesis: where the model's own system differs from the hypothesis's,
+    // the system is measured on the model; where it cannot be recovered from the planes, the hypothesis's stands, named
+    const fromModel = solH ? roofRegionsOfModel(mD) : undefined
+    const sameRegions = (a: NonNullable<typeof solH>['regions'], b: NonNullable<typeof solH>['regions']): boolean => a.length === b.length && a.every((r) => { const q = b.find((x) => x.id === r.id); return !!q && q.kind === r.kind && q.ridgeAxis === r.ridgeAxis && Math.abs(q.eaveY - r.eaveY) < 1e-3 && Math.abs(q.ridgeY - r.ridgeY) < 1e-3 && Math.abs(q.pitchDeg - r.pitchDeg) < 1e-3 && (['x0', 'x1', 'z0', 'z1'] as const).every((k) => Math.abs(q.rect[k] - r.rect[k]) < 1e-3) })
+    const corrected = !!solH && !!fromModel && 'solution' in fromModel && !sameRegions(solH.regions, fromModel.solution.regions)
+    const solD = corrected && fromModel && 'solution' in fromModel ? fromModel.solution : solH
+    const measuredOn = !solH ? undefined : corrected ? 'DELIVERED_MODEL' : fromModel && 'why' in fromModel ? `HYPOTHESIS (the delivered system is not recovered from its planes: ${fromModel.why})` : 'HYPOTHESIS (the delivered system is the solved one)'
     const boundD = hypD && solD ? { bodies: hypD.bodies, ...(hypD.crossRoofs ? { crossRoofs: hypD.crossRoofs } : {}), relations: solD.relations.map((q) => ({ a: q.a, b: q.b, kind: q.kind })) } : undefined
     const sb = readbackStructure(mD, structureMemo?.build, STOREY_WALLS, boundD)
-    if (hypD && solD) record({ at: now().toISOString(), kind: 'ROOF_SYSTEM', version: solD.version, regions: solD.regions, relations: solD.relations, adjustments: solD.adjustments, violations: solD.violations, creases: solD.creases.map((q) => ({ id: q.id, kind: q.kind, planeIds: q.planeIds, regionIds: q.regionIds, start: q.start, end: q.end, startM: q.startY, endM: q.endY })), fates: hypD.bodies.flatMap((b) => (b.fates ?? []).map((f) => ({ bodyId: b.id, ...f }))), crossRoofs: hypD.crossRoofs ?? [], ...(hypD.roofBuildError ? { buildError: hypD.roofBuildError } : {}), why: `${hypD.roofBuildError ? `BUILD_ERROR — ${hypD.roofBuildError}. As solved: ` : ''}the roofs of the body as one system: ${solD.regions.length} region(s), ${solD.relations.map((q) => `${q.a} → ${q.b} ${q.kind}`).join('; ') || 'no two roofs meet'}; ${solD.creases.filter((q) => q.kind === 'VALLEY').length} valley(s) computed from the planes; ${solD.adjustments.length} adjustment(s) within the stated tolerances; ${solD.violations.length} violation(s)` })
+    if (hypD && solD) record({ at: now().toISOString(), kind: 'ROOF_SYSTEM', version: solD.version, ...(measuredOn ? { measuredOn } : {}), ...(corrected && solH ? { solvedBeforeCorrection: { regions: solH.regions, relations: solH.relations, adjustments: solH.adjustments } } : {}), regions: solD.regions, relations: solD.relations, adjustments: solD.adjustments, violations: solD.violations, creases: solD.creases.map((q) => ({ id: q.id, kind: q.kind, planeIds: q.planeIds, regionIds: q.regionIds, start: q.start, end: q.end, startM: q.startY, endM: q.endY })), fates: hypD.bodies.flatMap((b) => (b.fates ?? []).map((f) => ({ bodyId: b.id, ...f }))), crossRoofs: hypD.crossRoofs ?? [], ...(hypD.roofBuildError ? { buildError: hypD.roofBuildError } : {}), why: `${hypD.roofBuildError ? `BUILD_ERROR — ${hypD.roofBuildError}. As solved: ` : ''}the roofs of the body as one system: ${solD.regions.length} region(s), ${solD.relations.map((q) => `${q.a} → ${q.b} ${q.kind}`).join('; ') || 'no two roofs meet'}; ${solD.creases.filter((q) => q.kind === 'VALLEY').length} valley(s) computed from the planes; ${solD.adjustments.length} adjustment(s) within the stated tolerances; ${solD.violations.length} violation(s)` })
     if (structureMemo?.agreed && structureMemo.features) {
       const tr = traceFeatures(structureMemo.features, { agreed: structureMemo.agreed, ...(structureMemo.build ? { taken: structureMemo.build } : {}), ...(hypD ? { bodies: hypD.bodies, ...(hypD.crossRoofs ? { crossRoofs: hypD.crossRoofs } : {}) } : {}), ...(solD ? { relations: solD.relations } : {}), readback: sb, model: mD, bodyBy: hypD ? 'SOURCE_BODY' : 'LOCAL', sideOfWall: (w) => sideOfWall(mD, w) })
       // an open KEY feature of the body or its roofs — by MEASUREMENT of the delivered model against the sources' own
@@ -2368,6 +2428,8 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
       if (keyOpen.length > 0 && sourceCheck?.quality && sourceCheck.quality.state === 'SOURCE_VERIFIED_IN_SCOPE') {
         const to = keyOpen.some((q) => q.cause === 'NO_CONSUMER' || q.cause === 'LOST_IN_BINDING') ? 'UNSUPPORTED_OPERATION' as const : 'NEEDS_EVIDENCE' as const
         sourceCheck.quality = { ...sourceCheck.quality, state: to, reasons: [to, ...sourceCheck.quality.reasons.filter((q) => q !== to && q !== 'SOURCE_VERIFIED_IN_SCOPE')], why: `${sourceCheck.quality.why}; ${keyOpen.length} KEY feature(s) the sources state are not in the delivered model by measurement (${keyOpen.map((q) => `${q.feature.id}: ${q.cause ?? q.result}`).join(', ')}): not verified, whatever the look found` }
+        // v3.54.21 review F2: the served summary says what the gate decided — consultation.quality was copied before it
+        consultation.quality = { state: sourceCheck.quality.state, reasons: sourceCheck.quality.reasons, reviewCompleted: sourceCheck.quality.reviewCompleted, openKey: sourceCheck.quality.openKey, closedVerified: sourceCheck.quality.closedVerified }
       }
       record({ at: now().toISOString(), kind: 'FEATURE_TRACE', version: tr.version, features: tr.features, keyOpen: keyOpen.map((q) => q.feature.id), byResult: tr.byResult, byCause: tr.byCause, rows: tr.rows, why: `${tr.features} source feature(s) followed to the delivered model: ${tr.byResult.BUILT_AS_STATED} built as stated, ${tr.byResult.BUILT_DIFFERENT} built differently, ${tr.byResult.NOT_BUILT} not built, ${tr.byResult.NOT_CHECKED} not checked — by cause: ${Object.entries(tr.byCause).map(([k, v]) => `${k} ${v}`).join(', ') || 'none'}` })
     } else record({ at: now().toISOString(), kind: 'FEATURE_TRACE', version: FEATURE_MAP_VERSION, features: 0, byResult: null, byCause: { NO_READ: 1 }, rows: [], why: `no feature map: ${structureMemo ? `the structure read gave no typed answer (${structureMemo.read.refused.join('; ').slice(0, 200)})` : 'the structure read was not asked (no elevation and no perspective picture in the package, or no consultant)'}` })
