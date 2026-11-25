@@ -2,7 +2,8 @@ import { createHash } from 'node:crypto'
 /**
  * v3.54.2 pilot — the consultant's transport to the provider's Messages API, server-side only.
  *
- * The key is read from this process's environment (`BUILDPLAN_ANTHROPIC_API_KEY`, else `ANTHROPIC_API_KEY`) and goes
+ * The key is read from this process's environment by the provider package (`providerKeyFromEnvironment`, the one
+ * reader of the variable outside `source-vision`'s own transports) and goes
  * nowhere else: not into a request body, a record, an error text or a result. One `send` is at most one billed request:
  * the SDK's own retries are off, and whoever holds the budget (`consultLabels`) owns the single retry the brief allows.
  * Thinking models refuse a forced tool choice, so the answer tool is offered with `tool_choice: auto`.
@@ -15,6 +16,7 @@ import { createHash } from 'node:crypto'
  *    pictures, ids and question come after it in `messages`. The usage's cache split (5-minute / 1-hour writes, reads)
  *    is returned for the books (`cost.ts`). A prefix below the model's minimum simply reports no cache tokens.
  */
+import { providerKeyFromEnvironment } from '@buildapp/source-vision'
 import { ConsultantUnavailable } from './loop.js'
 import type { ConsultantModel, ModelTurn } from './loop.js'
 import { RAW_ERROR, RAW_RESPONSE } from './exchange-log.js'
@@ -48,7 +50,7 @@ export function requestBody(input: { model: string; maxOutputTokens: number; sys
 }
 
 export function anthropicConsultant(options: { model?: string; maxOutputTokens?: number; timeoutMs?: number; effort?: 'low' | 'medium' | 'high'; apiKey?: string; strict?: boolean; cache?: { ttl: '5m' | '1h' }; createClient?: (key: string, timeoutMs: number) => Promise<MessagesLike> } = {}): ConsultantModel & { available(): boolean } {
-  const key = options.apiKey ?? process.env.BUILDPLAN_ANTHROPIC_API_KEY ?? process.env.ANTHROPIC_API_KEY ?? ''
+  const key = options.apiKey ?? providerKeyFromEnvironment()
   const model = options.model ?? 'claude-sonnet-5-5'
   const maxOutputTokens = options.maxOutputTokens ?? 8000
   const timeoutMs = options.timeoutMs ?? 180_000

@@ -221,12 +221,17 @@ class FeatureEdgesTest {
         return out
     }
 
+    /**
+     * Whether [p] lies on the side within the corner weld: [FeatureEdges] makes corners of different objects closer
+     * than a tenth of a millimetre one corner (so seams between objects are found), and a line then ends at the corner
+     * first seen — up to √3 / [FeatureEdges.POSITION_QUANTUM] from this object's own corner, along the side as well as
+     * across it. The distance to the side SEGMENT is therefore what is bounded, not the parameter along it.
+     */
     private fun onSide(p: Vec3, side: Pair<Vec3, Vec3>): Boolean {
         val d = side.second - side.first
         val dd = d dot d
         if (dd <= 0.0) return false
-        val t = ((p - side.first) dot d) / dd
-        if (t < -1e-6 || t > 1 + 1e-6) return false
+        val t = (((p - side.first) dot d) / dd).coerceIn(0.0, 1.0)
         val off = p - (side.first + d * t)
         return (off dot off) <= 1e-7
     }

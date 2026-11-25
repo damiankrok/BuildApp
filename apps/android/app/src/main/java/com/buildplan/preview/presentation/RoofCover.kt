@@ -250,6 +250,9 @@ object RoofCover {
     /** v3.54.14: the covering triangles a phone draws per scene at most (see [of]). */
     const val TRIANGLE_BUDGET: Int = 40_000
 
+    /** The share of trimmed tiles the first estimate allows over the area at the module ([of] then measures what is laid). */
+    private const val TRIM_ALLOWANCE: Double = 0.05
+
     /** Plane grouping: normals within this cosine and offsets within this many metres are one plane. */
     private const val PLANE_DOT = 0.99995
     private const val PLANE_OFFSET = 0.002
@@ -274,21 +277,36 @@ object RoofCover {
      */
     fun of(scene: ModelScene, spec: RoofCoverSpec = RoofCoverSpec.DEFAULT): List<RoofCoverBatch> {
         val blockers = blockersOf(scene)
-        val laid = withinBudget(scene, spec)
-        return scene.objects.mapNotNull { obj ->
-            val planes = planesOf(obj, laid)
-            if (planes.isEmpty()) null else cover(obj.id, planes, laid, blockers)
+        var laid = withinBudget(scene, spec)
+        val lay = { s: RoofCoverSpec -> scene.objects.mapNotNull { obj -> val planes = planesOf(obj, s); if (planes.isEmpty()) null else cover(obj.id, planes, s, blockers) } }
+        // v3.54.21: the estimate is held against what is actually laid. A roof of many small planes trims more tiles at
+        // its edges than the estimate allows for (a 38 m house of many gables came out at 40 320 triangles against the
+        // 40 000 budget): the module is then scaled up once more, by the measured excess, uniformly as before
+        var batches = lay(laid)
+        repeat(4) {
+            val triangles = batches.sumOf { it.triangleCount }
+            if (triangles <= TRIANGLE_BUDGET) return batches
+            laid = scaled(laid, sqrt(triangles.toDouble() / TRIANGLE_BUDGET) * 1.01)
+            batches = lay(laid)
         }
+        return batches
     }
+
+    private fun scaled(spec: RoofCoverSpec, k: Double): RoofCoverSpec =
+        spec.copy(moduleWidth = spec.moduleWidth * k, moduleLength = spec.moduleLength * k, exposure = spec.exposure * k, tailRound = spec.tailRound * k)
 
     /** [spec], or [spec] with its module scaled so that the scene's estimated covering fits [TRIANGLE_BUDGET]. */
     fun withinBudget(scene: ModelScene, spec: RoofCoverSpec = RoofCoverSpec.DEFAULT): RoofCoverSpec {
         val area = scene.objects.flatMap { planesOf(it, spec) }.sumOf { it.area }
         // the estimate a laid covering stays under: the tiles of the area at the module, 5 % trimmed, ten spare
-        val estimate = (area / (spec.moduleWidth * spec.exposure) * 1.05 + 10) * TRIANGLES_PER_TILE
+        val estimate = (area / (spec.moduleWidth * spec.exposure) * (1 + TRIM_ALLOWANCE) + 10) * TRIANGLES_PER_TILE
         if (estimate <= TRIANGLE_BUDGET) return spec
-        val k = sqrt(estimate / TRIANGLE_BUDGET) * 1.0001
-        return spec.copy(moduleWidth = spec.moduleWidth * k, moduleLength = spec.moduleLength * k, exposure = spec.exposure * k, tailRound = spec.tailRound * k)
+        // the ten spare tiles do not shrink with the module: the factor that makes the scaled estimate fit, not the one
+        // that scales the whole estimate down (which left the spare tiles over the budget)
+        val tiles = area / (spec.moduleWidth * spec.exposure) * (1 + TRIM_ALLOWANCE)
+        val room = TRIANGLE_BUDGET.toDouble() / TRIANGLES_PER_TILE - 10
+        val k = sqrt(tiles / max(1.0, room)) * 1.0001
+        return scaled(spec, k)
     }
 
     /** The coverable planes of one object, in first-triangle order. */

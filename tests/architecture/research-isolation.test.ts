@@ -16,6 +16,7 @@
  * With the harness present and not invoked, the production analyzer is the same code: nothing it imports changed for
  * Track B (`git diff` of Track B touches only `research/` and `stage-reports/`), which the matrix rows' hashes show.
  */
+import { createHash } from 'node:crypto'
 import { closeSync, existsSync, openSync, readFileSync, readSync, readdirSync, statSync } from 'node:fs'
 import { join, relative, resolve } from 'node:path'
 import { execFileSync, spawnSync } from 'node:child_process'
@@ -361,8 +362,15 @@ describe('005M production cannot reach the visual-referee v2 bake-off, and no we
   })
 
   it('no tracked file anywhere is the size of a model (post-review E2-5: a raw binary with no magic number)', () => {
-    // the largest tracked file at the stage base is 16 MB (a design-tool binary); the smallest VLM pack measured is 1.5 GB
-    expect(tracked().filter((f) => existsSync(join(ROOT, f)) && statSync(join(ROOT, f)).size > 32 * 2 ** 20)).toEqual([])
+    // the largest tracked file at the stage base is 16 MB (a design-tool binary); the smallest VLM pack measured is 1.5 GB.
+    // One larger file was committed after it as an OWNER deliverable (005T, `074d6ae`): a signed Android package of 146
+    // entries (AndroidManifest.xml, classes.dex). It is held to its exact bytes, so nothing else can take its place.
+    const REVIEWED: Record<string, string> = {
+      'stage-reports/artifacts/owner-005t/BuildPlan-005T-two-houses-arm64.apk': '26203a60177460c6be2b5c4895453022927b4fce7f0f3a932a5d7c54db2957dc',
+    }
+    const large = tracked().filter((f) => existsSync(join(ROOT, f)) && statSync(join(ROOT, f)).size > 32 * 2 ** 20)
+    for (const f of large.filter((f) => f in REVIEWED)) expect(createHash('sha256').update(readFileSync(join(ROOT, f))).digest('hex'), f).toBe(REVIEWED[f])
+    expect(large.filter((f) => !(f in REVIEWED))).toEqual([])
   })
 
   it('the detectors catch a disguised weight and reject a disguised publisher file (negative test, synthetic bytes)', () => {

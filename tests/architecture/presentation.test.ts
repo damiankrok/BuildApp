@@ -73,7 +73,7 @@ function numbersIn(code: string): number[] {
 
 describe('the ported presentation is generic', () => {
   it('finds the ported files', () => {
-    expect(kotlinUnder(PRESENTATION).map((f) => f.replace(/.*\//, '')).sort()).toEqual(['FeatureEdges.kt', 'PresentationMode.kt', 'RoofCover.kt', 'ScenePresentation.kt'])
+    expect(kotlinUnder(PRESENTATION).map((f) => f.replace(/.*\//, '')).sort()).toEqual(['FeatureEdges.kt', 'GroundFootprint.kt', 'HouseLooks.kt', 'PresentationMode.kt', 'RoofCover.kt', 'ScenePresentation.kt'])
     for (const f of PORTED) expect(existsSync(f), rel(f)).toBe(true)
   })
 

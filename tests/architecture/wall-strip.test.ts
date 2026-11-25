@@ -27,6 +27,13 @@ import { LAYOUT_INFERENCE_VERSION, WALL_STRIP_BOUNDS } from '@buildapp/reconstru
 
 const ROOT = resolve(import.meta.dirname, '../..')
 const BASE = '04d5568a4a36d2b850998f2848d06e2179218872'
+/**
+ * 005Q's delivery (N1a, Phase C): the last commit before a later stage (005T) touched the files the gates below read.
+ * The base comparisons are the record of what 005Q itself changed, so they compare this commit with the base; later
+ * stages change the same files on their own records (schema 1.7.0 … 1.9.0, v3.51 C1b's section height, N8-02B's
+ * seam-joined mass), and the source-reading gates hold the current code to the N1 line.
+ */
+const DELIVERED = '7eddd7bff5738924a07cc91daef68a560479f2c7'
 const read = (p: string): string => readFileSync(join(ROOT, p), 'utf8')
 const codeOf = (source: string): string => source.replace(/\/\*[\s\S]*?\*\//g, ' ').replace(/\/\/.*$/gm, ' ')
 const importsOf = (source: string): string[] => [...source.matchAll(/^\s*(?:import|export)[^'"]*?from\s+['"]([^'"]+)['"]/gm)].map((m) => m[1])
@@ -84,7 +91,7 @@ const HOUSES = /gozdzik|cyklamen|marcowk|rarytas|kosac|jarzab|arkadi|azali|helik
 
 const hasBase = ((): boolean => {
   try {
-    execFileSync('git', ['cat-file', '-e', `${BASE}^{commit}`], { cwd: ROOT, stdio: 'ignore' })
+    for (const c of [BASE, DELIVERED]) execFileSync('git', ['cat-file', '-e', `${c}^{commit}`], { cwd: ROOT, stdio: 'ignore' })
     return true
   } catch {
     return false // a shallow clone without the 005Q base: the source-reading gates below still hold the same line
@@ -92,6 +99,7 @@ const hasBase = ((): boolean => {
 })()
 const git = (args: string[]): string => execFileSync('git', args, { cwd: ROOT, encoding: 'utf8' })
 const atBase = (path: string): string => git(['show', `${BASE}:${path}`])
+const atDelivered = (path: string): string => git(['show', `${DELIVERED}:${path}`])
 
 describe('005Q the wall strip is read from the drawing only', () => {
   const code = codeOf(read(LAYOUT))
@@ -243,8 +251,8 @@ describe('005Q no canonical schema change', () => {
     expect(HARD_EVIDENCE_STATUSES).not.toContain(status)
   })
 
-  it.skipIf(!hasBase)(`packages/model and packages/commands are byte for byte as at the 005Q base (${BASE.slice(0, 7)}; needs the base in the clone)`, () => {
-    expect(git(['diff', '--stat', BASE, '--', 'packages/model', 'packages/commands'])).toBe('')
+  it.skipIf(!hasBase)(`005Q left packages/model and packages/commands byte for byte as at its base (${BASE.slice(0, 7)} → ${DELIVERED.slice(0, 7)}; needs both in the clone)`, () => {
+    expect(git(['diff', '--stat', BASE, DELIVERED, '--', 'packages/model', 'packages/commands'])).toBe('')
     expect(git(['ls-files', '--others', '--exclude-standard', '--', 'packages/model', 'packages/commands'])).toBe('')
   })
 })
@@ -295,7 +303,7 @@ describe('005Q one new bound, and the layout says it changed', () => {
   it.skipIf(!hasBase)('against the 005Q base, WALL_STRIP_BOUNDS is the only new named constant in the layout, and the version moved from 1.1.0', () => {
     const names = (text: string): string[] => [...codeOf(text).matchAll(/^(?:export )?const ([A-Z][A-Z0-9_]+) =/gm)].map((m) => m[1]).sort()
     const before = names(atBase(LAYOUT))
-    const after = names(read(LAYOUT))
+    const after = names(atDelivered(LAYOUT))
     expect(after.filter((n) => !before.includes(n))).toEqual(['WALL_STRIP_BOUNDS'])
     expect(before.filter((n) => !after.includes(n))).toEqual([])
     expect(atBase(LAYOUT)).toMatch(/export const LAYOUT_INFERENCE_VERSION = '1\.1\.0'/)
@@ -333,16 +341,25 @@ describe('005Q the gap is AMBIGUOUS and N1 never raises a provenance', () => {
 
   it('emit writes SOURCE_DERIVED for an open ring, and the SOURCE_EXACT ring only on the other branch, as before', () => {
     const lines = codeOf(read(EMIT)).split('\n').map((l) => l.trim())
-    const open = lines.filter((l) => /outerFacesOpen/.test(l))
-    expect(open).toHaveLength(1)
-    expect(open[0]).toMatch(/'SOURCE_DERIVED'/)
-    expect(open[0]).not.toMatch(/SOURCE_EXACT/)
-    const next = lines[lines.indexOf(open[0]) + 1]
-    expect(next).toBe("else evidence(`ring-${m.id}-${measuredOn}`, 'SOURCE_EXACT', `${(m.x1 - m.x0).toFixed(2)} × ${(m.z1 - m.z0).toFixed(2)} m body from the plan's printed chains and wall bands`)")
+    // every evidence an open outer face writes is SOURCE_DERIVED (the ring since 005Q, a seam-joined mass since N8-02B)
+    const open = lines.filter((l) => /outerFacesOpen/.test(l) && /evidence\(/.test(l))
+    expect(open.length).toBeGreaterThanOrEqual(1)
+    for (const l of open) {
+      expect(l).toMatch(/'SOURCE_DERIVED'/)
+      expect(l).not.toMatch(/SOURCE_EXACT/)
+    }
+    const ring = open.filter((l) => l.includes('evidence(`ring-${m.id}-${measuredOn}`'))
+    expect(ring).toHaveLength(1)
+    // the base's SOURCE_EXACT ring stays on a later `else` of the same chain (since v3.53 a stated body basis — the
+    // described-house builder's — is one more branch between them), so an open face never reaches it
+    const chain: string[] = []
+    for (let i = lines.indexOf(ring[0]) + 1; i < lines.length && lines[i].startsWith('else'); i++) chain.push(lines[i])
+    expect(chain.at(-1)).toBe("else evidence(`ring-${m.id}-${measuredOn}`, 'SOURCE_EXACT', `${(m.x1 - m.x0).toFixed(2)} × ${(m.z1 - m.z0).toFixed(2)} m body from the plan's printed chains and wall bands`)")
+    for (const l of chain.slice(0, -1)) expect(l).toMatch(/^else if \(/)
   })
 
   it.skipIf(!hasBase)('against the 005Q base, no file N1 touched says SOURCE_EXACT more often than it did', () => {
-    for (const f of [LAYOUT, V2, EMIT, BUILDING]) expect(count(codeOf(read(f)), /SOURCE_EXACT/), f).toBeLessThanOrEqual(count(codeOf(atBase(f)), /SOURCE_EXACT/))
+    for (const f of [LAYOUT, V2, EMIT, BUILDING]) expect(count(codeOf(atDelivered(f)), /SOURCE_EXACT/), f).toBeLessThanOrEqual(count(codeOf(atBase(f)), /SOURCE_EXACT/))
     // and the ring emission's SOURCE_EXACT text is the base's own line, now behind the open-face test
     expect(atBase(EMIT)).toContain("evidence(`ring-${m.id}-${measuredOn}`, 'SOURCE_EXACT', `${(m.x1 - m.x0).toFixed(2)} × ${(m.z1 - m.z0).toFixed(2)} m body from the plan's printed chains and wall bands`)")
   })

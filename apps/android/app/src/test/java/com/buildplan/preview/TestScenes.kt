@@ -81,7 +81,16 @@ object TestScenes {
         setOf("marcowki-auto-v2", "marcowki-auto-v3", "marcowki-local-v3548", "marcowki-local-v35410", "marcowki-h-v35410", "marcowki-h-v35411", "marcowki-h-v35412", "marcowki-local-szkice-v35412", "marcowki-c-v35413", "marcowki-c-live-v35413", "marcowki-c-v35414", "jarzmianki-005t-visual", "gozdzikowce-005t-visual", "bakopy-v35414", "ballina-v35414", "ballina-v35415", "murcja-v35415", "ballina-v35416", "murcja-v35416", "ballina-test-after-v35416", "ballina-test-before-v35416", "alaska-trial-v35416", "alaska-dev-v35417", "alaska-host-v35417", "aurora-maxi-trial-v35417"),
     )
 
-    fun sameAnalyzer(a: String, b: String): Boolean = analyzerLineages.any { a in it && b in it }
+    /**
+     * v3.54.21: from v3.54.18 every owner stage ships the analysis service's own models under `<house>-v354NN`: a LOCAL
+     * body, or a body built from the sources with LOCAL's plan-skeleton interior — the same naming, so they belong to the
+     * LOCAL analyzer's lineage like the earlier owner scenes listed above (v3.54.20's basiaiadam shared 15 wall ids with
+     * the auto candidates; the list had not been extended since v3.54.17).
+     */
+    private val ownerStage = Regex("-v354(1[8-9]|[2-9][0-9])$")
+    private fun lineageOf(key: String): Int? = analyzerLineages.indexOfFirst { key in it }.takeIf { it >= 0 } ?: if (ownerStage.containsMatchIn(key)) 0 else null
+
+    fun sameAnalyzer(a: String, b: String): Boolean { val la = lineageOf(a); return la != null && la == lineageOf(b) }
 
     fun candidate(key: String): ModelScene = candidates.getValue(key)
 

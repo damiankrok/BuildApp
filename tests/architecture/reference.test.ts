@@ -10,7 +10,7 @@
 import { readFileSync, readdirSync, statSync } from 'node:fs'
 import { join, resolve } from 'node:path'
 import { describe, expect, it } from 'vitest'
-import { createEmptyModel, loadModel, serializeModel } from '@buildapp/model'
+import { MODEL_SCHEMA_VERSION, createEmptyModel, loadModel, serializeModel } from '@buildapp/model'
 import { runCommands } from '@buildapp/commands'
 import { compileBuilding, solidTriangles } from '@buildapp/geometry'
 import { EditorStore } from '@buildapp/editor'
@@ -104,8 +104,16 @@ describe('the reference boundary', () => {
     const fromFile = compileBuilding(back.model)
     expect(fromFile.diagnostics).toEqual([])
     expect(fromFile).toEqual(compileBuilding(createMarcowkiReferenceBuilding()))
-    // the frozen fixture the model and geometry packages test against is this file
-    expect(readFileSync(resolve(ROOT, 'packages/model/test/fixtures/marcowki-ge-1.6.0.json'), 'utf8')).toBe(json)
+    // the frozen fixture the model and geometry packages test against is this model, frozen under schema 1.6.0 (the
+    // file stays as it was frozen): loaded through the migrations it is byte for byte today's serialization, apart from
+    // the one note each migration step writes into meta.notes
+    const frozen = loadModel(readFileSync(resolve(ROOT, 'packages/model/test/fixtures/marcowki-ge-1.6.0.json'), 'utf8'))
+    expect(frozen.ok).toBe(true)
+    if (!frozen.ok) return
+    const steps = frozen.issues.filter((i) => i.code === 'SCHEMA_MIGRATED').length
+    expect(steps).toBe(Number(MODEL_SCHEMA_VERSION.split('.')[1]) - 6)
+    expect(frozen.model.meta.notes?.length).toBe(steps)
+    expect(serializeModel({ ...frozen.model, meta: { ...frozen.model.meta, notes: [] } })).toBe(json)
   })
 
   it('5. every generic primitive the stage added has a test that is not about Marcówki', () => {
@@ -177,18 +185,15 @@ describe('the reference boundary', () => {
   })
 
   it('7. the schema migrations change no geometry: the frozen 1.1.0 … 1.5.0 demo files compile to exactly the current demo scene', () => {
-    for (const [file, steps] of [
-      ['demo-house-1.1.0.json', 5],
-      ['demo-house-1.2.0.json', 4],
-      ['demo-house-1.3.0.json', 3],
-      ['demo-house-1.4.0.json', 2],
-      ['demo-house-1.5.0.json', 1],
-    ] as const) {
+    // one SCHEMA_MIGRATED per minor version up to the current schema (1.6.0 when this was written; 1.9.0 since v3.54.13)
+    const current = Number(MODEL_SCHEMA_VERSION.split('.')[1])
+    for (const file of ['demo-house-1.1.0.json', 'demo-house-1.2.0.json', 'demo-house-1.3.0.json', 'demo-house-1.4.0.json', 'demo-house-1.5.0.json']) {
+      const steps = current - Number(file.split('-').at(-1)!.split('.')[1])
       const migrated = loadModel(readFileSync(resolve(ROOT, `packages/model/test/fixtures/${file}`), 'utf8'))
       expect(migrated.ok, file).toBe(true)
       if (!migrated.ok) return
       expect(migrated.issues.map((i) => i.code)).toEqual(Array(steps).fill('SCHEMA_MIGRATED'))
-      expect(migrated.model.schemaVersion).toBe('1.6.0')
+      expect(migrated.model.schemaVersion).toBe(MODEL_SCHEMA_VERSION)
       expect(compileBuilding(migrated.model)).toEqual(compileBuilding(createDemoBuilding()))
     }
   })

@@ -78,6 +78,8 @@ describe('005N §30 M10 the reading has no special cases', () => {
   it('its numbers are a frozen set: a wall, a half, a step, nothing that fits a sheet', () => {
     expect(numbersIn(codeOf(read(COMPOUND)))).toEqual(['0', '0.12', '0.6', '0.75', '0.9', '1', '1.25', '1.5', '100', '2', '24', '3', '35', '4', '4.5', '64', '8'])
     const decomposition = codeOf(read(DECOMPOSITION))
-    expect(numbersIn(WIRING.map((n) => bodyOf(decomposition, n)).join('\n'))).toEqual(['0', '0.2', '0.3', '0.5', '0.7', '0.9', '1', '1.5', '2'])
+    // N8-02A (`cornerJoined`): an end wall broken by its openings closes the rectangle of two opposite frame walls at
+    // least 4 wall thicknesses apart — a count of walls, like the others, not a length that fits a sheet
+    expect(numbersIn(WIRING.map((n) => bodyOf(decomposition, n)).join('\n'))).toEqual(['0', '0.2', '0.3', '0.5', '0.7', '0.9', '1', '1.5', '2', '4'])
   })
 })

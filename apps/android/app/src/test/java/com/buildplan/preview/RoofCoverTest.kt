@@ -17,6 +17,7 @@ import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
 import kotlin.math.abs
+import kotlin.math.ceil
 
 /**
  * The roof covering on generic fixtures: roofs that belong to no building,
@@ -226,12 +227,21 @@ class RoofCoverTest {
     fun `the covering of the shipped scenes stays within a phone's budget`() {
         for (scene in TestScenes.all) {
             val batches = RoofCover.of(scene)
-            val area = scene.objects.flatMap { RoofCover.planesOf(it) }.sumOf { it.area }
+            val planes = scene.objects.flatMap { RoofCover.planesOf(it) }
             val tiles = batches.sumOf { it.tileCount }
             val triangles = batches.sumOf { it.triangleCount }
-            assertTrue("${scene.key}: $tiles tiles on $area m²", tiles <= area / (spec.moduleWidth * spec.exposure) * 1.05 + 10)
+            // No plane holds more tiles than its own extent in courses and columns at the default module (a larger
+            // module, taken for the triangle budget, holds fewer). A fractional last course is a whole course of
+            // trimmed tiles, so the area at the module is not an upper bound: a plain 15.1 m gable of 5.68 m slopes
+            // lays 51 × 18 tiles a side, 5.9 % over its area. A tile laid twice would double the count.
+            val fit = planes.sumOf { p -> (ceil((p.sMax - p.sMin) / spec.moduleWidth) + 1) * (ceil((p.tMax - p.tMin) / spec.exposure) + 1) }
+            assertTrue("${scene.key}: $tiles tiles on ${planes.size} planes that hold at most $fit", tiles <= fit)
             assertTrue("${scene.key}: $triangles covering triangles", triangles <= 40_000)
-            assertTrue("${scene.key}: ${batches.size} batches", batches.size <= 8)
+            // The renderables a covering adds: one per covered roof object and never one per tile. A roof system
+            // states every plane as its own named object (three hip roofs = twelve planes), so the bound is the
+            // number of covered roof objects, not a fixed count taken from scenes with one object per roof.
+            val covered = scene.objects.count { RoofCover.planesOf(it).isNotEmpty() }
+            assertTrue("${scene.key}: ${batches.size} batches for $covered covered roof objects", batches.size <= covered)
         }
     }
 

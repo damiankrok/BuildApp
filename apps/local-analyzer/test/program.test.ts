@@ -104,7 +104,7 @@ describe('the bundle, run as the phone runs it, gives the desktop pipeline’s b
     expect(done.sources.assets.length).toBe(done.summary.counts.assets)
     expect(done.sources.pageHash).toMatch(/^[0-9a-f]{64}$/)
     // and it is the very scene the analyzer API served for this link (captured in BUILDAPP-03Y1)
-    const served = readFileSync(join(import.meta.dirname, '../../android/app/src/test/resources/analyzer-contract/scene.json'))
+    const served = readFileSync(join(import.meta.dirname, '../../android/app/src/test/resources/analyzer-contract-current/scene.json'))
     expect(readFileSync(join(result.outDir, 'scene.json')).equals(served)).toBe(true)
   })
 

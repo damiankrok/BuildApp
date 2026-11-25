@@ -44,7 +44,10 @@ describe('NFD: exactly what ICU computes', () => {
   })
 
   it('for strings whose combining marks need canonical reordering', () => {
-    const nonStarters = chars(TEXT_TABLES.nonStarters)
+    // the tables are the desktop's ICU (TEXT_TABLES.icu); an older ICU here has never heard of the newest marks (Unicode
+    // 17's U+1ACF… under ICU 77 / Unicode 16) and orders them as starters, so only marks it knows are its to judge
+    const nonStarters = chars(TEXT_TABLES.nonStarters).filter((c) => /\p{Assigned}/u.test(c))
+    expect(nonStarters.length).toBeGreaterThan(chars(TEXT_TABLES.nonStarters).length * 0.9)
     const starters = ['a', 'e', 'o', 'ó', 'ą', 'ł', 'Ż', '한', 'ệ', 'x']
     for (let k = 0; k < 20000; k++) {
       let s = ''

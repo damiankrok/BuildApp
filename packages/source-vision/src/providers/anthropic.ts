@@ -111,6 +111,15 @@ async function defaultClient(apiKey: string): Promise<AnthropicLike> {
   return new Ctor({ apiKey })
 }
 
+/**
+ * The provider key of a server-side transport that is not one of this package's readers (the analysis service's
+ * consultant): `BUILDPLAN_ANTHROPIC_API_KEY`, else `ANTHROPIC_API_KEY`, else empty. The key is read here, in the
+ * provider package, so the analysis service and the API never name it; the caller hands it to the SDK and nowhere else.
+ */
+export function providerKeyFromEnvironment(): string {
+  return process.env.BUILDPLAN_ANTHROPIC_API_KEY ?? process.env.ANTHROPIC_API_KEY ?? ''
+}
+
 export function anthropicVisionReasoner(options: AnthropicVisionOptions = {}): VisionReasoner {
   const apiKey = options.apiKey ?? process.env.ANTHROPIC_API_KEY ?? ''
   const model = options.model ?? 'claude-opus-5-5'
