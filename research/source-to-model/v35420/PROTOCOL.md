@@ -56,3 +56,13 @@ na diagnozę ≈ 3). Koszt odczytu struktury: 0,02–0,06 USD na dom.
   liczbowe: G6 5 → 3 otwory (strony dwóch elewacji bocznych zamienione przez odczyt struktury przy równym świadectwie
   rzutu), Medulin i Mindelo mniej otworów i ścian niż bryła LOCAL, którą zastąpiono. Ocena ślepa rozstrzygnie, czy to
   straty cech.
+
+## 6. Ramiona NEW-G (zapisane przed losowaniem i przed jakimkolwiek biegiem)
+
+- **B** — baseline `af7db0e`, jeden bieg na żywo. **F** — kod zamrożony `024e2b7`, jeden bieg na żywo na tych samych
+  bajtach. Porównanie B ↔ F jest wynikiem głównym (§3) i jest oddane takie, jakie wyszło za pierwszym razem.
+- **F@B** (pomocnicze, bez wpływu na wynik główny) — kod zamrożony odtworzony na nagranych odczytach biegu B (te same
+  szkice elewacji i ten sam odczyt metryczny; na żywo tylko to, czego B nie pytał: odczyt struktury, nowe listy otworów,
+  recenzja zmienionej rewizji). Służy wyłącznie do rozdzielenia wpływu kodu od zmienności świeżych szkiców: różnica
+  F ↔ F@B jest zmiennością odczytów, różnica B ↔ F@B jest kodem. Tabela formy (§2.3) i liczby modeli (§2.5) podawane
+  dla wszystkich trzech ramion.
