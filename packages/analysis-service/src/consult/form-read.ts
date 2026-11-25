@@ -135,7 +135,7 @@ export function formOf(raw: RawForm): HouseForm {
   const sideOf = (pick: (p: RawForm['pictures'][number]) => boolean): (typeof SIDES)[number] => raw.pictures.find((p) => pick(p) && p.shows !== 'NONE')?.shows ?? 'NONE'
   return { ...raw, mainRoof: { kind: raw.main.roof.kind, ridgeAlong: raw.main.roof.ridgeAlong, pitchDeg: raw.main.pitch.deg ?? 0 }, lowerParts: raw.parts.map((p) => ({ what: p.what, roof: p.roof.kind, where: p.where })), volumes: 1 + raw.parts.length, garageDoor: sideOf((p) => p.garageDoor), entrance: sideOf((p) => p.entranceDoor) }
 }
-export type FormRead = { version: string; promptVersion: string; pictures: number; raw: unknown; usd: number; requestId?: string; form?: HouseForm; refused: string[]; /** form-read/3: the request as it left — every picture's exact PNG bytes with the text that introduced it (the packet a delivery shows; never logged) */ sent?: Array<{ label: string; png: Uint8Array; width: number; height: number }>; sentText?: string[] }
+export type FormRead = { version: string; promptVersion: string; pictures: number; raw: unknown; usd: number; requestId?: string; form?: HouseForm; refused: string[]; /** form-read/3: the request as it left — every picture's exact PNG bytes with the text that introduced it (the packet a delivery shows; never logged) */ sent?: Array<{ label: string; png: Uint8Array; width: number; height: number }>; sentText?: string[]; /** v3.54.21: who answered — the transport's id (`replay`: a recorded answer, given to the pictures of ITS request, not necessarily `sent`) and the contract the answer's own shape is of (a form-read/2 answer has no `roofs`) */ answeredBy?: { transport: string; contract: 'form-read/2' | 'form-read/3' | 'NONE'; /** the answer was bought in this run (it carries the provider's token counts); a replayed recording carries none */ live: boolean } }
 type Ctx = { model: ConsultantModel; price: Price; spend?: ConsultSpend; signal?: AbortSignal }
 
 const toolInput = (turn: ModelTurn, name: string): unknown => (turn.content as Array<{ type: string; name?: string; input?: unknown }>).find((b) => b.type === 'tool_use' && b.name === name)?.input
@@ -203,7 +203,7 @@ export function fitPicture(raster: Raster, maxSide: number): { png: Uint8Array; 
 
 export async function readForm(ctx: Ctx, pictures: ReadonlyArray<{ caption: string; raster: Raster }>, sheets: FormSheets = {}): Promise<FormRead> {
   const sent: NonNullable<FormRead['sent']> = []
-  const base = { version: FORM_READ_VERSION, promptVersion: FORM_READ_PROMPT_VERSION, pictures: pictures.length, sent, sentText: [] as string[] }
+  const base: { version: string; promptVersion: string; pictures: number; sent: typeof sent; sentText: string[]; answeredBy: NonNullable<FormRead['answeredBy']> } = { version: FORM_READ_VERSION, promptVersion: FORM_READ_PROMPT_VERSION, pictures: pictures.length, sent, sentText: [] as string[], answeredBy: { transport: ctx.model.id, contract: 'NONE', live: false } }
   const content: unknown[] = [{ type: 'text', text: `The sheets of one house: ${pictures.length} elevation picture(s)${sheets.plan ? ', the ground-floor plan' : ''}${sheets.section ? ', a cross-section' : ''}${(sheets.perspectives ?? []).length > 0 ? `, ${(sheets.perspectives ?? []).length} perspective picture(s)` : ''}.` }]
   const image = (r: Raster): unknown => {
     const fit = fitPicture(r, MAX_SIDE)
@@ -235,6 +235,7 @@ export async function readForm(ctx: Ctx, pictures: ReadonlyArray<{ caption: stri
   const raw = toolInput(turn, TOOL.name)
   const rid = turn.requestId ? { requestId: turn.requestId } : {}
   if (turn.stopReason === 'refusal') return { ...base, raw, usd, ...rid, refused: ['REFUSED: the provider refused the answer'] }
+  base.answeredBy = { transport: ctx.model.id, contract: raw && typeof raw === 'object' && Array.isArray((raw as { roofs?: unknown }).roofs) ? 'form-read/3' : 'form-read/2', live: (turn.usage?.inputTokens ?? 0) + (turn.usage?.outputTokens ?? 0) > 0 }
   return { ...base, usd, ...rid, ...parseForm(raw, pictures.length) }
 }
 

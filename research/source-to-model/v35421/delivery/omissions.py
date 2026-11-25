@@ -53,7 +53,7 @@ def house(name, run, base):
     sr = last('STRUCTURE_READ')
     if sr:
         out['structureRead'] = {
-            'promptVersion': sr.get('promptVersion'), 'sent': [{k: i.get(k) for k in ('role', 'n', 'caption', 'frameId', 'sourceByteHash', 'sourcePx', 'sentPx', 'factor', 'origin')} for i in sr.get('images', [])],
+            'promptVersion': sr.get('promptVersion'), 'answeredBy': sr.get('answeredBy'), 'sent': [{k: i.get(k) for k in ('role', 'n', 'caption', 'frameId', 'sourceByteHash', 'sourcePx', 'sentPx', 'factor', 'origin')} for i in sr.get('images', [])],
             'skipped': sr.get('skipped', []), 'missing': sr.get('missing', []), 'facts': (sr.get('sheets') or {}).get('facts', []),
             **({'refused': sr.get('why')} if sr.get('decision') in ('REFUSED', 'FAILED') or sr.get('refused') else {}),
         }
@@ -141,7 +141,12 @@ def md(h):
     if not sr:
         L += ['Odczyt struktury nie został zapytany w tym biegu.', '']
     else:
-        L += [f"Kontrakt: `{sr['promptVersion']}`. Wysłano {len(sr['sent'])} obraz(y/ów); pominięto {len(sr['skipped'])}.", '', '| rola | podpis | px źródła | px wysłane | skala | pochodzenie |', '|---|---|---|---|---|---|']
+        ab = sr.get('answeredBy') or {}
+        if ab and not ab.get('live', True):
+            L += [f"**Odpowiedź ODTWORZONA z nagrania ({ab.get('contract')}), 0 USD** — nagrana odpowiedź widziała obrazy swojego żądania (dla form-read/2: elewacje, z których powstały szkice), a nie zestaw poniżej; tabela pokazuje, co wybiera i wysłałby obecny kod.", '']
+        elif ab:
+            L += [f"Odpowiedź z bieżącego żądania ({ab.get('contract')}, transport `{ab.get('transport')}`): tabela to dokładnie to, co dostał model.", '']
+        L += [f"Kontrakt: `{sr['promptVersion']}`. Wybrano {len(sr['sent'])} obraz(y/ów); pominięto {len(sr['skipped'])}.", '', '| rola | podpis | px źródła | px wysłane | skala | pochodzenie |', '|---|---|---|---|---|---|']
         for i in sr['sent']:
             L.append(f"| {i['role']}{' ' + str(i['n']) if i.get('n') else ''} | {i['caption']} | {i['sourcePx'][0]}×{i['sourcePx'][1]} | {i['sentPx'][0]}×{i['sentPx'][1]} | 1:{i['factor']} | {i['origin']} |")
         if sr['skipped']:
