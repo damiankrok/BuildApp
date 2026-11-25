@@ -139,7 +139,7 @@ export function settleRoof(roof: RoofSpec, rect: Rect, w: SettleInput): { roof: 
  */
 export type CrossRoofSpec = { id: string; over: string; side: Side; rect: Rect; ridgeAxis: 'X' | 'Z'; eavesM: number; ridgeM: number; pitchDeg: number; provenance: Prov }
 export type MassingStatus = 'BUILDABLE' | 'INSUFFICIENT' | 'UNSUPPORTED_FORM'
-export type MassingHypothesis = {
+export type MassingHypothesis = { /** massing 1.12.0: the kernel refused the roof system's statements and the roofs were built apart (the refusal, verbatim): a BUILD_ERROR the trace names — never a silent fallback */ roofBuildError?: string;
   version: string
   status: MassingStatus
   bodies: BodySpec[]
@@ -1570,7 +1570,7 @@ export function roofRegionsOfModel(m: CanonicalBuildingModel): { regions: RoofRe
 }
 
 /** BUILD_MASSING: the whole mass from nothing (no model, or no exterior walls): one level, one ring per body and the roofs — each body's own, or the house's roof system where roofs meet. */
-export function massingCommands(h: MassingHypothesis, model: CanonicalBuildingModel): BuildingCommand[] {
+export function massingCommands(h: MassingHypothesis, model: CanonicalBuildingModel, opts: { /** build every body's roof alone, as before the roof system (the fallback when the kernel refuses the system's statements) */ apart?: boolean } = {}): BuildingCommand[] {
   const top = Math.max(...h.bodies.map((b) => (b.roof.kind !== 'FLAT' ? b.roof.ridgeM ?? b.roof.eavesM : b.roof.eavesM)))
   const cmds: BuildingCommand[] = []
   if (!model.building) cmds.push({ type: 'createBuilding', id: 'building', name: 'massing' } as BuildingCommand)
@@ -1583,7 +1583,7 @@ export function massingCommands(h: MassingHypothesis, model: CanonicalBuildingMo
   // without a material (a pale roof on a body built without LOCAL — R3's open item 4).
   for (const mat of MINIATURE_PALETTE) if (!model.materials.some((x) => x.id === mat.id)) cmds.push({ type: 'defineMaterial', ...mat } as BuildingCommand)
   const sol = roofSystemOf(h)
-  const joined = joinedBodiesOf(sol)
+  const joined = opts.apart ? new Set<string>() : joinedBodiesOf(sol)
   const dress = (c: BuildingCommand): BuildingCommand => (c.type === 'createRoof' || c.type === 'createRoofPlane' ? ({ ...c, materialId: MINIATURE_CONVENTIONS.roofMaterialId } as BuildingCommand) : c.type === 'createWallRing' ? ({ ...c, materialId: 'mat-wall' } as BuildingCommand) : c)
   for (const b of h.bodies) {
     if (!joined.has(b.id)) { cmds.push(...bodyCommands(b, levelId, levelElevation, rects.filter((r) => r !== b.rect), h.wallThicknessM).map(dress)); continue }
@@ -1592,7 +1592,7 @@ export function massingCommands(h: MassingHypothesis, model: CanonicalBuildingMo
     const ridge = Math.max(...sol.regions.filter((q) => q.hostBodyId === b.id).map((q) => q.ridgeY))
     cmds.push(dress({ type: 'createWallRing', id: `ring-${b.id}`, levelId, polygon: [{ x: r.minX, z: r.minZ }, { x: r.maxX, z: r.minZ }, { x: r.maxX, z: r.maxZ }, { x: r.minX, z: r.maxZ }], thickness: h.wallThicknessM, height: r6(ridge - levelElevation), baseOffset: 0, kind: 'EXTERIOR', cornerOwnership: 'ALTERNATE' } as BuildingCommand))
   }
-  cmds.push(...roofSystemCommands(sol, h.bodies, levelId, h.wallThicknessM).map(dress))
+  if (!opts.apart) cmds.push(...roofSystemCommands(sol, h.bodies, levelId, h.wallThicknessM).map(dress))
   return cmds
 }
 

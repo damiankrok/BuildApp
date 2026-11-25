@@ -121,3 +121,16 @@ describe('ops 1.13.0: a correction of one roof of a roof system solves the whole
     expect(out.records[0].code, JSON.stringify(out.records[0]).slice(0, 500)).toBe('ROOF_SYSTEM_MEMBERSHIP_CHANGES')
   })
 })
+
+describe('ops 1.13.0: the kernel is asked before the roof system is proposed', () => {
+  it('massingCommands with { apart } states every roof alone, exactly as a body builder without the system would', () => {
+    const empty = createEmptyModel('m', 'control')
+    const apart = massingCommands(hyp([MAIN, WING]), empty, { apart: true })
+    expect(apart.filter((c) => c.type === 'createRoofPlane')).toHaveLength(0)
+    expect(apart.filter((c) => c.type === 'createRoof')).toHaveLength(2)
+    expect(apart.some((c) => c.type === 'createAssembly')).toBe(false)
+    const r = applyCommands(empty, apart)
+    expect(r.failedAt).toBeUndefined()
+    expect(validateModel(r.model).ok).toBe(true)
+  })
+})

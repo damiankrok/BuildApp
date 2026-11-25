@@ -636,7 +636,9 @@ async function checkSources(l: Local, options: AnalysisOptions, perspectives: Re
     const role = f.roles.view && f.roles.view !== 'NOT_APPLICABLE' && f.roles.view !== 'UNKNOWN' ? `; the publisher's caption says ${f.roles.view}` : ''
     await add(f.id, 'ELEVATION', `a publisher's elevation drawing${role} (which model side it shows is for you to establish)`)
   }
-  const section = l.graph.coordinateFrames.find((x) => x.roles.projection === 'ORTHOGRAPHIC_SECTION')
+  // v3.54.21: the largest picture the page labels a section, and none that is a placeholder (a 32 × 32 px loading image
+  // was shown to the reviewer as "the publisher's section drawing")
+  const section = l.graph.coordinateFrames.filter((x) => x.roles.projection === 'ORTHOGRAPHIC_SECTION' && Math.max(x.size?.width ?? 0, x.size?.height ?? 0) >= STRUCTURE_PICTURES.minSidePx / 2).sort((a, b) => area(b) - area(a) || a.id.localeCompare(b.id))[0]
   if (section) await add(section.id, 'OTHER_SOURCE', "the publisher's section drawing")
   // v3.54.21: the perspective pictures the structure read was asked of, as a QUALITATIVE witness: how volumes and roofs
   // relate (a recess, a porch, the depth of a balcony, where two roofs meet) is often plainer there than on an elevation.
@@ -876,6 +878,9 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
     for (const f of A.graph0.coordinateFrames) {
       if (roleOf(f.assetId).document !== 'SECTION') continue
       const r = await frameRaster(A.pkg0, A.graph0, f.id, options)
+      // a picture the page labels a section but which is a placeholder (a 32 × 32 px loading image was sent as the
+      // house's section, and looked at by every stage): left out by its size, with the reason recorded
+      if (r?.raster && Math.max(r.raster.width, r.raster.height) < STRUCTURE_PICTURES.minSidePx / 2) { skipped.push({ role: 'SECTION', frameId: f.id, px: [r.raster.width, r.raster.height], why: `a placeholder or thumbnail (${r.raster.width} × ${r.raster.height} px): not a section a height can be read from` }); continue }
       if (r?.raster && (!section || r.raster.width * r.raster.height > section.width * section.height)) { section = r.raster; sectionFrame = f }
     }
     if (section && sectionFrame) images.push({ role: 'SECTION', frameId: sectionFrame.id, caption: 'SECTION', sourceByteHash: sectionFrame.variantByteHash, sourcePx: [section.width, section.height], ...sentOf(section), origin: originOf(sentOf(section).factor) })
@@ -2338,7 +2343,7 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
     const solD = hypD ? roofSystemOf(hypD) : undefined
     const boundD = hypD && solD ? { bodies: hypD.bodies, ...(hypD.crossRoofs ? { crossRoofs: hypD.crossRoofs } : {}), relations: solD.relations.map((q) => ({ a: q.a, b: q.b, kind: q.kind })) } : undefined
     const sb = readbackStructure(mD, structureMemo?.build, STOREY_WALLS, boundD)
-    if (hypD && solD) record({ at: now().toISOString(), kind: 'ROOF_SYSTEM', version: solD.version, regions: solD.regions, relations: solD.relations, adjustments: solD.adjustments, violations: solD.violations, creases: solD.creases.map((q) => ({ id: q.id, kind: q.kind, planeIds: q.planeIds, regionIds: q.regionIds, start: q.start, end: q.end, startM: q.startY, endM: q.endY })), fates: hypD.bodies.flatMap((b) => (b.fates ?? []).map((f) => ({ bodyId: b.id, ...f }))), crossRoofs: hypD.crossRoofs ?? [], why: `the roofs of the body as one system: ${solD.regions.length} region(s), ${solD.relations.map((q) => `${q.a} → ${q.b} ${q.kind}`).join('; ') || 'no two roofs meet'}; ${solD.creases.filter((q) => q.kind === 'VALLEY').length} valley(s) computed from the planes; ${solD.adjustments.length} adjustment(s) within the stated tolerances; ${solD.violations.length} violation(s)` })
+    if (hypD && solD) record({ at: now().toISOString(), kind: 'ROOF_SYSTEM', version: solD.version, regions: solD.regions, relations: solD.relations, adjustments: solD.adjustments, violations: solD.violations, creases: solD.creases.map((q) => ({ id: q.id, kind: q.kind, planeIds: q.planeIds, regionIds: q.regionIds, start: q.start, end: q.end, startM: q.startY, endM: q.endY })), fates: hypD.bodies.flatMap((b) => (b.fates ?? []).map((f) => ({ bodyId: b.id, ...f }))), crossRoofs: hypD.crossRoofs ?? [], ...(hypD.roofBuildError ? { buildError: hypD.roofBuildError } : {}), why: `${hypD.roofBuildError ? `BUILD_ERROR — ${hypD.roofBuildError}. As solved: ` : ''}the roofs of the body as one system: ${solD.regions.length} region(s), ${solD.relations.map((q) => `${q.a} → ${q.b} ${q.kind}`).join('; ') || 'no two roofs meet'}; ${solD.creases.filter((q) => q.kind === 'VALLEY').length} valley(s) computed from the planes; ${solD.adjustments.length} adjustment(s) within the stated tolerances; ${solD.violations.length} violation(s)` })
     if (structureMemo?.agreed && structureMemo.features) {
       const tr = traceFeatures(structureMemo.features, { agreed: structureMemo.agreed, ...(structureMemo.build ? { taken: structureMemo.build } : {}), ...(hypD ? { bodies: hypD.bodies, ...(hypD.crossRoofs ? { crossRoofs: hypD.crossRoofs } : {}) } : {}), ...(solD ? { relations: solD.relations } : {}), readback: sb, model: mD, bodyBy: hypD ? 'SOURCE_BODY' : 'LOCAL', sideOfWall: (w) => sideOfWall(mD, w) })
       // an open KEY feature of the body or its roofs — by MEASUREMENT of the delivered model against the sources' own

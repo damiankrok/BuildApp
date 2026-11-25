@@ -13,7 +13,9 @@
  * wall, a party line with another body, a roof made of planes) refuses the whole patch by name, so nothing is left
  * orphaned and nothing unrelated changes (the executor's collateral check holds the rest of the model).
  */
+import { applyCommands } from '@buildapp/commands'
 import type { BuildingCommand } from '@buildapp/commands'
+import { validateModel } from '@buildapp/model'
 import type { CanonicalBuildingModel, Opening, Wall } from '@buildapp/model'
 import type { Evidence } from '@buildapp/model'
 import { compareRegions } from '../correct/source-gate.js'
@@ -803,6 +805,15 @@ export function bindBuildMassing(ctx: Ctx, p: CorrectionProposal): Bound | Refus
   if (existing.length === 0) {
     const partH = { ...h, bodies: missing }
     cmds = massingCommands(partH, m)
+    // ops 1.13.0: the roof system's statements are tried on the kernel BEFORE they are proposed. A system the kernel
+    // refuses (a plane it cannot bound, an edge off its planes) must not cost the house its body: the roofs are then built
+    // apart, as before this stage, and the refusal is carried on the hypothesis as a BUILD_ERROR — named in the record,
+    // in ROOF_SYSTEM and in the feature trace, never silent
+    if (joinedBodiesOf(roofSystemOf(partH)).size > 0) {
+      const dry = applyCommands(m, [...sources, ...cmds])
+      const bad = dry.failedAt !== undefined ? `command ${dry.failedAt} (${(cmds[dry.failedAt - sources.length] as { type?: string; id?: string } | undefined)?.type ?? '?'} ${(cmds[dry.failedAt - sources.length] as { id?: string } | undefined)?.id ?? ''}): ${JSON.stringify(dry.results[dry.failedAt]).slice(0, 300)}` : !validateModel(dry.model).ok ? `the candidate does not validate: ${JSON.stringify(validateModel(dry.model)).slice(0, 300)}` : undefined
+      if (bad) { h.roofBuildError = `the kernel refused the roof system (${bad}); the roofs are built apart`; cmds = massingCommands(partH, m, { apart: true }) }
+    }
     cmds = cmds.flatMap((c) => (c.type === 'createWallRing' || c.type === 'createRoof' || c.type === 'createRoofPlane' ? withEvidence([c], missing.find((b) => c.id === `ring-${b.id}` || c.id === `roof-${b.id}` || (c.id ?? '').startsWith(`roof-${b.id}-`)) as BodySpec, frames) : [c]))
   } else {
     const lv = [...m.levels].sort((a, b) => a.elevation - b.elevation)[0]
@@ -812,7 +823,7 @@ export function bindBuildMassing(ctx: Ctx, p: CorrectionProposal): Bound | Refus
   cmds = [...sources, ...cmds]
   // ops 1.12.0: a body under the roof system has its planes cut by the others' (a slope in two pieces is `-<side>-<n>`), a cross gable its own planes, and the system its creases, free edges and one ROOF assembly
   const sol = roofSystemOf(h)
-  const joined = joinedBodiesOf(sol)
+  const joined = h.roofBuildError ? new Set<string>() : joinedBodiesOf(sol)
   const allowed = [...missing.flatMap((b) => [`walls:ring-${b.id}*`, `wallRings:ring-${b.id}`, `wallJunctions:ring-${b.id}*`, `roofs:roof-${b.id}`, ...HIP_PLANE_SIDES.map((sd) => `roofPlanes:roof-${b.id}-${sd}`), ...(joined.has(b.id) ? [`roofPlanes:roof-${b.id}-*`] : [])]), ...(joined.size > 0 ? ['roofEdges:*', `assemblies:${ROOF_SYSTEM_ID}`] : []), 'evidenceSources:src-*', 'levels:*', 'materials:mat-*', ...(m.building ? [] : ['building', 'building:*'])]
   const viewsUsed = h.views
   const measure = (working: CanonicalBuildingModel, _b: CanonicalBuildingModel, pictures: readonly BindPicture[]): { failure?: string; measure: { sourceVerified: boolean | null; why: string } } => {

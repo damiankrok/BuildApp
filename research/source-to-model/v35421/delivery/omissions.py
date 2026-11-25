@@ -62,6 +62,18 @@ def house(name, run, base):
     sk = load(os.path.join(run, 'sketches.json')) or {}
     reading = (sk.get('reading') or {}).get('sketches', [])
     out['elevationSketches'] = [{'frameId': s.get('frameId'), 'facade': s.get('facade'), 'read': bool(s.get('sketch')), **({'why': s.get('why')} if not s.get('sketch') and s.get('why') else {})} for s in reading]
+    # the pictures every OTHER stage sent, from each stage's own record (role, what it is, its pixels)
+    inv = []
+    for s in reading:
+        src = (s.get('sketch') or {}).get('source') or {}
+        inv.append({'stage': 'ELEVATION_SKETCH', 'role': f"ELEVATION {s.get('facade')}", 'frameId': s.get('frameId'), 'what': 'the publisher\'s original picture' + (f" (1:{src.get('scale')})" if src.get('scale', 1) != 1 else ''), 'px': [src.get('width'), src.get('height')] if src else None, 'outcome': 'read' if s.get('sketch') else f"no sketch: {s.get('why') or (s.get('raw') or {}).get('why') or 'refused or failed'}"})
+    for e in by.get('METRIC_READ', []):
+        inv.append({'stage': 'METRIC_READ', 'role': 'PLAN / DIMENSIONED SHEET', 'frameId': e.get('frameId'), 'what': 'the publisher\'s original picture, whole-factor downscale above the provider\'s size (pixel coordinates are returned)', 'px': None, 'outcome': f"{e.get('observations')} observation(s), {e.get('refused')} refused"})
+    chk = last('SENT_MODEL_CHECK')
+    for q in (chk or {}).get('pictures', []):
+        inv.append({'stage': 'REVIEW', 'role': q.get('what'), 'frameId': q.get('frameId') or q.get('name'), 'what': 'a render of the model (derived)' if str(q.get('what', '')).startswith('MODEL') or not q.get('frameId') else 'the publisher\'s original picture' + (f" (1:{(q.get('transform') or {}).get('scale')})" if (q.get('transform') or {}).get('scale', 1) != 1 else ''), 'px': [q.get('width'), q.get('height')], 'outcome': (q.get('label') or '')[:120]})
+    out['otherStagesPictures'] = inv
+    out['reviewFeatureMapSent'] = bool((chk or {}).get('featureMap'))
     # (2) features
     ft = last('FEATURE_TRACE')
     out['features'] = None if not ft else {
@@ -74,7 +86,7 @@ def house(name, run, base):
     out['roofSystem'] = None if not rs else {
         'regions': [{k: q.get(k) for k in ('id', 'kind', 'ridgeAxis', 'pitchDeg', 'eaveY', 'ridgeY', 'joined')} for q in rs.get('regions', [])],
         'relations': rs.get('relations', []), 'adjustments': rs.get('adjustments', []), 'violations': rs.get('violations', []),
-        'valleys': [c for c in rs.get('creases', []) if c.get('kind') == 'VALLEY'], 'fates': rs.get('fates', []), 'crossRoofs': rs.get('crossRoofs', []),
+        'valleys': [c for c in rs.get('creases', []) if c.get('kind') == 'VALLEY'], 'fates': rs.get('fates', []), 'crossRoofs': rs.get('crossRoofs', []), 'buildError': rs.get('buildError'),
     }
     arb = last('BODY_ARBITRATION')
     out['bodyArbitration'] = None if not arb else {'decision': arb.get('decision'), 'why': arb.get('why')}
@@ -121,6 +133,11 @@ def md(h):
         if sr['missing']:
             L += ['', 'Brak w pakiecie: ' + '; '.join(str(m) for m in sr['missing'])]
         L.append('')
+    inv = h.get('otherStagesPictures') or []
+    if inv:
+        L += ['Obrazy wysłane w pozostałych etapach (z zapisów etapów):', '', '| etap | rola | obraz | px | wynik / opis |', '|---|---|---|---|---|']
+        L += [f"| {q['stage']} | {q['role']} | {q['what']} `{str(q.get('frameId') or '')[-24:]}` | {'×'.join(str(x) for x in q['px']) if q.get('px') and q['px'][0] else '—'} | {q['outcome']} |" for q in inv]
+        L += ['', f"Mapa cech wysłana recenzentowi przed oceną modelu: {'tak' if h.get('reviewFeatureMapSent') else 'nie (recenzja nie była pytana w tym biegu albo odtworzona z nagrania)'}.", '']
     f = h.get('features')
     L += ['### 2. Cecha → odczyt → uzgodnienie → model → wynik i przyczyna', '']
     if not f:
@@ -142,6 +159,8 @@ def md(h):
         L += [f"Kosze policzone z przecięcia połaci: {len(rs['valleys'])}" + (': ' + '; '.join(f"({v['start']['x']:.2f}, {v['start']['z']:.2f}) {v['startM']:.2f} m → ({v['end']['x']:.2f}, {v['end']['z']:.2f}) {v['endM']:.2f} m" for v in rs['valleys']) if rs['valleys'] else '') + '.']
         if rs['adjustments']:
             L += ['Korekty w tolerancji: ' + '; '.join(str(a.get('why', a))[:200] for a in rs['adjustments']) + '.']
+        if rs.get('buildError'):
+            L += ['**BŁĄD BUDOWY (BUILD_ERROR):** ' + str(rs['buildError'])[:400]]
         if rs['violations']:
             L += ['**Naruszenia:** ' + '; '.join(str(a.get('why', a))[:240] for a in rs['violations']) + '.']
         if rs['fates']:
