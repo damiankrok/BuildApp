@@ -385,3 +385,24 @@ describe('massing 1.13.0: stated numbers the roof cannot take are named, not bui
     expect(s.roof.ridgeM).toBeCloseTo(3 + 4 * Math.tan((25 * Math.PI) / 180), 3)
   })
 })
+
+describe('massing 1.13.0: a gable wall of another body is not a second ridge on the main body', () => {
+  // the 12 × 8 m house with a 4 m wide, 5 m deep wing in front of it (x 4…8): the front elevation draws the wing's own
+  // gable wall (shoulders 3 m, apex 5 m) over 4…8 m — exactly where a cross gable of the main body would be drawn
+  const T_OUTLINE = outlineOf([[0, 0], [4, 0], [4, -5], [8, -5], [8, 0], [12, 0], [12, 8], [0, 8]])
+  const side = (s: 'LEFT' | 'RIGHT'): SilhouetteObservation => view(s, [box(-5, 8, 0, 3), [[px(0), 400], [px(8), 400], [px(8), row(3)], [px(4), row(7)], [px(0), row(3)]]], [box(-5, 0, 3, 5), [[px(0), row(3)], [px(4), row(7.2)], [px(8), row(3)], [px(8), row(2.8)], [px(4), row(7)], [px(0), row(2.8)]]])
+  const sil = [slope('FRONT', [CROSS_WALL]), slope('REAR'), gableEnd('LEFT'), gableEnd('RIGHT')]
+  it('a CROSS roof the read reports on that side is refused by name: it is the wing\'s own gable; no cross gable over the main slope', () => {
+    const CROSS_FRONT: BuildStructure = { ...MAIN_X, parts: [], cross: [{ id: 'R9', side: 'FRONT', ridge: 'Z', pitchDeg: 45 }] }
+    const h = solveMassing({ outline: T_OUTLINE, silhouettes: sil, structure: CROSS_FRONT })
+    expect(h.status).toBe('BUILDABLE')
+    expect(h.crossRoofs ?? []).toHaveLength(0)
+    expect(h.alternatives.join('\n')).toMatch(/that body's own gable/)
+  })
+  it('counter-trial: on the plain rectangle the same read and drawing build the cross gable', () => {
+    const CROSS_FRONT: BuildStructure = { ...MAIN_X, parts: [], cross: [{ id: 'R9', side: 'FRONT', ridge: 'Z', pitchDeg: 45 }] }
+    const h = solveMassing({ outline: HOUSE, silhouettes: sil, structure: CROSS_FRONT })
+    expect((h.crossRoofs ?? []).map((c) => c.side)).toEqual(['FRONT'])
+  })
+  void side
+})

@@ -1120,6 +1120,26 @@ export function solveMassing(input: MassingInput): MassingHypothesis {
     else if (byShare && c.pitchDeg !== undefined) crossCands.push({ part, side: c.side as Side, lo: r6(byShare.lo), hi: r6(byShare.hi), shoulderM: 0, apexM: r6(((byShare.hi - byShare.lo) / 2) * Math.tan((c.pitchDeg * Math.PI) / 180)), estimated: true })
     else unbuiltParts.push({ part, why: g ? `the ${c.side.toLowerCase()} elevation draws a gable wall at ${g.lo.toFixed(2)}–${g.hi.toFixed(2)} m, the read puts this roof at ${byShare?.lo.toFixed(2)}–${byShare?.hi.toFixed(2)} m: not the same place` : `no gable wall is drawn on the ${c.side.toLowerCase()} elevation over the main body, and the read states no ${c.span ? 'pitch' : 'place'} for it` })
   }
+  // massing 1.13.0: a cross candidate is vetted BEFORE the body loop on everything that does not depend on how the main
+  // ridge is turned — so a candidate refused later cannot leave the main ridge turned for a part that is not built (half a
+  // description), and a gable wall that belongs to another body is not taken for a second ridge on the main body's walls
+  if (mainRep) {
+    const frontOf = (o: Rect, side: Side): boolean => (side === 'FRONT' ? o.maxZ <= mainRep.minZ + 0.05 : side === 'REAR' ? o.minZ >= mainRep.maxZ - 0.05 : side === 'LEFT' ? o.maxX <= mainRep.minX + 0.05 : o.minX >= mainRep.maxX - 0.05)
+    for (const c of [...crossCands]) {
+      const name = `the ${c.part.what.toLowerCase()} reported on the ${c.side.toLowerCase()}`
+      const e = extentOn(mainRep, c.side)
+      const [lo, hi] = [Math.max(e.lo, c.lo), Math.min(e.hi, c.hi)]
+      const crossAxis: 'X' | 'Z' = along(c.side) === 'x' ? 'Z' : 'X'
+      const other = rects.find((o) => o !== mainRep && frontOf(o, c.side) && Math.min(hi, extentOn(o, c.side).hi) - Math.max(lo, extentOn(o, c.side).lo) > 0.3)
+      const tan = hi - lo > 1e-6 ? (c.apexM - c.shoulderM) / ((hi - lo) / 2) : 0
+      const pitch = (Math.atan(tan) * 180) / Math.PI
+      const why = other ? `the gable wall drawn there stands over ${(Math.min(hi, extentOn(other, c.side).hi) - Math.max(lo, extentOn(other, c.side).lo)).toFixed(2)} m of the body in front of the main one on that side (${(other.maxX - other.minX).toFixed(2)} × ${(other.maxZ - other.minZ).toFixed(2)} m): it is that body's own gable, not a second ridge on the main body's walls`
+        : hi - lo < MASSING_TOLERANCES.minBodyM ? `the gable wall drawn there is ${(hi - lo).toFixed(2)} m wide over the main body`
+          : c.part.ridge !== undefined && c.part.ridge !== crossAxis ? `the read states its ridge along ${c.part.ridge}; a cross gable seen on the ${c.side.toLowerCase()} runs along ${crossAxis}`
+            : pitch < ROOF_SYSTEM_TOLERANCES.minPitchDeg || pitch > ROOF_SYSTEM_TOLERANCES.maxPitchDeg ? `the gable wall drawn there rises ${(c.apexM - c.shoulderM).toFixed(2)} m over half of ${(hi - lo).toFixed(2)} m (${pitch.toFixed(1)}°): not a roof's pitch` : undefined
+      if (why) { crossCands.splice(crossCands.indexOf(c), 1); unbuiltParts.push({ part: c.part, why }); base.alternatives.push(`STRUCTURE: ${name} is not built as a cross gable: ${why}`) }
+    }
+  }
   for (const [i, rect] of rects.entries()) {
     const id = i === 0 ? 'mass-main' : `mass-wing-${i}`
     const reads = allReads[i]
