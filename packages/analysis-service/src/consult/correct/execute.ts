@@ -1042,6 +1042,20 @@ export function sideEavesM(m: CanonicalBuildingModel, side: Side, range?: { lo: 
   }).filter((o) => o.share > 0).sort((a, b) => b.share - a.share || b.area - a.area)[0]
   if (over) return levelOf(m, over.x.levelId).elevation + over.x.eaveOffset
   const walls = exteriorWalls(m).filter((w) => sideOfWall(m, w) === side)
+  // executor 1.9.0 (v3.54.21): walls that die into the planes of a roof system carry no top of their own (the ring stands
+  // to the highest ridge and is cut by the planes) — read as a wall height they put the "eaves" at the ridge, and every
+  // elevation then failed to register on a body whose roofs meet. The eaves seen on this side are the eaves of the plane
+  // that drains to it over most of its run; on a gable-end side, of the largest plane that ends there.
+  if (walls.some((w) => w.topProfile?.kind === 'FOLLOW_ROOF_PLANES')) {
+    const out = side === 'FRONT' ? { x: 0, z: -1 } : side === 'REAR' ? { x: 0, z: 1 } : side === 'LEFT' ? { x: -1, z: 0 } : { x: 1, z: 0 }
+    const followed = new Set(walls.flatMap((w) => (w.topProfile?.kind === 'FOLLOW_ROOF_PLANES' ? w.topProfile.planeIds : [])))
+    const run = (pl: CanonicalBuildingModel['roofPlanes'][number]): number => { const q = pl.boundary.map((v) => (ax === 'x' ? v.x : v.z)); return r ? Math.max(0, Math.min(Math.max(...q), r.hi) - Math.max(Math.min(...q), r.lo)) : Math.max(...q) - Math.min(...q) }
+    const areaOf = (pl: CanonicalBuildingModel['roofPlanes'][number]): number => Math.abs(pl.boundary.reduce((t, a, i) => { const b = pl.boundary[(i + 1) % pl.boundary.length]; return t + a.x * b.z - b.x * a.z }, 0)) / 2
+    const cands = m.roofPlanes.filter((pl) => followed.has(pl.id) && pl.pitchDeg > 0 && run(pl) > 0)
+    const facing = cands.filter((pl) => pl.downslope.x * out.x + pl.downslope.z * out.z > 0.7)
+    const pick = [...(facing.length > 0 ? facing : cands)].sort((a, b) => run(b) - run(a) || areaOf(b) - areaOf(a) || a.id.localeCompare(b.id))[0]
+    if (pick) return pick.datum.y
+  }
   return Math.max(...walls.map((w) => { const lv = levelOf(m, w.levelId); return lv.elevation + w.baseOffset + (w.topProfile ? lv.height : w.height) }))
 }
 

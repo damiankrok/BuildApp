@@ -10,7 +10,7 @@ import { applyCommands } from '@buildapp/commands'
 import { compileBuilding } from '@buildapp/geometry'
 import { createEmptyModel, validateModel } from '@buildapp/model'
 import type { CanonicalBuildingModel } from '@buildapp/model'
-import { executeCorrections, modelRevision } from '../src/consult/correct/execute.js'
+import { executeCorrections, modelRevision, sideEavesM } from '../src/consult/correct/execute.js'
 import type { BindPicture, BindView, CorrectionProposal } from '../src/consult/correct/execute.js'
 import { bodiesOf, massingCommands, roofRegionsOfModel } from '../src/consult/massing/massing.js'
 import type { MassingHypothesis, RoofSpec } from '../src/consult/massing/massing.js'
@@ -132,5 +132,17 @@ describe('ops 1.13.0: the kernel is asked before the roof system is proposed', (
     const r = applyCommands(empty, apart)
     expect(r.failedAt).toBeUndefined()
     expect(validateModel(r.model).ok).toBe(true)
+  })
+})
+
+describe('executor 1.9.0: the eaves of a side whose walls die into roof planes', () => {
+  it('are the eaves of the plane that drains to that side — not the ring\'s height (the ridge), which made every elevation fail to register', () => {
+    const m = modelOf([MAIN, WING])
+    // the rear: the main roof's rear slope drains there; the left: a gable end of the main roof
+    expect(sideEavesM(m, 'REAR')).toBeCloseTo(3.4, 2)
+    expect(sideEavesM(m, 'LEFT')).toBeCloseTo(3.4, 2)
+    // the front, over the wing's own stretch: the wing's gable end, its eaves
+    expect(sideEavesM(m, 'FRONT', { lo: 4, hi: 8 })).toBeCloseTo(3.4, 2)
+    expect(sideEavesM(m, 'REAR')).toBeLessThan(5)
   })
 })

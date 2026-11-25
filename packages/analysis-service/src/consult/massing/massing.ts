@@ -57,6 +57,8 @@ export type PropertyFate = { property: string; fate: 'APPLIED' | 'RETAINED_WITH_
 export type BodySpec = { id: string; rect: Rect; roof: RoofSpec; provenance: Record<string, Prov>; fates?: PropertyFate[]; /** which description of the agreed structure this body carries (the binding the builder made; absent: no structure was agreed) */ describes?: 'MAIN' | 'MAIN_BESIDE' | 'PART' | 'NONE' }
 /** A description is bound to a body by its own views when at least this many more of them draw one ridge direction than the other. */
 export const BIND_BY_VIEWS = 2
+/** massing 1.12.0: a cross roof of the read is a body's own roof where its stated span covers at least this share of that body's stretch on the side it is seen on. */
+export const CROSS_AS_BODY = { minCover: 0.6 } as const
 /** A built pitch agrees with a stated one within this (degrees); a height within `MASSING_TOLERANCES.heightAgreeM` / share. */
 export const PITCH_AGREE_DEG = 6
 /** …and is THE stated pitch within this (degrees). */
@@ -1012,6 +1014,8 @@ export function solveMassing(input: MassingInput): MassingHypothesis {
   // the rear, slopes on both sides: the cross wing itself), the part is that body's description — and the main roof's
   // is the bodies' beside it. Nothing is turned against four views of its own because a larger label was nearer.
   const partOf = new Map<Rect, BuildStructure['parts'][number]>(wingBodies.map((q) => [q.rect, q.part]))
+  /** cross roofs of the read bound to a body of the outline as that body's own roof (not looked for as a cross gable) */
+  const boundCross = new Set<string>()
   let mainRects = new Set<Rect>(rects.length > 0 ? [rects[0]] : [])
   if (input.structure && rects.length > 1 && !partOf.has(rects[0])) {
     const st = input.structure
@@ -1019,6 +1023,16 @@ export function solveMassing(input: MassingInput): MassingHypothesis {
     const own0: 'X' | 'Z' | undefined = v0.X - v0.Z >= BIND_BY_VIEWS ? 'X' : v0.Z - v0.X >= BIND_BY_VIEWS ? 'Z' : undefined
     const reaches = (r: Rect, side: StructureSide): boolean => (side === 'FRONT' ? rects.every((o) => r.minZ <= o.minZ + 0.05) : side === 'REAR' ? rects.every((o) => r.maxZ >= o.maxZ - 0.05) : side === 'LEFT' ? rects.every((o) => r.minX <= o.minX + 0.05) : rects.every((o) => r.maxX >= o.maxX - 0.05))
     const free = st.parts.filter((q) => ![...partOf.values()].includes(q))
+    // massing 1.12.0 (form-read/3): the read may state that second ridge as a CROSS roof (a roof region with no part named
+    // under it — it cannot see how small a step of the outline is). Where the cross roof it reports has the ridge this
+    // body's own views draw, is seen on a side this body stands furthest out on, and its stated span along that side
+    // covers most of this body's own stretch (or no span is stated), that cross roof IS this body's roof: bound as its
+    // description with its own pitch and ridge height, and no longer a cross gable looked for on another body's walls.
+    const whole = (side: StructureSide): { lo: number; hi: number } => ({ lo: Math.min(...rects.map((r) => extentOn(r, side).lo)), hi: Math.max(...rects.map((r) => extentOn(r, side).hi)) })
+    const spanOf = (c: NonNullable<BuildStructure['cross']>[number]): { lo: number; hi: number } | undefined => { if (!c.span) return undefined; const e = whole(c.side); return signOf(c.side) === 1 ? { lo: e.lo + c.span.fromShare * (e.hi - e.lo), hi: e.lo + c.span.toShare * (e.hi - e.lo) } : { lo: e.hi - c.span.toShare * (e.hi - e.lo), hi: e.hi - c.span.fromShare * (e.hi - e.lo) } }
+    const covers = (c: NonNullable<BuildStructure['cross']>[number]): boolean => { const sp = spanOf(c); if (!sp) return true; const e = extentOn(rects[0], c.side); return Math.min(e.hi, sp.hi) - Math.max(e.lo, sp.lo) >= CROSS_AS_BODY.minCover * (e.hi - e.lo) }
+    const crossOwn = own0 && st.mainRidge && st.mainRidge !== own0 && !free.some((q) => q.ridge === own0 && reaches(rects[0], q.where)) ? (st.cross ?? []).find((c) => c.ridge === own0 && reaches(rects[0], c.side) && covers(c)) : undefined
+    if (crossOwn) { boundCross.add(crossOwn.id); free.push({ what: 'CROSS_ROOF', where: crossOwn.side, fullStoreys: st.fullStoreys ?? 1, roof: 'GABLE', ridge: crossOwn.ridge, ...(crossOwn.pitchDeg !== undefined ? { pitchDeg: crossOwn.pitchDeg } : {}), ...(crossOwn.ridgeM ? { ridgeM: crossOwn.ridgeM } : {}), roofId: crossOwn.id }) }
     const explains = own0 && st.mainRidge && st.mainRidge !== own0 ? free.find((q) => q.ridge === own0 && reaches(rects[0], q.where)) : undefined
     if (explains && own0) {
       partOf.set(rects[0], explains)
@@ -1045,6 +1059,7 @@ export function solveMassing(input: MassingInput): MassingHypothesis {
   // it draws the gable wall; where no gable wall is drawn there, the read's own shares of the building's width do — an
   // estimate, named as one.
   for (const c of input.structure?.cross ?? []) {
+    if (boundCross.has(c.id)) continue
     if (crossCands.some((q) => q.side === c.side)) continue
     const part = { what: 'CROSS_ROOF', where: c.side, fullStoreys: 1 as const, roof: 'GABLE' as const, ridge: c.ridge, ...(c.pitchDeg !== undefined ? { pitchDeg: c.pitchDeg } : {}), roofId: c.id }
     const seen = byView.get(c.side as Side)

@@ -142,6 +142,23 @@ describe('a description is bound to the body its own views draw, not to the larg
     expect(b.model.roofEdges.filter((e) => e.kind === 'VALLEY')).toHaveLength(4)
     expect(() => compileBuilding(b.model)).not.toThrow()
   })
+  it('the same second ridge stated as a CROSS roof (form-read/3 names no part under it): it is that body\'s roof, with its own pitch — not a cross gable on another body\'s walls', () => {
+    // seen on the front, from a third to two thirds of the building's width: the middle body's own stretch
+    const CROSS: BuildStructure = { ...MAIN_X, parts: [], cross: [{ id: 'R2', side: 'FRONT', ridge: 'Z', span: { fromShare: 0.3, toShare: 0.7 }, pitchDeg: 45, ridgeM: { m: 8, status: 'PRINTED' } }] }
+    const h = solveMassing({ outline, silhouettes, structure: CROSS })
+    expect(h.bodies[0].roof.ridgeAxis).toBe('Z')
+    expect(h.bodies[0].describes).toBe('PART')
+    expect(h.crossRoofs ?? []).toHaveLength(0)
+    expect(h.bodies[0].fates?.find((f) => f.property === 'part')?.taken).toMatch(/CROSS_ROOF@FRONT ridge Z/)
+    expect(h.bodies.filter((b) => b.describes === 'MAIN')).toHaveLength(1)
+    expect(roofSystemOf(h).relations.filter((r) => r.kind === 'VALLEY')).toHaveLength(2)
+  })
+  it('counter-trial: a cross roof stated over another stretch of the front is not this body\'s roof (its span does not cover the body)', () => {
+    const ELSEWHERE: BuildStructure = { ...MAIN_X, parts: [], cross: [{ id: 'R2', side: 'FRONT', ridge: 'Z', span: { fromShare: 0.72, toShare: 0.98 }, pitchDeg: 45 }] }
+    const h = solveMassing({ outline, silhouettes, structure: ELSEWHERE })
+    expect(h.bodies[0].describes).not.toBe('PART')
+    expect(h.alternatives.join('\n')).not.toMatch(/is the body whose own elevations draw that ridge/)
+  })
 })
 
 describe('pitch, eaves and ridge are agreed again after the last change (settleRoof)', () => {
