@@ -195,3 +195,9 @@ ze środowiska) — nie nowa pula i nie jej podniesienie; księga wycenia żąda
   w próbie nie ma HIP; kolejny w wylosowanym porządku z HIP: Dom pod osiką), poprawki usterek znalezionych w próbie
   i ponowne biegi tych domów (od tej chwili DEV; pierwsze wyniki zachowane), host na ostatecznej rewizji;
 - stan w chwili wpisu: księga 60,360809 USD, etap 4,070356 USD.
+
+### 9c. Piąty dom NEW-H (dopisane przed jego analizą)
+
+Po czterech domach w próbie nie ma warstwy HIP, a budżet (§7a) na piąty pozwala: §5 dopuszcza piąty dom w tej sytuacji.
+Pierwszy dom z HIP w wylosowanym porządku: **Dom pod osiką** (ARCHON; HIP + KRZYŻUJĄCE, oba czytelniki zgodne). Te same
+ramiona B / F@B / F@B/2, te same reguły; pozostałe trzy opisane pakiety (Argos, Newcastle II, Elsa III) zostają poza próbą.
