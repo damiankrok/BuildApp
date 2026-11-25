@@ -580,6 +580,8 @@ export type ModelCheckInput = {
   openDefects?: ReadonlyArray<{ id: string; about: string; scope: string; severity: string }>
   /** v3.54.17 R2 (contract 0.6.0): the editable elements of this revision by id (`element-index.ts`), sent in the message. */
   elements?: ElementIndex
+  /** v3.54.21: the house's features as the sources state them (`feature-map.ts`), made before any model existed: the list the model is checked against — never a list made from the model. */
+  featureMap?: string
   model: ConsultantModel
   price: Price
   spend?: ConsultSpend
@@ -614,9 +616,10 @@ export async function checkModel(input: ModelCheckInput): Promise<ModelCheckResu
   const sidesN = pictures.find((p) => p.what === 'MODEL_VIEWS' && p.label.startsWith('SIDES'))?.n
   const indexText = input.elements && input.elements.revision === input.baseRevision ? elementIndexText(input.elements, sidesN) : undefined
   if (indexText) content.push({ type: 'text', text: indexText })
+  if (input.featureMap) content.push({ type: 'text', text: `${input.featureMap}\nFor each KEY feature say in observations whether the model's views show it (about: its id), and report it as a defect when they do not — whatever the model's element index lists.` })
   content.push({ type: 'text', text: `Check the model against the drawings and answer with ${REVIEW_TOOL_NAME}.` })
   const messages: unknown[] = [{ role: 'user', content }]
-  input.record({ at: now().toISOString(), kind: 'SENT_MODEL_CHECK', baseRevision: input.baseRevision, pictures, applied: input.applied ?? [], refused: input.refused ?? [], openDefects: input.openDefects ?? [], ...(indexText && input.elements ? { elementIndex: { version: input.elements.version, revision: input.elements.revision, sha256: input.elements.sha256, elements: input.elements.elements.length, text: indexText } } : { elementIndex: null }) })
+  input.record({ at: now().toISOString(), kind: 'SENT_MODEL_CHECK', baseRevision: input.baseRevision, featureMap: input.featureMap ?? null, pictures, applied: input.applied ?? [], refused: input.refused ?? [], openDefects: input.openDefects ?? [], ...(indexText && input.elements ? { elementIndex: { version: input.elements.version, revision: input.elements.revision, sha256: input.elements.sha256, elements: input.elements.elements.length, text: indexText } } : { elementIndex: null }) })
   const consultInput = { problem: { problemId: 'model-check', kind: 'SCALE_UNSETTLED', frameId: '', assetId: '', labels: [], analyzerWhy: '' } as unknown as LabelProblem, metrics: {} as MetricEvidenceSet, raster: { width: 1, height: 1, data: new Uint8ClampedArray(4) }, baseRevision: input.baseRevision, model: input.model, price: input.price, ...(input.spend ? { spend: input.spend } : {}), record: input.record, ...(input.signal ? { signal: input.signal } : {}), now }
   const evidence: EvidenceHandler = (raw) => {
     const r = raw as Region & { picture?: number; why?: string }

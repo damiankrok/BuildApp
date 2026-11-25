@@ -21,6 +21,7 @@ import type { Poly } from '../correct/source-gate.js'
 import { facadePx, levelOf, openingBoxes, pictureOf, tolPxOf, toFrameX, toFrameY, viewOf } from '../correct/execute.js'
 import type { BindPicture, BindView, Bound, Ctx, CorrectionProposal, Refusal, Side } from '../correct/execute.js'
 import { targetBodies } from '../correct/resolve.js'
+import type { BuildStructure } from '../structure.js'
 import { area, bodiesOf, bodyCommands, extentOn, joinedBodiesOf, roofSystemOf, ROOF_SYSTEM_ID, outlineWithFront, pointWithFront, HIP_PLANE_SIDES, hipPlaneCommands, hipSpecFrom, hipWallTopM, MASSING_TOLERANCES, MAX_OVERHANG_M, MASSING_VERSION, massingCommands, MINIATURE_CONVENTIONS, profileOver, readableStretch, registerByPlan, solveMassing, wallCornerTopM } from './massing.js'
 import type { BodySpec, Fidelity, MassingHypothesis, ModelBody, OutlineObservation, Rect, RoofSpec, SilhouetteObservation } from './massing.js'
 
@@ -657,15 +658,17 @@ function withEvidence(cmds: BuildingCommand[], b: BodySpec, frames: string[]): B
 /** ops 1.9.0: a reading's top agrees with the page's building height within this (the page measures from the ground, the model from its floor). */
 export const PAGE_HEIGHT_AGREE = { m: 0.6, share: 0.1 } as const
 
-export function bindBuildMassing(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
-  const m = ctx.model
-  const obs = ctx.massing
-  if (!obs?.outline) return { status: 'NEEDS_EVIDENCE', code: 'NO_OUTLINE', why: 'BUILD_MASSING needs the plan outline (a plan frame read at a measured scale, or the walls of a model): none was observed' }
+/**
+ * ops 1.12.0: the hypothesis BUILD_MASSING takes from the observations — solved as labelled and turned by a quarter, the
+ * reading the page's height fits (else the one whose views agree on more bodies) taken. One function for the executor and
+ * for the offline replay of a recorded input (`record.massing.input`), so the two cannot disagree.
+ */
+export function massingHypothesisOf(obs: MassingObservations & { outline: NonNullable<MassingObservations['outline']> }, facts: { roofPitchDeg?: number; buildingHeightM?: number; structure?: BuildStructure } | undefined, ownFrame: boolean): { h: MassingHypothesis; turn: boolean } {
   // §6: the side each labelled elevation draws is a hypothesis of its own — solved as labelled and turned by 90°, the
   // reading whose views agree on every body's heights is taken (ties stay as labelled); the other is kept named
-  const pitchFact = { ...(ctx.facts?.roofPitchDeg !== undefined ? { publishedPitchDeg: ctx.facts.roofPitchDeg } : {}), ...(ctx.facts?.buildingHeightM !== undefined ? { publishedHeightM: ctx.facts.buildingHeightM } : {}) }
+  const pitchFact = { ...(facts?.roofPitchDeg !== undefined ? { publishedPitchDeg: facts.roofPitchDeg } : {}), ...(facts?.buildingHeightM !== undefined ? { publishedHeightM: facts.buildingHeightM } : {}) }
   const agreeing = (x: MassingHypothesis): number => x.bodies.filter((b) => b.provenance.height?.fidelity === 'SOURCE_DERIVED').length
-  const structureFact = ctx.facts?.structure ? { structure: ctx.facts.structure } : {}
+  const structureFact = facts?.structure ? { structure: facts.structure } : {}
   const wallsFact = { ...(obs.planWalls && obs.planWalls.length > 0 ? { planWalls: obs.planWalls } : {}), ...structureFact }
   const asLabelled = solveMassing({ outline: obs.outline, silhouettes: obs.silhouettes, ...pitchFact, ...wallsFact })
   // ops 1.7.0: the same quarter turn the orientation hypothesis takes (the plan's main entrance decides which), so the
@@ -677,8 +680,7 @@ export function bindBuildMassing(ctx: Ctx, p: CorrectionProposal): Bound | Refus
   // plan's main entrance says which end the front is; unmarked, the first turn stands as a convention.
   const planFront: Side = obs.entranceSide === TURN_BACK.FRONT ? 'LEFT' : 'RIGHT'
   // (a model that already has bodies keeps its frame: a body added to it is read through the turned side mapping, as before)
-  const ownFrame = !bodiesOf(m).some((b) => b.ringIds.length > 0)
-  const quarter = planFront === 'LEFT' ? TURN_BACK : TURN
+    const quarter = planFront === 'LEFT' ? TURN_BACK : TURN
   const frame0 = obs.outline.outline
   const turnedH = ownFrame ? solveMassing({ outline: { ...obs.outline, outline: outlineWithFront(obs.outline.outline, planFront) }, silhouettes: obs.silhouettes, ...pitchFact, ...structureFact, ...(obs.planWalls && obs.planWalls.length > 0 ? { planWalls: obs.planWalls.map((w) => ({ a: pointWithFront(w.a, planFront, frame0), b: pointWithFront(w.b, planFront, frame0) })) } : {}) }) : solveMassing({ outline: obs.outline, silhouettes: obs.silhouettes.map((q) => ({ ...q, side: quarter[q.side] })), ...pitchFact, ...wallsFact })
   // ops 1.9.0: which reading the page's own building height fits. The two readings put the same drawn heights over
@@ -686,13 +688,22 @@ export function bindBuildMassing(ctx: Ctx, p: CorrectionProposal): Bound | Refus
   // exactly one reading's top agrees with it, that reading is taken — a fact from outside the drawings decides before
   // a count of agreeing views does (two views that agree with each other on the wrong width agree on the wrong height)
   const topOf = (x: MassingHypothesis): number | undefined => (x.status === 'BUILDABLE' && x.bodies.length > 0 ? Math.max(...x.bodies.map((b) => b.roof.ridgeM ?? b.roof.eavesM)) : undefined)
-  const pageH = ctx.facts?.buildingHeightM
+  const pageH = facts?.buildingHeightM
   const fits = (x: MassingHypothesis): boolean => { const t = topOf(x); return pageH !== undefined && t !== undefined && Math.abs(t - pageH) <= Math.max(PAGE_HEIGHT_AGREE.m, PAGE_HEIGHT_AGREE.share * pageH) }
   const byHeight = pageH !== undefined && fits(asLabelled) !== fits(turnedH) ? (fits(turnedH) ? 'TURNED' : 'LABELLED') : undefined
   const turn = byHeight ? byHeight === 'TURNED' : agreeing(turnedH) > agreeing(asLabelled)
   const heightNote = byHeight ? [`the page states the building ${pageH} m high: ${byHeight === 'TURNED' ? 'turned by 90°' : 'as labelled'} the top stands at ${(topOf(byHeight === 'TURNED' ? turnedH : asLabelled) as number).toFixed(2)} m, ${byHeight === 'TURNED' ? 'as labelled' : 'turned by 90°'} at ${topOf(byHeight === 'TURNED' ? asLabelled : turnedH)?.toFixed(2) ?? 'no'} m — the reading the page's height fits is taken (heights agreeing: ${agreeing(asLabelled)} as labelled, ${agreeing(turnedH)} turned)`] : []
   const h: MassingHypothesis = turn && !ownFrame ? { ...turnedH, alternatives: [...turnedH.alternatives, `the elevations draw the model's sides turned by 90° from their labels: ${agreeing(turnedH)} body/bodies' heights agree so against ${agreeing(asLabelled)} as labelled (the labelled reading is kept as an alternative)`] } : turn ? { ...turnedH, planFront, alternatives: [...turnedH.alternatives, `the body is built in the elevations' frame, the plan sheet's ${planFront.toLowerCase()} side as its front (${obs.entranceSide === undefined ? 'which end is a convention: the plan read marks no main entrance' : obs.entranceSide === planFront ? 'the plan marks its main entrance there' : `the plan marks its main entrance on its ${obs.entranceSide.toLowerCase()} side, where neither quarter turn puts the front: a convention`}) — the elevations draw the plan's sides turned by 90° from their labels: ${agreeing(turnedH)} body/bodies' heights agree so against ${agreeing(asLabelled)} as labelled (the labelled reading is kept as an alternative)`] } : { ...asLabelled, alternatives: [...asLabelled.alternatives, ...(agreeing(turnedH) === agreeing(asLabelled) && turnedH.status === 'BUILDABLE' ? [`turned by 90° the elevations agree as well (${agreeing(turnedH)} body/bodies): the labels are kept`] : [])] }
   if (heightNote.length > 0) h.alternatives = [...h.alternatives, ...heightNote]
+  return { h, turn }
+}
+
+export function bindBuildMassing(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
+  const m = ctx.model
+  const obs = ctx.massing
+  if (!obs?.outline) return { status: 'NEEDS_EVIDENCE', code: 'NO_OUTLINE', why: 'BUILD_MASSING needs the plan outline (a plan frame read at a measured scale, or the walls of a model): none was observed' }
+  const ownFrame = !bodiesOf(m).some((b) => b.ringIds.length > 0)
+  const { h, turn } = massingHypothesisOf({ ...obs, outline: obs.outline }, ctx.facts, ownFrame)
   // ops 1.12.0: the observations the hypothesis was solved from are part of the record — the body can be solved again
   // offline from the record alone (a failed or a disputed body is reproduced without buying its readings a second time)
   const input = { outline: obs.outline, silhouettes: obs.silhouettes, ...(obs.planWalls ? { planWalls: obs.planWalls } : {}), ...(obs.entranceSide ? { entranceSide: obs.entranceSide } : {}), facts: { ...(ctx.facts?.roofPitchDeg !== undefined ? { roofPitchDeg: ctx.facts.roofPitchDeg } : {}), ...(ctx.facts?.buildingHeightM !== undefined ? { buildingHeightM: ctx.facts.buildingHeightM } : {}), ...(ctx.facts?.structure ? { structure: ctx.facts.structure } : {}) }, ownFrame, taken: turn ? 'TURNED_90' : 'AS_LABELLED' }
