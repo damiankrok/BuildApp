@@ -110,3 +110,34 @@ księgowań) → 12,252404 USD. **Limit etapu 9,5 USD**; rezerwa ≥ 2,7 USD nie
 DEV ≤ 2,2; NEW-H ≤ 4,6 (B ≈ 0,6/dom, F@B ≈ 0,3/dom); host (świeży bieg + powtórka + bez tokenu) ≤ 1,0; zapas 1,7.
 Ta sama pula, ta sama usługa, klucz tylko ze środowiska. Ograniczenie kosztów: replaye nagrań, cache promptów 5 min,
 dobór obrazów (jedna elewacja na stronę, do 3 perspektyw, miniatury i duplikaty pomijane z zapisaną przyczyną).
+
+## 8. Stan przed zamrożeniem (dopisane 2026-11-25, przed zamrożeniem i przed losowaniem NEW-H)
+
+Wszystko poniżej dotyczy **DEV** (domy znane: 20 domów v3.54.20, cztery domy NEW-G i siedem kontrprób audytu wśród nich).
+Zmiany kodu wprowadzone po obejrzeniu wyników DEV są dozwolone (DEV nie jest dowodem generalizacji) i są tu wymienione,
+żeby ocena NEW-H mogła je odróżnić od reguł zapisanych w §2–§6.
+
+Biegi DEV tego etapu (wszystkie zachowane, pierwszy wynik każdego zachowany):
+
+- `w1`–`w5`: 0 USD, odtworzenie nagrań siedmiu domów audytu na kolejnych commitach (odczyt struktury: nagrany `form-read/2`).
+- `v1` (Amber) i `v2` (siedem domów audytu): **świeży odczyt `form-read/3`** z oryginałów i perspektyw + recenzja na żywo;
+  pozostałe odczyty z nagrań. `v3`: te same zakupione odczyty `form-read/3` odtworzone (0 USD) na poprawionym kodzie
+  i nowa recenzja na żywo.
+- `d1`: 0 USD, 24 domy DEV na kodzie przed zamrożeniem (nagrane odczyty).
+
+Zmiany po obejrzeniu DEV (każda ogólna, z testem i kontrpróbą; żadnego warunku po domu):
+
+1. arbitraż i readback trzymają opis dachu głównego przy bryle, do której go związano (nie przy największym prostokącie);
+2. ciało ze źródeł, które nie zastąpiło LOCAL, zostaje w zapisie (`massing-rejected.json`);
+3. zdjęcia do odczytu struktury skalowane przez uśrednienie pola, nie przez pomijanie wierszy; obraz-zaślepka
+   (32 × 32 px) nie jest wysyłany jako „przekrój" (ani do odczytu, ani do recenzji);
+4. korekta jednego dachu układu rozwiązuje cały układ od nowa (ops 1.13.0); kernel jest pytany przed zaproponowaniem
+   układu (odmowa: dachy osobno, nazwany `BUILD_ERROR`);
+5. proponowana kalenica powyżej wysokości budynku podanej przez stronę jest odrzucana (`ABOVE_PUBLISHED_HEIGHT`);
+6. który bok jest frontem: odczyt, którego elewacje mają jedną skalę (`SCALE_AGREE` 1,12 / 1,30), po wysokości strony,
+   przed liczbą zgodnych wysokości; prawie kwadratowy dom nie rozstrzyga niczego;
+7. dach poprzeczny z odczytu leżący nad bryłą rzutu jest dachem tej bryły (`CROSS_AS_BODY` 0,6);
+8. okap boku, którego ściany kończą się pod połaciami, czytany z połaci (nie z wysokości pierścienia = kalenicy);
+9. zapis, kto odpowiedział na odczyt struktury (zakupione w tym biegu / odtworzone nagranie i kontrakt odpowiedzi).
+
+Kryteria §3 i oczekiwania §6 bez zmian. Zamrożenie: commit wpisany w §9 przed losowaniem.
