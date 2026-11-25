@@ -26,7 +26,7 @@ import { round6, stableId } from '@buildapp/source-common'
 import type { MetricEvidence, SpecificationFinding } from './schema.js'
 
 export const SPEC_READER_NAME = 'published-specification-reader'
-export const SPEC_READER_VERSION = '1.0.0'
+export const SPEC_READER_VERSION = '1.1.0'
 
 /** The frame a statement printed on the page itself belongs to. */
 export const PUBLISHED_PAGE_FRAME = 'frame-published-page'
@@ -71,7 +71,8 @@ const ROOF_KINDS: Array<{ test: RegExp; value: string; why: string }> = [
   { test: /\bdwuspadow|\bgable\b|\bsiodlow/, value: 'GABLE', why: 'a roof described as falling two ways off a ridge' },
   { test: /\bczterospadow|\bkopertow|\bnamiotow|\bhipped?\b/, value: 'HIP', why: 'a roof described as falling four ways' },
   { test: /\bwielospadow/, value: 'MULTI_PITCH', why: 'a roof described as falling several ways' },
-  { test: /\bplaski\b|\bstropodach|\bflat roof\b/, value: 'FLAT', why: 'a roof described as flat' },
+  // v3.54.21 (NEW-H Lyon): an inflected adjective is still the word — "z płaskim dachem", "dach płaski", "płaskich dachów"
+  { test: /\bplaski\b|\bplask\w*\s+dach|\bdach\w*\s+plask|\bstropodach|\bflat roof\b/, value: 'FLAT', why: 'a roof described as flat' },
   { test: /\bmansardow/, value: 'MANSARD', why: 'a roof described as a mansard' },
 ]
 
@@ -133,7 +134,7 @@ export function readSpecifications(specifications: readonly PublishedSpecificati
     const flat = deaccent(spec.text)
 
     // --- the roof --------------------------------------------------------
-    if (spec.key === 'roof' || /\bdach\b|\broof\b/.test(flat)) {
+    if (spec.key === 'roof' || /\bdach\w*|\bstropodach\w*|\broof\b/.test(flat)) {
       const kind = ROOF_KINDS.find((k) => k.test.test(flat))
       if (kind) {
         findings.push({
@@ -156,10 +157,17 @@ export function readSpecifications(specifications: readonly PublishedSpecificati
 
       let pitch: number | null = null
       let quote = ''
+      let fall: { n: number; quote: string } | undefined
       for (const pattern of ANGLE_PATTERNS) {
         const m = pattern.exec(spec.text)
         if (!m) continue
         const n = number(m[1])
+        // v3.54.21 (NEW-H Lyon: "Kąt nachylenia dachu 1.15°"): a roof angle above 0° and below 3° is the fall of a flat
+        // roof, not a pitch — said as such, never dropped as if nothing were printed
+        if (n !== null && n > 0 && n < 3) {
+          fall = { n, quote: m[0] }
+          continue
+        }
         // A pitch outside this range is not a pitch: it is a percentage, a
         // year, a product code or a thickness that happened to sit next to the
         // word.
@@ -168,8 +176,11 @@ export function readSpecifications(specifications: readonly PublishedSpecificati
         quote = m[0]
         break
       }
+      if (pitch === null && fall && !findings.some((f) => f.key === spec.key && f.subject === 'ROOF_KIND')) {
+        findings.push({ key: spec.key, subject: 'ROOF_KIND', value: 'FLAT', quote: spec.text.slice(0, 200), confidence: 0.85, why: `the publisher prints the roof's fall as "${fall.quote}": below 3° a roof is flat (its fall drains the membrane), not pitched` })
+      }
       if (pitch !== null) emit('ANGLE', pitch, 'deg', spec, quote, 0.92, `the publisher prints the roof pitch as "${quote}"`)
-      else if (/nachyleni|spadek|pitch|slope/.test(flat)) unread.push({ key: spec.key, label: spec.label, why: 'the line speaks of a pitch but states no angle this reader could recognise' })
+      else if (!fall && /nachyleni|spadek|pitch|slope/.test(flat)) unread.push({ key: spec.key, label: spec.label, why: 'the line speaks of a pitch but states no angle this reader could recognise' })
     }
 
     // --- a knee wall, which is a storey height and nothing else -----------

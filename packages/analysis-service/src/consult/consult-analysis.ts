@@ -1041,17 +1041,29 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
           // while both side elevations drew them three metres lower). A captioned side is never overridden; two pictures
           // the read puts on one side are both left out (it does not know).
           const structure = await structureOf({ pkg0, graph0, sketches: A.sketches, planRaster: fr.raster, planFrameId: plan.frameId, ...(plan.parts ? { planParts: plan.parts } : {}) })
-          const captioned = new Set(A.sketches.map((x) => sideOfFacade(x.facade)).filter(Boolean))
+          // v3.54.21 (NEW-H Anna II): a WEST / EAST that is only LOCAL's reading of pictures the publisher captions with the
+          // same words ("side elevation" twice) is not a caption — the same weak label the registration's side decision
+          // treats as a hypothesis. Its two side drawings went in mirrored: the garage's gable built as a cross gable on the
+          // other side, a corner stub the compiler could not close, and a flat garage the structure contradicted
+          const captionIn = (frameId: string): string => { const fr = graph0.coordinateFrames.find((q) => q.id === frameId); return (pkg0.assets.find((a) => a.id === fr?.assetId)?.caption ?? '').trim().toLowerCase() }
+          const weakIn = (x: { facade: string; frameId: string }): boolean => (x.facade === 'EAST' || x.facade === 'WEST') && captionIn(x.frameId) !== '' && A.sketches.some((y) => y.frameId !== x.frameId && (y.facade === 'EAST' || y.facade === 'WEST' || y.facade === 'SIDE_UNSPECIFIED') && captionIn(y.frameId) === captionIn(x.frameId))
+          const captioned = new Set(A.sketches.filter((x) => !weakIn(x)).map((x) => sideOfFacade(x.facade)).filter(Boolean))
           const readSide = (frameId: string): Side | undefined => {
             const n = (structure?.frames ?? []).indexOf(frameId) + 1
             const sd = n > 0 ? structure?.agreed?.pictures.find((q) => q.n === n)?.shows : undefined
             if (!sd || sd === 'NONE' || captioned.has(sd as Side)) return undefined
             return (structure?.agreed?.pictures ?? []).filter((q) => q.shows === sd).length === 1 ? (sd as Side) : undefined
           }
-          const sidesByRead: Array<{ frameId: string; side: Side }> = []
+          const sidesByRead: Array<{ frameId: string; side: Side; weakLabel?: string }> = []
+          // the weak labels give way to the read only when it puts every one of those pictures on its own side; otherwise
+          // LOCAL's labels stay, as before, the convention of last resort
+          const weak = A.sketches.filter((x) => x.sketch && weakIn(x))
+          const weakRead = weak.map((x) => readSide(x.frameId))
+          const readDecidesWeak = weak.length > 0 && weakRead.every((v) => v !== undefined) && new Set(weakRead).size === weak.length
           const silhouettes = A.sketches.flatMap((x) => {
-            const side = sideOfFacade(x.facade) ?? (x.sketch ? readSide(x.frameId) : undefined)
-            if (side && !sideOfFacade(x.facade)) sidesByRead.push({ frameId: x.frameId, side })
+            const isWeak = !!x.sketch && weakIn(x)
+            const side = isWeak && readDecidesWeak ? readSide(x.frameId) : sideOfFacade(x.facade) ?? (x.sketch ? readSide(x.frameId) : undefined)
+            if (side && (!sideOfFacade(x.facade) || (isWeak && readDecidesWeak))) sidesByRead.push({ frameId: x.frameId, side, ...(isWeak ? { weakLabel: x.facade } : {}) })
             const fx = graph0.coordinateFrames.find((q) => q.id === x.frameId)
             return side && x.sketch ? [{ observationId: `sk-${x.frameId.slice(-12)}`, side, frameId: x.frameId, sourceByteHash: fx?.variantByteHash ?? '', groundRow: x.sketch.groundRow ?? null, walls: x.sketch.walls.map((w) => w.polygon as Array<[number, number]>), roofs: x.sketch.roofs.map((r) => r.polygon as Array<[number, number]>) }] : []
           })
@@ -2164,13 +2176,15 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
       prevLook = undefined
       // what the look says of the features and patches the round before applied: one the source does not show is undone
       if (lastApplied.length > 0) {
-        // v3.54.21: what a look's word alone does not take out — an element the ground plan draws (any verdict), and an
-        // opening whose built box the source gate measured in the elevation (SHOULD_NOT_EXIST; WRONG_KIND still applies)
+        // v3.54.21: what a look's word alone does not take out — an element the ground plan draws, and an opening whose built
+        // box the source gate measured in the elevation. Both against either verdict: WRONG_KIND disputes the kind or the
+        // finish, not the hole (NEW-H Debora: a measured garage door taken out for its colour, "dark, the source timber");
+        // the dispute stays open, and a change of kind or a removal goes through the source gate (UPDATE / REMOVE_OPENING)
         const held = new Map<string, { verdicts: ReadonlyArray<string>; why: string }>()
         for (const a of lastApplied) {
           if (a.kind !== 'PATCH') continue
           if (a.origin === 'PLAN') held.set(a.id, { verdicts: ['SHOULD_NOT_EXIST', 'WRONG_KIND'], why: 'the ground plan draws it' })
-          else if (a.sourceVerified && (a.operation === 'ADD_OPENING' || a.operation === 'ADD_ROOF_WINDOW')) held.set(a.id, { verdicts: ['SHOULD_NOT_EXIST'], why: 'the source gate measured this opening in the elevation (its built box drawn back and supported)' })
+          else if (a.sourceVerified && (a.operation === 'ADD_OPENING' || a.operation === 'ADD_ROOF_WINDOW')) held.set(a.id, { verdicts: ['SHOULD_NOT_EXIST', 'WRONG_KIND'], why: 'the source gate measured this opening in the elevation (its built box drawn back and supported)' })
         }
         rec.reviewed = reviewOutcome(lastApplied.map((a) => a.id), res.review.appliedReview, held)
         record({ at: now().toISOString(), kind: 'APPLIED_REVIEW', round: g, reviewed: rec.reviewed })
