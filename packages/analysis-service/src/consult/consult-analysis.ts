@@ -1059,7 +1059,9 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
           // LOCAL's labels stay, as before, the convention of last resort
           const weak = A.sketches.filter((x) => x.sketch && weakIn(x))
           const weakRead = weak.map((x) => readSide(x.frameId))
-          const readDecidesWeak = weak.length > 0 && weakRead.every((v) => v !== undefined) && new Set(weakRead).size === weak.length
+          // … and only a read that saw the publisher's originals and perspectives (form-read/3): a form-read/2 answer was
+          // asked of the sketches alone, and its sides are the ones the audit found mirrored (Mindelo)
+          const readDecidesWeak = structure?.read.answeredBy?.contract === 'form-read/3' && weak.length > 0 && weakRead.every((v) => v !== undefined) && new Set(weakRead).size === weak.length
           const silhouettes = A.sketches.flatMap((x) => {
             const isWeak = !!x.sketch && weakIn(x)
             const side = isWeak && readDecidesWeak ? readSide(x.frameId) : sideOfFacade(x.facade) ?? (x.sketch ? readSide(x.frameId) : undefined)

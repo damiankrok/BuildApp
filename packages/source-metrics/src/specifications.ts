@@ -71,9 +71,13 @@ const ROOF_KINDS: Array<{ test: RegExp; value: string; why: string }> = [
   { test: /\bdwuspadow|\bgable\b|\bsiodlow/, value: 'GABLE', why: 'a roof described as falling two ways off a ridge' },
   { test: /\bczterospadow|\bkopertow|\bnamiotow|\bhipped?\b/, value: 'HIP', why: 'a roof described as falling four ways' },
   { test: /\bwielospadow/, value: 'MULTI_PITCH', why: 'a roof described as falling several ways' },
-  // v3.54.21 (NEW-H Lyon): an inflected adjective is still the word — "z płaskim dachem", "dach płaski", "płaskich dachów"
-  { test: /\bplaski\b|\bplask\w*\s+dach|\bdach\w*\s+plask|\bstropodach|\bflat roof\b/, value: 'FLAT', why: 'a roof described as flat' },
+  { test: /\bplaski\b|\bstropodach|\bflat roof\b/, value: 'FLAT', why: 'a roof described as flat' },
   { test: /\bmansardow/, value: 'MANSARD', why: 'a roof described as a mansard' },
+]
+
+/** v3.54.21 (NEW-H Lyon): on the roof's own line, an inflected adjective is still the word — "płaskim dachem", "dach płaski". */
+const ROOF_KINDS_INFLECTED: Array<{ test: RegExp; value: string; why: string }> = [
+  { test: /\bplask\w*\s+dach|\bdach\w*\s+plask|\bplask\w*$/, value: 'FLAT', why: 'the roof\'s own line describes it as flat' },
 ]
 
 const number = (text: string): number | null => {
@@ -134,8 +138,11 @@ export function readSpecifications(specifications: readonly PublishedSpecificati
     const flat = deaccent(spec.text)
 
     // --- the roof --------------------------------------------------------
-    if (spec.key === 'roof' || /\bdach\w*|\bstropodach\w*|\broof\b/.test(flat)) {
-      const kind = ROOF_KINDS.find((k) => k.test.test(flat))
+    // v3.54.21: the roof's OWN line (its key, or a label that names the roof) — not a page's free description, which
+    // speaks of a terrace's flat roof or of an offer and must not lend the main roof its words or its numbers
+    const roofLine = spec.key === 'roof' || /\bdach\w*|\broof\b/.test(deaccent(spec.label ?? ''))
+    if (roofLine || /\bdach\b|\broof\b/.test(flat)) {
+      const kind = ROOF_KINDS.find((k) => k.test.test(flat)) ?? (roofLine ? ROOF_KINDS_INFLECTED.find((k) => k.test.test(flat)) : undefined)
       if (kind) {
         findings.push({
           key: spec.key,
@@ -164,7 +171,7 @@ export function readSpecifications(specifications: readonly PublishedSpecificati
         const n = number(m[1])
         // v3.54.21 (NEW-H Lyon: "Kąt nachylenia dachu 1.15°"): a roof angle above 0° and below 3° is the fall of a flat
         // roof, not a pitch — said as such, never dropped as if nothing were printed
-        if (n !== null && n > 0 && n < 3) {
+        if (roofLine && n !== null && n > 0 && n < 3) {
           fall = { n, quote: m[0] }
           continue
         }

@@ -78,8 +78,15 @@ describe('v3.54.21: the specification reader reads a flat roof where the page sa
     expect(r.evidence.filter((e) => e.kind === 'ANGLE')).toEqual([])
   })
 
-  it('an inflected adjective is still the word: "z płaskim dachem"', () => {
-    expect(findingOf(readSpecifications([{ key: 'description', label: 'opis', text: 'Nowoczesny dom piętrowy z płaskim dachem' }], 'page').findings, 'ROOF_KIND')?.value).toBe('FLAT')
+  it('on the roof\'s own line an inflected adjective is still the word: "płaskim dachem", "dach płaski"', () => {
+    expect(findingOf(readSpecifications([{ key: 'roof', label: 'Dach', text: 'stropodach, z płaskim dachem nad całością' }], 'page').findings, 'ROOF_KIND')?.value).toBe('FLAT')
+    expect(findingOf(readSpecifications([{ key: 'roof_type', label: 'Rodzaj dachu', text: 'płaskim dachem' }], 'page').findings, 'ROOF_KIND')?.value).toBe('FLAT')
+  })
+
+  it('a free description lends the main roof neither its words nor its numbers (a terrace\'s flat roof, an offer\'s 35)', () => {
+    const r = readSpecifications([{ key: 'description', label: 'opis', text: 'Dom z dachem dwuspadowym i tarasem pod płaskim dachem. Rabat 35 st. dla pierwszych zamówień' }], 'page')
+    expect(findingOf(r.findings, 'ROOF_KIND')).toBeUndefined()
+    expect(r.evidence.filter((e) => e.kind === 'ANGLE')).toEqual([])
   })
 
   it('a pitched roof reads as before', () => {
