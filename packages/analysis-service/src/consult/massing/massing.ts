@@ -24,7 +24,7 @@ import type { CanonicalBuildingModel, Wall } from '@buildapp/model'
 import type { BindView, Projection, Side } from '../correct/execute.js'
 import type { Poly } from '../correct/source-gate.js'
 
-export const MASSING_VERSION = '1.9.0' as const
+export const MASSING_VERSION = '1.10.0' as const
 
 import type { BuildStructure, StructureSide } from '../structure.js'
 export type Rect = { minX: number; maxX: number; minZ: number; maxZ: number }
@@ -1003,8 +1003,12 @@ export function solveMassing(input: MassingInput): MassingHypothesis {
     if (input.structure) {
       const st = input.structure
       const wing = wingBodies.find((q) => q.rect === rect)?.part
+      // no body of a house rises a storey above its main volume unless the read reports such a part: under a one-storey
+      // main volume the other bodies' walls stay within one storey too (never the other way: a wing beside a two-storey
+      // main volume is as high as its own elevations draw it)
+      const oneStoreyHouse = st.fullStoreys === 1 && st.parts.every((q) => q.fullStoreys !== 2)
       const want = wing ? { ...(wing.roof ? { kind: wing.roof } : {}), ...(wing.ridge ? { axis: wing.ridge } : {}), full: wing.fullStoreys, ...(st.pitchDeg !== undefined ? { pitchDeg: st.pitchDeg } : {}), drawnTopsM: reads.map((q) => q.wallTopM ?? q.p.eavesM).filter((v) => Number.isFinite(v)) }
-        : { ...(st.mainRoof ? { kind: st.mainRoof } : {}), ...(i === 0 && st.mainRidge ? { axis: st.mainRidge } : {}), ...(i === 0 && st.fullStoreys ? { full: st.fullStoreys } : {}), ...(st.pitchDeg !== undefined ? { pitchDeg: st.pitchDeg } : {}), ...(i === 0 && st.eavesM ? { eavesM: st.eavesM } : {}), drawnTopsM: reads.map((q) => q.wallTopM ?? q.p.eavesM).filter((v) => Number.isFinite(v)) }
+        : { ...(st.mainRoof ? { kind: st.mainRoof } : {}), ...(i === 0 && st.mainRidge ? { axis: st.mainRidge } : {}), ...(st.fullStoreys && (i === 0 || oneStoreyHouse) ? { full: st.fullStoreys } : {}), ...(st.pitchDeg !== undefined ? { pitchDeg: st.pitchDeg } : {}), ...(i === 0 && st.eavesM ? { eavesM: st.eavesM } : {}), drawnTopsM: reads.map((q) => q.wallTopM ?? q.p.eavesM).filter((v) => Number.isFinite(v)) }
       const applied = roofByStructure(roof, want, rect)
       if (applied.notes.length > 0) {
         roof = applied.roof

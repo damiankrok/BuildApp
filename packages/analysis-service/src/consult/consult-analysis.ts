@@ -1022,7 +1022,7 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
               // (a registration made on a side the structure read named served the body's heights; which side that picture's
               // OPENINGS stand on is decided afterwards, like every unlabelled elevation's, by what registers and by the
               // plan's openings — so it is not carried as a held view)
-              massingOf.set(l, { views: mr.views.filter((v) => !sidesByRead.some((q) => q.frameId === v.frameId)), rebuild: (m) => build(m), ...(planFront ? { planFront } : {}), ...(interior ? { interior } : {}), ...(planMap ? { planMap } : {}) })
+              massingOf.set(l, { views: mr.views, rebuild: (m) => build(m), ...(planFront ? { planFront } : {}), ...(interior ? { interior } : {}), ...(planMap ? { planMap } : {}) })
               return l
             }
             const m0 = build()

@@ -116,7 +116,7 @@ describe('v3.54.20 the structure agreed with witnesses that are not the read', (
   })
 })
 
-describe('v3.54.20 (massing 1.9.0) the builder takes the agreed structure', () => {
+describe('v3.54.20 (massing 1.9.0+) the builder takes the agreed structure', () => {
   // a 9.4 × 10.1 m house with a 3.6 × 7.1 m garage stepping out on its right, 1.3 m in from the front and 1.7 m from the rear
   const HOUSE = [{ x: 0, z: 0 }, { x: 9.4, z: 0 }, { x: 9.4, z: 1.3 }, { x: 13, z: 1.3 }, { x: 13, z: 8.4 }, { x: 9.4, z: 8.4 }, { x: 9.4, z: 10.1 }, { x: 0, z: 10.1 }]
   it('a part reported on a side is the rectangle the outline steps out with there, and the outline is left without it', () => {
@@ -178,6 +178,29 @@ describe('v3.54.20 (massing 1.9.0) the builder takes the agreed structure', () =
     const withIt = solveMassing({ outline, silhouettes: [front], structure: { fullStoreys: 2, mainRoof: 'GABLE', mainRidge: 'X', pitchDeg: 30, parts: [{ what: 'GARAGE', where: 'RIGHT', fullStoreys: 1, roof: 'GABLE', ridge: 'X' }] } })
     expect(withIt.bodies.map((b) => b.rect)).toEqual([{ minX: 0, maxX: 9.4, minZ: 0, maxZ: 10.1 }, { minX: 9.4, maxX: 13, minZ: 1.3, maxZ: 8.4 }])
     expect(withIt.alternatives.join(' | ')).toMatch(/STRUCTURE: the garage reported on the right stands where the outline steps out/)
+  })
+})
+
+describe('v3.54.20 (massing 1.10.0) no body rises a storey above a one-storey main volume', () => {
+  // an L: a 12 × 8 m house and a 5 × 5 m body stepping out of its rear (40 px a metre, ground at row 400)
+  const L = [{ x: 0, z: 0 }, { x: 12, z: 0 }, { x: 12, z: 13 }, { x: 7, z: 13 }, { x: 7, z: 8 }, { x: 0, z: 8 }]
+  const outline: OutlineObservation = { observationId: 'o', frameId: 'plan', sourceByteHash: 'h', outline: L, by: 'CONTROL', fidelity: 'SOURCE_TRACED', why: 'control' }
+  const px = (m: number): number => 20 + 40 * m
+  const row = (m: number): number => 400 - 40 * m
+  // front: the house's wall 3 m under a slope to 6 m; rear: the rear body's gable wall sketched 5.6 m high under a sliver of roof
+  const front: SilhouetteObservation = { observationId: 'f', side: 'FRONT', frameId: 'front', sourceByteHash: 'h', groundRow: 400, walls: [[[px(0), 400], [px(12), 400], [px(12), row(3)], [px(0), row(3)]]], roofs: [[[px(-0.4), row(3)], [px(12.4), row(3)], [px(12.4), row(6)], [px(-0.4), row(6)]]] }
+  const rear: SilhouetteObservation = { observationId: 'r', side: 'REAR', frameId: 'rear', sourceByteHash: 'h', groundRow: 400, walls: [[[px(0), 400], [px(5), 400], [px(5), row(5.6)], [px(0), row(5.6)]], [[px(5), 400], [px(12), 400], [px(12), row(3)], [px(5), row(3)]]], roofs: [[[px(-0.3), row(5.6)], [px(5.3), row(5.6)], [px(5.3), row(6.2)], [px(-0.3), row(6.2)]], [[px(5), row(3)], [px(12.4), row(3)], [px(12.4), row(6)], [px(5), row(6)]]] }
+  const second = (structure?: Parameters<typeof solveMassing>[0]['structure']) => solveMassing({ outline, silhouettes: [front, rear], ...(structure ? { structure } : {}) }).bodies[1]?.roof
+
+  it('REPRODUCES Amarylis\'s loss on a control: a secondary body read with walls over 5 m is brought within one storey when the main volume is one storey', () => {
+    expect(second()).toMatchObject({ pitchDeg: 13.5, eavesM: 5.6 })
+    const r = second({ fullStoreys: 1, mainRoof: 'GABLE', pitchDeg: 30, parts: [] })
+    expect(r).toMatchObject({ pitchDeg: 30, ridgeM: 6.2 })
+    expect(r?.eavesM).toBeCloseTo(4.757, 2)
+  })
+  it('counter-trials: beside a two-storey main volume, or where the read reports a two-storey part, the body stays as its own elevations draw it', () => {
+    expect(second({ fullStoreys: 2, mainRoof: 'GABLE', pitchDeg: 30, parts: [] })).toMatchObject({ pitchDeg: 13.5, eavesM: 5.6 })
+    expect(second({ fullStoreys: 1, mainRoof: 'GABLE', pitchDeg: 30, parts: [{ what: 'WING', where: 'FRONT', fullStoreys: 2 }] })).toMatchObject({ pitchDeg: 13.5, eavesM: 5.6 })
   })
 })
 
