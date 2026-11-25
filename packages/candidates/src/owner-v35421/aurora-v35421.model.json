@@ -1,0 +1,1579 @@
+{
+  "assemblies": [],
+  "balconies": [],
+  "building": {
+    "id": "building",
+    "name": "massing"
+  },
+  "chimneys": [
+    {
+      "baseOffset": 0,
+      "footprint": {
+        "maxX": 10.508077,
+        "maxZ": 4.96325,
+        "minX": 9.989927,
+        "minZ": 4.4451
+      },
+      "height": 7.440634,
+      "id": "chimney-fix-front-7eabdb",
+      "levelId": "lvl-0",
+      "materialId": "mat-chimney"
+    },
+    {
+      "baseOffset": 0,
+      "footprint": {
+        "maxX": 8.829271,
+        "maxZ": 5.336318,
+        "minX": 7.938053,
+        "minZ": 4.4451
+      },
+      "height": 7.419908,
+      "id": "chimney-fix-front-d22351",
+      "levelId": "lvl-0",
+      "materialId": "mat-chimney"
+    },
+    {
+      "baseOffset": 0,
+      "footprint": {
+        "maxX": 12.277644,
+        "maxZ": 3.247457,
+        "minX": 11.866344,
+        "minZ": 2.61825
+      },
+      "height": 7.043059,
+      "id": "chimney-fix-right-2020b5",
+      "levelId": "lvl-0",
+      "materialId": "mat-chimney"
+    }
+  ],
+  "constraints": [],
+  "doors": [
+    {
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-front-519fd9-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "op-fix-front-519fd9",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-rear-4ae1ab-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "op-fix-rear-4ae1ab",
+      "swing": "IN"
+    }
+  ],
+  "evidenceSources": [
+    {
+      "id": "src-frame-asset-elewacja-boczna-projektu-aurora-maxi-ii-bi-99f861d289",
+      "kind": "DRAWING",
+      "label": "frame-asset-elewacja-boczna-projektu-aurora-maxi-ii-bi-99f861d289",
+      "note": "frame frame-asset-elewacja-boczna-projektu-aurora-maxi-ii-bi-99f861d289"
+    },
+    {
+      "id": "src-frame-asset-elewacja-boczna-projektu-aurora-maxi-ii-bi-cdf5a25265",
+      "kind": "DRAWING",
+      "label": "frame-asset-elewacja-boczna-projektu-aurora-maxi-ii-bi-cdf5a25265",
+      "note": "frame frame-asset-elewacja-boczna-projektu-aurora-maxi-ii-bi-cdf5a25265"
+    },
+    {
+      "id": "src-frame-asset-elewacja-frontowa-projektu-aurora-maxi-ii-47285fd06a",
+      "kind": "DRAWING",
+      "label": "frame-asset-elewacja-frontowa-projektu-aurora-maxi-ii-47285fd06a",
+      "note": "frame frame-asset-elewacja-frontowa-projektu-aurora-maxi-ii-47285fd06a"
+    },
+    {
+      "id": "src-frame-asset-elewacja-ogrodowa-projektu-aurora-maxi-ii-00181d1224",
+      "kind": "DRAWING",
+      "label": "frame-asset-elewacja-ogrodowa-projektu-aurora-maxi-ii-00181d1224",
+      "note": "frame frame-asset-elewacja-ogrodowa-projektu-aurora-maxi-ii-00181d1224"
+    },
+    {
+      "id": "src-frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3",
+      "kind": "DRAWING",
+      "label": "frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3",
+      "note": "frame frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3"
+    }
+  ],
+  "frame": {
+    "handedness": "LEFT_HANDED_AS_SPECIFIED",
+    "origin": "finished ground-floor level is y = 0; the front facade outer face is z = 0",
+    "viewerNote": "renderers working in a right-handed frame mirror z when building their scene",
+    "wallConvention": "a wall runs from start to end along its OUTER face at its base; its outward normal is up x u, so exterior rings are traversed counter-clockwise on a plan drawn with the front facade at the bottom and material lies to the left of the direction of travel",
+    "x": "right when looking at the front facade",
+    "y": "up (vertical)",
+    "z": "away from the front facade, into the building"
+  },
+  "id": "m-analysis-u3a44cf494a39",
+  "levels": [
+    {
+      "buildingId": "building",
+      "elevation": 0,
+      "height": 6.649938,
+      "id": "lvl-0",
+      "index": 0,
+      "name": "Massing"
+    }
+  ],
+  "linearSolids": [],
+  "materials": [
+    {
+      "color": "#9a7b66",
+      "id": "mat-brick",
+      "name": "Facing brick"
+    },
+    {
+      "color": "#6d6a66",
+      "id": "mat-chimney",
+      "name": "Chimney"
+    },
+    {
+      "color": "#55585c",
+      "id": "mat-gate",
+      "name": "Garage door"
+    },
+    {
+      "color": "#9fc3d8",
+      "id": "mat-glass",
+      "name": "Glazing",
+      "opacity": 0.35
+    },
+    {
+      "color": "#d9d5cc",
+      "id": "mat-partition",
+      "name": "Partition"
+    },
+    {
+      "color": "#3a3a3c",
+      "id": "mat-render-dark",
+      "name": "Dark render"
+    },
+    {
+      "color": "#5a5550",
+      "id": "mat-roof",
+      "name": "Roof covering (tone not read: miniature convention)"
+    },
+    {
+      "color": "#b07a4a",
+      "id": "mat-timber",
+      "name": "Timber (door leaf, cladding)"
+    },
+    {
+      "color": "#e8e4dc",
+      "id": "mat-wall",
+      "name": "Rendered wall (tone not read: miniature convention)"
+    }
+  ],
+  "meta": {
+    "createdWith": "buildapp",
+    "notes": []
+  },
+  "name": "Aurora Maxi II BIS SZ (analysis)",
+  "openings": [
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-H517-409",
+      "kind": "DOOR",
+      "offset": 1.023073,
+      "sill": 0,
+      "wallId": "iw-H517-329",
+      "width": 0.790236
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-H517-678",
+      "kind": "DOOR",
+      "offset": 2.109648,
+      "sill": 0,
+      "wallId": "iw-H517-329-x",
+      "width": 0.790236
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-H684-355",
+      "kind": "DOOR",
+      "offset": 0.712623,
+      "sill": 0,
+      "wallId": "iw-H684-294",
+      "width": 0.804347
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-H684-569",
+      "kind": "DOOR",
+      "offset": 3.732454,
+      "sill": 0,
+      "wallId": "iw-H684-294",
+      "width": 0.762013
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-H684-716",
+      "kind": "DOOR",
+      "offset": 5.806824,
+      "sill": 0,
+      "wallId": "iw-H684-294",
+      "width": 0.83257
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-V333-530",
+      "kind": "DOOR",
+      "offset": 0.14817,
+      "sill": 0,
+      "wallId": "iw-V333-670-x",
+      "width": 0.747902
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-V333-617",
+      "kind": "DOOR",
+      "offset": 0.119947,
+      "sill": 0,
+      "wallId": "iw-V333-670",
+      "width": 0.747902
+    },
+    {
+      "height": 1.326464,
+      "id": "op-fix-front-414300",
+      "kind": "WINDOW",
+      "offset": 1.202103,
+      "sill": 1.367916,
+      "wallId": "ring-mass-main-w0",
+      "width": 1.471546
+    },
+    {
+      "height": 2.342038,
+      "id": "op-fix-front-519fd9",
+      "kind": "DOOR",
+      "offset": 9.409599,
+      "sill": 0.393794,
+      "wallId": "ring-mass-main-w0",
+      "width": 0.93267
+    },
+    {
+      "height": 1.326464,
+      "id": "op-fix-front-7a5715",
+      "kind": "WINDOW",
+      "offset": 4.456085,
+      "sill": 1.367916,
+      "wallId": "ring-mass-main-w0",
+      "width": 1.45082
+    },
+    {
+      "height": 1.326464,
+      "id": "op-fix-front-de342d",
+      "kind": "WINDOW",
+      "offset": 14.155853,
+      "sill": 1.367916,
+      "wallId": "ring-mass-main-w0",
+      "width": 1.430094
+    },
+    {
+      "height": 0.497424,
+      "id": "op-fix-front-ebc30d",
+      "kind": "WINDOW",
+      "offset": 7.502807,
+      "sill": 2.196956,
+      "wallId": "ring-mass-main-w0",
+      "width": 1.45082
+    },
+    {
+      "height": 1.76859,
+      "id": "op-fix-rear-4ae1ab",
+      "kind": "DOOR",
+      "offset": 6.210581,
+      "sill": 0.98712,
+      "wallId": "ring-mass-main-w2",
+      "width": 0.966555
+    },
+    {
+      "height": 1.35729,
+      "id": "op-fix-rear-6d8dc9",
+      "kind": "WINDOW",
+      "offset": 12.997031,
+      "sill": 1.336725,
+      "wallId": "ring-mass-main-w2",
+      "width": 1.418985
+    },
+    {
+      "height": 2.282715,
+      "id": "op-fix-rear-8a01f5",
+      "kind": "WINDOW",
+      "offset": 1.789106,
+      "sill": 0.431865,
+      "wallId": "ring-mass-main-w2",
+      "width": 2.63232
+    },
+    {
+      "height": 1.35729,
+      "id": "op-fix-rear-e35793",
+      "kind": "WINDOW",
+      "offset": 9.644936,
+      "sill": 1.336725,
+      "wallId": "ring-mass-main-w2",
+      "width": 1.43955
+    },
+    {
+      "height": 2.212373,
+      "id": "op-fix-right-beb1d7",
+      "kind": "WINDOW",
+      "offset": 3.085081,
+      "sill": 0.243564,
+      "wallId": "ring-mass-main-w1",
+      "width": 2.63861
+    }
+  ],
+  "platforms": [],
+  "railings": [],
+  "relationships": [],
+  "roofEdges": [],
+  "roofOpenings": [
+    {
+      "footprint": {
+        "maxX": 7.033569,
+        "maxZ": 5.219564,
+        "minX": 6.231534,
+        "minZ": 4.591878
+      },
+      "id": "rw-fix-rear-c823b5",
+      "kind": "ROOFLIGHT",
+      "roofId": "roof-mass-main"
+    }
+  ],
+  "roofPlanes": [],
+  "rooflights": [
+    {
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "rw-fix-rear-c823b5-light",
+      "roofOpeningId": "rw-fix-rear-c823b5"
+    }
+  ],
+  "roofs": [
+    {
+      "eaveOffset": 3.300652,
+      "evidence": {
+        "interpretation": "ridge along X (slopes seen on the sides along it, the gable end across it); pitch 37° from a 3.35 m rise over half of 8.89 m (the walls end at 2.99 m: the roof's underside there)",
+        "properties": {
+          "eaveOffset": "SOURCE_DERIVED",
+          "pitchDeg": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3 + frame-asset-elewacja-frontowa-projektu-aurora-maxi-ii-47285fd06a + frame-asset-elewacja-ogrodowa-projektu-aurora-maxi-ii-00181d1224 + frame-asset-elewacja-boczna-projektu-aurora-maxi-ii-bi-99f861d289 + frame-asset-elewacja-boczna-projektu-aurora-maxi-ii-bi-cdf5a25265",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3",
+          "src-frame-asset-elewacja-frontowa-projektu-aurora-maxi-ii-47285fd06a",
+          "src-frame-asset-elewacja-ogrodowa-projektu-aurora-maxi-ii-00181d1224",
+          "src-frame-asset-elewacja-boczna-projektu-aurora-maxi-ii-bi-99f861d289",
+          "src-frame-asset-elewacja-boczna-projektu-aurora-maxi-ii-bi-cdf5a25265"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "footprint": {
+        "maxX": 15.9976,
+        "maxZ": 8.8902,
+        "minX": -0.08,
+        "minZ": 0
+      },
+      "id": "roof-mass-main",
+      "kind": "GABLE",
+      "levelId": "lvl-0",
+      "materialId": "mat-roof",
+      "overhang": 0.69,
+      "pitchDeg": 37,
+      "ridgeAxis": "X",
+      "thickness": 0.25
+    }
+  ],
+  "rooms": [],
+  "schema": "buildapp.canonical-building-model",
+  "schemaVersion": "1.9.0",
+  "slabs": [],
+  "stairs": [],
+  "stepRuns": [],
+  "surfaceRegions": [
+    {
+      "evidence": {
+        "interpretation": "a timber outline from finish-921295 (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-mass-main-w1",
+      "id": "appearance-east-ring-mass-main-w1-timber-0",
+      "materialId": "mat-timber",
+      "outline": [
+        {
+          "a": 0.31,
+          "b": 1.100634
+        },
+        {
+          "a": 1.25,
+          "b": 1.100634
+        },
+        {
+          "a": 1.25,
+          "b": 1.080634
+        },
+        {
+          "a": 1.27,
+          "b": 1.080634
+        },
+        {
+          "a": 1.27,
+          "b": 0.020634
+        },
+        {
+          "a": 1.25,
+          "b": 0.020634
+        },
+        {
+          "a": 1.25,
+          "b": 0.000634
+        },
+        {
+          "a": 0.31,
+          "b": 0.000634
+        },
+        {
+          "a": 0.31,
+          "b": 0.020634
+        },
+        {
+          "a": 0.29,
+          "b": 0.020634
+        },
+        {
+          "a": 0.29,
+          "b": 1.080634
+        },
+        {
+          "a": 0.31,
+          "b": 1.080634
+        }
+      ],
+      "rect": {
+        "a0": 0.29,
+        "a1": 1.27,
+        "b0": 0.000634,
+        "b1": 1.100634
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a timber outline from finish-7e63e6 (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-mass-main-w0",
+      "id": "appearance-front-ring-mass-main-w0-timber-0",
+      "materialId": "mat-timber",
+      "outline": [
+        {
+          "a": 15.59,
+          "b": 2.480634
+        },
+        {
+          "a": 15.91,
+          "b": 2.480634
+        },
+        {
+          "a": 15.91,
+          "b": 2.460634
+        },
+        {
+          "a": 15.9176,
+          "b": 2.460634
+        },
+        {
+          "a": 15.9176,
+          "b": 1.360634
+        },
+        {
+          "a": 15.91,
+          "b": 1.360634
+        },
+        {
+          "a": 15.91,
+          "b": 1.340634
+        },
+        {
+          "a": 15.59,
+          "b": 1.340634
+        },
+        {
+          "a": 15.59,
+          "b": 1.360634
+        },
+        {
+          "a": 15.57,
+          "b": 1.360634
+        },
+        {
+          "a": 15.57,
+          "b": 2.460634
+        },
+        {
+          "a": 15.59,
+          "b": 2.460634
+        }
+      ],
+      "rect": {
+        "a0": 15.57,
+        "a1": 15.9176,
+        "b0": 1.340634,
+        "b1": 2.480634
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a dark render outline from finish-268c9c (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-mass-main-w2",
+      "id": "appearance-rear-ring-mass-main-w2-dark-render-0",
+      "materialId": "mat-render-dark",
+      "outline": [
+        {
+          "a": 7.1676,
+          "b": 2.480634
+        },
+        {
+          "a": 6.2876,
+          "b": 2.480634
+        },
+        {
+          "a": 6.2876,
+          "b": 2.460634
+        },
+        {
+          "a": 6.2676,
+          "b": 2.460634
+        },
+        {
+          "a": 6.2676,
+          "b": 2.480634
+        },
+        {
+          "a": 6.2076,
+          "b": 2.480634
+        },
+        {
+          "a": 6.2076,
+          "b": 2.460634
+        },
+        {
+          "a": 6.1876,
+          "b": 2.460634
+        },
+        {
+          "a": 6.1876,
+          "b": 0.400634
+        },
+        {
+          "a": 6.2076,
+          "b": 0.400634
+        },
+        {
+          "a": 6.2076,
+          "b": 0.380634
+        },
+        {
+          "a": 7.1676,
+          "b": 0.380634
+        },
+        {
+          "a": 7.1676,
+          "b": 0.400634
+        },
+        {
+          "a": 7.1876,
+          "b": 0.400634
+        },
+        {
+          "a": 7.1876,
+          "b": 2.460634
+        },
+        {
+          "a": 7.1676,
+          "b": 2.460634
+        }
+      ],
+      "rect": {
+        "a0": 6.1876,
+        "a1": 7.1876,
+        "b0": 0.380634,
+        "b1": 2.480634
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a brick outline from finish-d9bf6a (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-mass-main-w3",
+      "id": "appearance-west-ring-mass-main-w3-brick-0",
+      "materialId": "mat-brick",
+      "outline": [
+        {
+          "a": 8.5802,
+          "b": 0.240634
+        },
+        {
+          "a": 0.3002,
+          "b": 0.240634
+        },
+        {
+          "a": 0.3002,
+          "b": 0.220634
+        },
+        {
+          "a": 0.2802,
+          "b": 0.220634
+        },
+        {
+          "a": 0.2802,
+          "b": 0.000634
+        },
+        {
+          "a": 0.3002,
+          "b": 0.000634
+        },
+        {
+          "a": 0.3002,
+          "b": 0
+        },
+        {
+          "a": 8.5802,
+          "b": 0
+        },
+        {
+          "a": 8.5802,
+          "b": 0.000634
+        },
+        {
+          "a": 8.6002,
+          "b": 0.000634
+        },
+        {
+          "a": 8.6002,
+          "b": 0.220634
+        },
+        {
+          "a": 8.5802,
+          "b": 0.220634
+        }
+      ],
+      "rect": {
+        "a0": 0.2802,
+        "a1": 8.6002,
+        "b0": 0,
+        "b1": 0.240634
+      }
+    }
+  ],
+  "terraces": [],
+  "units": {
+    "angle": "deg",
+    "length": "m"
+  },
+  "wallJunctions": [
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w3"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w0"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3 (MAIN), at the analyzer's own scale: 1.411136 cm/px from the traced outline: 15.9 m over the outline's 1128 px and 8.9 m over its 630 px (printed on the plan with their axes): 1.410 and 1.413 cm/px, 0.2 % apart; heights: 4 registered elevation(s) give eaves (the walls' corner tops) 2.08 / 2.76 / 2.88 / 3.09 m and top 6.72 / 6.66 / 6.37 / 6.64 m — the gable-end view(s) (RIGHT, LEFT) show the wall corner under the roof: 2.99 m is taken; a view along the ridge draws its walls ending behind the fascia, lower by no more than an overhang hides (two views draw that line)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3 + frame-asset-elewacja-frontowa-projektu-aurora-maxi-ii-47285fd06a + frame-asset-elewacja-ogrodowa-projektu-aurora-maxi-ii-00181d1224 + frame-asset-elewacja-boczna-projektu-aurora-maxi-ii-bi-99f861d289 + frame-asset-elewacja-boczna-projektu-aurora-maxi-ii-bi-cdf5a25265",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3",
+          "src-frame-asset-elewacja-frontowa-projektu-aurora-maxi-ii-47285fd06a",
+          "src-frame-asset-elewacja-ogrodowa-projektu-aurora-maxi-ii-00181d1224",
+          "src-frame-asset-elewacja-boczna-projektu-aurora-maxi-ii-bi-99f861d289",
+          "src-frame-asset-elewacja-boczna-projektu-aurora-maxi-ii-bi-cdf5a25265"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j0",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w0"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w1"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3 (MAIN), at the analyzer's own scale: 1.411136 cm/px from the traced outline: 15.9 m over the outline's 1128 px and 8.9 m over its 630 px (printed on the plan with their axes): 1.410 and 1.413 cm/px, 0.2 % apart; heights: 4 registered elevation(s) give eaves (the walls' corner tops) 2.08 / 2.76 / 2.88 / 3.09 m and top 6.72 / 6.66 / 6.37 / 6.64 m — the gable-end view(s) (RIGHT, LEFT) show the wall corner under the roof: 2.99 m is taken; a view along the ridge draws its walls ending behind the fascia, lower by no more than an overhang hides (two views draw that line)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3 + frame-asset-elewacja-frontowa-projektu-aurora-maxi-ii-47285fd06a + frame-asset-elewacja-ogrodowa-projektu-aurora-maxi-ii-00181d1224 + frame-asset-elewacja-boczna-projektu-aurora-maxi-ii-bi-99f861d289 + frame-asset-elewacja-boczna-projektu-aurora-maxi-ii-bi-cdf5a25265",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3",
+          "src-frame-asset-elewacja-frontowa-projektu-aurora-maxi-ii-47285fd06a",
+          "src-frame-asset-elewacja-ogrodowa-projektu-aurora-maxi-ii-00181d1224",
+          "src-frame-asset-elewacja-boczna-projektu-aurora-maxi-ii-bi-99f861d289",
+          "src-frame-asset-elewacja-boczna-projektu-aurora-maxi-ii-bi-cdf5a25265"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j1",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w1"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w2"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3 (MAIN), at the analyzer's own scale: 1.411136 cm/px from the traced outline: 15.9 m over the outline's 1128 px and 8.9 m over its 630 px (printed on the plan with their axes): 1.410 and 1.413 cm/px, 0.2 % apart; heights: 4 registered elevation(s) give eaves (the walls' corner tops) 2.08 / 2.76 / 2.88 / 3.09 m and top 6.72 / 6.66 / 6.37 / 6.64 m — the gable-end view(s) (RIGHT, LEFT) show the wall corner under the roof: 2.99 m is taken; a view along the ridge draws its walls ending behind the fascia, lower by no more than an overhang hides (two views draw that line)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3 + frame-asset-elewacja-frontowa-projektu-aurora-maxi-ii-47285fd06a + frame-asset-elewacja-ogrodowa-projektu-aurora-maxi-ii-00181d1224 + frame-asset-elewacja-boczna-projektu-aurora-maxi-ii-bi-99f861d289 + frame-asset-elewacja-boczna-projektu-aurora-maxi-ii-bi-cdf5a25265",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3",
+          "src-frame-asset-elewacja-frontowa-projektu-aurora-maxi-ii-47285fd06a",
+          "src-frame-asset-elewacja-ogrodowa-projektu-aurora-maxi-ii-00181d1224",
+          "src-frame-asset-elewacja-boczna-projektu-aurora-maxi-ii-bi-99f861d289",
+          "src-frame-asset-elewacja-boczna-projektu-aurora-maxi-ii-bi-cdf5a25265"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j2",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w2",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w2"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w3"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3 (MAIN), at the analyzer's own scale: 1.411136 cm/px from the traced outline: 15.9 m over the outline's 1128 px and 8.9 m over its 630 px (printed on the plan with their axes): 1.410 and 1.413 cm/px, 0.2 % apart; heights: 4 registered elevation(s) give eaves (the walls' corner tops) 2.08 / 2.76 / 2.88 / 3.09 m and top 6.72 / 6.66 / 6.37 / 6.64 m — the gable-end view(s) (RIGHT, LEFT) show the wall corner under the roof: 2.99 m is taken; a view along the ridge draws its walls ending behind the fascia, lower by no more than an overhang hides (two views draw that line)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3 + frame-asset-elewacja-frontowa-projektu-aurora-maxi-ii-47285fd06a + frame-asset-elewacja-ogrodowa-projektu-aurora-maxi-ii-00181d1224 + frame-asset-elewacja-boczna-projektu-aurora-maxi-ii-bi-99f861d289 + frame-asset-elewacja-boczna-projektu-aurora-maxi-ii-bi-cdf5a25265",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3",
+          "src-frame-asset-elewacja-frontowa-projektu-aurora-maxi-ii-47285fd06a",
+          "src-frame-asset-elewacja-ogrodowa-projektu-aurora-maxi-ii-00181d1224",
+          "src-frame-asset-elewacja-boczna-projektu-aurora-maxi-ii-bi-99f861d289",
+          "src-frame-asset-elewacja-boczna-projektu-aurora-maxi-ii-bi-cdf5a25265"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j3",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w2",
+      "tolerance": 0.001
+    }
+  ],
+  "wallPanels": [],
+  "wallRings": [
+    {
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3 (MAIN), at the analyzer's own scale: 1.411136 cm/px from the traced outline: 15.9 m over the outline's 1128 px and 8.9 m over its 630 px (printed on the plan with their axes): 1.410 and 1.413 cm/px, 0.2 % apart; heights: 4 registered elevation(s) give eaves (the walls' corner tops) 2.08 / 2.76 / 2.88 / 3.09 m and top 6.72 / 6.66 / 6.37 / 6.64 m — the gable-end view(s) (RIGHT, LEFT) show the wall corner under the roof: 2.99 m is taken; a view along the ridge draws its walls ending behind the fascia, lower by no more than an overhang hides (two views draw that line)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3 + frame-asset-elewacja-frontowa-projektu-aurora-maxi-ii-47285fd06a + frame-asset-elewacja-ogrodowa-projektu-aurora-maxi-ii-00181d1224 + frame-asset-elewacja-boczna-projektu-aurora-maxi-ii-bi-99f861d289 + frame-asset-elewacja-boczna-projektu-aurora-maxi-ii-bi-cdf5a25265",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3",
+          "src-frame-asset-elewacja-frontowa-projektu-aurora-maxi-ii-47285fd06a",
+          "src-frame-asset-elewacja-ogrodowa-projektu-aurora-maxi-ii-00181d1224",
+          "src-frame-asset-elewacja-boczna-projektu-aurora-maxi-ii-bi-99f861d289",
+          "src-frame-asset-elewacja-boczna-projektu-aurora-maxi-ii-bi-cdf5a25265"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main",
+      "junctionIds": [
+        "ring-mass-main-j0",
+        "ring-mass-main-j1",
+        "ring-mass-main-j2",
+        "ring-mass-main-j3"
+      ],
+      "levelId": "lvl-0",
+      "wallIds": [
+        "ring-mass-main-w0",
+        "ring-mass-main-w1",
+        "ring-mass-main-w2",
+        "ring-mass-main-w3"
+      ]
+    }
+  ],
+  "walls": [
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 6.611172,
+        "z": 5.566932
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-H517-329",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 4.085239,
+        "z": 5.566932
+      },
+      "thickness": 0.112891
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 10.350683,
+        "z": 5.566932
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-H517-329-x",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 6.79462,
+        "z": 5.566932
+      },
+      "thickness": 0.112891
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 8.50915,
+        "z": 4.4098
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-H598-516",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 6.79462,
+        "z": 4.4098
+      },
+      "thickness": 0.141114
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 4.14874,
+        "z": 4.381577
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-H600-74",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 0.3,
+        "z": 4.381577
+      },
+      "thickness": 0.169336
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 12.319217,
+        "z": 3.182112
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-H684-294",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 3.633676,
+        "z": 3.182112
+      },
+      "thickness": 0.169336
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 3.633676,
+        "z": 3.182112
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-V299-679",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 3.633676,
+        "z": 0.3
+      },
+      "thickness": 0.155225
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 4.085239,
+        "z": 4.381577
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-V333-670",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 4.085239,
+        "z": 3.351448
+      },
+      "thickness": 0.112891
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 4.085239,
+        "z": 8.5902
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-V333-670-x",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 4.085239,
+        "z": 4.550913
+      },
+      "thickness": 0.112891
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 6.79462,
+        "z": 5.729212
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-V522-510",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 6.79462,
+        "z": 4.402744
+      },
+      "thickness": 0.183448
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 7.189738,
+        "z": 3.182112
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-V552-679",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 7.189738,
+        "z": 0.3
+      },
+      "thickness": 0.112891
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 7.951751,
+        "z": 8.5902
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-V607-313",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 7.951751,
+        "z": 5.679822
+      },
+      "thickness": 0.112891
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 9.249997,
+        "z": 3.182112
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-V699-679",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 9.249997,
+        "z": 0.3
+      },
+      "thickness": 0.112891
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 10.520019,
+        "z": 8.5902
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-V786-313",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 10.520019,
+        "z": 4.445078
+      },
+      "thickness": 0.169336
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 11.155031,
+        "z": 3.182112
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-V832-679",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 11.155031,
+        "z": 0.3
+      },
+      "thickness": 0.155225
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 12.312162,
+        "z": 3.182112
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-V907-679",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 12.312162,
+        "z": 1.792143
+      },
+      "thickness": 0.366895
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 15.9176,
+        "z": 0
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3 (MAIN), at the analyzer's own scale: 1.411136 cm/px from the traced outline: 15.9 m over the outline's 1128 px and 8.9 m over its 630 px (printed on the plan with their axes): 1.410 and 1.413 cm/px, 0.2 % apart; heights: 4 registered elevation(s) give eaves (the walls' corner tops) 2.08 / 2.76 / 2.88 / 3.09 m and top 6.72 / 6.66 / 6.37 / 6.64 m — the gable-end view(s) (RIGHT, LEFT) show the wall corner under the roof: 2.99 m is taken; a view along the ridge draws its walls ending behind the fascia, lower by no more than an overhang hides (two views draw that line)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3 + frame-asset-elewacja-frontowa-projektu-aurora-maxi-ii-47285fd06a + frame-asset-elewacja-ogrodowa-projektu-aurora-maxi-ii-00181d1224 + frame-asset-elewacja-boczna-projektu-aurora-maxi-ii-bi-99f861d289 + frame-asset-elewacja-boczna-projektu-aurora-maxi-ii-bi-cdf5a25265",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3",
+          "src-frame-asset-elewacja-frontowa-projektu-aurora-maxi-ii-47285fd06a",
+          "src-frame-asset-elewacja-ogrodowa-projektu-aurora-maxi-ii-00181d1224",
+          "src-frame-asset-elewacja-boczna-projektu-aurora-maxi-ii-bi-99f861d289",
+          "src-frame-asset-elewacja-boczna-projektu-aurora-maxi-ii-bi-cdf5a25265"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 6.649938,
+      "id": "ring-mass-main-w0",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 0,
+        "z": 0
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-mass-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 15.9176,
+        "z": 8.8902
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3 (MAIN), at the analyzer's own scale: 1.411136 cm/px from the traced outline: 15.9 m over the outline's 1128 px and 8.9 m over its 630 px (printed on the plan with their axes): 1.410 and 1.413 cm/px, 0.2 % apart; heights: 4 registered elevation(s) give eaves (the walls' corner tops) 2.08 / 2.76 / 2.88 / 3.09 m and top 6.72 / 6.66 / 6.37 / 6.64 m — the gable-end view(s) (RIGHT, LEFT) show the wall corner under the roof: 2.99 m is taken; a view along the ridge draws its walls ending behind the fascia, lower by no more than an overhang hides (two views draw that line)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3 + frame-asset-elewacja-frontowa-projektu-aurora-maxi-ii-47285fd06a + frame-asset-elewacja-ogrodowa-projektu-aurora-maxi-ii-00181d1224 + frame-asset-elewacja-boczna-projektu-aurora-maxi-ii-bi-99f861d289 + frame-asset-elewacja-boczna-projektu-aurora-maxi-ii-bi-cdf5a25265",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3",
+          "src-frame-asset-elewacja-frontowa-projektu-aurora-maxi-ii-47285fd06a",
+          "src-frame-asset-elewacja-ogrodowa-projektu-aurora-maxi-ii-00181d1224",
+          "src-frame-asset-elewacja-boczna-projektu-aurora-maxi-ii-bi-99f861d289",
+          "src-frame-asset-elewacja-boczna-projektu-aurora-maxi-ii-bi-cdf5a25265"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 6.649938,
+      "id": "ring-mass-main-w1",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 15.9176,
+        "z": 0
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-mass-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0,
+        "z": 8.8902
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3 (MAIN), at the analyzer's own scale: 1.411136 cm/px from the traced outline: 15.9 m over the outline's 1128 px and 8.9 m over its 630 px (printed on the plan with their axes): 1.410 and 1.413 cm/px, 0.2 % apart; heights: 4 registered elevation(s) give eaves (the walls' corner tops) 2.08 / 2.76 / 2.88 / 3.09 m and top 6.72 / 6.66 / 6.37 / 6.64 m — the gable-end view(s) (RIGHT, LEFT) show the wall corner under the roof: 2.99 m is taken; a view along the ridge draws its walls ending behind the fascia, lower by no more than an overhang hides (two views draw that line)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3 + frame-asset-elewacja-frontowa-projektu-aurora-maxi-ii-47285fd06a + frame-asset-elewacja-ogrodowa-projektu-aurora-maxi-ii-00181d1224 + frame-asset-elewacja-boczna-projektu-aurora-maxi-ii-bi-99f861d289 + frame-asset-elewacja-boczna-projektu-aurora-maxi-ii-bi-cdf5a25265",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3",
+          "src-frame-asset-elewacja-frontowa-projektu-aurora-maxi-ii-47285fd06a",
+          "src-frame-asset-elewacja-ogrodowa-projektu-aurora-maxi-ii-00181d1224",
+          "src-frame-asset-elewacja-boczna-projektu-aurora-maxi-ii-bi-99f861d289",
+          "src-frame-asset-elewacja-boczna-projektu-aurora-maxi-ii-bi-cdf5a25265"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 6.649938,
+      "id": "ring-mass-main-w2",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 15.9176,
+        "z": 8.8902
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-mass-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0,
+        "z": 0
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3 (MAIN), at the analyzer's own scale: 1.411136 cm/px from the traced outline: 15.9 m over the outline's 1128 px and 8.9 m over its 630 px (printed on the plan with their axes): 1.410 and 1.413 cm/px, 0.2 % apart; heights: 4 registered elevation(s) give eaves (the walls' corner tops) 2.08 / 2.76 / 2.88 / 3.09 m and top 6.72 / 6.66 / 6.37 / 6.64 m — the gable-end view(s) (RIGHT, LEFT) show the wall corner under the roof: 2.99 m is taken; a view along the ridge draws its walls ending behind the fascia, lower by no more than an overhang hides (two views draw that line)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3 + frame-asset-elewacja-frontowa-projektu-aurora-maxi-ii-47285fd06a + frame-asset-elewacja-ogrodowa-projektu-aurora-maxi-ii-00181d1224 + frame-asset-elewacja-boczna-projektu-aurora-maxi-ii-bi-99f861d289 + frame-asset-elewacja-boczna-projektu-aurora-maxi-ii-bi-cdf5a25265",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-aurora-maxi-ii-bis-sz-a5a8ba6-87735a61c3",
+          "src-frame-asset-elewacja-frontowa-projektu-aurora-maxi-ii-47285fd06a",
+          "src-frame-asset-elewacja-ogrodowa-projektu-aurora-maxi-ii-00181d1224",
+          "src-frame-asset-elewacja-boczna-projektu-aurora-maxi-ii-bi-99f861d289",
+          "src-frame-asset-elewacja-boczna-projektu-aurora-maxi-ii-bi-cdf5a25265"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 6.649938,
+      "id": "ring-mass-main-w3",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 0,
+        "z": 8.8902
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-mass-main"
+      }
+    }
+  ],
+  "windows": [
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-front-414300-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-front-414300"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-front-7a5715-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-front-7a5715"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-front-de342d-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-front-de342d"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-front-ebc30d-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-front-ebc30d"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-rear-6d8dc9-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-rear-6d8dc9"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-rear-8a01f5-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-rear-8a01f5"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-rear-e35793-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-rear-e35793"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-right-beb1d7-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-right-beb1d7"
+    }
+  ]
+}

@@ -1,0 +1,2877 @@
+{
+  "assemblies": [],
+  "balconies": [],
+  "building": {
+    "id": "building",
+    "name": "massing"
+  },
+  "chimneys": [
+    {
+      "baseOffset": 0,
+      "footprint": {
+        "maxX": 11.0207,
+        "maxZ": 1.150184,
+        "minX": 10.220516,
+        "minZ": 0.35
+      },
+      "height": 7.874538,
+      "id": "chimney-fix-front-061081",
+      "levelId": "lvl-0",
+      "materialId": "mat-chimney"
+    },
+    {
+      "baseOffset": 0,
+      "footprint": {
+        "maxX": 8.274614,
+        "maxZ": 2.172538,
+        "minX": 7.492616,
+        "minZ": 1.39054
+      },
+      "height": 8.747466,
+      "id": "chimney-fix-front-a4e46b",
+      "levelId": "lvl-0",
+      "materialId": "mat-chimney"
+    },
+    {
+      "baseOffset": 0,
+      "footprint": {
+        "maxX": 10.585123,
+        "maxZ": 9.866925,
+        "minX": 9.83593,
+        "minZ": 9.117732
+      },
+      "height": 8.679675,
+      "id": "chimney-fix-left-5fbe75",
+      "levelId": "lvl-0",
+      "materialId": "mat-chimney"
+    },
+    {
+      "baseOffset": 0,
+      "footprint": {
+        "maxX": 5.508302,
+        "maxZ": 3.823985,
+        "minX": 4.547186,
+        "minZ": 2.862869
+      },
+      "height": 8.797908,
+      "id": "chimney-fix-rear-c8f9a5",
+      "levelId": "lvl-0",
+      "materialId": "mat-chimney"
+    },
+    {
+      "baseOffset": 0,
+      "footprint": {
+        "maxX": 11.53178,
+        "maxZ": 5.427167,
+        "minX": 10.837406,
+        "minZ": 4.732793
+      },
+      "height": 8.697948,
+      "id": "chimney-fix-right-03f46f",
+      "levelId": "lvl-0",
+      "materialId": "mat-chimney"
+    },
+    {
+      "baseOffset": 0,
+      "footprint": {
+        "maxX": 13.2168,
+        "maxZ": 9.227951,
+        "minX": 12.558972,
+        "minZ": 8.570123
+      },
+      "height": 7.85739,
+      "id": "chimney-fix-right-9a6e98",
+      "levelId": "lvl-0",
+      "materialId": "mat-chimney"
+    }
+  ],
+  "constraints": [],
+  "doors": [
+    {
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-front-8ebc21-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "op-fix-front-8ebc21",
+      "swing": "IN"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "glazing": "FULL",
+            "hinge": "LEFT",
+            "kind": "LEAF"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-left-2d4e3b-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-glass",
+      "openAngle": 0,
+      "openingId": "op-fix-left-2d4e3b",
+      "swing": "IN"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "glazing": "FULL",
+            "hinge": "LEFT",
+            "kind": "LEAF"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-left-9c40b1-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-glass",
+      "openAngle": 0,
+      "openingId": "op-fix-left-9c40b1",
+      "swing": "IN"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "glazing": "FULL",
+            "hinge": "LEFT",
+            "kind": "LEAF"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-rear-4412fb-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-glass",
+      "openAngle": 0,
+      "openingId": "op-fix-rear-4412fb",
+      "swing": "IN"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "glazing": "FULL",
+            "hinge": "LEFT",
+            "kind": "LEAF"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-rear-fcb84c-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-glass",
+      "openAngle": 0,
+      "openingId": "op-fix-rear-fcb84c",
+      "swing": "IN"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "kind": "PANEL"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-plan-front-c702b9-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-gate",
+      "openAngle": 0,
+      "openingId": "op-plan-front-c702b9",
+      "swing": "IN",
+      "usage": "GARAGE"
+    }
+  ],
+  "evidenceSources": [
+    {
+      "id": "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0",
+      "kind": "DRAWING",
+      "label": "frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0",
+      "note": "frame frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0"
+    },
+    {
+      "id": "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f",
+      "kind": "DRAWING",
+      "label": "frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f",
+      "note": "frame frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f"
+    },
+    {
+      "id": "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549",
+      "kind": "DRAWING",
+      "label": "frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549",
+      "note": "frame frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549"
+    },
+    {
+      "id": "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3",
+      "kind": "DRAWING",
+      "label": "frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3",
+      "note": "frame frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3"
+    },
+    {
+      "id": "src-frame-asset-rzut-6f22c38438-d2a9fab32e",
+      "kind": "DRAWING",
+      "label": "frame-asset-rzut-6f22c38438-d2a9fab32e",
+      "note": "frame frame-asset-rzut-6f22c38438-d2a9fab32e"
+    }
+  ],
+  "frame": {
+    "handedness": "LEFT_HANDED_AS_SPECIFIED",
+    "origin": "finished ground-floor level is y = 0; the front facade outer face is z = 0",
+    "viewerNote": "renderers working in a right-handed frame mirror z when building their scene",
+    "wallConvention": "a wall runs from start to end along its OUTER face at its base; its outward normal is up x u, so exterior rings are traversed counter-clockwise on a plan drawn with the front facade at the bottom and material lies to the left of the direction of travel",
+    "x": "right when looking at the front facade",
+    "y": "up (vertical)",
+    "z": "away from the front facade, into the building"
+  },
+  "id": "m-analysis-ma4a24c40addc8",
+  "levels": [
+    {
+      "buildingId": "building",
+      "elevation": 0,
+      "height": 8.521099,
+      "id": "lvl-0",
+      "index": 0,
+      "name": "Massing"
+    }
+  ],
+  "linearSolids": [],
+  "materials": [
+    {
+      "color": "#9a7b66",
+      "id": "mat-brick",
+      "name": "Facing brick"
+    },
+    {
+      "color": "#6d6a66",
+      "id": "mat-chimney",
+      "name": "Chimney"
+    },
+    {
+      "color": "#55585c",
+      "id": "mat-gate",
+      "name": "Garage door"
+    },
+    {
+      "color": "#9fc3d8",
+      "id": "mat-glass",
+      "name": "Glazing",
+      "opacity": 0.35
+    },
+    {
+      "color": "#d9d5cc",
+      "id": "mat-partition",
+      "name": "Partition"
+    },
+    {
+      "color": "#3a3a3c",
+      "id": "mat-render-dark",
+      "name": "Dark render"
+    },
+    {
+      "color": "#5a5550",
+      "id": "mat-roof",
+      "name": "Roof covering (tone not read: miniature convention)"
+    },
+    {
+      "color": "#b07a4a",
+      "id": "mat-timber",
+      "name": "Timber (door leaf, cladding)"
+    },
+    {
+      "color": "#e8e4dc",
+      "id": "mat-wall",
+      "name": "Rendered wall (tone not read: miniature convention)"
+    }
+  ],
+  "meta": {
+    "createdWith": "buildapp",
+    "notes": []
+  },
+  "name": "Willa Eliza 5 (G2) Opis projektu (analysis)",
+  "openings": [
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-6f22c38438-d2a9fab32e",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-H458-600",
+      "kind": "DOOR",
+      "offset": 5.16836,
+      "sill": 0,
+      "wallId": "iw-H459-316",
+      "width": 0.83328
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-6f22c38438-d2a9fab32e",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-H459-347",
+      "kind": "DOOR",
+      "offset": 0.69006,
+      "sill": 0,
+      "wallId": "iw-H459-316-b1",
+      "width": 0.75976
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-6f22c38438-d2a9fab32e",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-V295-556",
+      "kind": "DOOR",
+      "offset": 0.84572,
+      "sill": 0,
+      "wallId": "iw-V295-584-b1",
+      "width": 0.72912
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-6f22c38438-d2a9fab32e",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-V496-369",
+      "kind": "DOOR",
+      "offset": 1.34106,
+      "sill": 0,
+      "wallId": "iw-V495-339",
+      "width": 0.85932
+    },
+    {
+      "height": 1.36395,
+      "id": "op-fix-front-61e9f9",
+      "kind": "WINDOW",
+      "offset": 0.145472,
+      "sill": 1.00023,
+      "wallId": "ring-mass-wing-2-w0",
+      "width": 2.145948
+    },
+    {
+      "height": 2.218692,
+      "id": "op-fix-front-8ebc21",
+      "kind": "DOOR",
+      "offset": 1.299298,
+      "sill": 0.109116,
+      "wallId": "ring-mass-wing-1-w0",
+      "width": 2.055902
+    },
+    {
+      "height": 2.247579,
+      "id": "op-fix-left-2d4e3b",
+      "kind": "DOOR",
+      "offset": 4.769395,
+      "sill": 3.197775,
+      "wallId": "ring-mass-wing-1-w3",
+      "width": 1.900392
+    },
+    {
+      "height": 2.211033,
+      "id": "op-fix-left-9c40b1",
+      "kind": "DOOR",
+      "offset": 0.703516,
+      "sill": 0.036546,
+      "wallId": "ring-mass-wing-2-w3",
+      "width": 2.814042
+    },
+    {
+      "height": 1.187745,
+      "id": "op-fix-left-d92d07",
+      "kind": "WINDOW",
+      "offset": 1.059976,
+      "sill": 4.294155,
+      "wallId": "ring-mass-wing-1-w3",
+      "width": 0.840558
+    },
+    {
+      "height": 2.236443,
+      "id": "op-fix-rear-4412fb",
+      "kind": "DOOR",
+      "offset": 0.19742,
+      "sill": 0.055449,
+      "wallId": "ring-mass-wing-2-w2",
+      "width": 1.8483
+    },
+    {
+      "height": 2.40279,
+      "id": "op-fix-rear-f916d8",
+      "kind": "WINDOW",
+      "offset": 2.291802,
+      "sill": 3.160593,
+      "wallId": "ring-mass-main-w2",
+      "width": 1.996164
+    },
+    {
+      "height": 2.273409,
+      "id": "op-fix-rear-fcb84c",
+      "kind": "DOOR",
+      "offset": 2.291802,
+      "sill": 0.018483,
+      "wallId": "ring-mass-main-w2",
+      "width": 1.996164
+    },
+    {
+      "height": 1.297383,
+      "id": "op-fix-right-34eace",
+      "kind": "WINDOW",
+      "offset": 2.594852,
+      "sill": 0.822285,
+      "wallId": "ring-mass-main-w1",
+      "width": 0.968469
+    },
+    {
+      "height": 1.27911,
+      "id": "op-fix-right-73d4ea",
+      "kind": "WINDOW",
+      "offset": 5.116526,
+      "sill": 0.822285,
+      "wallId": "ring-mass-main-w1",
+      "width": 0.968469
+    },
+    {
+      "height": 1.297383,
+      "id": "op-fix-right-7fe380",
+      "kind": "WINDOW",
+      "offset": 6.706277,
+      "sill": 4.239336,
+      "wallId": "ring-mass-main-w1",
+      "width": 0.986742
+    },
+    {
+      "height": 1.297383,
+      "id": "op-fix-right-917c16",
+      "kind": "WINDOW",
+      "offset": 2.229392,
+      "sill": 4.239336,
+      "wallId": "ring-mass-main-w1",
+      "width": 1.09638
+    },
+    {
+      "height": 1.297383,
+      "id": "op-fix-right-c7ec6b",
+      "kind": "WINDOW",
+      "offset": 9.154859,
+      "sill": 4.239336,
+      "wallId": "ring-mass-main-w1",
+      "width": 0.767466
+    },
+    {
+      "height": 1.27911,
+      "id": "op-fix-right-f0a55d",
+      "kind": "WINDOW",
+      "offset": 7.601654,
+      "sill": 0.822285,
+      "wallId": "ring-mass-main-w1",
+      "width": 0.986742
+    },
+    {
+      "evidence": {
+        "interpretation": "a gap the ground-floor plan draws in this wall (plan-gap-3-429: 7.63..12.63 m), where the model had no opening; its kind, sill and height follow one metric reading of this side's elevation (frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549, 99 % of the span shared): not located in the elevation's pixels, not source-verified",
+        "properties": {
+          "height": "VISUAL_INFERRED",
+          "offset": "SOURCE_DERIVED",
+          "sill": "VISUAL_INFERRED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.27,
+      "id": "op-plan-front-c702b9",
+      "kind": "DOOR",
+      "offset": 1.01552,
+      "sill": 0,
+      "wallId": "ring-mass-main-w0",
+      "width": 4.99968
+    }
+  ],
+  "platforms": [],
+  "railings": [],
+  "relationships": [],
+  "roofEdges": [],
+  "roofOpenings": [],
+  "roofPlanes": [
+    {
+      "boundary": [
+        {
+          "x": 10.0905,
+          "z": 10.4291
+        },
+        {
+          "x": 10.0905,
+          "z": 3.4763
+        },
+        {
+          "x": 13.5668,
+          "z": 0
+        },
+        {
+          "x": 13.5668,
+          "z": 13.9054
+        }
+      ],
+      "datum": {
+        "x": 13.5668,
+        "y": 7.116583,
+        "z": 0
+      },
+      "downslope": {
+        "x": 1,
+        "z": 0
+      },
+      "evidence": {
+        "interpretation": "ridge along X (slopes seen on the sides along it, the gable end across it); pitch 37.1° from a 5.26 m rise over half of 13.91 m; no gable-end view gives the wall's corner under the roof: the roofs' lowest drawn edge (2.95 m, the eaves' edge out on the overhang) is taken as the wall's top under the roof, a lower bound; the agreed structure: a hip's ridge runs along the longer side (Z), not X; two full storeys under the eaves: the walls end at 6.85 m (the agreed 22° down from the drawn ridge at 8.52 m), not at 2.81 m; a hip (no gable wall), built with one pitch all round — the ridge ends half the span (3.48 m) in from the end walls: DISPLAY_ASSUMPTION",
+        "properties": {
+          "datum": "SOURCE_DERIVED",
+          "pitchDeg": "UNRESOLVED"
+        },
+        "source": "frame-asset-rzut-6f22c38438-d2a9fab32e + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f",
+        "sourceIds": [
+          "src-frame-asset-rzut-6f22c38438-d2a9fab32e",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f"
+        ],
+        "status": "UNRESOLVED"
+      },
+      "id": "roof-mass-main-maxX",
+      "levelId": "lvl-0",
+      "materialId": "mat-roof",
+      "pitchDeg": 22,
+      "thickness": 0.25
+    },
+    {
+      "boundary": [
+        {
+          "x": 10.0905,
+          "z": 10.4291
+        },
+        {
+          "x": 13.5668,
+          "z": 13.9054
+        },
+        {
+          "x": 6.6142,
+          "z": 13.9054
+        }
+      ],
+      "datum": {
+        "x": 6.6142,
+        "y": 7.116583,
+        "z": 13.9054
+      },
+      "downslope": {
+        "x": 0,
+        "z": 1
+      },
+      "evidence": {
+        "interpretation": "ridge along X (slopes seen on the sides along it, the gable end across it); pitch 37.1° from a 5.26 m rise over half of 13.91 m; no gable-end view gives the wall's corner under the roof: the roofs' lowest drawn edge (2.95 m, the eaves' edge out on the overhang) is taken as the wall's top under the roof, a lower bound; the agreed structure: a hip's ridge runs along the longer side (Z), not X; two full storeys under the eaves: the walls end at 6.85 m (the agreed 22° down from the drawn ridge at 8.52 m), not at 2.81 m; a hip (no gable wall), built with one pitch all round — the ridge ends half the span (3.48 m) in from the end walls: DISPLAY_ASSUMPTION",
+        "properties": {
+          "datum": "SOURCE_DERIVED",
+          "pitchDeg": "UNRESOLVED"
+        },
+        "source": "frame-asset-rzut-6f22c38438-d2a9fab32e + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f",
+        "sourceIds": [
+          "src-frame-asset-rzut-6f22c38438-d2a9fab32e",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f"
+        ],
+        "status": "UNRESOLVED"
+      },
+      "id": "roof-mass-main-maxZ",
+      "levelId": "lvl-0",
+      "materialId": "mat-roof",
+      "pitchDeg": 22,
+      "thickness": 0.25
+    },
+    {
+      "boundary": [
+        {
+          "x": 10.0905,
+          "z": 3.4763
+        },
+        {
+          "x": 10.0905,
+          "z": 10.4291
+        },
+        {
+          "x": 6.6142,
+          "z": 13.9054
+        },
+        {
+          "x": 6.6142,
+          "z": 0
+        }
+      ],
+      "datum": {
+        "x": 6.6142,
+        "y": 7.116583,
+        "z": 0
+      },
+      "downslope": {
+        "x": -1,
+        "z": 0
+      },
+      "evidence": {
+        "interpretation": "ridge along X (slopes seen on the sides along it, the gable end across it); pitch 37.1° from a 5.26 m rise over half of 13.91 m; no gable-end view gives the wall's corner under the roof: the roofs' lowest drawn edge (2.95 m, the eaves' edge out on the overhang) is taken as the wall's top under the roof, a lower bound; the agreed structure: a hip's ridge runs along the longer side (Z), not X; two full storeys under the eaves: the walls end at 6.85 m (the agreed 22° down from the drawn ridge at 8.52 m), not at 2.81 m; a hip (no gable wall), built with one pitch all round — the ridge ends half the span (3.48 m) in from the end walls: DISPLAY_ASSUMPTION",
+        "properties": {
+          "datum": "SOURCE_DERIVED",
+          "pitchDeg": "UNRESOLVED"
+        },
+        "source": "frame-asset-rzut-6f22c38438-d2a9fab32e + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f",
+        "sourceIds": [
+          "src-frame-asset-rzut-6f22c38438-d2a9fab32e",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f"
+        ],
+        "status": "UNRESOLVED"
+      },
+      "id": "roof-mass-main-minX",
+      "levelId": "lvl-0",
+      "materialId": "mat-roof",
+      "pitchDeg": 22,
+      "thickness": 0.25
+    },
+    {
+      "boundary": [
+        {
+          "x": 10.0905,
+          "z": 3.4763
+        },
+        {
+          "x": 6.6142,
+          "z": 0
+        },
+        {
+          "x": 13.5668,
+          "z": 0
+        }
+      ],
+      "datum": {
+        "x": 6.6142,
+        "y": 7.116583,
+        "z": 0
+      },
+      "downslope": {
+        "x": 0,
+        "z": -1
+      },
+      "evidence": {
+        "interpretation": "ridge along X (slopes seen on the sides along it, the gable end across it); pitch 37.1° from a 5.26 m rise over half of 13.91 m; no gable-end view gives the wall's corner under the roof: the roofs' lowest drawn edge (2.95 m, the eaves' edge out on the overhang) is taken as the wall's top under the roof, a lower bound; the agreed structure: a hip's ridge runs along the longer side (Z), not X; two full storeys under the eaves: the walls end at 6.85 m (the agreed 22° down from the drawn ridge at 8.52 m), not at 2.81 m; a hip (no gable wall), built with one pitch all round — the ridge ends half the span (3.48 m) in from the end walls: DISPLAY_ASSUMPTION",
+        "properties": {
+          "datum": "SOURCE_DERIVED",
+          "pitchDeg": "UNRESOLVED"
+        },
+        "source": "frame-asset-rzut-6f22c38438-d2a9fab32e + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f",
+        "sourceIds": [
+          "src-frame-asset-rzut-6f22c38438-d2a9fab32e",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f"
+        ],
+        "status": "UNRESOLVED"
+      },
+      "id": "roof-mass-main-minZ",
+      "levelId": "lvl-0",
+      "materialId": "mat-roof",
+      "pitchDeg": 22,
+      "thickness": 0.25
+    },
+    {
+      "boundary": [
+        {
+          "x": 4.9216,
+          "z": 12.2128
+        },
+        {
+          "x": 4.9216,
+          "z": 3.88
+        },
+        {
+          "x": 6.6142,
+          "z": 2.1874
+        },
+        {
+          "x": 6.6142,
+          "z": 13.9054
+        }
+      ],
+      "datum": {
+        "x": 6.6142,
+        "y": 6.153388,
+        "z": 2.1874
+      },
+      "downslope": {
+        "x": 1,
+        "z": 0
+      },
+      "evidence": {
+        "interpretation": "ridge along X (slopes seen on the sides along it, the gable end across it); pitch 21.9° from a 2.36 m rise over half of 11.72 m; no view shows the wall's corner under the roof: the highest drawn wall top (5.88 m) is taken as the wall's, a lower bound; the agreed structure: a hip's ridge runs along the longer side (Z), not X; a hip (no gable wall), built with one pitch all round — the ridge ends half the span (1.69 m) in from the end walls: DISPLAY_ASSUMPTION; agreed again after the last change: 54.3° over the 3.39 m span it now has against 22° (the pitch the structure read states for the main roof): no view across the ridge draws this roof narrowing to the top drawn over it (it is the roof behind it) — the ridge follows from this body's own eaves at 22° (the pitch the structure read states for the main roof): 6.84 m, not 8.51 m",
+        "properties": {
+          "datum": "UNRESOLVED",
+          "pitchDeg": "UNRESOLVED"
+        },
+        "source": "frame-asset-rzut-6f22c38438-d2a9fab32e + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f",
+        "sourceIds": [
+          "src-frame-asset-rzut-6f22c38438-d2a9fab32e",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f"
+        ],
+        "status": "UNRESOLVED"
+      },
+      "id": "roof-mass-wing-1-maxX",
+      "levelId": "lvl-0",
+      "materialId": "mat-roof",
+      "pitchDeg": 22,
+      "thickness": 0.25
+    },
+    {
+      "boundary": [
+        {
+          "x": 4.9216,
+          "z": 12.2128
+        },
+        {
+          "x": 6.6142,
+          "z": 13.9054
+        },
+        {
+          "x": 3.229,
+          "z": 13.9054
+        }
+      ],
+      "datum": {
+        "x": 3.229,
+        "y": 6.153388,
+        "z": 13.9054
+      },
+      "downslope": {
+        "x": 0,
+        "z": 1
+      },
+      "evidence": {
+        "interpretation": "ridge along X (slopes seen on the sides along it, the gable end across it); pitch 21.9° from a 2.36 m rise over half of 11.72 m; no view shows the wall's corner under the roof: the highest drawn wall top (5.88 m) is taken as the wall's, a lower bound; the agreed structure: a hip's ridge runs along the longer side (Z), not X; a hip (no gable wall), built with one pitch all round — the ridge ends half the span (1.69 m) in from the end walls: DISPLAY_ASSUMPTION; agreed again after the last change: 54.3° over the 3.39 m span it now has against 22° (the pitch the structure read states for the main roof): no view across the ridge draws this roof narrowing to the top drawn over it (it is the roof behind it) — the ridge follows from this body's own eaves at 22° (the pitch the structure read states for the main roof): 6.84 m, not 8.51 m",
+        "properties": {
+          "datum": "UNRESOLVED",
+          "pitchDeg": "UNRESOLVED"
+        },
+        "source": "frame-asset-rzut-6f22c38438-d2a9fab32e + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f",
+        "sourceIds": [
+          "src-frame-asset-rzut-6f22c38438-d2a9fab32e",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f"
+        ],
+        "status": "UNRESOLVED"
+      },
+      "id": "roof-mass-wing-1-maxZ",
+      "levelId": "lvl-0",
+      "materialId": "mat-roof",
+      "pitchDeg": 22,
+      "thickness": 0.25
+    },
+    {
+      "boundary": [
+        {
+          "x": 4.9216,
+          "z": 3.88
+        },
+        {
+          "x": 4.9216,
+          "z": 12.2128
+        },
+        {
+          "x": 3.229,
+          "z": 13.9054
+        },
+        {
+          "x": 3.229,
+          "z": 2.1874
+        }
+      ],
+      "datum": {
+        "x": 3.229,
+        "y": 6.153388,
+        "z": 2.1874
+      },
+      "downslope": {
+        "x": -1,
+        "z": 0
+      },
+      "evidence": {
+        "interpretation": "ridge along X (slopes seen on the sides along it, the gable end across it); pitch 21.9° from a 2.36 m rise over half of 11.72 m; no view shows the wall's corner under the roof: the highest drawn wall top (5.88 m) is taken as the wall's, a lower bound; the agreed structure: a hip's ridge runs along the longer side (Z), not X; a hip (no gable wall), built with one pitch all round — the ridge ends half the span (1.69 m) in from the end walls: DISPLAY_ASSUMPTION; agreed again after the last change: 54.3° over the 3.39 m span it now has against 22° (the pitch the structure read states for the main roof): no view across the ridge draws this roof narrowing to the top drawn over it (it is the roof behind it) — the ridge follows from this body's own eaves at 22° (the pitch the structure read states for the main roof): 6.84 m, not 8.51 m",
+        "properties": {
+          "datum": "UNRESOLVED",
+          "pitchDeg": "UNRESOLVED"
+        },
+        "source": "frame-asset-rzut-6f22c38438-d2a9fab32e + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f",
+        "sourceIds": [
+          "src-frame-asset-rzut-6f22c38438-d2a9fab32e",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f"
+        ],
+        "status": "UNRESOLVED"
+      },
+      "id": "roof-mass-wing-1-minX",
+      "levelId": "lvl-0",
+      "materialId": "mat-roof",
+      "pitchDeg": 22,
+      "thickness": 0.25
+    },
+    {
+      "boundary": [
+        {
+          "x": 4.9216,
+          "z": 3.88
+        },
+        {
+          "x": 3.229,
+          "z": 2.1874
+        },
+        {
+          "x": 6.6142,
+          "z": 2.1874
+        }
+      ],
+      "datum": {
+        "x": 3.229,
+        "y": 6.153388,
+        "z": 2.1874
+      },
+      "downslope": {
+        "x": 0,
+        "z": -1
+      },
+      "evidence": {
+        "interpretation": "ridge along X (slopes seen on the sides along it, the gable end across it); pitch 21.9° from a 2.36 m rise over half of 11.72 m; no view shows the wall's corner under the roof: the highest drawn wall top (5.88 m) is taken as the wall's, a lower bound; the agreed structure: a hip's ridge runs along the longer side (Z), not X; a hip (no gable wall), built with one pitch all round — the ridge ends half the span (1.69 m) in from the end walls: DISPLAY_ASSUMPTION; agreed again after the last change: 54.3° over the 3.39 m span it now has against 22° (the pitch the structure read states for the main roof): no view across the ridge draws this roof narrowing to the top drawn over it (it is the roof behind it) — the ridge follows from this body's own eaves at 22° (the pitch the structure read states for the main roof): 6.84 m, not 8.51 m",
+        "properties": {
+          "datum": "UNRESOLVED",
+          "pitchDeg": "UNRESOLVED"
+        },
+        "source": "frame-asset-rzut-6f22c38438-d2a9fab32e + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f",
+        "sourceIds": [
+          "src-frame-asset-rzut-6f22c38438-d2a9fab32e",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f"
+        ],
+        "status": "UNRESOLVED"
+      },
+      "id": "roof-mass-wing-1-minZ",
+      "levelId": "lvl-0",
+      "materialId": "mat-roof",
+      "pitchDeg": 22,
+      "thickness": 0.25
+    },
+    {
+      "boundary": [
+        {
+          "x": 1.6145,
+          "z": 8.6453
+        },
+        {
+          "x": 1.6145,
+          "z": 3.8019
+        },
+        {
+          "x": 3.229,
+          "z": 2.1874
+        },
+        {
+          "x": 3.229,
+          "z": 10.2598
+        }
+      ],
+      "datum": {
+        "x": 3.229,
+        "y": 5.046342,
+        "z": 2.1874
+      },
+      "downslope": {
+        "x": 1,
+        "z": 0
+      },
+      "evidence": {
+        "interpretation": "ridge along Z (slopes seen on the sides along it, the gable end across it); pitch 22° from a 0.65 m rise over half of 3.23 m; the top drawn over this body (8.14 m) would make a 62.4° roof — steeper than a house roof: it is the roof of the body behind it; this body takes 22° (the first body's pitch) from its own walls' top, unconfirmed; the agreed structure: a hip (no gable wall), built with one pitch all round — the ridge ends half the span (1.61 m) in from the end walls: DISPLAY_ASSUMPTION",
+        "properties": {
+          "datum": "UNRESOLVED",
+          "pitchDeg": "UNRESOLVED"
+        },
+        "source": "frame-asset-rzut-6f22c38438-d2a9fab32e + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f",
+        "sourceIds": [
+          "src-frame-asset-rzut-6f22c38438-d2a9fab32e",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f"
+        ],
+        "status": "UNRESOLVED"
+      },
+      "id": "roof-mass-wing-2-maxX",
+      "levelId": "lvl-0",
+      "materialId": "mat-roof",
+      "pitchDeg": 22,
+      "thickness": 0.25
+    },
+    {
+      "boundary": [
+        {
+          "x": 1.6145,
+          "z": 8.6453
+        },
+        {
+          "x": 3.229,
+          "z": 10.2598
+        },
+        {
+          "x": 0,
+          "z": 10.2598
+        }
+      ],
+      "datum": {
+        "x": 0,
+        "y": 5.046342,
+        "z": 10.2598
+      },
+      "downslope": {
+        "x": 0,
+        "z": 1
+      },
+      "evidence": {
+        "interpretation": "ridge along Z (slopes seen on the sides along it, the gable end across it); pitch 22° from a 0.65 m rise over half of 3.23 m; the top drawn over this body (8.14 m) would make a 62.4° roof — steeper than a house roof: it is the roof of the body behind it; this body takes 22° (the first body's pitch) from its own walls' top, unconfirmed; the agreed structure: a hip (no gable wall), built with one pitch all round — the ridge ends half the span (1.61 m) in from the end walls: DISPLAY_ASSUMPTION",
+        "properties": {
+          "datum": "UNRESOLVED",
+          "pitchDeg": "UNRESOLVED"
+        },
+        "source": "frame-asset-rzut-6f22c38438-d2a9fab32e + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f",
+        "sourceIds": [
+          "src-frame-asset-rzut-6f22c38438-d2a9fab32e",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f"
+        ],
+        "status": "UNRESOLVED"
+      },
+      "id": "roof-mass-wing-2-maxZ",
+      "levelId": "lvl-0",
+      "materialId": "mat-roof",
+      "pitchDeg": 22,
+      "thickness": 0.25
+    },
+    {
+      "boundary": [
+        {
+          "x": 1.6145,
+          "z": 3.8019
+        },
+        {
+          "x": 1.6145,
+          "z": 8.6453
+        },
+        {
+          "x": 0,
+          "z": 10.2598
+        },
+        {
+          "x": 0,
+          "z": 2.1874
+        }
+      ],
+      "datum": {
+        "x": 0,
+        "y": 5.046342,
+        "z": 2.1874
+      },
+      "downslope": {
+        "x": -1,
+        "z": 0
+      },
+      "evidence": {
+        "interpretation": "ridge along Z (slopes seen on the sides along it, the gable end across it); pitch 22° from a 0.65 m rise over half of 3.23 m; the top drawn over this body (8.14 m) would make a 62.4° roof — steeper than a house roof: it is the roof of the body behind it; this body takes 22° (the first body's pitch) from its own walls' top, unconfirmed; the agreed structure: a hip (no gable wall), built with one pitch all round — the ridge ends half the span (1.61 m) in from the end walls: DISPLAY_ASSUMPTION",
+        "properties": {
+          "datum": "UNRESOLVED",
+          "pitchDeg": "UNRESOLVED"
+        },
+        "source": "frame-asset-rzut-6f22c38438-d2a9fab32e + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f",
+        "sourceIds": [
+          "src-frame-asset-rzut-6f22c38438-d2a9fab32e",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f"
+        ],
+        "status": "UNRESOLVED"
+      },
+      "id": "roof-mass-wing-2-minX",
+      "levelId": "lvl-0",
+      "materialId": "mat-roof",
+      "pitchDeg": 22,
+      "thickness": 0.25
+    },
+    {
+      "boundary": [
+        {
+          "x": 1.6145,
+          "z": 3.8019
+        },
+        {
+          "x": 0,
+          "z": 2.1874
+        },
+        {
+          "x": 3.229,
+          "z": 2.1874
+        }
+      ],
+      "datum": {
+        "x": 0,
+        "y": 5.046342,
+        "z": 2.1874
+      },
+      "downslope": {
+        "x": 0,
+        "z": -1
+      },
+      "evidence": {
+        "interpretation": "ridge along Z (slopes seen on the sides along it, the gable end across it); pitch 22° from a 0.65 m rise over half of 3.23 m; the top drawn over this body (8.14 m) would make a 62.4° roof — steeper than a house roof: it is the roof of the body behind it; this body takes 22° (the first body's pitch) from its own walls' top, unconfirmed; the agreed structure: a hip (no gable wall), built with one pitch all round — the ridge ends half the span (1.61 m) in from the end walls: DISPLAY_ASSUMPTION",
+        "properties": {
+          "datum": "UNRESOLVED",
+          "pitchDeg": "UNRESOLVED"
+        },
+        "source": "frame-asset-rzut-6f22c38438-d2a9fab32e + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f",
+        "sourceIds": [
+          "src-frame-asset-rzut-6f22c38438-d2a9fab32e",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f"
+        ],
+        "status": "UNRESOLVED"
+      },
+      "id": "roof-mass-wing-2-minZ",
+      "levelId": "lvl-0",
+      "materialId": "mat-roof",
+      "pitchDeg": 22,
+      "thickness": 0.25
+    }
+  ],
+  "rooflights": [],
+  "roofs": [],
+  "rooms": [],
+  "schema": "buildapp.canonical-building-model",
+  "schemaVersion": "1.9.0",
+  "slabs": [],
+  "stairs": [],
+  "stepRuns": [],
+  "surfaceRegions": [
+    {
+      "evidence": {
+        "interpretation": "a timber outline from finish-c7eea9 (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-mass-main-w1",
+      "id": "appearance-east-ring-mass-main-w1-timber-0",
+      "materialId": "mat-timber",
+      "outline": [
+        {
+          "a": 3.56,
+          "b": 2.137908
+        },
+        {
+          "a": 7.62,
+          "b": 2.137908
+        },
+        {
+          "a": 7.62,
+          "b": 2.117908
+        },
+        {
+          "a": 7.64,
+          "b": 2.117908
+        },
+        {
+          "a": 7.64,
+          "b": 0.837908
+        },
+        {
+          "a": 7.62,
+          "b": 0.837908
+        },
+        {
+          "a": 7.62,
+          "b": 0.817908
+        },
+        {
+          "a": 3.56,
+          "b": 0.817908
+        },
+        {
+          "a": 3.56,
+          "b": 0.837908
+        },
+        {
+          "a": 3.54,
+          "b": 0.837908
+        },
+        {
+          "a": 3.54,
+          "b": 2.117908
+        },
+        {
+          "a": 3.56,
+          "b": 2.117908
+        }
+      ],
+      "rect": {
+        "a0": 3.54,
+        "a1": 7.64,
+        "b0": 0.817908,
+        "b1": 2.137908
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a brick outline from finish-7c60e2 (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-mass-main-w0",
+      "id": "appearance-front-ring-mass-main-w0-brick-0",
+      "materialId": "mat-brick",
+      "outline": [
+        {
+          "a": 0.0058,
+          "b": 5.617908
+        },
+        {
+          "a": 4.6658,
+          "b": 5.617908
+        },
+        {
+          "a": 4.6658,
+          "b": 5.597908
+        },
+        {
+          "a": 4.6858,
+          "b": 5.597908
+        },
+        {
+          "a": 4.6858,
+          "b": 4.337908
+        },
+        {
+          "a": 4.6658,
+          "b": 4.337908
+        },
+        {
+          "a": 4.6658,
+          "b": 4.317908
+        },
+        {
+          "a": 0.0058,
+          "b": 4.317908
+        },
+        {
+          "a": 0.0058,
+          "b": 4.337908
+        },
+        {
+          "a": 0,
+          "b": 4.337908
+        },
+        {
+          "a": 0,
+          "b": 5.597908
+        },
+        {
+          "a": 0.0058,
+          "b": 5.597908
+        }
+      ],
+      "rect": {
+        "a0": 0,
+        "a1": 4.6858,
+        "b0": 4.317908,
+        "b1": 5.617908
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a brick outline from finish-7c60e2 (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-mass-wing-2-w0",
+      "id": "appearance-front-ring-mass-wing-2-w0-brick-0",
+      "materialId": "mat-brick",
+      "outline": [
+        {
+          "a": 3.229,
+          "b": 4.776708
+        },
+        {
+          "a": 3.229,
+          "b": 4.337908
+        },
+        {
+          "a": 3.22,
+          "b": 4.337908
+        },
+        {
+          "a": 3.22,
+          "b": 4.317908
+        },
+        {
+          "a": 2.32,
+          "b": 4.317908
+        },
+        {
+          "a": 2.32,
+          "b": 4.337908
+        },
+        {
+          "a": 2.3,
+          "b": 4.337908
+        },
+        {
+          "a": 2.3,
+          "b": 4.776708
+        }
+      ],
+      "rect": {
+        "a0": 2.3,
+        "a1": 3.229,
+        "b0": 4.317908,
+        "b1": 4.776708
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a timber outline from finish-d97a1f (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-mass-main-w2",
+      "id": "appearance-rear-ring-mass-main-w2-timber-0",
+      "materialId": "mat-timber",
+      "outline": [
+        {
+          "a": 6.5068,
+          "b": 2.317908
+        },
+        {
+          "a": 4.2868,
+          "b": 2.317908
+        },
+        {
+          "a": 4.2868,
+          "b": 2.297908
+        },
+        {
+          "a": 4.2668,
+          "b": 2.297908
+        },
+        {
+          "a": 4.2668,
+          "b": 0
+        },
+        {
+          "a": 6.5268,
+          "b": 0
+        },
+        {
+          "a": 6.5268,
+          "b": 2.297908
+        },
+        {
+          "a": 6.5068,
+          "b": 2.297908
+        }
+      ],
+      "rect": {
+        "a0": 4.2668,
+        "a1": 6.5268,
+        "b0": 0,
+        "b1": 2.317908
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a timber outline from finish-ae2d68 (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-mass-wing-1-w2",
+      "id": "appearance-rear-ring-mass-wing-1-w2-timber-0",
+      "materialId": "mat-timber",
+      "outline": [
+        {
+          "a": 3.3852,
+          "b": 2.317908
+        },
+        {
+          "a": 3.0742,
+          "b": 2.317908
+        },
+        {
+          "a": 3.0742,
+          "b": 2.297908
+        },
+        {
+          "a": 3.0542,
+          "b": 2.297908
+        },
+        {
+          "a": 3.0542,
+          "b": 0
+        },
+        {
+          "a": 3.3852,
+          "b": 0
+        }
+      ],
+      "rect": {
+        "a0": 3.0542,
+        "a1": 3.3852,
+        "b0": 0,
+        "b1": 2.317908
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a timber outline from finish-ae2d68 (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-mass-wing-2-w2",
+      "id": "appearance-rear-ring-mass-wing-2-w2-timber-0",
+      "materialId": "mat-timber",
+      "outline": [
+        {
+          "a": 0.189,
+          "b": 2.317908
+        },
+        {
+          "a": 0.009,
+          "b": 2.317908
+        },
+        {
+          "a": 0.009,
+          "b": 2.297908
+        },
+        {
+          "a": 0,
+          "b": 2.297908
+        },
+        {
+          "a": 0,
+          "b": 0
+        },
+        {
+          "a": 0.209,
+          "b": 0
+        },
+        {
+          "a": 0.209,
+          "b": 2.297908
+        },
+        {
+          "a": 0.189,
+          "b": 2.297908
+        }
+      ],
+      "rect": {
+        "a0": 0,
+        "a1": 0.209,
+        "b0": 0,
+        "b1": 2.317908
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a timber outline from finish-f8d97c (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-mass-main-w3",
+      "id": "appearance-west-ring-mass-main-w3-timber-0",
+      "materialId": "mat-timber",
+      "outline": [
+        {
+          "a": 12.7654,
+          "b": 2.297908
+        },
+        {
+          "a": 11.7454,
+          "b": 2.297908
+        },
+        {
+          "a": 11.7454,
+          "b": 2.277908
+        },
+        {
+          "a": 11.7254,
+          "b": 2.277908
+        },
+        {
+          "a": 11.7254,
+          "b": 0
+        },
+        {
+          "a": 12.7854,
+          "b": 0
+        },
+        {
+          "a": 12.7854,
+          "b": 2.277908
+        },
+        {
+          "a": 12.7654,
+          "b": 2.277908
+        }
+      ],
+      "rect": {
+        "a0": 11.7254,
+        "a1": 12.7854,
+        "b0": 0,
+        "b1": 2.297908
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a timber outline from finish-7cd8d0 (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-mass-wing-1-w3",
+      "id": "appearance-west-ring-mass-wing-1-w3-timber-0",
+      "materialId": "mat-timber",
+      "outline": [
+        {
+          "a": 3.6454,
+          "b": 2.297908
+        },
+        {
+          "a": 3.5254,
+          "b": 2.297908
+        },
+        {
+          "a": 3.5254,
+          "b": 2.277908
+        },
+        {
+          "a": 3.5054,
+          "b": 2.277908
+        },
+        {
+          "a": 3.5054,
+          "b": 0
+        },
+        {
+          "a": 3.6654,
+          "b": 0
+        },
+        {
+          "a": 3.6654,
+          "b": 2.277908
+        },
+        {
+          "a": 3.6454,
+          "b": 2.277908
+        }
+      ],
+      "rect": {
+        "a0": 3.5054,
+        "a1": 3.6654,
+        "b0": 0,
+        "b1": 2.297908
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a timber outline from finish-7cd8d0 (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-mass-wing-2-w3",
+      "id": "appearance-west-ring-mass-wing-2-w3-timber-0",
+      "materialId": "mat-timber",
+      "outline": [
+        {
+          "a": 0.6998,
+          "b": 2.297908
+        },
+        {
+          "a": 0.2998,
+          "b": 2.297908
+        },
+        {
+          "a": 0.2998,
+          "b": 2.277908
+        },
+        {
+          "a": 0.2798,
+          "b": 2.277908
+        },
+        {
+          "a": 0.2798,
+          "b": 0
+        },
+        {
+          "a": 0.7198,
+          "b": 0
+        },
+        {
+          "a": 0.7198,
+          "b": 2.277908
+        },
+        {
+          "a": 0.6998,
+          "b": 2.277908
+        }
+      ],
+      "rect": {
+        "a0": 0.2798,
+        "a1": 0.7198,
+        "b0": 0,
+        "b1": 2.297908
+      }
+    }
+  ],
+  "terraces": [],
+  "units": {
+    "angle": "deg",
+    "length": "m"
+  },
+  "wallJunctions": [
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w3"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w0"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-6f22c38438-d2a9fab32e (MAIN, GARAGE), at the analyzer's own scale: 2.604 cm/px, STRONG / CONFIRMED with 4 independent witnesses; heights: 2 registered elevation(s) give eaves 2.96 / 2.94 m and top 8.48 / 8.56 m (they agree)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-6f22c38438-d2a9fab32e + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f",
+        "sourceIds": [
+          "src-frame-asset-rzut-6f22c38438-d2a9fab32e",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j0",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w0"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w1"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-6f22c38438-d2a9fab32e (MAIN, GARAGE), at the analyzer's own scale: 2.604 cm/px, STRONG / CONFIRMED with 4 independent witnesses; heights: 2 registered elevation(s) give eaves 2.96 / 2.94 m and top 8.48 / 8.56 m (they agree)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-6f22c38438-d2a9fab32e + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f",
+        "sourceIds": [
+          "src-frame-asset-rzut-6f22c38438-d2a9fab32e",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j1",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w1"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w2"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-6f22c38438-d2a9fab32e (MAIN, GARAGE), at the analyzer's own scale: 2.604 cm/px, STRONG / CONFIRMED with 4 independent witnesses; heights: 2 registered elevation(s) give eaves 2.96 / 2.94 m and top 8.48 / 8.56 m (they agree)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-6f22c38438-d2a9fab32e + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f",
+        "sourceIds": [
+          "src-frame-asset-rzut-6f22c38438-d2a9fab32e",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j2",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w2",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w2"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w3"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-6f22c38438-d2a9fab32e (MAIN, GARAGE), at the analyzer's own scale: 2.604 cm/px, STRONG / CONFIRMED with 4 independent witnesses; heights: 2 registered elevation(s) give eaves 2.96 / 2.94 m and top 8.48 / 8.56 m (they agree)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-6f22c38438-d2a9fab32e + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f",
+        "sourceIds": [
+          "src-frame-asset-rzut-6f22c38438-d2a9fab32e",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j3",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w2",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-wing-1-w3"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-wing-1-w0"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-6f22c38438-d2a9fab32e (MAIN, GARAGE), at the analyzer's own scale: 2.604 cm/px, STRONG / CONFIRMED with 4 independent witnesses; heights: 3 registered elevation(s) give eaves 2.96 / 2.94 / 5.92 m and top 8.51 / 8.55 / 8.41 m (they disagree by 2.98 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-6f22c38438-d2a9fab32e + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f",
+        "sourceIds": [
+          "src-frame-asset-rzut-6f22c38438-d2a9fab32e",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-wing-1-j0",
+      "kind": "CORNER",
+      "owner": "ring-mass-wing-1-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-wing-1-w0"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-wing-1-w1"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-6f22c38438-d2a9fab32e (MAIN, GARAGE), at the analyzer's own scale: 2.604 cm/px, STRONG / CONFIRMED with 4 independent witnesses; heights: 3 registered elevation(s) give eaves 2.96 / 2.94 / 5.92 m and top 8.51 / 8.55 / 8.41 m (they disagree by 2.98 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-6f22c38438-d2a9fab32e + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f",
+        "sourceIds": [
+          "src-frame-asset-rzut-6f22c38438-d2a9fab32e",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-wing-1-j1",
+      "kind": "CORNER",
+      "owner": "ring-mass-wing-1-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-wing-1-w1"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-wing-1-w2"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-6f22c38438-d2a9fab32e (MAIN, GARAGE), at the analyzer's own scale: 2.604 cm/px, STRONG / CONFIRMED with 4 independent witnesses; heights: 3 registered elevation(s) give eaves 2.96 / 2.94 / 5.92 m and top 8.51 / 8.55 / 8.41 m (they disagree by 2.98 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-6f22c38438-d2a9fab32e + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f",
+        "sourceIds": [
+          "src-frame-asset-rzut-6f22c38438-d2a9fab32e",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-wing-1-j2",
+      "kind": "CORNER",
+      "owner": "ring-mass-wing-1-w2",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-wing-1-w2"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-wing-1-w3"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-6f22c38438-d2a9fab32e (MAIN, GARAGE), at the analyzer's own scale: 2.604 cm/px, STRONG / CONFIRMED with 4 independent witnesses; heights: 3 registered elevation(s) give eaves 2.96 / 2.94 / 5.92 m and top 8.51 / 8.55 / 8.41 m (they disagree by 2.98 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-6f22c38438-d2a9fab32e + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f",
+        "sourceIds": [
+          "src-frame-asset-rzut-6f22c38438-d2a9fab32e",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-wing-1-j3",
+      "kind": "CORNER",
+      "owner": "ring-mass-wing-1-w2",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-wing-2-w3"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-wing-2-w0"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-6f22c38438-d2a9fab32e (MAIN, GARAGE), at the analyzer's own scale: 2.604 cm/px, STRONG / CONFIRMED with 4 independent witnesses; heights: 2 registered elevation(s) give eaves 6.07 / 2.94 m and top 8.07 / 8.20 m (they disagree by 3.14 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-6f22c38438-d2a9fab32e + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f",
+        "sourceIds": [
+          "src-frame-asset-rzut-6f22c38438-d2a9fab32e",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-wing-2-j0",
+      "kind": "CORNER",
+      "owner": "ring-mass-wing-2-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-wing-2-w0"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-wing-2-w1"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-6f22c38438-d2a9fab32e (MAIN, GARAGE), at the analyzer's own scale: 2.604 cm/px, STRONG / CONFIRMED with 4 independent witnesses; heights: 2 registered elevation(s) give eaves 6.07 / 2.94 m and top 8.07 / 8.20 m (they disagree by 3.14 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-6f22c38438-d2a9fab32e + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f",
+        "sourceIds": [
+          "src-frame-asset-rzut-6f22c38438-d2a9fab32e",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-wing-2-j1",
+      "kind": "CORNER",
+      "owner": "ring-mass-wing-2-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-wing-2-w1"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-wing-2-w2"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-6f22c38438-d2a9fab32e (MAIN, GARAGE), at the analyzer's own scale: 2.604 cm/px, STRONG / CONFIRMED with 4 independent witnesses; heights: 2 registered elevation(s) give eaves 6.07 / 2.94 m and top 8.07 / 8.20 m (they disagree by 3.14 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-6f22c38438-d2a9fab32e + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f",
+        "sourceIds": [
+          "src-frame-asset-rzut-6f22c38438-d2a9fab32e",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-wing-2-j2",
+      "kind": "CORNER",
+      "owner": "ring-mass-wing-2-w2",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-wing-2-w2"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-wing-2-w3"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-6f22c38438-d2a9fab32e (MAIN, GARAGE), at the analyzer's own scale: 2.604 cm/px, STRONG / CONFIRMED with 4 independent witnesses; heights: 2 registered elevation(s) give eaves 6.07 / 2.94 m and top 8.07 / 8.20 m (they disagree by 3.14 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-6f22c38438-d2a9fab32e + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f",
+        "sourceIds": [
+          "src-frame-asset-rzut-6f22c38438-d2a9fab32e",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-wing-2-j3",
+      "kind": "CORNER",
+      "owner": "ring-mass-wing-2-w2",
+      "tolerance": 0.001
+    }
+  ],
+  "wallPanels": [],
+  "wallRings": [
+    {
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-6f22c38438-d2a9fab32e (MAIN, GARAGE), at the analyzer's own scale: 2.604 cm/px, STRONG / CONFIRMED with 4 independent witnesses; heights: 2 registered elevation(s) give eaves 2.96 / 2.94 m and top 8.48 / 8.56 m (they agree)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-6f22c38438-d2a9fab32e + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f",
+        "sourceIds": [
+          "src-frame-asset-rzut-6f22c38438-d2a9fab32e",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main",
+      "junctionIds": [
+        "ring-mass-main-j0",
+        "ring-mass-main-j1",
+        "ring-mass-main-j2",
+        "ring-mass-main-j3"
+      ],
+      "levelId": "lvl-0",
+      "wallIds": [
+        "ring-mass-main-w0",
+        "ring-mass-main-w1",
+        "ring-mass-main-w2",
+        "ring-mass-main-w3"
+      ]
+    },
+    {
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-6f22c38438-d2a9fab32e (MAIN, GARAGE), at the analyzer's own scale: 2.604 cm/px, STRONG / CONFIRMED with 4 independent witnesses; heights: 3 registered elevation(s) give eaves 2.96 / 2.94 / 5.92 m and top 8.51 / 8.55 / 8.41 m (they disagree by 2.98 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-6f22c38438-d2a9fab32e + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f",
+        "sourceIds": [
+          "src-frame-asset-rzut-6f22c38438-d2a9fab32e",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-wing-1",
+      "junctionIds": [
+        "ring-mass-wing-1-j0",
+        "ring-mass-wing-1-j1",
+        "ring-mass-wing-1-j2",
+        "ring-mass-wing-1-j3"
+      ],
+      "levelId": "lvl-0",
+      "wallIds": [
+        "ring-mass-wing-1-w0",
+        "ring-mass-wing-1-w1",
+        "ring-mass-wing-1-w2",
+        "ring-mass-wing-1-w3"
+      ]
+    },
+    {
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-6f22c38438-d2a9fab32e (MAIN, GARAGE), at the analyzer's own scale: 2.604 cm/px, STRONG / CONFIRMED with 4 independent witnesses; heights: 2 registered elevation(s) give eaves 6.07 / 2.94 m and top 8.07 / 8.20 m (they disagree by 3.14 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-6f22c38438-d2a9fab32e + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f",
+        "sourceIds": [
+          "src-frame-asset-rzut-6f22c38438-d2a9fab32e",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-wing-2",
+      "junctionIds": [
+        "ring-mass-wing-2-j0",
+        "ring-mass-wing-2-j1",
+        "ring-mass-wing-2-j2",
+        "ring-mass-wing-2-j3"
+      ],
+      "levelId": "lvl-0",
+      "wallIds": [
+        "ring-mass-wing-2-w0",
+        "ring-mass-wing-2-w1",
+        "ring-mass-wing-2-w2",
+        "ring-mass-wing-2-w3"
+      ]
+    }
+  ],
+  "walls": [
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 10.9368,
+        "z": 9.59574
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-6f22c38438-d2a9fab32e), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-6f22c38438-d2a9fab32e",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-H341-491",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 9.45252,
+        "z": 9.59574
+      },
+      "thickness": 0.1302
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 13.2668,
+        "z": 6.47094
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-6f22c38438-d2a9fab32e), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-6f22c38438-d2a9fab32e",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-H459-316",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 6.9142,
+        "z": 6.47094
+      },
+      "thickness": 0.2604
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 6.3142,
+        "z": 6.47094
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-6f22c38438-d2a9fab32e), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-6f22c38438-d2a9fab32e",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-H459-316-b1",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 4.80438,
+        "z": 6.47094
+      },
+      "thickness": 0.2604
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 5.44236,
+        "z": 4.72626
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-6f22c38438-d2a9fab32e), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-6f22c38438-d2a9fab32e",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-H528-293-b1",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 4.20546,
+        "z": 4.72626
+      },
+      "thickness": 0.1302
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 4.20546,
+        "z": 4.72626
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-6f22c38438-d2a9fab32e), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-6f22c38438-d2a9fab32e",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-V295-584-b1",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 4.20546,
+        "z": 2.4874
+      },
+      "thickness": 0.1302
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 4.80438,
+        "z": 6.71832
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-6f22c38438-d2a9fab32e), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-6f22c38438-d2a9fab32e",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-V318-454-b1",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 4.80438,
+        "z": 4.85646
+      },
+      "thickness": 0.1302
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 5.42934,
+        "z": 4.72626
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-6f22c38438-d2a9fab32e), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-6f22c38438-d2a9fab32e",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-V342-526-b1",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 5.42934,
+        "z": 2.4874
+      },
+      "thickness": 0.1302
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 8.24166,
+        "z": 13.6054
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-6f22c38438-d2a9fab32e), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-6f22c38438-d2a9fab32e",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-V450-195",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 8.24166,
+        "z": 9.2442
+      },
+      "thickness": 0.1302
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 9.45252,
+        "z": 9.71292
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-6f22c38438-d2a9fab32e), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-6f22c38438-d2a9fab32e",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-V495-339",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 9.45252,
+        "z": 6.73134
+      },
+      "thickness": 0.23436
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 11.15814,
+        "z": 9.5046
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-6f22c38438-d2a9fab32e), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-6f22c38438-d2a9fab32e",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-V560-347",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 11.15814,
+        "z": 6.73134
+      },
+      "thickness": 0.2604
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 13.5668,
+        "z": 0
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-6f22c38438-d2a9fab32e (MAIN, GARAGE), at the analyzer's own scale: 2.604 cm/px, STRONG / CONFIRMED with 4 independent witnesses; heights: 2 registered elevation(s) give eaves 2.96 / 2.94 m and top 8.48 / 8.56 m (they agree)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-6f22c38438-d2a9fab32e + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f",
+        "sourceIds": [
+          "src-frame-asset-rzut-6f22c38438-d2a9fab32e",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 6.846949,
+      "id": "ring-mass-main-w0",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 6.6142,
+        "z": 0
+      },
+      "thickness": 0.3
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 13.5668,
+        "z": 13.9054
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-6f22c38438-d2a9fab32e (MAIN, GARAGE), at the analyzer's own scale: 2.604 cm/px, STRONG / CONFIRMED with 4 independent witnesses; heights: 2 registered elevation(s) give eaves 2.96 / 2.94 m and top 8.48 / 8.56 m (they agree)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-6f22c38438-d2a9fab32e + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f",
+        "sourceIds": [
+          "src-frame-asset-rzut-6f22c38438-d2a9fab32e",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 6.846949,
+      "id": "ring-mass-main-w1",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 13.5668,
+        "z": 0
+      },
+      "thickness": 0.3
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 6.6142,
+        "z": 13.9054
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-6f22c38438-d2a9fab32e (MAIN, GARAGE), at the analyzer's own scale: 2.604 cm/px, STRONG / CONFIRMED with 4 independent witnesses; heights: 2 registered elevation(s) give eaves 2.96 / 2.94 m and top 8.48 / 8.56 m (they agree)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-6f22c38438-d2a9fab32e + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f",
+        "sourceIds": [
+          "src-frame-asset-rzut-6f22c38438-d2a9fab32e",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 6.846949,
+      "id": "ring-mass-main-w2",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 13.5668,
+        "z": 13.9054
+      },
+      "thickness": 0.3
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 6.6142,
+        "z": 0
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-6f22c38438-d2a9fab32e (MAIN, GARAGE), at the analyzer's own scale: 2.604 cm/px, STRONG / CONFIRMED with 4 independent witnesses; heights: 2 registered elevation(s) give eaves 2.96 / 2.94 m and top 8.48 / 8.56 m (they agree)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-6f22c38438-d2a9fab32e + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f",
+        "sourceIds": [
+          "src-frame-asset-rzut-6f22c38438-d2a9fab32e",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 6.846949,
+      "id": "ring-mass-main-w3",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 6.6142,
+        "z": 13.9054
+      },
+      "thickness": 0.3
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 6.6142,
+        "z": 2.1874
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-6f22c38438-d2a9fab32e (MAIN, GARAGE), at the analyzer's own scale: 2.604 cm/px, STRONG / CONFIRMED with 4 independent witnesses; heights: 3 registered elevation(s) give eaves 2.96 / 2.94 / 5.92 m and top 8.51 / 8.55 / 8.41 m (they disagree by 2.98 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-6f22c38438-d2a9fab32e + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f",
+        "sourceIds": [
+          "src-frame-asset-rzut-6f22c38438-d2a9fab32e",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 5.883754,
+      "id": "ring-mass-wing-1-w0",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 3.229,
+        "z": 2.1874
+      },
+      "thickness": 0.3
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 6.6142,
+        "z": 13.9054
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-6f22c38438-d2a9fab32e (MAIN, GARAGE), at the analyzer's own scale: 2.604 cm/px, STRONG / CONFIRMED with 4 independent witnesses; heights: 3 registered elevation(s) give eaves 2.96 / 2.94 / 5.92 m and top 8.51 / 8.55 / 8.41 m (they disagree by 2.98 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-6f22c38438-d2a9fab32e + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f",
+        "sourceIds": [
+          "src-frame-asset-rzut-6f22c38438-d2a9fab32e",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 5.883754,
+      "id": "ring-mass-wing-1-w1",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 6.6142,
+        "z": 2.1874
+      },
+      "thickness": 0.3
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 3.229,
+        "z": 13.9054
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-6f22c38438-d2a9fab32e (MAIN, GARAGE), at the analyzer's own scale: 2.604 cm/px, STRONG / CONFIRMED with 4 independent witnesses; heights: 3 registered elevation(s) give eaves 2.96 / 2.94 / 5.92 m and top 8.51 / 8.55 / 8.41 m (they disagree by 2.98 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-6f22c38438-d2a9fab32e + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f",
+        "sourceIds": [
+          "src-frame-asset-rzut-6f22c38438-d2a9fab32e",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 5.883754,
+      "id": "ring-mass-wing-1-w2",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 6.6142,
+        "z": 13.9054
+      },
+      "thickness": 0.3
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 3.229,
+        "z": 2.1874
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-6f22c38438-d2a9fab32e (MAIN, GARAGE), at the analyzer's own scale: 2.604 cm/px, STRONG / CONFIRMED with 4 independent witnesses; heights: 3 registered elevation(s) give eaves 2.96 / 2.94 / 5.92 m and top 8.51 / 8.55 / 8.41 m (they disagree by 2.98 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-6f22c38438-d2a9fab32e + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f",
+        "sourceIds": [
+          "src-frame-asset-rzut-6f22c38438-d2a9fab32e",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 5.883754,
+      "id": "ring-mass-wing-1-w3",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 3.229,
+        "z": 13.9054
+      },
+      "thickness": 0.3
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 3.229,
+        "z": 2.1874
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-6f22c38438-d2a9fab32e (MAIN, GARAGE), at the analyzer's own scale: 2.604 cm/px, STRONG / CONFIRMED with 4 independent witnesses; heights: 2 registered elevation(s) give eaves 6.07 / 2.94 m and top 8.07 / 8.20 m (they disagree by 3.14 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-6f22c38438-d2a9fab32e + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f",
+        "sourceIds": [
+          "src-frame-asset-rzut-6f22c38438-d2a9fab32e",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 4.776708,
+      "id": "ring-mass-wing-2-w0",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 0,
+        "z": 2.1874
+      },
+      "thickness": 0.3
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 3.229,
+        "z": 10.2598
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-6f22c38438-d2a9fab32e (MAIN, GARAGE), at the analyzer's own scale: 2.604 cm/px, STRONG / CONFIRMED with 4 independent witnesses; heights: 2 registered elevation(s) give eaves 6.07 / 2.94 m and top 8.07 / 8.20 m (they disagree by 3.14 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-6f22c38438-d2a9fab32e + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f",
+        "sourceIds": [
+          "src-frame-asset-rzut-6f22c38438-d2a9fab32e",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 4.776708,
+      "id": "ring-mass-wing-2-w1",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 3.229,
+        "z": 2.1874
+      },
+      "thickness": 0.3
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0,
+        "z": 10.2598
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-6f22c38438-d2a9fab32e (MAIN, GARAGE), at the analyzer's own scale: 2.604 cm/px, STRONG / CONFIRMED with 4 independent witnesses; heights: 2 registered elevation(s) give eaves 6.07 / 2.94 m and top 8.07 / 8.20 m (they disagree by 3.14 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-6f22c38438-d2a9fab32e + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f",
+        "sourceIds": [
+          "src-frame-asset-rzut-6f22c38438-d2a9fab32e",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 4.776708,
+      "id": "ring-mass-wing-2-w2",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 3.229,
+        "z": 10.2598
+      },
+      "thickness": 0.3
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0,
+        "z": 2.1874
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-6f22c38438-d2a9fab32e (MAIN, GARAGE), at the analyzer's own scale: 2.604 cm/px, STRONG / CONFIRMED with 4 independent witnesses; heights: 2 registered elevation(s) give eaves 6.07 / 2.94 m and top 8.07 / 8.20 m (they disagree by 3.14 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-6f22c38438-d2a9fab32e + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0 + frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f",
+        "sourceIds": [
+          "src-frame-asset-rzut-6f22c38438-d2a9fab32e",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-f-9f2e62e549",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-o-8edbf366a3",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-c9cb0314b0",
+          "src-frame-asset-gotowy-projekt-willa-eliza-5-g2-elewacja-b-d8662a835f"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 4.776708,
+      "id": "ring-mass-wing-2-w3",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 0,
+        "z": 10.2598
+      },
+      "thickness": 0.3
+    }
+  ],
+  "windows": [
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-front-61e9f9-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-front-61e9f9"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-left-d92d07-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-left-d92d07"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-rear-f916d8-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-rear-f916d8"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-right-34eace-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-right-34eace"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-right-73d4ea-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-right-73d4ea"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-right-7fe380-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-right-7fe380"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-right-917c16-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-right-917c16"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-right-c7ec6b-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-right-c7ec6b"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-right-f0a55d-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-right-f0a55d"
+    }
+  ]
+}

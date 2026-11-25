@@ -1,0 +1,1518 @@
+{
+  "assemblies": [],
+  "balconies": [],
+  "building": {
+    "id": "building",
+    "name": "massing"
+  },
+  "chimneys": [
+    {
+      "baseOffset": 0,
+      "footprint": {
+        "maxX": 5.107511,
+        "maxZ": 3.272144,
+        "minX": 4.523201,
+        "minZ": 2.687834
+      },
+      "height": 8.394587,
+      "id": "chimney-fix-right-b5792c",
+      "levelId": "lvl-0",
+      "materialId": "mat-chimney"
+    }
+  ],
+  "constraints": [],
+  "doors": [
+    {
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-front-c8b1d8-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "op-fix-front-c8b1d8",
+      "swing": "IN"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "kind": "PANEL"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-front-e15fed-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-gate",
+      "openAngle": 0,
+      "openingId": "op-fix-front-e15fed",
+      "swing": "IN",
+      "usage": "GARAGE"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "glazing": "FULL",
+            "hinge": "LEFT",
+            "kind": "LEAF"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-left-233dc0-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-glass",
+      "openAngle": 0,
+      "openingId": "op-fix-left-233dc0",
+      "swing": "IN"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "glazing": "FULL",
+            "hinge": "LEFT",
+            "kind": "LEAF"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-left-7b83e9-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-glass",
+      "openAngle": 0,
+      "openingId": "op-fix-left-7b83e9",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-left-e719cb-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "op-fix-left-e719cb",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-left-ebc565-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "op-fix-left-ebc565",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-right-3ad2ec-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "op-fix-right-3ad2ec",
+      "swing": "IN"
+    }
+  ],
+  "evidenceSources": [
+    {
+      "id": "src-frame-asset-gotowy-projekt-domu-medulin-5b596082ff-a7d599eb0e",
+      "kind": "DRAWING",
+      "label": "frame-asset-gotowy-projekt-domu-medulin-5b596082ff-a7d599eb0e",
+      "note": "frame frame-asset-gotowy-projekt-domu-medulin-5b596082ff-a7d599eb0e"
+    },
+    {
+      "id": "src-frame-asset-projekt-domu-medulin-3a38bf115c-742d30f6e0",
+      "kind": "DRAWING",
+      "label": "frame-asset-projekt-domu-medulin-3a38bf115c-742d30f6e0",
+      "note": "frame frame-asset-projekt-domu-medulin-3a38bf115c-742d30f6e0"
+    },
+    {
+      "id": "src-frame-asset-projekt-domu-medulin-5137ad0201-076c2e2ea9",
+      "kind": "DRAWING",
+      "label": "frame-asset-projekt-domu-medulin-5137ad0201-076c2e2ea9",
+      "note": "frame frame-asset-projekt-domu-medulin-5137ad0201-076c2e2ea9"
+    },
+    {
+      "id": "src-frame-asset-projekt-domu-medulin-743d9e3fc2-c49002470e",
+      "kind": "DRAWING",
+      "label": "frame-asset-projekt-domu-medulin-743d9e3fc2-c49002470e",
+      "note": "frame frame-asset-projekt-domu-medulin-743d9e3fc2-c49002470e"
+    },
+    {
+      "id": "src-frame-asset-projekt-domu-medulin-e4d295efeb-787b087f39",
+      "kind": "DRAWING",
+      "label": "frame-asset-projekt-domu-medulin-e4d295efeb-787b087f39",
+      "note": "frame frame-asset-projekt-domu-medulin-e4d295efeb-787b087f39"
+    }
+  ],
+  "frame": {
+    "handedness": "LEFT_HANDED_AS_SPECIFIED",
+    "origin": "finished ground-floor level is y = 0; the front facade outer face is z = 0",
+    "viewerNote": "renderers working in a right-handed frame mirror z when building their scene",
+    "wallConvention": "a wall runs from start to end along its OUTER face at its base; its outward normal is up x u, so exterior rings are traversed counter-clockwise on a plan drawn with the front facade at the bottom and material lies to the left of the direction of travel",
+    "x": "right when looking at the front facade",
+    "y": "up (vertical)",
+    "z": "away from the front facade, into the building"
+  },
+  "id": "m-analysis-dcp405",
+  "levels": [
+    {
+      "buildingId": "building",
+      "elevation": 0,
+      "height": 8.00162,
+      "id": "lvl-0",
+      "index": 0,
+      "name": "Massing"
+    }
+  ],
+  "linearSolids": [],
+  "materials": [
+    {
+      "color": "#9a7b66",
+      "id": "mat-brick",
+      "name": "Facing brick"
+    },
+    {
+      "color": "#6d6a66",
+      "id": "mat-chimney",
+      "name": "Chimney"
+    },
+    {
+      "color": "#55585c",
+      "id": "mat-gate",
+      "name": "Garage door"
+    },
+    {
+      "color": "#9fc3d8",
+      "id": "mat-glass",
+      "name": "Glazing",
+      "opacity": 0.35
+    },
+    {
+      "color": "#d9d5cc",
+      "id": "mat-partition",
+      "name": "Partition"
+    },
+    {
+      "color": "#5a5550",
+      "id": "mat-roof",
+      "name": "Roof covering (tone not read: miniature convention)"
+    },
+    {
+      "color": "#b07a4a",
+      "id": "mat-timber",
+      "name": "Timber (door leaf, cladding)"
+    },
+    {
+      "color": "#e8e4dc",
+      "id": "mat-wall",
+      "name": "Rendered wall (tone not read: miniature convention)"
+    }
+  ],
+  "meta": {
+    "createdWith": "buildapp",
+    "notes": []
+  },
+  "name": "Medulin - Lipińscy Domy (analysis)",
+  "openings": [
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-medulin-5b596082ff-a7d599eb0e",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-H350-367",
+      "kind": "DOOR",
+      "offset": 1.852508,
+      "sill": 0,
+      "wallId": "iw-H350-293",
+      "width": 0.826118
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-medulin-5b596082ff-a7d599eb0e",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-H515-245",
+      "kind": "DOOR",
+      "offset": 2.85429,
+      "sill": 0,
+      "wallId": "iw-H515-129",
+      "width": 0.826118
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-medulin-5b596082ff-a7d599eb0e",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-V240-430",
+      "kind": "DOOR",
+      "offset": 1.114007,
+      "sill": 0,
+      "wallId": "iw-V240-465",
+      "width": 0.876185
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-medulin-5b596082ff-a7d599eb0e",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-V289-558",
+      "kind": "DOOR",
+      "offset": 3.880658,
+      "sill": 0,
+      "wallId": "iw-V289-714",
+      "width": 0.876186
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-medulin-5b596082ff-a7d599eb0e",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-V289-681",
+      "kind": "DOOR",
+      "offset": 0.851558,
+      "sill": 0,
+      "wallId": "iw-V289-714",
+      "width": 0.826119
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-medulin-5b596082ff-a7d599eb0e",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-V296-382",
+      "kind": "DOOR",
+      "offset": 0.325441,
+      "sill": 0,
+      "wallId": "iw-V296-417",
+      "width": 0.876186
+    },
+    {
+      "height": 1.936539,
+      "id": "op-fix-front-57ba58",
+      "kind": "WINDOW",
+      "offset": 2.603359,
+      "sill": 3.442736,
+      "wallId": "ring-mass-main-w0",
+      "width": 1.056294
+    },
+    {
+      "height": 1.995222,
+      "id": "op-fix-front-c8b1d8",
+      "kind": "DOOR",
+      "offset": 0.412527,
+      "sill": 0.332537,
+      "wallId": "ring-mass-main-w0",
+      "width": 0.97805
+    },
+    {
+      "height": 2.014783,
+      "id": "op-fix-front-e15fed",
+      "kind": "DOOR",
+      "offset": 4.637703,
+      "sill": 0.293415,
+      "wallId": "ring-mass-main-w0",
+      "width": 2.621174
+    },
+    {
+      "height": 1.936539,
+      "id": "op-fix-front-e17b43",
+      "kind": "WINDOW",
+      "offset": 4.168239,
+      "sill": 3.442736,
+      "wallId": "ring-mass-main-w0",
+      "width": 1.036733
+    },
+    {
+      "height": 2.248064,
+      "id": "op-fix-left-233dc0",
+      "kind": "DOOR",
+      "offset": 0.843001,
+      "sill": 0.040144,
+      "wallId": "ring-mass-main-w3",
+      "width": 0.983528
+    },
+    {
+      "height": 2.248064,
+      "id": "op-fix-left-7b83e9",
+      "kind": "DOOR",
+      "offset": 2.388545,
+      "sill": 0.040144,
+      "wallId": "ring-mass-main-w3",
+      "width": 4.596488
+    },
+    {
+      "height": 1.284608,
+      "id": "op-fix-left-e1fa87",
+      "kind": "WINDOW",
+      "offset": 15.455417,
+      "sill": 0.983528,
+      "wallId": "ring-mass-main-w3",
+      "width": 1.023672
+    },
+    {
+      "height": 2.268136,
+      "id": "op-fix-left-e719cb",
+      "kind": "DOOR",
+      "offset": 9.092593,
+      "sill": 0.040144,
+      "wallId": "ring-mass-main-w3",
+      "width": 1.043744
+    },
+    {
+      "height": 2.268136,
+      "id": "op-fix-left-ebc565",
+      "kind": "DOOR",
+      "offset": 11.982961,
+      "sill": 0.040144,
+      "wallId": "ring-mass-main-w3",
+      "width": 1.043744
+    },
+    {
+      "height": 1.307773,
+      "id": "op-fix-rear-245c95",
+      "kind": "WINDOW",
+      "offset": 1.522485,
+      "sill": 1.249216,
+      "wallId": "ring-mass-main-w2",
+      "width": 2.400837
+    },
+    {
+      "height": 1.9519,
+      "id": "op-fix-rear-a06163",
+      "kind": "WINDOW",
+      "offset": 2.888815,
+      "sill": 3.454863,
+      "wallId": "ring-mass-main-w2",
+      "width": 1.034507
+    },
+    {
+      "head": {
+        "heightFar": 2.966888,
+        "kind": "RAKED"
+      },
+      "height": 5.094459,
+      "id": "op-fix-rear-bb9594",
+      "kind": "WINDOW",
+      "offset": 5.465323,
+      "sill": 0.351342,
+      "wallId": "ring-mass-main-w2",
+      "width": 2.166609
+    },
+    {
+      "height": 1.304959,
+      "id": "op-fix-right-3ad2ec",
+      "kind": "DOOR",
+      "offset": 11.238237,
+      "sill": 1.227051,
+      "wallId": "ring-mass-main-w1",
+      "width": 1.032281
+    },
+    {
+      "height": 1.285482,
+      "id": "op-fix-right-58d614",
+      "kind": "WINDOW",
+      "offset": 6.73905,
+      "sill": 2.025608,
+      "wallId": "ring-mass-main-w1",
+      "width": 1.012804
+    },
+    {
+      "height": 1.304959,
+      "id": "op-fix-right-7cea9b",
+      "kind": "WINDOW",
+      "offset": 3.447437,
+      "sill": 1.227051,
+      "wallId": "ring-mass-main-w1",
+      "width": 0.993327
+    }
+  ],
+  "platforms": [],
+  "railings": [],
+  "relationships": [],
+  "roofEdges": [],
+  "roofOpenings": [
+    {
+      "footprint": {
+        "maxX": 2.528219,
+        "maxZ": 12.605663,
+        "minX": 1.579161,
+        "minZ": 11.742567
+      },
+      "id": "rw-fix-left-1d1302",
+      "kind": "ROOFLIGHT",
+      "roofId": "roof-mass-main"
+    },
+    {
+      "footprint": {
+        "maxX": 2.831917,
+        "maxZ": 8.531047,
+        "minX": 1.88286,
+        "minZ": 7.688023
+      },
+      "id": "rw-fix-left-d68418",
+      "kind": "ROOFLIGHT",
+      "roofId": "roof-mass-main"
+    },
+    {
+      "footprint": {
+        "maxX": 8.004445,
+        "maxZ": 9.524261,
+        "minX": 7.157195,
+        "minZ": 8.764658
+      },
+      "id": "rw-fix-right-764105",
+      "kind": "ROOFLIGHT",
+      "roofId": "roof-mass-main"
+    },
+    {
+      "footprint": {
+        "maxX": 8.004445,
+        "maxZ": 13.809201,
+        "minX": 7.157195,
+        "minZ": 13.049598
+      },
+      "id": "rw-fix-right-81f8c8",
+      "kind": "ROOFLIGHT",
+      "roofId": "roof-mass-main"
+    },
+    {
+      "footprint": {
+        "maxX": 8.004445,
+        "maxZ": 11.452484,
+        "minX": 7.157195,
+        "minZ": 10.692881
+      },
+      "id": "rw-fix-right-95c2dd",
+      "kind": "ROOFLIGHT",
+      "roofId": "roof-mass-main"
+    },
+    {
+      "footprint": {
+        "maxX": 8.004445,
+        "maxZ": 7.615515,
+        "minX": 7.157195,
+        "minZ": 6.855912
+      },
+      "id": "rw-fix-right-b141fa",
+      "kind": "ROOFLIGHT",
+      "roofId": "roof-mass-main"
+    },
+    {
+      "footprint": {
+        "maxX": 8.022863,
+        "maxZ": 5.434091,
+        "minX": 7.120358,
+        "minZ": 4.635534
+      },
+      "id": "rw-fix-right-c5f8ca",
+      "kind": "ROOFLIGHT",
+      "roofId": "roof-mass-main"
+    }
+  ],
+  "roofPlanes": [],
+  "rooflights": [
+    {
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "rw-fix-left-1d1302-light",
+      "roofOpeningId": "rw-fix-left-1d1302"
+    },
+    {
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "rw-fix-left-d68418-light",
+      "roofOpeningId": "rw-fix-left-d68418"
+    },
+    {
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "rw-fix-right-764105-light",
+      "roofOpeningId": "rw-fix-right-764105"
+    },
+    {
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "rw-fix-right-81f8c8-light",
+      "roofOpeningId": "rw-fix-right-81f8c8"
+    },
+    {
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "rw-fix-right-95c2dd-light",
+      "roofOpeningId": "rw-fix-right-95c2dd"
+    },
+    {
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "rw-fix-right-b141fa-light",
+      "roofOpeningId": "rw-fix-right-b141fa"
+    },
+    {
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "rw-fix-right-c5f8ca-light",
+      "roofOpeningId": "rw-fix-right-c5f8ca"
+    }
+  ],
+  "roofs": [
+    {
+      "eaveOffset": 3.738188,
+      "evidence": {
+        "interpretation": "ridge along Z (slopes seen on the sides along it, the gable end across it); pitch 46.6° from a 4.26 m rise over half of 8.06 m (the walls end at 3.37 m: the roof's underside there)",
+        "properties": {
+          "eaveOffset": "SOURCE_DERIVED",
+          "pitchDeg": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-medulin-5b596082ff-a7d599eb0e + frame-asset-projekt-domu-medulin-3a38bf115c-742d30f6e0 + frame-asset-projekt-domu-medulin-743d9e3fc2-c49002470e + frame-asset-projekt-domu-medulin-e4d295efeb-787b087f39 + frame-asset-projekt-domu-medulin-5137ad0201-076c2e2ea9",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-medulin-5b596082ff-a7d599eb0e",
+          "src-frame-asset-projekt-domu-medulin-3a38bf115c-742d30f6e0",
+          "src-frame-asset-projekt-domu-medulin-743d9e3fc2-c49002470e",
+          "src-frame-asset-projekt-domu-medulin-e4d295efeb-787b087f39",
+          "src-frame-asset-projekt-domu-medulin-5137ad0201-076c2e2ea9"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "footprint": {
+        "maxX": 9.0372,
+        "maxZ": 18.424,
+        "minX": 0.9763,
+        "minZ": -0.14
+      },
+      "id": "roof-mass-main",
+      "kind": "GABLE",
+      "levelId": "lvl-0",
+      "materialId": "mat-roof",
+      "overhang": 0,
+      "pitchDeg": 46.6,
+      "ridgeAxis": "Z",
+      "thickness": 0.25
+    }
+  ],
+  "rooms": [],
+  "schema": "buildapp.canonical-building-model",
+  "schemaVersion": "1.9.0",
+  "slabs": [],
+  "stairs": [],
+  "stepRuns": [],
+  "surfaceRegions": [
+    {
+      "evidence": {
+        "interpretation": "a brick outline from finish-ab1b67 (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-mass-main-w1",
+      "id": "appearance-east-ring-mass-main-w1-brick-0",
+      "materialId": "mat-brick",
+      "outline": [
+        {
+          "a": 7.8,
+          "b": 0.314587
+        },
+        {
+          "a": 17.42,
+          "b": 0.314587
+        },
+        {
+          "a": 17.42,
+          "b": 0.294587
+        },
+        {
+          "a": 17.44,
+          "b": 0.294587
+        },
+        {
+          "a": 17.44,
+          "b": 0
+        },
+        {
+          "a": 7.78,
+          "b": 0
+        },
+        {
+          "a": 7.78,
+          "b": 0.294587
+        },
+        {
+          "a": 7.8,
+          "b": 0.294587
+        }
+      ],
+      "rect": {
+        "a0": 7.78,
+        "a1": 17.44,
+        "b0": 0,
+        "b1": 0.314587
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a brick outline from finish-dc2486 (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-mass-main-w0",
+      "id": "appearance-front-ring-mass-main-w0-brick-0",
+      "materialId": "mat-brick",
+      "outline": [
+        {
+          "a": 1.54,
+          "b": 2.734587
+        },
+        {
+          "a": 8.06,
+          "b": 2.734587
+        },
+        {
+          "a": 8.06,
+          "b": 2.714587
+        },
+        {
+          "a": 8.0609,
+          "b": 2.714587
+        },
+        {
+          "a": 8.0609,
+          "b": 0
+        },
+        {
+          "a": 1.52,
+          "b": 0
+        },
+        {
+          "a": 1.52,
+          "b": 2.714587
+        },
+        {
+          "a": 1.54,
+          "b": 2.714587
+        }
+      ],
+      "rect": {
+        "a0": 1.52,
+        "a1": 8.0609,
+        "b0": 0,
+        "b1": 2.734587
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a brick outline from finish-05ec99 (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-mass-main-w2",
+      "id": "appearance-rear-ring-mass-main-w2-brick-0",
+      "materialId": "mat-brick",
+      "outline": [
+        {
+          "a": 5.4209,
+          "b": 0.314587
+        },
+        {
+          "a": 0.0009,
+          "b": 0.314587
+        },
+        {
+          "a": 0.0009,
+          "b": 0.294587
+        },
+        {
+          "a": 0,
+          "b": 0.294587
+        },
+        {
+          "a": 0,
+          "b": 0.014587
+        },
+        {
+          "a": 0.0009,
+          "b": 0.014587
+        },
+        {
+          "a": 0.0009,
+          "b": 0
+        },
+        {
+          "a": 5.4209,
+          "b": 0
+        },
+        {
+          "a": 5.4209,
+          "b": 0.014587
+        },
+        {
+          "a": 5.4409,
+          "b": 0.014587
+        },
+        {
+          "a": 5.4409,
+          "b": 0.294587
+        },
+        {
+          "a": 5.4209,
+          "b": 0.294587
+        }
+      ],
+      "rect": {
+        "a0": 0,
+        "a1": 5.4409,
+        "b0": 0,
+        "b1": 0.314587
+      }
+    }
+  ],
+  "terraces": [],
+  "units": {
+    "angle": "deg",
+    "length": "m"
+  },
+  "wallJunctions": [
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w3"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w0"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-medulin-5b596082ff-a7d599eb0e (MAIN, GARAGE), at the analyzer's own scale: 2.503388 cm/px, PRINTED_DIMENSION_LINES / \"1825\", \"925\" over their own dimension lines (2 line(s), spread 0.3 %) with ? independent witnesses; heights: 4 registered elevation(s) give eaves (the walls' corner tops) 3.53 / 2.91 / 3.37 / 3.46 m and top 8.02 / 7.93 / 8.00 / 8.00 m — the gable-end view(s) (FRONT) show the wall corner under the roof: 3.37 m is taken; a view along the ridge draws its walls ending behind the fascia, lower by no more than an overhang hides (two views draw that line)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-medulin-5b596082ff-a7d599eb0e + frame-asset-projekt-domu-medulin-3a38bf115c-742d30f6e0 + frame-asset-projekt-domu-medulin-743d9e3fc2-c49002470e + frame-asset-projekt-domu-medulin-e4d295efeb-787b087f39 + frame-asset-projekt-domu-medulin-5137ad0201-076c2e2ea9",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-medulin-5b596082ff-a7d599eb0e",
+          "src-frame-asset-projekt-domu-medulin-3a38bf115c-742d30f6e0",
+          "src-frame-asset-projekt-domu-medulin-743d9e3fc2-c49002470e",
+          "src-frame-asset-projekt-domu-medulin-e4d295efeb-787b087f39",
+          "src-frame-asset-projekt-domu-medulin-5137ad0201-076c2e2ea9"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j0",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w0"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w1"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-medulin-5b596082ff-a7d599eb0e (MAIN, GARAGE), at the analyzer's own scale: 2.503388 cm/px, PRINTED_DIMENSION_LINES / \"1825\", \"925\" over their own dimension lines (2 line(s), spread 0.3 %) with ? independent witnesses; heights: 4 registered elevation(s) give eaves (the walls' corner tops) 3.53 / 2.91 / 3.37 / 3.46 m and top 8.02 / 7.93 / 8.00 / 8.00 m — the gable-end view(s) (FRONT) show the wall corner under the roof: 3.37 m is taken; a view along the ridge draws its walls ending behind the fascia, lower by no more than an overhang hides (two views draw that line)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-medulin-5b596082ff-a7d599eb0e + frame-asset-projekt-domu-medulin-3a38bf115c-742d30f6e0 + frame-asset-projekt-domu-medulin-743d9e3fc2-c49002470e + frame-asset-projekt-domu-medulin-e4d295efeb-787b087f39 + frame-asset-projekt-domu-medulin-5137ad0201-076c2e2ea9",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-medulin-5b596082ff-a7d599eb0e",
+          "src-frame-asset-projekt-domu-medulin-3a38bf115c-742d30f6e0",
+          "src-frame-asset-projekt-domu-medulin-743d9e3fc2-c49002470e",
+          "src-frame-asset-projekt-domu-medulin-e4d295efeb-787b087f39",
+          "src-frame-asset-projekt-domu-medulin-5137ad0201-076c2e2ea9"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j1",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w1"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w2"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-medulin-5b596082ff-a7d599eb0e (MAIN, GARAGE), at the analyzer's own scale: 2.503388 cm/px, PRINTED_DIMENSION_LINES / \"1825\", \"925\" over their own dimension lines (2 line(s), spread 0.3 %) with ? independent witnesses; heights: 4 registered elevation(s) give eaves (the walls' corner tops) 3.53 / 2.91 / 3.37 / 3.46 m and top 8.02 / 7.93 / 8.00 / 8.00 m — the gable-end view(s) (FRONT) show the wall corner under the roof: 3.37 m is taken; a view along the ridge draws its walls ending behind the fascia, lower by no more than an overhang hides (two views draw that line)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-medulin-5b596082ff-a7d599eb0e + frame-asset-projekt-domu-medulin-3a38bf115c-742d30f6e0 + frame-asset-projekt-domu-medulin-743d9e3fc2-c49002470e + frame-asset-projekt-domu-medulin-e4d295efeb-787b087f39 + frame-asset-projekt-domu-medulin-5137ad0201-076c2e2ea9",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-medulin-5b596082ff-a7d599eb0e",
+          "src-frame-asset-projekt-domu-medulin-3a38bf115c-742d30f6e0",
+          "src-frame-asset-projekt-domu-medulin-743d9e3fc2-c49002470e",
+          "src-frame-asset-projekt-domu-medulin-e4d295efeb-787b087f39",
+          "src-frame-asset-projekt-domu-medulin-5137ad0201-076c2e2ea9"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j2",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w2",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w2"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w3"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-medulin-5b596082ff-a7d599eb0e (MAIN, GARAGE), at the analyzer's own scale: 2.503388 cm/px, PRINTED_DIMENSION_LINES / \"1825\", \"925\" over their own dimension lines (2 line(s), spread 0.3 %) with ? independent witnesses; heights: 4 registered elevation(s) give eaves (the walls' corner tops) 3.53 / 2.91 / 3.37 / 3.46 m and top 8.02 / 7.93 / 8.00 / 8.00 m — the gable-end view(s) (FRONT) show the wall corner under the roof: 3.37 m is taken; a view along the ridge draws its walls ending behind the fascia, lower by no more than an overhang hides (two views draw that line)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-medulin-5b596082ff-a7d599eb0e + frame-asset-projekt-domu-medulin-3a38bf115c-742d30f6e0 + frame-asset-projekt-domu-medulin-743d9e3fc2-c49002470e + frame-asset-projekt-domu-medulin-e4d295efeb-787b087f39 + frame-asset-projekt-domu-medulin-5137ad0201-076c2e2ea9",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-medulin-5b596082ff-a7d599eb0e",
+          "src-frame-asset-projekt-domu-medulin-3a38bf115c-742d30f6e0",
+          "src-frame-asset-projekt-domu-medulin-743d9e3fc2-c49002470e",
+          "src-frame-asset-projekt-domu-medulin-e4d295efeb-787b087f39",
+          "src-frame-asset-projekt-domu-medulin-5137ad0201-076c2e2ea9"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j3",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w2",
+      "tolerance": 0.001
+    }
+  ],
+  "wallPanels": [],
+  "wallRings": [
+    {
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-medulin-5b596082ff-a7d599eb0e (MAIN, GARAGE), at the analyzer's own scale: 2.503388 cm/px, PRINTED_DIMENSION_LINES / \"1825\", \"925\" over their own dimension lines (2 line(s), spread 0.3 %) with ? independent witnesses; heights: 4 registered elevation(s) give eaves (the walls' corner tops) 3.53 / 2.91 / 3.37 / 3.46 m and top 8.02 / 7.93 / 8.00 / 8.00 m — the gable-end view(s) (FRONT) show the wall corner under the roof: 3.37 m is taken; a view along the ridge draws its walls ending behind the fascia, lower by no more than an overhang hides (two views draw that line)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-medulin-5b596082ff-a7d599eb0e + frame-asset-projekt-domu-medulin-3a38bf115c-742d30f6e0 + frame-asset-projekt-domu-medulin-743d9e3fc2-c49002470e + frame-asset-projekt-domu-medulin-e4d295efeb-787b087f39 + frame-asset-projekt-domu-medulin-5137ad0201-076c2e2ea9",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-medulin-5b596082ff-a7d599eb0e",
+          "src-frame-asset-projekt-domu-medulin-3a38bf115c-742d30f6e0",
+          "src-frame-asset-projekt-domu-medulin-743d9e3fc2-c49002470e",
+          "src-frame-asset-projekt-domu-medulin-e4d295efeb-787b087f39",
+          "src-frame-asset-projekt-domu-medulin-5137ad0201-076c2e2ea9"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main",
+      "junctionIds": [
+        "ring-mass-main-j0",
+        "ring-mass-main-j1",
+        "ring-mass-main-j2",
+        "ring-mass-main-j3"
+      ],
+      "levelId": "lvl-0",
+      "wallIds": [
+        "ring-mass-main-w0",
+        "ring-mass-main-w1",
+        "ring-mass-main-w2",
+        "ring-mass-main-w3"
+      ]
+    }
+  ],
+  "walls": [
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 8.7372,
+        "z": 13.25544
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-gotowy-projekt-domu-medulin-5b596082ff-a7d599eb0e), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-medulin-5b596082ff-a7d599eb0e",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-H227-293",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 5.332216,
+        "z": 13.25544
+      },
+      "thickness": 0.150203
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 4.080522,
+        "z": 10.151239
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-gotowy-projekt-domu-medulin-5b596082ff-a7d599eb0e), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-medulin-5b596082ff-a7d599eb0e",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-H350-129",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 1.2763,
+        "z": 10.151239
+      },
+      "thickness": 0.250339
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 8.7372,
+        "z": 10.151239
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-gotowy-projekt-domu-medulin-5b596082ff-a7d599eb0e), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-medulin-5b596082ff-a7d599eb0e",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-H350-293",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 5.332216,
+        "z": 10.151239
+      },
+      "thickness": 0.250339
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 8.7372,
+        "z": 8.273698
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-gotowy-projekt-domu-medulin-5b596082ff-a7d599eb0e), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-medulin-5b596082ff-a7d599eb0e",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-H427-294",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 5.469903,
+        "z": 8.273698
+      },
+      "thickness": 0.125169
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 8.7372,
+        "z": 6.020649
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-gotowy-projekt-domu-medulin-5b596082ff-a7d599eb0e), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-medulin-5b596082ff-a7d599eb0e",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-H515-129",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 1.2763,
+        "z": 6.020649
+      },
+      "thickness": 0.250339
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 5.094395,
+        "z": 3.19182
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-gotowy-projekt-domu-medulin-5b596082ff-a7d599eb0e), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-medulin-5b596082ff-a7d599eb0e",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-H630-199",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 2.979032,
+        "z": 3.19182
+      },
+      "thickness": 0.125169
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 4.068006,
+        "z": 10.151239
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-gotowy-projekt-domu-medulin-5b596082ff-a7d599eb0e), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-medulin-5b596082ff-a7d599eb0e",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-V240-465",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 4.068006,
+        "z": 6.270988
+      },
+      "thickness": 0.125169
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 5.344734,
+        "z": 6.020649
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-gotowy-projekt-domu-medulin-5b596082ff-a7d599eb0e), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-medulin-5b596082ff-a7d599eb0e",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-V289-714",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 5.344734,
+        "z": 0.3
+      },
+      "thickness": 0.250339
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 5.469903,
+        "z": 10.151239
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-gotowy-projekt-domu-medulin-5b596082ff-a7d599eb0e), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-medulin-5b596082ff-a7d599eb0e",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-V296-417",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 5.469903,
+        "z": 8.26118
+      },
+      "thickness": 0.125169
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 7.172207,
+        "z": 10.151239
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-gotowy-projekt-domu-medulin-5b596082ff-a7d599eb0e), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-medulin-5b596082ff-a7d599eb0e",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-V364-345",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 7.172207,
+        "z": 8.398867
+      },
+      "thickness": 0.125169
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 9.0372,
+        "z": 0
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-medulin-5b596082ff-a7d599eb0e (MAIN, GARAGE), at the analyzer's own scale: 2.503388 cm/px, PRINTED_DIMENSION_LINES / \"1825\", \"925\" over their own dimension lines (2 line(s), spread 0.3 %) with ? independent witnesses; heights: 4 registered elevation(s) give eaves (the walls' corner tops) 3.53 / 2.91 / 3.37 / 3.46 m and top 8.02 / 7.93 / 8.00 / 8.00 m — the gable-end view(s) (FRONT) show the wall corner under the roof: 3.37 m is taken; a view along the ridge draws its walls ending behind the fascia, lower by no more than an overhang hides (two views draw that line)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-medulin-5b596082ff-a7d599eb0e + frame-asset-projekt-domu-medulin-3a38bf115c-742d30f6e0 + frame-asset-projekt-domu-medulin-743d9e3fc2-c49002470e + frame-asset-projekt-domu-medulin-e4d295efeb-787b087f39 + frame-asset-projekt-domu-medulin-5137ad0201-076c2e2ea9",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-medulin-5b596082ff-a7d599eb0e",
+          "src-frame-asset-projekt-domu-medulin-3a38bf115c-742d30f6e0",
+          "src-frame-asset-projekt-domu-medulin-743d9e3fc2-c49002470e",
+          "src-frame-asset-projekt-domu-medulin-e4d295efeb-787b087f39",
+          "src-frame-asset-projekt-domu-medulin-5137ad0201-076c2e2ea9"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 8.00162,
+      "id": "ring-mass-main-w0",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 0.9763,
+        "z": 0
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-mass-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 9.0372,
+        "z": 17.724
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-medulin-5b596082ff-a7d599eb0e (MAIN, GARAGE), at the analyzer's own scale: 2.503388 cm/px, PRINTED_DIMENSION_LINES / \"1825\", \"925\" over their own dimension lines (2 line(s), spread 0.3 %) with ? independent witnesses; heights: 4 registered elevation(s) give eaves (the walls' corner tops) 3.53 / 2.91 / 3.37 / 3.46 m and top 8.02 / 7.93 / 8.00 / 8.00 m — the gable-end view(s) (FRONT) show the wall corner under the roof: 3.37 m is taken; a view along the ridge draws its walls ending behind the fascia, lower by no more than an overhang hides (two views draw that line)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-medulin-5b596082ff-a7d599eb0e + frame-asset-projekt-domu-medulin-3a38bf115c-742d30f6e0 + frame-asset-projekt-domu-medulin-743d9e3fc2-c49002470e + frame-asset-projekt-domu-medulin-e4d295efeb-787b087f39 + frame-asset-projekt-domu-medulin-5137ad0201-076c2e2ea9",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-medulin-5b596082ff-a7d599eb0e",
+          "src-frame-asset-projekt-domu-medulin-3a38bf115c-742d30f6e0",
+          "src-frame-asset-projekt-domu-medulin-743d9e3fc2-c49002470e",
+          "src-frame-asset-projekt-domu-medulin-e4d295efeb-787b087f39",
+          "src-frame-asset-projekt-domu-medulin-5137ad0201-076c2e2ea9"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 8.00162,
+      "id": "ring-mass-main-w1",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 9.0372,
+        "z": 0
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-mass-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0.9763,
+        "z": 17.724
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-medulin-5b596082ff-a7d599eb0e (MAIN, GARAGE), at the analyzer's own scale: 2.503388 cm/px, PRINTED_DIMENSION_LINES / \"1825\", \"925\" over their own dimension lines (2 line(s), spread 0.3 %) with ? independent witnesses; heights: 4 registered elevation(s) give eaves (the walls' corner tops) 3.53 / 2.91 / 3.37 / 3.46 m and top 8.02 / 7.93 / 8.00 / 8.00 m — the gable-end view(s) (FRONT) show the wall corner under the roof: 3.37 m is taken; a view along the ridge draws its walls ending behind the fascia, lower by no more than an overhang hides (two views draw that line)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-medulin-5b596082ff-a7d599eb0e + frame-asset-projekt-domu-medulin-3a38bf115c-742d30f6e0 + frame-asset-projekt-domu-medulin-743d9e3fc2-c49002470e + frame-asset-projekt-domu-medulin-e4d295efeb-787b087f39 + frame-asset-projekt-domu-medulin-5137ad0201-076c2e2ea9",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-medulin-5b596082ff-a7d599eb0e",
+          "src-frame-asset-projekt-domu-medulin-3a38bf115c-742d30f6e0",
+          "src-frame-asset-projekt-domu-medulin-743d9e3fc2-c49002470e",
+          "src-frame-asset-projekt-domu-medulin-e4d295efeb-787b087f39",
+          "src-frame-asset-projekt-domu-medulin-5137ad0201-076c2e2ea9"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 8.00162,
+      "id": "ring-mass-main-w2",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 9.0372,
+        "z": 17.724
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-mass-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0.9763,
+        "z": 0
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-medulin-5b596082ff-a7d599eb0e (MAIN, GARAGE), at the analyzer's own scale: 2.503388 cm/px, PRINTED_DIMENSION_LINES / \"1825\", \"925\" over their own dimension lines (2 line(s), spread 0.3 %) with ? independent witnesses; heights: 4 registered elevation(s) give eaves (the walls' corner tops) 3.53 / 2.91 / 3.37 / 3.46 m and top 8.02 / 7.93 / 8.00 / 8.00 m — the gable-end view(s) (FRONT) show the wall corner under the roof: 3.37 m is taken; a view along the ridge draws its walls ending behind the fascia, lower by no more than an overhang hides (two views draw that line)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-medulin-5b596082ff-a7d599eb0e + frame-asset-projekt-domu-medulin-3a38bf115c-742d30f6e0 + frame-asset-projekt-domu-medulin-743d9e3fc2-c49002470e + frame-asset-projekt-domu-medulin-e4d295efeb-787b087f39 + frame-asset-projekt-domu-medulin-5137ad0201-076c2e2ea9",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-medulin-5b596082ff-a7d599eb0e",
+          "src-frame-asset-projekt-domu-medulin-3a38bf115c-742d30f6e0",
+          "src-frame-asset-projekt-domu-medulin-743d9e3fc2-c49002470e",
+          "src-frame-asset-projekt-domu-medulin-e4d295efeb-787b087f39",
+          "src-frame-asset-projekt-domu-medulin-5137ad0201-076c2e2ea9"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 8.00162,
+      "id": "ring-mass-main-w3",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 0.9763,
+        "z": 17.724
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-mass-main"
+      }
+    }
+  ],
+  "windows": [
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-front-57ba58-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-front-57ba58"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-front-e17b43-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-front-e17b43"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-left-e1fa87-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-left-e1fa87"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-rear-245c95-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-rear-245c95"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-rear-a06163-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-rear-a06163"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-rear-bb9594-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-rear-bb9594"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-right-58d614-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-right-58d614"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-right-7cea9b-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-right-7cea9b"
+    }
+  ]
+}

@@ -1,0 +1,1376 @@
+{
+  "assemblies": [],
+  "balconies": [],
+  "building": {
+    "id": "building",
+    "name": "massing"
+  },
+  "chimneys": [],
+  "constraints": [],
+  "doors": [
+    {
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-front-2afeff-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "op-fix-front-2afeff",
+      "swing": "IN"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "glazing": "FULL",
+            "hinge": "LEFT",
+            "kind": "LEAF"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-front-69b3d9-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-glass",
+      "openAngle": 0,
+      "openingId": "op-fix-front-69b3d9",
+      "swing": "IN"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "glazing": "FULL",
+            "hinge": "LEFT",
+            "kind": "LEAF"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-left-8806a4-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-glass",
+      "openAngle": 0,
+      "openingId": "op-fix-left-8806a4",
+      "swing": "IN"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "glazing": "FULL",
+            "hinge": "LEFT",
+            "kind": "LEAF"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-rear-0049cd-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-glass",
+      "openAngle": 0,
+      "openingId": "op-fix-rear-0049cd",
+      "swing": "IN"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "glazing": "FULL",
+            "hinge": "LEFT",
+            "kind": "LEAF"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-right-2ab21a-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-glass",
+      "openAngle": 0,
+      "openingId": "op-fix-right-2ab21a",
+      "swing": "IN"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "glazing": "FULL",
+            "hinge": "LEFT",
+            "kind": "LEAF"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-right-edadeb-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-glass",
+      "openAngle": 0,
+      "openingId": "op-fix-right-edadeb",
+      "swing": "IN"
+    }
+  ],
+  "evidenceSources": [
+    {
+      "id": "src-frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc",
+      "kind": "DRAWING",
+      "label": "frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc",
+      "note": "frame frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc"
+    },
+    {
+      "id": "src-frame-asset-projekt-domu-novara-421dc1d80d-a49e75143e",
+      "kind": "DRAWING",
+      "label": "frame-asset-projekt-domu-novara-421dc1d80d-a49e75143e",
+      "note": "frame frame-asset-projekt-domu-novara-421dc1d80d-a49e75143e"
+    },
+    {
+      "id": "src-frame-asset-projekt-domu-novara-7bcd736359-84afa41f2e",
+      "kind": "DRAWING",
+      "label": "frame-asset-projekt-domu-novara-7bcd736359-84afa41f2e",
+      "note": "frame frame-asset-projekt-domu-novara-7bcd736359-84afa41f2e"
+    },
+    {
+      "id": "src-frame-asset-projekt-domu-novara-84ceddba3a-ff6dc4e9a0",
+      "kind": "DRAWING",
+      "label": "frame-asset-projekt-domu-novara-84ceddba3a-ff6dc4e9a0",
+      "note": "frame frame-asset-projekt-domu-novara-84ceddba3a-ff6dc4e9a0"
+    },
+    {
+      "id": "src-frame-asset-projekt-domu-novara-cd36a92257-1346a4ff02",
+      "kind": "DRAWING",
+      "label": "frame-asset-projekt-domu-novara-cd36a92257-1346a4ff02",
+      "note": "frame frame-asset-projekt-domu-novara-cd36a92257-1346a4ff02"
+    }
+  ],
+  "frame": {
+    "handedness": "LEFT_HANDED_AS_SPECIFIED",
+    "origin": "finished ground-floor level is y = 0; the front facade outer face is z = 0",
+    "viewerNote": "renderers working in a right-handed frame mirror z when building their scene",
+    "wallConvention": "a wall runs from start to end along its OUTER face at its base; its outward normal is up x u, so exterior rings are traversed counter-clockwise on a plan drawn with the front facade at the bottom and material lies to the left of the direction of travel",
+    "x": "right when looking at the front facade",
+    "y": "up (vertical)",
+    "z": "away from the front facade, into the building"
+  },
+  "id": "m-analysis-dcb156",
+  "levels": [
+    {
+      "buildingId": "building",
+      "elevation": 0,
+      "height": 5.893773,
+      "id": "lvl-0",
+      "index": 0,
+      "name": "Massing"
+    }
+  ],
+  "linearSolids": [],
+  "materials": [
+    {
+      "color": "#6d6a66",
+      "id": "mat-chimney",
+      "name": "Chimney"
+    },
+    {
+      "color": "#55585c",
+      "id": "mat-gate",
+      "name": "Garage door"
+    },
+    {
+      "color": "#9fc3d8",
+      "id": "mat-glass",
+      "name": "Glazing",
+      "opacity": 0.35
+    },
+    {
+      "color": "#d9d5cc",
+      "id": "mat-partition",
+      "name": "Partition"
+    },
+    {
+      "color": "#3a3a3c",
+      "id": "mat-render-dark",
+      "name": "Dark render"
+    },
+    {
+      "color": "#5a5550",
+      "id": "mat-roof",
+      "name": "Roof covering (tone not read: miniature convention)"
+    },
+    {
+      "color": "#b07a4a",
+      "id": "mat-timber",
+      "name": "Timber (door leaf, cladding)"
+    },
+    {
+      "color": "#e8e4dc",
+      "id": "mat-wall",
+      "name": "Rendered wall (tone not read: miniature convention)"
+    }
+  ],
+  "meta": {
+    "createdWith": "buildapp",
+    "notes": []
+  },
+  "name": "Novara - Lipińscy Domy (analysis)",
+  "openings": [
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-H315-251",
+      "kind": "DOOR",
+      "offset": 1.716307,
+      "sill": 0,
+      "wallId": "iw-H315-169",
+      "width": 0.84015
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-H315-378",
+      "kind": "DOOR",
+      "offset": 4.764852,
+      "sill": 0,
+      "wallId": "iw-H315-169",
+      "width": 0.84015
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-H376-64",
+      "kind": "DOOR",
+      "offset": 0.780193,
+      "sill": 0,
+      "wallId": "iw-H378-107",
+      "width": 1.032185
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-H378-226",
+      "kind": "DOOR",
+      "offset": 4.668888,
+      "sill": 0,
+      "wallId": "iw-H378-107",
+      "width": 0.84015
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-H378-405",
+      "kind": "DOOR",
+      "offset": 1.17621,
+      "sill": 0,
+      "wallId": "iw-H378-356",
+      "width": 0.84015
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-V110-427",
+      "kind": "DOOR",
+      "offset": 1.500322,
+      "sill": 0,
+      "wallId": "iw-V110-462",
+      "width": 0.84015
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-V174-327",
+      "kind": "DOOR",
+      "offset": 0.204036,
+      "sill": 0,
+      "wallId": "iw-V174-364-x",
+      "width": 0.888159
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-V552-452",
+      "kind": "DOOR",
+      "offset": 0.900215,
+      "sill": 0,
+      "wallId": "iw-V552-487",
+      "width": 0.84015
+    },
+    {
+      "height": 1.41449,
+      "id": "op-fix-front-092dbe",
+      "kind": "WINDOW",
+      "offset": 11.31592,
+      "sill": 0.874412,
+      "wallId": "ring-mass-main-w0",
+      "width": 0.784399
+    },
+    {
+      "height": 2.05744,
+      "id": "op-fix-front-2afeff",
+      "kind": "DOOR",
+      "offset": 9.052736,
+      "sill": 0,
+      "wallId": "ring-mass-main-w0",
+      "width": 1.015861
+    },
+    {
+      "height": 2.250325,
+      "id": "op-fix-front-2c2f94",
+      "kind": "WINDOW",
+      "offset": 4.860702,
+      "sill": 0.038577,
+      "wallId": "ring-mass-main-w0",
+      "width": 0.745822
+    },
+    {
+      "height": 2.018863,
+      "id": "op-fix-front-4dc80d",
+      "kind": "WINDOW",
+      "offset": 8.756979,
+      "sill": 0.038577,
+      "wallId": "ring-mass-main-w0",
+      "width": 0.282898
+    },
+    {
+      "height": 2.237466,
+      "id": "op-fix-front-69b3d9",
+      "kind": "DOOR",
+      "offset": 1.195887,
+      "sill": 0.051436,
+      "wallId": "ring-mass-main-w0",
+      "width": 0.77154
+    },
+    {
+      "height": 1.401631,
+      "id": "op-fix-front-a4159a",
+      "kind": "WINDOW",
+      "offset": 13.797707,
+      "sill": 0.887271,
+      "wallId": "ring-mass-main-w0",
+      "width": 2.584659
+    },
+    {
+      "height": 2.193789,
+      "id": "op-fix-left-8806a4",
+      "kind": "DOOR",
+      "offset": 4.102099,
+      "sill": 0.077886,
+      "wallId": "ring-mass-main-w3",
+      "width": 1.350024
+    },
+    {
+      "height": 2.227894,
+      "id": "op-fix-rear-0049cd",
+      "kind": "DOOR",
+      "offset": 1.107508,
+      "sill": 0.038634,
+      "wallId": "ring-mass-main-w2",
+      "width": 5.241346
+    },
+    {
+      "height": 2.227894,
+      "id": "op-fix-rear-1d9df0",
+      "kind": "WINDOW",
+      "offset": 7.66241,
+      "sill": 0.038634,
+      "wallId": "ring-mass-main-w2",
+      "width": 2.305162
+    },
+    {
+      "height": 2.176382,
+      "id": "op-fix-rear-5b9d51",
+      "kind": "WINDOW",
+      "offset": 11.07508,
+      "sill": 0.077268,
+      "wallId": "ring-mass-main-w2",
+      "width": 2.266528
+    },
+    {
+      "height": 2.202138,
+      "id": "op-fix-rear-ab74b2",
+      "kind": "WINDOW",
+      "offset": 14.461994,
+      "sill": 0.051512,
+      "wallId": "ring-mass-main-w2",
+      "width": 2.279406
+    },
+    {
+      "height": 2.20371,
+      "id": "op-fix-right-2ab21a",
+      "kind": "DOOR",
+      "offset": 2.255566,
+      "sill": 0.077778,
+      "wallId": "ring-mass-main-w1",
+      "width": 1.361115
+    },
+    {
+      "height": 2.20371,
+      "id": "op-fix-right-edadeb",
+      "kind": "DOOR",
+      "offset": 5.911132,
+      "sill": 0.077778,
+      "wallId": "ring-mass-main-w1",
+      "width": 1.361115
+    }
+  ],
+  "platforms": [],
+  "railings": [],
+  "relationships": [],
+  "roofEdges": [],
+  "roofOpenings": [],
+  "roofPlanes": [],
+  "rooflights": [],
+  "roofs": [
+    {
+      "eaveOffset": 3.376417,
+      "evidence": {
+        "interpretation": "ridge along X (slopes seen on the sides along it, the gable end across it); pitch 27.8° from a 2.52 m rise over half of 9.55 m (the walls end at 3.09 m: the roof's underside there)",
+        "properties": {
+          "eaveOffset": "SOURCE_DERIVED",
+          "pitchDeg": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc + frame-asset-projekt-domu-novara-421dc1d80d-a49e75143e + frame-asset-projekt-domu-novara-cd36a92257-1346a4ff02 + frame-asset-projekt-domu-novara-7bcd736359-84afa41f2e + frame-asset-projekt-domu-novara-84ceddba3a-ff6dc4e9a0",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc",
+          "src-frame-asset-projekt-domu-novara-421dc1d80d-a49e75143e",
+          "src-frame-asset-projekt-domu-novara-cd36a92257-1346a4ff02",
+          "src-frame-asset-projekt-domu-novara-7bcd736359-84afa41f2e",
+          "src-frame-asset-projekt-domu-novara-84ceddba3a-ff6dc4e9a0"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "footprint": {
+        "maxX": 17.6432,
+        "maxZ": 9.5537,
+        "minX": 0,
+        "minZ": 0
+      },
+      "id": "roof-mass-main",
+      "kind": "GABLE",
+      "levelId": "lvl-0",
+      "materialId": "mat-roof",
+      "overhang": 0,
+      "pitchDeg": 27.8,
+      "ridgeAxis": "X",
+      "thickness": 0.25
+    }
+  ],
+  "rooms": [],
+  "schema": "buildapp.canonical-building-model",
+  "schemaVersion": "1.9.0",
+  "slabs": [],
+  "stairs": [],
+  "stepRuns": [],
+  "surfaceRegions": [
+    {
+      "evidence": {
+        "interpretation": "a timber outline from finish-5534df (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-mass-main-w1",
+      "id": "appearance-east-ring-mass-main-w1-timber-0",
+      "materialId": "mat-timber",
+      "outline": [
+        {
+          "a": 3.64,
+          "b": 2.314964
+        },
+        {
+          "a": 5.88,
+          "b": 2.314964
+        },
+        {
+          "a": 5.88,
+          "b": 2.294964
+        },
+        {
+          "a": 5.9,
+          "b": 2.294964
+        },
+        {
+          "a": 5.9,
+          "b": 0
+        },
+        {
+          "a": 3.62,
+          "b": 0
+        },
+        {
+          "a": 3.62,
+          "b": 2.294964
+        },
+        {
+          "a": 3.64,
+          "b": 2.294964
+        }
+      ],
+      "rect": {
+        "a0": 3.62,
+        "a1": 5.9,
+        "b0": 0,
+        "b1": 2.314964
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a timber outline from finish-213263 (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-mass-main-w2",
+      "id": "appearance-rear-ring-mass-main-w2-timber-0",
+      "materialId": "mat-timber",
+      "outline": [
+        {
+          "a": 17.6432,
+          "b": 2.294964
+        },
+        {
+          "a": 16.7432,
+          "b": 2.294964
+        },
+        {
+          "a": 16.7432,
+          "b": 2.274964
+        },
+        {
+          "a": 16.7232,
+          "b": 2.274964
+        },
+        {
+          "a": 16.7232,
+          "b": 0
+        },
+        {
+          "a": 17.6432,
+          "b": 0
+        }
+      ],
+      "rect": {
+        "a0": 16.7232,
+        "a1": 17.6432,
+        "b0": 0,
+        "b1": 2.294964
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a timber outline from finish-e1ff04 (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-mass-main-w3",
+      "id": "appearance-west-ring-mass-main-w3-timber-0",
+      "materialId": "mat-timber",
+      "outline": [
+        {
+          "a": 4.0937,
+          "b": 2.294964
+        },
+        {
+          "a": 0.2937,
+          "b": 2.294964
+        },
+        {
+          "a": 0.2937,
+          "b": 2.274964
+        },
+        {
+          "a": 0.2737,
+          "b": 2.274964
+        },
+        {
+          "a": 0.2737,
+          "b": 0
+        },
+        {
+          "a": 4.1137,
+          "b": 0
+        },
+        {
+          "a": 4.1137,
+          "b": 2.274964
+        },
+        {
+          "a": 4.0937,
+          "b": 2.274964
+        }
+      ],
+      "rect": {
+        "a0": 0.2737,
+        "a1": 4.1137,
+        "b0": 0,
+        "b1": 2.294964
+      }
+    }
+  ],
+  "terraces": [],
+  "units": {
+    "angle": "deg",
+    "length": "m"
+  },
+  "wallJunctions": [
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w3"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w0"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc (MAIN), at the analyzer's own scale: 2.400429 cm/px on the walls' outer line: 17.65 m over the outline's 735 px and 9.55 m over its 398 px (printed on the plan with their axes): 2.401 and 2.399 cm/px, 0.1 % apart; heights: 4 registered elevation(s) give eaves (the walls' corner tops) 2.93 / 2.94 / 3.10 / 3.09 m and top 5.89 / 5.90 / 5.88 / 5.90 m — the gable-end view(s) (LEFT, RIGHT) show the wall corner under the roof: 3.09 m is taken; a view along the ridge draws its walls ending behind the fascia, lower by no more than an overhang hides (two views draw that line)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc + frame-asset-projekt-domu-novara-421dc1d80d-a49e75143e + frame-asset-projekt-domu-novara-cd36a92257-1346a4ff02 + frame-asset-projekt-domu-novara-7bcd736359-84afa41f2e + frame-asset-projekt-domu-novara-84ceddba3a-ff6dc4e9a0",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc",
+          "src-frame-asset-projekt-domu-novara-421dc1d80d-a49e75143e",
+          "src-frame-asset-projekt-domu-novara-cd36a92257-1346a4ff02",
+          "src-frame-asset-projekt-domu-novara-7bcd736359-84afa41f2e",
+          "src-frame-asset-projekt-domu-novara-84ceddba3a-ff6dc4e9a0"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j0",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w0"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w1"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc (MAIN), at the analyzer's own scale: 2.400429 cm/px on the walls' outer line: 17.65 m over the outline's 735 px and 9.55 m over its 398 px (printed on the plan with their axes): 2.401 and 2.399 cm/px, 0.1 % apart; heights: 4 registered elevation(s) give eaves (the walls' corner tops) 2.93 / 2.94 / 3.10 / 3.09 m and top 5.89 / 5.90 / 5.88 / 5.90 m — the gable-end view(s) (LEFT, RIGHT) show the wall corner under the roof: 3.09 m is taken; a view along the ridge draws its walls ending behind the fascia, lower by no more than an overhang hides (two views draw that line)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc + frame-asset-projekt-domu-novara-421dc1d80d-a49e75143e + frame-asset-projekt-domu-novara-cd36a92257-1346a4ff02 + frame-asset-projekt-domu-novara-7bcd736359-84afa41f2e + frame-asset-projekt-domu-novara-84ceddba3a-ff6dc4e9a0",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc",
+          "src-frame-asset-projekt-domu-novara-421dc1d80d-a49e75143e",
+          "src-frame-asset-projekt-domu-novara-cd36a92257-1346a4ff02",
+          "src-frame-asset-projekt-domu-novara-7bcd736359-84afa41f2e",
+          "src-frame-asset-projekt-domu-novara-84ceddba3a-ff6dc4e9a0"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j1",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w1"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w2"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc (MAIN), at the analyzer's own scale: 2.400429 cm/px on the walls' outer line: 17.65 m over the outline's 735 px and 9.55 m over its 398 px (printed on the plan with their axes): 2.401 and 2.399 cm/px, 0.1 % apart; heights: 4 registered elevation(s) give eaves (the walls' corner tops) 2.93 / 2.94 / 3.10 / 3.09 m and top 5.89 / 5.90 / 5.88 / 5.90 m — the gable-end view(s) (LEFT, RIGHT) show the wall corner under the roof: 3.09 m is taken; a view along the ridge draws its walls ending behind the fascia, lower by no more than an overhang hides (two views draw that line)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc + frame-asset-projekt-domu-novara-421dc1d80d-a49e75143e + frame-asset-projekt-domu-novara-cd36a92257-1346a4ff02 + frame-asset-projekt-domu-novara-7bcd736359-84afa41f2e + frame-asset-projekt-domu-novara-84ceddba3a-ff6dc4e9a0",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc",
+          "src-frame-asset-projekt-domu-novara-421dc1d80d-a49e75143e",
+          "src-frame-asset-projekt-domu-novara-cd36a92257-1346a4ff02",
+          "src-frame-asset-projekt-domu-novara-7bcd736359-84afa41f2e",
+          "src-frame-asset-projekt-domu-novara-84ceddba3a-ff6dc4e9a0"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j2",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w2",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w2"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w3"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc (MAIN), at the analyzer's own scale: 2.400429 cm/px on the walls' outer line: 17.65 m over the outline's 735 px and 9.55 m over its 398 px (printed on the plan with their axes): 2.401 and 2.399 cm/px, 0.1 % apart; heights: 4 registered elevation(s) give eaves (the walls' corner tops) 2.93 / 2.94 / 3.10 / 3.09 m and top 5.89 / 5.90 / 5.88 / 5.90 m — the gable-end view(s) (LEFT, RIGHT) show the wall corner under the roof: 3.09 m is taken; a view along the ridge draws its walls ending behind the fascia, lower by no more than an overhang hides (two views draw that line)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc + frame-asset-projekt-domu-novara-421dc1d80d-a49e75143e + frame-asset-projekt-domu-novara-cd36a92257-1346a4ff02 + frame-asset-projekt-domu-novara-7bcd736359-84afa41f2e + frame-asset-projekt-domu-novara-84ceddba3a-ff6dc4e9a0",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc",
+          "src-frame-asset-projekt-domu-novara-421dc1d80d-a49e75143e",
+          "src-frame-asset-projekt-domu-novara-cd36a92257-1346a4ff02",
+          "src-frame-asset-projekt-domu-novara-7bcd736359-84afa41f2e",
+          "src-frame-asset-projekt-domu-novara-84ceddba3a-ff6dc4e9a0"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j3",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w2",
+      "tolerance": 0.001
+    }
+  ],
+  "wallPanels": [],
+  "wallRings": [
+    {
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc (MAIN), at the analyzer's own scale: 2.400429 cm/px on the walls' outer line: 17.65 m over the outline's 735 px and 9.55 m over its 398 px (printed on the plan with their axes): 2.401 and 2.399 cm/px, 0.1 % apart; heights: 4 registered elevation(s) give eaves (the walls' corner tops) 2.93 / 2.94 / 3.10 / 3.09 m and top 5.89 / 5.90 / 5.88 / 5.90 m — the gable-end view(s) (LEFT, RIGHT) show the wall corner under the roof: 3.09 m is taken; a view along the ridge draws its walls ending behind the fascia, lower by no more than an overhang hides (two views draw that line)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc + frame-asset-projekt-domu-novara-421dc1d80d-a49e75143e + frame-asset-projekt-domu-novara-cd36a92257-1346a4ff02 + frame-asset-projekt-domu-novara-7bcd736359-84afa41f2e + frame-asset-projekt-domu-novara-84ceddba3a-ff6dc4e9a0",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc",
+          "src-frame-asset-projekt-domu-novara-421dc1d80d-a49e75143e",
+          "src-frame-asset-projekt-domu-novara-cd36a92257-1346a4ff02",
+          "src-frame-asset-projekt-domu-novara-7bcd736359-84afa41f2e",
+          "src-frame-asset-projekt-domu-novara-84ceddba3a-ff6dc4e9a0"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main",
+      "junctionIds": [
+        "ring-mass-main-j0",
+        "ring-mass-main-j1",
+        "ring-mass-main-j2",
+        "ring-mass-main-j3"
+      ],
+      "levelId": "lvl-0",
+      "wallIds": [
+        "ring-mass-main-w0",
+        "ring-mass-main-w1",
+        "ring-mass-main-w2",
+        "ring-mass-main-w3"
+      ]
+    }
+  ],
+  "walls": [
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 10.681909,
+        "z": 5.244937
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-H315-169",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 3.852688,
+        "z": 5.244937
+      },
+      "thickness": 0.144026
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 7.2733,
+        "z": 3.684659
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-H378-107",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 0.3,
+        "z": 3.684659
+      },
+      "thickness": 0.264047
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 13.490411,
+        "z": 3.684659
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-H378-356",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 8.089446,
+        "z": 3.684659
+      },
+      "thickness": 0.264047
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 2.244401,
+        "z": 3.684659
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-V110-462",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 2.244401,
+        "z": 0.3
+      },
+      "thickness": 0.144026
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 3.852688,
+        "z": 3.684659
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-V174-364",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 3.852688,
+        "z": 0.3
+      },
+      "thickness": 0.264047
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 3.852688,
+        "z": 9.2537
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-V174-364-x",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 3.852688,
+        "z": 3.948706
+      },
+      "thickness": 0.264047
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 6.541169,
+        "z": 3.684659
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-V289-373",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 6.541169,
+        "z": 1.056189
+      },
+      "thickness": 0.144026
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 7.237294,
+        "z": 9.2537
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-V318-159",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 7.237294,
+        "z": 5.388963
+      },
+      "thickness": 0.144026
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 8.317487,
+        "z": 3.684659
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-V362-373",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 8.317487,
+        "z": 1.056189
+      },
+      "thickness": 0.144026
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 12.878302,
+        "z": 3.684659
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-V552-487",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 12.878302,
+        "z": 0.3
+      },
+      "thickness": 0.144026
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 17.6432,
+        "z": 0
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc (MAIN), at the analyzer's own scale: 2.400429 cm/px on the walls' outer line: 17.65 m over the outline's 735 px and 9.55 m over its 398 px (printed on the plan with their axes): 2.401 and 2.399 cm/px, 0.1 % apart; heights: 4 registered elevation(s) give eaves (the walls' corner tops) 2.93 / 2.94 / 3.10 / 3.09 m and top 5.89 / 5.90 / 5.88 / 5.90 m — the gable-end view(s) (LEFT, RIGHT) show the wall corner under the roof: 3.09 m is taken; a view along the ridge draws its walls ending behind the fascia, lower by no more than an overhang hides (two views draw that line)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc + frame-asset-projekt-domu-novara-421dc1d80d-a49e75143e + frame-asset-projekt-domu-novara-cd36a92257-1346a4ff02 + frame-asset-projekt-domu-novara-7bcd736359-84afa41f2e + frame-asset-projekt-domu-novara-84ceddba3a-ff6dc4e9a0",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc",
+          "src-frame-asset-projekt-domu-novara-421dc1d80d-a49e75143e",
+          "src-frame-asset-projekt-domu-novara-cd36a92257-1346a4ff02",
+          "src-frame-asset-projekt-domu-novara-7bcd736359-84afa41f2e",
+          "src-frame-asset-projekt-domu-novara-84ceddba3a-ff6dc4e9a0"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 5.893773,
+      "id": "ring-mass-main-w0",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 0,
+        "z": 0
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-mass-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 17.6432,
+        "z": 9.5537
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc (MAIN), at the analyzer's own scale: 2.400429 cm/px on the walls' outer line: 17.65 m over the outline's 735 px and 9.55 m over its 398 px (printed on the plan with their axes): 2.401 and 2.399 cm/px, 0.1 % apart; heights: 4 registered elevation(s) give eaves (the walls' corner tops) 2.93 / 2.94 / 3.10 / 3.09 m and top 5.89 / 5.90 / 5.88 / 5.90 m — the gable-end view(s) (LEFT, RIGHT) show the wall corner under the roof: 3.09 m is taken; a view along the ridge draws its walls ending behind the fascia, lower by no more than an overhang hides (two views draw that line)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc + frame-asset-projekt-domu-novara-421dc1d80d-a49e75143e + frame-asset-projekt-domu-novara-cd36a92257-1346a4ff02 + frame-asset-projekt-domu-novara-7bcd736359-84afa41f2e + frame-asset-projekt-domu-novara-84ceddba3a-ff6dc4e9a0",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc",
+          "src-frame-asset-projekt-domu-novara-421dc1d80d-a49e75143e",
+          "src-frame-asset-projekt-domu-novara-cd36a92257-1346a4ff02",
+          "src-frame-asset-projekt-domu-novara-7bcd736359-84afa41f2e",
+          "src-frame-asset-projekt-domu-novara-84ceddba3a-ff6dc4e9a0"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 5.893773,
+      "id": "ring-mass-main-w1",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 17.6432,
+        "z": 0
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-mass-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0,
+        "z": 9.5537
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc (MAIN), at the analyzer's own scale: 2.400429 cm/px on the walls' outer line: 17.65 m over the outline's 735 px and 9.55 m over its 398 px (printed on the plan with their axes): 2.401 and 2.399 cm/px, 0.1 % apart; heights: 4 registered elevation(s) give eaves (the walls' corner tops) 2.93 / 2.94 / 3.10 / 3.09 m and top 5.89 / 5.90 / 5.88 / 5.90 m — the gable-end view(s) (LEFT, RIGHT) show the wall corner under the roof: 3.09 m is taken; a view along the ridge draws its walls ending behind the fascia, lower by no more than an overhang hides (two views draw that line)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc + frame-asset-projekt-domu-novara-421dc1d80d-a49e75143e + frame-asset-projekt-domu-novara-cd36a92257-1346a4ff02 + frame-asset-projekt-domu-novara-7bcd736359-84afa41f2e + frame-asset-projekt-domu-novara-84ceddba3a-ff6dc4e9a0",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc",
+          "src-frame-asset-projekt-domu-novara-421dc1d80d-a49e75143e",
+          "src-frame-asset-projekt-domu-novara-cd36a92257-1346a4ff02",
+          "src-frame-asset-projekt-domu-novara-7bcd736359-84afa41f2e",
+          "src-frame-asset-projekt-domu-novara-84ceddba3a-ff6dc4e9a0"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 5.893773,
+      "id": "ring-mass-main-w2",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 17.6432,
+        "z": 9.5537
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-mass-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0,
+        "z": 0
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc (MAIN), at the analyzer's own scale: 2.400429 cm/px on the walls' outer line: 17.65 m over the outline's 735 px and 9.55 m over its 398 px (printed on the plan with their axes): 2.401 and 2.399 cm/px, 0.1 % apart; heights: 4 registered elevation(s) give eaves (the walls' corner tops) 2.93 / 2.94 / 3.10 / 3.09 m and top 5.89 / 5.90 / 5.88 / 5.90 m — the gable-end view(s) (LEFT, RIGHT) show the wall corner under the roof: 3.09 m is taken; a view along the ridge draws its walls ending behind the fascia, lower by no more than an overhang hides (two views draw that line)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc + frame-asset-projekt-domu-novara-421dc1d80d-a49e75143e + frame-asset-projekt-domu-novara-cd36a92257-1346a4ff02 + frame-asset-projekt-domu-novara-7bcd736359-84afa41f2e + frame-asset-projekt-domu-novara-84ceddba3a-ff6dc4e9a0",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-novara-82704e1cda-56c93accfc",
+          "src-frame-asset-projekt-domu-novara-421dc1d80d-a49e75143e",
+          "src-frame-asset-projekt-domu-novara-cd36a92257-1346a4ff02",
+          "src-frame-asset-projekt-domu-novara-7bcd736359-84afa41f2e",
+          "src-frame-asset-projekt-domu-novara-84ceddba3a-ff6dc4e9a0"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 5.893773,
+      "id": "ring-mass-main-w3",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 0,
+        "z": 9.5537
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-mass-main"
+      }
+    }
+  ],
+  "windows": [
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-front-092dbe-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-front-092dbe"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-front-2c2f94-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-front-2c2f94"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-front-4dc80d-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-front-4dc80d"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-front-a4159a-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-front-a4159a"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-rear-1d9df0-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-rear-1d9df0"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-rear-5b9d51-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-rear-5b9d51"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-rear-ab74b2-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-rear-ab74b2"
+    }
+  ]
+}

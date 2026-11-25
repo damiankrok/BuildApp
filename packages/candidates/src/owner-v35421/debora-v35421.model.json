@@ -1,0 +1,2608 @@
+{
+  "assemblies": [
+    {
+      "chimneyIds": [],
+      "classification": "INTERSECTING",
+      "dormerIds": [],
+      "edgeIds": [
+        "ridge-mass-main-minX-mass-main-maxX",
+        "valley-mass-main-maxX-mass-wing-1-minZ-1",
+        "valley-mass-main-maxX-mass-wing-1-maxZ-1",
+        "ridge-mass-wing-1-minZ-0-mass-wing-1-maxZ-0",
+        "ridge-mass-wing-1-minZ-1-mass-wing-1-maxZ-1",
+        "verge-mass-main-minX-0",
+        "verge-mass-main-minX-1",
+        "eave-mass-main-minX-2",
+        "verge-mass-main-maxX-0",
+        "eave-mass-main-maxX-1",
+        "eave-mass-main-maxX-2",
+        "verge-mass-main-maxX-3",
+        "eave-mass-wing-1-minZ-0-0",
+        "verge-mass-wing-1-minZ-0-1",
+        "abutment-mass-wing-1-minZ-0-2",
+        "verge-mass-wing-1-maxZ-0-0",
+        "eave-mass-wing-1-maxZ-0-1",
+        "abutment-mass-wing-1-maxZ-0-2"
+      ],
+      "hostIds": [
+        "ring-mass-main",
+        "ring-mass-wing-1"
+      ],
+      "id": "roofsys-main",
+      "kind": "ROOF",
+      "openingIds": [],
+      "planeIds": [
+        "roof-mass-main-minX",
+        "roof-mass-main-maxX",
+        "roof-mass-wing-1-minZ-0",
+        "roof-mass-wing-1-minZ-1",
+        "roof-mass-wing-1-maxZ-0",
+        "roof-mass-wing-1-maxZ-1"
+      ],
+      "quality": "COMPLETE",
+      "trimIds": []
+    }
+  ],
+  "balconies": [],
+  "building": {
+    "id": "building",
+    "name": "massing"
+  },
+  "chimneys": [
+    {
+      "baseOffset": 0,
+      "footprint": {
+        "maxX": 7.037909,
+        "maxZ": 6.013408,
+        "minX": 6.392561,
+        "minZ": 5.36806
+      },
+      "height": 7.890846,
+      "id": "chimney-fix-right-2fcd2c",
+      "levelId": "lvl-0",
+      "materialId": "mat-chimney"
+    }
+  ],
+  "constraints": [],
+  "doors": [
+    {
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-front-ac1b3b-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "op-fix-front-ac1b3b",
+      "swing": "IN"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "kind": "PANEL"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-front-b3b84c-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-gate",
+      "openAngle": 0,
+      "openingId": "op-fix-front-b3b84c",
+      "swing": "IN",
+      "usage": "GARAGE"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "glazing": "FULL",
+            "hinge": "LEFT",
+            "kind": "LEAF"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-left-09d6ae-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-glass",
+      "openAngle": 0,
+      "openingId": "op-fix-left-09d6ae",
+      "swing": "IN"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "glazing": "FULL",
+            "hinge": "LEFT",
+            "kind": "LEAF"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-left-29c971-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-glass",
+      "openAngle": 0,
+      "openingId": "op-fix-left-29c971",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-rear-0f6881-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "op-fix-rear-0f6881",
+      "swing": "IN"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "glazing": "FULL",
+            "hinge": "LEFT",
+            "kind": "LEAF"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-rear-4854cb-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-glass",
+      "openAngle": 0,
+      "openingId": "op-fix-rear-4854cb",
+      "swing": "IN"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "glazing": "FULL",
+            "hinge": "LEFT",
+            "kind": "LEAF"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-rear-c6b3a3-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-glass",
+      "openAngle": 0,
+      "openingId": "op-fix-rear-c6b3a3",
+      "swing": "IN"
+    }
+  ],
+  "evidenceSources": [
+    {
+      "id": "src-frame-asset-debora-elewacja-boczna-be9d125a40-10cc8009e1",
+      "kind": "DRAWING",
+      "label": "frame-asset-debora-elewacja-boczna-be9d125a40-10cc8009e1",
+      "note": "frame frame-asset-debora-elewacja-boczna-be9d125a40-10cc8009e1"
+    },
+    {
+      "id": "src-frame-asset-debora-elewacja-boczna-f9deab0d1a-bf24db7f06",
+      "kind": "DRAWING",
+      "label": "frame-asset-debora-elewacja-boczna-f9deab0d1a-bf24db7f06",
+      "note": "frame frame-asset-debora-elewacja-boczna-f9deab0d1a-bf24db7f06"
+    },
+    {
+      "id": "src-frame-asset-debora-elewacja-przod-2858e7b957-18c5b5e067",
+      "kind": "DRAWING",
+      "label": "frame-asset-debora-elewacja-przod-2858e7b957-18c5b5e067",
+      "note": "frame frame-asset-debora-elewacja-przod-2858e7b957-18c5b5e067"
+    },
+    {
+      "id": "src-frame-asset-debora-elewacja-ty-a5b6999315-e84acc7aa2",
+      "kind": "DRAWING",
+      "label": "frame-asset-debora-elewacja-ty-a5b6999315-e84acc7aa2",
+      "note": "frame frame-asset-debora-elewacja-ty-a5b6999315-e84acc7aa2"
+    },
+    {
+      "id": "src-frame-asset-debora-rzut-parter-a12cfd0762-6855091717",
+      "kind": "DRAWING",
+      "label": "frame-asset-debora-rzut-parter-a12cfd0762-6855091717",
+      "note": "frame frame-asset-debora-rzut-parter-a12cfd0762-6855091717"
+    }
+  ],
+  "frame": {
+    "handedness": "LEFT_HANDED_AS_SPECIFIED",
+    "origin": "finished ground-floor level is y = 0; the front facade outer face is z = 0",
+    "viewerNote": "renderers working in a right-handed frame mirror z when building their scene",
+    "wallConvention": "a wall runs from start to end along its OUTER face at its base; its outward normal is up x u, so exterior rings are traversed counter-clockwise on a plan drawn with the front facade at the bottom and material lies to the left of the direction of travel",
+    "x": "right when looking at the front facade",
+    "y": "up (vertical)",
+    "z": "away from the front facade, into the building"
+  },
+  "id": "m-analysis-u42aefee10c76",
+  "levels": [
+    {
+      "buildingId": "building",
+      "elevation": 0,
+      "height": 7.947284,
+      "id": "lvl-0",
+      "index": 0,
+      "name": "Massing"
+    }
+  ],
+  "linearSolids": [],
+  "materials": [
+    {
+      "color": "#6d6a66",
+      "id": "mat-chimney",
+      "name": "Chimney"
+    },
+    {
+      "color": "#55585c",
+      "id": "mat-gate",
+      "name": "Garage door"
+    },
+    {
+      "color": "#9fc3d8",
+      "id": "mat-glass",
+      "name": "Glazing",
+      "opacity": 0.35
+    },
+    {
+      "color": "#d9d5cc",
+      "id": "mat-partition",
+      "name": "Partition"
+    },
+    {
+      "color": "#5a5550",
+      "id": "mat-roof",
+      "name": "Roof covering (tone not read: miniature convention)"
+    },
+    {
+      "color": "#b07a4a",
+      "id": "mat-timber",
+      "name": "Timber (door leaf, cladding)"
+    },
+    {
+      "color": "#e8e4dc",
+      "id": "mat-wall",
+      "name": "Rendered wall (tone not read: miniature convention)"
+    }
+  ],
+  "meta": {
+    "createdWith": "buildapp",
+    "notes": []
+  },
+  "name": "Debora (analysis)",
+  "openings": [
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-debora-rzut-parter-a12cfd0762-6855091717",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-H372-686",
+      "kind": "DOOR",
+      "offset": 1.179618,
+      "sill": 0,
+      "wallId": "iw-H372-636-b1",
+      "width": 0.990879
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-debora-rzut-parter-a12cfd0762-6855091717",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-H459-504",
+      "kind": "DOOR",
+      "offset": 0.06,
+      "sill": 0,
+      "wallId": "iw-H459-454-x",
+      "width": 0.706752
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-debora-rzut-parter-a12cfd0762-6855091717",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-H517-425",
+      "kind": "DOOR",
+      "offset": 1.958166,
+      "sill": 0,
+      "wallId": "iw-H517-342",
+      "width": 0.89651
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-debora-rzut-parter-a12cfd0762-6855091717",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-H588-425",
+      "kind": "DOOR",
+      "offset": 1.804815,
+      "sill": 0,
+      "wallId": "iw-H589-380",
+      "width": 1.273987
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-debora-rzut-parter-a12cfd0762-6855091717",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-H589-349",
+      "kind": "DOOR",
+      "offset": 0.06,
+      "sill": 0,
+      "wallId": "iw-H589-380",
+      "width": 0.683159
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-debora-rzut-parter-a12cfd0762-6855091717",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-V345-565",
+      "kind": "DOOR",
+      "offset": 0.90321,
+      "sill": 0,
+      "wallId": "iw-V345-595",
+      "width": 0.659567
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-debora-rzut-parter-a12cfd0762-6855091717",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-V496-525",
+      "kind": "DOOR",
+      "offset": 0.943695,
+      "sill": 0,
+      "wallId": "iw-V495-197",
+      "width": 0.778548
+    },
+    {
+      "height": 1.168245,
+      "id": "op-fix-front-0a1d9d",
+      "kind": "WINDOW",
+      "offset": 0.179736,
+      "sill": 1.1982,
+      "wallId": "ring-mass-main-w0",
+      "width": 2.066895
+    },
+    {
+      "height": 2.33649,
+      "id": "op-fix-front-30b2c6",
+      "kind": "WINDOW",
+      "offset": 4.253616,
+      "sill": 3.205185,
+      "wallId": "ring-mass-main-w0",
+      "width": 0.95856
+    },
+    {
+      "height": 2.27658,
+      "id": "op-fix-front-ac1b3b",
+      "kind": "DOOR",
+      "offset": 5.751366,
+      "sill": 0.089865,
+      "wallId": "ring-mass-main-w0",
+      "width": 1.13829
+    },
+    {
+      "height": 2.33649,
+      "id": "op-fix-front-b3b84c",
+      "kind": "DOOR",
+      "offset": 0.930946,
+      "sill": 0.05991,
+      "wallId": "ring-mass-wing-1-w0",
+      "width": 4.702935
+    },
+    {
+      "height": 2.33649,
+      "id": "op-fix-front-eadc44",
+      "kind": "WINDOW",
+      "offset": 2.276586,
+      "sill": 3.205185,
+      "wallId": "ring-mass-main-w0",
+      "width": 0.928605
+    },
+    {
+      "height": 2.27658,
+      "id": "op-fix-front-f99c7e",
+      "kind": "WINDOW",
+      "offset": 8.027946,
+      "sill": 0.089865,
+      "wallId": "ring-mass-main-w0",
+      "width": 0.41937
+    },
+    {
+      "height": 2.229227,
+      "id": "op-fix-left-09d6ae",
+      "kind": "DOOR",
+      "offset": 1.982554,
+      "sill": 0.115804,
+      "wallId": "ring-mass-main-w3",
+      "width": 1.650207
+    },
+    {
+      "height": 2.229227,
+      "id": "op-fix-left-29c971",
+      "kind": "DOOR",
+      "offset": 3.864369,
+      "sill": 0.115804,
+      "wallId": "ring-mass-main-w3",
+      "width": 1.881815
+    },
+    {
+      "height": 2.204089,
+      "id": "op-fix-rear-0f6881",
+      "kind": "DOOR",
+      "offset": 0.500856,
+      "sill": 0.150965,
+      "wallId": "ring-mass-main-w2",
+      "width": 0.966176
+    },
+    {
+      "height": 2.324861,
+      "id": "op-fix-rear-3ee524",
+      "kind": "WINDOW",
+      "offset": 5.784631,
+      "sill": 3.230651,
+      "wallId": "ring-mass-main-w2",
+      "width": 0.935983
+    },
+    {
+      "height": 2.294668,
+      "id": "op-fix-rear-4854cb",
+      "kind": "DOOR",
+      "offset": 7.68679,
+      "sill": 0.060386,
+      "wallId": "ring-mass-main-w2",
+      "width": 1.026562
+    },
+    {
+      "height": 2.324861,
+      "id": "op-fix-rear-932b75",
+      "kind": "WINDOW",
+      "offset": 3.791893,
+      "sill": 3.230651,
+      "wallId": "ring-mass-main-w2",
+      "width": 0.935983
+    },
+    {
+      "height": 2.264475,
+      "id": "op-fix-rear-c6b3a3",
+      "kind": "DOOR",
+      "offset": 3.882472,
+      "sill": 0.060386,
+      "wallId": "ring-mass-main-w2",
+      "width": 3.260844
+    },
+    {
+      "height": 1.994712,
+      "id": "op-fix-right-3bf584",
+      "kind": "WINDOW",
+      "offset": 2.13508,
+      "sill": 2.522724,
+      "wallId": "ring-mass-wing-1-w1",
+      "width": 2.288052
+    },
+    {
+      "evidence": {
+        "interpretation": "a gap the ground-floor plan draws in this wall (plan-gap-7-745: 12.79..13.26 m), where the model had no opening; its kind, sill and height follow one metric reading of this side's elevation (frame-asset-debora-elewacja-ty-a5b6999315-e84acc7aa2, 70 % of the span shared): not located in the elevation's pixels, not source-verified",
+        "properties": {
+          "height": "VISUAL_INFERRED",
+          "offset": "SOURCE_DERIVED",
+          "sill": "VISUAL_INFERRED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-debora-elewacja-ty-a5b6999315-e84acc7aa2",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.2,
+      "id": "op-plan-rear-a38668",
+      "kind": "WINDOW",
+      "offset": 1.958194,
+      "sill": 0.05,
+      "wallId": "ring-mass-wing-1-w2",
+      "width": 0.471847
+    },
+    {
+      "evidence": {
+        "interpretation": "a gap the ground-floor plan draws in this wall (plan-gap-7-651: 10.57..11.04 m), where the model had no opening; its kind, sill and height follow one metric reading of this side's elevation (frame-asset-debora-elewacja-ty-a5b6999315-e84acc7aa2, 73 % of the span shared): not located in the elevation's pixels, not source-verified",
+        "properties": {
+          "height": "VISUAL_INFERRED",
+          "offset": "SOURCE_DERIVED",
+          "sill": "VISUAL_INFERRED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-debora-elewacja-ty-a5b6999315-e84acc7aa2",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.2,
+      "id": "op-plan-rear-e5185d",
+      "kind": "WINDOW",
+      "offset": 4.175876,
+      "sill": 0.05,
+      "wallId": "ring-mass-wing-1-w2",
+      "width": 0.471847
+    }
+  ],
+  "platforms": [],
+  "railings": [],
+  "relationships": [],
+  "roofEdges": [
+    {
+      "end": {
+        "x": 8.8943,
+        "y": 4.262954946514098,
+        "z": 7.083185
+      },
+      "id": "abutment-mass-wing-1-maxZ-0-2",
+      "kind": "ABUTMENT",
+      "planeIds": [
+        "roof-mass-wing-1-maxZ-0"
+      ],
+      "start": {
+        "x": 8.8943,
+        "y": 3.559982,
+        "z": 7.8327
+      }
+    },
+    {
+      "end": {
+        "x": 8.8943,
+        "y": 3.559982,
+        "z": 1.1796
+      },
+      "id": "abutment-mass-wing-1-minZ-0-2",
+      "kind": "ABUTMENT",
+      "planeIds": [
+        "roof-mass-wing-1-minZ-0"
+      ],
+      "start": {
+        "x": 8.8943,
+        "y": 4.262954946514099,
+        "z": 1.929115
+      }
+    },
+    {
+      "end": {
+        "x": 8.8943,
+        "y": 4.262955,
+        "z": 1.929115
+      },
+      "id": "eave-mass-main-maxX-1",
+      "kind": "EAVE",
+      "planeIds": [
+        "roof-mass-main-maxX"
+      ],
+      "start": {
+        "x": 8.8943,
+        "y": 4.262955,
+        "z": 0
+      }
+    },
+    {
+      "end": {
+        "x": 8.8943,
+        "y": 4.262955,
+        "z": 10.8997
+      },
+      "id": "eave-mass-main-maxX-2",
+      "kind": "EAVE",
+      "planeIds": [
+        "roof-mass-main-maxX"
+      ],
+      "start": {
+        "x": 8.8943,
+        "y": 4.262955,
+        "z": 7.083185
+      }
+    },
+    {
+      "end": {
+        "x": 0,
+        "y": 4.262955,
+        "z": 0
+      },
+      "id": "eave-mass-main-minX-2",
+      "kind": "EAVE",
+      "planeIds": [
+        "roof-mass-main-minX"
+      ],
+      "start": {
+        "x": 0,
+        "y": 4.262955,
+        "z": 10.8997
+      }
+    },
+    {
+      "end": {
+        "x": 8.8943,
+        "y": 3.559982,
+        "z": 7.8327
+      },
+      "id": "eave-mass-wing-1-maxZ-0-1",
+      "kind": "EAVE",
+      "planeIds": [
+        "roof-mass-wing-1-maxZ-0"
+      ],
+      "start": {
+        "x": 15.2171,
+        "y": 3.559982,
+        "z": 7.8327
+      }
+    },
+    {
+      "end": {
+        "x": 15.2171,
+        "y": 3.559982,
+        "z": 1.1796
+      },
+      "id": "eave-mass-wing-1-minZ-0-0",
+      "kind": "EAVE",
+      "planeIds": [
+        "roof-mass-wing-1-minZ-0"
+      ],
+      "start": {
+        "x": 8.8943,
+        "y": 3.559982,
+        "z": 1.1796
+      }
+    },
+    {
+      "end": {
+        "x": 4.44715,
+        "y": 8.117806395252465,
+        "z": 10.8997
+      },
+      "id": "ridge-mass-main-minX-mass-main-maxX",
+      "kind": "RIDGE",
+      "planeIds": [
+        "roof-mass-main-minX",
+        "roof-mass-main-maxX"
+      ],
+      "start": {
+        "x": 4.44715,
+        "y": 8.117806395252465,
+        "z": 0
+      }
+    },
+    {
+      "end": {
+        "x": 8.8943,
+        "y": 6.679965796490363,
+        "z": 4.50615
+      },
+      "id": "ridge-mass-wing-1-minZ-0-mass-wing-1-maxZ-0",
+      "kind": "RIDGE",
+      "planeIds": [
+        "roof-mass-wing-1-minZ-0",
+        "roof-mass-wing-1-maxZ-0"
+      ],
+      "start": {
+        "x": 15.2171,
+        "y": 6.679965796490363,
+        "z": 4.50615
+      }
+    },
+    {
+      "end": {
+        "x": 6.105914,
+        "y": 6.679965796490363,
+        "z": 4.50615
+      },
+      "id": "ridge-mass-wing-1-minZ-1-mass-wing-1-maxZ-1",
+      "kind": "RIDGE",
+      "planeIds": [
+        "roof-mass-wing-1-minZ-1",
+        "roof-mass-wing-1-maxZ-1"
+      ],
+      "start": {
+        "x": 8.8943,
+        "y": 6.679965796490363,
+        "z": 4.50615
+      }
+    },
+    {
+      "end": {
+        "x": 8.8943,
+        "y": 4.262955,
+        "z": 7.083185
+      },
+      "id": "valley-mass-main-maxX-mass-wing-1-maxZ-1",
+      "kind": "VALLEY",
+      "planeIds": [
+        "roof-mass-main-maxX",
+        "roof-mass-wing-1-maxZ-1"
+      ],
+      "start": {
+        "x": 6.105914,
+        "y": 6.679966718202092,
+        "z": 4.50615
+      }
+    },
+    {
+      "end": {
+        "x": 6.105914,
+        "y": 6.679966718202092,
+        "z": 4.50615
+      },
+      "id": "valley-mass-main-maxX-mass-wing-1-minZ-1",
+      "kind": "VALLEY",
+      "planeIds": [
+        "roof-mass-main-maxX",
+        "roof-mass-wing-1-minZ-1"
+      ],
+      "start": {
+        "x": 8.8943,
+        "y": 4.262955,
+        "z": 1.929115
+      }
+    },
+    {
+      "end": {
+        "x": 8.8943,
+        "y": 4.262955,
+        "z": 0
+      },
+      "id": "verge-mass-main-maxX-0",
+      "kind": "VERGE",
+      "planeIds": [
+        "roof-mass-main-maxX"
+      ],
+      "start": {
+        "x": 4.44715,
+        "y": 8.117806395252465,
+        "z": 0
+      }
+    },
+    {
+      "end": {
+        "x": 4.44715,
+        "y": 8.117806395252465,
+        "z": 10.8997
+      },
+      "id": "verge-mass-main-maxX-3",
+      "kind": "VERGE",
+      "planeIds": [
+        "roof-mass-main-maxX"
+      ],
+      "start": {
+        "x": 8.8943,
+        "y": 4.262955,
+        "z": 10.8997
+      }
+    },
+    {
+      "end": {
+        "x": 4.44715,
+        "y": 8.117806395252465,
+        "z": 0
+      },
+      "id": "verge-mass-main-minX-0",
+      "kind": "VERGE",
+      "planeIds": [
+        "roof-mass-main-minX"
+      ],
+      "start": {
+        "x": 0,
+        "y": 4.262955,
+        "z": 0
+      }
+    },
+    {
+      "end": {
+        "x": 0,
+        "y": 4.262955,
+        "z": 10.8997
+      },
+      "id": "verge-mass-main-minX-1",
+      "kind": "VERGE",
+      "planeIds": [
+        "roof-mass-main-minX"
+      ],
+      "start": {
+        "x": 4.44715,
+        "y": 8.117806395252465,
+        "z": 10.8997
+      }
+    },
+    {
+      "end": {
+        "x": 15.2171,
+        "y": 3.559982,
+        "z": 7.8327
+      },
+      "id": "verge-mass-wing-1-maxZ-0-0",
+      "kind": "VERGE",
+      "planeIds": [
+        "roof-mass-wing-1-maxZ-0"
+      ],
+      "start": {
+        "x": 15.2171,
+        "y": 6.679965796490363,
+        "z": 4.50615
+      }
+    },
+    {
+      "end": {
+        "x": 15.2171,
+        "y": 6.679965796490363,
+        "z": 4.50615
+      },
+      "id": "verge-mass-wing-1-minZ-0-1",
+      "kind": "VERGE",
+      "planeIds": [
+        "roof-mass-wing-1-minZ-0"
+      ],
+      "start": {
+        "x": 15.2171,
+        "y": 3.559982,
+        "z": 1.1796
+      }
+    }
+  ],
+  "roofOpenings": [
+    {
+      "footprint": {
+        "maxX": 11.622546,
+        "maxZ": 3.068928,
+        "minX": 10.843716,
+        "minZ": 1.919151
+      },
+      "id": "rw-fix-front-eb0da0",
+      "kind": "ROOFLIGHT",
+      "roofId": "roof-mass-wing-1-minZ-0"
+    },
+    {
+      "footprint": {
+        "maxX": 1.728507,
+        "maxZ": 5.211418,
+        "minX": 0.492732,
+        "minZ": 4.458692
+      },
+      "id": "rw-fix-left-0e9653",
+      "kind": "ROOFLIGHT",
+      "roofId": "roof-mass-main-minX"
+    },
+    {
+      "footprint": {
+        "maxX": 1.728507,
+        "maxZ": 8.019665,
+        "minX": 0.492732,
+        "minZ": 7.237988
+      },
+      "id": "rw-fix-left-82f3a2",
+      "kind": "ROOFLIGHT",
+      "roofId": "roof-mass-main-minX"
+    }
+  ],
+  "roofPlanes": [
+    {
+      "boundary": [
+        {
+          "x": 4.44715,
+          "z": 0
+        },
+        {
+          "x": 8.8943,
+          "z": 0
+        },
+        {
+          "x": 8.8943,
+          "z": 1.929115
+        },
+        {
+          "x": 6.105914,
+          "z": 4.50615
+        },
+        {
+          "x": 8.8943,
+          "z": 7.083185
+        },
+        {
+          "x": 8.8943,
+          "z": 10.8997
+        },
+        {
+          "x": 4.44715,
+          "z": 10.8997
+        }
+      ],
+      "datum": {
+        "x": 8.8943,
+        "y": 4.262955,
+        "z": 0
+      },
+      "downslope": {
+        "x": 1,
+        "z": 0
+      },
+      "evidence": {
+        "interpretation": "GABLE along Z read from the source elevation through assigned registration of frame-asset-debora-elewacja-przod-2858e7b957-18c5b5e067 (front); the roof system solved again with it",
+        "locator": "roof polygon on frame-asset-debora-elewacja-przod-2858e7b957-18c5b5e067",
+        "source": "frame-asset-debora-elewacja-przod-2858e7b957-18c5b5e067",
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "roof-mass-main-maxX",
+      "levelId": "lvl-0",
+      "materialId": "mat-roof",
+      "pitchDeg": 40.9192,
+      "thickness": 0.25
+    },
+    {
+      "boundary": [
+        {
+          "x": 0,
+          "z": 0
+        },
+        {
+          "x": 4.44715,
+          "z": 0
+        },
+        {
+          "x": 4.44715,
+          "z": 10.8997
+        },
+        {
+          "x": 0,
+          "z": 10.8997
+        }
+      ],
+      "datum": {
+        "x": 0,
+        "y": 4.262955,
+        "z": 0
+      },
+      "downslope": {
+        "x": -1,
+        "z": 0
+      },
+      "evidence": {
+        "interpretation": "GABLE along Z read from the source elevation through assigned registration of frame-asset-debora-elewacja-przod-2858e7b957-18c5b5e067 (front); the roof system solved again with it",
+        "locator": "roof polygon on frame-asset-debora-elewacja-przod-2858e7b957-18c5b5e067",
+        "source": "frame-asset-debora-elewacja-przod-2858e7b957-18c5b5e067",
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "roof-mass-main-minX",
+      "levelId": "lvl-0",
+      "materialId": "mat-roof",
+      "pitchDeg": 40.9192,
+      "thickness": 0.25
+    },
+    {
+      "boundary": [
+        {
+          "x": 15.2171,
+          "z": 4.50615
+        },
+        {
+          "x": 15.2171,
+          "z": 7.8327
+        },
+        {
+          "x": 8.8943,
+          "z": 7.8327
+        },
+        {
+          "x": 8.8943,
+          "z": 4.50615
+        }
+      ],
+      "datum": {
+        "x": 8.8943,
+        "y": 3.559982,
+        "z": 7.8327
+      },
+      "downslope": {
+        "x": 0,
+        "z": 1
+      },
+      "evidence": {
+        "interpretation": "GABLE along Z read from the source elevation through assigned registration of frame-asset-debora-elewacja-przod-2858e7b957-18c5b5e067 (front); the roof system solved again with it",
+        "locator": "roof polygon on frame-asset-debora-elewacja-przod-2858e7b957-18c5b5e067",
+        "source": "frame-asset-debora-elewacja-przod-2858e7b957-18c5b5e067",
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "roof-mass-wing-1-maxZ-0",
+      "levelId": "lvl-0",
+      "materialId": "mat-roof",
+      "pitchDeg": 43.1647,
+      "thickness": 0.25
+    },
+    {
+      "boundary": [
+        {
+          "x": 8.8943,
+          "z": 7.083185
+        },
+        {
+          "x": 6.105914,
+          "z": 4.50615
+        },
+        {
+          "x": 8.8943,
+          "z": 4.50615
+        }
+      ],
+      "datum": {
+        "x": 8.8943,
+        "y": 3.559982,
+        "z": 7.8327
+      },
+      "downslope": {
+        "x": 0,
+        "z": 1
+      },
+      "evidence": {
+        "interpretation": "GABLE along Z read from the source elevation through assigned registration of frame-asset-debora-elewacja-przod-2858e7b957-18c5b5e067 (front); the roof system solved again with it",
+        "locator": "roof polygon on frame-asset-debora-elewacja-przod-2858e7b957-18c5b5e067",
+        "source": "frame-asset-debora-elewacja-przod-2858e7b957-18c5b5e067",
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "roof-mass-wing-1-maxZ-1",
+      "levelId": "lvl-0",
+      "materialId": "mat-roof",
+      "pitchDeg": 43.1647,
+      "thickness": 0.25
+    },
+    {
+      "boundary": [
+        {
+          "x": 8.8943,
+          "z": 1.1796
+        },
+        {
+          "x": 15.2171,
+          "z": 1.1796
+        },
+        {
+          "x": 15.2171,
+          "z": 4.50615
+        },
+        {
+          "x": 8.8943,
+          "z": 4.50615
+        }
+      ],
+      "datum": {
+        "x": 8.8943,
+        "y": 3.559982,
+        "z": 1.1796
+      },
+      "downslope": {
+        "x": 0,
+        "z": -1
+      },
+      "evidence": {
+        "interpretation": "GABLE along Z read from the source elevation through assigned registration of frame-asset-debora-elewacja-przod-2858e7b957-18c5b5e067 (front); the roof system solved again with it",
+        "locator": "roof polygon on frame-asset-debora-elewacja-przod-2858e7b957-18c5b5e067",
+        "source": "frame-asset-debora-elewacja-przod-2858e7b957-18c5b5e067",
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "roof-mass-wing-1-minZ-0",
+      "levelId": "lvl-0",
+      "materialId": "mat-roof",
+      "pitchDeg": 43.1647,
+      "thickness": 0.25
+    },
+    {
+      "boundary": [
+        {
+          "x": 8.8943,
+          "z": 4.50615
+        },
+        {
+          "x": 6.105914,
+          "z": 4.50615
+        },
+        {
+          "x": 8.8943,
+          "z": 1.929115
+        }
+      ],
+      "datum": {
+        "x": 8.8943,
+        "y": 3.559982,
+        "z": 1.1796
+      },
+      "downslope": {
+        "x": 0,
+        "z": -1
+      },
+      "evidence": {
+        "interpretation": "GABLE along Z read from the source elevation through assigned registration of frame-asset-debora-elewacja-przod-2858e7b957-18c5b5e067 (front); the roof system solved again with it",
+        "locator": "roof polygon on frame-asset-debora-elewacja-przod-2858e7b957-18c5b5e067",
+        "source": "frame-asset-debora-elewacja-przod-2858e7b957-18c5b5e067",
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "roof-mass-wing-1-minZ-1",
+      "levelId": "lvl-0",
+      "materialId": "mat-roof",
+      "pitchDeg": 43.1647,
+      "thickness": 0.25
+    }
+  ],
+  "rooflights": [
+    {
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "rw-fix-front-eb0da0-light",
+      "roofOpeningId": "rw-fix-front-eb0da0"
+    },
+    {
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "rw-fix-left-0e9653-light",
+      "roofOpeningId": "rw-fix-left-0e9653"
+    },
+    {
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "rw-fix-left-82f3a2-light",
+      "roofOpeningId": "rw-fix-left-82f3a2"
+    }
+  ],
+  "roofs": [],
+  "rooms": [],
+  "schema": "buildapp.canonical-building-model",
+  "schemaVersion": "1.9.0",
+  "slabs": [],
+  "stairs": [],
+  "stepRuns": [],
+  "surfaceRegions": [
+    {
+      "evidence": {
+        "interpretation": "a timber outline from finish-3c863f (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-mass-main-w1",
+      "id": "appearance-east-ring-mass-main-w1-timber-0",
+      "materialId": "mat-timber",
+      "outline": [
+        {
+          "a": 0.3,
+          "b": 2.357806
+        },
+        {
+          "a": 1.02,
+          "b": 2.357806
+        },
+        {
+          "a": 1.02,
+          "b": 2.337806
+        },
+        {
+          "a": 1.04,
+          "b": 2.337806
+        },
+        {
+          "a": 1.04,
+          "b": 0.057806
+        },
+        {
+          "a": 1.02,
+          "b": 0.057806
+        },
+        {
+          "a": 1.02,
+          "b": 0.037806
+        },
+        {
+          "a": 0.3,
+          "b": 0.037806
+        },
+        {
+          "a": 0.3,
+          "b": 0.057806
+        },
+        {
+          "a": 0.28,
+          "b": 0.057806
+        },
+        {
+          "a": 0.28,
+          "b": 2.337806
+        },
+        {
+          "a": 0.3,
+          "b": 2.337806
+        }
+      ],
+      "rect": {
+        "a0": 0.28,
+        "a1": 1.04,
+        "b0": 0.037806,
+        "b1": 2.357806
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a timber outline from finish-aa4071 (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-mass-main-w0",
+      "id": "appearance-front-ring-mass-main-w0-timber-0",
+      "materialId": "mat-timber",
+      "outline": [
+        {
+          "a": 3.18,
+          "b": 2.437806
+        },
+        {
+          "a": 8.32,
+          "b": 2.437806
+        },
+        {
+          "a": 8.32,
+          "b": 2.417806
+        },
+        {
+          "a": 8.34,
+          "b": 2.417806
+        },
+        {
+          "a": 8.34,
+          "b": 0.097806
+        },
+        {
+          "a": 8.32,
+          "b": 0.097806
+        },
+        {
+          "a": 8.32,
+          "b": 0.077806
+        },
+        {
+          "a": 3.18,
+          "b": 0.077806
+        },
+        {
+          "a": 3.18,
+          "b": 0.097806
+        },
+        {
+          "a": 3.16,
+          "b": 0.097806
+        },
+        {
+          "a": 3.16,
+          "b": 2.417806
+        },
+        {
+          "a": 3.18,
+          "b": 2.417806
+        }
+      ],
+      "rect": {
+        "a0": 3.16,
+        "a1": 8.34,
+        "b0": 0.077806,
+        "b1": 2.437806
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a timber outline from finish-959aa1 (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-mass-wing-1-w0",
+      "id": "appearance-front-ring-mass-wing-1-w0-timber-0",
+      "materialId": "mat-timber",
+      "outline": [
+        {
+          "a": 0.0057,
+          "b": 2.437806
+        },
+        {
+          "a": 5.6257,
+          "b": 2.437806
+        },
+        {
+          "a": 5.6257,
+          "b": 2.417806
+        },
+        {
+          "a": 5.6457,
+          "b": 2.417806
+        },
+        {
+          "a": 5.6457,
+          "b": 0.097806
+        },
+        {
+          "a": 5.6257,
+          "b": 0.097806
+        },
+        {
+          "a": 5.6257,
+          "b": 0.077806
+        },
+        {
+          "a": 0.0057,
+          "b": 0.077806
+        },
+        {
+          "a": 0.0057,
+          "b": 0.097806
+        },
+        {
+          "a": 0,
+          "b": 0.097806
+        },
+        {
+          "a": 0,
+          "b": 2.417806
+        },
+        {
+          "a": 0.0057,
+          "b": 2.417806
+        }
+      ],
+      "rect": {
+        "a0": 0,
+        "a1": 5.6457,
+        "b0": 0.077806,
+        "b1": 2.437806
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a timber outline from finish-4ac20a (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-mass-main-w2",
+      "id": "appearance-rear-ring-mass-main-w2-timber-0",
+      "materialId": "mat-timber",
+      "outline": [
+        {
+          "a": 3.8143,
+          "b": 2.437806
+        },
+        {
+          "a": 1.4743,
+          "b": 2.437806
+        },
+        {
+          "a": 1.4743,
+          "b": 2.417806
+        },
+        {
+          "a": 1.4543,
+          "b": 2.417806
+        },
+        {
+          "a": 1.4543,
+          "b": 0
+        },
+        {
+          "a": 3.8343,
+          "b": 0
+        },
+        {
+          "a": 3.8343,
+          "b": 2.417806
+        },
+        {
+          "a": 3.8143,
+          "b": 2.417806
+        }
+      ],
+      "rect": {
+        "a0": 1.4543,
+        "a1": 3.8343,
+        "b0": 0,
+        "b1": 2.437806
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a timber outline from finish-4eaf2e (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-mass-wing-1-w2",
+      "id": "appearance-rear-ring-mass-wing-1-w2-timber-0",
+      "materialId": "mat-timber",
+      "outline": [
+        {
+          "a": 6.3171,
+          "b": 2.437806
+        },
+        {
+          "a": 1.5171,
+          "b": 2.437806
+        },
+        {
+          "a": 1.5171,
+          "b": 2.417806
+        },
+        {
+          "a": 1.4971,
+          "b": 2.417806
+        },
+        {
+          "a": 1.4971,
+          "b": 0
+        },
+        {
+          "a": 6.3228,
+          "b": 0
+        },
+        {
+          "a": 6.3228,
+          "b": 2.417806
+        },
+        {
+          "a": 6.3171,
+          "b": 2.417806
+        }
+      ],
+      "rect": {
+        "a0": 1.4971,
+        "a1": 6.3228,
+        "b0": 0,
+        "b1": 2.437806
+      }
+    }
+  ],
+  "terraces": [],
+  "units": {
+    "angle": "deg",
+    "length": "m"
+  },
+  "wallJunctions": [
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w3"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w0"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-debora-rzut-parter-a12cfd0762-6855091717 (MAIN, GARAGE), at the analyzer's own scale: 2.359236 cm/px from the traced outline: 15.16 m over the outline's 645 px and 11.13 m over its 470 px (the building's two overall dimensions printed on the site plan, the longer over the longer extent): 2.350 and 2.368 cm/px, 0.7 % apart; heights: 4 registered elevation(s) give eaves 3.21 / 3.32 / 4.02 / 4.23 m and top 8.12 / 8.09 / 7.80 / 7.79 m (they disagree by 1.02 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-debora-rzut-parter-a12cfd0762-6855091717 + frame-asset-debora-elewacja-przod-2858e7b957-18c5b5e067 + frame-asset-debora-elewacja-ty-a5b6999315-e84acc7aa2 + frame-asset-debora-elewacja-boczna-be9d125a40-10cc8009e1 + frame-asset-debora-elewacja-boczna-f9deab0d1a-bf24db7f06",
+        "sourceIds": [
+          "src-frame-asset-debora-rzut-parter-a12cfd0762-6855091717",
+          "src-frame-asset-debora-elewacja-przod-2858e7b957-18c5b5e067",
+          "src-frame-asset-debora-elewacja-ty-a5b6999315-e84acc7aa2",
+          "src-frame-asset-debora-elewacja-boczna-be9d125a40-10cc8009e1",
+          "src-frame-asset-debora-elewacja-boczna-f9deab0d1a-bf24db7f06"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j0",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w0"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w1"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-debora-rzut-parter-a12cfd0762-6855091717 (MAIN, GARAGE), at the analyzer's own scale: 2.359236 cm/px from the traced outline: 15.16 m over the outline's 645 px and 11.13 m over its 470 px (the building's two overall dimensions printed on the site plan, the longer over the longer extent): 2.350 and 2.368 cm/px, 0.7 % apart; heights: 4 registered elevation(s) give eaves 3.21 / 3.32 / 4.02 / 4.23 m and top 8.12 / 8.09 / 7.80 / 7.79 m (they disagree by 1.02 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-debora-rzut-parter-a12cfd0762-6855091717 + frame-asset-debora-elewacja-przod-2858e7b957-18c5b5e067 + frame-asset-debora-elewacja-ty-a5b6999315-e84acc7aa2 + frame-asset-debora-elewacja-boczna-be9d125a40-10cc8009e1 + frame-asset-debora-elewacja-boczna-f9deab0d1a-bf24db7f06",
+        "sourceIds": [
+          "src-frame-asset-debora-rzut-parter-a12cfd0762-6855091717",
+          "src-frame-asset-debora-elewacja-przod-2858e7b957-18c5b5e067",
+          "src-frame-asset-debora-elewacja-ty-a5b6999315-e84acc7aa2",
+          "src-frame-asset-debora-elewacja-boczna-be9d125a40-10cc8009e1",
+          "src-frame-asset-debora-elewacja-boczna-f9deab0d1a-bf24db7f06"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j1",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w1"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w2"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-debora-rzut-parter-a12cfd0762-6855091717 (MAIN, GARAGE), at the analyzer's own scale: 2.359236 cm/px from the traced outline: 15.16 m over the outline's 645 px and 11.13 m over its 470 px (the building's two overall dimensions printed on the site plan, the longer over the longer extent): 2.350 and 2.368 cm/px, 0.7 % apart; heights: 4 registered elevation(s) give eaves 3.21 / 3.32 / 4.02 / 4.23 m and top 8.12 / 8.09 / 7.80 / 7.79 m (they disagree by 1.02 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-debora-rzut-parter-a12cfd0762-6855091717 + frame-asset-debora-elewacja-przod-2858e7b957-18c5b5e067 + frame-asset-debora-elewacja-ty-a5b6999315-e84acc7aa2 + frame-asset-debora-elewacja-boczna-be9d125a40-10cc8009e1 + frame-asset-debora-elewacja-boczna-f9deab0d1a-bf24db7f06",
+        "sourceIds": [
+          "src-frame-asset-debora-rzut-parter-a12cfd0762-6855091717",
+          "src-frame-asset-debora-elewacja-przod-2858e7b957-18c5b5e067",
+          "src-frame-asset-debora-elewacja-ty-a5b6999315-e84acc7aa2",
+          "src-frame-asset-debora-elewacja-boczna-be9d125a40-10cc8009e1",
+          "src-frame-asset-debora-elewacja-boczna-f9deab0d1a-bf24db7f06"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j2",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w2",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w2"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w3"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-debora-rzut-parter-a12cfd0762-6855091717 (MAIN, GARAGE), at the analyzer's own scale: 2.359236 cm/px from the traced outline: 15.16 m over the outline's 645 px and 11.13 m over its 470 px (the building's two overall dimensions printed on the site plan, the longer over the longer extent): 2.350 and 2.368 cm/px, 0.7 % apart; heights: 4 registered elevation(s) give eaves 3.21 / 3.32 / 4.02 / 4.23 m and top 8.12 / 8.09 / 7.80 / 7.79 m (they disagree by 1.02 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-debora-rzut-parter-a12cfd0762-6855091717 + frame-asset-debora-elewacja-przod-2858e7b957-18c5b5e067 + frame-asset-debora-elewacja-ty-a5b6999315-e84acc7aa2 + frame-asset-debora-elewacja-boczna-be9d125a40-10cc8009e1 + frame-asset-debora-elewacja-boczna-f9deab0d1a-bf24db7f06",
+        "sourceIds": [
+          "src-frame-asset-debora-rzut-parter-a12cfd0762-6855091717",
+          "src-frame-asset-debora-elewacja-przod-2858e7b957-18c5b5e067",
+          "src-frame-asset-debora-elewacja-ty-a5b6999315-e84acc7aa2",
+          "src-frame-asset-debora-elewacja-boczna-be9d125a40-10cc8009e1",
+          "src-frame-asset-debora-elewacja-boczna-f9deab0d1a-bf24db7f06"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j3",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w2",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-wing-1-w3"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-wing-1-w0"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-debora-rzut-parter-a12cfd0762-6855091717 (MAIN, GARAGE), at the analyzer's own scale: 2.359236 cm/px from the traced outline: 15.16 m over the outline's 645 px and 11.13 m over its 470 px (the building's two overall dimensions printed on the site plan, the longer over the longer extent): 2.350 and 2.368 cm/px, 0.7 % apart; heights: 3 registered elevation(s) give eaves 3.22 / 3.32 / 6.49 m and top 6.68 / 6.70 / 6.49 m (they disagree by 3.27 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-debora-rzut-parter-a12cfd0762-6855091717 + frame-asset-debora-elewacja-przod-2858e7b957-18c5b5e067 + frame-asset-debora-elewacja-ty-a5b6999315-e84acc7aa2 + frame-asset-debora-elewacja-boczna-be9d125a40-10cc8009e1 + frame-asset-debora-elewacja-boczna-f9deab0d1a-bf24db7f06",
+        "sourceIds": [
+          "src-frame-asset-debora-rzut-parter-a12cfd0762-6855091717",
+          "src-frame-asset-debora-elewacja-przod-2858e7b957-18c5b5e067",
+          "src-frame-asset-debora-elewacja-ty-a5b6999315-e84acc7aa2",
+          "src-frame-asset-debora-elewacja-boczna-be9d125a40-10cc8009e1",
+          "src-frame-asset-debora-elewacja-boczna-f9deab0d1a-bf24db7f06"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-wing-1-j0",
+      "kind": "CORNER",
+      "owner": "ring-mass-wing-1-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-wing-1-w0"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-wing-1-w1"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-debora-rzut-parter-a12cfd0762-6855091717 (MAIN, GARAGE), at the analyzer's own scale: 2.359236 cm/px from the traced outline: 15.16 m over the outline's 645 px and 11.13 m over its 470 px (the building's two overall dimensions printed on the site plan, the longer over the longer extent): 2.350 and 2.368 cm/px, 0.7 % apart; heights: 3 registered elevation(s) give eaves 3.22 / 3.32 / 6.49 m and top 6.68 / 6.70 / 6.49 m (they disagree by 3.27 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-debora-rzut-parter-a12cfd0762-6855091717 + frame-asset-debora-elewacja-przod-2858e7b957-18c5b5e067 + frame-asset-debora-elewacja-ty-a5b6999315-e84acc7aa2 + frame-asset-debora-elewacja-boczna-be9d125a40-10cc8009e1 + frame-asset-debora-elewacja-boczna-f9deab0d1a-bf24db7f06",
+        "sourceIds": [
+          "src-frame-asset-debora-rzut-parter-a12cfd0762-6855091717",
+          "src-frame-asset-debora-elewacja-przod-2858e7b957-18c5b5e067",
+          "src-frame-asset-debora-elewacja-ty-a5b6999315-e84acc7aa2",
+          "src-frame-asset-debora-elewacja-boczna-be9d125a40-10cc8009e1",
+          "src-frame-asset-debora-elewacja-boczna-f9deab0d1a-bf24db7f06"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-wing-1-j1",
+      "kind": "CORNER",
+      "owner": "ring-mass-wing-1-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-wing-1-w1"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-wing-1-w2"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-debora-rzut-parter-a12cfd0762-6855091717 (MAIN, GARAGE), at the analyzer's own scale: 2.359236 cm/px from the traced outline: 15.16 m over the outline's 645 px and 11.13 m over its 470 px (the building's two overall dimensions printed on the site plan, the longer over the longer extent): 2.350 and 2.368 cm/px, 0.7 % apart; heights: 3 registered elevation(s) give eaves 3.22 / 3.32 / 6.49 m and top 6.68 / 6.70 / 6.49 m (they disagree by 3.27 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-debora-rzut-parter-a12cfd0762-6855091717 + frame-asset-debora-elewacja-przod-2858e7b957-18c5b5e067 + frame-asset-debora-elewacja-ty-a5b6999315-e84acc7aa2 + frame-asset-debora-elewacja-boczna-be9d125a40-10cc8009e1 + frame-asset-debora-elewacja-boczna-f9deab0d1a-bf24db7f06",
+        "sourceIds": [
+          "src-frame-asset-debora-rzut-parter-a12cfd0762-6855091717",
+          "src-frame-asset-debora-elewacja-przod-2858e7b957-18c5b5e067",
+          "src-frame-asset-debora-elewacja-ty-a5b6999315-e84acc7aa2",
+          "src-frame-asset-debora-elewacja-boczna-be9d125a40-10cc8009e1",
+          "src-frame-asset-debora-elewacja-boczna-f9deab0d1a-bf24db7f06"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-wing-1-j2",
+      "kind": "CORNER",
+      "owner": "ring-mass-wing-1-w2",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-wing-1-w2"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-wing-1-w3"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-debora-rzut-parter-a12cfd0762-6855091717 (MAIN, GARAGE), at the analyzer's own scale: 2.359236 cm/px from the traced outline: 15.16 m over the outline's 645 px and 11.13 m over its 470 px (the building's two overall dimensions printed on the site plan, the longer over the longer extent): 2.350 and 2.368 cm/px, 0.7 % apart; heights: 3 registered elevation(s) give eaves 3.22 / 3.32 / 6.49 m and top 6.68 / 6.70 / 6.49 m (they disagree by 3.27 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-debora-rzut-parter-a12cfd0762-6855091717 + frame-asset-debora-elewacja-przod-2858e7b957-18c5b5e067 + frame-asset-debora-elewacja-ty-a5b6999315-e84acc7aa2 + frame-asset-debora-elewacja-boczna-be9d125a40-10cc8009e1 + frame-asset-debora-elewacja-boczna-f9deab0d1a-bf24db7f06",
+        "sourceIds": [
+          "src-frame-asset-debora-rzut-parter-a12cfd0762-6855091717",
+          "src-frame-asset-debora-elewacja-przod-2858e7b957-18c5b5e067",
+          "src-frame-asset-debora-elewacja-ty-a5b6999315-e84acc7aa2",
+          "src-frame-asset-debora-elewacja-boczna-be9d125a40-10cc8009e1",
+          "src-frame-asset-debora-elewacja-boczna-f9deab0d1a-bf24db7f06"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-wing-1-j3",
+      "kind": "CORNER",
+      "owner": "ring-mass-wing-1-w2",
+      "tolerance": 0.001
+    }
+  ],
+  "wallPanels": [],
+  "wallRings": [
+    {
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-debora-rzut-parter-a12cfd0762-6855091717 (MAIN, GARAGE), at the analyzer's own scale: 2.359236 cm/px from the traced outline: 15.16 m over the outline's 645 px and 11.13 m over its 470 px (the building's two overall dimensions printed on the site plan, the longer over the longer extent): 2.350 and 2.368 cm/px, 0.7 % apart; heights: 4 registered elevation(s) give eaves 3.21 / 3.32 / 4.02 / 4.23 m and top 8.12 / 8.09 / 7.80 / 7.79 m (they disagree by 1.02 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-debora-rzut-parter-a12cfd0762-6855091717 + frame-asset-debora-elewacja-przod-2858e7b957-18c5b5e067 + frame-asset-debora-elewacja-ty-a5b6999315-e84acc7aa2 + frame-asset-debora-elewacja-boczna-be9d125a40-10cc8009e1 + frame-asset-debora-elewacja-boczna-f9deab0d1a-bf24db7f06",
+        "sourceIds": [
+          "src-frame-asset-debora-rzut-parter-a12cfd0762-6855091717",
+          "src-frame-asset-debora-elewacja-przod-2858e7b957-18c5b5e067",
+          "src-frame-asset-debora-elewacja-ty-a5b6999315-e84acc7aa2",
+          "src-frame-asset-debora-elewacja-boczna-be9d125a40-10cc8009e1",
+          "src-frame-asset-debora-elewacja-boczna-f9deab0d1a-bf24db7f06"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main",
+      "junctionIds": [
+        "ring-mass-main-j0",
+        "ring-mass-main-j1",
+        "ring-mass-main-j2",
+        "ring-mass-main-j3"
+      ],
+      "levelId": "lvl-0",
+      "wallIds": [
+        "ring-mass-main-w0",
+        "ring-mass-main-w1",
+        "ring-mass-main-w2",
+        "ring-mass-main-w3"
+      ]
+    },
+    {
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-debora-rzut-parter-a12cfd0762-6855091717 (MAIN, GARAGE), at the analyzer's own scale: 2.359236 cm/px from the traced outline: 15.16 m over the outline's 645 px and 11.13 m over its 470 px (the building's two overall dimensions printed on the site plan, the longer over the longer extent): 2.350 and 2.368 cm/px, 0.7 % apart; heights: 3 registered elevation(s) give eaves 3.22 / 3.32 / 6.49 m and top 6.68 / 6.70 / 6.49 m (they disagree by 3.27 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-debora-rzut-parter-a12cfd0762-6855091717 + frame-asset-debora-elewacja-przod-2858e7b957-18c5b5e067 + frame-asset-debora-elewacja-ty-a5b6999315-e84acc7aa2 + frame-asset-debora-elewacja-boczna-be9d125a40-10cc8009e1 + frame-asset-debora-elewacja-boczna-f9deab0d1a-bf24db7f06",
+        "sourceIds": [
+          "src-frame-asset-debora-rzut-parter-a12cfd0762-6855091717",
+          "src-frame-asset-debora-elewacja-przod-2858e7b957-18c5b5e067",
+          "src-frame-asset-debora-elewacja-ty-a5b6999315-e84acc7aa2",
+          "src-frame-asset-debora-elewacja-boczna-be9d125a40-10cc8009e1",
+          "src-frame-asset-debora-elewacja-boczna-f9deab0d1a-bf24db7f06"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-wing-1",
+      "junctionIds": [
+        "ring-mass-wing-1-j0",
+        "ring-mass-wing-1-j1",
+        "ring-mass-wing-1-j2",
+        "ring-mass-wing-1-j3"
+      ],
+      "levelId": "lvl-0",
+      "wallIds": [
+        "ring-mass-wing-1-w0",
+        "ring-mass-wing-1-w1",
+        "ring-mass-wing-1-w2",
+        "ring-mass-wing-1-w3"
+      ]
+    }
+  ],
+  "walls": [
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 1.580688,
+        "z": 6.853581
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-debora-rzut-parter-a12cfd0762-6855091717), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-debora-rzut-parter-a12cfd0762-6855091717",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-H346-219",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 0.3,
+        "z": 6.853581
+      },
+      "thickness": 0.448255
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 13.542015,
+        "z": 6.405326
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-debora-rzut-parter-a12cfd0762-6855091717), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-debora-rzut-parter-a12cfd0762-6855091717",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-H372-636-b1",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 10.215492,
+        "z": 6.405326
+      },
+      "thickness": 0.117962
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 6.688434,
+        "z": 5.815517
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-debora-rzut-parter-a12cfd0762-6855091717), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-debora-rzut-parter-a12cfd0762-6855091717",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-H395-398",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 4.9426,
+        "z": 5.815517
+      },
+      "thickness": 0.188739
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 6.688434,
+        "z": 4.329198
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-debora-rzut-parter-a12cfd0762-6855091717), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-debora-rzut-parter-a12cfd0762-6855091717",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-H459-454",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 5.921682,
+        "z": 4.329198
+      },
+      "thickness": 0.165147
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 8.5943,
+        "z": 4.329198
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-debora-rzut-parter-a12cfd0762-6855091717), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-debora-rzut-parter-a12cfd0762-6855091717",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-H459-454-x",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 7.089504,
+        "z": 4.329198
+      },
+      "thickness": 0.165147
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 6.688434,
+        "z": 2.96084
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-debora-rzut-parter-a12cfd0762-6855091717), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-debora-rzut-parter-a12cfd0762-6855091717",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-H517-342",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 3.279338,
+        "z": 2.96084
+      },
+      "thickness": 0.165147
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 4.187644,
+        "z": 1.922777
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-debora-rzut-parter-a12cfd0762-6855091717), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-debora-rzut-parter-a12cfd0762-6855091717",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-H562-342",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 3.432689,
+        "z": 1.922777
+      },
+      "thickness": 0.117962
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 6.591491,
+        "z": 1.120638
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-debora-rzut-parter-a12cfd0762-6855091717), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-debora-rzut-parter-a12cfd0762-6855091717",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-H589-380",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 3.432689,
+        "z": 1.120638
+      },
+      "thickness": 0.471847
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 3.432689,
+        "z": 1.922777
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-debora-rzut-parter-a12cfd0762-6855091717), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-debora-rzut-parter-a12cfd0762-6855091717",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-V345-595",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 3.432689,
+        "z": 0.3
+      },
+      "thickness": 0.165147
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 4.329198,
+        "z": 2.96084
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-debora-rzut-parter-a12cfd0762-6855091717), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-debora-rzut-parter-a12cfd0762-6855091717",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-V383-514",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 4.329198,
+        "z": 1.592484
+      },
+      "thickness": 0.141554
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 4.9426,
+        "z": 5.815517
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-debora-rzut-parter-a12cfd0762-6855091717), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-debora-rzut-parter-a12cfd0762-6855091717",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-V405-392",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 4.9426,
+        "z": 4.317402
+      },
+      "thickness": 0.353885
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 7.089504,
+        "z": 10.5997
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-debora-rzut-parter-a12cfd0762-6855091717), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-debora-rzut-parter-a12cfd0762-6855091717",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-V495-197",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 7.089504,
+        "z": 1.132433
+      },
+      "thickness": 0.40107
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 8.8943,
+        "z": 0
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-debora-rzut-parter-a12cfd0762-6855091717 (MAIN, GARAGE), at the analyzer's own scale: 2.359236 cm/px from the traced outline: 15.16 m over the outline's 645 px and 11.13 m over its 470 px (the building's two overall dimensions printed on the site plan, the longer over the longer extent): 2.350 and 2.368 cm/px, 0.7 % apart; heights: 4 registered elevation(s) give eaves 3.21 / 3.32 / 4.02 / 4.23 m and top 8.12 / 8.09 / 7.80 / 7.79 m (they disagree by 1.02 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-debora-rzut-parter-a12cfd0762-6855091717 + frame-asset-debora-elewacja-przod-2858e7b957-18c5b5e067 + frame-asset-debora-elewacja-ty-a5b6999315-e84acc7aa2 + frame-asset-debora-elewacja-boczna-be9d125a40-10cc8009e1 + frame-asset-debora-elewacja-boczna-f9deab0d1a-bf24db7f06",
+        "sourceIds": [
+          "src-frame-asset-debora-rzut-parter-a12cfd0762-6855091717",
+          "src-frame-asset-debora-elewacja-przod-2858e7b957-18c5b5e067",
+          "src-frame-asset-debora-elewacja-ty-a5b6999315-e84acc7aa2",
+          "src-frame-asset-debora-elewacja-boczna-be9d125a40-10cc8009e1",
+          "src-frame-asset-debora-elewacja-boczna-f9deab0d1a-bf24db7f06"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 8.117805,
+      "id": "ring-mass-main-w0",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 0,
+        "z": 0
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF_PLANES",
+        "planeIds": [
+          "roof-mass-main-maxX",
+          "roof-mass-main-minX"
+        ]
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 8.8943,
+        "z": 10.8997
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-debora-rzut-parter-a12cfd0762-6855091717 (MAIN, GARAGE), at the analyzer's own scale: 2.359236 cm/px from the traced outline: 15.16 m over the outline's 645 px and 11.13 m over its 470 px (the building's two overall dimensions printed on the site plan, the longer over the longer extent): 2.350 and 2.368 cm/px, 0.7 % apart; heights: 4 registered elevation(s) give eaves 3.21 / 3.32 / 4.02 / 4.23 m and top 8.12 / 8.09 / 7.80 / 7.79 m (they disagree by 1.02 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-debora-rzut-parter-a12cfd0762-6855091717 + frame-asset-debora-elewacja-przod-2858e7b957-18c5b5e067 + frame-asset-debora-elewacja-ty-a5b6999315-e84acc7aa2 + frame-asset-debora-elewacja-boczna-be9d125a40-10cc8009e1 + frame-asset-debora-elewacja-boczna-f9deab0d1a-bf24db7f06",
+        "sourceIds": [
+          "src-frame-asset-debora-rzut-parter-a12cfd0762-6855091717",
+          "src-frame-asset-debora-elewacja-przod-2858e7b957-18c5b5e067",
+          "src-frame-asset-debora-elewacja-ty-a5b6999315-e84acc7aa2",
+          "src-frame-asset-debora-elewacja-boczna-be9d125a40-10cc8009e1",
+          "src-frame-asset-debora-elewacja-boczna-f9deab0d1a-bf24db7f06"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 8.117805,
+      "id": "ring-mass-main-w1",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 8.8943,
+        "z": 0
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF_PLANES",
+        "planeIds": [
+          "roof-mass-main-maxX",
+          "roof-mass-wing-1-maxZ-1",
+          "roof-mass-wing-1-minZ-1"
+        ]
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0,
+        "z": 10.8997
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-debora-rzut-parter-a12cfd0762-6855091717 (MAIN, GARAGE), at the analyzer's own scale: 2.359236 cm/px from the traced outline: 15.16 m over the outline's 645 px and 11.13 m over its 470 px (the building's two overall dimensions printed on the site plan, the longer over the longer extent): 2.350 and 2.368 cm/px, 0.7 % apart; heights: 4 registered elevation(s) give eaves 3.21 / 3.32 / 4.02 / 4.23 m and top 8.12 / 8.09 / 7.80 / 7.79 m (they disagree by 1.02 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-debora-rzut-parter-a12cfd0762-6855091717 + frame-asset-debora-elewacja-przod-2858e7b957-18c5b5e067 + frame-asset-debora-elewacja-ty-a5b6999315-e84acc7aa2 + frame-asset-debora-elewacja-boczna-be9d125a40-10cc8009e1 + frame-asset-debora-elewacja-boczna-f9deab0d1a-bf24db7f06",
+        "sourceIds": [
+          "src-frame-asset-debora-rzut-parter-a12cfd0762-6855091717",
+          "src-frame-asset-debora-elewacja-przod-2858e7b957-18c5b5e067",
+          "src-frame-asset-debora-elewacja-ty-a5b6999315-e84acc7aa2",
+          "src-frame-asset-debora-elewacja-boczna-be9d125a40-10cc8009e1",
+          "src-frame-asset-debora-elewacja-boczna-f9deab0d1a-bf24db7f06"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 8.117805,
+      "id": "ring-mass-main-w2",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 8.8943,
+        "z": 10.8997
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF_PLANES",
+        "planeIds": [
+          "roof-mass-main-maxX",
+          "roof-mass-main-minX"
+        ]
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0,
+        "z": 0
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-debora-rzut-parter-a12cfd0762-6855091717 (MAIN, GARAGE), at the analyzer's own scale: 2.359236 cm/px from the traced outline: 15.16 m over the outline's 645 px and 11.13 m over its 470 px (the building's two overall dimensions printed on the site plan, the longer over the longer extent): 2.350 and 2.368 cm/px, 0.7 % apart; heights: 4 registered elevation(s) give eaves 3.21 / 3.32 / 4.02 / 4.23 m and top 8.12 / 8.09 / 7.80 / 7.79 m (they disagree by 1.02 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-debora-rzut-parter-a12cfd0762-6855091717 + frame-asset-debora-elewacja-przod-2858e7b957-18c5b5e067 + frame-asset-debora-elewacja-ty-a5b6999315-e84acc7aa2 + frame-asset-debora-elewacja-boczna-be9d125a40-10cc8009e1 + frame-asset-debora-elewacja-boczna-f9deab0d1a-bf24db7f06",
+        "sourceIds": [
+          "src-frame-asset-debora-rzut-parter-a12cfd0762-6855091717",
+          "src-frame-asset-debora-elewacja-przod-2858e7b957-18c5b5e067",
+          "src-frame-asset-debora-elewacja-ty-a5b6999315-e84acc7aa2",
+          "src-frame-asset-debora-elewacja-boczna-be9d125a40-10cc8009e1",
+          "src-frame-asset-debora-elewacja-boczna-f9deab0d1a-bf24db7f06"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 8.117805,
+      "id": "ring-mass-main-w3",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 0,
+        "z": 10.8997
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF_PLANES",
+        "planeIds": [
+          "roof-mass-main-minX"
+        ]
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 15.2171,
+        "z": 1.1796
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-debora-rzut-parter-a12cfd0762-6855091717 (MAIN, GARAGE), at the analyzer's own scale: 2.359236 cm/px from the traced outline: 15.16 m over the outline's 645 px and 11.13 m over its 470 px (the building's two overall dimensions printed on the site plan, the longer over the longer extent): 2.350 and 2.368 cm/px, 0.7 % apart; heights: 3 registered elevation(s) give eaves 3.22 / 3.32 / 6.49 m and top 6.68 / 6.70 / 6.49 m (they disagree by 3.27 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-debora-rzut-parter-a12cfd0762-6855091717 + frame-asset-debora-elewacja-przod-2858e7b957-18c5b5e067 + frame-asset-debora-elewacja-ty-a5b6999315-e84acc7aa2 + frame-asset-debora-elewacja-boczna-be9d125a40-10cc8009e1 + frame-asset-debora-elewacja-boczna-f9deab0d1a-bf24db7f06",
+        "sourceIds": [
+          "src-frame-asset-debora-rzut-parter-a12cfd0762-6855091717",
+          "src-frame-asset-debora-elewacja-przod-2858e7b957-18c5b5e067",
+          "src-frame-asset-debora-elewacja-ty-a5b6999315-e84acc7aa2",
+          "src-frame-asset-debora-elewacja-boczna-be9d125a40-10cc8009e1",
+          "src-frame-asset-debora-elewacja-boczna-f9deab0d1a-bf24db7f06"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 6.679966,
+      "id": "ring-mass-wing-1-w0",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 8.8943,
+        "z": 1.1796
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF_PLANES",
+        "planeIds": [
+          "roof-mass-wing-1-minZ-0"
+        ]
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 15.2171,
+        "z": 7.8327
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-debora-rzut-parter-a12cfd0762-6855091717 (MAIN, GARAGE), at the analyzer's own scale: 2.359236 cm/px from the traced outline: 15.16 m over the outline's 645 px and 11.13 m over its 470 px (the building's two overall dimensions printed on the site plan, the longer over the longer extent): 2.350 and 2.368 cm/px, 0.7 % apart; heights: 3 registered elevation(s) give eaves 3.22 / 3.32 / 6.49 m and top 6.68 / 6.70 / 6.49 m (they disagree by 3.27 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-debora-rzut-parter-a12cfd0762-6855091717 + frame-asset-debora-elewacja-przod-2858e7b957-18c5b5e067 + frame-asset-debora-elewacja-ty-a5b6999315-e84acc7aa2 + frame-asset-debora-elewacja-boczna-be9d125a40-10cc8009e1 + frame-asset-debora-elewacja-boczna-f9deab0d1a-bf24db7f06",
+        "sourceIds": [
+          "src-frame-asset-debora-rzut-parter-a12cfd0762-6855091717",
+          "src-frame-asset-debora-elewacja-przod-2858e7b957-18c5b5e067",
+          "src-frame-asset-debora-elewacja-ty-a5b6999315-e84acc7aa2",
+          "src-frame-asset-debora-elewacja-boczna-be9d125a40-10cc8009e1",
+          "src-frame-asset-debora-elewacja-boczna-f9deab0d1a-bf24db7f06"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 6.679966,
+      "id": "ring-mass-wing-1-w1",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 15.2171,
+        "z": 1.1796
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF_PLANES",
+        "planeIds": [
+          "roof-mass-wing-1-maxZ-0",
+          "roof-mass-wing-1-minZ-0"
+        ]
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 8.8943,
+        "z": 7.8327
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-debora-rzut-parter-a12cfd0762-6855091717 (MAIN, GARAGE), at the analyzer's own scale: 2.359236 cm/px from the traced outline: 15.16 m over the outline's 645 px and 11.13 m over its 470 px (the building's two overall dimensions printed on the site plan, the longer over the longer extent): 2.350 and 2.368 cm/px, 0.7 % apart; heights: 3 registered elevation(s) give eaves 3.22 / 3.32 / 6.49 m and top 6.68 / 6.70 / 6.49 m (they disagree by 3.27 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-debora-rzut-parter-a12cfd0762-6855091717 + frame-asset-debora-elewacja-przod-2858e7b957-18c5b5e067 + frame-asset-debora-elewacja-ty-a5b6999315-e84acc7aa2 + frame-asset-debora-elewacja-boczna-be9d125a40-10cc8009e1 + frame-asset-debora-elewacja-boczna-f9deab0d1a-bf24db7f06",
+        "sourceIds": [
+          "src-frame-asset-debora-rzut-parter-a12cfd0762-6855091717",
+          "src-frame-asset-debora-elewacja-przod-2858e7b957-18c5b5e067",
+          "src-frame-asset-debora-elewacja-ty-a5b6999315-e84acc7aa2",
+          "src-frame-asset-debora-elewacja-boczna-be9d125a40-10cc8009e1",
+          "src-frame-asset-debora-elewacja-boczna-f9deab0d1a-bf24db7f06"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 6.679966,
+      "id": "ring-mass-wing-1-w2",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 15.2171,
+        "z": 7.8327
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF_PLANES",
+        "planeIds": [
+          "roof-mass-wing-1-maxZ-0"
+        ]
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 8.8943,
+        "z": 1.1796
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-debora-rzut-parter-a12cfd0762-6855091717 (MAIN, GARAGE), at the analyzer's own scale: 2.359236 cm/px from the traced outline: 15.16 m over the outline's 645 px and 11.13 m over its 470 px (the building's two overall dimensions printed on the site plan, the longer over the longer extent): 2.350 and 2.368 cm/px, 0.7 % apart; heights: 3 registered elevation(s) give eaves 3.22 / 3.32 / 6.49 m and top 6.68 / 6.70 / 6.49 m (they disagree by 3.27 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-debora-rzut-parter-a12cfd0762-6855091717 + frame-asset-debora-elewacja-przod-2858e7b957-18c5b5e067 + frame-asset-debora-elewacja-ty-a5b6999315-e84acc7aa2 + frame-asset-debora-elewacja-boczna-be9d125a40-10cc8009e1 + frame-asset-debora-elewacja-boczna-f9deab0d1a-bf24db7f06",
+        "sourceIds": [
+          "src-frame-asset-debora-rzut-parter-a12cfd0762-6855091717",
+          "src-frame-asset-debora-elewacja-przod-2858e7b957-18c5b5e067",
+          "src-frame-asset-debora-elewacja-ty-a5b6999315-e84acc7aa2",
+          "src-frame-asset-debora-elewacja-boczna-be9d125a40-10cc8009e1",
+          "src-frame-asset-debora-elewacja-boczna-f9deab0d1a-bf24db7f06"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 6.679966,
+      "id": "ring-mass-wing-1-w3",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 8.8943,
+        "z": 7.8327
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF_PLANES",
+        "planeIds": [
+          "roof-mass-wing-1-maxZ-0",
+          "roof-mass-wing-1-minZ-0"
+        ]
+      }
+    }
+  ],
+  "windows": [
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-front-0a1d9d-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-front-0a1d9d"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-front-30b2c6-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-front-30b2c6"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-front-eadc44-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-front-eadc44"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-front-f99c7e-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-front-f99c7e"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-rear-3ee524-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-rear-3ee524"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-rear-932b75-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-rear-932b75"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-right-3bf584-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-right-3bf584"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-plan-rear-a38668-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-plan-rear-a38668"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-plan-rear-e5185d-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-plan-rear-e5185d"
+    }
+  ]
+}
