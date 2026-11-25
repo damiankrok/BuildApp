@@ -14,7 +14,8 @@ import type { Raster } from '@buildapp/source-cv'
 import { ConsultantUnavailable, settledOf } from './loop.js'
 import type { ConsultSpend, ConsultantModel, ModelTurn, Price } from './loop.js'
 import { reserveOf } from './cost.js'
-import { pictureOf } from './metric-read.js'
+import { encodePng } from '../diagnostics.js'
+import { MAX_SIDE } from './tools.js'
 
 export const FORM_READ_VERSION = '3.0.0' as const
 export const FORM_READ_PROMPT_VERSION = 'form-read/3' as const
@@ -159,10 +160,51 @@ export function formVerdict(f: HouseForm, body: { flatVolumes: number; pitchedKi
 export type FormSheets = { /** the ground-floor plan, where the package has one */ plan?: Raster; /** a cross-section, where the package has one */ section?: Raster; /** form-read/3: perspective pictures of the finished house — a qualitative witness of how volumes and roofs relate, never a measure */ perspectives?: ReadonlyArray<{ caption: string; raster: Raster }>; /** the page's own facts, one per line (text the publisher states) */ facts?: readonly string[] }
 export type RoofRegionRead = NonNullable<z.infer<typeof Raw>['roofs']>[number]
 
+/**
+ * form-read/3 — the picture the structure read is sent: the publisher's raster at its own resolution, or, above
+ * `maxSide`, resampled by AREA to fit it exactly (every source pixel weighs in). The whole-factor decimation of the
+ * measuring reads keeps pixel coordinates exact but drops every other row: an elevation 1480 px wide went out at 740 px,
+ * with one-pixel roof and wall lines thinned to nothing. This read returns no pixel coordinate, so it keeps the detail.
+ */
+export function fitPicture(raster: Raster, maxSide: number): { png: Uint8Array; width: number; height: number; factor: number } {
+  const side = Math.max(raster.width, raster.height)
+  if (side <= maxSide) {
+    const data = new Uint8ClampedArray(raster.width * raster.height * 4)
+    for (let i = 0; i < raster.width * raster.height; i++) { data[i * 4] = raster.data[i * 4]; data[i * 4 + 1] = raster.data[i * 4 + 1]; data[i * 4 + 2] = raster.data[i * 4 + 2]; data[i * 4 + 3] = 255 }
+    return { png: encodePng({ width: raster.width, height: raster.height, data }), width: raster.width, height: raster.height, factor: 1 }
+  }
+  const f = side / maxSide
+  const w = Math.max(1, Math.round(raster.width / f))
+  const h = Math.max(1, Math.round(raster.height / f))
+  const data = new Uint8ClampedArray(w * h * 4)
+  const fx = raster.width / w
+  const fy = raster.height / h
+  for (let y = 0; y < h; y++) {
+    const y0 = y * fy
+    const y1 = (y + 1) * fy
+    for (let x = 0; x < w; x++) {
+      const x0 = x * fx
+      const x1 = (x + 1) * fx
+      let r = 0, g = 0, b = 0, t = 0
+      for (let sy = Math.floor(y0); sy < Math.min(raster.height, Math.ceil(y1)); sy++) {
+        const wy = Math.min(y1, sy + 1) - Math.max(y0, sy)
+        for (let sx = Math.floor(x0); sx < Math.min(raster.width, Math.ceil(x1)); sx++) {
+          const wt = wy * (Math.min(x1, sx + 1) - Math.max(x0, sx))
+          const si = (sy * raster.width + sx) * 4
+          r += raster.data[si] * wt; g += raster.data[si + 1] * wt; b += raster.data[si + 2] * wt; t += wt
+        }
+      }
+      const di = (y * w + x) * 4
+      data[di] = r / t; data[di + 1] = g / t; data[di + 2] = b / t; data[di + 3] = 255
+    }
+  }
+  return { png: encodePng({ width: w, height: h, data }), width: w, height: h, factor: Math.round(f * 1000) / 1000 }
+}
+
 export async function readForm(ctx: Ctx, pictures: ReadonlyArray<{ caption: string; raster: Raster }>, sheets: FormSheets = {}): Promise<FormRead> {
   const base = { version: FORM_READ_VERSION, promptVersion: FORM_READ_PROMPT_VERSION, pictures: pictures.length }
   const content: unknown[] = [{ type: 'text', text: `The sheets of one house: ${pictures.length} elevation picture(s)${sheets.plan ? ', the ground-floor plan' : ''}${sheets.section ? ', a cross-section' : ''}${(sheets.perspectives ?? []).length > 0 ? `, ${(sheets.perspectives ?? []).length} perspective picture(s)` : ''}.` }]
-  const image = (r: Raster): unknown => ({ type: 'image', source: { type: 'base64', media_type: 'image/png', data: Buffer.from(pictureOf(r).png).toString('base64') } })
+  const image = (r: Raster): unknown => ({ type: 'image', source: { type: 'base64', media_type: 'image/png', data: Buffer.from(fitPicture(r, MAX_SIDE).png).toString('base64') } })
   pictures.forEach((p, i) => content.push({ type: 'text', text: `Elevation picture ${i + 1}, the publisher's caption: ${p.caption}` }, image(p.raster)))
   if (sheets.plan) content.push({ type: 'text', text: 'The ground-floor plan (the publisher draws the front of the house at the foot of the sheet unless the sheet marks the entrance elsewhere):' }, image(sheets.plan))
   if (sheets.section) content.push({ type: 'text', text: 'A cross-section:' }, image(sheets.section))

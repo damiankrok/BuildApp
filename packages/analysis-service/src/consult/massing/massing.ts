@@ -26,7 +26,7 @@ import type { RoofRegion, RoofSystemSolution } from '@buildapp/reconstruction'
 import type { BindView, Projection, Side } from '../correct/execute.js'
 import type { Poly } from '../correct/source-gate.js'
 
-export const MASSING_VERSION = '1.11.0' as const
+export const MASSING_VERSION = '1.12.0' as const
 
 import type { BuildStructure, StructureSide } from '../structure.js'
 export type Rect = { minX: number; maxX: number; minZ: number; maxZ: number }
@@ -1516,6 +1516,59 @@ export function roofSystemCommands(sol: RoofSystemSolution, bodies: readonly Bod
   return cmds
 }
 
+/**
+ * massing 1.12.0 — the regions of the roof system a MODEL holds, measured back from its planes (the model is the only
+ * truth a later correction has: no recorded hypothesis is trusted to still describe it). A region is recovered where its
+ * planes carry a ring's name (`roof-<body>` over `ring-<body>`); kind, ridge direction, eaves, ridge height and hip run
+ * come from the planes' own falls and pitches. The recovery is then PROVED: the regions are solved again and every plane
+ * of the solution must be a plane of the model — same name, pitch, eaves datum and area. Anything else (a cross gable on
+ * a body's walls, roofs kept apart by the source, a plane edited since) is not recovered, by name; nothing is guessed.
+ */
+export function roofRegionsOfModel(m: CanonicalBuildingModel): { regions: RoofRegion[]; solution: RoofSystemSolution; planeIds: string[] } | { why: string } {
+  const system = m.assemblies.find((q) => q.kind === 'ROOF' && q.id === ROOF_SYSTEM_ID)
+  if (!system || system.kind !== 'ROOF') return { why: `the model has no roof system (${ROOF_SYSTEM_ID})` }
+  const planes = m.roofPlanes.filter((p) => system.planeIds.includes(p.id))
+  const drainOf = (id: string): string | undefined => /-(minX|maxX|minZ|maxZ)(?:-\d+)?$/.exec(id)?.[1]
+  const regionId = (id: string): string => id.replace(/-(minX|maxX|minZ|maxZ)(-\d+)?$/, '')
+  const byRegion = new Map<string, typeof planes>()
+  for (const p of planes) byRegion.set(regionId(p.id), [...(byRegion.get(regionId(p.id)) ?? []), p])
+  const bodies = bodiesOf(m)
+  const regions: RoofRegion[] = []
+  for (const [rid, ps] of [...byRegion].sort((a, b) => a[0].localeCompare(b[0]))) {
+    const ring = bodies.find((b) => b.id === rid.replace(/^roof-/, 'ring-') && b.ringIds.length > 0)
+    if (!ring) return { why: `${rid} stands over no ring of its own name (a cross gable on another body's walls, or a roof named otherwise): its region is not recovered from the planes` }
+    const r = ring.rect
+    const tanOf = (k: string): number | undefined => { const q = ps.find((x) => drainOf(x.id) === k); return q ? Math.tan((q.pitchDeg * Math.PI) / 180) : undefined }
+    const [tzLo, tzHi, txLo, txHi] = [tanOf('minZ'), tanOf('maxZ'), tanOf('minX'), tanOf('maxX')]
+    const zPair = tzLo !== undefined && tzHi !== undefined
+    const xPair = txLo !== undefined && txHi !== undefined
+    if (!zPair && !xPair) return { why: `${rid} has no two planes falling to opposite sides: not a gable or a hip the solver lays out` }
+    const hip = (zPair && (txLo !== undefined || txHi !== undefined)) || (xPair && (tzLo !== undefined || tzHi !== undefined))
+    const [width, depth] = [r.maxX - r.minX, r.maxZ - r.minZ]
+    // the ridge runs along the pair of planes that reach it first (a hip's ends stop at the ridge's ends)
+    const axis: 'X' | 'Z' = zPair && !xPair ? 'X' : xPair && !zPair ? 'Z' : (depth / 2) * (tzLo as number) <= (width / 2) * (txLo as number) + 1e-9 ? 'X' : 'Z'
+    const main = ps.find((x) => drainOf(x.id) === (axis === 'X' ? 'minZ' : 'minX')) as (typeof planes)[number]
+    const edge = axis === 'X' ? { x: main.datum.x, z: r.minZ } : { x: r.minX, z: main.datum.z }
+    const tan = Math.tan((main.pitchDeg * Math.PI) / 180)
+    const eaveY = main.datum.y - tan * ((edge.x - main.datum.x) * main.downslope.x + (edge.z - main.datum.z) * main.downslope.z)
+    const half = (axis === 'X' ? depth : width) / 2
+    const ridgeY = eaveY + half * tan
+    const endTan = axis === 'X' ? txLo ?? txHi : tzLo ?? tzHi
+    regions.push({ id: rid, hostBodyId: rid.replace(/^roof-/, ''), rect: { x0: r.minX, z0: r.minZ, x1: r.maxX, z1: r.maxZ }, kind: hip ? 'HIP' : 'GABLE', ridgeAxis: axis, eaveY: r6(eaveY), ridgeY: r6(ridgeY), ...(hip && endTan ? { hipRunM: r6((ridgeY - eaveY) / endTan) } : {}), thicknessM: main.thickness })
+  }
+  const solution = solveRoofSystem(regions)
+  const joined = joinedBodiesOf(solution)
+  const solved = solution.planes.filter((p) => joined.has(solution.regions.find((q) => q.id === p.regionId)?.hostBodyId ?? ''))
+  const areaOf = (b: ReadonlyArray<{ x: number; z: number }>): number => Math.abs(b.reduce((t, a, i) => { const c = b[(i + 1) % b.length]; return t + a.x * c.z - c.x * a.z }, 0)) / 2
+  if (solved.length !== planes.length) return { why: `the regions measured from the planes solve to ${solved.length} plane(s), the model's roof system holds ${planes.length}: the system is not the one these regions make (roofs the source kept apart, or planes changed since)` }
+  for (const q of solved) {
+    const p = planes.find((x) => x.id === q.id)
+    if (!p) return { why: `the regions measured from the planes solve to a plane ${q.id} the model does not hold` }
+    if (Math.abs(p.pitchDeg - q.pitchDeg) > 0.02 || Math.abs(p.datum.y - q.datum.y) > 2e-3 || Math.abs(areaOf(p.boundary) - areaOf(q.boundary)) > 0.02) return { why: `${q.id} solved again is not the model's plane (pitch ${q.pitchDeg.toFixed(2)}° against ${p.pitchDeg.toFixed(2)}°, datum ${q.datum.y.toFixed(3)} m against ${p.datum.y.toFixed(3)} m, ${areaOf(q.boundary).toFixed(2)} m² against ${areaOf(p.boundary).toFixed(2)} m²)` }
+  }
+  return { regions, solution, planeIds: planes.map((p) => p.id) }
+}
+
 /** BUILD_MASSING: the whole mass from nothing (no model, or no exterior walls): one level, one ring per body and the roofs — each body's own, or the house's roof system where roofs meet. */
 export function massingCommands(h: MassingHypothesis, model: CanonicalBuildingModel): BuildingCommand[] {
   const top = Math.max(...h.bodies.map((b) => (b.roof.kind !== 'FLAT' ? b.roof.ridgeM ?? b.roof.eavesM : b.roof.eavesM)))
@@ -1605,7 +1658,10 @@ export function bodiesOf(m: CanonicalBuildingModel): ModelBody[] {
   for (const pl of m.roofPlanes) {
     const pts = pl.boundary
     if (pts.length === 0) continue
-    const b = smallest(pts.reduce((a, p) => a + p.x, 0) / pts.length, pts.reduce((a, p) => a + p.z, 0) / pts.length)
+    // massing 1.12.0: a plane named for a ring (`roof-<body>-<side>` over `ring-<body>`) is that body's, wherever it lies —
+    // a wing's plane that runs on over the main slope to the valley has its middle over the MAIN body's walls
+    const named = bodies.find((q) => q.ringIds.length > 0 && q.id === pl.id.replace(/-(minX|maxX|minZ|maxZ)(-\d+)?$/, '').replace(/^roof-/, 'ring-'))
+    const b = named ?? smallest(pts.reduce((a, p) => a + p.x, 0) / pts.length, pts.reduce((a, p) => a + p.z, 0) / pts.length)
     if (b) b.planeIds.push(pl.id)
     else adopt({ minX: Math.min(...pts.map((p) => p.x)), maxX: Math.max(...pts.map((p) => p.x)), minZ: Math.min(...pts.map((p) => p.z)), maxZ: Math.max(...pts.map((p) => p.z)) }, undefined, pl.id)
   }

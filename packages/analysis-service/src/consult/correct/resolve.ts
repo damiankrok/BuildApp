@@ -66,6 +66,9 @@ export function targetBodies(m: CanonicalBuildingModel, bodies: readonly ModelBo
   if (roof.length > 0) return { ids: roof.map((b) => b.id), what: `roof ${targetId}` }
   const plane = bodies.filter((b) => b.planeIds.includes(targetId))
   if (plane.length > 0) return { ids: plane.map((b) => b.id), what: `roof plane ${targetId}` }
+  // a roof stated in planes is named by its region (`roof-<body>`: the name its planes carry before the side they drain to)
+  const region = bodies.filter((b) => b.planeIds.length > 0 && b.planeIds.some((id) => id.replace(/-(minX|maxX|minZ|maxZ)(-\d+)?$/, '') === targetId))
+  if (region.length > 0) return { ids: region.map((b) => b.id), what: `roof ${targetId}` }
   const wall = bodies.filter((b) => b.wallIds.includes(targetId))
   if (wall.length > 0) return { ids: wall.map((b) => b.id), what: `wall ${targetId}` }
   const w = m.walls.find((x) => x.id === targetId)

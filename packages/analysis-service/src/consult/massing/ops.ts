@@ -22,10 +22,12 @@ import { facadePx, levelOf, openingBoxes, pictureOf, tolPxOf, toFrameX, toFrameY
 import type { BindPicture, BindView, Bound, Ctx, CorrectionProposal, Refusal, Side } from '../correct/execute.js'
 import { targetBodies } from '../correct/resolve.js'
 import type { BuildStructure } from '../structure.js'
-import { area, bodiesOf, bodyCommands, extentOn, joinedBodiesOf, roofSystemOf, ROOF_SYSTEM_ID, outlineWithFront, pointWithFront, HIP_PLANE_SIDES, hipPlaneCommands, hipSpecFrom, hipWallTopM, MASSING_TOLERANCES, MAX_OVERHANG_M, MASSING_VERSION, massingCommands, MINIATURE_CONVENTIONS, profileOver, readableStretch, registerByPlan, solveMassing, wallCornerTopM } from './massing.js'
+import { regionOfPlane } from '../readback.js'
+import { pointInPoly, solveRoofSystem } from '@buildapp/reconstruction'
+import { area, bodiesOf, bodyCommands, extentOn, joinedBodiesOf, roofRegionsOfModel, roofSystemCommands, roofSystemOf, ROOF_SYSTEM_ID, outlineWithFront, pointWithFront, HIP_PLANE_SIDES, hipPlaneCommands, hipSpecFrom, hipWallTopM, MASSING_TOLERANCES, MAX_OVERHANG_M, MASSING_VERSION, massingCommands, MINIATURE_CONVENTIONS, profileOver, readableStretch, registerByPlan, solveMassing, wallCornerTopM } from './massing.js'
 import type { BodySpec, Fidelity, MassingHypothesis, ModelBody, OutlineObservation, Rect, RoofSpec, SilhouetteObservation } from './massing.js'
 
-export const MASSING_OPS_VERSION = '1.12.0' as const
+export const MASSING_OPS_VERSION = '1.13.0' as const
 /** v3.54.17 R2: the most overhang a drawn roof may have past its body on a side, and the steepest pitch the kernel builds. */
 export { MAX_OVERHANG_M }
 /** v3.54.18 (ops 1.6.0): an opening whose height the model ASSUMED comes down under a roof the source draws — to this far under the wall top, and only while at least this much of it is left (else the roof patch is refused, as before). */
@@ -235,11 +237,12 @@ export function bindSetRoof(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
   const { body, bodies } = ob
   if (body.wallIds.length === 0) return { status: 'UNSUPPORTED_OPERATION', code: 'NO_WALLS', why: `${body.id} has no walls: a roof is set on a body; build the body first (BUILD_MASSING)` }
   if (!rectangular(m, body)) return { status: 'UNSUPPORTED_OPERATION', code: 'NOT_RECTANGULAR', why: `${body.id}'s rings are not four-walled: a roof over a non-rectangular body is beyond this version` }
-  // ops 1.12.0: a roof that is one region of a ROOF SYSTEM (its planes are cut by the roofs it meets, and theirs by it)
-  // is not changed alone — the system would have to be solved again from every region, and no operation does that yet.
-  // Refused by name (never applied half: a wing's roof replaced while the main slope keeps the notch of the old one)
+  // ops 1.13.0: a roof that is one region of a ROOF SYSTEM (its planes are cut by the roofs it meets, and theirs by it)
+  // is never changed alone: the correction is measured as for any roof, then the WHOLE system is solved again from its
+  // regions with this one replaced, and its planes, creases and free edges are stated anew in one transaction (below).
   const system = m.assemblies.find((q) => q.kind === 'ROOF' && q.id === ROOF_SYSTEM_ID)
-  if (system && system.kind === 'ROOF' && body.planeIds.some((id) => system.planeIds.includes(id))) return { status: 'UNSUPPORTED_OPERATION', code: 'ROOF_SYSTEM_MEMBER', why: `${body.id}'s roof is one region of the roof system ${ROOF_SYSTEM_ID} (${system.planeIds.length} planes, cut where the roofs meet): changing it means solving the whole system again from its regions — no operation of this version does; the difference stays open, by name` }
+  const regionId = `roof-${body.id.replace(/^ring-/, '')}`
+  const member = !!system && system.kind === 'ROOF' && m.roofPlanes.some((pl) => system.planeIds.includes(pl.id) && regionOfPlane(pl.id) === regionId)
   const pic = pictureOf(ctx, p, f.picture)
   if (!pic) return { status: 'INVALID', code: 'NOT_A_SOURCE_PICTURE', why: `picture ${String(f.picture ?? p.frameId)} is not a source picture of this check` }
   if (pic.projection !== 'ORTHOGRAPHIC_ELEVATION') return { status: 'INVALID', code: 'NOT_ORTHOGRAPHIC', why: `picture ${pic.n} is ${pic.projection}: a perspective draws no metric roof` }
@@ -343,7 +346,24 @@ export function bindSetRoof(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
   } else spec = { kind: 'FLAT', eavesM: r6(prof.topM) }
   // (d) a pitch the kernel cannot build is named here, with its inputs — never clamped to a buildable one
   if (spec.kind !== 'FLAT' && !((spec.pitchDeg ?? 0) <= MAX_PITCH_DEG)) return { status: 'NEEDS_EVIDENCE', code: 'IMPLAUSIBLE_PITCH', why: `${(spec.pitchDeg ?? 0).toFixed(1)}° from a rise of ${rise.toFixed(2)} m over half of ${(spec.ridgeAxis === 'X' ? body.rect.maxZ - body.rect.minZ : body.rect.maxX - body.rect.minX).toFixed(2)} m through ${hv.how}: beyond ${MAX_PITCH_DEG}°, the registration or the drawn roof is not this body's` }
+  // (e) ops 1.13.0: the height the page states for the building is a witness from outside every drawing. No roof of the
+  // house stands above it; a proposal that does — while the roof it would replace stands nearer to it — is a picture
+  // registered at another scale, however well its own pixels agree with it (a body the builder had agreed at the printed
+  // ridge was replaced by a roof 1.8 m above the building's stated height, and the source gate, which sees one picture,
+  // called it drawn). Named, with both numbers; nothing is clamped.
+  {
+    const H = ctx.facts?.buildingHeightM
+    if (H !== undefined && H > 2 && spec.kind !== 'FLAT' && spec.ridgeM !== undefined) {
+      const tol = Math.max(0.6, 0.1 * H)
+      const tops = [...m.roofs.filter((r) => body.roofIds.includes(r.id) && r.kind !== 'FLAT').map((r) => levelOf(m, r.levelId).elevation + r.eaveOffset + Math.tan((r.pitchDeg * Math.PI) / 180) * ((r.ridgeAxis === 'X' ? body.rect.maxZ - body.rect.minZ : body.rect.maxX - body.rect.minX) / 2)), ...m.roofPlanes.filter((pl) => body.planeIds.includes(pl.id)).flatMap((pl) => pl.boundary.map((q) => pl.datum.y - Math.tan((pl.pitchDeg * Math.PI) / 180) * ((q.x - pl.datum.x) * pl.downslope.x + (q.z - pl.datum.z) * pl.downslope.z)))]
+      const cur = tops.length > 0 ? Math.max(...tops) : undefined
+      if (spec.ridgeM > H + tol && (cur === undefined || Math.abs(spec.ridgeM - H) > Math.abs(cur - H) + 0.05)) return { status: 'NEEDS_EVIDENCE', code: 'ABOVE_PUBLISHED_HEIGHT', why: `the proposed ridge at ${spec.ridgeM.toFixed(2)} m stands ${(spec.ridgeM - H).toFixed(2)} m above the height the page states for the whole building (${H.toFixed(2)} m, tolerance ${tol.toFixed(2)} m)${cur !== undefined ? `; the roof it would replace tops at ${cur.toFixed(2)} m` : ''}: the picture is registered at another scale through ${hv.how}, or the drawn roof is not this body's — the roof is not replaced` }
+    }
+  }
   if (!(spec.eavesM - top.elevation > 0.3)) return { status: 'INVALID', code: 'IMPOSSIBLE_EAVES', why: `the drawn eaves at ${spec.eavesM.toFixed(2)} m are not above ${top.id} (${top.elevation.toFixed(2)} m)` }
+  // a region of the roof system is built without an eaves overhang (the system's planes end on the walls' lines): named
+  if (member && overhangM > 0) { pitchFrom = `${pitchFrom ?? ''}; the drawn ${overhangM.toFixed(2)} m overhang is not built on a roof of the roof system`; overhangM = 0 }
+  if (member && spec.overhangM) spec = { ...spec, overhangM: 0 }
   // the source decides between the model's roof and the proposal on the original picture
   const proposed = overhangM > 0 ? withOverhang(spec, body.rect, view, overhangM) : specSilhouette(spec, body.rect, view)
   const floorM = Math.min(...body.levelIds.map((id) => levelOf(m, id).elevation))
@@ -373,6 +393,59 @@ export function bindSetRoof(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
   const yields = above.filter((o) => heightAssumed(o) && hostTop(o) - HEAD_CLEARANCE_M - o.sill >= MIN_YIELDED_HEIGHT_M)
   const blocked = above.filter((o) => !yields.includes(o))
   if (blocked.length > 0) return { status: 'NEEDS_EVIDENCE', code: 'OPENING_ABOVE_EAVES', why: `${blocked.map((o) => o.id).join(', ')} would rise above the wall top under the new roof (${(top.elevation + wallTopRel).toFixed(2)} m; eaves ${spec.eavesM.toFixed(2)} m): the opening and the roof disagree, and the patch does not move either`, record }
+  if (member) {
+    // the system as the model holds it, proved by solving it again (nothing recorded elsewhere is trusted to describe it)
+    if (spec.kind === 'FLAT') return { status: 'UNSUPPORTED_OPERATION', code: 'ROOF_SYSTEM_MEMBER_FLAT', why: `${body.id}'s roof is one region of the roof system: a flat roof in its place is another body form (the system holds pitched regions) — not done by this operation, the difference stays open by name`, record }
+    const rec = roofRegionsOfModel(m)
+    if ('why' in rec) return { status: 'UNSUPPORTED_OPERATION', code: 'ROOF_SYSTEM_NOT_RECOVERED', why: `${body.id}'s roof is one region of the roof system, and the system cannot be solved again from the model: ${rec.why}`, record }
+    const lights = m.roofOpenings.filter((o) => rec.planeIds.includes(o.roofId))
+    if (lights.length > 0) return { status: 'UNSUPPORTED_OPERATION', code: 'ROOF_SYSTEM_HAS_ROOF_WINDOWS', why: `the roof system carries ${lights.length} roof opening(s) (${lights.map((o) => o.id).join(', ')}): solving it again would drop them from planes that no longer exist — the roof is corrected before roof windows are placed, not after`, record }
+    const next = rec.regions.map((q) => (q.id === regionId ? { ...q, kind: spec.kind as 'GABLE' | 'HIP', ridgeAxis: spec.ridgeAxis ?? q.ridgeAxis, eaveY: spec.eavesM, ridgeY: spec.ridgeM as number, ...(spec.kind === 'HIP' && spec.hipRunM !== undefined ? { hipRunM: spec.hipRunM } : { hipRunM: undefined }) } : q)).map((q) => { const { hipRunM, ...rest } = q; return hipRunM === undefined ? rest : q })
+    const sol = solveRoofSystem(next)
+    if (sol.violations.length > 0) return { status: 'NEEDS_EVIDENCE', code: 'ROOF_SYSTEM_VIOLATION', why: `with ${body.id}'s roof as proposed the roof system does not solve: ${sol.violations.map((v) => v.why).join('; ')}`.slice(0, 600), record }
+    const before = joinedBodiesOf(rec.solution)
+    const after = joinedBodiesOf(sol)
+    if (before.size !== after.size || [...before].some((id) => !after.has(id))) return { status: 'UNSUPPORTED_OPERATION', code: 'ROOF_SYSTEM_MEMBERSHIP_CHANGES', why: `with ${body.id}'s roof as proposed the roofs that meet are no longer the same (${[...before].sort().join(', ')} → ${[...after].sort().join(', ') || 'none'}): a body leaving or entering the system is rebuilt with its walls, which this operation does not do`, record }
+    const oldPlanes = m.roofPlanes.filter((pl) => rec.planeIds.includes(pl.id))
+    const levelId = oldPlanes[0].levelId
+    const material = oldPlanes.find((pl) => pl.materialId)?.materialId
+    const evidence = { status: 'SOURCE_DERIVED' as const, source: pic.frameId, locator: `roof polygon on ${pic.frameId}`, interpretation: `${spec.kind}${spec.ridgeAxis ? ` along ${spec.ridgeAxis}` : ''} read from the source elevation through ${hv.how}; the roof system solved again with it` }
+    const systemBodies = bodies.filter((q) => after.has(q.id.replace(/^ring-/, '')))
+    const specs = systemBodies.map((q) => ({ id: q.id.replace(/^ring-/, ''), rect: q.rect, roof: { kind: 'GABLE' as const, eavesM: 0 }, provenance: {} }))
+    const ringWalls = m.walls.filter((w) => systemBodies.some((q) => q.wallIds.includes(w.id)))
+    const thickness = Math.max(...ringWalls.map((w) => w.thickness))
+    // every wall that died into a plane of the old system and is not a ring wall (a partition under the roof) dies into
+    // the planes of the new one that stand over its own line
+    const followers = m.walls.filter((w) => !ringWalls.includes(w) && w.topProfile?.kind === 'FOLLOW_ROOF_PLANES' && w.topProfile.planeIds.some((id) => rec.planeIds.includes(id)))
+    const joinedRegions = new Set(sol.regions.filter((q) => after.has(q.hostBodyId)).map((q) => q.id))
+    const newPlanes = sol.planes.filter((q) => joinedRegions.has(q.regionId))
+    const cmds: BuildingCommand[] = [{ type: 'removeFeature', targetId: ROOF_SYSTEM_ID, cascade: false } as BuildingCommand, ...rec.planeIds.map((id) => ({ type: 'removeFeature', targetId: id, cascade: true }) as BuildingCommand)]
+    for (const q of systemBodies) {
+      const ridge = Math.max(...sol.regions.filter((g) => g.hostBodyId === q.id.replace(/^ring-/, '')).map((g) => g.ridgeY))
+      for (const w of m.walls.filter((x) => q.wallIds.includes(x.id) && x.levelId === top.id)) cmds.push({ type: 'setProperty', targetId: w.id, property: 'height', value: r6(ridge - levelOf(m, w.levelId).elevation - w.baseOffset) })
+    }
+    for (const o of yields) cmds.push({ type: 'setProperty', targetId: o.id, property: 'height', value: r6(hostTop(o) - HEAD_CLEARANCE_M - o.sill) })
+    cmds.push(...roofSystemCommands(sol, specs, levelId, thickness).map((c) => (c.type === 'createRoofPlane' ? ({ ...c, ...(material ? { materialId: material } : {}), evidence } as BuildingCommand) : c)))
+    for (const w of followers) {
+      const over = new Set<string>()
+      for (let k = 0; k <= 24; k += 1) { const t = 0.005 + (0.99 * k) / 24; const q = { x: w.start.x + (w.end.x - w.start.x) * t, z: w.start.z + (w.end.z - w.start.z) * t }; for (const pl of newPlanes) if (pointInPoly(q, pl.boundary, 1e-9)) over.add(pl.id) }
+      if (over.size > 0) cmds.push({ type: 'setProperty', targetId: w.id, property: 'topProfile', value: { kind: 'FOLLOW_ROOF_PLANES', planeIds: [...over].sort() } } as BuildingCommand)
+    }
+    const allowed = [`assemblies:${ROOF_SYSTEM_ID}`, 'roofPlanes:*', 'roofEdges:*', ...ringWalls.map((w) => `walls:${w.id}`), ...followers.map((w) => `walls:${w.id}`), ...yields.flatMap((o) => [`openings:${o.id}`, `windows:${o.id}-unit`, `doors:${o.id}-unit`])]
+    const want = sol.regions.find((q) => q.id === regionId)
+    const measure = (working: CanonicalBuildingModel, _before: CanonicalBuildingModel, pictures: readonly BindPicture[]): { failure?: string; measure: { sourceVerified: boolean | null; why: string } } => {
+      // the candidate's own system, measured back and solved again, must hold this region as it was solved here
+      const back = roofRegionsOfModel(working)
+      if ('why' in back) return { failure: `the roof system of the candidate is not the one solved: ${back.why}`, measure: { sourceVerified: false, why: back.why } }
+      const got = back.solution.regions.find((q) => q.id === regionId)
+      if (!got || !want || got.kind !== want.kind || got.ridgeAxis !== want.ridgeAxis || Math.abs(got.eaveY - want.eaveY) > 0.01 || Math.abs(got.ridgeY - want.ridgeY) > 0.01) return { failure: `${regionId} was not built as solved (${got ? `${got.kind} along ${got.ridgeAxis}, ${got.eaveY.toFixed(2)} → ${got.ridgeY.toFixed(2)} m` : 'absent'})`, measure: { sourceVerified: false, why: 'the region measured back differs from the one solved' } }
+      const src = pictures.find((q) => q.frameId === pic.frameId)
+      const drawn = src ? drawnBack(src.raster, specBody(body.rect, { ...spec, eavesM: want.eaveY, ridgeM: want.ridgeY }, view, floorM, 0), occupied, view.projection.zeroRow) : undefined
+      const rel = back.solution.relations.filter((q) => q.a === regionId || q.b === regionId).map((q) => `${q.a} → ${q.b} ${q.kind}`).join('; ')
+      return { measure: { sourceVerified: drawn ? drawn.verified : null, why: `the roof system solved again with ${regionId} as ${want.kind} along ${want.ridgeAxis}, eaves ${want.eaveY.toFixed(2)} m, ridge ${want.ridgeY.toFixed(2)} m, ${want.pitchDeg.toFixed(1)}° (${rel || 'meets no other roof'}; ${back.solution.creases.filter((c) => c.kind === 'VALLEY').length} valley(s)); measured back from the candidate's planes; the body drawn back into ${pic.frameId} covers ${drawn?.why ?? '—'}` } }
+    }
+    return { commands: cmds, allowed, expect: { kind: 'CUSTOM', measure }, record: { ...record, massing: { ...record.massing, roofSystem: { regions: sol.regions.map((q) => ({ id: q.id, kind: q.kind, ridgeAxis: q.ridgeAxis, eaveY: q.eaveY, ridgeY: q.ridgeY, pitchDeg: q.pitchDeg })), relations: sol.relations, adjustments: sol.adjustments } } } }
+  }
   const removedRoofs = body.roofIds
   // a hip's four planes carry their roof's id (`<roof>-minZ` …): a body roofed by them keeps that id through any change
   const hipBase = body.planeIds.length === HIP_PLANE_SIDES.length ? HIP_PLANE_SIDES.reduce<string | undefined>((base, sd) => { const id = body.planeIds.find((q) => q.endsWith(`-${sd}`)); const b = id?.slice(0, -sd.length - 1); return id && (base === undefined || base === b) ? b : '' }, undefined) : undefined

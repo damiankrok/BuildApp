@@ -818,8 +818,8 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
     // and every omission is recorded with its reason, and so is what the provider was actually sent (its pixels and factor).
     const images: Array<{ role: 'ELEVATION' | 'PLAN' | 'SECTION' | 'PERSPECTIVE'; n?: number; frameId: string; caption: string; sourceByteHash: string; sourcePx: [number, number]; sentPx: [number, number]; factor: number; origin: string }> = []
     const skipped: Array<{ role: string; frameId: string; px: [number, number]; why: string }> = []
-    const sentOf = (r: Raster): { sentPx: [number, number]; factor: number } => { const k = Math.max(1, Math.ceil(Math.max(r.width, r.height) / MAX_SIDE)); return { sentPx: [Math.floor(r.width / k), Math.floor(r.height / k)], factor: k } }
-    const originOf = (k: number): string => `the publisher's own picture, decoded and sent as PNG${k > 1 ? `, every ${k}th pixel (the provider keeps ${MAX_SIDE} px a side)` : ' at its own resolution'}`
+    const sentOf = (r: Raster): { sentPx: [number, number]; factor: number } => { const f = Math.max(1, Math.max(r.width, r.height) / MAX_SIDE); return f === 1 ? { sentPx: [r.width, r.height], factor: 1 } : { sentPx: [Math.max(1, Math.round(r.width / f)), Math.max(1, Math.round(r.height / f))], factor: Math.round(f * 1000) / 1000 } }
+    const originOf = (k: number): string => `the publisher's own picture, decoded and sent as PNG${k > 1 ? `, resampled by area to ${MAX_SIDE} px on its longer side (1 : ${k}; every source pixel weighs in)` : ' at its own resolution'}`
     const pxOf = (f: { size?: { width: number; height: number } }): [number, number] => [f.size?.width ?? 0, f.size?.height ?? 0]
     const sketchOf = new Map(sketched.map((x) => [x.frameId, x]))
     // the elevations a sketch was made of come first, in the sketches' own order (the numbering a recorded answer was given
@@ -1485,11 +1485,13 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
     const held = viewsOfRun(l.run.reconstruction.facadeAlignment.views)
     const plans = (l.run.reconstruction.registrations.plans ?? []).map((q) => ({ frameId: q.frameId, toWorld: q.toWorld }))
     const pitch = (l.pkg ?? l.run.pkg)?.publishedFacts.find((f) => f.key === 'roof_pitch' && f.unit === 'deg')?.value
+    // v3.54.21: the page's building height reaches every correction round (SET_ROOF holds a proposed ridge against it)
+    const heightP = (l.pkg ?? l.run.pkg)?.publishedFacts.find((f) => f.key === 'building_height' && f.unit === 'm')?.value
     // v3.54.19: the plan skeleton of the body that stands: its exterior gaps witness an opening the elevation reading adds
     const interior = massingOf.get(l)?.interior ?? (massingOf.has(l) ? undefined : localInterior)
     const skeletonGaps = interior && massingOf.has(l) ? planGapsFromSkeleton(m0, interior) : []
     const gaps = [...replacedPlanGaps, ...skeletonGaps]
-    const out = executeCorrections({ model: m0, claims: facadeClaims(), adopted: adoptedFrames, ...(gaps.length > 0 ? { planGaps: gaps } : {}), ...(interior ? { interior } : {}), views: massingViews(l) ?? held, derivedViews: (m: CanonicalBuildingModel, h: readonly BindView[]) => sketchViewsOf(m, pictures, h), ...(plans.length > 0 ? { plans } : {}), ...(typeof pitch === 'number' ? { facts: { roofPitchDeg: pitch } } : {}), pictures, proposals, witnesses: witnessesOf(l), seen, ...(retiredIds.size > 0 ? { retiredIds } : {}) })
+    const out = executeCorrections({ model: m0, claims: facadeClaims(), adopted: adoptedFrames, ...(gaps.length > 0 ? { planGaps: gaps } : {}), ...(interior ? { interior } : {}), views: massingViews(l) ?? held, derivedViews: (m: CanonicalBuildingModel, h: readonly BindView[]) => sketchViewsOf(m, pictures, h), ...(plans.length > 0 ? { plans } : {}), ...(typeof pitch === 'number' || typeof heightP === 'number' ? { facts: { ...(typeof pitch === 'number' ? { roofPitchDeg: pitch } : {}), ...(typeof heightP === 'number' ? { buildingHeightM: heightP } : {}) } } : {}), pictures, proposals, witnesses: witnessesOf(l), seen, ...(retiredIds.size > 0 ? { retiredIds } : {}) })
     correctionRuns.push({ stage, baseRevision: out.baseRevision, revision: out.revision, delivered: false, records: out.records, transactions: out.transactions })
     record({ at: now().toISOString(), kind: 'CORRECTIONS', stage, baseRevision: out.baseRevision, revision: out.revision, records: out.records.map((r) => ({ proposalId: r.proposalId, operation: r.operation, status: r.status, code: r.code ?? null })), transactions: out.transactions.map((t) => ({ txId: t.txId, decision: t.decision, why: t.why })) })
     return out
@@ -1592,7 +1594,8 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
     const sketchInputs0 = sketchSummary.reading.sketches.filter((x) => x.sketch).map((x) => ({ facade: x.facade, frameId: x.frameId, groundRow: x.sketch?.groundRow ?? null, walls: (x.sketch?.walls ?? []).map((w) => w.polygon as Array<[number, number]>), roofs: (x.sketch?.roofs ?? []).map((r) => r.polygon as Array<[number, number]>) }))
     const roofs0 = roofProposalsFromSketches(sketchInputs0, mL0, heldL, modelRevision(mL0), sideOfFacade)
     const pitch0 = pkg0.publishedFacts.find((f) => f.key === 'roof_pitch' && f.unit === 'deg')?.value
-    const tried = roofs0.proposals.length > 0 ? executeCorrections({ model: mL0, views: heldL, derivedViews: (m: CanonicalBuildingModel, h: readonly BindView[]) => sketchViewsOf(m, pics, h), pictures: pics, proposals: roofs0.proposals.map((q) => ({ ...q, proposalId: `arb:${q.proposalId}` })), witnesses: witnessesOf(good), ...(typeof pitch0 === 'number' ? { facts: { roofPitchDeg: pitch0 } } : {}), seen: new Set<string>() }) : undefined
+    const height0 = pkg0.publishedFacts.find((f) => f.key === 'building_height' && f.unit === 'm')?.value
+    const tried = roofs0.proposals.length > 0 ? executeCorrections({ model: mL0, views: heldL, derivedViews: (m: CanonicalBuildingModel, h: readonly BindView[]) => sketchViewsOf(m, pics, h), pictures: pics, proposals: roofs0.proposals.map((q) => ({ ...q, proposalId: `arb:${q.proposalId}` })), witnesses: witnessesOf(good), ...(typeof pitch0 === 'number' || typeof height0 === 'number' ? { facts: { ...(typeof pitch0 === 'number' ? { roofPitchDeg: pitch0 } : {}), ...(typeof height0 === 'number' ? { buildingHeightM: height0 } : {}) } } : {}), seen: new Set<string>() }) : undefined
     const roofFixed = (tried?.records ?? []).filter((r) => r.status === 'COMMITTED').length
     const localEv = evidenceOf(tried && roofFixed > 0 ? tried.model : mL0, heldL)
     // v3.54.19 (arbitration 1.2.0): the typed FORM of the house as one more witness. Asked only where it can say
