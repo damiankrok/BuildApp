@@ -249,7 +249,13 @@ test('save writes the reference through the normal serializer, byte-equal to the
   await selectMarcowki(page)
   const [download] = await Promise.all([page.waitForEvent('download'), page.getByTestId('save').click()])
   const text = readFileSync((await download.path())!, 'utf8')
-  expect(text).toBe(readFileSync(FIXTURE, 'utf8'))
+  // the fixture was frozen under schema 1.6.0; the save writes the current schema, and the migrations since (1.7.0 room
+  // holes, 1.8.0 gable frames, 1.9.0 region outlines) add nothing to this model — so the bytes differ by the version alone
+  // (tests/architecture/reference.test.ts holds the same through loadModel's migrations)
+  const current = /MODEL_SCHEMA_VERSION = '(\d+\.\d+\.\d+)'/.exec(readFileSync(resolve(HERE, '../../../packages/model/src/schema.ts'), 'utf8'))?.[1]
+  const frozen = readFileSync(FIXTURE, 'utf8')
+  expect(frozen.split('"schemaVersion": "1.6.0"').length).toBe(2)
+  expect(text).toBe(frozen.replace('"schemaVersion": "1.6.0"', `"schemaVersion": "${current}"`))
   writeFileSync(resolve(ART, 'marcowki-ge.json'), text)
   const tris = await page.getByTestId('status-triangles').textContent()
   // switch away, then load the file back: the same model, the same geometry, no reference package involved in loading
