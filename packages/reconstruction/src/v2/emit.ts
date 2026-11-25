@@ -323,6 +323,8 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
   /** N8-03D1: the slab voids cut, and the slab each went into. */
   const voidsEmitted: Array<{ v: NonNullable<BuildingV2['slabVoids']>[number]; slabId: string }> = []
   const attachedCapIds = new Map<string, string[]>()
+  /** v3.54.21: the pocket walls of a MAIN body's top storey closed by its own flat plate — they die into that plate */
+  const platePocketCaps = new Map<string, string[]>()
   const emittedInteriorByStorey = new Map<number, string[]>()
   for (const m of b.masses) {
     const body = [
@@ -498,7 +500,9 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
     for (const w of p.walls) {
       // under the storey above, a wall stops at that floor's slab, as a partition does
       push({ type: 'createWall', id: w.id, levelId: l.id, start: w.start, end: w.end, thickness: w.thicknessM, height: isTop ? round6(l.height) : round6(l.height - b.slabThicknessM), baseOffset: 0, kind: 'EXTERIOR', ...(planeRoof ? { topProfile: { kind: 'FOLLOW_ROOF_PLANES' as const, planeIds: planeRoof.layout.planes.map((pl) => planeRoofPlaneId(planeRoof.massId, pl.key)) } } : {}), materialId: MATERIALS_V2.wall }, p.featureId, 'walls')
-      if (isTop && !planeRoof && mass.role === 'MAIN') capWallIds.push(w.id)
+      const ownPlate = isTop && !planeRoof && mass.role === 'MAIN' && !b.mainRoof ? b.attachedRoofs.find((r) => r.massId === mass.id) : undefined
+      if (ownPlate) platePocketCaps.set(mass.id, [...(platePocketCaps.get(mass.id) ?? []), w.id])
+      else if (isTop && !planeRoof && mass.role === 'MAIN') capWallIds.push(w.id)
       evidence(w.id, 'SOURCE_DERIVED', `the ${w.role === 'BACK' ? 'back wall' : 'return'} of ${p.id}: ${p.why}`)
     }
   }
@@ -841,7 +845,7 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
         plateInset,
         materialId: MATERIALS_V2.roof,
         // Its returns under the head, and the partitions of its top storey, die into the plate.
-        capWallIds: [...(returnsUnderAttached.get(r.massId) ?? []), ...(l ? (emittedInteriorByStorey.get(l.index) ?? []).filter((id) => id.startsWith(`${r.massId}-iwall-`)) : [])],
+        capWallIds: [...(returnsUnderAttached.get(r.massId) ?? []), ...(l ? (emittedInteriorByStorey.get(l.index) ?? []).filter((id) => id.startsWith(`${r.massId}-iwall-`)) : []), ...(platePocketCaps.get(r.massId) ?? [])],
       },
       r.featureId,
       'roofs',

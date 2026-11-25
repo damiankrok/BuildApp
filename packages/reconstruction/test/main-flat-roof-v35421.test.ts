@@ -89,6 +89,27 @@ describe('v3.54.21: the specification reader reads a flat roof where the page sa
     expect(r.evidence.filter((e) => e.kind === 'ANGLE')).toEqual([])
   })
 
+  it('another body\'s roof line, the covering and the roof windows lend the main roof nothing (post-trial review F1, F2, F4)', () => {
+    const garage = readSpecifications([{ key: 'other', label: 'Kąt nachylenia dachu garażu', text: '2°' }], 'page')
+    expect(findingOf(garage.findings, 'ROOF_KIND')).toBeUndefined()
+    const tile = readSpecifications([{ key: 'other', label: 'Pokrycie dachu', text: 'dachówka płaska ceramiczna' }], 'page')
+    expect(findingOf(tile.findings, 'ROOF_KIND')).toBeUndefined()
+    const windows = readSpecifications([{ key: 'other', label: 'Okna dachowe', text: 'do montażu przy nachyleniu 15–90°' }], 'page')
+    expect(windows.evidence.filter((e) => e.kind === 'ANGLE')).toEqual([])
+  })
+
+  it('a fall printed before the pitch on the roof\'s line does not hide the pitch, and is no flat roof (review F3)', () => {
+    const r = readSpecifications([{ key: 'roof', label: 'Dach', text: 'spadek rynien 2°, nachylenie połaci 40°' }], 'page')
+    expect(r.evidence.find((e) => e.kind === 'ANGLE')?.value).toBe(40)
+    expect(findingOf(r.findings, 'ROOF_KIND')).toBeUndefined()
+  })
+
+  it('a fall beside a pitched kind on one line is left unread, not taken as either (review F7)', () => {
+    const r = readSpecifications([{ key: 'roof', label: 'Dach', text: 'dwuspadowy, spadek 2°' }], 'page')
+    expect(findingOf(r.findings, 'ROOF_KIND')?.value).toBe('GABLE')
+    expect(r.unread.some((u) => /fall/.test(u.why))).toBe(true)
+  })
+
   it('a pitched roof reads as before', () => {
     const r = readSpecifications([{ key: 'roof', label: 'Kąt nachylenia dachu', text: '40°' }], 'page')
     expect(r.evidence.find((e) => e.kind === 'ANGLE')?.value).toBe(40)

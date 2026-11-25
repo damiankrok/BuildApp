@@ -442,7 +442,7 @@ export function pictureSignature(r: Raster): number[] {
   }
   return out
 }
-const massingOf = new WeakMap<Local, { views: BindView[]; rebuild: (model: CanonicalBuildingModel) => Local | undefined; /** the side of the plan sheet that is this body's front (a body built in the elevations' frame); absent: the sheet's foot */ planFront?: Side; /** v3.54.19: the plan skeleton in this body's frame (interior, exterior gaps) */ interior?: InteriorObservation; /** the sheet → model map as three mapped points of the plan frame: (0,0), (1000,0), (0,1000) px */ planMap?: PlanFrameOfModel; /** v3.54.21: the hypothesis the body was built from (its bodies, their roofs and fates, its cross gables) */ hypothesis?: MassingHypothesis }>()
+const massingOf = new WeakMap<Local, { views: BindView[]; rebuild: (model: CanonicalBuildingModel) => Local | undefined; /** the side of the plan sheet that is this body's front (a body built in the elevations' frame); absent: the sheet's foot */ planFront?: Side; /** v3.54.19: the plan skeleton in this body's frame (interior, exterior gaps) */ interior?: InteriorObservation; /** the sheet → model map as three mapped points of the plan frame: (0,0), (1000,0), (0,1000) px */ planMap?: PlanFrameOfModel; /** v3.54.21: the hypothesis the body was built from (its bodies, their roofs and fates, its cross gables) */ hypothesis?: MassingHypothesis; /** v3.54.21: the side drawings whose weak (LOCAL-only) labels a form-read/3 read overruled for this body — the side every later consumer takes for them */ weakSides?: Record<string, Side> }>()
 /** v3.54.19: where the plan sheet lies in the delivered model's frame (an affine map stated by three points), for any overlay of the model on its plan. */
 export type PlanFrameOfModel = { frameId: string; basis: 'OUTLINE_SCALE' | 'LOCAL_PLAN_REGISTRATION'; o: { x: number; z: number }; x1000: { x: number; z: number }; y1000: { x: number; z: number } }
 async function attempt(input: AnalysisInput, options: AnalysisOptions): Promise<Local> {
@@ -1157,7 +1157,8 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
               // OPENINGS stand on is decided afterwards, like every unlabelled elevation's, by what registers and by the
               // plan's openings — so it is not carried as a held view)
               const hyp = (rec0.massing as { hypothesis?: MassingHypothesis } | undefined)?.hypothesis
-              massingOf.set(l, { views: mr.views, rebuild: (m) => build(m), ...(planFront ? { planFront } : {}), ...(interior ? { interior } : {}), ...(planMap ? { planMap } : {}), ...(hyp ? { hypothesis: hyp } : {}) })
+              const weakSides = Object.fromEntries(sidesByRead.filter((q) => q.weakLabel).map((q) => [q.frameId, q.side])) as Record<string, Side>
+              massingOf.set(l, { views: mr.views, rebuild: (m) => build(m), ...(planFront ? { planFront } : {}), ...(interior ? { interior } : {}), ...(planMap ? { planMap } : {}), ...(hyp ? { hypothesis: hyp } : {}), ...(Object.keys(weakSides).length > 0 ? { weakSides } : {}) })
               return l
             }
             const m0 = build()
@@ -1791,7 +1792,9 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
     const rev = modelRevision(run.reconstruction.model)
     const held = massingViews(good) ?? viewsOfRun(run.reconstruction.facadeAlignment.views)
     // v3.54.17: the bodies' roofs first — a roof the sketches draw and the model lacks (or has wrong) is a SET_ROOF
-    const sketchInputs = () => sketchSummary.reading.sketches.filter((x) => x.sketch).map((x) => ({ facade: x.facade, frameId: x.frameId, groundRow: x.sketch?.groundRow ?? null, walls: (x.sketch?.walls ?? []).map((w) => w.polygon as Array<[number, number]>), roofs: (x.sketch?.roofs ?? []).map((r) => r.polygon as Array<[number, number]>) }))
+    // (review W2: a weak-labelled side drawing the read placed for this body is read on THAT side by the roof proposals too)
+    const facadeFor = (x: { facade: string; frameId: string }): string => { const sd = massingOf.get(good)?.weakSides?.[x.frameId]; return sd === 'RIGHT' ? 'EAST' : sd === 'LEFT' ? 'WEST' : x.facade }
+    const sketchInputs = () => sketchSummary.reading.sketches.filter((x) => x.sketch).map((x) => ({ facade: facadeFor(x), frameId: x.frameId, groundRow: x.sketch?.groundRow ?? null, walls: (x.sketch?.walls ?? []).map((w) => w.polygon as Array<[number, number]>), roofs: (x.sketch?.roofs ?? []).map((r) => r.polygon as Array<[number, number]>) }))
     // v3.54.18 R2: what the plan read says of the main entrance decides WHICH quarter turn a turned set of elevations is
     const pageHeightM = (good.pkg ?? run.pkg)?.publishedFacts.find((f: { key: string; unit?: string }) => f.key === 'building_height' && f.unit === 'm')?.value
     const orientationHints = { ...(planEntranceSide ? { entranceSide: planEntranceSide } : {}), ...(typeof pageHeightM === 'number' ? { buildingHeightM: pageHeightM } : {}) }
@@ -1802,11 +1805,19 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
     // v3.54.17 R3: under TURNED_90 each elevation is registered (from its sketch) on the side the orientation reads, and its
     // openings and stacks are bound through that registration — no longer skipped
     sketchSideOf = turnedSides ? (roofs.orientation.sideOf as Record<string, Side> | undefined) : undefined
+    // v3.54.21 (post-trial review W1/W2): the side drawings whose weak labels the structure read overruled when this body
+    // was solved keep that side for their openings, stacks, finishes and roofs too — one side per picture for every
+    // consumer, not the body on one wall and its windows on the mirrored one
+    const weakSides = massingOf.get(good)?.weakSides
+    if (!turnedSides && weakSides) {
+      sketchSideOf = { ...(sketchSideOf ?? {}), ...weakSides }
+    }
     // v3.54.17 R3: the elevations no caption tells apart ("side" twice): each is tried on every model side no other
     // elevation shows, all of them at once; a permutation is taken only when it is the only one that registers, or its
     // drawn openings support it by a clear margin (z ≥ 1 over the next) — otherwise they stay unassigned, by name
     const sidesByConvention = new Set<string>()
     const sideBasisOf = new Map<string, string>()
+    if (!turnedSides) for (const frameId of Object.keys(weakSides ?? {})) sideBasisOf.set(frameId, 'STRUCTURE_READ_WEAK_LABEL')
     // v3.54.18 R3: a side the CAPTION does not state. Two pictures the publisher captions with the same words ("side
     // elevation" twice) are not told apart by the source; LOCAL's left/right for them is its own hypothesis, made in its
     // own frame. Such an elevation is assigned like an unlabelled one — by what registers, by the model's openings, by
@@ -2190,7 +2201,10 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
         for (const a of lastApplied) {
           if (a.kind !== 'PATCH') continue
           if (a.origin === 'PLAN') held.set(a.id, { verdicts: ['SHOULD_NOT_EXIST', 'WRONG_KIND'], why: 'the ground plan draws it' })
-          else if (a.sourceVerified && (a.operation === 'ADD_OPENING' || a.operation === 'ADD_ROOF_WINDOW')) held.set(a.id, { verdicts: ['SHOULD_NOT_EXIST', 'WRONG_KIND'], why: 'the source gate measured this opening in the elevation (its built box drawn back and supported)' })
+          else if (a.sourceVerified && a.operation === 'ADD_OPENING') held.set(a.id, { verdicts: ['SHOULD_NOT_EXIST', 'WRONG_KIND'], why: 'the source gate measured this opening in the elevation (its built box drawn back and supported)' })
+          // a roof window: against SHOULD_NOT_EXIST only — no operation reaches a committed roof window afterwards (no update
+          // or remove of roof openings), and its gate measures a framed element on the slope, not its kind (review F5)
+          else if (a.sourceVerified && a.operation === 'ADD_ROOF_WINDOW') held.set(a.id, { verdicts: ['SHOULD_NOT_EXIST'], why: 'the source gate measured a framed element on the slope' })
         }
         rec.reviewed = reviewOutcome(lastApplied.map((a) => a.id), res.review.appliedReview, held)
         record({ at: now().toISOString(), kind: 'APPLIED_REVIEW', round: g, reviewed: rec.reviewed })

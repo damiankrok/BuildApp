@@ -2583,6 +2583,36 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     attachedRoofs.push({ massId: m.id, reading, slabTopY, slabSoffitY, parapetTopY: reading?.parapetTopY, footprint, projectsOverZone: projects, featureId, provenance: reading ? 'SOURCE_EXACT' : 'ASSUMED_FOR_RENDERING' })
     if (reading) for (const e of levels.evidenceIds) record({ evidenceId: e, evidenceKind: 'METRIC', what: 'a level datum', authority: 'HIGH', disposition: 'USED_IN_MODEL', reason: 'the section scale the attached roof was read at', stage: 'METRIC_SOLVE' })
   }
+  // v3.54.21 (NEW-H Lyon): the main body is never left open. Where no pitched main roof was inferred over it — its support
+  // FLAT, or UNKNOWN with no pitched evidence — and no plane roof, no pitched or flat roof of its own covers it, it
+  // carries a flat plate over its top storey through the attached bodies' own path: the section's slab and parapet where
+  // the section is registered and reads them, else the storey's wall head by convention (ASSUMED_FOR_RENDERING). The gap
+  // "the main roof" stays named; the plate only closes the top (an open box shows its partitions from above).
+  {
+    // (decided here, beside the attached bodies' plates and before the chimneys and the facade bands read against it)
+    const coveredByWings = eavesWings.some((w) => w.mass.id === main.id || w.covers?.includes(main.id)) || crossMembers.has(main.id)
+    const ownRoof = attachedRoofs.some((r) => r.massId === main.id) || pitchedAttachedRoofs.some((r) => r.massId === main.id)
+    // UNKNOWN counts as unpitched only with no pitched evidence: no stated or printed pitch and no ridge datum (review F1/F8)
+    const unpitched = !support || support.kind === 'FLAT' || (support.kind === 'UNKNOWN' && !support.pitchDeg && !support.ridgeLevelM)
+    const l = levelOf(topStorey)
+    if (!mainRoof && !coveredByWings && !ownRoof && unpitched && l) {
+      const m = { ...main, ...rectAt(main, topStorey) }
+      let reading: ReturnType<typeof readAttachedRoof>
+      if (sectionReg && sectionFrame) {
+        const raster = options.raster(sectionFrame)
+        const span = sectionReg.axis === 'X' ? { from: m.x0, to: m.x1 } : { from: m.z0, to: m.z1 }
+        if (raster) reading = readAttachedRoof(raster, sectionReg, m.id, span, l.elevation, l.wallTop + 1.5)
+      }
+      const slabTopY = reading ? reading.slabTopY : l.wallTop
+      const slabSoffitY = reading ? reading.slabSoffitY : round6(l.wallTop - CONVENTIONS.roofThickness)
+      const why = `${support?.kind === 'FLAT' ? 'the layout reads the main roof as flat' : 'no pitched roof was inferred over the main body (no stated pitch, no ridge datum)'}: it carries a flat plate over its top storey, ${reading ? `the section's slab (${reading.why})` : 'at the wall head by convention — its height is not measured'}`
+      const featureId = feature('ATTACHED_ROOF', `roof-${m.id}`, { slabTopY: { value: slabTopY, low: slabTopY - 0.05, high: slabTopY + 0.05 }, ...(reading?.parapetTopY !== undefined ? { parapetTopY: { value: reading.parapetTopY, low: reading.parapetTopY - 0.05, high: reading.parapetTopY + 0.05 } } : {}) }, sectionFrame && reading ? [sighting(sectionFrame, `flat roof slab over ${m.id}`, reading.confidence)] : [], reading ? 'SOURCE_EXACT' : 'ASSUMED_FOR_RENDERING', why, { hostId: m.featureId, uncertaintyM: 0.04, unresolvedProperties: reading ? [] : ['slabTopY'], printed: !!reading })
+      relate('SUPPORTS', m.featureId, featureId, 'the body carries its roof')
+      attachedRoofs.push({ massId: m.id, reading, slabTopY, slabSoffitY, parapetTopY: reading?.parapetTopY, footprint: { x0: m.x0, x1: m.x1, z0: m.z0, z1: m.z1 }, projectsOverZone: false, featureId, provenance: reading ? 'SOURCE_EXACT' : 'ASSUMED_FOR_RENDERING' })
+      step({ stage: 'roof', what: 'v3.54.21: the main body closed by a flat plate', method: 'DISCRETE_SELECTION', detail: why, inputs: 1, outputs: 1 })
+      if (reading) for (const e of levels.evidenceIds) record({ evidenceId: e, evidenceKind: 'METRIC', what: 'a level datum', authority: 'HIGH', disposition: 'USED_IN_MODEL', reason: 'the section scale the main body\'s flat roof was read at', stage: 'METRIC_SOLVE' })
+    }
+  }
   // Chimneys.
   const mainRoofTopY = (x: number, z: number): number => {
     if (!mainRoof) return levelsV2[levelsV2.length - 1].wallTop
@@ -3359,34 +3389,6 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   if (facadeAlignment.corrections.length > 0) openings.splice(0, openings.length, ...applyOpeningCorrections(openings, facadeAlignment.corrections))
   step({ stage: 'verification', what: 'N7-P2: the openings each elevation draws against the plan’s', method: 'DIRECT', detail: `${facadeViews.length} view${facadeViews.length === 1 ? '' : 's'} read (${facadeViews.map((v) => `${v.facade.toLowerCase()} ${v.registration.toLowerCase().replace(/_/g, ' ')}${v.heights ? '' : ', positions only'}`).join('; ') || 'none'}); ${facadeAlignment.readings.length} openings read, ${facadeAlignment.rejected.length} rectangles rejected; ${Object.entries(facadeAlignment.counts).filter(([, n]) => n > 0).map(([k, n]) => `${k.toLowerCase()} ${n}`).join(', ')}; ${facadeAlignment.corrections.length} height${facadeAlignment.corrections.length === 1 ? '' : 's'} corrected`, inputs: openings.length, outputs: facadeAlignment.corrections.length })
   for (const c of facadeAlignment.corrections) ctx.traces.push({ objectId: c.openingId, kind: 'repair', hypothesisId: `hyp-${c.openingId}`, evidenceIds: [], observationIds: facadeAlignment.readings.find((r) => r.id === c.readingId)?.observationIds ?? [], rejected: [], why: c.why })
-  // v3.54.21 (NEW-H Lyon): the main body is never left open. Where no pitched main roof was inferred over it — its support
-  // FLAT, or UNKNOWN with no pitched evidence — and no plane roof, no pitched or flat roof of its own covers it, it
-  // carries a flat plate over its top storey through the attached bodies' own path: the section's slab and parapet where
-  // the section is registered and reads them, else the storey's wall head by convention (ASSUMED_FOR_RENDERING). The gap
-  // "the main roof" stays named; the plate only closes the top (an open box shows its partitions from above).
-  {
-    const coveredByPlanes = (planeRoofs ?? []).some((r) => r.massId === main.id || r.coversMassIds?.includes(main.id))
-    const ownRoof = attachedRoofs.some((r) => r.massId === main.id) || pitchedAttachedRoofs.some((r) => r.massId === main.id)
-    const unpitched = !support || support.kind === 'FLAT' || support.kind === 'UNKNOWN'
-    const l = levelOf(topStorey)
-    if (!builtMainRoof && !coveredByPlanes && !ownRoof && unpitched && l) {
-      const m = { ...main, ...rectAt(main, topStorey) }
-      let reading: ReturnType<typeof readAttachedRoof>
-      if (sectionReg && sectionFrame) {
-        const raster = options.raster(sectionFrame)
-        const span = sectionReg.axis === 'X' ? { from: m.x0, to: m.x1 } : { from: m.z0, to: m.z1 }
-        if (raster) reading = readAttachedRoof(raster, sectionReg, m.id, span, l.elevation, l.wallTop + 1.5)
-      }
-      const slabTopY = reading ? reading.slabTopY : l.wallTop
-      const slabSoffitY = reading ? reading.slabSoffitY : round6(l.wallTop - CONVENTIONS.roofThickness)
-      const why = `${support?.kind === 'FLAT' ? 'the layout reads the main roof as flat' : 'no pitched roof was inferred over the main body (no stated pitch, no ridge datum)'}: it carries a flat plate over its top storey, ${reading ? `the section's slab (${reading.why})` : 'at the wall head by convention — its height is not measured'}`
-      const featureId = feature('ATTACHED_ROOF', `roof-${m.id}`, { slabTopY: { value: slabTopY, low: slabTopY - 0.05, high: slabTopY + 0.05 }, ...(reading?.parapetTopY !== undefined ? { parapetTopY: { value: reading.parapetTopY, low: reading.parapetTopY - 0.05, high: reading.parapetTopY + 0.05 } } : {}) }, sectionFrame && reading ? [sighting(sectionFrame, `flat roof slab over ${m.id}`, reading.confidence)] : [], reading ? 'SOURCE_EXACT' : 'ASSUMED_FOR_RENDERING', why, { hostId: m.featureId, uncertaintyM: 0.04, unresolvedProperties: reading ? [] : ['slabTopY'], printed: !!reading })
-      relate('SUPPORTS', m.featureId, featureId, 'the body carries its roof')
-      attachedRoofs.push({ massId: m.id, reading, slabTopY, slabSoffitY, parapetTopY: reading?.parapetTopY, footprint: { x0: m.x0, x1: m.x1, z0: m.z0, z1: m.z1 }, projectsOverZone: false, featureId, provenance: reading ? 'SOURCE_EXACT' : 'ASSUMED_FOR_RENDERING' })
-      step({ stage: 'roof', what: 'v3.54.21: the main body closed by a flat plate', method: 'DISCRETE_SELECTION', detail: why, inputs: 1, outputs: 1 })
-      if (reading) for (const e of levels.evidenceIds) record({ evidenceId: e, evidenceKind: 'METRIC', what: 'a level datum', authority: 'HIGH', disposition: 'USED_IN_MODEL', reason: 'the section scale the main body\'s flat roof was read at', stage: 'METRIC_SOLVE' })
-    }
-  }
   const building: BuildingV2 = { label: options.label, wallThicknessM: T, slabThicknessM: slabT, slabThicknessBasis: clearHeight.accepted ? 'SECTION_CLEAR_HEIGHT' : 'ASSUMED', levels: levelsV2, masses, mainRoof: builtMainRoof, ...(planeRoofs ? { planeRoofs } : {}), attachedRoofs, pitchedAttachedRoofs, recesses, ...(pockets.length > 0 ? { pockets } : {}), ...(pergolas.length > 0 ? { pergolas } : {}), returns, balconies, railings, portalHeads, verges, terraces, massTones, returnTones, facadeGraph, chimneys, rooflights, openings, sharedDoors, interior, stair, assemblies, surfaceRegions, terrainY: terrain, ...(slabVoids.length > 0 ? { slabVoids } : {}), ...(bandWalls.length > 0 ? { bandWalls } : {}), ...(partyWalls.length > 0 ? { partyWalls } : {}), ...(canopies.length > 0 ? { canopies } : {}) }
   const residualsBefore = verifyAgainstViews({ building, views, openingHeightsRefused: new Set([...openingHeightRefused].filter((f) => !openingViewOverrides.has(f))) })
   const repair = repairFromResiduals(building, residualsBefore, 2)

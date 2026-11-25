@@ -77,7 +77,8 @@ const ROOF_KINDS: Array<{ test: RegExp; value: string; why: string }> = [
 
 /** v3.54.21 (NEW-H Lyon): on the roof's own line, an inflected adjective is still the word — "płaskim dachem", "dach płaski". */
 const ROOF_KINDS_INFLECTED: Array<{ test: RegExp; value: string; why: string }> = [
-  { test: /\bplask\w*\s+dach|\bdach\w*\s+plask|\bplask\w*$/, value: 'FLAT', why: 'the roof\'s own line describes it as flat' },
+  // the noun "dach" in its own forms, never "dachówka" (a flat TILE is not a flat roof)
+  { test: /\bplask\w*\s+dach(?:em|u|y|ow)?\b|\bdach(?:em|u|y)?\s+plask/, value: 'FLAT', why: 'the roof\'s own line describes it as flat' },
 ]
 
 const number = (text: string): number | null => {
@@ -138,18 +139,26 @@ export function readSpecifications(specifications: readonly PublishedSpecificati
     const flat = deaccent(spec.text)
 
     // --- the roof --------------------------------------------------------
-    // v3.54.21: the roof's OWN line (its key, or a label that names the roof) — not a page's free description, which
-    // speaks of a terrace's flat roof or of an offer and must not lend the main roof its words or its numbers
-    const roofLine = spec.key === 'roof' || /\bdach\w*|\broof\b/.test(deaccent(spec.label ?? ''))
-    if (roofLine || /\bdach\b|\broof\b/.test(flat)) {
-      const kind = ROOF_KINDS.find((k) => k.test.test(flat)) ?? (roofLine ? ROOF_KINDS_INFLECTED.find((k) => k.test.test(flat)) : undefined)
+    // v3.54.21: the roof's OWN line — its key, or a label that is the roof itself, its pitch, kind or shape — and never a
+    // line about another body's roof or a part of it (a garage's roof, the covering, roof windows, gutters): only such a
+    // line lends the main roof the readings this version adds (an inflected "płaski", a flat roof's fall). A page's free
+    // description keeps the original gate, and lends the main roof none of them.
+    const label = deaccent(spec.label ?? '').trim()
+    const NOT_THE_ROOF = /garaz|garage|taras|wiat|ganek|ganku|lukarn|dobudow|carport|pokryc|dachowk|okn|window|rynn|powierzchn|\barea\b|blach|obrob|izolac|ociepl|konstrukc|wiezb/
+    const ownLabel = /^(glowny |glownego )?(kat nachylenia|kat|nachylenie|spadek|rodzaj|typ|ksztalt|geometria|forma)( glownego)? dachu( glownego)?$|^dach( glowny)?$|^roof( pitch| type| slope| shape)?$/.test(label)
+    const roofLine = (spec.key === 'roof' || ownLabel) && !NOT_THE_ROOF.test(label)
+    if (spec.key === 'roof' || roofLine || /\bdach\b|\broof\b/.test(flat)) {
+      const word = ROOF_KINDS.find((k) => k.test.test(flat))
+      const inflected = !word && roofLine ? ROOF_KINDS_INFLECTED.find((k) => k.test.test(flat)) : undefined
+      const kind = word ?? inflected
       if (kind) {
         findings.push({
           key: spec.key,
           subject: 'ROOF_KIND',
           value: kind.value,
           quote: spec.text.slice(0, 200),
-          confidence: 0.9,
+          // a line the label alone admits does not tie with the roof's own keyed line
+          confidence: inflected || (roofLine && spec.key !== 'roof') ? 0.85 : 0.9,
           why: `${kind.why}, in the publisher's own specification`,
         })
       }
@@ -164,17 +173,10 @@ export function readSpecifications(specifications: readonly PublishedSpecificati
 
       let pitch: number | null = null
       let quote = ''
-      let fall: { n: number; quote: string } | undefined
       for (const pattern of ANGLE_PATTERNS) {
         const m = pattern.exec(spec.text)
         if (!m) continue
         const n = number(m[1])
-        // v3.54.21 (NEW-H Lyon: "Kąt nachylenia dachu 1.15°"): a roof angle above 0° and below 3° is the fall of a flat
-        // roof, not a pitch — said as such, never dropped as if nothing were printed
-        if (roofLine && n !== null && n > 0 && n < 3) {
-          fall = { n, quote: m[0] }
-          continue
-        }
         // A pitch outside this range is not a pitch: it is a percentage, a
         // year, a product code or a thickness that happened to sit next to the
         // word.
@@ -183,11 +185,34 @@ export function readSpecifications(specifications: readonly PublishedSpecificati
         quote = m[0]
         break
       }
-      if (pitch === null && fall && !findings.some((f) => f.key === spec.key && f.subject === 'ROOF_KIND')) {
-        findings.push({ key: spec.key, subject: 'ROOF_KIND', value: 'FLAT', quote: spec.text.slice(0, 200), confidence: 0.85, why: `the publisher prints the roof's fall as "${fall.quote}": below 3° a roof is flat (its fall drains the membrane), not pitched` })
+      // v3.54.21: on the roof's own line every angle is read, not only the first of each pattern — a fall printed before
+      // the pitch does not hide the pitch; and an angle above 0° and below 3°, with a degree sign, is a flat roof's fall
+      // (NEW-H Lyon: "Kąt nachylenia dachu: 1.15°"), never dropped as if nothing were printed
+      const angles: Array<{ n: number; quote: string; degree: boolean }> = []
+      if (roofLine) {
+        for (const [i, pattern] of ANGLE_PATTERNS.entries()) {
+          for (const m of spec.text.matchAll(new RegExp(pattern.source, `${pattern.flags.replace('g', '')}g`))) {
+            const n = number(m[1])
+            if (n !== null) angles.push({ n, quote: m[0], degree: i === 0 })
+          }
+        }
+        if (pitch === null) {
+          const later = angles.find((a) => a.n >= 3 && a.n <= 70)
+          if (later) {
+            pitch = later.n
+            quote = later.quote
+          }
+        }
+      }
+      const falls = angles.filter((a) => a.degree && a.n > 0 && a.n < 3)
+      // the line is a flat roof's only when every angle on it is a fall and it names no pitched kind
+      const flatFall = roofLine && pitch === null && falls.length > 0 && (!kind || kind.value === 'FLAT')
+      if (flatFall && !kind) {
+        findings.push({ key: spec.key, subject: 'ROOF_KIND', value: 'FLAT', quote: spec.text.slice(0, 200), confidence: 0.85, why: `the publisher prints the roof's fall as "${falls[0].quote}": below 3° a roof is flat (its fall drains the membrane), not pitched` })
       }
       if (pitch !== null) emit('ANGLE', pitch, 'deg', spec, quote, 0.92, `the publisher prints the roof pitch as "${quote}"`)
-      else if (!fall && /nachyleni|spadek|pitch|slope/.test(flat)) unread.push({ key: spec.key, label: spec.label, why: 'the line speaks of a pitch but states no angle this reader could recognise' })
+      else if (falls.length > 0 && !flatFall) unread.push({ key: spec.key, label: spec.label, why: `the line prints a fall (${falls[0].quote}) beside a pitched roof's kind: neither is taken` })
+      else if (!flatFall && /nachyleni|spadek|pitch|slope/.test(flat)) unread.push({ key: spec.key, label: spec.label, why: 'the line speaks of a pitch but states no angle this reader could recognise' })
     }
 
     // --- a knee wall, which is a storey height and nothing else -----------
