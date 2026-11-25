@@ -97,3 +97,31 @@ zmienia też niczego, co różniło B od F w tych liczbach.
   F@B (zamrożenie 1) zostaje w zapisie.
 - DEV: wariant końcowy = przebieg `d4` na `10ce107` z połączonych nagrań (`d2` ∪ `d3`), 0 USD poza brakującymi odczytami.
 - Po zamrożeniu 2 nic nie jest strojone. Gdyby `d4` pokazał kolejną stratę wobec `d2`, zostaje zapisana, nie naprawiona.
+
+## 8. Zamrożenie 3 — luka wykryta przez bieg hosta, zmiana obojętna dla ocenionych modeli (2026-11-25)
+
+**Co się stało.** Końcowy bieg hosta (budowa z kodu zamrożenia 2) dał dla Skagen — domu DEV — bryłę LOCAL: parterową,
+z kalenicą w poprzek, mimo uzgodnionych dwóch kondygnacji i kalenicy wzdłuż frontu. Na hoście świeży odczyt metryczny
+pozwolił LOCAL zbudować bryłę (w nagraniach DEV LOCAL jej nie budował), a arbitraż sprawdzał wobec opisu struktury tylko
+rodzaje dachów — odpowiedział AGREES i LOCAL został. To dokładnie przypadek „błędna bryła LOCAL", który zlecenie nazywa.
+
+**Poprawka (`108611e`)** — arbitraż 1.5.0, struktura 1.1.0: uzgodnione (stan AGREED) kondygnacje i kierunek kalenicy są
+trzymane wobec bryły, mierzonej z modelu (`structureAgainstBody`). Własność przyjęta tylko na słowo odczytu nie jest
+trzymana przeciw nikomu. Test kontrolny z kontrpróbami.
+
+**Dlaczego to nie unieważnia oceny.** Sprawdzone dwojako, 0 USD poza brakującymi odczytami:
+1. `arbitration-neutral.ts` na 28 nagranych biegach kodu oddawanego (20 DEV, 4 NEW-G F2, 4 F2@B): w żadnym biegu
+   nowa reguła nie trzyma niczego przeciw bryle, która stoi; **0 decyzji może się zmienić** (zapis:
+   `arbitration-neutral.txt` w dostawie).
+2. Odtworzenie pięciu domów na `108611e` z tych samych nagrań — Jeziorko i Pomarańcza (LOCAL stoi), Ametyst New
+   (LOCAL zastąpiony; jedyny dom, w którym nowa reguła coś trzyma przeciw LOCAL), Medulin, Dom pod jarząbem (NEW-G):
+   **modele identyczne co do bajta** z ocenionymi.
+
+**Dowód działania.** Drugi bieg hosta, budowa z `108611e`, Skagen na żywo: LOCAL zakwestionowany (1 sprzeczność —
+struktura), bryła ze źródeł stoi: dwie bryły, ściany bryły głównej do okapu 6,0 m (dwie kondygnacje), dach 30°
+z kalenicą wzdłuż frontu, garaż pod własnym dachem, 16 otworów zewnętrznych.
+
+**Kod oddawany (APK 1353, host) = zamrożenie 3 = `108611e`.** Ocenione modele (zamrożenie 2) są jego modelami na tych
+samych odczytach w sprawdzonych biegach; dla pozostałych 19 biegów równość wynika z punktu 1, nie z ponownego biegu.
+Regresy DEV znalezione przez ocenę ślepą (Ametyst New obrócony, Amarylis bez szczytu frontowego i inne — raport §7)
+**nie zostały naprawione**: zgodnie z §7 po zamrożeniu 2 nic nie jest strojone pod wynik oceny.
