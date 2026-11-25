@@ -36,8 +36,8 @@ describe('v3.54.15 scenes', () => {
   })
   it('the two scenes follow v3.54.16\'s five: Ballina delivered, then the control labelled as such', () => {
     const index = JSON.parse(readFileSync(join(ASSET_DIR, 'index.json'), 'utf8')) as Array<{ key: string; subtitle: string }>
-    expect(index.slice(49, 51).map((e) => e.key)).toEqual(['ballina-v35415', 'murcja-v35415'])
-    expect(index[49].subtitle).toContain('ODDANY')
-    expect(index[50].subtitle).toContain('KONTROLA')
+    expect(index.slice(75, 77).map((e) => e.key)).toEqual(['ballina-v35415', 'murcja-v35415'])
+    expect(index[75].subtitle).toContain('ODDANY')
+    expect(index[76].subtitle).toContain('KONTROLA')
   })
 })

@@ -1,0 +1,1707 @@
+{
+  "assemblies": [],
+  "balconies": [],
+  "building": {
+    "id": "building",
+    "name": "massing"
+  },
+  "chimneys": [],
+  "constraints": [],
+  "doors": [
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "glazing": "FULL",
+            "hinge": "LEFT",
+            "kind": "LEAF"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-front-8c0ed4-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-glass",
+      "openAngle": 0,
+      "openingId": "op-fix-front-8c0ed4",
+      "swing": "IN"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "kind": "PANEL"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-front-c877bd-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-gate",
+      "openAngle": 0,
+      "openingId": "op-fix-front-c877bd",
+      "swing": "IN",
+      "usage": "GARAGE"
+    },
+    {
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-front-f1a315-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "op-fix-front-f1a315",
+      "swing": "IN"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "glazing": "FULL",
+            "hinge": "LEFT",
+            "kind": "LEAF"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-rear-1e8faa-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-glass",
+      "openAngle": 0,
+      "openingId": "op-fix-rear-1e8faa",
+      "swing": "IN"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "glazing": "FULL",
+            "hinge": "LEFT",
+            "kind": "LEAF"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-rear-244f41-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-glass",
+      "openAngle": 0,
+      "openingId": "op-fix-rear-244f41",
+      "swing": "IN"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "glazing": "FULL",
+            "hinge": "LEFT",
+            "kind": "LEAF"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-plan-left-eb40bd-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-glass",
+      "openAngle": 0,
+      "openingId": "op-plan-left-eb40bd",
+      "swing": "IN"
+    }
+  ],
+  "evidenceSources": [
+    {
+      "id": "src-frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84",
+      "kind": "DRAWING",
+      "label": "frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84",
+      "note": "frame frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84"
+    },
+    {
+      "id": "src-frame-asset-projekt-domu-skagen-0429a527bd-35c7543be2",
+      "kind": "DRAWING",
+      "label": "frame-asset-projekt-domu-skagen-0429a527bd-35c7543be2",
+      "note": "frame frame-asset-projekt-domu-skagen-0429a527bd-35c7543be2"
+    },
+    {
+      "id": "src-frame-asset-projekt-domu-skagen-3cf3bbfd4e-e47748d323",
+      "kind": "DRAWING",
+      "label": "frame-asset-projekt-domu-skagen-3cf3bbfd4e-e47748d323",
+      "note": "frame frame-asset-projekt-domu-skagen-3cf3bbfd4e-e47748d323"
+    },
+    {
+      "id": "src-frame-asset-projekt-domu-skagen-5746f669d9-7ff180ff2a",
+      "kind": "DRAWING",
+      "label": "frame-asset-projekt-domu-skagen-5746f669d9-7ff180ff2a",
+      "note": "frame frame-asset-projekt-domu-skagen-5746f669d9-7ff180ff2a"
+    },
+    {
+      "id": "src-frame-asset-projekt-domu-skagen-aa6b22594c-f87ec48060",
+      "kind": "DRAWING",
+      "label": "frame-asset-projekt-domu-skagen-aa6b22594c-f87ec48060",
+      "note": "frame frame-asset-projekt-domu-skagen-aa6b22594c-f87ec48060"
+    }
+  ],
+  "frame": {
+    "handedness": "LEFT_HANDED_AS_SPECIFIED",
+    "origin": "finished ground-floor level is y = 0; the front facade outer face is z = 0",
+    "viewerNote": "renderers working in a right-handed frame mirror z when building their scene",
+    "wallConvention": "a wall runs from start to end along its OUTER face at its base; its outward normal is up x u, so exterior rings are traversed counter-clockwise on a plan drawn with the front facade at the bottom and material lies to the left of the direction of travel",
+    "x": "right when looking at the front facade",
+    "y": "up (vertical)",
+    "z": "away from the front facade, into the building"
+  },
+  "id": "m-analysis-dcp401",
+  "levels": [
+    {
+      "buildingId": "building",
+      "elevation": 0,
+      "height": 8.911662,
+      "id": "lvl-0",
+      "index": 0,
+      "name": "Massing"
+    }
+  ],
+  "linearSolids": [],
+  "materials": [
+    {
+      "color": "#6d6a66",
+      "id": "mat-chimney",
+      "name": "Chimney"
+    },
+    {
+      "color": "#55585c",
+      "id": "mat-gate",
+      "name": "Garage door"
+    },
+    {
+      "color": "#9fc3d8",
+      "id": "mat-glass",
+      "name": "Glazing",
+      "opacity": 0.35
+    },
+    {
+      "color": "#d9d5cc",
+      "id": "mat-partition",
+      "name": "Partition"
+    },
+    {
+      "color": "#3a3a3c",
+      "id": "mat-render-dark",
+      "name": "Dark render"
+    },
+    {
+      "color": "#5a5550",
+      "id": "mat-roof",
+      "name": "Roof covering (tone not read: miniature convention)"
+    },
+    {
+      "color": "#b07a4a",
+      "id": "mat-timber",
+      "name": "Timber (door leaf, cladding)"
+    },
+    {
+      "color": "#e8e4dc",
+      "id": "mat-wall",
+      "name": "Rendered wall (tone not read: miniature convention)"
+    }
+  ],
+  "meta": {
+    "createdWith": "buildapp",
+    "notes": []
+  },
+  "name": "Skagen - Lipińscy Domy (analysis)",
+  "openings": [
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-H583-350",
+      "kind": "DOOR",
+      "offset": 0.966749,
+      "sill": 0,
+      "wallId": "iw-H583-292",
+      "width": 0.883885
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-V422-677",
+      "kind": "DOOR",
+      "offset": 0.08,
+      "sill": 0,
+      "wallId": "iw-V422-576",
+      "width": 0.847057
+    },
+    {
+      "height": 1.970669,
+      "id": "op-fix-front-1b0bf9",
+      "kind": "WINDOW",
+      "offset": 7.312845,
+      "sill": 3.347763,
+      "wallId": "ring-mass-main-w0",
+      "width": 1.163407
+    },
+    {
+      "height": 1.970669,
+      "id": "op-fix-front-251554",
+      "kind": "WINDOW",
+      "offset": 1.25838,
+      "sill": 3.347763,
+      "wallId": "ring-mass-main-w0",
+      "width": 1.163407
+    },
+    {
+      "height": 2.445529,
+      "id": "op-fix-front-8c0ed4",
+      "kind": "DOOR",
+      "offset": 1.234637,
+      "sill": 0.047486,
+      "wallId": "ring-mass-main-w0",
+      "width": 2.754188
+    },
+    {
+      "height": 1.400837,
+      "id": "op-fix-front-9ccb63",
+      "kind": "WINDOW",
+      "offset": 7.692733,
+      "sill": 0.902234,
+      "wallId": "ring-mass-main-w0",
+      "width": 0.71229
+    },
+    {
+      "height": 2.160613,
+      "id": "op-fix-front-c877bd",
+      "kind": "DOOR",
+      "offset": 0.90782,
+      "sill": 0,
+      "wallId": "ring-mass-wing-1-w0",
+      "width": 2.445529
+    },
+    {
+      "height": 1.970669,
+      "id": "op-fix-front-d00137",
+      "kind": "WINDOW",
+      "offset": 3.513965,
+      "sill": 3.347763,
+      "wallId": "ring-mass-main-w0",
+      "width": 2.706702
+    },
+    {
+      "height": 2.303071,
+      "id": "op-fix-front-f1a315",
+      "kind": "DOOR",
+      "offset": 5.318433,
+      "sill": 0.047486,
+      "wallId": "ring-mass-main-w0",
+      "width": 1.614524
+    },
+    {
+      "height": 1.926456,
+      "id": "op-fix-left-13b3c9",
+      "kind": "WINDOW",
+      "offset": 4.380382,
+      "sill": 3.21076,
+      "wallId": "ring-mass-main-w3",
+      "width": 1.284304
+    },
+    {
+      "height": 1.926456,
+      "id": "op-fix-left-3aebe5",
+      "kind": "WINDOW",
+      "offset": 1.513632,
+      "sill": 3.21076,
+      "wallId": "ring-mass-main-w3",
+      "width": 1.284304
+    },
+    {
+      "height": 0.57335,
+      "id": "op-fix-left-9b22ed",
+      "kind": "WINDOW",
+      "offset": 6.60498,
+      "sill": 0.848558,
+      "wallId": "ring-mass-main-w3",
+      "width": 2.224598
+    },
+    {
+      "height": 2.44244,
+      "id": "op-fix-rear-1e8faa",
+      "kind": "DOOR",
+      "offset": 0.965392,
+      "sill": 0.023485,
+      "wallId": "ring-mass-main-w2",
+      "width": 1.103795
+    },
+    {
+      "height": 2.39547,
+      "id": "op-fix-rear-244f41",
+      "kind": "DOOR",
+      "offset": 3.736622,
+      "sill": 0.023485,
+      "wallId": "ring-mass-main-w2",
+      "width": 5.425035
+    },
+    {
+      "height": 0.51667,
+      "id": "op-fix-rear-3c2494",
+      "kind": "WINDOW",
+      "offset": 0.540157,
+      "sill": 0.915915,
+      "wallId": "ring-mass-wing-1-w2",
+      "width": 2.25456
+    },
+    {
+      "height": 1.949255,
+      "id": "op-fix-rear-6b8996",
+      "kind": "WINDOW",
+      "offset": 5.404057,
+      "sill": 3.2879,
+      "wallId": "ring-mass-main-w2",
+      "width": 2.67729
+    },
+    {
+      "height": 1.949255,
+      "id": "op-fix-rear-b48916",
+      "kind": "WINDOW",
+      "offset": 0.965392,
+      "sill": 3.2879,
+      "wallId": "ring-mass-main-w2",
+      "width": 2.653805
+    },
+    {
+      "evidence": {
+        "interpretation": "a gap the ground-floor plan draws in this wall (plan-gap-12-270: 7.24..9.67 m), where the model had no opening; its kind, sill and height follow one metric reading of this side's elevation (frame-asset-projekt-domu-skagen-0429a527bd-35c7543be2, 87 % of the span shared): not located in the elevation's pixels, not source-verified",
+        "properties": {
+          "height": "VISUAL_INFERRED",
+          "offset": "SOURCE_DERIVED",
+          "sill": "VISUAL_INFERRED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-projekt-domu-skagen-0429a527bd-35c7543be2",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.29,
+      "id": "op-plan-left-eb40bd",
+      "kind": "DOOR",
+      "offset": 0.423508,
+      "sill": 0,
+      "wallId": "ring-mass-main-w3",
+      "width": 2.430684
+    }
+  ],
+  "platforms": [],
+  "railings": [],
+  "relationships": [],
+  "roofEdges": [],
+  "roofOpenings": [
+    {
+      "footprint": {
+        "maxX": 5.76955,
+        "maxZ": 3.551113,
+        "minX": 5.009774,
+        "minZ": 2.481887
+      },
+      "id": "rw-fix-front-c3c4f7",
+      "kind": "ROOFLIGHT",
+      "roofId": "roof-mass-main"
+    },
+    {
+      "footprint": {
+        "maxX": 4.914802,
+        "maxZ": 3.551113,
+        "minX": 4.155026,
+        "minZ": 2.481887
+      },
+      "id": "rw-fix-front-c69146",
+      "kind": "ROOFLIGHT",
+      "roofId": "roof-mass-main"
+    },
+    {
+      "footprint": {
+        "maxX": 5.730218,
+        "maxZ": 7.78966,
+        "minX": 5.002183,
+        "minZ": 6.732053
+      },
+      "id": "rw-fix-rear-31ed7b",
+      "kind": "ROOFLIGHT",
+      "roofId": "roof-mass-main"
+    },
+    {
+      "footprint": {
+        "maxX": 4.861273,
+        "maxZ": 7.78966,
+        "minX": 4.133238,
+        "minZ": 6.732053
+      },
+      "id": "rw-fix-rear-e57b65",
+      "kind": "ROOFLIGHT",
+      "roofId": "roof-mass-main"
+    }
+  ],
+  "roofPlanes": [],
+  "rooflights": [
+    {
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "rw-fix-front-c3c4f7-light",
+      "roofOpeningId": "rw-fix-front-c3c4f7"
+    },
+    {
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "rw-fix-front-c69146-light",
+      "roofOpeningId": "rw-fix-front-c69146"
+    },
+    {
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "rw-fix-rear-31ed7b-light",
+      "roofOpeningId": "rw-fix-rear-31ed7b"
+    },
+    {
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "rw-fix-rear-e57b65-light",
+      "roofOpeningId": "rw-fix-rear-e57b65"
+    }
+  ],
+  "roofs": [
+    {
+      "eaveOffset": 5.998641,
+      "evidence": {
+        "interpretation": "nothing rises more than 0.4 m above the walls: a flat roof, its parapet at 8.91 m (the plate 0.3 m below: DISPLAY_ASSUMPTION); the agreed structure: the silhouettes read nothing rising above the walls (drawn to 8.91 m); the structure reports a gable: that top is its ridge and the walls end at 5.71 m (the agreed 30° down from it)",
+        "properties": {
+          "eaveOffset": "UNRESOLVED",
+          "pitchDeg": "UNRESOLVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84 + frame-asset-projekt-domu-skagen-3cf3bbfd4e-e47748d323 + frame-asset-projekt-domu-skagen-5746f669d9-7ff180ff2a + frame-asset-projekt-domu-skagen-0429a527bd-35c7543be2 + frame-asset-projekt-domu-skagen-aa6b22594c-f87ec48060",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84",
+          "src-frame-asset-projekt-domu-skagen-3cf3bbfd4e-e47748d323",
+          "src-frame-asset-projekt-domu-skagen-5746f669d9-7ff180ff2a",
+          "src-frame-asset-projekt-domu-skagen-0429a527bd-35c7543be2",
+          "src-frame-asset-projekt-domu-skagen-aa6b22594c-f87ec48060"
+        ],
+        "status": "UNRESOLVED"
+      },
+      "footprint": {
+        "maxX": 9.3729,
+        "maxZ": 10.091,
+        "minX": 0,
+        "minZ": 0
+      },
+      "id": "roof-mass-main",
+      "kind": "GABLE",
+      "levelId": "lvl-0",
+      "materialId": "mat-roof",
+      "overhang": 0,
+      "pitchDeg": 30,
+      "ridgeAxis": "X",
+      "thickness": 0.25
+    },
+    {
+      "eaveOffset": 3.396968,
+      "evidence": {
+        "interpretation": "nothing rises more than 0.4 m above the walls: a flat roof, its parapet at 5.29 m (the plate 0.3 m below: DISPLAY_ASSUMPTION); the agreed structure: the silhouettes read nothing rising above the walls (drawn to 5.29 m); the structure reports a gable: that top is its ridge and the walls end at 3.11 m (the agreed 30° down from it)",
+        "properties": {
+          "eaveOffset": "UNRESOLVED",
+          "pitchDeg": "UNRESOLVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84 + frame-asset-projekt-domu-skagen-3cf3bbfd4e-e47748d323 + frame-asset-projekt-domu-skagen-5746f669d9-7ff180ff2a + frame-asset-projekt-domu-skagen-0429a527bd-35c7543be2 + frame-asset-projekt-domu-skagen-aa6b22594c-f87ec48060",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84",
+          "src-frame-asset-projekt-domu-skagen-3cf3bbfd4e-e47748d323",
+          "src-frame-asset-projekt-domu-skagen-5746f669d9-7ff180ff2a",
+          "src-frame-asset-projekt-domu-skagen-0429a527bd-35c7543be2",
+          "src-frame-asset-projekt-domu-skagen-aa6b22594c-f87ec48060"
+        ],
+        "status": "UNRESOLVED"
+      },
+      "footprint": {
+        "maxX": 12.9636,
+        "maxZ": 8.3785,
+        "minX": 9.3729,
+        "minZ": 1.8046
+      },
+      "id": "roof-mass-wing-1",
+      "kind": "GABLE",
+      "levelId": "lvl-0",
+      "materialId": "mat-roof",
+      "overhang": 0,
+      "pitchDeg": 30,
+      "ridgeAxis": "X",
+      "thickness": 0.25
+    }
+  ],
+  "rooms": [],
+  "schema": "buildapp.canonical-building-model",
+  "schemaVersion": "1.9.0",
+  "slabs": [],
+  "stairs": [],
+  "stepRuns": [],
+  "surfaceRegions": [
+    {
+      "evidence": {
+        "interpretation": "a timber outline from finish-3abaf4 (MANUAL_DIAGNOSTIC): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-mass-main-w0",
+      "id": "appearance-front-ring-mass-main-w0-timber-0",
+      "materialId": "mat-timber",
+      "outline": [
+        {
+          "a": 0,
+          "b": 2.531662
+        },
+        {
+          "a": 1.18,
+          "b": 2.531662
+        },
+        {
+          "a": 1.18,
+          "b": 2.511662
+        },
+        {
+          "a": 1.2,
+          "b": 2.511662
+        },
+        {
+          "a": 1.2,
+          "b": 0.031662
+        },
+        {
+          "a": 1.18,
+          "b": 0.031662
+        },
+        {
+          "a": 1.18,
+          "b": 0.011662
+        },
+        {
+          "a": 0,
+          "b": 0.011662
+        }
+      ],
+      "rect": {
+        "a0": 0,
+        "a1": 1.2,
+        "b0": 0.011662,
+        "b1": 2.531662
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a timber outline from finish-5cc5ad (MANUAL_DIAGNOSTIC): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-mass-main-w2",
+      "id": "appearance-rear-ring-mass-main-w2-timber-0",
+      "materialId": "mat-timber",
+      "outline": [
+        {
+          "a": 3.6929,
+          "b": 2.491662
+        },
+        {
+          "a": 2.1129,
+          "b": 2.491662
+        },
+        {
+          "a": 2.1129,
+          "b": 2.471662
+        },
+        {
+          "a": 2.0929,
+          "b": 2.471662
+        },
+        {
+          "a": 2.0929,
+          "b": 0.031662
+        },
+        {
+          "a": 2.1129,
+          "b": 0.031662
+        },
+        {
+          "a": 2.1129,
+          "b": 0.011662
+        },
+        {
+          "a": 3.6929,
+          "b": 0.011662
+        },
+        {
+          "a": 3.6929,
+          "b": 0.031662
+        },
+        {
+          "a": 3.7129,
+          "b": 0.031662
+        },
+        {
+          "a": 3.7129,
+          "b": 2.471662
+        },
+        {
+          "a": 3.6929,
+          "b": 2.471662
+        }
+      ],
+      "rect": {
+        "a0": 2.0929,
+        "a1": 3.7129,
+        "b0": 0.011662,
+        "b1": 2.491662
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a dark render outline from finish-ef8c1a (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-mass-wing-1-w2",
+      "id": "appearance-rear-ring-mass-wing-1-w2-dark-render-0",
+      "materialId": "mat-render-dark",
+      "outline": [
+        {
+          "a": 3.2636,
+          "b": 3.131662
+        },
+        {
+          "a": 0.1236,
+          "b": 3.131662
+        },
+        {
+          "a": 0.1236,
+          "b": 3.111662
+        },
+        {
+          "a": 0.1036,
+          "b": 3.111662
+        },
+        {
+          "a": 0.1036,
+          "b": 2.851662
+        },
+        {
+          "a": 0.1236,
+          "b": 2.851662
+        },
+        {
+          "a": 0.1236,
+          "b": 2.831662
+        },
+        {
+          "a": 3.2636,
+          "b": 2.831662
+        },
+        {
+          "a": 3.2636,
+          "b": 2.851662
+        },
+        {
+          "a": 3.2836,
+          "b": 2.851662
+        },
+        {
+          "a": 3.2836,
+          "b": 3.111662
+        },
+        {
+          "a": 3.2636,
+          "b": 3.111662
+        }
+      ],
+      "rect": {
+        "a0": 0.1036,
+        "a1": 3.2836,
+        "b0": 2.831662,
+        "b1": 3.131662
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a timber outline from finish-6b1b5a (MANUAL_DIAGNOSTIC): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-mass-main-w3",
+      "id": "appearance-west-ring-mass-main-w3-timber-0",
+      "materialId": "mat-timber",
+      "outline": [
+        {
+          "a": 4.371,
+          "b": 5.131662
+        },
+        {
+          "a": 2.851,
+          "b": 5.131662
+        },
+        {
+          "a": 2.851,
+          "b": 5.111662
+        },
+        {
+          "a": 2.831,
+          "b": 5.111662
+        },
+        {
+          "a": 2.831,
+          "b": 3.211662
+        },
+        {
+          "a": 2.851,
+          "b": 3.211662
+        },
+        {
+          "a": 2.851,
+          "b": 3.191662
+        },
+        {
+          "a": 4.371,
+          "b": 3.191662
+        },
+        {
+          "a": 4.371,
+          "b": 3.211662
+        },
+        {
+          "a": 4.391,
+          "b": 3.211662
+        },
+        {
+          "a": 4.391,
+          "b": 5.111662
+        },
+        {
+          "a": 4.371,
+          "b": 5.111662
+        }
+      ],
+      "rect": {
+        "a0": 2.831,
+        "a1": 4.391,
+        "b0": 3.191662,
+        "b1": 5.131662
+      }
+    }
+  ],
+  "terraces": [],
+  "units": {
+    "angle": "deg",
+    "length": "m"
+  },
+  "wallJunctions": [
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w3"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w0"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84 (MAIN, GARAGE), at the analyzer's own scale: 1.841427 cm/px, STRONG / CONFIRMED with ? independent witnesses; heights: 4 registered elevation(s) give eaves 8.99 / 5.72 / 8.79 / 8.83 m and top 8.99 / 9.12 / 8.79 / 8.83 m (they disagree by 3.27 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84 + frame-asset-projekt-domu-skagen-3cf3bbfd4e-e47748d323 + frame-asset-projekt-domu-skagen-5746f669d9-7ff180ff2a + frame-asset-projekt-domu-skagen-0429a527bd-35c7543be2 + frame-asset-projekt-domu-skagen-aa6b22594c-f87ec48060",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84",
+          "src-frame-asset-projekt-domu-skagen-3cf3bbfd4e-e47748d323",
+          "src-frame-asset-projekt-domu-skagen-5746f669d9-7ff180ff2a",
+          "src-frame-asset-projekt-domu-skagen-0429a527bd-35c7543be2",
+          "src-frame-asset-projekt-domu-skagen-aa6b22594c-f87ec48060"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j0",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w0"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w1"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84 (MAIN, GARAGE), at the analyzer's own scale: 1.841427 cm/px, STRONG / CONFIRMED with ? independent witnesses; heights: 4 registered elevation(s) give eaves 8.99 / 5.72 / 8.79 / 8.83 m and top 8.99 / 9.12 / 8.79 / 8.83 m (they disagree by 3.27 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84 + frame-asset-projekt-domu-skagen-3cf3bbfd4e-e47748d323 + frame-asset-projekt-domu-skagen-5746f669d9-7ff180ff2a + frame-asset-projekt-domu-skagen-0429a527bd-35c7543be2 + frame-asset-projekt-domu-skagen-aa6b22594c-f87ec48060",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84",
+          "src-frame-asset-projekt-domu-skagen-3cf3bbfd4e-e47748d323",
+          "src-frame-asset-projekt-domu-skagen-5746f669d9-7ff180ff2a",
+          "src-frame-asset-projekt-domu-skagen-0429a527bd-35c7543be2",
+          "src-frame-asset-projekt-domu-skagen-aa6b22594c-f87ec48060"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j1",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w1"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w2"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84 (MAIN, GARAGE), at the analyzer's own scale: 1.841427 cm/px, STRONG / CONFIRMED with ? independent witnesses; heights: 4 registered elevation(s) give eaves 8.99 / 5.72 / 8.79 / 8.83 m and top 8.99 / 9.12 / 8.79 / 8.83 m (they disagree by 3.27 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84 + frame-asset-projekt-domu-skagen-3cf3bbfd4e-e47748d323 + frame-asset-projekt-domu-skagen-5746f669d9-7ff180ff2a + frame-asset-projekt-domu-skagen-0429a527bd-35c7543be2 + frame-asset-projekt-domu-skagen-aa6b22594c-f87ec48060",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84",
+          "src-frame-asset-projekt-domu-skagen-3cf3bbfd4e-e47748d323",
+          "src-frame-asset-projekt-domu-skagen-5746f669d9-7ff180ff2a",
+          "src-frame-asset-projekt-domu-skagen-0429a527bd-35c7543be2",
+          "src-frame-asset-projekt-domu-skagen-aa6b22594c-f87ec48060"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j2",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w2",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w2"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w3"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84 (MAIN, GARAGE), at the analyzer's own scale: 1.841427 cm/px, STRONG / CONFIRMED with ? independent witnesses; heights: 4 registered elevation(s) give eaves 8.99 / 5.72 / 8.79 / 8.83 m and top 8.99 / 9.12 / 8.79 / 8.83 m (they disagree by 3.27 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84 + frame-asset-projekt-domu-skagen-3cf3bbfd4e-e47748d323 + frame-asset-projekt-domu-skagen-5746f669d9-7ff180ff2a + frame-asset-projekt-domu-skagen-0429a527bd-35c7543be2 + frame-asset-projekt-domu-skagen-aa6b22594c-f87ec48060",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84",
+          "src-frame-asset-projekt-domu-skagen-3cf3bbfd4e-e47748d323",
+          "src-frame-asset-projekt-domu-skagen-5746f669d9-7ff180ff2a",
+          "src-frame-asset-projekt-domu-skagen-0429a527bd-35c7543be2",
+          "src-frame-asset-projekt-domu-skagen-aa6b22594c-f87ec48060"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j3",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w2",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-wing-1-w3"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-wing-1-w0"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84 (MAIN, GARAGE), at the analyzer's own scale: 1.841427 cm/px, STRONG / CONFIRMED with ? independent witnesses; heights: 3 registered elevation(s) give eaves 5.21 / 2.87 / 5.44 m and top 5.21 / 5.29 / 5.44 m (they disagree by 2.56 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84 + frame-asset-projekt-domu-skagen-3cf3bbfd4e-e47748d323 + frame-asset-projekt-domu-skagen-5746f669d9-7ff180ff2a + frame-asset-projekt-domu-skagen-0429a527bd-35c7543be2 + frame-asset-projekt-domu-skagen-aa6b22594c-f87ec48060",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84",
+          "src-frame-asset-projekt-domu-skagen-3cf3bbfd4e-e47748d323",
+          "src-frame-asset-projekt-domu-skagen-5746f669d9-7ff180ff2a",
+          "src-frame-asset-projekt-domu-skagen-0429a527bd-35c7543be2",
+          "src-frame-asset-projekt-domu-skagen-aa6b22594c-f87ec48060"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-wing-1-j0",
+      "kind": "CORNER",
+      "owner": "ring-mass-wing-1-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-wing-1-w0"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-wing-1-w1"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84 (MAIN, GARAGE), at the analyzer's own scale: 1.841427 cm/px, STRONG / CONFIRMED with ? independent witnesses; heights: 3 registered elevation(s) give eaves 5.21 / 2.87 / 5.44 m and top 5.21 / 5.29 / 5.44 m (they disagree by 2.56 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84 + frame-asset-projekt-domu-skagen-3cf3bbfd4e-e47748d323 + frame-asset-projekt-domu-skagen-5746f669d9-7ff180ff2a + frame-asset-projekt-domu-skagen-0429a527bd-35c7543be2 + frame-asset-projekt-domu-skagen-aa6b22594c-f87ec48060",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84",
+          "src-frame-asset-projekt-domu-skagen-3cf3bbfd4e-e47748d323",
+          "src-frame-asset-projekt-domu-skagen-5746f669d9-7ff180ff2a",
+          "src-frame-asset-projekt-domu-skagen-0429a527bd-35c7543be2",
+          "src-frame-asset-projekt-domu-skagen-aa6b22594c-f87ec48060"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-wing-1-j1",
+      "kind": "CORNER",
+      "owner": "ring-mass-wing-1-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-wing-1-w1"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-wing-1-w2"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84 (MAIN, GARAGE), at the analyzer's own scale: 1.841427 cm/px, STRONG / CONFIRMED with ? independent witnesses; heights: 3 registered elevation(s) give eaves 5.21 / 2.87 / 5.44 m and top 5.21 / 5.29 / 5.44 m (they disagree by 2.56 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84 + frame-asset-projekt-domu-skagen-3cf3bbfd4e-e47748d323 + frame-asset-projekt-domu-skagen-5746f669d9-7ff180ff2a + frame-asset-projekt-domu-skagen-0429a527bd-35c7543be2 + frame-asset-projekt-domu-skagen-aa6b22594c-f87ec48060",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84",
+          "src-frame-asset-projekt-domu-skagen-3cf3bbfd4e-e47748d323",
+          "src-frame-asset-projekt-domu-skagen-5746f669d9-7ff180ff2a",
+          "src-frame-asset-projekt-domu-skagen-0429a527bd-35c7543be2",
+          "src-frame-asset-projekt-domu-skagen-aa6b22594c-f87ec48060"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-wing-1-j2",
+      "kind": "CORNER",
+      "owner": "ring-mass-wing-1-w2",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-wing-1-w2"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-wing-1-w3"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84 (MAIN, GARAGE), at the analyzer's own scale: 1.841427 cm/px, STRONG / CONFIRMED with ? independent witnesses; heights: 3 registered elevation(s) give eaves 5.21 / 2.87 / 5.44 m and top 5.21 / 5.29 / 5.44 m (they disagree by 2.56 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84 + frame-asset-projekt-domu-skagen-3cf3bbfd4e-e47748d323 + frame-asset-projekt-domu-skagen-5746f669d9-7ff180ff2a + frame-asset-projekt-domu-skagen-0429a527bd-35c7543be2 + frame-asset-projekt-domu-skagen-aa6b22594c-f87ec48060",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84",
+          "src-frame-asset-projekt-domu-skagen-3cf3bbfd4e-e47748d323",
+          "src-frame-asset-projekt-domu-skagen-5746f669d9-7ff180ff2a",
+          "src-frame-asset-projekt-domu-skagen-0429a527bd-35c7543be2",
+          "src-frame-asset-projekt-domu-skagen-aa6b22594c-f87ec48060"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-wing-1-j3",
+      "kind": "CORNER",
+      "owner": "ring-mass-wing-1-w2",
+      "tolerance": 0.001
+    }
+  ],
+  "wallPanels": [],
+  "wallRings": [
+    {
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84 (MAIN, GARAGE), at the analyzer's own scale: 1.841427 cm/px, STRONG / CONFIRMED with ? independent witnesses; heights: 4 registered elevation(s) give eaves 8.99 / 5.72 / 8.79 / 8.83 m and top 8.99 / 9.12 / 8.79 / 8.83 m (they disagree by 3.27 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84 + frame-asset-projekt-domu-skagen-3cf3bbfd4e-e47748d323 + frame-asset-projekt-domu-skagen-5746f669d9-7ff180ff2a + frame-asset-projekt-domu-skagen-0429a527bd-35c7543be2 + frame-asset-projekt-domu-skagen-aa6b22594c-f87ec48060",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84",
+          "src-frame-asset-projekt-domu-skagen-3cf3bbfd4e-e47748d323",
+          "src-frame-asset-projekt-domu-skagen-5746f669d9-7ff180ff2a",
+          "src-frame-asset-projekt-domu-skagen-0429a527bd-35c7543be2",
+          "src-frame-asset-projekt-domu-skagen-aa6b22594c-f87ec48060"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main",
+      "junctionIds": [
+        "ring-mass-main-j0",
+        "ring-mass-main-j1",
+        "ring-mass-main-j2",
+        "ring-mass-main-j3"
+      ],
+      "levelId": "lvl-0",
+      "wallIds": [
+        "ring-mass-main-w0",
+        "ring-mass-main-w1",
+        "ring-mass-main-w2",
+        "ring-mass-main-w3"
+      ]
+    },
+    {
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84 (MAIN, GARAGE), at the analyzer's own scale: 1.841427 cm/px, STRONG / CONFIRMED with ? independent witnesses; heights: 3 registered elevation(s) give eaves 5.21 / 2.87 / 5.44 m and top 5.21 / 5.29 / 5.44 m (they disagree by 2.56 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84 + frame-asset-projekt-domu-skagen-3cf3bbfd4e-e47748d323 + frame-asset-projekt-domu-skagen-5746f669d9-7ff180ff2a + frame-asset-projekt-domu-skagen-0429a527bd-35c7543be2 + frame-asset-projekt-domu-skagen-aa6b22594c-f87ec48060",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84",
+          "src-frame-asset-projekt-domu-skagen-3cf3bbfd4e-e47748d323",
+          "src-frame-asset-projekt-domu-skagen-5746f669d9-7ff180ff2a",
+          "src-frame-asset-projekt-domu-skagen-0429a527bd-35c7543be2",
+          "src-frame-asset-projekt-domu-skagen-aa6b22594c-f87ec48060"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-wing-1",
+      "junctionIds": [
+        "ring-mass-wing-1-j0",
+        "ring-mass-wing-1-j1",
+        "ring-mass-wing-1-j2",
+        "ring-mass-wing-1-j3"
+      ],
+      "levelId": "lvl-0",
+      "wallIds": [
+        "ring-mass-wing-1-w0",
+        "ring-mass-wing-1-w1",
+        "ring-mass-wing-1-w2",
+        "ring-mass-wing-1-w3"
+      ]
+    }
+  ],
+  "walls": [
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 9.0729,
+        "z": 3.784132
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-H583-292",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 4.778503,
+        "z": 3.784132
+      },
+      "thickness": 0.2578
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 4.778503,
+        "z": 3.784132
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-V295-576",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 4.778503,
+        "z": 1.25217
+      },
+      "thickness": 0.110486
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 5.643974,
+        "z": 9.791
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-V341-275",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 5.643974,
+        "z": 5.966223
+      },
+      "thickness": 0.110486
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 6.896144,
+        "z": 4.898196
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-V410-529",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 6.896144,
+        "z": 4.041932
+      },
+      "thickness": 0.092071
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 7.13553,
+        "z": 3.784132
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-V422-576",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 7.13553,
+        "z": 1.245827
+      },
+      "thickness": 0.110486
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 9.3729,
+        "z": 0
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84 (MAIN, GARAGE), at the analyzer's own scale: 1.841427 cm/px, STRONG / CONFIRMED with ? independent witnesses; heights: 4 registered elevation(s) give eaves 8.99 / 5.72 / 8.79 / 8.83 m and top 8.99 / 9.12 / 8.79 / 8.83 m (they disagree by 3.27 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84 + frame-asset-projekt-domu-skagen-3cf3bbfd4e-e47748d323 + frame-asset-projekt-domu-skagen-5746f669d9-7ff180ff2a + frame-asset-projekt-domu-skagen-0429a527bd-35c7543be2 + frame-asset-projekt-domu-skagen-aa6b22594c-f87ec48060",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84",
+          "src-frame-asset-projekt-domu-skagen-3cf3bbfd4e-e47748d323",
+          "src-frame-asset-projekt-domu-skagen-5746f669d9-7ff180ff2a",
+          "src-frame-asset-projekt-domu-skagen-0429a527bd-35c7543be2",
+          "src-frame-asset-projekt-domu-skagen-aa6b22594c-f87ec48060"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 8.911662,
+      "id": "ring-mass-main-w0",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 0,
+        "z": 0
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-mass-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 9.3729,
+        "z": 10.091
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84 (MAIN, GARAGE), at the analyzer's own scale: 1.841427 cm/px, STRONG / CONFIRMED with ? independent witnesses; heights: 4 registered elevation(s) give eaves 8.99 / 5.72 / 8.79 / 8.83 m and top 8.99 / 9.12 / 8.79 / 8.83 m (they disagree by 3.27 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84 + frame-asset-projekt-domu-skagen-3cf3bbfd4e-e47748d323 + frame-asset-projekt-domu-skagen-5746f669d9-7ff180ff2a + frame-asset-projekt-domu-skagen-0429a527bd-35c7543be2 + frame-asset-projekt-domu-skagen-aa6b22594c-f87ec48060",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84",
+          "src-frame-asset-projekt-domu-skagen-3cf3bbfd4e-e47748d323",
+          "src-frame-asset-projekt-domu-skagen-5746f669d9-7ff180ff2a",
+          "src-frame-asset-projekt-domu-skagen-0429a527bd-35c7543be2",
+          "src-frame-asset-projekt-domu-skagen-aa6b22594c-f87ec48060"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 8.911662,
+      "id": "ring-mass-main-w1",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 9.3729,
+        "z": 0
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-mass-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0,
+        "z": 10.091
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84 (MAIN, GARAGE), at the analyzer's own scale: 1.841427 cm/px, STRONG / CONFIRMED with ? independent witnesses; heights: 4 registered elevation(s) give eaves 8.99 / 5.72 / 8.79 / 8.83 m and top 8.99 / 9.12 / 8.79 / 8.83 m (they disagree by 3.27 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84 + frame-asset-projekt-domu-skagen-3cf3bbfd4e-e47748d323 + frame-asset-projekt-domu-skagen-5746f669d9-7ff180ff2a + frame-asset-projekt-domu-skagen-0429a527bd-35c7543be2 + frame-asset-projekt-domu-skagen-aa6b22594c-f87ec48060",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84",
+          "src-frame-asset-projekt-domu-skagen-3cf3bbfd4e-e47748d323",
+          "src-frame-asset-projekt-domu-skagen-5746f669d9-7ff180ff2a",
+          "src-frame-asset-projekt-domu-skagen-0429a527bd-35c7543be2",
+          "src-frame-asset-projekt-domu-skagen-aa6b22594c-f87ec48060"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 8.911662,
+      "id": "ring-mass-main-w2",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 9.3729,
+        "z": 10.091
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-mass-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0,
+        "z": 0
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84 (MAIN, GARAGE), at the analyzer's own scale: 1.841427 cm/px, STRONG / CONFIRMED with ? independent witnesses; heights: 4 registered elevation(s) give eaves 8.99 / 5.72 / 8.79 / 8.83 m and top 8.99 / 9.12 / 8.79 / 8.83 m (they disagree by 3.27 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84 + frame-asset-projekt-domu-skagen-3cf3bbfd4e-e47748d323 + frame-asset-projekt-domu-skagen-5746f669d9-7ff180ff2a + frame-asset-projekt-domu-skagen-0429a527bd-35c7543be2 + frame-asset-projekt-domu-skagen-aa6b22594c-f87ec48060",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84",
+          "src-frame-asset-projekt-domu-skagen-3cf3bbfd4e-e47748d323",
+          "src-frame-asset-projekt-domu-skagen-5746f669d9-7ff180ff2a",
+          "src-frame-asset-projekt-domu-skagen-0429a527bd-35c7543be2",
+          "src-frame-asset-projekt-domu-skagen-aa6b22594c-f87ec48060"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 8.911662,
+      "id": "ring-mass-main-w3",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 0,
+        "z": 10.091
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-mass-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 12.9636,
+        "z": 1.8046
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84 (MAIN, GARAGE), at the analyzer's own scale: 1.841427 cm/px, STRONG / CONFIRMED with ? independent witnesses; heights: 3 registered elevation(s) give eaves 5.21 / 2.87 / 5.44 m and top 5.21 / 5.29 / 5.44 m (they disagree by 2.56 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84 + frame-asset-projekt-domu-skagen-3cf3bbfd4e-e47748d323 + frame-asset-projekt-domu-skagen-5746f669d9-7ff180ff2a + frame-asset-projekt-domu-skagen-0429a527bd-35c7543be2 + frame-asset-projekt-domu-skagen-aa6b22594c-f87ec48060",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84",
+          "src-frame-asset-projekt-domu-skagen-3cf3bbfd4e-e47748d323",
+          "src-frame-asset-projekt-domu-skagen-5746f669d9-7ff180ff2a",
+          "src-frame-asset-projekt-domu-skagen-0429a527bd-35c7543be2",
+          "src-frame-asset-projekt-domu-skagen-aa6b22594c-f87ec48060"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 5.294689,
+      "id": "ring-mass-wing-1-w0",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 9.3729,
+        "z": 1.8046
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-mass-wing-1"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 12.9636,
+        "z": 8.3785
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84 (MAIN, GARAGE), at the analyzer's own scale: 1.841427 cm/px, STRONG / CONFIRMED with ? independent witnesses; heights: 3 registered elevation(s) give eaves 5.21 / 2.87 / 5.44 m and top 5.21 / 5.29 / 5.44 m (they disagree by 2.56 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84 + frame-asset-projekt-domu-skagen-3cf3bbfd4e-e47748d323 + frame-asset-projekt-domu-skagen-5746f669d9-7ff180ff2a + frame-asset-projekt-domu-skagen-0429a527bd-35c7543be2 + frame-asset-projekt-domu-skagen-aa6b22594c-f87ec48060",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84",
+          "src-frame-asset-projekt-domu-skagen-3cf3bbfd4e-e47748d323",
+          "src-frame-asset-projekt-domu-skagen-5746f669d9-7ff180ff2a",
+          "src-frame-asset-projekt-domu-skagen-0429a527bd-35c7543be2",
+          "src-frame-asset-projekt-domu-skagen-aa6b22594c-f87ec48060"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 5.294689,
+      "id": "ring-mass-wing-1-w1",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 12.9636,
+        "z": 1.8046
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-mass-wing-1"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 9.3729,
+        "z": 8.3785
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84 (MAIN, GARAGE), at the analyzer's own scale: 1.841427 cm/px, STRONG / CONFIRMED with ? independent witnesses; heights: 3 registered elevation(s) give eaves 5.21 / 2.87 / 5.44 m and top 5.21 / 5.29 / 5.44 m (they disagree by 2.56 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84 + frame-asset-projekt-domu-skagen-3cf3bbfd4e-e47748d323 + frame-asset-projekt-domu-skagen-5746f669d9-7ff180ff2a + frame-asset-projekt-domu-skagen-0429a527bd-35c7543be2 + frame-asset-projekt-domu-skagen-aa6b22594c-f87ec48060",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84",
+          "src-frame-asset-projekt-domu-skagen-3cf3bbfd4e-e47748d323",
+          "src-frame-asset-projekt-domu-skagen-5746f669d9-7ff180ff2a",
+          "src-frame-asset-projekt-domu-skagen-0429a527bd-35c7543be2",
+          "src-frame-asset-projekt-domu-skagen-aa6b22594c-f87ec48060"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 5.294689,
+      "id": "ring-mass-wing-1-w2",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 12.9636,
+        "z": 8.3785
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-mass-wing-1"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 9.3729,
+        "z": 1.8046
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84 (MAIN, GARAGE), at the analyzer's own scale: 1.841427 cm/px, STRONG / CONFIRMED with ? independent witnesses; heights: 3 registered elevation(s) give eaves 5.21 / 2.87 / 5.44 m and top 5.21 / 5.29 / 5.44 m (they disagree by 2.56 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84 + frame-asset-projekt-domu-skagen-3cf3bbfd4e-e47748d323 + frame-asset-projekt-domu-skagen-5746f669d9-7ff180ff2a + frame-asset-projekt-domu-skagen-0429a527bd-35c7543be2 + frame-asset-projekt-domu-skagen-aa6b22594c-f87ec48060",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-skagen-63a98adea6-3da5d92f84",
+          "src-frame-asset-projekt-domu-skagen-3cf3bbfd4e-e47748d323",
+          "src-frame-asset-projekt-domu-skagen-5746f669d9-7ff180ff2a",
+          "src-frame-asset-projekt-domu-skagen-0429a527bd-35c7543be2",
+          "src-frame-asset-projekt-domu-skagen-aa6b22594c-f87ec48060"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 5.294689,
+      "id": "ring-mass-wing-1-w3",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 9.3729,
+        "z": 8.3785
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-mass-wing-1"
+      }
+    }
+  ],
+  "windows": [
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-front-1b0bf9-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-front-1b0bf9"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-front-251554-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-front-251554"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-front-9ccb63-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-front-9ccb63"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-front-d00137-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-front-d00137"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-left-13b3c9-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-left-13b3c9"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-left-3aebe5-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-left-3aebe5"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-left-9b22ed-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-left-9b22ed"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-rear-3c2494-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-rear-3c2494"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-rear-6b8996-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-rear-6b8996"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-rear-b48916-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-rear-b48916"
+    }
+  ]
+}

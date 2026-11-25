@@ -10,10 +10,10 @@ const ORDER = ['ametyst-v35419', 'skagen-v35419', 'fabia-v35419', 'pomarancza-v3
 
 describe('v3.54.19 scenes', () => {
   it('come first, the held-out NEW-F four leading, the two host models last', () => {
-    expect(SCENES.slice(0, 22).map((s) => s.key)).toEqual(ORDER)
-    for (const s of SCENES.slice(0, 4)) expect(s.title).toContain('NEW-F (próba odłożona)')
-    for (const s of SCENES.slice(4, 7)) expect(s.title).toContain('rozwojowy')
-    for (const s of SCENES.slice(20, 22)) expect(s.title).toContain('z hosta na finalnej rewizji')
+    expect(SCENES.slice(26, 48).map((s) => s.key)).toEqual(ORDER)
+    for (const s of SCENES.slice(26, 30)) expect(s.title).toContain('NEW-F (próba odłożona)')
+    for (const s of SCENES.slice(30, 33)) expect(s.title).toContain('rozwojowy')
+    for (const s of SCENES.slice(46, 48)) expect(s.title).toContain('z hosta na finalnej rewizji')
   })
 
   it('a failed or lossy result says so in its own subtitle', () => {
@@ -25,7 +25,7 @@ describe('v3.54.19 scenes', () => {
   })
 
   it('every scene builds from its sealed bytes and compiles; interior walls are counted from the model, not claimed', () => {
-    for (const s of SCENES.slice(0, 22)) {
+    for (const s of SCENES.slice(26, 48)) {
       const m = s.build()
       expect(compileBuilding(m).meshes.length, s.key).toBeGreaterThan(0)
       const interior = m.walls.filter((w) => w.kind === 'INTERIOR').length

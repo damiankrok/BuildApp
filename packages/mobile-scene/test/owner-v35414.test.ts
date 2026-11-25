@@ -43,9 +43,9 @@ describe('v3.54.14 scenes', () => {
   })
   it('the three scenes come first: the two delivered, then Ballina labelled as partial', () => {
     const index = JSON.parse(readFileSync(join(ASSET_DIR, 'index.json'), 'utf8')) as Array<{ key: string; title: string; subtitle: string }>
-    expect(index.slice(51, 54).map((e) => e.key)).toEqual(['marcowki-c-v35414', 'bakopy-v35414', 'ballina-v35414'])
-    expect(index[51].subtitle).toContain('ODDANY')
-    expect(index[52].subtitle).toContain('ODDANY')
-    expect(index[53].subtitle).toContain('CZĘŚCIOWY')
+    expect(index.slice(77, 80).map((e) => e.key)).toEqual(['marcowki-c-v35414', 'bakopy-v35414', 'ballina-v35414'])
+    expect(index[77].subtitle).toContain('ODDANY')
+    expect(index[78].subtitle).toContain('ODDANY')
+    expect(index[79].subtitle).toContain('CZĘŚCIOWY')
   })
 })

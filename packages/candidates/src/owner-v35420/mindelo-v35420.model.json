@@ -1,0 +1,4139 @@
+{
+  "assemblies": [],
+  "balconies": [],
+  "building": {
+    "id": "building",
+    "name": "massing"
+  },
+  "chimneys": [
+    {
+      "baseOffset": 0,
+      "footprint": {
+        "maxX": 15.758116,
+        "maxZ": 10.784038,
+        "minX": 15.493268,
+        "minZ": 10.51919
+      },
+      "height": 6.323246,
+      "id": "chimney-fix-rear-57e3ba",
+      "levelId": "lvl-0",
+      "materialId": "mat-chimney"
+    },
+    {
+      "baseOffset": 0,
+      "footprint": {
+        "maxX": 24.1481,
+        "maxZ": 9.602145,
+        "minX": 23.8022,
+        "minZ": 9.256245
+      },
+      "height": 4.939452,
+      "id": "chimney-fix-right-528cf8",
+      "levelId": "lvl-0",
+      "materialId": "mat-chimney"
+    }
+  ],
+  "constraints": [],
+  "doors": [
+    {
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-front-77e077-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "op-fix-front-77e077",
+      "swing": "IN"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "kind": "PANEL"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-front-e93a18-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-gate",
+      "openAngle": 0,
+      "openingId": "op-fix-front-e93a18",
+      "swing": "IN",
+      "usage": "GARAGE"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "glazing": "FULL",
+            "hinge": "LEFT",
+            "kind": "LEAF"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-rear-4cc473-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-glass",
+      "openAngle": 0,
+      "openingId": "op-fix-rear-4cc473",
+      "swing": "IN"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "glazing": "FULL",
+            "hinge": "LEFT",
+            "kind": "LEAF"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-rear-5c7114-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-glass",
+      "openAngle": 0,
+      "openingId": "op-fix-rear-5c7114",
+      "swing": "IN"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "glazing": "FULL",
+            "hinge": "LEFT",
+            "kind": "LEAF"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-rear-67daa0-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-glass",
+      "openAngle": 0,
+      "openingId": "op-fix-rear-67daa0",
+      "swing": "IN"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "glazing": "FULL",
+            "hinge": "LEFT",
+            "kind": "LEAF"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-rear-c781e7-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-glass",
+      "openAngle": 0,
+      "openingId": "op-fix-rear-c781e7",
+      "swing": "IN"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "glazing": "FULL",
+            "hinge": "LEFT",
+            "kind": "LEAF"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-rear-f1fde5-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-glass",
+      "openAngle": 0,
+      "openingId": "op-fix-rear-f1fde5",
+      "swing": "IN"
+    }
+  ],
+  "evidenceSources": [
+    {
+      "id": "src-frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432",
+      "kind": "DRAWING",
+      "label": "frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432",
+      "note": "frame frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432"
+    },
+    {
+      "id": "src-frame-asset-projekt-domu-mindelo-1bd6779f35-f3339440b9",
+      "kind": "DRAWING",
+      "label": "frame-asset-projekt-domu-mindelo-1bd6779f35-f3339440b9",
+      "note": "frame frame-asset-projekt-domu-mindelo-1bd6779f35-f3339440b9"
+    },
+    {
+      "id": "src-frame-asset-projekt-domu-mindelo-cfc102784f-bbeade8f1f",
+      "kind": "DRAWING",
+      "label": "frame-asset-projekt-domu-mindelo-cfc102784f-bbeade8f1f",
+      "note": "frame frame-asset-projekt-domu-mindelo-cfc102784f-bbeade8f1f"
+    },
+    {
+      "id": "src-frame-asset-projekt-domu-mindelo-f48b0b12ea-73c2f2f601",
+      "kind": "DRAWING",
+      "label": "frame-asset-projekt-domu-mindelo-f48b0b12ea-73c2f2f601",
+      "note": "frame frame-asset-projekt-domu-mindelo-f48b0b12ea-73c2f2f601"
+    }
+  ],
+  "frame": {
+    "handedness": "LEFT_HANDED_AS_SPECIFIED",
+    "origin": "finished ground-floor level is y = 0; the front facade outer face is z = 0",
+    "viewerNote": "renderers working in a right-handed frame mirror z when building their scene",
+    "wallConvention": "a wall runs from start to end along its OUTER face at its base; its outward normal is up x u, so exterior rings are traversed counter-clockwise on a plan drawn with the front facade at the bottom and material lies to the left of the direction of travel",
+    "x": "right when looking at the front facade",
+    "y": "up (vertical)",
+    "z": "away from the front facade, into the building"
+  },
+  "id": "m-analysis-dcb136",
+  "levels": [
+    {
+      "buildingId": "building",
+      "elevation": 0,
+      "height": 5.826656,
+      "id": "lvl-0",
+      "index": 0,
+      "name": "Massing"
+    }
+  ],
+  "linearSolids": [],
+  "materials": [
+    {
+      "color": "#6d6a66",
+      "id": "mat-chimney",
+      "name": "Chimney"
+    },
+    {
+      "color": "#55585c",
+      "id": "mat-gate",
+      "name": "Garage door"
+    },
+    {
+      "color": "#9fc3d8",
+      "id": "mat-glass",
+      "name": "Glazing",
+      "opacity": 0.35
+    },
+    {
+      "color": "#d9d5cc",
+      "id": "mat-partition",
+      "name": "Partition"
+    },
+    {
+      "color": "#5a5550",
+      "id": "mat-roof",
+      "name": "Roof covering (tone not read: miniature convention)"
+    },
+    {
+      "color": "#b07a4a",
+      "id": "mat-timber",
+      "name": "Timber (door leaf, cladding)"
+    },
+    {
+      "color": "#e8e4dc",
+      "id": "mat-wall",
+      "name": "Rendered wall (tone not read: miniature convention)"
+    }
+  ],
+  "meta": {
+    "createdWith": "buildapp",
+    "notes": []
+  },
+  "name": "Mindelo - Lipińscy Domy (analysis)",
+  "openings": [
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-H437-306",
+      "kind": "DOOR",
+      "offset": 1.286666,
+      "sill": 0,
+      "wallId": "iw-H437-237",
+      "width": 0.885227
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-H437-449",
+      "kind": "DOOR",
+      "offset": 0.854346,
+      "sill": 0,
+      "wallId": "iw-H437-237-x",
+      "width": 0.844053
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-H515-199",
+      "kind": "DOOR",
+      "offset": 3.179147,
+      "sill": 0,
+      "wallId": "iw-H515-54",
+      "width": 0.885227
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-H515-345",
+      "kind": "DOOR",
+      "offset": 6.184801,
+      "sill": 0,
+      "wallId": "iw-H515-54",
+      "width": 0.885227
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-H515-488",
+      "kind": "DOOR",
+      "offset": 9.128695,
+      "sill": 0,
+      "wallId": "iw-H515-54",
+      "width": 0.782293
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-H515-646",
+      "kind": "DOOR",
+      "offset": 12.381389,
+      "sill": 0,
+      "wallId": "iw-H515-54",
+      "width": 0.823467
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-H515-761",
+      "kind": "DOOR",
+      "offset": 14.748856,
+      "sill": 0,
+      "wallId": "iw-H515-54",
+      "width": 0.823467
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-H515-858",
+      "kind": "DOOR",
+      "offset": 16.745763,
+      "sill": 0,
+      "wallId": "iw-H515-54",
+      "width": 0.782293
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-H515-90",
+      "kind": "DOOR",
+      "offset": 0.9352,
+      "sill": 0,
+      "wallId": "iw-H515-54",
+      "width": 0.885227
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-V298-457",
+      "kind": "DOOR",
+      "offset": 0.33968,
+      "sill": 0,
+      "wallId": "iw-V298-495-x",
+      "width": 0.782294
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-V743-601",
+      "kind": "DOOR",
+      "offset": 0.296988,
+      "sill": 0,
+      "wallId": "iw-V742-512",
+      "width": 0.782293
+    },
+    {
+      "height": 2.28208,
+      "id": "op-fix-front-2e6f9e",
+      "kind": "WINDOW",
+      "offset": 22.384528,
+      "sill": 0.06712,
+      "wallId": "ring-mass-main-w0",
+      "width": 0.80544
+    },
+    {
+      "height": 2.28208,
+      "id": "op-fix-front-3635de",
+      "kind": "WINDOW",
+      "offset": 1.006808,
+      "sill": 0.06712,
+      "wallId": "ring-mass-main-w0",
+      "width": 0.80544
+    },
+    {
+      "height": 2.3492,
+      "id": "op-fix-front-77e077",
+      "kind": "DOOR",
+      "offset": 11.813128,
+      "sill": 0,
+      "wallId": "ring-mass-main-w0",
+      "width": 2.3492
+    },
+    {
+      "height": 2.28208,
+      "id": "op-fix-front-a8709e",
+      "kind": "WINDOW",
+      "offset": 9.094768,
+      "sill": 0.06712,
+      "wallId": "ring-mass-main-w0",
+      "width": 0.839
+    },
+    {
+      "height": 2.28208,
+      "id": "op-fix-front-d6f710",
+      "kind": "WINDOW",
+      "offset": 3.356008,
+      "sill": 0.06712,
+      "wallId": "ring-mass-main-w0",
+      "width": 0.80544
+    },
+    {
+      "height": 2.21496,
+      "id": "op-fix-front-e93a18",
+      "kind": "DOOR",
+      "offset": 0.548088,
+      "sill": 0,
+      "wallId": "ring-mass-wing-1-w0",
+      "width": 5.50384
+    },
+    {
+      "height": 2.28208,
+      "id": "op-fix-front-f0972d",
+      "kind": "WINDOW",
+      "offset": 6.510648,
+      "sill": 0.06712,
+      "wallId": "ring-mass-main-w0",
+      "width": 0.80544
+    },
+    {
+      "height": 2.184996,
+      "id": "op-fix-rear-4cc473",
+      "kind": "DOOR",
+      "offset": 1.390452,
+      "sill": 0.099318,
+      "wallId": "ring-mass-main-w2",
+      "width": 3.443024
+    },
+    {
+      "height": 2.286815,
+      "id": "op-fix-rear-5c7114",
+      "kind": "DOOR",
+      "offset": 6.190822,
+      "sill": 0.099318,
+      "wallId": "ring-mass-main-w2",
+      "width": 6.819836
+    },
+    {
+      "height": 2.184996,
+      "id": "op-fix-rear-67daa0",
+      "kind": "DOOR",
+      "offset": 21.121628,
+      "sill": 0.099318,
+      "wallId": "ring-mass-main-w2",
+      "width": 2.218102
+    },
+    {
+      "height": 2.184996,
+      "id": "op-fix-rear-c781e7",
+      "kind": "DOOR",
+      "offset": 14.169368,
+      "sill": 0.099318,
+      "wallId": "ring-mass-main-w2",
+      "width": 2.218102
+    },
+    {
+      "height": 2.184996,
+      "id": "op-fix-rear-f1fde5",
+      "kind": "DOOR",
+      "offset": 17.645498,
+      "sill": 0.099318,
+      "wallId": "ring-mass-main-w2",
+      "width": 2.218102
+    },
+    {
+      "height": 0.774816,
+      "id": "op-fix-right-031f0b",
+      "kind": "WINDOW",
+      "offset": 1.466577,
+      "sill": 1.148388,
+      "wallId": "ring-mass-wing-1-w1",
+      "width": 1.812516
+    }
+  ],
+  "platforms": [],
+  "railings": [],
+  "relationships": [],
+  "roofEdges": [],
+  "roofOpenings": [],
+  "roofPlanes": [],
+  "rooflights": [],
+  "roofs": [
+    {
+      "eaveOffset": 2.729167,
+      "evidence": {
+        "interpretation": "ridge along X (slopes seen on the sides along it, the gable end across it); pitch 37° from a 3.10 m rise over half of 8.23 m; no gable-end view gives the wall's corner under the roof: the roofs' lowest drawn edge (2.42 m, the eaves' edge out on the overhang) is taken as the wall's top under the roof, a lower bound",
+        "properties": {
+          "eaveOffset": "UNRESOLVED",
+          "pitchDeg": "UNRESOLVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432 + frame-asset-projekt-domu-mindelo-1bd6779f35-f3339440b9 + frame-asset-projekt-domu-mindelo-cfc102784f-bbeade8f1f + frame-asset-projekt-domu-mindelo-f48b0b12ea-73c2f2f601",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432",
+          "src-frame-asset-projekt-domu-mindelo-1bd6779f35-f3339440b9",
+          "src-frame-asset-projekt-domu-mindelo-cfc102784f-bbeade8f1f",
+          "src-frame-asset-projekt-domu-mindelo-f48b0b12ea-73c2f2f601"
+        ],
+        "status": "UNRESOLVED"
+      },
+      "footprint": {
+        "maxX": 24.4981,
+        "maxZ": 14.143,
+        "minX": -0.27,
+        "minZ": 5.9084
+      },
+      "id": "roof-mass-main",
+      "kind": "GABLE",
+      "levelId": "lvl-0",
+      "materialId": "mat-roof",
+      "overhang": 0,
+      "pitchDeg": 37,
+      "ridgeAxis": "X",
+      "thickness": 0.25
+    },
+    {
+      "eaveOffset": 2.850487,
+      "evidence": {
+        "interpretation": "ridge along Z (slopes seen on the sides along it, the gable end across it); pitch 27.3° from a 1.69 m rise over half of 6.55 m; no gable-end view gives the wall's corner under the roof: the roofs' lowest drawn edge (2.57 m, the eaves' edge out on the overhang) is taken as the wall's top under the roof, a lower bound",
+        "properties": {
+          "eaveOffset": "UNRESOLVED",
+          "pitchDeg": "UNRESOLVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432 + frame-asset-projekt-domu-mindelo-1bd6779f35-f3339440b9 + frame-asset-projekt-domu-mindelo-cfc102784f-bbeade8f1f + frame-asset-projekt-domu-mindelo-f48b0b12ea-73c2f2f601",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432",
+          "src-frame-asset-projekt-domu-mindelo-1bd6779f35-f3339440b9",
+          "src-frame-asset-projekt-domu-mindelo-cfc102784f-bbeade8f1f",
+          "src-frame-asset-projekt-domu-mindelo-f48b0b12ea-73c2f2f601"
+        ],
+        "status": "UNRESOLVED"
+      },
+      "footprint": {
+        "maxX": 21.369,
+        "maxZ": 5.9084,
+        "minX": 14.8224,
+        "minZ": 0
+      },
+      "id": "roof-mass-wing-1",
+      "kind": "GABLE",
+      "levelId": "lvl-0",
+      "materialId": "mat-roof",
+      "overhang": 0,
+      "pitchDeg": 27.3,
+      "ridgeAxis": "Z",
+      "thickness": 0.25
+    }
+  ],
+  "rooms": [],
+  "schema": "buildapp.canonical-building-model",
+  "schemaVersion": "1.9.0",
+  "slabs": [],
+  "stairs": [],
+  "stepRuns": [],
+  "surfaceRegions": [
+    {
+      "evidence": {
+        "interpretation": "a timber outline from finish-b82560 (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-mass-main-w1",
+      "id": "appearance-east-ring-mass-main-w1-timber-0",
+      "materialId": "mat-timber",
+      "outline": [
+        {
+          "a": 2.7716,
+          "b": 4.263246
+        },
+        {
+          "a": 2.8316,
+          "b": 4.263246
+        },
+        {
+          "a": 2.8316,
+          "b": 4.243246
+        },
+        {
+          "a": 2.8716,
+          "b": 4.243246
+        },
+        {
+          "a": 2.8716,
+          "b": 4.223246
+        },
+        {
+          "a": 2.9116,
+          "b": 4.223246
+        },
+        {
+          "a": 2.9116,
+          "b": 4.203246
+        },
+        {
+          "a": 2.9516,
+          "b": 4.203246
+        },
+        {
+          "a": 2.9516,
+          "b": 4.183246
+        },
+        {
+          "a": 2.9916,
+          "b": 4.183246
+        },
+        {
+          "a": 2.9916,
+          "b": 4.163246
+        },
+        {
+          "a": 3.0316,
+          "b": 4.163246
+        },
+        {
+          "a": 3.0316,
+          "b": 4.143246
+        },
+        {
+          "a": 3.0516,
+          "b": 4.143246
+        },
+        {
+          "a": 3.0516,
+          "b": 4.123246
+        },
+        {
+          "a": 3.0916,
+          "b": 4.123246
+        },
+        {
+          "a": 3.0916,
+          "b": 4.103246
+        },
+        {
+          "a": 3.1316,
+          "b": 4.103246
+        },
+        {
+          "a": 3.1316,
+          "b": 4.083246
+        },
+        {
+          "a": 3.1716,
+          "b": 4.083246
+        },
+        {
+          "a": 3.1716,
+          "b": 4.063246
+        },
+        {
+          "a": 3.2116,
+          "b": 4.063246
+        },
+        {
+          "a": 3.2116,
+          "b": 4.043246
+        },
+        {
+          "a": 3.2516,
+          "b": 4.043246
+        },
+        {
+          "a": 3.2516,
+          "b": 4.023246
+        },
+        {
+          "a": 3.2916,
+          "b": 4.023246
+        },
+        {
+          "a": 3.2916,
+          "b": 4.003246
+        },
+        {
+          "a": 3.3316,
+          "b": 4.003246
+        },
+        {
+          "a": 3.3316,
+          "b": 3.983246
+        },
+        {
+          "a": 3.3516,
+          "b": 3.983246
+        },
+        {
+          "a": 3.3516,
+          "b": 3.963246
+        },
+        {
+          "a": 3.3916,
+          "b": 3.963246
+        },
+        {
+          "a": 3.3916,
+          "b": 3.943246
+        },
+        {
+          "a": 3.4316,
+          "b": 3.943246
+        },
+        {
+          "a": 3.4316,
+          "b": 3.923246
+        },
+        {
+          "a": 3.4716,
+          "b": 3.923246
+        },
+        {
+          "a": 3.4716,
+          "b": 3.903246
+        },
+        {
+          "a": 3.5116,
+          "b": 3.903246
+        },
+        {
+          "a": 3.5116,
+          "b": 3.883246
+        },
+        {
+          "a": 3.5516,
+          "b": 3.883246
+        },
+        {
+          "a": 3.5516,
+          "b": 3.863246
+        },
+        {
+          "a": 3.5916,
+          "b": 3.863246
+        },
+        {
+          "a": 3.5916,
+          "b": 3.843246
+        },
+        {
+          "a": 3.6116,
+          "b": 3.843246
+        },
+        {
+          "a": 3.6116,
+          "b": 3.823246
+        },
+        {
+          "a": 3.6516,
+          "b": 3.823246
+        },
+        {
+          "a": 3.6516,
+          "b": 3.803246
+        },
+        {
+          "a": 3.6916,
+          "b": 3.803246
+        },
+        {
+          "a": 3.6916,
+          "b": 3.783246
+        },
+        {
+          "a": 3.7316,
+          "b": 3.783246
+        },
+        {
+          "a": 3.7316,
+          "b": 3.763246
+        },
+        {
+          "a": 3.7716,
+          "b": 3.763246
+        },
+        {
+          "a": 3.7716,
+          "b": 3.743246
+        },
+        {
+          "a": 3.8116,
+          "b": 3.743246
+        },
+        {
+          "a": 3.8116,
+          "b": 3.723246
+        },
+        {
+          "a": 3.8516,
+          "b": 3.723246
+        },
+        {
+          "a": 3.8516,
+          "b": 3.703246
+        },
+        {
+          "a": 3.8916,
+          "b": 3.703246
+        },
+        {
+          "a": 3.8916,
+          "b": 3.683246
+        },
+        {
+          "a": 3.9116,
+          "b": 3.683246
+        },
+        {
+          "a": 3.9116,
+          "b": 3.663246
+        },
+        {
+          "a": 3.9516,
+          "b": 3.663246
+        },
+        {
+          "a": 3.9516,
+          "b": 3.643246
+        },
+        {
+          "a": 3.9916,
+          "b": 3.643246
+        },
+        {
+          "a": 3.9916,
+          "b": 3.623246
+        },
+        {
+          "a": 4.0316,
+          "b": 3.623246
+        },
+        {
+          "a": 4.0316,
+          "b": 3.603246
+        },
+        {
+          "a": 4.0716,
+          "b": 3.603246
+        },
+        {
+          "a": 4.0716,
+          "b": 3.583246
+        },
+        {
+          "a": 4.1116,
+          "b": 3.583246
+        },
+        {
+          "a": 4.1116,
+          "b": 3.563246
+        },
+        {
+          "a": 4.1516,
+          "b": 3.563246
+        },
+        {
+          "a": 4.1516,
+          "b": 3.543246
+        },
+        {
+          "a": 4.1916,
+          "b": 3.543246
+        },
+        {
+          "a": 4.1916,
+          "b": 3.523246
+        },
+        {
+          "a": 4.2116,
+          "b": 3.523246
+        },
+        {
+          "a": 4.2116,
+          "b": 3.503246
+        },
+        {
+          "a": 4.2516,
+          "b": 3.503246
+        },
+        {
+          "a": 4.2516,
+          "b": 3.483246
+        },
+        {
+          "a": 4.2916,
+          "b": 3.483246
+        },
+        {
+          "a": 4.2916,
+          "b": 3.463246
+        },
+        {
+          "a": 4.3316,
+          "b": 3.463246
+        },
+        {
+          "a": 4.3316,
+          "b": 3.443246
+        },
+        {
+          "a": 4.3716,
+          "b": 3.443246
+        },
+        {
+          "a": 4.3716,
+          "b": 3.423246
+        },
+        {
+          "a": 4.4116,
+          "b": 3.423246
+        },
+        {
+          "a": 4.4116,
+          "b": 3.403246
+        },
+        {
+          "a": 4.4516,
+          "b": 3.403246
+        },
+        {
+          "a": 4.4516,
+          "b": 3.383246
+        },
+        {
+          "a": 4.4916,
+          "b": 3.383246
+        },
+        {
+          "a": 4.4916,
+          "b": 3.363246
+        },
+        {
+          "a": 4.5116,
+          "b": 3.363246
+        },
+        {
+          "a": 4.5116,
+          "b": 3.343246
+        },
+        {
+          "a": 4.5516,
+          "b": 3.343246
+        },
+        {
+          "a": 4.5516,
+          "b": 3.323246
+        },
+        {
+          "a": 4.5916,
+          "b": 3.323246
+        },
+        {
+          "a": 4.5916,
+          "b": 3.303246
+        },
+        {
+          "a": 4.6316,
+          "b": 3.303246
+        },
+        {
+          "a": 4.6316,
+          "b": 3.283246
+        },
+        {
+          "a": 4.6716,
+          "b": 3.283246
+        },
+        {
+          "a": 4.6716,
+          "b": 3.263246
+        },
+        {
+          "a": 4.7116,
+          "b": 3.263246
+        },
+        {
+          "a": 4.7116,
+          "b": 3.243246
+        },
+        {
+          "a": 4.7516,
+          "b": 3.243246
+        },
+        {
+          "a": 4.7516,
+          "b": 3.223246
+        },
+        {
+          "a": 4.7716,
+          "b": 3.223246
+        },
+        {
+          "a": 4.7716,
+          "b": 3.203246
+        },
+        {
+          "a": 4.8116,
+          "b": 3.203246
+        },
+        {
+          "a": 4.8116,
+          "b": 3.183246
+        },
+        {
+          "a": 4.8516,
+          "b": 3.183246
+        },
+        {
+          "a": 4.8516,
+          "b": 3.163246
+        },
+        {
+          "a": 4.8916,
+          "b": 3.163246
+        },
+        {
+          "a": 4.8916,
+          "b": 3.143246
+        },
+        {
+          "a": 4.9316,
+          "b": 3.143246
+        },
+        {
+          "a": 4.9316,
+          "b": 3.123246
+        },
+        {
+          "a": 4.9716,
+          "b": 3.123246
+        },
+        {
+          "a": 4.9716,
+          "b": 3.103246
+        },
+        {
+          "a": 5.0116,
+          "b": 3.103246
+        },
+        {
+          "a": 5.0116,
+          "b": 3.083246
+        },
+        {
+          "a": 5.0516,
+          "b": 3.083246
+        },
+        {
+          "a": 5.0516,
+          "b": 3.063246
+        },
+        {
+          "a": 5.0716,
+          "b": 3.063246
+        },
+        {
+          "a": 5.0716,
+          "b": 3.043246
+        },
+        {
+          "a": 5.1116,
+          "b": 3.043246
+        },
+        {
+          "a": 5.1116,
+          "b": 3.023246
+        },
+        {
+          "a": 5.1516,
+          "b": 3.023246
+        },
+        {
+          "a": 5.1516,
+          "b": 3.003246
+        },
+        {
+          "a": 5.1916,
+          "b": 3.003246
+        },
+        {
+          "a": 5.1916,
+          "b": 2.983246
+        },
+        {
+          "a": 5.2316,
+          "b": 2.983246
+        },
+        {
+          "a": 5.2316,
+          "b": 2.963246
+        },
+        {
+          "a": 5.2716,
+          "b": 2.963246
+        },
+        {
+          "a": 5.2716,
+          "b": 2.943246
+        },
+        {
+          "a": 5.3116,
+          "b": 2.943246
+        },
+        {
+          "a": 5.3116,
+          "b": 2.923246
+        },
+        {
+          "a": 5.3516,
+          "b": 2.923246
+        },
+        {
+          "a": 5.3516,
+          "b": 2.903246
+        },
+        {
+          "a": 5.3716,
+          "b": 2.903246
+        },
+        {
+          "a": 5.3716,
+          "b": 2.883246
+        },
+        {
+          "a": 5.4116,
+          "b": 2.883246
+        },
+        {
+          "a": 5.4116,
+          "b": 2.863246
+        },
+        {
+          "a": 5.4516,
+          "b": 2.863246
+        },
+        {
+          "a": 5.4516,
+          "b": 2.843246
+        },
+        {
+          "a": 5.4916,
+          "b": 2.843246
+        },
+        {
+          "a": 5.4916,
+          "b": 2.823246
+        },
+        {
+          "a": 5.5316,
+          "b": 2.823246
+        },
+        {
+          "a": 5.5316,
+          "b": 2.803246
+        },
+        {
+          "a": 5.5716,
+          "b": 2.803246
+        },
+        {
+          "a": 5.5716,
+          "b": 2.783246
+        },
+        {
+          "a": 5.6116,
+          "b": 2.783246
+        },
+        {
+          "a": 5.6116,
+          "b": 2.763246
+        },
+        {
+          "a": 5.6516,
+          "b": 2.763246
+        },
+        {
+          "a": 5.6516,
+          "b": 2.743246
+        },
+        {
+          "a": 5.6716,
+          "b": 2.743246
+        },
+        {
+          "a": 5.6716,
+          "b": 2.723246
+        },
+        {
+          "a": 5.7116,
+          "b": 2.723246
+        },
+        {
+          "a": 5.7116,
+          "b": 2.703246
+        },
+        {
+          "a": 5.7516,
+          "b": 2.703246
+        },
+        {
+          "a": 5.7516,
+          "b": 2.683246
+        },
+        {
+          "a": 5.7916,
+          "b": 2.683246
+        },
+        {
+          "a": 5.7916,
+          "b": 2.663246
+        },
+        {
+          "a": 5.8316,
+          "b": 2.663246
+        },
+        {
+          "a": 5.8316,
+          "b": 2.643246
+        },
+        {
+          "a": 5.8716,
+          "b": 2.643246
+        },
+        {
+          "a": 5.8716,
+          "b": 2.623246
+        },
+        {
+          "a": 5.9116,
+          "b": 2.623246
+        },
+        {
+          "a": 5.9116,
+          "b": 2.603246
+        },
+        {
+          "a": 5.9516,
+          "b": 2.603246
+        },
+        {
+          "a": 5.9516,
+          "b": 2.583246
+        },
+        {
+          "a": 5.9716,
+          "b": 2.583246
+        },
+        {
+          "a": 5.9716,
+          "b": 2.563246
+        },
+        {
+          "a": 6.0116,
+          "b": 2.563246
+        },
+        {
+          "a": 6.0116,
+          "b": 2.543246
+        },
+        {
+          "a": 6.0516,
+          "b": 2.543246
+        },
+        {
+          "a": 6.0516,
+          "b": 2.523246
+        },
+        {
+          "a": 6.0916,
+          "b": 2.523246
+        },
+        {
+          "a": 6.0916,
+          "b": 2.503246
+        },
+        {
+          "a": 6.1316,
+          "b": 2.503246
+        },
+        {
+          "a": 6.1316,
+          "b": 2.483246
+        },
+        {
+          "a": 6.1716,
+          "b": 2.483246
+        },
+        {
+          "a": 6.1716,
+          "b": 2.463246
+        },
+        {
+          "a": 6.2116,
+          "b": 2.463246
+        },
+        {
+          "a": 6.2116,
+          "b": 2.443246
+        },
+        {
+          "a": 6.2316,
+          "b": 2.443246
+        },
+        {
+          "a": 6.2316,
+          "b": 2.423246
+        },
+        {
+          "a": 6.2716,
+          "b": 2.423246
+        },
+        {
+          "a": 6.2716,
+          "b": 2.403246
+        },
+        {
+          "a": 6.3116,
+          "b": 2.403246
+        },
+        {
+          "a": 6.3116,
+          "b": 2.383246
+        },
+        {
+          "a": 6.3516,
+          "b": 2.383246
+        },
+        {
+          "a": 6.3516,
+          "b": 2.363246
+        },
+        {
+          "a": 6.3916,
+          "b": 2.363246
+        },
+        {
+          "a": 6.3916,
+          "b": 2.343246
+        },
+        {
+          "a": 6.4316,
+          "b": 2.343246
+        },
+        {
+          "a": 6.4316,
+          "b": 2.323246
+        },
+        {
+          "a": 6.4516,
+          "b": 2.323246
+        },
+        {
+          "a": 6.4516,
+          "b": 0.003246
+        },
+        {
+          "a": 6.4316,
+          "b": 0.003246
+        },
+        {
+          "a": 6.4316,
+          "b": 0
+        },
+        {
+          "a": 0.2916,
+          "b": 0
+        },
+        {
+          "a": 0.2916,
+          "b": 0.003246
+        },
+        {
+          "a": 0.2716,
+          "b": 0.003246
+        },
+        {
+          "a": 0.2716,
+          "b": 2.643246
+        },
+        {
+          "a": 0.2916,
+          "b": 2.643246
+        },
+        {
+          "a": 0.2916,
+          "b": 2.663246
+        },
+        {
+          "a": 0.3116,
+          "b": 2.663246
+        },
+        {
+          "a": 0.3116,
+          "b": 2.683246
+        },
+        {
+          "a": 0.3316,
+          "b": 2.683246
+        },
+        {
+          "a": 0.3316,
+          "b": 2.703246
+        },
+        {
+          "a": 0.3716,
+          "b": 2.703246
+        },
+        {
+          "a": 0.3716,
+          "b": 2.723246
+        },
+        {
+          "a": 0.3916,
+          "b": 2.723246
+        },
+        {
+          "a": 0.3916,
+          "b": 2.743246
+        },
+        {
+          "a": 0.4116,
+          "b": 2.743246
+        },
+        {
+          "a": 0.4116,
+          "b": 2.763246
+        },
+        {
+          "a": 0.4516,
+          "b": 2.763246
+        },
+        {
+          "a": 0.4516,
+          "b": 2.783246
+        },
+        {
+          "a": 0.4716,
+          "b": 2.783246
+        },
+        {
+          "a": 0.4716,
+          "b": 2.803246
+        },
+        {
+          "a": 0.4916,
+          "b": 2.803246
+        },
+        {
+          "a": 0.4916,
+          "b": 2.823246
+        },
+        {
+          "a": 0.5316,
+          "b": 2.823246
+        },
+        {
+          "a": 0.5316,
+          "b": 2.843246
+        },
+        {
+          "a": 0.5516,
+          "b": 2.843246
+        },
+        {
+          "a": 0.5516,
+          "b": 2.863246
+        },
+        {
+          "a": 0.5716,
+          "b": 2.863246
+        },
+        {
+          "a": 0.5716,
+          "b": 2.883246
+        },
+        {
+          "a": 0.6116,
+          "b": 2.883246
+        },
+        {
+          "a": 0.6116,
+          "b": 2.903246
+        },
+        {
+          "a": 0.6316,
+          "b": 2.903246
+        },
+        {
+          "a": 0.6316,
+          "b": 2.923246
+        },
+        {
+          "a": 0.6516,
+          "b": 2.923246
+        },
+        {
+          "a": 0.6516,
+          "b": 2.943246
+        },
+        {
+          "a": 0.6916,
+          "b": 2.943246
+        },
+        {
+          "a": 0.6916,
+          "b": 2.963246
+        },
+        {
+          "a": 0.7116,
+          "b": 2.963246
+        },
+        {
+          "a": 0.7116,
+          "b": 2.983246
+        },
+        {
+          "a": 0.7316,
+          "b": 2.983246
+        },
+        {
+          "a": 0.7316,
+          "b": 3.003246
+        },
+        {
+          "a": 0.7716,
+          "b": 3.003246
+        },
+        {
+          "a": 0.7716,
+          "b": 3.023246
+        },
+        {
+          "a": 0.7916,
+          "b": 3.023246
+        },
+        {
+          "a": 0.7916,
+          "b": 3.043246
+        },
+        {
+          "a": 0.8116,
+          "b": 3.043246
+        },
+        {
+          "a": 0.8116,
+          "b": 3.063246
+        },
+        {
+          "a": 0.8516,
+          "b": 3.063246
+        },
+        {
+          "a": 0.8516,
+          "b": 3.083246
+        },
+        {
+          "a": 0.8716,
+          "b": 3.083246
+        },
+        {
+          "a": 0.8716,
+          "b": 3.103246
+        },
+        {
+          "a": 0.8916,
+          "b": 3.103246
+        },
+        {
+          "a": 0.8916,
+          "b": 3.123246
+        },
+        {
+          "a": 0.9316,
+          "b": 3.123246
+        },
+        {
+          "a": 0.9316,
+          "b": 3.143246
+        },
+        {
+          "a": 0.9516,
+          "b": 3.143246
+        },
+        {
+          "a": 0.9516,
+          "b": 3.163246
+        },
+        {
+          "a": 0.9716,
+          "b": 3.163246
+        },
+        {
+          "a": 0.9716,
+          "b": 3.183246
+        },
+        {
+          "a": 1.0116,
+          "b": 3.183246
+        },
+        {
+          "a": 1.0116,
+          "b": 3.203246
+        },
+        {
+          "a": 1.0316,
+          "b": 3.203246
+        },
+        {
+          "a": 1.0316,
+          "b": 3.223246
+        },
+        {
+          "a": 1.0516,
+          "b": 3.223246
+        },
+        {
+          "a": 1.0516,
+          "b": 3.243246
+        },
+        {
+          "a": 1.0916,
+          "b": 3.243246
+        },
+        {
+          "a": 1.0916,
+          "b": 3.263246
+        },
+        {
+          "a": 1.1116,
+          "b": 3.263246
+        },
+        {
+          "a": 1.1116,
+          "b": 3.283246
+        },
+        {
+          "a": 1.1316,
+          "b": 3.283246
+        },
+        {
+          "a": 1.1316,
+          "b": 3.303246
+        },
+        {
+          "a": 1.1716,
+          "b": 3.303246
+        },
+        {
+          "a": 1.1716,
+          "b": 3.323246
+        },
+        {
+          "a": 1.1916,
+          "b": 3.323246
+        },
+        {
+          "a": 1.1916,
+          "b": 3.343246
+        },
+        {
+          "a": 1.2116,
+          "b": 3.343246
+        },
+        {
+          "a": 1.2116,
+          "b": 3.363246
+        },
+        {
+          "a": 1.2516,
+          "b": 3.363246
+        },
+        {
+          "a": 1.2516,
+          "b": 3.383246
+        },
+        {
+          "a": 1.2716,
+          "b": 3.383246
+        },
+        {
+          "a": 1.2716,
+          "b": 3.403246
+        },
+        {
+          "a": 1.2916,
+          "b": 3.403246
+        },
+        {
+          "a": 1.2916,
+          "b": 3.423246
+        },
+        {
+          "a": 1.3316,
+          "b": 3.423246
+        },
+        {
+          "a": 1.3316,
+          "b": 3.443246
+        },
+        {
+          "a": 1.3516,
+          "b": 3.443246
+        },
+        {
+          "a": 1.3516,
+          "b": 3.463246
+        },
+        {
+          "a": 1.3716,
+          "b": 3.463246
+        },
+        {
+          "a": 1.3716,
+          "b": 3.483246
+        },
+        {
+          "a": 1.4116,
+          "b": 3.483246
+        },
+        {
+          "a": 1.4116,
+          "b": 3.503246
+        },
+        {
+          "a": 1.4316,
+          "b": 3.503246
+        },
+        {
+          "a": 1.4316,
+          "b": 3.523246
+        },
+        {
+          "a": 1.4516,
+          "b": 3.523246
+        },
+        {
+          "a": 1.4516,
+          "b": 3.543246
+        },
+        {
+          "a": 1.4916,
+          "b": 3.543246
+        },
+        {
+          "a": 1.4916,
+          "b": 3.563246
+        },
+        {
+          "a": 1.5116,
+          "b": 3.563246
+        },
+        {
+          "a": 1.5116,
+          "b": 3.583246
+        },
+        {
+          "a": 1.5516,
+          "b": 3.583246
+        },
+        {
+          "a": 1.5516,
+          "b": 3.603246
+        },
+        {
+          "a": 1.5916,
+          "b": 3.603246
+        },
+        {
+          "a": 1.5916,
+          "b": 3.623246
+        },
+        {
+          "a": 1.6116,
+          "b": 3.623246
+        },
+        {
+          "a": 1.6116,
+          "b": 3.643246
+        },
+        {
+          "a": 1.6516,
+          "b": 3.643246
+        },
+        {
+          "a": 1.6516,
+          "b": 3.663246
+        },
+        {
+          "a": 1.6916,
+          "b": 3.663246
+        },
+        {
+          "a": 1.6916,
+          "b": 3.683246
+        },
+        {
+          "a": 1.7316,
+          "b": 3.683246
+        },
+        {
+          "a": 1.7316,
+          "b": 3.703246
+        },
+        {
+          "a": 1.7716,
+          "b": 3.703246
+        },
+        {
+          "a": 1.7716,
+          "b": 3.723246
+        },
+        {
+          "a": 1.8116,
+          "b": 3.723246
+        },
+        {
+          "a": 1.8116,
+          "b": 3.743246
+        },
+        {
+          "a": 1.8516,
+          "b": 3.743246
+        },
+        {
+          "a": 1.8516,
+          "b": 3.763246
+        },
+        {
+          "a": 1.8916,
+          "b": 3.763246
+        },
+        {
+          "a": 1.8916,
+          "b": 3.783246
+        },
+        {
+          "a": 1.9116,
+          "b": 3.783246
+        },
+        {
+          "a": 1.9116,
+          "b": 3.803246
+        },
+        {
+          "a": 1.9516,
+          "b": 3.803246
+        },
+        {
+          "a": 1.9516,
+          "b": 3.823246
+        },
+        {
+          "a": 1.9916,
+          "b": 3.823246
+        },
+        {
+          "a": 1.9916,
+          "b": 3.843246
+        },
+        {
+          "a": 2.0316,
+          "b": 3.843246
+        },
+        {
+          "a": 2.0316,
+          "b": 3.863246
+        },
+        {
+          "a": 2.0716,
+          "b": 3.863246
+        },
+        {
+          "a": 2.0716,
+          "b": 3.883246
+        },
+        {
+          "a": 2.1116,
+          "b": 3.883246
+        },
+        {
+          "a": 2.1116,
+          "b": 3.903246
+        },
+        {
+          "a": 2.1516,
+          "b": 3.903246
+        },
+        {
+          "a": 2.1516,
+          "b": 3.923246
+        },
+        {
+          "a": 2.1716,
+          "b": 3.923246
+        },
+        {
+          "a": 2.1716,
+          "b": 3.943246
+        },
+        {
+          "a": 2.2116,
+          "b": 3.943246
+        },
+        {
+          "a": 2.2116,
+          "b": 3.963246
+        },
+        {
+          "a": 2.2516,
+          "b": 3.963246
+        },
+        {
+          "a": 2.2516,
+          "b": 3.983246
+        },
+        {
+          "a": 2.2916,
+          "b": 3.983246
+        },
+        {
+          "a": 2.2916,
+          "b": 4.003246
+        },
+        {
+          "a": 2.3316,
+          "b": 4.003246
+        },
+        {
+          "a": 2.3316,
+          "b": 4.023246
+        },
+        {
+          "a": 2.3716,
+          "b": 4.023246
+        },
+        {
+          "a": 2.3716,
+          "b": 4.043246
+        },
+        {
+          "a": 2.4116,
+          "b": 4.043246
+        },
+        {
+          "a": 2.4116,
+          "b": 4.063246
+        },
+        {
+          "a": 2.4516,
+          "b": 4.063246
+        },
+        {
+          "a": 2.4516,
+          "b": 4.083246
+        },
+        {
+          "a": 2.4716,
+          "b": 4.083246
+        },
+        {
+          "a": 2.4716,
+          "b": 4.103246
+        },
+        {
+          "a": 2.5116,
+          "b": 4.103246
+        },
+        {
+          "a": 2.5116,
+          "b": 4.123246
+        },
+        {
+          "a": 2.5516,
+          "b": 4.123246
+        },
+        {
+          "a": 2.5516,
+          "b": 4.143246
+        },
+        {
+          "a": 2.5916,
+          "b": 4.143246
+        },
+        {
+          "a": 2.5916,
+          "b": 4.163246
+        },
+        {
+          "a": 2.6316,
+          "b": 4.163246
+        },
+        {
+          "a": 2.6316,
+          "b": 4.183246
+        },
+        {
+          "a": 2.6716,
+          "b": 4.183246
+        },
+        {
+          "a": 2.6716,
+          "b": 4.203246
+        },
+        {
+          "a": 2.7116,
+          "b": 4.203246
+        },
+        {
+          "a": 2.7116,
+          "b": 4.223246
+        },
+        {
+          "a": 2.7516,
+          "b": 4.223246
+        },
+        {
+          "a": 2.7516,
+          "b": 4.243246
+        },
+        {
+          "a": 2.7716,
+          "b": 4.243246
+        }
+      ],
+      "rect": {
+        "a0": 0.2716,
+        "a1": 6.4516,
+        "b0": 0,
+        "b1": 4.263246
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a timber outline from finish-3d8f78 (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-mass-main-w0",
+      "id": "appearance-front-ring-mass-main-w0-timber-0",
+      "materialId": "mat-timber",
+      "outline": [
+        {
+          "a": 1.87,
+          "b": 2.363246
+        },
+        {
+          "a": 3.29,
+          "b": 2.363246
+        },
+        {
+          "a": 3.29,
+          "b": 2.343246
+        },
+        {
+          "a": 3.31,
+          "b": 2.343246
+        },
+        {
+          "a": 3.31,
+          "b": 0.063246
+        },
+        {
+          "a": 3.29,
+          "b": 0.063246
+        },
+        {
+          "a": 3.29,
+          "b": 0.043246
+        },
+        {
+          "a": 1.87,
+          "b": 0.043246
+        },
+        {
+          "a": 1.87,
+          "b": 0.063246
+        },
+        {
+          "a": 1.85,
+          "b": 0.063246
+        },
+        {
+          "a": 1.85,
+          "b": 2.343246
+        },
+        {
+          "a": 1.87,
+          "b": 2.343246
+        }
+      ],
+      "rect": {
+        "a0": 1.85,
+        "a1": 3.31,
+        "b0": 0.043246,
+        "b1": 2.363246
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a timber outline from finish-ad80f2 (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-mass-wing-1-w0",
+      "id": "appearance-front-ring-mass-wing-1-w0-timber-0",
+      "materialId": "mat-timber",
+      "outline": [
+        {
+          "a": 2.3276,
+          "b": 3.803246
+        },
+        {
+          "a": 2.3476,
+          "b": 3.803246
+        },
+        {
+          "a": 2.3476,
+          "b": 3.783246
+        },
+        {
+          "a": 2.4276,
+          "b": 3.783246
+        },
+        {
+          "a": 2.4276,
+          "b": 3.763246
+        },
+        {
+          "a": 2.5076,
+          "b": 3.763246
+        },
+        {
+          "a": 2.5076,
+          "b": 3.743246
+        },
+        {
+          "a": 2.5876,
+          "b": 3.743246
+        },
+        {
+          "a": 2.5876,
+          "b": 3.723246
+        },
+        {
+          "a": 2.6676,
+          "b": 3.723246
+        },
+        {
+          "a": 2.6676,
+          "b": 3.703246
+        },
+        {
+          "a": 2.7276,
+          "b": 3.703246
+        },
+        {
+          "a": 2.7276,
+          "b": 3.683246
+        },
+        {
+          "a": 2.8076,
+          "b": 3.683246
+        },
+        {
+          "a": 2.8076,
+          "b": 3.663246
+        },
+        {
+          "a": 2.8876,
+          "b": 3.663246
+        },
+        {
+          "a": 2.8876,
+          "b": 3.643246
+        },
+        {
+          "a": 2.9676,
+          "b": 3.643246
+        },
+        {
+          "a": 2.9676,
+          "b": 3.623246
+        },
+        {
+          "a": 3.0476,
+          "b": 3.623246
+        },
+        {
+          "a": 3.0476,
+          "b": 3.603246
+        },
+        {
+          "a": 3.1276,
+          "b": 3.603246
+        },
+        {
+          "a": 3.1276,
+          "b": 3.583246
+        },
+        {
+          "a": 3.2076,
+          "b": 3.583246
+        },
+        {
+          "a": 3.2076,
+          "b": 3.563246
+        },
+        {
+          "a": 3.2876,
+          "b": 3.563246
+        },
+        {
+          "a": 3.2876,
+          "b": 3.543246
+        },
+        {
+          "a": 3.3676,
+          "b": 3.543246
+        },
+        {
+          "a": 3.3676,
+          "b": 3.523246
+        },
+        {
+          "a": 3.4276,
+          "b": 3.523246
+        },
+        {
+          "a": 3.4276,
+          "b": 3.503246
+        },
+        {
+          "a": 3.5076,
+          "b": 3.503246
+        },
+        {
+          "a": 3.5076,
+          "b": 3.483246
+        },
+        {
+          "a": 3.5876,
+          "b": 3.483246
+        },
+        {
+          "a": 3.5876,
+          "b": 3.463246
+        },
+        {
+          "a": 3.6676,
+          "b": 3.463246
+        },
+        {
+          "a": 3.6676,
+          "b": 3.443246
+        },
+        {
+          "a": 3.7476,
+          "b": 3.443246
+        },
+        {
+          "a": 3.7476,
+          "b": 3.423246
+        },
+        {
+          "a": 3.8276,
+          "b": 3.423246
+        },
+        {
+          "a": 3.8276,
+          "b": 3.403246
+        },
+        {
+          "a": 3.9076,
+          "b": 3.403246
+        },
+        {
+          "a": 3.9076,
+          "b": 3.383246
+        },
+        {
+          "a": 3.9876,
+          "b": 3.383246
+        },
+        {
+          "a": 3.9876,
+          "b": 3.363246
+        },
+        {
+          "a": 4.0476,
+          "b": 3.363246
+        },
+        {
+          "a": 4.0476,
+          "b": 3.343246
+        },
+        {
+          "a": 4.1276,
+          "b": 3.343246
+        },
+        {
+          "a": 4.1276,
+          "b": 3.323246
+        },
+        {
+          "a": 4.2076,
+          "b": 3.323246
+        },
+        {
+          "a": 4.2076,
+          "b": 3.303246
+        },
+        {
+          "a": 4.2876,
+          "b": 3.303246
+        },
+        {
+          "a": 4.2876,
+          "b": 3.283246
+        },
+        {
+          "a": 4.3676,
+          "b": 3.283246
+        },
+        {
+          "a": 4.3676,
+          "b": 3.263246
+        },
+        {
+          "a": 4.4476,
+          "b": 3.263246
+        },
+        {
+          "a": 4.4476,
+          "b": 3.243246
+        },
+        {
+          "a": 4.5276,
+          "b": 3.243246
+        },
+        {
+          "a": 4.5276,
+          "b": 3.223246
+        },
+        {
+          "a": 4.6076,
+          "b": 3.223246
+        },
+        {
+          "a": 4.6076,
+          "b": 3.203246
+        },
+        {
+          "a": 4.6676,
+          "b": 3.203246
+        },
+        {
+          "a": 4.6676,
+          "b": 3.183246
+        },
+        {
+          "a": 4.7476,
+          "b": 3.183246
+        },
+        {
+          "a": 4.7476,
+          "b": 3.163246
+        },
+        {
+          "a": 4.8276,
+          "b": 3.163246
+        },
+        {
+          "a": 4.8276,
+          "b": 3.143246
+        },
+        {
+          "a": 4.9076,
+          "b": 3.143246
+        },
+        {
+          "a": 4.9076,
+          "b": 3.123246
+        },
+        {
+          "a": 4.9876,
+          "b": 3.123246
+        },
+        {
+          "a": 4.9876,
+          "b": 3.103246
+        },
+        {
+          "a": 5.0676,
+          "b": 3.103246
+        },
+        {
+          "a": 5.0676,
+          "b": 3.083246
+        },
+        {
+          "a": 5.1476,
+          "b": 3.083246
+        },
+        {
+          "a": 5.1476,
+          "b": 3.063246
+        },
+        {
+          "a": 5.2276,
+          "b": 3.063246
+        },
+        {
+          "a": 5.2276,
+          "b": 3.043246
+        },
+        {
+          "a": 5.3076,
+          "b": 3.043246
+        },
+        {
+          "a": 5.3076,
+          "b": 3.023246
+        },
+        {
+          "a": 5.3676,
+          "b": 3.023246
+        },
+        {
+          "a": 5.3676,
+          "b": 3.003246
+        },
+        {
+          "a": 5.4476,
+          "b": 3.003246
+        },
+        {
+          "a": 5.4476,
+          "b": 2.983246
+        },
+        {
+          "a": 5.5276,
+          "b": 2.983246
+        },
+        {
+          "a": 5.5276,
+          "b": 2.963246
+        },
+        {
+          "a": 5.6076,
+          "b": 2.963246
+        },
+        {
+          "a": 5.6076,
+          "b": 2.943246
+        },
+        {
+          "a": 5.6876,
+          "b": 2.943246
+        },
+        {
+          "a": 5.6876,
+          "b": 2.923246
+        },
+        {
+          "a": 5.7676,
+          "b": 2.923246
+        },
+        {
+          "a": 5.7676,
+          "b": 2.903246
+        },
+        {
+          "a": 5.8476,
+          "b": 2.903246
+        },
+        {
+          "a": 5.8476,
+          "b": 2.883246
+        },
+        {
+          "a": 5.9276,
+          "b": 2.883246
+        },
+        {
+          "a": 5.9276,
+          "b": 2.863246
+        },
+        {
+          "a": 5.9876,
+          "b": 2.863246
+        },
+        {
+          "a": 5.9876,
+          "b": 2.843246
+        },
+        {
+          "a": 6.0076,
+          "b": 2.843246
+        },
+        {
+          "a": 6.0076,
+          "b": 2.823246
+        },
+        {
+          "a": 5.9876,
+          "b": 2.823246
+        },
+        {
+          "a": 5.9876,
+          "b": 2.803246
+        },
+        {
+          "a": 0.5076,
+          "b": 2.803246
+        },
+        {
+          "a": 0.5076,
+          "b": 2.823246
+        },
+        {
+          "a": 0.4876,
+          "b": 2.823246
+        },
+        {
+          "a": 0.4876,
+          "b": 2.843246
+        },
+        {
+          "a": 0.5076,
+          "b": 2.843246
+        },
+        {
+          "a": 0.5076,
+          "b": 2.863246
+        },
+        {
+          "a": 0.5476,
+          "b": 2.863246
+        },
+        {
+          "a": 0.5476,
+          "b": 2.883246
+        },
+        {
+          "a": 0.5876,
+          "b": 2.883246
+        },
+        {
+          "a": 0.5876,
+          "b": 2.903246
+        },
+        {
+          "a": 0.6276,
+          "b": 2.903246
+        },
+        {
+          "a": 0.6276,
+          "b": 2.923246
+        },
+        {
+          "a": 0.6676,
+          "b": 2.923246
+        },
+        {
+          "a": 0.6676,
+          "b": 2.943246
+        },
+        {
+          "a": 0.7076,
+          "b": 2.943246
+        },
+        {
+          "a": 0.7076,
+          "b": 2.963246
+        },
+        {
+          "a": 0.7476,
+          "b": 2.963246
+        },
+        {
+          "a": 0.7476,
+          "b": 2.983246
+        },
+        {
+          "a": 0.7876,
+          "b": 2.983246
+        },
+        {
+          "a": 0.7876,
+          "b": 3.003246
+        },
+        {
+          "a": 0.8276,
+          "b": 3.003246
+        },
+        {
+          "a": 0.8276,
+          "b": 3.023246
+        },
+        {
+          "a": 0.8676,
+          "b": 3.023246
+        },
+        {
+          "a": 0.8676,
+          "b": 3.043246
+        },
+        {
+          "a": 0.9076,
+          "b": 3.043246
+        },
+        {
+          "a": 0.9076,
+          "b": 3.063246
+        },
+        {
+          "a": 0.9476,
+          "b": 3.063246
+        },
+        {
+          "a": 0.9476,
+          "b": 3.083246
+        },
+        {
+          "a": 0.9676,
+          "b": 3.083246
+        },
+        {
+          "a": 0.9676,
+          "b": 3.103246
+        },
+        {
+          "a": 1.0076,
+          "b": 3.103246
+        },
+        {
+          "a": 1.0076,
+          "b": 3.123246
+        },
+        {
+          "a": 1.0476,
+          "b": 3.123246
+        },
+        {
+          "a": 1.0476,
+          "b": 3.143246
+        },
+        {
+          "a": 1.0876,
+          "b": 3.143246
+        },
+        {
+          "a": 1.0876,
+          "b": 3.163246
+        },
+        {
+          "a": 1.1276,
+          "b": 3.163246
+        },
+        {
+          "a": 1.1276,
+          "b": 3.183246
+        },
+        {
+          "a": 1.1676,
+          "b": 3.183246
+        },
+        {
+          "a": 1.1676,
+          "b": 3.203246
+        },
+        {
+          "a": 1.2076,
+          "b": 3.203246
+        },
+        {
+          "a": 1.2076,
+          "b": 3.223246
+        },
+        {
+          "a": 1.2476,
+          "b": 3.223246
+        },
+        {
+          "a": 1.2476,
+          "b": 3.243246
+        },
+        {
+          "a": 1.2876,
+          "b": 3.243246
+        },
+        {
+          "a": 1.2876,
+          "b": 3.263246
+        },
+        {
+          "a": 1.3276,
+          "b": 3.263246
+        },
+        {
+          "a": 1.3276,
+          "b": 3.283246
+        },
+        {
+          "a": 1.3676,
+          "b": 3.283246
+        },
+        {
+          "a": 1.3676,
+          "b": 3.303246
+        },
+        {
+          "a": 1.4076,
+          "b": 3.303246
+        },
+        {
+          "a": 1.4076,
+          "b": 3.323246
+        },
+        {
+          "a": 1.4476,
+          "b": 3.323246
+        },
+        {
+          "a": 1.4476,
+          "b": 3.343246
+        },
+        {
+          "a": 1.4876,
+          "b": 3.343246
+        },
+        {
+          "a": 1.4876,
+          "b": 3.363246
+        },
+        {
+          "a": 1.5276,
+          "b": 3.363246
+        },
+        {
+          "a": 1.5276,
+          "b": 3.383246
+        },
+        {
+          "a": 1.5676,
+          "b": 3.383246
+        },
+        {
+          "a": 1.5676,
+          "b": 3.403246
+        },
+        {
+          "a": 1.5876,
+          "b": 3.403246
+        },
+        {
+          "a": 1.5876,
+          "b": 3.423246
+        },
+        {
+          "a": 1.6276,
+          "b": 3.423246
+        },
+        {
+          "a": 1.6276,
+          "b": 3.443246
+        },
+        {
+          "a": 1.6676,
+          "b": 3.443246
+        },
+        {
+          "a": 1.6676,
+          "b": 3.463246
+        },
+        {
+          "a": 1.7076,
+          "b": 3.463246
+        },
+        {
+          "a": 1.7076,
+          "b": 3.483246
+        },
+        {
+          "a": 1.7476,
+          "b": 3.483246
+        },
+        {
+          "a": 1.7476,
+          "b": 3.503246
+        },
+        {
+          "a": 1.7876,
+          "b": 3.503246
+        },
+        {
+          "a": 1.7876,
+          "b": 3.523246
+        },
+        {
+          "a": 1.8276,
+          "b": 3.523246
+        },
+        {
+          "a": 1.8276,
+          "b": 3.543246
+        },
+        {
+          "a": 1.8676,
+          "b": 3.543246
+        },
+        {
+          "a": 1.8676,
+          "b": 3.563246
+        },
+        {
+          "a": 1.9076,
+          "b": 3.563246
+        },
+        {
+          "a": 1.9076,
+          "b": 3.583246
+        },
+        {
+          "a": 1.9476,
+          "b": 3.583246
+        },
+        {
+          "a": 1.9476,
+          "b": 3.603246
+        },
+        {
+          "a": 1.9876,
+          "b": 3.603246
+        },
+        {
+          "a": 1.9876,
+          "b": 3.623246
+        },
+        {
+          "a": 2.0276,
+          "b": 3.623246
+        },
+        {
+          "a": 2.0276,
+          "b": 3.643246
+        },
+        {
+          "a": 2.0676,
+          "b": 3.643246
+        },
+        {
+          "a": 2.0676,
+          "b": 3.663246
+        },
+        {
+          "a": 2.1076,
+          "b": 3.663246
+        },
+        {
+          "a": 2.1076,
+          "b": 3.683246
+        },
+        {
+          "a": 2.1476,
+          "b": 3.683246
+        },
+        {
+          "a": 2.1476,
+          "b": 3.703246
+        },
+        {
+          "a": 2.1876,
+          "b": 3.703246
+        },
+        {
+          "a": 2.1876,
+          "b": 3.723246
+        },
+        {
+          "a": 2.2076,
+          "b": 3.723246
+        },
+        {
+          "a": 2.2076,
+          "b": 3.743246
+        },
+        {
+          "a": 2.2476,
+          "b": 3.743246
+        },
+        {
+          "a": 2.2476,
+          "b": 3.763246
+        },
+        {
+          "a": 2.2876,
+          "b": 3.763246
+        },
+        {
+          "a": 2.2876,
+          "b": 3.783246
+        },
+        {
+          "a": 2.3276,
+          "b": 3.783246
+        }
+      ],
+      "rect": {
+        "a0": 0.4876,
+        "a1": 6.0076,
+        "b0": 2.803246,
+        "b1": 3.803246
+      }
+    }
+  ],
+  "terraces": [],
+  "units": {
+    "angle": "deg",
+    "length": "m"
+  },
+  "wallJunctions": [
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w3"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w0"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432 (MAIN, GARAGE), at the analyzer's own scale: 2.058667 cm/px, PRINTED_DIMENSION_LINES / \"1834\", \"2444\" over their own dimension lines (2 line(s), spread 0.0 %) with ? independent witnesses; heights: 3 registered elevation(s) give eaves 1.94 / 2.91 / 2.42 m and top 4.81 / 5.83 / 5.87 m (they disagree by 0.98 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432 + frame-asset-projekt-domu-mindelo-1bd6779f35-f3339440b9 + frame-asset-projekt-domu-mindelo-cfc102784f-bbeade8f1f + frame-asset-projekt-domu-mindelo-f48b0b12ea-73c2f2f601",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432",
+          "src-frame-asset-projekt-domu-mindelo-1bd6779f35-f3339440b9",
+          "src-frame-asset-projekt-domu-mindelo-cfc102784f-bbeade8f1f",
+          "src-frame-asset-projekt-domu-mindelo-f48b0b12ea-73c2f2f601"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j0",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w0"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w1"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432 (MAIN, GARAGE), at the analyzer's own scale: 2.058667 cm/px, PRINTED_DIMENSION_LINES / \"1834\", \"2444\" over their own dimension lines (2 line(s), spread 0.0 %) with ? independent witnesses; heights: 3 registered elevation(s) give eaves 1.94 / 2.91 / 2.42 m and top 4.81 / 5.83 / 5.87 m (they disagree by 0.98 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432 + frame-asset-projekt-domu-mindelo-1bd6779f35-f3339440b9 + frame-asset-projekt-domu-mindelo-cfc102784f-bbeade8f1f + frame-asset-projekt-domu-mindelo-f48b0b12ea-73c2f2f601",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432",
+          "src-frame-asset-projekt-domu-mindelo-1bd6779f35-f3339440b9",
+          "src-frame-asset-projekt-domu-mindelo-cfc102784f-bbeade8f1f",
+          "src-frame-asset-projekt-domu-mindelo-f48b0b12ea-73c2f2f601"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j1",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w1"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w2"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432 (MAIN, GARAGE), at the analyzer's own scale: 2.058667 cm/px, PRINTED_DIMENSION_LINES / \"1834\", \"2444\" over their own dimension lines (2 line(s), spread 0.0 %) with ? independent witnesses; heights: 3 registered elevation(s) give eaves 1.94 / 2.91 / 2.42 m and top 4.81 / 5.83 / 5.87 m (they disagree by 0.98 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432 + frame-asset-projekt-domu-mindelo-1bd6779f35-f3339440b9 + frame-asset-projekt-domu-mindelo-cfc102784f-bbeade8f1f + frame-asset-projekt-domu-mindelo-f48b0b12ea-73c2f2f601",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432",
+          "src-frame-asset-projekt-domu-mindelo-1bd6779f35-f3339440b9",
+          "src-frame-asset-projekt-domu-mindelo-cfc102784f-bbeade8f1f",
+          "src-frame-asset-projekt-domu-mindelo-f48b0b12ea-73c2f2f601"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j2",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w2",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w2"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w3"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432 (MAIN, GARAGE), at the analyzer's own scale: 2.058667 cm/px, PRINTED_DIMENSION_LINES / \"1834\", \"2444\" over their own dimension lines (2 line(s), spread 0.0 %) with ? independent witnesses; heights: 3 registered elevation(s) give eaves 1.94 / 2.91 / 2.42 m and top 4.81 / 5.83 / 5.87 m (they disagree by 0.98 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432 + frame-asset-projekt-domu-mindelo-1bd6779f35-f3339440b9 + frame-asset-projekt-domu-mindelo-cfc102784f-bbeade8f1f + frame-asset-projekt-domu-mindelo-f48b0b12ea-73c2f2f601",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432",
+          "src-frame-asset-projekt-domu-mindelo-1bd6779f35-f3339440b9",
+          "src-frame-asset-projekt-domu-mindelo-cfc102784f-bbeade8f1f",
+          "src-frame-asset-projekt-domu-mindelo-f48b0b12ea-73c2f2f601"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j3",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w2",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-wing-1-w3"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-wing-1-w0"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432 (MAIN, GARAGE), at the analyzer's own scale: 2.058667 cm/px, PRINTED_DIMENSION_LINES / \"1834\", \"2444\" over their own dimension lines (2 line(s), spread 0.0 %) with ? independent witnesses; heights: 2 registered elevation(s) give eaves 2.32 / 2.82 m and top 4.11 / 4.97 m (they disagree by 0.50 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432 + frame-asset-projekt-domu-mindelo-1bd6779f35-f3339440b9 + frame-asset-projekt-domu-mindelo-cfc102784f-bbeade8f1f + frame-asset-projekt-domu-mindelo-f48b0b12ea-73c2f2f601",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432",
+          "src-frame-asset-projekt-domu-mindelo-1bd6779f35-f3339440b9",
+          "src-frame-asset-projekt-domu-mindelo-cfc102784f-bbeade8f1f",
+          "src-frame-asset-projekt-domu-mindelo-f48b0b12ea-73c2f2f601"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-wing-1-j0",
+      "kind": "CORNER",
+      "owner": "ring-mass-wing-1-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-wing-1-w0"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-wing-1-w1"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432 (MAIN, GARAGE), at the analyzer's own scale: 2.058667 cm/px, PRINTED_DIMENSION_LINES / \"1834\", \"2444\" over their own dimension lines (2 line(s), spread 0.0 %) with ? independent witnesses; heights: 2 registered elevation(s) give eaves 2.32 / 2.82 m and top 4.11 / 4.97 m (they disagree by 0.50 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432 + frame-asset-projekt-domu-mindelo-1bd6779f35-f3339440b9 + frame-asset-projekt-domu-mindelo-cfc102784f-bbeade8f1f + frame-asset-projekt-domu-mindelo-f48b0b12ea-73c2f2f601",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432",
+          "src-frame-asset-projekt-domu-mindelo-1bd6779f35-f3339440b9",
+          "src-frame-asset-projekt-domu-mindelo-cfc102784f-bbeade8f1f",
+          "src-frame-asset-projekt-domu-mindelo-f48b0b12ea-73c2f2f601"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-wing-1-j1",
+      "kind": "CORNER",
+      "owner": "ring-mass-wing-1-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-wing-1-w1"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-wing-1-w2"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432 (MAIN, GARAGE), at the analyzer's own scale: 2.058667 cm/px, PRINTED_DIMENSION_LINES / \"1834\", \"2444\" over their own dimension lines (2 line(s), spread 0.0 %) with ? independent witnesses; heights: 2 registered elevation(s) give eaves 2.32 / 2.82 m and top 4.11 / 4.97 m (they disagree by 0.50 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432 + frame-asset-projekt-domu-mindelo-1bd6779f35-f3339440b9 + frame-asset-projekt-domu-mindelo-cfc102784f-bbeade8f1f + frame-asset-projekt-domu-mindelo-f48b0b12ea-73c2f2f601",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432",
+          "src-frame-asset-projekt-domu-mindelo-1bd6779f35-f3339440b9",
+          "src-frame-asset-projekt-domu-mindelo-cfc102784f-bbeade8f1f",
+          "src-frame-asset-projekt-domu-mindelo-f48b0b12ea-73c2f2f601"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-wing-1-j2",
+      "kind": "CORNER",
+      "owner": "ring-mass-wing-1-w2",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-wing-1-w2"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-wing-1-w3"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432 (MAIN, GARAGE), at the analyzer's own scale: 2.058667 cm/px, PRINTED_DIMENSION_LINES / \"1834\", \"2444\" over their own dimension lines (2 line(s), spread 0.0 %) with ? independent witnesses; heights: 2 registered elevation(s) give eaves 2.32 / 2.82 m and top 4.11 / 4.97 m (they disagree by 0.50 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432 + frame-asset-projekt-domu-mindelo-1bd6779f35-f3339440b9 + frame-asset-projekt-domu-mindelo-cfc102784f-bbeade8f1f + frame-asset-projekt-domu-mindelo-f48b0b12ea-73c2f2f601",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432",
+          "src-frame-asset-projekt-domu-mindelo-1bd6779f35-f3339440b9",
+          "src-frame-asset-projekt-domu-mindelo-cfc102784f-bbeade8f1f",
+          "src-frame-asset-projekt-domu-mindelo-f48b0b12ea-73c2f2f601"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-wing-1-j3",
+      "kind": "CORNER",
+      "owner": "ring-mass-wing-1-w2",
+      "tolerance": 0.001
+    }
+  ],
+  "wallPanels": [],
+  "wallRings": [
+    {
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432 (MAIN, GARAGE), at the analyzer's own scale: 2.058667 cm/px, PRINTED_DIMENSION_LINES / \"1834\", \"2444\" over their own dimension lines (2 line(s), spread 0.0 %) with ? independent witnesses; heights: 3 registered elevation(s) give eaves 1.94 / 2.91 / 2.42 m and top 4.81 / 5.83 / 5.87 m (they disagree by 0.98 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432 + frame-asset-projekt-domu-mindelo-1bd6779f35-f3339440b9 + frame-asset-projekt-domu-mindelo-cfc102784f-bbeade8f1f + frame-asset-projekt-domu-mindelo-f48b0b12ea-73c2f2f601",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432",
+          "src-frame-asset-projekt-domu-mindelo-1bd6779f35-f3339440b9",
+          "src-frame-asset-projekt-domu-mindelo-cfc102784f-bbeade8f1f",
+          "src-frame-asset-projekt-domu-mindelo-f48b0b12ea-73c2f2f601"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main",
+      "junctionIds": [
+        "ring-mass-main-j0",
+        "ring-mass-main-j1",
+        "ring-mass-main-j2",
+        "ring-mass-main-j3"
+      ],
+      "levelId": "lvl-0",
+      "wallIds": [
+        "ring-mass-main-w0",
+        "ring-mass-main-w1",
+        "ring-mass-main-w2",
+        "ring-mass-main-w3"
+      ]
+    },
+    {
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432 (MAIN, GARAGE), at the analyzer's own scale: 2.058667 cm/px, PRINTED_DIMENSION_LINES / \"1834\", \"2444\" over their own dimension lines (2 line(s), spread 0.0 %) with ? independent witnesses; heights: 2 registered elevation(s) give eaves 2.32 / 2.82 m and top 4.11 / 4.97 m (they disagree by 0.50 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432 + frame-asset-projekt-domu-mindelo-1bd6779f35-f3339440b9 + frame-asset-projekt-domu-mindelo-cfc102784f-bbeade8f1f + frame-asset-projekt-domu-mindelo-f48b0b12ea-73c2f2f601",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432",
+          "src-frame-asset-projekt-domu-mindelo-1bd6779f35-f3339440b9",
+          "src-frame-asset-projekt-domu-mindelo-cfc102784f-bbeade8f1f",
+          "src-frame-asset-projekt-domu-mindelo-f48b0b12ea-73c2f2f601"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-wing-1",
+      "junctionIds": [
+        "ring-mass-wing-1-j0",
+        "ring-mass-wing-1-j1",
+        "ring-mass-wing-1-j2",
+        "ring-mass-wing-1-j3"
+      ],
+      "levelId": "lvl-0",
+      "wallIds": [
+        "ring-mass-wing-1-w0",
+        "ring-mass-wing-1-w1",
+        "ring-mass-wing-1-w2",
+        "ring-mass-wing-1-w3"
+      ]
+    }
+  ],
+  "walls": [
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 7.627362,
+        "z": 10.612428
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.579167,
+      "id": "iw-H437-237",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 4.395255,
+        "z": 10.612428
+      },
+      "thickness": 0.12352
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 11.003575,
+        "z": 10.612428
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.579167,
+      "id": "iw-H437-237-x",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 7.771469,
+        "z": 10.612428
+      },
+      "thickness": 0.12352
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 18.836803,
+        "z": 9.006668
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.579167,
+      "id": "iw-H515-54",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 0.3,
+        "z": 9.006668
+      },
+      "thickness": 0.12352
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 16.459042,
+        "z": 7.812641
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.579167,
+      "id": "iw-H573-739",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 14.740056,
+        "z": 7.812641
+      },
+      "thickness": 0.12352
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 18.836803,
+        "z": 7.812641
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.579167,
+      "id": "iw-H573-739-x",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 16.623735,
+        "z": 7.812641
+      },
+      "thickness": 0.12352
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 2.974774,
+        "z": 9.006668
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.579167,
+      "id": "iw-V171-512",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 2.974774,
+        "z": 6.2084
+      },
+      "thickness": 0.12352
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 4.395255,
+        "z": 13.843
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.579167,
+      "id": "iw-V240-226",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 4.395255,
+        "z": 10.602135
+      },
+      "thickness": 0.144107
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 5.568695,
+        "z": 9.006668
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.579167,
+      "id": "iw-V298-495",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 5.568695,
+        "z": 6.2084
+      },
+      "thickness": 0.102933
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 5.568695,
+        "z": 10.612428
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.579167,
+      "id": "iw-V298-495-x",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 5.568695,
+        "z": 9.130188
+      },
+      "thickness": 0.102933
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 7.771469,
+        "z": 13.843
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.579167,
+      "id": "iw-V404-226",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 7.771469,
+        "z": 10.602135
+      },
+      "thickness": 0.144107
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 8.677281,
+        "z": 9.006668
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.579167,
+      "id": "iw-V448-512",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 8.677281,
+        "z": 6.2084
+      },
+      "thickness": 0.12352
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 11.271202,
+        "z": 13.843
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.579167,
+      "id": "iw-V571-281",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 11.271202,
+        "z": 10.602135
+      },
+      "thickness": 0.267627
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 11.271202,
+        "z": 9.006668
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.579167,
+      "id": "iw-V571-512",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 11.271202,
+        "z": 6.2084
+      },
+      "thickness": 0.267627
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 14.740056,
+        "z": 9.006668
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.579167,
+      "id": "iw-V742-512",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 14.740056,
+        "z": 6.2084
+      },
+      "thickness": 0.144107
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 16.623735,
+        "z": 9.006668
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.579167,
+      "id": "iw-V834-512",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 16.623735,
+        "z": 7.802348
+      },
+      "thickness": 0.164693
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 24.4981,
+        "z": 5.9084
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432 (MAIN, GARAGE), at the analyzer's own scale: 2.058667 cm/px, PRINTED_DIMENSION_LINES / \"1834\", \"2444\" over their own dimension lines (2 line(s), spread 0.0 %) with ? independent witnesses; heights: 3 registered elevation(s) give eaves 1.94 / 2.91 / 2.42 m and top 4.81 / 5.83 / 5.87 m (they disagree by 0.98 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432 + frame-asset-projekt-domu-mindelo-1bd6779f35-f3339440b9 + frame-asset-projekt-domu-mindelo-cfc102784f-bbeade8f1f + frame-asset-projekt-domu-mindelo-f48b0b12ea-73c2f2f601",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432",
+          "src-frame-asset-projekt-domu-mindelo-1bd6779f35-f3339440b9",
+          "src-frame-asset-projekt-domu-mindelo-cfc102784f-bbeade8f1f",
+          "src-frame-asset-projekt-domu-mindelo-f48b0b12ea-73c2f2f601"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 5.826656,
+      "id": "ring-mass-main-w0",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 0,
+        "z": 5.9084
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-mass-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 24.4981,
+        "z": 14.143
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432 (MAIN, GARAGE), at the analyzer's own scale: 2.058667 cm/px, PRINTED_DIMENSION_LINES / \"1834\", \"2444\" over their own dimension lines (2 line(s), spread 0.0 %) with ? independent witnesses; heights: 3 registered elevation(s) give eaves 1.94 / 2.91 / 2.42 m and top 4.81 / 5.83 / 5.87 m (they disagree by 0.98 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432 + frame-asset-projekt-domu-mindelo-1bd6779f35-f3339440b9 + frame-asset-projekt-domu-mindelo-cfc102784f-bbeade8f1f + frame-asset-projekt-domu-mindelo-f48b0b12ea-73c2f2f601",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432",
+          "src-frame-asset-projekt-domu-mindelo-1bd6779f35-f3339440b9",
+          "src-frame-asset-projekt-domu-mindelo-cfc102784f-bbeade8f1f",
+          "src-frame-asset-projekt-domu-mindelo-f48b0b12ea-73c2f2f601"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 5.826656,
+      "id": "ring-mass-main-w1",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 24.4981,
+        "z": 5.9084
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-mass-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0,
+        "z": 14.143
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432 (MAIN, GARAGE), at the analyzer's own scale: 2.058667 cm/px, PRINTED_DIMENSION_LINES / \"1834\", \"2444\" over their own dimension lines (2 line(s), spread 0.0 %) with ? independent witnesses; heights: 3 registered elevation(s) give eaves 1.94 / 2.91 / 2.42 m and top 4.81 / 5.83 / 5.87 m (they disagree by 0.98 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432 + frame-asset-projekt-domu-mindelo-1bd6779f35-f3339440b9 + frame-asset-projekt-domu-mindelo-cfc102784f-bbeade8f1f + frame-asset-projekt-domu-mindelo-f48b0b12ea-73c2f2f601",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432",
+          "src-frame-asset-projekt-domu-mindelo-1bd6779f35-f3339440b9",
+          "src-frame-asset-projekt-domu-mindelo-cfc102784f-bbeade8f1f",
+          "src-frame-asset-projekt-domu-mindelo-f48b0b12ea-73c2f2f601"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 5.826656,
+      "id": "ring-mass-main-w2",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 24.4981,
+        "z": 14.143
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-mass-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0,
+        "z": 5.9084
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432 (MAIN, GARAGE), at the analyzer's own scale: 2.058667 cm/px, PRINTED_DIMENSION_LINES / \"1834\", \"2444\" over their own dimension lines (2 line(s), spread 0.0 %) with ? independent witnesses; heights: 3 registered elevation(s) give eaves 1.94 / 2.91 / 2.42 m and top 4.81 / 5.83 / 5.87 m (they disagree by 0.98 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432 + frame-asset-projekt-domu-mindelo-1bd6779f35-f3339440b9 + frame-asset-projekt-domu-mindelo-cfc102784f-bbeade8f1f + frame-asset-projekt-domu-mindelo-f48b0b12ea-73c2f2f601",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432",
+          "src-frame-asset-projekt-domu-mindelo-1bd6779f35-f3339440b9",
+          "src-frame-asset-projekt-domu-mindelo-cfc102784f-bbeade8f1f",
+          "src-frame-asset-projekt-domu-mindelo-f48b0b12ea-73c2f2f601"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 5.826656,
+      "id": "ring-mass-main-w3",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 0,
+        "z": 14.143
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-mass-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 21.369,
+        "z": 0
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432 (MAIN, GARAGE), at the analyzer's own scale: 2.058667 cm/px, PRINTED_DIMENSION_LINES / \"1834\", \"2444\" over their own dimension lines (2 line(s), spread 0.0 %) with ? independent witnesses; heights: 2 registered elevation(s) give eaves 2.32 / 2.82 m and top 4.11 / 4.97 m (they disagree by 0.50 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432 + frame-asset-projekt-domu-mindelo-1bd6779f35-f3339440b9 + frame-asset-projekt-domu-mindelo-cfc102784f-bbeade8f1f + frame-asset-projekt-domu-mindelo-f48b0b12ea-73c2f2f601",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432",
+          "src-frame-asset-projekt-domu-mindelo-1bd6779f35-f3339440b9",
+          "src-frame-asset-projekt-domu-mindelo-cfc102784f-bbeade8f1f",
+          "src-frame-asset-projekt-domu-mindelo-f48b0b12ea-73c2f2f601"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 4.538086,
+      "id": "ring-mass-wing-1-w0",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 14.8224,
+        "z": 0
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-mass-wing-1"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 21.369,
+        "z": 5.9084
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432 (MAIN, GARAGE), at the analyzer's own scale: 2.058667 cm/px, PRINTED_DIMENSION_LINES / \"1834\", \"2444\" over their own dimension lines (2 line(s), spread 0.0 %) with ? independent witnesses; heights: 2 registered elevation(s) give eaves 2.32 / 2.82 m and top 4.11 / 4.97 m (they disagree by 0.50 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432 + frame-asset-projekt-domu-mindelo-1bd6779f35-f3339440b9 + frame-asset-projekt-domu-mindelo-cfc102784f-bbeade8f1f + frame-asset-projekt-domu-mindelo-f48b0b12ea-73c2f2f601",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432",
+          "src-frame-asset-projekt-domu-mindelo-1bd6779f35-f3339440b9",
+          "src-frame-asset-projekt-domu-mindelo-cfc102784f-bbeade8f1f",
+          "src-frame-asset-projekt-domu-mindelo-f48b0b12ea-73c2f2f601"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 4.538086,
+      "id": "ring-mass-wing-1-w1",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 21.369,
+        "z": 0
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-mass-wing-1"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 14.8224,
+        "z": 5.9084
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432 (MAIN, GARAGE), at the analyzer's own scale: 2.058667 cm/px, PRINTED_DIMENSION_LINES / \"1834\", \"2444\" over their own dimension lines (2 line(s), spread 0.0 %) with ? independent witnesses; heights: 2 registered elevation(s) give eaves 2.32 / 2.82 m and top 4.11 / 4.97 m (they disagree by 0.50 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432 + frame-asset-projekt-domu-mindelo-1bd6779f35-f3339440b9 + frame-asset-projekt-domu-mindelo-cfc102784f-bbeade8f1f + frame-asset-projekt-domu-mindelo-f48b0b12ea-73c2f2f601",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432",
+          "src-frame-asset-projekt-domu-mindelo-1bd6779f35-f3339440b9",
+          "src-frame-asset-projekt-domu-mindelo-cfc102784f-bbeade8f1f",
+          "src-frame-asset-projekt-domu-mindelo-f48b0b12ea-73c2f2f601"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 4.538086,
+      "id": "ring-mass-wing-1-w2",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 21.369,
+        "z": 5.9084
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-mass-wing-1"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 14.8224,
+        "z": 0
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432 (MAIN, GARAGE), at the analyzer's own scale: 2.058667 cm/px, PRINTED_DIMENSION_LINES / \"1834\", \"2444\" over their own dimension lines (2 line(s), spread 0.0 %) with ? independent witnesses; heights: 2 registered elevation(s) give eaves 2.32 / 2.82 m and top 4.11 / 4.97 m (they disagree by 0.50 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432 + frame-asset-projekt-domu-mindelo-1bd6779f35-f3339440b9 + frame-asset-projekt-domu-mindelo-cfc102784f-bbeade8f1f + frame-asset-projekt-domu-mindelo-f48b0b12ea-73c2f2f601",
+        "sourceIds": [
+          "src-frame-asset-gotowy-projekt-domu-mindelo-projekt-ludwik-cc9ee64432",
+          "src-frame-asset-projekt-domu-mindelo-1bd6779f35-f3339440b9",
+          "src-frame-asset-projekt-domu-mindelo-cfc102784f-bbeade8f1f",
+          "src-frame-asset-projekt-domu-mindelo-f48b0b12ea-73c2f2f601"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 4.538086,
+      "id": "ring-mass-wing-1-w3",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 14.8224,
+        "z": 5.9084
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-mass-wing-1"
+      }
+    }
+  ],
+  "windows": [
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-front-2e6f9e-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-front-2e6f9e"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-front-3635de-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-front-3635de"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-front-a8709e-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-front-a8709e"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-front-d6f710-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-front-d6f710"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-front-f0972d-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-front-f0972d"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-right-031f0b-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-right-031f0b"
+    }
+  ]
+}

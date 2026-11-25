@@ -42,11 +42,11 @@ describe('v3.54.16 scenes', () => {
   })
   it('the five scenes come first, each labelled for what it is', () => {
     const index = JSON.parse(readFileSync(join(ASSET_DIR, 'index.json'), 'utf8')) as Array<{ key: string; subtitle: string }>
-    expect(index.slice(44, 49).map((e) => e.key)).toEqual(KEYS)
-    expect(index[44].subtitle).toContain('ODDANY')
-    expect(index[45].subtitle).toContain('ROZWÓJ')
-    expect(index[46].subtitle).toContain('TEST')
-    expect(index[47].subtitle).toContain('TEST')
-    expect(index[48].subtitle).toContain('PRÓBA')
+    expect(index.slice(70, 75).map((e) => e.key)).toEqual(KEYS)
+    expect(index[70].subtitle).toContain('ODDANY')
+    expect(index[71].subtitle).toContain('ROZWÓJ')
+    expect(index[72].subtitle).toContain('TEST')
+    expect(index[73].subtitle).toContain('TEST')
+    expect(index[74].subtitle).toContain('PRÓBA')
   })
 })

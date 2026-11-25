@@ -10,20 +10,20 @@ const KEYS = ['ballina-host-v35418', 'layla-host-v35418', 'alaska-v35418', 'auro
 
 describe('v3.54.18 scenes', () => {
   it('the eleven scenes follow the four of R2: host, development, blind', () => {
-    expect(SCENES.slice(30, 41).map((s) => s.key)).toEqual(KEYS)
-    expect(SCENES[30].subtitle).toContain('ODDANY')
-    expect(SCENES[31].subtitle).toContain('ODDANY')
-    for (const i of [32, 33, 34]) expect(SCENES[i].subtitle).toContain('ROZWÓJ')
-    for (const i of [35, 36, 37]) expect(SCENES[i].subtitle).toContain('NOWY DOM')
-    for (const i of [38, 39, 40]) expect(SCENES[i].subtitle).toContain('PRÓBA ŚLEPA')
+    expect(SCENES.slice(56, 67).map((s) => s.key)).toEqual(KEYS)
+    expect(SCENES[56].subtitle).toContain('ODDANY')
+    expect(SCENES[57].subtitle).toContain('ODDANY')
+    for (const i of [58, 59, 60]) expect(SCENES[i].subtitle).toContain('ROZWÓJ')
+    for (const i of [61, 62, 63]) expect(SCENES[i].subtitle).toContain('NOWY DOM')
+    for (const i of [64, 65, 66]) expect(SCENES[i].subtitle).toContain('PRÓBA ŚLEPA')
   })
   it('a kept failure is labelled as one, never as a delivery', () => {
-    expect(SCENES[36].subtitle).toContain('NIEPOWODZENIE ZACHOWANE')
-    expect(SCENES[40].subtitle).toContain('NIEPOWODZENIE ZACHOWANE')
-    expect(SCENES[35].subtitle).toContain('NIEUŻYTECZNA')
+    expect(SCENES[62].subtitle).toContain('NIEPOWODZENIE ZACHOWANE')
+    expect(SCENES[66].subtitle).toContain('NIEPOWODZENIE ZACHOWANE')
+    expect(SCENES[61].subtitle).toContain('NIEUŻYTECZNA')
   })
   it('no v3.54.18 scene holds an opening the compiler does not cut (the loss found in cycle 4)', () => {
-    for (const s of SCENES.slice(30, 41)) {
+    for (const s of SCENES.slice(56, 67)) {
       const uncut = compileBuilding(s.build()).diagnostics.filter((d) => d.code === 'OPENING_ABOVE_WALL_TOP')
       expect(uncut.map((d) => d.objectId), s.key).toEqual([])
     }
