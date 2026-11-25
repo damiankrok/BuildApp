@@ -7,7 +7,7 @@ import { describe, expect, it } from 'vitest'
 import { flatVolumesOf, formVerdict, parseForm, readForm } from '../src/consult/form-read.js'
 import type { HouseForm } from '../src/consult/form-read.js'
 import type { ConsultantModel } from '../src/consult/loop.js'
-import { agreeStructure, buildStructureOf, wallToApex } from '../src/consult/structure.js'
+import { agreeStructure, buildStructureOf, structureAgainstBody, wallToApex } from '../src/consult/structure.js'
 import { roofByStructure, solveMassing, wingOnSide } from '../src/consult/massing/massing.js'
 import type { OutlineObservation, RoofSpec, SilhouetteObservation } from '../src/consult/massing/massing.js'
 
@@ -225,5 +225,34 @@ describe('v3.54.20 the storeys rule takes the elevations\' own wall tops first, 
     expect(buildStructureOf(agreeStructure(est, { planStoreys: ['GROUND'], gableWalls: [] })).pitchDeg).toBeUndefined()
     expect(buildStructureOf(agreeStructure(est, { planStoreys: ['GROUND'], gableWalls: [], publishedPitchDeg: 42 })).pitchDeg).toBe(42)
     expect(buildStructureOf(agreeStructure(form(), { planStoreys: ['GROUND'], gableWalls: [] })).pitchDeg).toBe(35)
+  })
+})
+
+describe('v3.54.20 (structure 1.1.0, arbitration 1.5.0) the agreed structure is held against a body as it stands', () => {
+  const W = { twoMinM: 4.4, oneMaxM: 4.6 }
+  const agreed = (over: Record<string, unknown>, x: Parameters<typeof agreeStructure>[1]) => agreeStructure(form(over), x)
+  // the page publishes an upper-floor plan; the front sketch's wall ends at the eaves (a ridge along the front)
+  const two = agreed({ storeys: 'TWO', storeysBasis: 'SECTION' }, { planStoreys: ['GROUND', 'UPPER'], gableWalls: [{ frameId: 'f', side: 'FRONT', wallToApex: false }, { frameId: 'l', side: 'LEFT', wallToApex: true }] })
+
+  it('REPRODUCES the host\'s loss on a control: a one-storey body with its ridge across, where two storeys and a ridge along the front are agreed, is contradicted on both counts', () => {
+    expect(two.storeys.standing).toBe('AGREED')
+    expect(two.mainRidge.standing).toBe('AGREED')
+    const held = structureAgainstBody(two, { roof: 'GABLE', ridgeAxis: 'Z', wallTopM: 3.07 }, W)
+    expect(held).toHaveLength(2)
+    expect(held[0]).toMatch(/two full storeys are agreed \(PLAN_STOREYS\), the body's walls end at 3\.07 m/)
+    expect(held[1]).toMatch(/the ridge parallel to the front is agreed/)
+  })
+  it('counter-trials: a body that has them is held to nothing; a property on the read alone is held against no body; a hip has no ridge direction to hold', () => {
+    expect(structureAgainstBody(two, { roof: 'GABLE', ridgeAxis: 'X', wallTopM: 5.7 }, W)).toEqual([])
+    const alone = agreed({ storeys: 'TWO', storeysBasis: 'ELEVATIONS' }, { planStoreys: [], gableWalls: [] })
+    expect(alone.storeys.standing).toBe('UNWITNESSED')
+    expect(structureAgainstBody(alone, { roof: 'GABLE', ridgeAxis: 'Z', wallTopM: 3.07 }, W)).toEqual([])
+    expect(structureAgainstBody(two, { roof: 'HIP', ridgeAxis: 'Z', wallTopM: 5.7 }, W)).toEqual([])
+    expect(structureAgainstBody(two, undefined, W)).toEqual([])
+  })
+  it('one storey agreed: walls two storeys high are held against the body, an attic\'s knee wall is not', () => {
+    const one = agreed({}, { planStoreys: ['GROUND'], gableWalls: [] })
+    expect(structureAgainstBody(one, { roof: 'GABLE', ridgeAxis: 'X', wallTopM: 5.9 }, W)).toHaveLength(1)
+    expect(structureAgainstBody(one, { roof: 'GABLE', ridgeAxis: 'X', wallTopM: 4.1 }, W)).toEqual([])
   })
 })

@@ -56,7 +56,7 @@ import { MASSING_VERSION, OUTLINE_SIMPLIFICATION, STOREY_WALLS, bodiesOf, pointW
 import { readSiteDimensions, SITE_DIMENSIONS_VERSION } from './site-dimensions.js'
 import { FACADE_METRIC_VERSION, readFacadeMetric } from './facade-metric.js'
 import { FORM_READ_VERSION, flatVolumesOf, formVerdict, readForm } from './form-read.js'
-import { STRUCTURE_VERSION, agreeStructure, buildStructureOf, wallToApex } from './structure.js'
+import { STRUCTURE_VERSION, agreeStructure, buildStructureOf, structureAgainstBody, wallToApex } from './structure.js'
 import { readbackOpenings, readbackStructure } from './readback.js'
 import type { AgreedStructure, BuildStructure, StructureSide } from './structure.js'
 import type { Raster } from '@buildapp/source-cv'
@@ -161,8 +161,8 @@ export type SketchSummary = { reading: Omit<SketchReading, 'elevationSketches'>;
 /** v3.54.18: tolerances of the body arbitration, fixed before any result (a printed dimension, a published height). */
 /** v3.54.18 R2: which source pictures get a frame changed (a content-disputed orthographic elevation keeps its frame): part of the accepted-revision key. */
 export const SOURCE_FRAMES_RULE = 'frames2' as const
-export const BODY_ARBITRATION = { version: '1.4.0', dimAgreeM: 0.3, dimAgreeShare: 0.04, heightAgreeM: 0.6, heightAgreeShare: 0.1 } as const
-export type BodyEvidence = { bodies: number; registrations: Array<{ frameId: string; side: string; ok: boolean; code: string; why?: string }>; printed: Array<{ literal: string; valueM: number; modelM: number; agrees: boolean; /** arbitration 1.3.0: the traced outline's own extent, where the dimension agrees with it and the body leaves out only the small steps the massing's convention names */ outlineM?: number }>; height?: { publishedM: number; modelRidgeM: number; agrees: boolean }; /** v3.54.19: what the typed form of the house (form-read) says of this body's roofs. */ form?: { verdict: 'CONTRADICTS' | 'AGREES' | 'SILENT'; flatVolumes: number; reportedFlatVolumes: number; reportedMainRoof: string; reportedVolumes: number }; contradictions: number; supports: number }
+export const BODY_ARBITRATION = { version: '1.5.0', dimAgreeM: 0.3, dimAgreeShare: 0.04, heightAgreeM: 0.6, heightAgreeShare: 0.1 } as const
+export type BodyEvidence = { bodies: number; registrations: Array<{ frameId: string; side: string; ok: boolean; code: string; why?: string }>; printed: Array<{ literal: string; valueM: number; modelM: number; agrees: boolean; /** arbitration 1.3.0: the traced outline's own extent, where the dimension agrees with it and the body leaves out only the small steps the massing's convention names */ outlineM?: number }>; height?: { publishedM: number; modelRidgeM: number; agrees: boolean }; /** v3.54.19: what the typed form of the house (form-read) says of this body's roofs. */ form?: { verdict: 'CONTRADICTS' | 'AGREES' | 'SILENT'; flatVolumes: number; reportedFlatVolumes: number; reportedMainRoof: string; reportedVolumes: number; /** arbitration 1.5.0: what the AGREED structure holds against this body's main volume (storeys, ridge direction) */ structure?: string[] }; contradictions: number; supports: number }
 export type BodyArbitration = { version: string; local: BodyEvidence; /** LOCAL's body was judged with this many roof corrections from the same elevations applied (on a copy). */ localAfterRoofCorrections?: number; alternative?: BodyEvidence; massing?: { decision: string; why: string; usd: number }; /** 1.2.0: elevations that register on neither body, set aside on both sides. */ setAside?: { frames: string[]; why: string }; decision: 'LOCAL_STANDS' | 'REPLACED_BY_SOURCE_BODY'; why: string }
 
 /** v3.54.17: the no-model path's delivery: a mass built from the source, or the anchors it lacks. */
@@ -1521,10 +1521,18 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
     // not dispute it (a hip the sketches' gable walls contradict is not held against anyone).
     let formRead: FormRead | undefined
     let agreedForm: AgreedStructure | undefined
-    const withForm = (ev: BodyEvidence, roofs: { flatVolumes: number; pitchedKinds: string[] }): void => {
-      if (!formRead?.form || agreedForm?.mainRoof.standing === 'DISPUTED') return
-      const verdict = formVerdict(formRead.form, roofs)
-      ev.form = { verdict, flatVolumes: roofs.flatVolumes, reportedFlatVolumes: flatVolumesOf(formRead.form), reportedMainRoof: formRead.form.mainRoof.kind, reportedVolumes: formRead.form.volumes }
+    // arbitration 1.5.0: the agreed storeys and ridge direction are held against the body too (the host built a one-storey
+    // LOCAL body with its ridge across where two storeys and a ridge along the front were agreed, and the roofs' kinds
+    // alone answered AGREES). A roof kind the sketches dispute is still held against no one; the storeys still are.
+    const withForm = (ev: BodyEvidence, roofs: { flatVolumes: number; pitchedKinds: string[] }, body: CanonicalBuildingModel): void => {
+      if (!formRead?.form) return
+      const rb = readbackStructure(body, undefined, STOREY_WALLS)
+      const main = [...rb.bodies].sort((p, q) => q.widthM * q.depthM - p.widthM * p.depthM)[0]
+      const against = agreedForm ? structureAgainstBody(agreedForm, main, STOREY_WALLS) : []
+      if (agreedForm?.mainRoof.standing === 'DISPUTED' && against.length === 0) return
+      const kinds = agreedForm?.mainRoof.standing === 'DISPUTED' ? 'SILENT' as const : formVerdict(formRead.form, roofs)
+      const verdict = against.length > 0 ? 'CONTRADICTS' as const : kinds
+      ev.form = { verdict, flatVolumes: roofs.flatVolumes, reportedFlatVolumes: flatVolumesOf(formRead.form), reportedMainRoof: formRead.form.mainRoof.kind, reportedVolumes: formRead.form.volumes, ...(against.length > 0 ? { structure: against } : {}) }
       if (verdict === 'CONTRADICTS') ev.contradictions += 1
       if (verdict === 'AGREES') ev.supports += 1
     }
@@ -1535,7 +1543,7 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
       if (st?.read.form) {
         formRead = st.read
         agreedForm = st.agreed
-        withForm(localEv, localRoofs)
+        withForm(localEv, localRoofs, tried && roofFixed > 0 ? tried.model : mL0)
       }
     }
     const arb: BodyArbitration = { version: BODY_ARBITRATION.version, local: localEv, ...(roofFixed > 0 ? { localAfterRoofCorrections: roofFixed } : {}), decision: 'LOCAL_STANDS', why: '' }
@@ -1553,7 +1561,7 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
       else {
         const altFront = massingOf.get(mb.built)?.planFront
         const altEv = evidenceOf(mb.built.run.reconstruction.model, massingViews(mb.built) ?? [], altFront, mb.delivery.plan?.observation?.outline)
-        withForm(altEv, roofsOf(mb.built.run.reconstruction.model))
+        withForm(altEv, roofsOf(mb.built.run.reconstruction.model), mb.built.run.reconstruction.model)
         arb.alternative = altEv
         // v3.54.18 arbitration 1.1.0: the body that replaces LOCAL's must itself be UNCONTRADICTED. One the same sources
         // contradict "less" is still a body they contradict — and it costs the interior and the plan's openings (Jeziorko,

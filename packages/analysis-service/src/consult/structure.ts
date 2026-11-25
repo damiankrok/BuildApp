@@ -17,7 +17,7 @@
  */
 import type { HouseForm, ValueStatus } from './form-read.js'
 
-export const STRUCTURE_VERSION = '1.0.0' as const
+export const STRUCTURE_VERSION = '1.1.0' as const
 export type Standing = 'AGREED' | 'UNWITNESSED' | 'DISPUTED'
 export type Witnessed<T> = { value: T; standing: Standing; witnesses: string[]; why: string }
 export type StructureSide = 'FRONT' | 'LEFT' | 'RIGHT' | 'REAR'
@@ -179,4 +179,25 @@ export function wallToApex(walls: ReadonlyArray<ReadonlyArray<readonly [number, 
   const h = groundRow - roofTop
   if (!(h > 10) || !(width > 10)) return undefined
   return walls.some((p) => { const px = p.map((q) => q[0]); const top = Math.min(...p.map((q) => q[1])); return Math.max(...px) - Math.min(...px) >= GABLE_WALL.minWidthShare * width && top - roofTop <= GABLE_WALL.topShare * h })
+}
+
+/**
+ * structure 1.1.0: what the AGREED structure holds against a body as it stands — its main volume's wall top against the
+ * storeys an independent witness agrees with, and its gable's ridge against the direction the front sketch's wall agrees
+ * with. Only AGREED properties speak (a property on the read alone is taken by the builder, never held against a body the
+ * drawings built), and the ridge only where the roof's kind is not disputed. The body is measured, not asked.
+ */
+export function structureAgainstBody(a: AgreedStructure, main: { roof: string; ridgeAxis?: 'X' | 'Z'; wallTopM?: number } | undefined, walls: { twoMinM: number; oneMaxM: number }): string[] {
+  const out: string[] = []
+  if (!main) return out
+  if (a.storeys.standing === 'AGREED' && main.wallTopM !== undefined) {
+    if (a.storeys.value.full === 2 && main.wallTopM < walls.twoMinM) out.push(`two full storeys are agreed (${a.storeys.witnesses.join(', ')}), the body's walls end at ${main.wallTopM.toFixed(2)} m`)
+    if (a.storeys.value.full === 1 && main.wallTopM > walls.oneMaxM) out.push(`one storey under the eaves is agreed (${a.storeys.witnesses.join(', ')}), the body's walls end at ${main.wallTopM.toFixed(2)} m`)
+  }
+  const along = a.mainRidge.value.along
+  if (a.mainRidge.standing === 'AGREED' && a.mainRoof.standing !== 'DISPUTED' && main.roof === 'GABLE' && main.ridgeAxis && along !== 'NONE') {
+    const want = along === 'FRONT' ? 'X' : 'Z'
+    if (main.ridgeAxis !== want) out.push(`the ridge ${along === 'FRONT' ? 'parallel' : 'perpendicular'} to the front is agreed (${a.mainRidge.witnesses.join(', ')}), the body's ridge runs along ${main.ridgeAxis}`)
+  }
+  return out
 }
