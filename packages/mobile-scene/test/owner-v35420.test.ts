@@ -10,10 +10,10 @@ const ORDER = ['amber', 'rockville', 'basiaiadam', 'jarzab', 'skagen', 'fabia', 
 
 describe('v3.54.20 scenes', () => {
   it('come first, the held-out NEW-G four leading, the two host models last', () => {
-    expect(SCENES.slice(0, 26).map((s) => s.key)).toEqual(ORDER)
-    for (const s of SCENES.slice(0, 4)) expect(s.title).toContain('NEW-G (próba odłożona)')
-    for (const s of SCENES.slice(4, 24)) expect(s.title).toContain('DEV')
-    for (const s of SCENES.slice(24, 26)) expect(s.title).toContain('z hosta')
+    expect(SCENES.slice(31, 57).map((s) => s.key)).toEqual(ORDER)
+    for (const s of SCENES.slice(31, 35)) expect(s.title).toContain('NEW-G (próba odłożona)')
+    for (const s of SCENES.slice(35, 55)) expect(s.title).toContain('DEV')
+    for (const s of SCENES.slice(55, 57)) expect(s.title).toContain('z hosta')
   })
 
   it('a failed, lossy or regressed result says so in its own title or subtitle', () => {
@@ -28,7 +28,7 @@ describe('v3.54.20 scenes', () => {
   })
 
   it('every scene builds from its sealed bytes and compiles; interior walls are counted from the model, not claimed', () => {
-    for (const s of SCENES.slice(0, 26)) {
+    for (const s of SCENES.slice(31, 57)) {
       const m = s.build()
       expect(compileBuilding(m).meshes.length, s.key).toBeGreaterThan(0)
       const interior = m.walls.filter((w) => w.kind === 'INTERIOR').length

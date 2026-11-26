@@ -1,0 +1,2776 @@
+{
+  "assemblies": [
+    {
+      "chimneyIds": [],
+      "classification": "INTERSECTING",
+      "dormerIds": [],
+      "edgeIds": [
+        "ridge-mass-main-minX-mass-main-maxX",
+        "valley-mass-main-minX-mass-main-cross-left-maxZ",
+        "valley-mass-main-minX-mass-main-cross-left-minZ",
+        "valley-mass-main-maxX-mass-wing-1-minZ-1",
+        "valley-mass-main-maxX-mass-wing-1-maxZ-1",
+        "ridge-mass-wing-1-minZ-0-mass-wing-1-maxZ-0",
+        "ridge-mass-wing-1-minZ-1-mass-wing-1-maxZ-1",
+        "ridge-mass-main-cross-left-minZ-mass-main-cross-left-maxZ",
+        "verge-mass-main-minX-0",
+        "verge-mass-main-minX-1",
+        "eave-mass-main-minX-2",
+        "eave-mass-main-minX-3",
+        "verge-mass-main-maxX-0",
+        "eave-mass-main-maxX-1",
+        "eave-mass-main-maxX-2",
+        "verge-mass-main-maxX-3",
+        "eave-mass-wing-1-minZ-0-0",
+        "verge-mass-wing-1-minZ-0-1",
+        "abutment-mass-wing-1-minZ-0-2",
+        "verge-mass-wing-1-maxZ-0-0",
+        "eave-mass-wing-1-maxZ-0-1",
+        "abutment-mass-wing-1-maxZ-0-2",
+        "verge-mass-main-cross-left-minZ-0",
+        "verge-mass-main-cross-left-maxZ-0"
+      ],
+      "hostIds": [
+        "ring-mass-main",
+        "ring-mass-wing-1"
+      ],
+      "id": "roofsys-main",
+      "kind": "ROOF",
+      "openingIds": [],
+      "planeIds": [
+        "roof-mass-main-minX",
+        "roof-mass-main-maxX",
+        "roof-mass-wing-1-minZ-0",
+        "roof-mass-wing-1-minZ-1",
+        "roof-mass-wing-1-maxZ-0",
+        "roof-mass-wing-1-maxZ-1",
+        "roof-mass-main-cross-left-minZ",
+        "roof-mass-main-cross-left-maxZ"
+      ],
+      "quality": "COMPLETE",
+      "trimIds": []
+    }
+  ],
+  "balconies": [],
+  "building": {
+    "id": "building",
+    "name": "massing"
+  },
+  "chimneys": [
+    {
+      "baseOffset": 0,
+      "footprint": {
+        "maxX": 6.517525,
+        "maxZ": 6.553082,
+        "minX": 5.746573,
+        "minZ": 5.78213
+      },
+      "height": 7.8013,
+      "id": "chimney-fix-right-797f5e",
+      "levelId": "lvl-0",
+      "materialId": "mat-chimney"
+    },
+    {
+      "baseOffset": 0,
+      "footprint": {
+        "maxX": 5.728369,
+        "maxZ": 3.799682,
+        "minX": 5.030841,
+        "minZ": 3.102154
+      },
+      "height": 8.774168,
+      "id": "chimney-fix-right-8661b4",
+      "levelId": "lvl-0",
+      "materialId": "mat-chimney"
+    }
+  ],
+  "constraints": [],
+  "doors": [
+    {
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-front-8cf1a3-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "op-fix-front-8cf1a3",
+      "swing": "IN"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "kind": "PANEL"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-front-ac7d53-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-gate",
+      "openAngle": 0,
+      "openingId": "op-fix-front-ac7d53",
+      "swing": "IN",
+      "usage": "GARAGE"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "glazing": "FULL",
+            "hinge": "LEFT",
+            "kind": "LEAF"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-front-c27e30-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-glass",
+      "openAngle": 0,
+      "openingId": "op-fix-front-c27e30",
+      "swing": "IN"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "glazing": "FULL",
+            "hinge": "LEFT",
+            "kind": "LEAF"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-left-32647b-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-glass",
+      "openAngle": 0,
+      "openingId": "op-fix-left-32647b",
+      "swing": "IN"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "glazing": "FULL",
+            "hinge": "LEFT",
+            "kind": "LEAF"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-rear-014405-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-glass",
+      "openAngle": 0,
+      "openingId": "op-fix-rear-014405",
+      "swing": "IN"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "glazing": "FULL",
+            "hinge": "LEFT",
+            "kind": "LEAF"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "op-fix-rear-9e92e6-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-glass",
+      "openAngle": 0,
+      "openingId": "op-fix-rear-9e92e6",
+      "swing": "IN"
+    }
+  ],
+  "evidenceSources": [
+    {
+      "id": "src-frame-asset-elewacja-boczna-domu-anna-ii-5adc9d7716-71742bcaaf",
+      "kind": "DRAWING",
+      "label": "frame-asset-elewacja-boczna-domu-anna-ii-5adc9d7716-71742bcaaf",
+      "note": "frame frame-asset-elewacja-boczna-domu-anna-ii-5adc9d7716-71742bcaaf"
+    },
+    {
+      "id": "src-frame-asset-elewacja-boczna-domu-anna-ii-68592292ce-3935527cb4",
+      "kind": "DRAWING",
+      "label": "frame-asset-elewacja-boczna-domu-anna-ii-68592292ce-3935527cb4",
+      "note": "frame frame-asset-elewacja-boczna-domu-anna-ii-68592292ce-3935527cb4"
+    },
+    {
+      "id": "src-frame-asset-elewacja-frontowa-domu-anna-ii-8fcc7e8e8f-9e1454a435",
+      "kind": "DRAWING",
+      "label": "frame-asset-elewacja-frontowa-domu-anna-ii-8fcc7e8e8f-9e1454a435",
+      "note": "frame frame-asset-elewacja-frontowa-domu-anna-ii-8fcc7e8e8f-9e1454a435"
+    },
+    {
+      "id": "src-frame-asset-elewacja-tylna-domu-anna-ii-64bfd3f5c0-ee5228dc20",
+      "kind": "DRAWING",
+      "label": "frame-asset-elewacja-tylna-domu-anna-ii-64bfd3f5c0-ee5228dc20",
+      "note": "frame frame-asset-elewacja-tylna-domu-anna-ii-64bfd3f5c0-ee5228dc20"
+    },
+    {
+      "id": "src-frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681",
+      "kind": "DRAWING",
+      "label": "frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681",
+      "note": "frame frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681"
+    }
+  ],
+  "frame": {
+    "handedness": "LEFT_HANDED_AS_SPECIFIED",
+    "origin": "finished ground-floor level is y = 0; the front facade outer face is z = 0",
+    "viewerNote": "renderers working in a right-handed frame mirror z when building their scene",
+    "wallConvention": "a wall runs from start to end along its OUTER face at its base; its outward normal is up x u, so exterior rings are traversed counter-clockwise on a plan drawn with the front facade at the bottom and material lies to the left of the direction of travel",
+    "x": "right when looking at the front facade",
+    "y": "up (vertical)",
+    "z": "away from the front facade, into the building"
+  },
+  "id": "m-analysis-u7a243fda5915",
+  "levels": [
+    {
+      "buildingId": "building",
+      "elevation": 0,
+      "height": 8.039796,
+      "id": "lvl-0",
+      "index": 0,
+      "name": "Massing"
+    }
+  ],
+  "linearSolids": [],
+  "materials": [
+    {
+      "color": "#6d6a66",
+      "id": "mat-chimney",
+      "name": "Chimney"
+    },
+    {
+      "color": "#55585c",
+      "id": "mat-gate",
+      "name": "Garage door"
+    },
+    {
+      "color": "#9fc3d8",
+      "id": "mat-glass",
+      "name": "Glazing",
+      "opacity": 0.35
+    },
+    {
+      "color": "#d9d5cc",
+      "id": "mat-partition",
+      "name": "Partition"
+    },
+    {
+      "color": "#3a3a3c",
+      "id": "mat-render-dark",
+      "name": "Dark render"
+    },
+    {
+      "color": "#5a5550",
+      "id": "mat-roof",
+      "name": "Roof covering (tone not read: miniature convention)"
+    },
+    {
+      "color": "#b07a4a",
+      "id": "mat-timber",
+      "name": "Timber (door leaf, cladding)"
+    },
+    {
+      "color": "#e8e4dc",
+      "id": "mat-wall",
+      "name": "Rendered wall (tone not read: miniature convention)"
+    }
+  ],
+  "meta": {
+    "createdWith": "buildapp",
+    "notes": []
+  },
+  "name": "Anna II (analysis)",
+  "openings": [
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-H272-158",
+      "kind": "DOOR",
+      "offset": 0.814077,
+      "sill": 0,
+      "wallId": "iw-H273-197",
+      "width": 1.206944
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-H286-366",
+      "kind": "DOOR",
+      "offset": 1.516415,
+      "sill": 0,
+      "wallId": "iw-H286-317",
+      "width": 0.804629
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-H320-158",
+      "kind": "DOOR",
+      "offset": 0.814077,
+      "sill": 0,
+      "wallId": "iw-H321-196",
+      "width": 1.175996
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-H321-286",
+      "kind": "DOOR",
+      "offset": 4.775327,
+      "sill": 0,
+      "wallId": "iw-H321-196",
+      "width": 0.866523
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-H347-155",
+      "kind": "DOOR",
+      "offset": 0.721236,
+      "sill": 0,
+      "wallId": "iw-H347-139",
+      "width": 1.23789
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-V274-278",
+      "kind": "DOOR",
+      "offset": 0.448736,
+      "sill": 0,
+      "wallId": "iw-V274-303-x",
+      "width": 0.773681
+    },
+    {
+      "evidence": {
+        "interpretation": "a door gap between two pieces of the same partition on the plan; its height is not read",
+        "properties": {
+          "height": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "width": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.05,
+      "id": "id-V385-91",
+      "kind": "DOOR",
+      "offset": 1.702099,
+      "sill": 0,
+      "wallId": "iw-V385-116",
+      "width": 0.773682
+    },
+    {
+      "height": 2.052871,
+      "id": "op-fix-front-35eed9",
+      "kind": "WINDOW",
+      "offset": 2.343553,
+      "sill": 3.45173,
+      "wallId": "ring-mass-main-w0",
+      "width": 1.907535
+    },
+    {
+      "height": 1.398859,
+      "id": "op-fix-front-4c7bfb",
+      "kind": "WINDOW",
+      "offset": 0.308849,
+      "sill": 1.362525,
+      "wallId": "ring-mass-main-w0",
+      "width": 2.052871
+    },
+    {
+      "height": 2.289042,
+      "id": "op-fix-front-8cf1a3",
+      "kind": "DOOR",
+      "offset": 5.123104,
+      "sill": 0.490509,
+      "wallId": "ring-mass-main-w0",
+      "width": 0.962851
+    },
+    {
+      "height": 2.452545,
+      "id": "op-fix-front-ac7d53",
+      "kind": "DOOR",
+      "offset": 0.717785,
+      "sill": 0.254338,
+      "wallId": "ring-mass-wing-1-w0",
+      "width": 2.470712
+    },
+    {
+      "height": 2.052871,
+      "id": "op-fix-front-c27e30",
+      "kind": "DOOR",
+      "offset": 5.159438,
+      "sill": 3.45173,
+      "wallId": "ring-mass-main-w0",
+      "width": 0.90835
+    },
+    {
+      "height": 2.321652,
+      "id": "op-fix-left-32647b",
+      "kind": "DOOR",
+      "offset": 2.752243,
+      "sill": 0.224676,
+      "wallId": "ring-mass-main-w3",
+      "width": 2.99568
+    },
+    {
+      "height": 2.08978,
+      "id": "op-fix-rear-014405",
+      "kind": "DOOR",
+      "offset": 4.861487,
+      "sill": 3.343648,
+      "wallId": "ring-mass-main-w2",
+      "width": 0.963116
+    },
+    {
+      "height": 0.599676,
+      "id": "op-fix-rear-1d5583",
+      "kind": "WINDOW",
+      "offset": 1.998963,
+      "sill": 1.835372,
+      "wallId": "ring-mass-wing-1-w2",
+      "width": 0.672364
+    },
+    {
+      "height": 1.435588,
+      "id": "op-fix-rear-549986",
+      "kind": "WINDOW",
+      "offset": 2.789879,
+      "sill": 1.253868,
+      "wallId": "ring-mass-main-w2",
+      "width": 3.034724
+    },
+    {
+      "height": 2.2715,
+      "id": "op-fix-rear-7a72a8",
+      "kind": "WINDOW",
+      "offset": 6.042667,
+      "sill": 0.417956,
+      "wallId": "ring-mass-main-w2",
+      "width": 2.107952
+    },
+    {
+      "height": 0.599676,
+      "id": "op-fix-rear-84a054",
+      "kind": "WINDOW",
+      "offset": 1.054019,
+      "sill": 1.835372,
+      "wallId": "ring-mass-wing-1-w2",
+      "width": 0.672364
+    },
+    {
+      "height": 2.08978,
+      "id": "op-fix-rear-9e92e6",
+      "kind": "DOOR",
+      "offset": 2.789879,
+      "sill": 3.343648,
+      "wallId": "ring-mass-main-w2",
+      "width": 0.944944
+    },
+    {
+      "height": 0.881088,
+      "id": "op-fix-right-114f1d",
+      "kind": "WINDOW",
+      "offset": 0.477246,
+      "sill": 1.890668,
+      "wallId": "ring-mass-main-w1",
+      "width": 0.513968
+    }
+  ],
+  "platforms": [],
+  "railings": [],
+  "relationships": [],
+  "roofEdges": [
+    {
+      "end": {
+        "x": 9.6555,
+        "y": 4.254112679777204,
+        "z": 8.868069
+      },
+      "id": "abutment-mass-wing-1-maxZ-0-2",
+      "kind": "ABUTMENT",
+      "planeIds": [
+        "roof-mass-wing-1-maxZ-0"
+      ],
+      "start": {
+        "x": 9.6555,
+        "y": 3.625701,
+        "z": 9.4389
+      }
+    },
+    {
+      "end": {
+        "x": 9.6555,
+        "y": 3.625701,
+        "z": 3.2495
+      },
+      "id": "abutment-mass-wing-1-minZ-0-2",
+      "kind": "ABUTMENT",
+      "planeIds": [
+        "roof-mass-wing-1-minZ-0"
+      ],
+      "start": {
+        "x": 9.6555,
+        "y": 4.254112679777204,
+        "z": 3.820331
+      }
+    },
+    {
+      "end": {
+        "x": 9.6555,
+        "y": 4.254112,
+        "z": 3.820331
+      },
+      "id": "eave-mass-main-maxX-1",
+      "kind": "EAVE",
+      "planeIds": [
+        "roof-mass-main-maxX"
+      ],
+      "start": {
+        "x": 9.6555,
+        "y": 4.254112,
+        "z": 0
+      }
+    },
+    {
+      "end": {
+        "x": 9.6555,
+        "y": 4.254112,
+        "z": 11.2339
+      },
+      "id": "eave-mass-main-maxX-2",
+      "kind": "EAVE",
+      "planeIds": [
+        "roof-mass-main-maxX"
+      ],
+      "start": {
+        "x": 9.6555,
+        "y": 4.254112,
+        "z": 8.868069
+      }
+    },
+    {
+      "end": {
+        "x": 0.8356,
+        "y": 4.254112,
+        "z": 8.98712
+      },
+      "id": "eave-mass-main-minX-2",
+      "kind": "EAVE",
+      "planeIds": [
+        "roof-mass-main-minX"
+      ],
+      "start": {
+        "x": 0.8356,
+        "y": 4.254112,
+        "z": 11.2339
+      }
+    },
+    {
+      "end": {
+        "x": 0.8356,
+        "y": 4.254112,
+        "z": 0
+      },
+      "id": "eave-mass-main-minX-3",
+      "kind": "EAVE",
+      "planeIds": [
+        "roof-mass-main-minX"
+      ],
+      "start": {
+        "x": 0.8356,
+        "y": 4.254112,
+        "z": 4.268882
+      }
+    },
+    {
+      "end": {
+        "x": 9.6555,
+        "y": 3.625701,
+        "z": 9.4389
+      },
+      "id": "eave-mass-wing-1-maxZ-0-1",
+      "kind": "EAVE",
+      "planeIds": [
+        "roof-mass-wing-1-maxZ-0"
+      ],
+      "start": {
+        "x": 13.4621,
+        "y": 3.625701,
+        "z": 9.4389
+      }
+    },
+    {
+      "end": {
+        "x": 13.4621,
+        "y": 3.625701,
+        "z": 3.2495
+      },
+      "id": "eave-mass-wing-1-minZ-0-0",
+      "kind": "EAVE",
+      "planeIds": [
+        "roof-mass-wing-1-minZ-0"
+      ],
+      "start": {
+        "x": 9.6555,
+        "y": 3.625701,
+        "z": 3.2495
+      }
+    },
+    {
+      "end": {
+        "x": 0.8356,
+        "y": 6.233647882803314,
+        "z": 6.628001
+      },
+      "id": "ridge-mass-main-cross-left-minZ-mass-main-cross-left-maxZ",
+      "kind": "RIDGE",
+      "planeIds": [
+        "roof-mass-main-cross-left-minZ",
+        "roof-mass-main-cross-left-maxZ"
+      ],
+      "start": {
+        "x": 3.141565,
+        "y": 6.233647882803314,
+        "z": 6.628001
+      }
+    },
+    {
+      "end": {
+        "x": 5.24555,
+        "y": 8.039801382080537,
+        "z": 11.2339
+      },
+      "id": "ridge-mass-main-minX-mass-main-maxX",
+      "kind": "RIDGE",
+      "planeIds": [
+        "roof-mass-main-minX",
+        "roof-mass-main-maxX"
+      ],
+      "start": {
+        "x": 5.24555,
+        "y": 8.039801382080537,
+        "z": 0
+      }
+    },
+    {
+      "end": {
+        "x": 9.6555,
+        "y": 7.03256857622924,
+        "z": 6.3442
+      },
+      "id": "ridge-mass-wing-1-minZ-0-mass-wing-1-maxZ-0",
+      "kind": "RIDGE",
+      "planeIds": [
+        "roof-mass-wing-1-minZ-0",
+        "roof-mass-wing-1-maxZ-0"
+      ],
+      "start": {
+        "x": 13.4621,
+        "y": 7.03256857622924,
+        "z": 6.3442
+      }
+    },
+    {
+      "end": {
+        "x": 6.418876,
+        "y": 7.03256857622924,
+        "z": 6.3442
+      },
+      "id": "ridge-mass-wing-1-minZ-1-mass-wing-1-maxZ-1",
+      "kind": "RIDGE",
+      "planeIds": [
+        "roof-mass-wing-1-minZ-1",
+        "roof-mass-wing-1-maxZ-1"
+      ],
+      "start": {
+        "x": 9.6555,
+        "y": 7.03256857622924,
+        "z": 6.3442
+      }
+    },
+    {
+      "end": {
+        "x": 9.6555,
+        "y": 4.254112,
+        "z": 8.868069
+      },
+      "id": "valley-mass-main-maxX-mass-wing-1-maxZ-1",
+      "kind": "VALLEY",
+      "planeIds": [
+        "roof-mass-main-maxX",
+        "roof-mass-wing-1-maxZ-1"
+      ],
+      "start": {
+        "x": 6.418876,
+        "y": 7.032568243401181,
+        "z": 6.3442
+      }
+    },
+    {
+      "end": {
+        "x": 6.418876,
+        "y": 7.032568243401181,
+        "z": 6.3442
+      },
+      "id": "valley-mass-main-maxX-mass-wing-1-minZ-1",
+      "kind": "VALLEY",
+      "planeIds": [
+        "roof-mass-main-maxX",
+        "roof-mass-wing-1-minZ-1"
+      ],
+      "start": {
+        "x": 9.6555,
+        "y": 4.254112,
+        "z": 3.820331
+      }
+    },
+    {
+      "end": {
+        "x": 3.141565,
+        "y": 6.233650819249504,
+        "z": 6.628001
+      },
+      "id": "valley-mass-main-minX-mass-main-cross-left-maxZ",
+      "kind": "VALLEY",
+      "planeIds": [
+        "roof-mass-main-minX",
+        "roof-mass-main-cross-left-maxZ"
+      ],
+      "start": {
+        "x": 0.8356,
+        "y": 4.254112,
+        "z": 8.98712
+      }
+    },
+    {
+      "end": {
+        "x": 0.8356,
+        "y": 4.254112,
+        "z": 4.268882
+      },
+      "id": "valley-mass-main-minX-mass-main-cross-left-minZ",
+      "kind": "VALLEY",
+      "planeIds": [
+        "roof-mass-main-minX",
+        "roof-mass-main-cross-left-minZ"
+      ],
+      "start": {
+        "x": 3.141565,
+        "y": 6.233650819249504,
+        "z": 6.628001
+      }
+    },
+    {
+      "end": {
+        "x": 0.8356,
+        "y": 6.233647882803314,
+        "z": 6.628001
+      },
+      "id": "verge-mass-main-cross-left-maxZ-0",
+      "kind": "VERGE",
+      "planeIds": [
+        "roof-mass-main-cross-left-maxZ"
+      ],
+      "start": {
+        "x": 0.8356,
+        "y": 4.254112,
+        "z": 8.98712
+      }
+    },
+    {
+      "end": {
+        "x": 0.8356,
+        "y": 4.254112,
+        "z": 4.268882
+      },
+      "id": "verge-mass-main-cross-left-minZ-0",
+      "kind": "VERGE",
+      "planeIds": [
+        "roof-mass-main-cross-left-minZ"
+      ],
+      "start": {
+        "x": 0.8356,
+        "y": 6.233647882803314,
+        "z": 6.628001
+      }
+    },
+    {
+      "end": {
+        "x": 9.6555,
+        "y": 4.254112,
+        "z": 0
+      },
+      "id": "verge-mass-main-maxX-0",
+      "kind": "VERGE",
+      "planeIds": [
+        "roof-mass-main-maxX"
+      ],
+      "start": {
+        "x": 5.24555,
+        "y": 8.039801382080539,
+        "z": 0
+      }
+    },
+    {
+      "end": {
+        "x": 5.24555,
+        "y": 8.039801382080539,
+        "z": 11.2339
+      },
+      "id": "verge-mass-main-maxX-3",
+      "kind": "VERGE",
+      "planeIds": [
+        "roof-mass-main-maxX"
+      ],
+      "start": {
+        "x": 9.6555,
+        "y": 4.254112,
+        "z": 11.2339
+      }
+    },
+    {
+      "end": {
+        "x": 5.24555,
+        "y": 8.039801382080537,
+        "z": 0
+      },
+      "id": "verge-mass-main-minX-0",
+      "kind": "VERGE",
+      "planeIds": [
+        "roof-mass-main-minX"
+      ],
+      "start": {
+        "x": 0.8356,
+        "y": 4.254112,
+        "z": 0
+      }
+    },
+    {
+      "end": {
+        "x": 0.8356,
+        "y": 4.254112,
+        "z": 11.2339
+      },
+      "id": "verge-mass-main-minX-1",
+      "kind": "VERGE",
+      "planeIds": [
+        "roof-mass-main-minX"
+      ],
+      "start": {
+        "x": 5.24555,
+        "y": 8.039801382080537,
+        "z": 11.2339
+      }
+    },
+    {
+      "end": {
+        "x": 13.4621,
+        "y": 3.625701,
+        "z": 9.4389
+      },
+      "id": "verge-mass-wing-1-maxZ-0-0",
+      "kind": "VERGE",
+      "planeIds": [
+        "roof-mass-wing-1-maxZ-0"
+      ],
+      "start": {
+        "x": 13.4621,
+        "y": 7.03256857622924,
+        "z": 6.3442
+      }
+    },
+    {
+      "end": {
+        "x": 13.4621,
+        "y": 7.03256857622924,
+        "z": 6.3442
+      },
+      "id": "verge-mass-wing-1-minZ-0-1",
+      "kind": "VERGE",
+      "planeIds": [
+        "roof-mass-wing-1-minZ-0"
+      ],
+      "start": {
+        "x": 13.4621,
+        "y": 3.625701,
+        "z": 3.2495
+      }
+    }
+  ],
+  "roofOpenings": [
+    {
+      "footprint": {
+        "maxX": 12.09915,
+        "maxZ": 5.10476,
+        "minX": 11.354303,
+        "minZ": 4.329148
+      },
+      "id": "rw-fix-front-703345",
+      "kind": "ROOFLIGHT",
+      "roofId": "roof-mass-wing-1-minZ-0"
+    },
+    {
+      "footprint": {
+        "maxX": 11.208967,
+        "maxZ": 5.10476,
+        "minX": 10.46412,
+        "minZ": 4.329148
+      },
+      "id": "rw-fix-front-77b7c4",
+      "kind": "ROOFLIGHT",
+      "roofId": "roof-mass-wing-1-minZ-0"
+    },
+    {
+      "footprint": {
+        "maxX": 12.099157,
+        "maxZ": 8.440583,
+        "minX": 11.354105,
+        "minZ": 7.664758
+      },
+      "id": "rw-fix-rear-4da0c9",
+      "kind": "ROOFLIGHT",
+      "roofId": "roof-mass-wing-1-maxZ-0"
+    },
+    {
+      "footprint": {
+        "maxX": 11.208729,
+        "maxZ": 8.440583,
+        "minX": 10.445505,
+        "minZ": 7.664758
+      },
+      "id": "rw-fix-rear-e0e6b9",
+      "kind": "ROOFLIGHT",
+      "roofId": "roof-mass-wing-1-maxZ-0"
+    },
+    {
+      "footprint": {
+        "maxX": 6.250399,
+        "maxZ": 5.451722,
+        "minX": 5.694444,
+        "minZ": 4.68077
+      },
+      "id": "rw-fix-right-7af166",
+      "kind": "ROOFLIGHT",
+      "roofId": "roof-mass-main-maxX"
+    }
+  ],
+  "roofPlanes": [
+    {
+      "boundary": [
+        {
+          "x": 0.8356,
+          "z": 8.98712
+        },
+        {
+          "x": 0.8356,
+          "z": 6.628001
+        },
+        {
+          "x": 3.141565,
+          "z": 6.628001
+        }
+      ],
+      "datum": {
+        "x": 0.8356,
+        "y": 4.254112,
+        "z": 8.98712
+      },
+      "downslope": {
+        "x": 0,
+        "z": 1
+      },
+      "evidence": {
+        "interpretation": "ridge along Z (slopes seen on the sides along it, the gable end across it); pitch 40.6° from a 3.79 m rise over half of 8.82 m (the walls end at 3.92 m: the roof's underside there)",
+        "properties": {
+          "datum": "SOURCE_DERIVED",
+          "pitchDeg": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681 + frame-asset-elewacja-boczna-domu-anna-ii-5adc9d7716-71742bcaaf + frame-asset-elewacja-boczna-domu-anna-ii-68592292ce-3935527cb4 + frame-asset-elewacja-frontowa-domu-anna-ii-8fcc7e8e8f-9e1454a435 + frame-asset-elewacja-tylna-domu-anna-ii-64bfd3f5c0-ee5228dc20",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681",
+          "src-frame-asset-elewacja-boczna-domu-anna-ii-5adc9d7716-71742bcaaf",
+          "src-frame-asset-elewacja-boczna-domu-anna-ii-68592292ce-3935527cb4",
+          "src-frame-asset-elewacja-frontowa-domu-anna-ii-8fcc7e8e8f-9e1454a435",
+          "src-frame-asset-elewacja-tylna-domu-anna-ii-64bfd3f5c0-ee5228dc20"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "roof-mass-main-cross-left-maxZ",
+      "levelId": "lvl-0",
+      "materialId": "mat-roof",
+      "pitchDeg": 40,
+      "thickness": 0.25
+    },
+    {
+      "boundary": [
+        {
+          "x": 0.8356,
+          "z": 4.268882
+        },
+        {
+          "x": 3.141565,
+          "z": 6.628001
+        },
+        {
+          "x": 0.8356,
+          "z": 6.628001
+        }
+      ],
+      "datum": {
+        "x": 0.8356,
+        "y": 4.254112,
+        "z": 4.268882
+      },
+      "downslope": {
+        "x": 0,
+        "z": -1
+      },
+      "evidence": {
+        "interpretation": "ridge along Z (slopes seen on the sides along it, the gable end across it); pitch 40.6° from a 3.79 m rise over half of 8.82 m (the walls end at 3.92 m: the roof's underside there)",
+        "properties": {
+          "datum": "SOURCE_DERIVED",
+          "pitchDeg": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681 + frame-asset-elewacja-boczna-domu-anna-ii-5adc9d7716-71742bcaaf + frame-asset-elewacja-boczna-domu-anna-ii-68592292ce-3935527cb4 + frame-asset-elewacja-frontowa-domu-anna-ii-8fcc7e8e8f-9e1454a435 + frame-asset-elewacja-tylna-domu-anna-ii-64bfd3f5c0-ee5228dc20",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681",
+          "src-frame-asset-elewacja-boczna-domu-anna-ii-5adc9d7716-71742bcaaf",
+          "src-frame-asset-elewacja-boczna-domu-anna-ii-68592292ce-3935527cb4",
+          "src-frame-asset-elewacja-frontowa-domu-anna-ii-8fcc7e8e8f-9e1454a435",
+          "src-frame-asset-elewacja-tylna-domu-anna-ii-64bfd3f5c0-ee5228dc20"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "roof-mass-main-cross-left-minZ",
+      "levelId": "lvl-0",
+      "materialId": "mat-roof",
+      "pitchDeg": 40,
+      "thickness": 0.25
+    },
+    {
+      "boundary": [
+        {
+          "x": 5.24555,
+          "z": 0
+        },
+        {
+          "x": 9.6555,
+          "z": 0
+        },
+        {
+          "x": 9.6555,
+          "z": 3.820331
+        },
+        {
+          "x": 6.418876,
+          "z": 6.3442
+        },
+        {
+          "x": 9.6555,
+          "z": 8.868069
+        },
+        {
+          "x": 9.6555,
+          "z": 11.2339
+        },
+        {
+          "x": 5.24555,
+          "z": 11.2339
+        }
+      ],
+      "datum": {
+        "x": 9.6555,
+        "y": 4.254112,
+        "z": 0
+      },
+      "downslope": {
+        "x": 1,
+        "z": 0
+      },
+      "evidence": {
+        "interpretation": "ridge along Z (slopes seen on the sides along it, the gable end across it); pitch 40.6° from a 3.79 m rise over half of 8.82 m (the walls end at 3.92 m: the roof's underside there)",
+        "properties": {
+          "datum": "SOURCE_DERIVED",
+          "pitchDeg": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681 + frame-asset-elewacja-boczna-domu-anna-ii-5adc9d7716-71742bcaaf + frame-asset-elewacja-boczna-domu-anna-ii-68592292ce-3935527cb4 + frame-asset-elewacja-frontowa-domu-anna-ii-8fcc7e8e8f-9e1454a435 + frame-asset-elewacja-tylna-domu-anna-ii-64bfd3f5c0-ee5228dc20",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681",
+          "src-frame-asset-elewacja-boczna-domu-anna-ii-5adc9d7716-71742bcaaf",
+          "src-frame-asset-elewacja-boczna-domu-anna-ii-68592292ce-3935527cb4",
+          "src-frame-asset-elewacja-frontowa-domu-anna-ii-8fcc7e8e8f-9e1454a435",
+          "src-frame-asset-elewacja-tylna-domu-anna-ii-64bfd3f5c0-ee5228dc20"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "roof-mass-main-maxX",
+      "levelId": "lvl-0",
+      "materialId": "mat-roof",
+      "pitchDeg": 40.6442,
+      "thickness": 0.25
+    },
+    {
+      "boundary": [
+        {
+          "x": 0.8356,
+          "z": 0
+        },
+        {
+          "x": 5.24555,
+          "z": 0
+        },
+        {
+          "x": 5.24555,
+          "z": 11.2339
+        },
+        {
+          "x": 0.8356,
+          "z": 11.2339
+        },
+        {
+          "x": 0.8356,
+          "z": 8.98712
+        },
+        {
+          "x": 3.141565,
+          "z": 6.628001
+        },
+        {
+          "x": 0.8356,
+          "z": 4.268882
+        }
+      ],
+      "datum": {
+        "x": 0.8356,
+        "y": 4.254112,
+        "z": 0
+      },
+      "downslope": {
+        "x": -1,
+        "z": 0
+      },
+      "evidence": {
+        "interpretation": "ridge along Z (slopes seen on the sides along it, the gable end across it); pitch 40.6° from a 3.79 m rise over half of 8.82 m (the walls end at 3.92 m: the roof's underside there)",
+        "properties": {
+          "datum": "SOURCE_DERIVED",
+          "pitchDeg": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681 + frame-asset-elewacja-boczna-domu-anna-ii-5adc9d7716-71742bcaaf + frame-asset-elewacja-boczna-domu-anna-ii-68592292ce-3935527cb4 + frame-asset-elewacja-frontowa-domu-anna-ii-8fcc7e8e8f-9e1454a435 + frame-asset-elewacja-tylna-domu-anna-ii-64bfd3f5c0-ee5228dc20",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681",
+          "src-frame-asset-elewacja-boczna-domu-anna-ii-5adc9d7716-71742bcaaf",
+          "src-frame-asset-elewacja-boczna-domu-anna-ii-68592292ce-3935527cb4",
+          "src-frame-asset-elewacja-frontowa-domu-anna-ii-8fcc7e8e8f-9e1454a435",
+          "src-frame-asset-elewacja-tylna-domu-anna-ii-64bfd3f5c0-ee5228dc20"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "roof-mass-main-minX",
+      "levelId": "lvl-0",
+      "materialId": "mat-roof",
+      "pitchDeg": 40.6442,
+      "thickness": 0.25
+    },
+    {
+      "boundary": [
+        {
+          "x": 13.4621,
+          "z": 6.3442
+        },
+        {
+          "x": 13.4621,
+          "z": 9.4389
+        },
+        {
+          "x": 9.6555,
+          "z": 9.4389
+        },
+        {
+          "x": 9.6555,
+          "z": 6.3442
+        }
+      ],
+      "datum": {
+        "x": 9.6555,
+        "y": 3.625701,
+        "z": 9.4389
+      },
+      "downslope": {
+        "x": 0,
+        "z": 1
+      },
+      "evidence": {
+        "interpretation": "ridge along X (slopes seen on the sides along it, the gable end across it); pitch 8° from a 0.43 m rise over half of 6.19 m; no view shows the wall's corner under the roof and the page's 40° does not fit the drawn walls (it would put their top at 4.11 m, they are drawn to 6.60 m): the highest drawn wall top is taken, unconfirmed; the agreed structure: one storey under the eaves: the walls end at 3.25 m (the wall top 2 elevation(s) draw within the storey), not at 6.35 m",
+        "properties": {
+          "datum": "UNRESOLVED",
+          "pitchDeg": "UNRESOLVED"
+        },
+        "source": "frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681 + frame-asset-elewacja-boczna-domu-anna-ii-5adc9d7716-71742bcaaf + frame-asset-elewacja-boczna-domu-anna-ii-68592292ce-3935527cb4 + frame-asset-elewacja-frontowa-domu-anna-ii-8fcc7e8e8f-9e1454a435 + frame-asset-elewacja-tylna-domu-anna-ii-64bfd3f5c0-ee5228dc20",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681",
+          "src-frame-asset-elewacja-boczna-domu-anna-ii-5adc9d7716-71742bcaaf",
+          "src-frame-asset-elewacja-boczna-domu-anna-ii-68592292ce-3935527cb4",
+          "src-frame-asset-elewacja-frontowa-domu-anna-ii-8fcc7e8e8f-9e1454a435",
+          "src-frame-asset-elewacja-tylna-domu-anna-ii-64bfd3f5c0-ee5228dc20"
+        ],
+        "status": "UNRESOLVED"
+      },
+      "id": "roof-mass-wing-1-maxZ-0",
+      "levelId": "lvl-0",
+      "materialId": "mat-roof",
+      "pitchDeg": 47.7489,
+      "thickness": 0.25
+    },
+    {
+      "boundary": [
+        {
+          "x": 9.6555,
+          "z": 8.868069
+        },
+        {
+          "x": 6.418876,
+          "z": 6.3442
+        },
+        {
+          "x": 9.6555,
+          "z": 6.3442
+        }
+      ],
+      "datum": {
+        "x": 9.6555,
+        "y": 3.625701,
+        "z": 9.4389
+      },
+      "downslope": {
+        "x": 0,
+        "z": 1
+      },
+      "evidence": {
+        "interpretation": "ridge along X (slopes seen on the sides along it, the gable end across it); pitch 8° from a 0.43 m rise over half of 6.19 m; no view shows the wall's corner under the roof and the page's 40° does not fit the drawn walls (it would put their top at 4.11 m, they are drawn to 6.60 m): the highest drawn wall top is taken, unconfirmed; the agreed structure: one storey under the eaves: the walls end at 3.25 m (the wall top 2 elevation(s) draw within the storey), not at 6.35 m",
+        "properties": {
+          "datum": "UNRESOLVED",
+          "pitchDeg": "UNRESOLVED"
+        },
+        "source": "frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681 + frame-asset-elewacja-boczna-domu-anna-ii-5adc9d7716-71742bcaaf + frame-asset-elewacja-boczna-domu-anna-ii-68592292ce-3935527cb4 + frame-asset-elewacja-frontowa-domu-anna-ii-8fcc7e8e8f-9e1454a435 + frame-asset-elewacja-tylna-domu-anna-ii-64bfd3f5c0-ee5228dc20",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681",
+          "src-frame-asset-elewacja-boczna-domu-anna-ii-5adc9d7716-71742bcaaf",
+          "src-frame-asset-elewacja-boczna-domu-anna-ii-68592292ce-3935527cb4",
+          "src-frame-asset-elewacja-frontowa-domu-anna-ii-8fcc7e8e8f-9e1454a435",
+          "src-frame-asset-elewacja-tylna-domu-anna-ii-64bfd3f5c0-ee5228dc20"
+        ],
+        "status": "UNRESOLVED"
+      },
+      "id": "roof-mass-wing-1-maxZ-1",
+      "levelId": "lvl-0",
+      "materialId": "mat-roof",
+      "pitchDeg": 47.7489,
+      "thickness": 0.25
+    },
+    {
+      "boundary": [
+        {
+          "x": 9.6555,
+          "z": 3.2495
+        },
+        {
+          "x": 13.4621,
+          "z": 3.2495
+        },
+        {
+          "x": 13.4621,
+          "z": 6.3442
+        },
+        {
+          "x": 9.6555,
+          "z": 6.3442
+        }
+      ],
+      "datum": {
+        "x": 9.6555,
+        "y": 3.625701,
+        "z": 3.2495
+      },
+      "downslope": {
+        "x": 0,
+        "z": -1
+      },
+      "evidence": {
+        "interpretation": "ridge along X (slopes seen on the sides along it, the gable end across it); pitch 8° from a 0.43 m rise over half of 6.19 m; no view shows the wall's corner under the roof and the page's 40° does not fit the drawn walls (it would put their top at 4.11 m, they are drawn to 6.60 m): the highest drawn wall top is taken, unconfirmed; the agreed structure: one storey under the eaves: the walls end at 3.25 m (the wall top 2 elevation(s) draw within the storey), not at 6.35 m",
+        "properties": {
+          "datum": "UNRESOLVED",
+          "pitchDeg": "UNRESOLVED"
+        },
+        "source": "frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681 + frame-asset-elewacja-boczna-domu-anna-ii-5adc9d7716-71742bcaaf + frame-asset-elewacja-boczna-domu-anna-ii-68592292ce-3935527cb4 + frame-asset-elewacja-frontowa-domu-anna-ii-8fcc7e8e8f-9e1454a435 + frame-asset-elewacja-tylna-domu-anna-ii-64bfd3f5c0-ee5228dc20",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681",
+          "src-frame-asset-elewacja-boczna-domu-anna-ii-5adc9d7716-71742bcaaf",
+          "src-frame-asset-elewacja-boczna-domu-anna-ii-68592292ce-3935527cb4",
+          "src-frame-asset-elewacja-frontowa-domu-anna-ii-8fcc7e8e8f-9e1454a435",
+          "src-frame-asset-elewacja-tylna-domu-anna-ii-64bfd3f5c0-ee5228dc20"
+        ],
+        "status": "UNRESOLVED"
+      },
+      "id": "roof-mass-wing-1-minZ-0",
+      "levelId": "lvl-0",
+      "materialId": "mat-roof",
+      "pitchDeg": 47.7489,
+      "thickness": 0.25
+    },
+    {
+      "boundary": [
+        {
+          "x": 9.6555,
+          "z": 6.3442
+        },
+        {
+          "x": 6.418876,
+          "z": 6.3442
+        },
+        {
+          "x": 9.6555,
+          "z": 3.820331
+        }
+      ],
+      "datum": {
+        "x": 9.6555,
+        "y": 3.625701,
+        "z": 3.2495
+      },
+      "downslope": {
+        "x": 0,
+        "z": -1
+      },
+      "evidence": {
+        "interpretation": "ridge along X (slopes seen on the sides along it, the gable end across it); pitch 8° from a 0.43 m rise over half of 6.19 m; no view shows the wall's corner under the roof and the page's 40° does not fit the drawn walls (it would put their top at 4.11 m, they are drawn to 6.60 m): the highest drawn wall top is taken, unconfirmed; the agreed structure: one storey under the eaves: the walls end at 3.25 m (the wall top 2 elevation(s) draw within the storey), not at 6.35 m",
+        "properties": {
+          "datum": "UNRESOLVED",
+          "pitchDeg": "UNRESOLVED"
+        },
+        "source": "frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681 + frame-asset-elewacja-boczna-domu-anna-ii-5adc9d7716-71742bcaaf + frame-asset-elewacja-boczna-domu-anna-ii-68592292ce-3935527cb4 + frame-asset-elewacja-frontowa-domu-anna-ii-8fcc7e8e8f-9e1454a435 + frame-asset-elewacja-tylna-domu-anna-ii-64bfd3f5c0-ee5228dc20",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681",
+          "src-frame-asset-elewacja-boczna-domu-anna-ii-5adc9d7716-71742bcaaf",
+          "src-frame-asset-elewacja-boczna-domu-anna-ii-68592292ce-3935527cb4",
+          "src-frame-asset-elewacja-frontowa-domu-anna-ii-8fcc7e8e8f-9e1454a435",
+          "src-frame-asset-elewacja-tylna-domu-anna-ii-64bfd3f5c0-ee5228dc20"
+        ],
+        "status": "UNRESOLVED"
+      },
+      "id": "roof-mass-wing-1-minZ-1",
+      "levelId": "lvl-0",
+      "materialId": "mat-roof",
+      "pitchDeg": 47.7489,
+      "thickness": 0.25
+    }
+  ],
+  "rooflights": [
+    {
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "rw-fix-front-703345-light",
+      "roofOpeningId": "rw-fix-front-703345"
+    },
+    {
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "rw-fix-front-77b7c4-light",
+      "roofOpeningId": "rw-fix-front-77b7c4"
+    },
+    {
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "rw-fix-rear-4da0c9-light",
+      "roofOpeningId": "rw-fix-rear-4da0c9"
+    },
+    {
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "rw-fix-rear-e0e6b9-light",
+      "roofOpeningId": "rw-fix-rear-e0e6b9"
+    },
+    {
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "rw-fix-right-7af166-light",
+      "roofOpeningId": "rw-fix-right-7af166"
+    }
+  ],
+  "roofs": [],
+  "rooms": [],
+  "schema": "buildapp.canonical-building-model",
+  "schemaVersion": "1.9.0",
+  "slabs": [],
+  "stairs": [],
+  "stepRuns": [],
+  "surfaceRegions": [
+    {
+      "evidence": {
+        "interpretation": "a dark render outline from finish-6c1655 (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-mass-main-w1",
+      "id": "appearance-east-ring-mass-main-w1-dark-render-0",
+      "materialId": "mat-render-dark",
+      "outline": [
+        {
+          "a": 9.5,
+          "b": 3.734168
+        },
+        {
+          "a": 9.56,
+          "b": 3.734168
+        },
+        {
+          "a": 9.56,
+          "b": 3.714168
+        },
+        {
+          "a": 9.64,
+          "b": 3.714168
+        },
+        {
+          "a": 9.64,
+          "b": 3.694168
+        },
+        {
+          "a": 9.7,
+          "b": 3.694168
+        },
+        {
+          "a": 9.7,
+          "b": 3.674168
+        },
+        {
+          "a": 9.76,
+          "b": 3.674168
+        },
+        {
+          "a": 9.76,
+          "b": 3.654168
+        },
+        {
+          "a": 9.84,
+          "b": 3.654168
+        },
+        {
+          "a": 9.84,
+          "b": 3.634168
+        },
+        {
+          "a": 9.9,
+          "b": 3.634168
+        },
+        {
+          "a": 9.9,
+          "b": 3.614168
+        },
+        {
+          "a": 9.98,
+          "b": 3.614168
+        },
+        {
+          "a": 9.98,
+          "b": 3.594168
+        },
+        {
+          "a": 10.04,
+          "b": 3.594168
+        },
+        {
+          "a": 10.04,
+          "b": 3.574168
+        },
+        {
+          "a": 10.1,
+          "b": 3.574168
+        },
+        {
+          "a": 10.1,
+          "b": 3.554168
+        },
+        {
+          "a": 10.18,
+          "b": 3.554168
+        },
+        {
+          "a": 10.18,
+          "b": 3.534168
+        },
+        {
+          "a": 10.24,
+          "b": 3.534168
+        },
+        {
+          "a": 10.24,
+          "b": 3.514168
+        },
+        {
+          "a": 10.32,
+          "b": 3.514168
+        },
+        {
+          "a": 10.32,
+          "b": 3.494168
+        },
+        {
+          "a": 10.38,
+          "b": 3.494168
+        },
+        {
+          "a": 10.38,
+          "b": 3.474168
+        },
+        {
+          "a": 10.44,
+          "b": 3.474168
+        },
+        {
+          "a": 10.44,
+          "b": 3.454168
+        },
+        {
+          "a": 10.52,
+          "b": 3.454168
+        },
+        {
+          "a": 10.52,
+          "b": 3.434168
+        },
+        {
+          "a": 10.58,
+          "b": 3.434168
+        },
+        {
+          "a": 10.58,
+          "b": 3.414168
+        },
+        {
+          "a": 10.66,
+          "b": 3.414168
+        },
+        {
+          "a": 10.66,
+          "b": 3.394168
+        },
+        {
+          "a": 10.72,
+          "b": 3.394168
+        },
+        {
+          "a": 10.72,
+          "b": 3.374168
+        },
+        {
+          "a": 10.78,
+          "b": 3.374168
+        },
+        {
+          "a": 10.78,
+          "b": 3.354168
+        },
+        {
+          "a": 10.86,
+          "b": 3.354168
+        },
+        {
+          "a": 10.86,
+          "b": 3.334168
+        },
+        {
+          "a": 10.92,
+          "b": 3.334168
+        },
+        {
+          "a": 10.92,
+          "b": 3.314168
+        },
+        {
+          "a": 10.94,
+          "b": 3.314168
+        },
+        {
+          "a": 10.94,
+          "b": 3.294168
+        },
+        {
+          "a": 10.96,
+          "b": 3.294168
+        },
+        {
+          "a": 10.96,
+          "b": 0.234168
+        },
+        {
+          "a": 10.94,
+          "b": 0.234168
+        },
+        {
+          "a": 10.94,
+          "b": 0.214168
+        },
+        {
+          "a": 9.5,
+          "b": 0.214168
+        },
+        {
+          "a": 9.5,
+          "b": 0.234168
+        },
+        {
+          "a": 9.48,
+          "b": 0.234168
+        },
+        {
+          "a": 9.48,
+          "b": 3.714168
+        },
+        {
+          "a": 9.5,
+          "b": 3.714168
+        }
+      ],
+      "rect": {
+        "a0": 9.48,
+        "a1": 10.96,
+        "b0": 0.214168,
+        "b1": 3.734168
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a dark render outline from finish-c7ded4 (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-mass-main-w2",
+      "id": "appearance-rear-ring-mass-main-w2-dark-render-0",
+      "materialId": "mat-render-dark",
+      "outline": [
+        {
+          "a": 8.7599,
+          "b": 3.674168
+        },
+        {
+          "a": 8.7399,
+          "b": 3.674168
+        },
+        {
+          "a": 8.7399,
+          "b": 3.654168
+        },
+        {
+          "a": 8.7199,
+          "b": 3.654168
+        },
+        {
+          "a": 8.7199,
+          "b": 0.414168
+        },
+        {
+          "a": 8.7399,
+          "b": 0.414168
+        },
+        {
+          "a": 8.7399,
+          "b": 0.394168
+        },
+        {
+          "a": 8.8199,
+          "b": 0.394168
+        },
+        {
+          "a": 8.8199,
+          "b": 3.634168
+        },
+        {
+          "a": 8.7999,
+          "b": 3.634168
+        },
+        {
+          "a": 8.7999,
+          "b": 3.654168
+        },
+        {
+          "a": 8.7599,
+          "b": 3.654168
+        }
+      ],
+      "rect": {
+        "a0": 8.7199,
+        "a1": 8.8199,
+        "b0": 0.394168,
+        "b1": 3.674168
+      }
+    }
+  ],
+  "terraces": [],
+  "units": {
+    "angle": "deg",
+    "length": "m"
+  },
+  "wallJunctions": [
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w3"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w0"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681 (MAIN, GARAGE), at the analyzer's own scale: 3.094726 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 4 registered elevation(s) give eaves (the walls' corner tops) 3.29 / 3.33 / 3.79 / 4.06 m and top 8.08 / 8.01 / 8.07 / 7.83 m — the gable-end view(s) (FRONT, REAR) show the wall corner under the roof: 3.92 m is taken; a view along the ridge draws its walls ending behind the fascia, lower by no more than an overhang hides (two views draw that line)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681 + frame-asset-elewacja-boczna-domu-anna-ii-5adc9d7716-71742bcaaf + frame-asset-elewacja-boczna-domu-anna-ii-68592292ce-3935527cb4 + frame-asset-elewacja-frontowa-domu-anna-ii-8fcc7e8e8f-9e1454a435 + frame-asset-elewacja-tylna-domu-anna-ii-64bfd3f5c0-ee5228dc20",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681",
+          "src-frame-asset-elewacja-boczna-domu-anna-ii-5adc9d7716-71742bcaaf",
+          "src-frame-asset-elewacja-boczna-domu-anna-ii-68592292ce-3935527cb4",
+          "src-frame-asset-elewacja-frontowa-domu-anna-ii-8fcc7e8e8f-9e1454a435",
+          "src-frame-asset-elewacja-tylna-domu-anna-ii-64bfd3f5c0-ee5228dc20"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j0",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w0"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w1"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681 (MAIN, GARAGE), at the analyzer's own scale: 3.094726 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 4 registered elevation(s) give eaves (the walls' corner tops) 3.29 / 3.33 / 3.79 / 4.06 m and top 8.08 / 8.01 / 8.07 / 7.83 m — the gable-end view(s) (FRONT, REAR) show the wall corner under the roof: 3.92 m is taken; a view along the ridge draws its walls ending behind the fascia, lower by no more than an overhang hides (two views draw that line)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681 + frame-asset-elewacja-boczna-domu-anna-ii-5adc9d7716-71742bcaaf + frame-asset-elewacja-boczna-domu-anna-ii-68592292ce-3935527cb4 + frame-asset-elewacja-frontowa-domu-anna-ii-8fcc7e8e8f-9e1454a435 + frame-asset-elewacja-tylna-domu-anna-ii-64bfd3f5c0-ee5228dc20",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681",
+          "src-frame-asset-elewacja-boczna-domu-anna-ii-5adc9d7716-71742bcaaf",
+          "src-frame-asset-elewacja-boczna-domu-anna-ii-68592292ce-3935527cb4",
+          "src-frame-asset-elewacja-frontowa-domu-anna-ii-8fcc7e8e8f-9e1454a435",
+          "src-frame-asset-elewacja-tylna-domu-anna-ii-64bfd3f5c0-ee5228dc20"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j1",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w1"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w2"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681 (MAIN, GARAGE), at the analyzer's own scale: 3.094726 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 4 registered elevation(s) give eaves (the walls' corner tops) 3.29 / 3.33 / 3.79 / 4.06 m and top 8.08 / 8.01 / 8.07 / 7.83 m — the gable-end view(s) (FRONT, REAR) show the wall corner under the roof: 3.92 m is taken; a view along the ridge draws its walls ending behind the fascia, lower by no more than an overhang hides (two views draw that line)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681 + frame-asset-elewacja-boczna-domu-anna-ii-5adc9d7716-71742bcaaf + frame-asset-elewacja-boczna-domu-anna-ii-68592292ce-3935527cb4 + frame-asset-elewacja-frontowa-domu-anna-ii-8fcc7e8e8f-9e1454a435 + frame-asset-elewacja-tylna-domu-anna-ii-64bfd3f5c0-ee5228dc20",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681",
+          "src-frame-asset-elewacja-boczna-domu-anna-ii-5adc9d7716-71742bcaaf",
+          "src-frame-asset-elewacja-boczna-domu-anna-ii-68592292ce-3935527cb4",
+          "src-frame-asset-elewacja-frontowa-domu-anna-ii-8fcc7e8e8f-9e1454a435",
+          "src-frame-asset-elewacja-tylna-domu-anna-ii-64bfd3f5c0-ee5228dc20"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j2",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w2",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-main-w2"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-main-w3"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681 (MAIN, GARAGE), at the analyzer's own scale: 3.094726 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 4 registered elevation(s) give eaves (the walls' corner tops) 3.29 / 3.33 / 3.79 / 4.06 m and top 8.08 / 8.01 / 8.07 / 7.83 m — the gable-end view(s) (FRONT, REAR) show the wall corner under the roof: 3.92 m is taken; a view along the ridge draws its walls ending behind the fascia, lower by no more than an overhang hides (two views draw that line)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681 + frame-asset-elewacja-boczna-domu-anna-ii-5adc9d7716-71742bcaaf + frame-asset-elewacja-boczna-domu-anna-ii-68592292ce-3935527cb4 + frame-asset-elewacja-frontowa-domu-anna-ii-8fcc7e8e8f-9e1454a435 + frame-asset-elewacja-tylna-domu-anna-ii-64bfd3f5c0-ee5228dc20",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681",
+          "src-frame-asset-elewacja-boczna-domu-anna-ii-5adc9d7716-71742bcaaf",
+          "src-frame-asset-elewacja-boczna-domu-anna-ii-68592292ce-3935527cb4",
+          "src-frame-asset-elewacja-frontowa-domu-anna-ii-8fcc7e8e8f-9e1454a435",
+          "src-frame-asset-elewacja-tylna-domu-anna-ii-64bfd3f5c0-ee5228dc20"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main-j3",
+      "kind": "CORNER",
+      "owner": "ring-mass-main-w2",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-wing-1-w3"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-wing-1-w0"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681 (MAIN, GARAGE), at the analyzer's own scale: 3.094726 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 3 registered elevation(s) give eaves 6.60 / 3.34 / 3.25 m and top 6.60 / 7.14 / 7.03 m (they disagree by 3.34 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681 + frame-asset-elewacja-boczna-domu-anna-ii-5adc9d7716-71742bcaaf + frame-asset-elewacja-boczna-domu-anna-ii-68592292ce-3935527cb4 + frame-asset-elewacja-frontowa-domu-anna-ii-8fcc7e8e8f-9e1454a435 + frame-asset-elewacja-tylna-domu-anna-ii-64bfd3f5c0-ee5228dc20",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681",
+          "src-frame-asset-elewacja-boczna-domu-anna-ii-5adc9d7716-71742bcaaf",
+          "src-frame-asset-elewacja-boczna-domu-anna-ii-68592292ce-3935527cb4",
+          "src-frame-asset-elewacja-frontowa-domu-anna-ii-8fcc7e8e8f-9e1454a435",
+          "src-frame-asset-elewacja-tylna-domu-anna-ii-64bfd3f5c0-ee5228dc20"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-wing-1-j0",
+      "kind": "CORNER",
+      "owner": "ring-mass-wing-1-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-wing-1-w0"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-wing-1-w1"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681 (MAIN, GARAGE), at the analyzer's own scale: 3.094726 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 3 registered elevation(s) give eaves 6.60 / 3.34 / 3.25 m and top 6.60 / 7.14 / 7.03 m (they disagree by 3.34 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681 + frame-asset-elewacja-boczna-domu-anna-ii-5adc9d7716-71742bcaaf + frame-asset-elewacja-boczna-domu-anna-ii-68592292ce-3935527cb4 + frame-asset-elewacja-frontowa-domu-anna-ii-8fcc7e8e8f-9e1454a435 + frame-asset-elewacja-tylna-domu-anna-ii-64bfd3f5c0-ee5228dc20",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681",
+          "src-frame-asset-elewacja-boczna-domu-anna-ii-5adc9d7716-71742bcaaf",
+          "src-frame-asset-elewacja-boczna-domu-anna-ii-68592292ce-3935527cb4",
+          "src-frame-asset-elewacja-frontowa-domu-anna-ii-8fcc7e8e8f-9e1454a435",
+          "src-frame-asset-elewacja-tylna-domu-anna-ii-64bfd3f5c0-ee5228dc20"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-wing-1-j1",
+      "kind": "CORNER",
+      "owner": "ring-mass-wing-1-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-wing-1-w1"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-wing-1-w2"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681 (MAIN, GARAGE), at the analyzer's own scale: 3.094726 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 3 registered elevation(s) give eaves 6.60 / 3.34 / 3.25 m and top 6.60 / 7.14 / 7.03 m (they disagree by 3.34 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681 + frame-asset-elewacja-boczna-domu-anna-ii-5adc9d7716-71742bcaaf + frame-asset-elewacja-boczna-domu-anna-ii-68592292ce-3935527cb4 + frame-asset-elewacja-frontowa-domu-anna-ii-8fcc7e8e8f-9e1454a435 + frame-asset-elewacja-tylna-domu-anna-ii-64bfd3f5c0-ee5228dc20",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681",
+          "src-frame-asset-elewacja-boczna-domu-anna-ii-5adc9d7716-71742bcaaf",
+          "src-frame-asset-elewacja-boczna-domu-anna-ii-68592292ce-3935527cb4",
+          "src-frame-asset-elewacja-frontowa-domu-anna-ii-8fcc7e8e8f-9e1454a435",
+          "src-frame-asset-elewacja-tylna-domu-anna-ii-64bfd3f5c0-ee5228dc20"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-wing-1-j2",
+      "kind": "CORNER",
+      "owner": "ring-mass-wing-1-w2",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-mass-wing-1-w2"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-mass-wing-1-w3"
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681 (MAIN, GARAGE), at the analyzer's own scale: 3.094726 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 3 registered elevation(s) give eaves 6.60 / 3.34 / 3.25 m and top 6.60 / 7.14 / 7.03 m (they disagree by 3.34 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681 + frame-asset-elewacja-boczna-domu-anna-ii-5adc9d7716-71742bcaaf + frame-asset-elewacja-boczna-domu-anna-ii-68592292ce-3935527cb4 + frame-asset-elewacja-frontowa-domu-anna-ii-8fcc7e8e8f-9e1454a435 + frame-asset-elewacja-tylna-domu-anna-ii-64bfd3f5c0-ee5228dc20",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681",
+          "src-frame-asset-elewacja-boczna-domu-anna-ii-5adc9d7716-71742bcaaf",
+          "src-frame-asset-elewacja-boczna-domu-anna-ii-68592292ce-3935527cb4",
+          "src-frame-asset-elewacja-frontowa-domu-anna-ii-8fcc7e8e8f-9e1454a435",
+          "src-frame-asset-elewacja-tylna-domu-anna-ii-64bfd3f5c0-ee5228dc20"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-wing-1-j3",
+      "kind": "CORNER",
+      "owner": "ring-mass-wing-1-w2",
+      "tolerance": 0.001
+    }
+  ],
+  "wallPanels": [],
+  "wallRings": [
+    {
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681 (MAIN, GARAGE), at the analyzer's own scale: 3.094726 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 4 registered elevation(s) give eaves (the walls' corner tops) 3.29 / 3.33 / 3.79 / 4.06 m and top 8.08 / 8.01 / 8.07 / 7.83 m — the gable-end view(s) (FRONT, REAR) show the wall corner under the roof: 3.92 m is taken; a view along the ridge draws its walls ending behind the fascia, lower by no more than an overhang hides (two views draw that line)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681 + frame-asset-elewacja-boczna-domu-anna-ii-5adc9d7716-71742bcaaf + frame-asset-elewacja-boczna-domu-anna-ii-68592292ce-3935527cb4 + frame-asset-elewacja-frontowa-domu-anna-ii-8fcc7e8e8f-9e1454a435 + frame-asset-elewacja-tylna-domu-anna-ii-64bfd3f5c0-ee5228dc20",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681",
+          "src-frame-asset-elewacja-boczna-domu-anna-ii-5adc9d7716-71742bcaaf",
+          "src-frame-asset-elewacja-boczna-domu-anna-ii-68592292ce-3935527cb4",
+          "src-frame-asset-elewacja-frontowa-domu-anna-ii-8fcc7e8e8f-9e1454a435",
+          "src-frame-asset-elewacja-tylna-domu-anna-ii-64bfd3f5c0-ee5228dc20"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-main",
+      "junctionIds": [
+        "ring-mass-main-j0",
+        "ring-mass-main-j1",
+        "ring-mass-main-j2",
+        "ring-mass-main-j3"
+      ],
+      "levelId": "lvl-0",
+      "wallIds": [
+        "ring-mass-main-w0",
+        "ring-mass-main-w1",
+        "ring-mass-main-w2",
+        "ring-mass-main-w3"
+      ]
+    },
+    {
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681 (MAIN, GARAGE), at the analyzer's own scale: 3.094726 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 3 registered elevation(s) give eaves 6.60 / 3.34 / 3.25 m and top 6.60 / 7.14 / 7.03 m (they disagree by 3.34 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681 + frame-asset-elewacja-boczna-domu-anna-ii-5adc9d7716-71742bcaaf + frame-asset-elewacja-boczna-domu-anna-ii-68592292ce-3935527cb4 + frame-asset-elewacja-frontowa-domu-anna-ii-8fcc7e8e8f-9e1454a435 + frame-asset-elewacja-tylna-domu-anna-ii-64bfd3f5c0-ee5228dc20",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681",
+          "src-frame-asset-elewacja-boczna-domu-anna-ii-5adc9d7716-71742bcaaf",
+          "src-frame-asset-elewacja-boczna-domu-anna-ii-68592292ce-3935527cb4",
+          "src-frame-asset-elewacja-frontowa-domu-anna-ii-8fcc7e8e8f-9e1454a435",
+          "src-frame-asset-elewacja-tylna-domu-anna-ii-64bfd3f5c0-ee5228dc20"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "id": "ring-mass-wing-1",
+      "junctionIds": [
+        "ring-mass-wing-1-j0",
+        "ring-mass-wing-1-j1",
+        "ring-mass-wing-1-j2",
+        "ring-mass-wing-1-j3"
+      ],
+      "levelId": "lvl-0",
+      "wallIds": [
+        "ring-mass-wing-1-w0",
+        "ring-mass-wing-1-w1",
+        "ring-mass-wing-1-w2",
+        "ring-mass-wing-1-w3"
+      ]
+    }
+  ],
+  "walls": [
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 5.663349,
+        "z": 5.090824
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-H273-197",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 1.1356,
+        "z": 5.090824
+      },
+      "thickness": 0.154736
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 9.3555,
+        "z": 4.688509
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-H286-317",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 6.870292,
+        "z": 4.688509
+      },
+      "thickness": 0.123789
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 9.3555,
+        "z": 3.574409
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-H321-196",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 1.1356,
+        "z": 3.574409
+      },
+      "thickness": 0.216631
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 3.79104,
+        "z": 2.800728
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-H347-139",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 1.1356,
+        "z": 2.800728
+      },
+      "thickness": 0.123789
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 4.00767,
+        "z": 3.574409
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-V221-271",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 4.00767,
+        "z": 0.3
+      },
+      "thickness": 0.216631
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 4.00767,
+        "z": 5.090824
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-V221-271-x",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 4.00767,
+        "z": 3.791039
+      },
+      "thickness": 0.216631
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 5.585981,
+        "z": 3.574409
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-V274-303",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 5.585981,
+        "z": 2.970937
+      },
+      "thickness": 0.092842
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 5.585981,
+        "z": 5.090824
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-V274-303-x",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 5.585981,
+        "z": 3.791039
+      },
+      "thickness": 0.092842
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 9.083021,
+        "z": 10.9339
+      },
+      "evidence": {
+        "interpretation": "partition ink on the plan (frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681), read in the sheet's wall colour; its height is not read",
+        "properties": {
+          "end": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "start": "SOURCE_DERIVED",
+          "thickness": "SOURCE_DERIVED"
+        },
+        "source": "frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.7,
+      "id": "iw-V385-116",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 9.083021,
+        "z": 8.324813
+      },
+      "thickness": 0.185684
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 9.6555,
+        "z": 0
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681 (MAIN, GARAGE), at the analyzer's own scale: 3.094726 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 4 registered elevation(s) give eaves (the walls' corner tops) 3.29 / 3.33 / 3.79 / 4.06 m and top 8.08 / 8.01 / 8.07 / 7.83 m — the gable-end view(s) (FRONT, REAR) show the wall corner under the roof: 3.92 m is taken; a view along the ridge draws its walls ending behind the fascia, lower by no more than an overhang hides (two views draw that line)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681 + frame-asset-elewacja-boczna-domu-anna-ii-5adc9d7716-71742bcaaf + frame-asset-elewacja-boczna-domu-anna-ii-68592292ce-3935527cb4 + frame-asset-elewacja-frontowa-domu-anna-ii-8fcc7e8e8f-9e1454a435 + frame-asset-elewacja-tylna-domu-anna-ii-64bfd3f5c0-ee5228dc20",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681",
+          "src-frame-asset-elewacja-boczna-domu-anna-ii-5adc9d7716-71742bcaaf",
+          "src-frame-asset-elewacja-boczna-domu-anna-ii-68592292ce-3935527cb4",
+          "src-frame-asset-elewacja-frontowa-domu-anna-ii-8fcc7e8e8f-9e1454a435",
+          "src-frame-asset-elewacja-tylna-domu-anna-ii-64bfd3f5c0-ee5228dc20"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 8.039796,
+      "id": "ring-mass-main-w0",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 0.8356,
+        "z": 0
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF_PLANES",
+        "planeIds": [
+          "roof-mass-main-maxX",
+          "roof-mass-main-minX"
+        ]
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 9.6555,
+        "z": 11.2339
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681 (MAIN, GARAGE), at the analyzer's own scale: 3.094726 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 4 registered elevation(s) give eaves (the walls' corner tops) 3.29 / 3.33 / 3.79 / 4.06 m and top 8.08 / 8.01 / 8.07 / 7.83 m — the gable-end view(s) (FRONT, REAR) show the wall corner under the roof: 3.92 m is taken; a view along the ridge draws its walls ending behind the fascia, lower by no more than an overhang hides (two views draw that line)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681 + frame-asset-elewacja-boczna-domu-anna-ii-5adc9d7716-71742bcaaf + frame-asset-elewacja-boczna-domu-anna-ii-68592292ce-3935527cb4 + frame-asset-elewacja-frontowa-domu-anna-ii-8fcc7e8e8f-9e1454a435 + frame-asset-elewacja-tylna-domu-anna-ii-64bfd3f5c0-ee5228dc20",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681",
+          "src-frame-asset-elewacja-boczna-domu-anna-ii-5adc9d7716-71742bcaaf",
+          "src-frame-asset-elewacja-boczna-domu-anna-ii-68592292ce-3935527cb4",
+          "src-frame-asset-elewacja-frontowa-domu-anna-ii-8fcc7e8e8f-9e1454a435",
+          "src-frame-asset-elewacja-tylna-domu-anna-ii-64bfd3f5c0-ee5228dc20"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 8.039796,
+      "id": "ring-mass-main-w1",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 9.6555,
+        "z": 0
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF_PLANES",
+        "planeIds": [
+          "roof-mass-main-maxX",
+          "roof-mass-wing-1-maxZ-1",
+          "roof-mass-wing-1-minZ-1"
+        ]
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0.8356,
+        "z": 11.2339
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681 (MAIN, GARAGE), at the analyzer's own scale: 3.094726 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 4 registered elevation(s) give eaves (the walls' corner tops) 3.29 / 3.33 / 3.79 / 4.06 m and top 8.08 / 8.01 / 8.07 / 7.83 m — the gable-end view(s) (FRONT, REAR) show the wall corner under the roof: 3.92 m is taken; a view along the ridge draws its walls ending behind the fascia, lower by no more than an overhang hides (two views draw that line)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681 + frame-asset-elewacja-boczna-domu-anna-ii-5adc9d7716-71742bcaaf + frame-asset-elewacja-boczna-domu-anna-ii-68592292ce-3935527cb4 + frame-asset-elewacja-frontowa-domu-anna-ii-8fcc7e8e8f-9e1454a435 + frame-asset-elewacja-tylna-domu-anna-ii-64bfd3f5c0-ee5228dc20",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681",
+          "src-frame-asset-elewacja-boczna-domu-anna-ii-5adc9d7716-71742bcaaf",
+          "src-frame-asset-elewacja-boczna-domu-anna-ii-68592292ce-3935527cb4",
+          "src-frame-asset-elewacja-frontowa-domu-anna-ii-8fcc7e8e8f-9e1454a435",
+          "src-frame-asset-elewacja-tylna-domu-anna-ii-64bfd3f5c0-ee5228dc20"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 8.039796,
+      "id": "ring-mass-main-w2",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 9.6555,
+        "z": 11.2339
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF_PLANES",
+        "planeIds": [
+          "roof-mass-main-maxX",
+          "roof-mass-main-minX"
+        ]
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0.8356,
+        "z": 0
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681 (MAIN, GARAGE), at the analyzer's own scale: 3.094726 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 4 registered elevation(s) give eaves (the walls' corner tops) 3.29 / 3.33 / 3.79 / 4.06 m and top 8.08 / 8.01 / 8.07 / 7.83 m — the gable-end view(s) (FRONT, REAR) show the wall corner under the roof: 3.92 m is taken; a view along the ridge draws its walls ending behind the fascia, lower by no more than an overhang hides (two views draw that line)",
+        "properties": {
+          "height": "SOURCE_DERIVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681 + frame-asset-elewacja-boczna-domu-anna-ii-5adc9d7716-71742bcaaf + frame-asset-elewacja-boczna-domu-anna-ii-68592292ce-3935527cb4 + frame-asset-elewacja-frontowa-domu-anna-ii-8fcc7e8e8f-9e1454a435 + frame-asset-elewacja-tylna-domu-anna-ii-64bfd3f5c0-ee5228dc20",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681",
+          "src-frame-asset-elewacja-boczna-domu-anna-ii-5adc9d7716-71742bcaaf",
+          "src-frame-asset-elewacja-boczna-domu-anna-ii-68592292ce-3935527cb4",
+          "src-frame-asset-elewacja-frontowa-domu-anna-ii-8fcc7e8e8f-9e1454a435",
+          "src-frame-asset-elewacja-tylna-domu-anna-ii-64bfd3f5c0-ee5228dc20"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 8.039796,
+      "id": "ring-mass-main-w3",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 0.8356,
+        "z": 11.2339
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF_PLANES",
+        "planeIds": [
+          "roof-mass-main-cross-left-maxZ",
+          "roof-mass-main-cross-left-minZ",
+          "roof-mass-main-minX"
+        ]
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 13.4621,
+        "z": 3.2495
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681 (MAIN, GARAGE), at the analyzer's own scale: 3.094726 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 3 registered elevation(s) give eaves 6.60 / 3.34 / 3.25 m and top 6.60 / 7.14 / 7.03 m (they disagree by 3.34 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681 + frame-asset-elewacja-boczna-domu-anna-ii-5adc9d7716-71742bcaaf + frame-asset-elewacja-boczna-domu-anna-ii-68592292ce-3935527cb4 + frame-asset-elewacja-frontowa-domu-anna-ii-8fcc7e8e8f-9e1454a435 + frame-asset-elewacja-tylna-domu-anna-ii-64bfd3f5c0-ee5228dc20",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681",
+          "src-frame-asset-elewacja-boczna-domu-anna-ii-5adc9d7716-71742bcaaf",
+          "src-frame-asset-elewacja-boczna-domu-anna-ii-68592292ce-3935527cb4",
+          "src-frame-asset-elewacja-frontowa-domu-anna-ii-8fcc7e8e8f-9e1454a435",
+          "src-frame-asset-elewacja-tylna-domu-anna-ii-64bfd3f5c0-ee5228dc20"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 7.032564,
+      "id": "ring-mass-wing-1-w0",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 9.6555,
+        "z": 3.2495
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF_PLANES",
+        "planeIds": [
+          "roof-mass-wing-1-minZ-0"
+        ]
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 13.4621,
+        "z": 9.4389
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681 (MAIN, GARAGE), at the analyzer's own scale: 3.094726 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 3 registered elevation(s) give eaves 6.60 / 3.34 / 3.25 m and top 6.60 / 7.14 / 7.03 m (they disagree by 3.34 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681 + frame-asset-elewacja-boczna-domu-anna-ii-5adc9d7716-71742bcaaf + frame-asset-elewacja-boczna-domu-anna-ii-68592292ce-3935527cb4 + frame-asset-elewacja-frontowa-domu-anna-ii-8fcc7e8e8f-9e1454a435 + frame-asset-elewacja-tylna-domu-anna-ii-64bfd3f5c0-ee5228dc20",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681",
+          "src-frame-asset-elewacja-boczna-domu-anna-ii-5adc9d7716-71742bcaaf",
+          "src-frame-asset-elewacja-boczna-domu-anna-ii-68592292ce-3935527cb4",
+          "src-frame-asset-elewacja-frontowa-domu-anna-ii-8fcc7e8e8f-9e1454a435",
+          "src-frame-asset-elewacja-tylna-domu-anna-ii-64bfd3f5c0-ee5228dc20"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 7.032564,
+      "id": "ring-mass-wing-1-w1",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 13.4621,
+        "z": 3.2495
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF_PLANES",
+        "planeIds": [
+          "roof-mass-wing-1-maxZ-0",
+          "roof-mass-wing-1-minZ-0"
+        ]
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 9.6555,
+        "z": 9.4389
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681 (MAIN, GARAGE), at the analyzer's own scale: 3.094726 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 3 registered elevation(s) give eaves 6.60 / 3.34 / 3.25 m and top 6.60 / 7.14 / 7.03 m (they disagree by 3.34 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681 + frame-asset-elewacja-boczna-domu-anna-ii-5adc9d7716-71742bcaaf + frame-asset-elewacja-boczna-domu-anna-ii-68592292ce-3935527cb4 + frame-asset-elewacja-frontowa-domu-anna-ii-8fcc7e8e8f-9e1454a435 + frame-asset-elewacja-tylna-domu-anna-ii-64bfd3f5c0-ee5228dc20",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681",
+          "src-frame-asset-elewacja-boczna-domu-anna-ii-5adc9d7716-71742bcaaf",
+          "src-frame-asset-elewacja-boczna-domu-anna-ii-68592292ce-3935527cb4",
+          "src-frame-asset-elewacja-frontowa-domu-anna-ii-8fcc7e8e8f-9e1454a435",
+          "src-frame-asset-elewacja-tylna-domu-anna-ii-64bfd3f5c0-ee5228dc20"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 7.032564,
+      "id": "ring-mass-wing-1-w2",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 13.4621,
+        "z": 9.4389
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF_PLANES",
+        "planeIds": [
+          "roof-mass-wing-1-maxZ-0"
+        ]
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 9.6555,
+        "z": 3.2495
+      },
+      "evidence": {
+        "interpretation": "the outer wall faces traced on frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681 (MAIN, GARAGE), at the analyzer's own scale: 3.094726 cm/px, SUPPORTED / REPLACED with ? independent witnesses; heights: 3 registered elevation(s) give eaves 6.60 / 3.34 / 3.25 m and top 6.60 / 7.14 / 7.03 m (they disagree by 3.34 m)",
+        "properties": {
+          "height": "UNRESOLVED",
+          "polygon": "GEOMETRIC_INFERRED",
+          "thickness": "ASSUMED"
+        },
+        "source": "frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681 + frame-asset-elewacja-boczna-domu-anna-ii-5adc9d7716-71742bcaaf + frame-asset-elewacja-boczna-domu-anna-ii-68592292ce-3935527cb4 + frame-asset-elewacja-frontowa-domu-anna-ii-8fcc7e8e8f-9e1454a435 + frame-asset-elewacja-tylna-domu-anna-ii-64bfd3f5c0-ee5228dc20",
+        "sourceIds": [
+          "src-frame-asset-rzut-parteru-anna-ii-b9da44a854-252b438681",
+          "src-frame-asset-elewacja-boczna-domu-anna-ii-5adc9d7716-71742bcaaf",
+          "src-frame-asset-elewacja-boczna-domu-anna-ii-68592292ce-3935527cb4",
+          "src-frame-asset-elewacja-frontowa-domu-anna-ii-8fcc7e8e8f-9e1454a435",
+          "src-frame-asset-elewacja-tylna-domu-anna-ii-64bfd3f5c0-ee5228dc20"
+        ],
+        "status": "GEOMETRIC_INFERRED"
+      },
+      "height": 7.032564,
+      "id": "ring-mass-wing-1-w3",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 9.6555,
+        "z": 9.4389
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF_PLANES",
+        "planeIds": [
+          "roof-mass-wing-1-maxZ-0",
+          "roof-mass-wing-1-minZ-0"
+        ]
+      }
+    }
+  ],
+  "windows": [
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-front-35eed9-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-front-35eed9"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-front-4c7bfb-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-front-4c7bfb"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-rear-1d5583-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-rear-1d5583"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-rear-549986-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-rear-549986"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-rear-7a72a8-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-rear-7a72a8"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-rear-84a054-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-rear-84a054"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-right-114f1d-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-right-114f1d"
+    }
+  ]
+}

@@ -49,6 +49,196 @@ export type SceneSpec = { key: string; title: string; subtitle: string; build: (
  * hash — `bundle.test.ts` holds that.
  */
 export const SCENES: readonly SceneSpec[] = [
+  // v3.54.21 (2026-11-25): the delivered models — the fresh trial NEW-H first (Anna II, Debora and Lyon as post-trial
+  // DEV runs on the final code, their first trial results kept in the report; Morwa and Osika as the first trial result),
+  // then the audit's counter-trial houses and the DEV replays on the final code, then the two models the host served
+  // live. Failures are kept and named in the titles and subtitles.
+  {
+    key: 'anna-v35421',
+    title: 'Anna II (Studio Atrium) — v3.54.21: NEW-H, PO PRÓBIE (DEV): bryła ze źródeł, jeden układ dachów z 4 koszami',
+    subtitle: 'w próbie (B i F@B) płaskie pudła bez dachu — wynik zachowany w raporcie; po poprawce boków elewacji o identycznym podpisie bryła ze źródeł zastępuje LOCAL; dach: układ połaci: 10 połaci, kosze 4, dojścia do ściany 5, naroża 0; ściany wewnętrzne z rzutu: 17, drzwi wewnętrzne: 8; otwory zewnętrzne: 9; UTRACONE wnętrze LOCAL-a (26 → 17 ścian wewnętrznych, 45 → 17 otworów) — bryła ze źródeł nie przenosi wnętrza LOCAL-a; szczyt garażu z kalenicą wzdłuż głębokości (w źródle równoległa do frontu)',
+    build: () => sealedOwnerModel('anna-v35421', '864692d14b50db43823b7d3b1626e5eb9d303ea372b01147d725a209ee7409a9', 'owner-v35421'),
+  },
+  {
+    key: 'debora-v35421',
+    title: 'Debora (Dobre Domy) — v3.54.21: NEW-H, PO PRÓBIE (DEV): układ T z dwoma koszami, brama garażowa zachowana',
+    subtitle: 'w próbie F@B bliżej oryginału u 3 z 3 oceniających (B: dwa osobne dachy bez kosza); po poprawce WRONG_KIND brama zostaje; dach: układ połaci: 6 połaci, kosze 2, dojścia do ściany 2, naroża 0; ściany wewnętrzne z rzutu: 12, drzwi wewnętrzne: 7; otwory zewnętrzne: 16; drugi komin (tylna połać skrzydła) wycofany — kolizja ze ścianą tylną skrzydła; kąt 40,9° wobec 44° z odczytu; przeszklenia tarasu po lewej uproszczone',
+    build: () => sealedOwnerModel('debora-v35421', '350ea890058fa26f0cff8c3350c62c57eca75bfc299b392609b7d6b2a8a36b02', 'owner-v35421'),
+  },
+  {
+    key: 'lyon-v35421',
+    title: 'Lyon (Lipińscy) — v3.54.21: NEW-H, PO PRÓBIE (DEV): dach płaski zamiast otwartego pudła',
+    subtitle: 'w próbie (B i F@B) bryła bez dachu — otwarte pudło; po poprawce bryła główna bez dachu spadzistego dostaje płytę; dach: płaski; ściany wewnętrzne z rzutu: 17, drzwi wewnętrzne: 3; otwory zewnętrzne: 17; attyka nieosiągnięta (płyta na głowicy ściany 5,6 m wobec 6,56 m z przekroju); wiata i pergole bez przekrycia',
+    build: () => sealedOwnerModel('lyon-v35421', '3abfde8e741d47d85c27783a2a4ca6b728628a3e191c9a2a9ce4c0d38a09b2a3', 'owner-v35421'),
+  },
+  {
+    key: 'morwa-v35421',
+    title: 'Dom pod morwą (ARCHON) — v3.54.21: NEW-H (pierwszy wynik próby, F@B): dwuspadowy, 2 kominy jak w źródle',
+    subtitle: 'F@B bliżej oryginału u 3 z 3 oceniających (B: dwa kominy zmyślone przy szczycie); dach: dwuspadowy 32.6°; ściany wewnętrzne z rzutu: 11, drzwi wewnętrzne: 8; otwory zewnętrzne: 10; brak daszku wejściowego i pergoli; widoki szczytowe liczą pylon wejścia w szerokość (skala ok. 9 % za mała)',
+    build: () => sealedOwnerModel('morwa-v35421', '7b4598d34a024963b96abf40c885f19c99680b97a573893c6cb722de941c635a', 'owner-v35421'),
+  },
+  {
+    key: 'osika-v35421',
+    title: 'Dom pod osiką (ARCHON) — v3.54.21: NEW-H (pierwszy wynik próby, F@B): dach czterospadowy z połaci',
+    subtitle: 'B bliżej oryginału u 3 z 3 oceniających; dach: układ połaci: 4 połacie, kosze 0, dojścia do ściany 0, naroża 4; ściany wewnętrzne z rzutu: 16, drzwi wewnętrzne: 8; otwory zewnętrzne: 17; BRAK portyków (dwa szczyty poprzeczne z koszami, front i ogród); ZMIENIONY zestaw okien prawej elewacji (odczyt form-read/3 umieścił elewację boczną po złej stronie)',
+    build: () => sealedOwnerModel('osika-v35421', '8306b8f8c5db23ab8ae1c3505453dc34653f79b5b96b9a63a081ee5e62d002c8', 'owner-v35421'),
+  },
+  {
+    key: 'mindelo-v35421',
+    title: 'Mindelo (Lipińscy) — v3.54.21: kontrpróba audytu: bryła ze źródeł, układ dachów z 4 koszami',
+    subtitle: 'v3.54.20: LOCAL z czterema płaskimi dobudówkami; po uzgodnieniu jednej skali elewacji bryła ze źródeł; dach: układ połaci: 8 połaci, kosze 4, dojścia do ściany 2, naroża 0; ściany wewnętrzne z rzutu: 15, drzwi wewnętrzne: 11; otwory zewnętrzne: 14; otwory jak w 1353 nie wszystkie: patrz raport',
+    build: () => sealedOwnerModel('mindelo-v35421', '378ebfc13f588d60de6e4891a46b2b3f9ecdeae958ddcb1c644a4800032f04e9', 'owner-v35421'),
+  },
+  {
+    key: 'amarylis-v35421',
+    title: 'Amarylis (Studio Atrium) — v3.54.21: kontrpróba audytu: 10 połaci, 4 kosze, szczyt poprzeczny',
+    subtitle: 'dach: układ połaci: 10 połaci, kosze 4, dojścia do ściany 4, naroża 0; ściany wewnętrzne z rzutu: 12, drzwi wewnętrzne: 8; otwory zewnętrzne: 12; 2 z 4 kominów utracone w recenzji na żywo (zmienność recenzji)',
+    build: () => sealedOwnerModel('amarylis-v35421', 'f45cd8a4b1c6d0f010eab4a19653043b20695cfe3d8c3252ff6e928024da6b78', 'owner-v35421'),
+  },
+  {
+    key: 'amber-v35421',
+    title: 'Amber IV (Studio Atrium) — v3.54.21: kontrpróba audytu: kosz zamiast przenikania dachów, drzwi wejściowe zachowane',
+    subtitle: 'dach: układ połaci: 6 połaci, kosze 2, dojścia do ściany 2, naroża 0; ściany wewnętrzne z rzutu: 12, drzwi wewnętrzne: 7; otwory zewnętrzne: 10; niepowodzenia zachowane: patrz raport',
+    build: () => sealedOwnerModel('amber-v35421', 'be766a91b172bf9fd8dad898e03ea491d56cd90c81b682f47dd0013327e75d94', 'owner-v35421'),
+  },
+  {
+    key: 'eliza-v35421',
+    title: 'Willa Eliza 5 G2 (ARCHON) — v3.54.21: kontrpróba audytu: dachy czterospadowe z połaci',
+    subtitle: 'dach: układ połaci: 12 połaci, kosze 0, dojścia do ściany 0, naroża 0; ściany wewnętrzne z rzutu: 10, drzwi wewnętrzne: 4; otwory zewnętrzne: 15; NIEUDANY UKŁAD brył (podział z rzutu piętra poza zakresem); okno utracone w recenzji na żywo',
+    build: () => sealedOwnerModel('eliza-v35421', 'eeeada5e63f6a86a298adf5f00e99ec8f36ad0656bbd53163ab9567703169d94', 'owner-v35421'),
+  },
+  {
+    key: 'ametyst-v35421',
+    title: 'Ametyst New (Studio Atrium) — v3.54.21: kontrpróba audytu',
+    subtitle: 'dach: dwuspadowy 33.9°; ściany wewnętrzne z rzutu: 12, drzwi wewnętrzne: 6; otwory zewnętrzne: 9; niepowodzenia zachowane: patrz raport',
+    build: () => sealedOwnerModel('ametyst-v35421', '9f9cc897afe13e0a8201ff1db9bec62a64a1f85b0c5b1d154c857bf71225890c', 'owner-v35421'),
+  },
+  {
+    key: 'skagen-v35421',
+    title: 'Skagen (Lipińscy) — v3.54.21: kontrpróba audytu: bez zmiany geometrii wobec 1353',
+    subtitle: 'dach: dwuspadowy 30°, dwuspadowy 30°; ściany wewnętrzne z rzutu: 5, drzwi wewnętrzne: 2; otwory zewnętrzne: 16; ZACHOWANE: dojście niższego dachu do ściany, bez kosza (zgodnie ze źródłem)',
+    build: () => sealedOwnerModel('skagen-v35421', '70128456c9a3d2800708f45b31891efb2d7b15ae8a2eb503b18cd0f0d04c281e', 'owner-v35421'),
+  },
+  {
+    key: 'aletta-v35421',
+    title: 'Aletta New (Studio Atrium) — v3.54.21: kontrpróba audytu: bez zmiany geometrii wobec 1353',
+    subtitle: 'dach: dwuspadowy 37.6°, dwuspadowy 20.6°; ściany wewnętrzne z rzutu: 11, drzwi wewnętrzne: 3; otwory zewnętrzne: 14; ZACHOWANE: dach garażu zbyt płaski (20,6°)',
+    build: () => sealedOwnerModel('aletta-v35421', '475b7ce70bc4cc77142bf6dd60797756972f843d266fd5c64412f5c70744e548', 'owner-v35421'),
+  },
+  {
+    key: 'alaska-v35421',
+    title: 'Alaska (Studio Atrium) — v3.54.21: DEV: bez zmiany wobec 1353',
+    subtitle: 'dach: dwuspadowy 38.2°; ściany wewnętrzne z rzutu: 11, drzwi wewnętrzne: 6; otwory zewnętrzne: 11; niepowodzenia zachowane: patrz raport',
+    build: () => sealedOwnerModel('alaska-v35421', '913a917c20269d683a05f1715c97830f7ec7218f7691c5a0879cc8a553a4f59a', 'owner-v35421'),
+  },
+  {
+    key: 'aurora-v35421',
+    title: 'Aurora maxi II bis sz (Studio Atrium) — v3.54.21: DEV: bez zmiany wobec 1353',
+    subtitle: 'dach: dwuspadowy 37°; ściany wewnętrzne z rzutu: 15, drzwi wewnętrzne: 7; otwory zewnętrzne: 10; niepowodzenia zachowane: patrz raport',
+    build: () => sealedOwnerModel('aurora-v35421', 'dfec5efe1621a37acbfe77dd1ae44edb77c11a206b730cdf2cd5feea0572a931', 'owner-v35421'),
+  },
+  {
+    key: 'ballina-v35421',
+    title: 'Ballina (Lipińscy) — v3.54.21: DEV: bez zmiany wobec 1353',
+    subtitle: 'dach: dwuspadowy 30.8°; ściany wewnętrzne z rzutu: 10, drzwi wewnętrzne: 7; otwory zewnętrzne: 10; niepowodzenia zachowane: patrz raport',
+    build: () => sealedOwnerModel('ballina-v35421', '4cfbb9b8a15ef13ffaae5b31d6abc9c42feddbc2e90a437147291a51fd7f672d', 'owner-v35421'),
+  },
+  {
+    key: 'alberto-v35421',
+    title: 'Alberto (Studio Atrium) — v3.54.21: DEV: bez zmiany wobec 1353',
+    subtitle: 'dach: dwuspadowy 25.2°; ściany wewnętrzne z rzutu: 16, drzwi wewnętrzne: 8; otwory zewnętrzne: 9; niepowodzenia zachowane: patrz raport',
+    build: () => sealedOwnerModel('alberto-v35421', 'e48991029834ff8087e9db7adc62a3ed889aa740a32a3dbb4d8831a075664d33', 'owner-v35421'),
+  },
+  {
+    key: 'medulin-v35421',
+    title: 'Medulin (Lipińscy) — v3.54.21: DEV: bez zmiany wobec 1353',
+    subtitle: 'dach: dwuspadowy 46.6°; ściany wewnętrzne z rzutu: 10, drzwi wewnętrzne: 6; otwory zewnętrzne: 15; UTRACONE (od 1353): obrys uproszczony do prostokąta, otwory 24 → 15, ściany wewnętrzne 25 → 10',
+    build: () => sealedOwnerModel('medulin-v35421', '2a066b334613e6952c412efaaa46319812e82dbdb6fe0a36f4b29db9b904b245', 'owner-v35421'),
+  },
+  {
+    key: 'jeziorko-v35421',
+    title: 'Domek letniskowy nad jeziorkiem (ARCHON) — v3.54.21: DEV: bez zmiany wobec 1353',
+    subtitle: 'dach: dwuspadowy 30°; ściany wewnętrzne z rzutu: 5, drzwi wewnętrzne: 2; otwory zewnętrzne: 7; niepowodzenia zachowane: patrz raport',
+    build: () => sealedOwnerModel('jeziorko-v35421', '2bf92a615e03d63f7f3f091689acc13eec3e5cd0c5c9154e60425a985cc1426f', 'owner-v35421'),
+  },
+  {
+    key: 'sakura-v35421',
+    title: 'Dom pod sakurą E (ARCHON) — v3.54.21: DEV: bez zmiany wobec 1353',
+    subtitle: 'dach: układ połaci: 4 połacie, kosze 0, dojścia do ściany 0, naroża 0; ściany wewnętrzne z rzutu: 20, drzwi wewnętrzne: 11; otwory zewnętrzne: 11; niepowodzenia zachowane: patrz raport',
+    build: () => sealedOwnerModel('sakura-v35421', 'f637915cf44bf71840a9981253a043a379682101f3934d6cf380027ba0fba12f', 'owner-v35421'),
+  },
+  {
+    key: 'g6-v35421',
+    title: 'G6 (Dobre Domy) — v3.54.21: DEV: bez zmiany wobec 1353',
+    subtitle: 'dach: układ połaci: 4 połacie, kosze 0, dojścia do ściany 0, naroża 0; ściany wewnętrzne z rzutu: 0, drzwi wewnętrzne: 0; otwory zewnętrzne: 3; UTRACONE (od 1353): otwory 5 → 3 (strony dwóch elewacji bocznych zamienione)',
+    build: () => sealedOwnerModel('g6-v35421', '3e1571e773072fd902d502a6007efacaf4d077d261d91122285fc6b757438aee', 'owner-v35421'),
+  },
+  {
+    key: 'novara-v35421',
+    title: 'Novara (Lipińscy) — v3.54.21: DEV: bez zmiany wobec 1353',
+    subtitle: 'dach: dwuspadowy 27.8°; ściany wewnętrzne z rzutu: 10, drzwi wewnętrzne: 8; otwory zewnętrzne: 13; niepowodzenia zachowane: patrz raport',
+    build: () => sealedOwnerModel('novara-v35421', '817cde1e9f3dbe721284c607ff45f24e8e42031d804d0016760126d045f04c23', 'owner-v35421'),
+  },
+  {
+    key: 'jarzebina-v35421',
+    title: 'Jarzębina (Dobre Domy) — v3.54.21: DEV: jeden otwór więcej wobec 1353',
+    subtitle: 'zmierzony przez bramkę źródłową otwór lewej elewacji zostaje wbrew werdyktowi WRONG_KIND recenzji (poprawka po próbie); dach: dwuspadowy 46.3°; ściany wewnętrzne z rzutu: 15, drzwi wewnętrzne: 4; otwory zewnętrzne: 15; niepowodzenia zachowane: patrz raport',
+    build: () => sealedOwnerModel('jarzebina-v35421', 'e7638660ff62f200bff2aea465dd348e4e6cab945705f81c0fac29604e0ba720', 'owner-v35421'),
+  },
+  {
+    key: 'oban-v35421',
+    title: 'Oban III (Lipińscy) — v3.54.21: DEV: bez zmiany wobec 1353',
+    subtitle: 'dach: dwuspadowy 31.5°; ściany wewnętrzne z rzutu: 8, drzwi wewnętrzne: 3; otwory zewnętrzne: 8; niepowodzenia zachowane: patrz raport',
+    build: () => sealedOwnerModel('oban-v35421', '686d8f15ac22198aca78bad0e98e45484dd7df3c91b95d4ea5f81fc1b41a3122', 'owner-v35421'),
+  },
+  {
+    key: 'juliusz-v35421',
+    title: 'Juliusz Nowy (Dobre Domy) — v3.54.21: DEV: bez zmiany wobec 1353',
+    subtitle: 'dach: dwuspadowy 37.4°; ściany wewnętrzne z rzutu: 11, drzwi wewnętrzne: 7; otwory zewnętrzne: 4; odczyt „dach czterospadowy” odrzucony przez szkice (od 1353)',
+    build: () => sealedOwnerModel('juliusz-v35421', '2b21dfa86bc19e7e9adba1fd7bed1219872d7fda80eddf7ba917eb825af916cb', 'owner-v35421'),
+  },
+  {
+    key: 'fabia-v35421',
+    title: 'Fabia (Dobre Domy) — v3.54.21: DEV: bez zmiany wobec 1353',
+    subtitle: 'dach: układ połaci: 4 połacie, kosze 0, dojścia do ściany 0, naroża 0; ściany wewnętrzne z rzutu: 18, drzwi wewnętrzne: 9; otwory zewnętrzne: 11; długość kalenicy to założenie prezentacji (od 1353)',
+    build: () => sealedOwnerModel('fabia-v35421', 'c0072b6993c930116d2328794598ca967110a1b7b3f7b297bc30e6c031682c6e', 'owner-v35421'),
+  },
+  {
+    key: 'pomarancza-v35421',
+    title: 'Dom pod pomarańczą 2 (ARCHON) — v3.54.21: DEV: bez zmiany wobec 1353',
+    subtitle: 'dach: dwuspadowy 30°; ściany wewnętrzne z rzutu: 16, drzwi wewnętrzne: 10; otwory zewnętrzne: 11; niepowodzenia zachowane: patrz raport',
+    build: () => sealedOwnerModel('pomarancza-v35421', 'ac0f279cf06bc734b97c3b624f13ca0f2f90d6d2435e367b131de8da5a94ad3b', 'owner-v35421'),
+  },
+  {
+    key: 'rockville-v35421',
+    title: 'Rockville (Lipińscy) — v3.54.21: DEV: bez zmiany wobec 1353',
+    subtitle: 'dach: dwuspadowy 29.8°; ściany wewnętrzne z rzutu: 14, drzwi wewnętrzne: 8; otwory zewnętrzne: 9; NIEUDANE ZEWNĘTRZE (od 1353): brak drzwi wejściowych i obu poprzecznych szczytów',
+    build: () => sealedOwnerModel('rockville-v35421', '457b26b4109643737bb0b4ffd6e2255a6fae66a8fb543f6df9dd06bd397dcec2', 'owner-v35421'),
+  },
+  {
+    key: 'basiaiadam-v35421',
+    title: 'Basia i Adam (Dobre Domy) — v3.54.21: DEV: bez zmiany wobec 1353',
+    subtitle: 'dach: dwuspadowy 30°; ściany wewnętrzne z rzutu: 36, drzwi wewnętrzne: 4; otwory zewnętrzne: 20; NIEUDANY (od 1353): elewacje wydawcy są perspektywiczne, odczyt struktury nie został zadany',
+    build: () => sealedOwnerModel('basiaiadam-v35421', '9c55232444ec044f24f6269f4439eb57dd6ac31a2d46996c727ec2f408696d03', 'owner-v35421'),
+  },
+  {
+    key: 'jarzab-v35421',
+    title: 'Dom pod jarząbem 25 (ARCHON) — v3.54.21: DEV: bez zmiany wobec 1353',
+    subtitle: 'dach: dwuspadowy 30°; ściany wewnętrzne z rzutu: 12, drzwi wewnętrzne: 7; otwory zewnętrzne: 11; niepowodzenia zachowane: patrz raport',
+    build: () => sealedOwnerModel('jarzab-v35421', '4b88cb15cb9d3c3ef82fd78c41ccf50069a26a00066ccfcb05c533f959534a20', 'owner-v35421'),
+  },
+  {
+    key: 'debora-host-v35421',
+    title: 'Debora (Dobre Domy) — v3.54.21: z hosta na rewizji 5d5ea2c (świeży bieg na żywo)',
+    subtitle: 'dach: układ połaci: 6 połaci, kosze 2, dojścia do ściany 2, naroża 0; ściany wewnętrzne: 11; otwory zewnętrzne: 15; świeży bieg na żywo przez publiczny punkt wejścia (686 s, 0,98 USD): układ T z dwoma koszami i brama garażowa jak w biegu DEV po próbie; jakość BUDGET_OR_ROUND_LIMIT: 0 otwartych cech kluczowych, 18 innych różnic otwartych (balustrady, ściany wnętrza, kolor bramy)',
+    build: () => sealedOwnerModel('debora-host-v35421', '8fe06d415c1545093306a13bab2862efee1a799e5576f45929930adab63e54a3', 'owner-v35421'),
+  },
+  {
+    key: 'anna-host-v35421',
+    title: 'Anna II (Studio Atrium) — v3.54.21: z hosta na rewizji 1a00654 (świeży bieg na żywo)',
+    subtitle: 'dach: układ połaci: 8 połaci, kosze 4, dojścia do ściany 2, naroża 0; ściany wewnętrzne: 9; otwory zewnętrzne: 13; świeży bieg na żywo przez publiczny punkt wejścia (856 s, 0,87 USD) po poprawce odmowy księgi (w pierwszej sesji to samo zadanie padło INTERNAL_ERROR na pułapie hosta); UTRACONE wnętrze z rzutu (9 ścian wobec 26 w pierwszym wyniku próby); jakość RECOGNIZABLE_PARTIAL: 0 otwartych cech kluczowych, 9 innych (balkony, podcień, taras)',
+    build: () => sealedOwnerModel('anna-host-v35421', 'f201da9cdc5a3fa3b6df5d33a204e450aff6c92bc19bb4e91dae6bb488261785', 'owner-v35421'),
+  },
   // v3.54.20 (2026-11-25): the delivered code's models — the held-out sample NEW-G first (byte-identical to the first
   // held-out run), then the 20 developmental houses (the ones the agreed structure changed first, regressions named),
   // then the two models the host served live. Failures are kept and named in the titles and subtitles.

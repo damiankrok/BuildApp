@@ -402,6 +402,15 @@
     },
     {
       "height": 0.527832,
+      "id": "op-fix-left-17aada",
+      "kind": "WINDOW",
+      "offset": 4.204552,
+      "sill": 1.75944,
+      "wallId": "ring-mass-main-w3",
+      "width": 1.231608
+    },
+    {
+      "height": 0.527832,
       "id": "op-fix-left-ad0811",
       "kind": "WINDOW",
       "offset": 8.045996,
@@ -605,7 +614,7 @@
   "surfaceRegions": [
     {
       "evidence": {
-        "interpretation": "a dark render outline from finish-234072 (API_CONTOUR_READING): colour, not geometry",
+        "interpretation": "a dark render outline from finish-f73b95 (API_CONTOUR_READING): colour, not geometry",
         "status": "VISUAL_INFERRED"
       },
       "face": "OUTER",
@@ -671,7 +680,7 @@
     },
     {
       "evidence": {
-        "interpretation": "a brick outline from finish-0d8a99 (API_CONTOUR_READING): colour, not geometry",
+        "interpretation": "a brick outline from finish-fef169 (API_CONTOUR_READING): colour, not geometry",
         "status": "VISUAL_INFERRED"
       },
       "face": "OUTER",
@@ -721,7 +730,7 @@
     },
     {
       "evidence": {
-        "interpretation": "a timber outline from finish-3ce642 (API_CONTOUR_READING): colour, not geometry",
+        "interpretation": "a timber outline from finish-1ae4ee (API_CONTOUR_READING): colour, not geometry",
         "status": "VISUAL_INFERRED"
       },
       "face": "OUTER",
@@ -787,7 +796,7 @@
     },
     {
       "evidence": {
-        "interpretation": "a brick outline from finish-21abbc (API_CONTOUR_READING): colour, not geometry",
+        "interpretation": "a brick outline from finish-eaefd8 (API_CONTOUR_READING): colour, not geometry",
         "status": "VISUAL_INFERRED"
       },
       "face": "OUTER",
@@ -1604,6 +1613,16 @@
       "id": "op-fix-front-c6667e-unit",
       "materialId": "mat-glass",
       "openingId": "op-fix-front-c6667e"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "op-fix-left-17aada-unit",
+      "materialId": "mat-glass",
+      "openingId": "op-fix-left-17aada"
     },
     {
       "divisions": 1,
