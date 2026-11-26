@@ -99,7 +99,20 @@ class OrbitCamera(
     }
 
     /** The eye position for a pose. */
-    fun eye(pose: OrbitPose): Vec3 = pose.target + direction(pose) * pose.distance
+    fun eye(pose: OrbitPose): Vec3 = pose.target + direction(pose) * eyeDistance(pose)
+
+    /**
+     * How far the eye stands from the target. In perspective that is the pose's distance. In a parallel view the
+     * distance is only the zoom (the orthographic extent), and a box fit on a wide window can make it shorter than
+     * the house is deep: the eye would stand inside the house and the near plane cut its front away (MARCOWKI-UI,
+     * audit round 2). There the eye steps back outside the whole scene; a parallel image does not change with it.
+     */
+    fun eyeDistance(pose: OrbitPose): Double =
+        if (pose.projection == Projection.ORTHOGRAPHIC) {
+            max(pose.distance, (pose.target - sceneBounds.center).length + sceneRadius + minDistance)
+        } else {
+            pose.distance
+        }
 
     /** Unit vector from the target towards the eye. */
     fun direction(pose: OrbitPose): Vec3 {
@@ -262,8 +275,9 @@ class OrbitCamera(
 
     /** Near/far planes that hold the whole scene however far the camera is. */
     fun clipPlanes(pose: OrbitPose): Pair<Double, Double> {
-        val far = pose.distance + sceneRadius * 4.0
-        val near = max(0.05, minOf(pose.distance * 0.02, sceneRadius * 0.02))
+        val eyeAt = eyeDistance(pose)
+        val far = eyeAt + sceneRadius * 4.0
+        val near = max(0.05, minOf(eyeAt * 0.02, sceneRadius * 0.02))
         return near to far
     }
 

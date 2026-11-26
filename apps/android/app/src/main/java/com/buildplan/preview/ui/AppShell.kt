@@ -41,7 +41,11 @@ fun AppShell(preview: PreviewViewModel, analyzer: AnalyzerViewModel, progress: P
     // A job that finishes (or a download deleted) joins the list of houses at once.
     LaunchedEffect(analyzer.downloads) { preview.refreshScenes() }
     // The progress, the drawing and the time machine belong to the open house.
-    LaunchedEffect(preview.scene) { progress.bind(preview.scene) }
+    // A scene from the developer gallery is looked at, never recorded (MARCOWKI-UI): its progress is preview-only.
+    LaunchedEffect(preview.scene) {
+        val scene = preview.scene
+        progress.bind(scene, development = scene != null && preview.scenes.firstOrNull { it.key == scene.key }?.isDevelopment == true)
+    }
 
     // An analysis on this phone takes minutes in this process: the screen stays on while it runs,
     // wherever the owner is in the app (cycle 3, C3-07).

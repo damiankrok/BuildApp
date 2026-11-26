@@ -40,6 +40,35 @@ object Visibility {
     fun availableModes(scene: ModelScene): List<VisibilityMode> =
         VisibilityMode.entries.filter { it != VisibilityMode.UPPER_ONLY || scene.levels.size > 1 }
 
+    /**
+     * What a mode actually leaves out of [scene], for the words that say it (MARCOWKI-UI): derived from the filter
+     * itself, so the sentence is true for any building — "Tylko parter" keeps a garage roof that stands on the ground
+     * storey, and a bungalow has no upper storey to hide.
+     */
+    data class Hidden(val roofHidden: Boolean, val roofKept: Boolean, val upperHidden: Boolean, val groundHidden: Boolean, val roofWindowsHidden: Boolean = false)
+
+    fun hidden(scene: ModelScene, mode: VisibilityMode): Hidden {
+        val ground = scene.groundLevelId
+        var roofHidden = false
+        var roofKept = false
+        var upperHidden = false
+        var groundHidden = false
+        var roofWindowsHidden = false
+        for (o in scene.objects) {
+            val shown = isVisible(o, mode, ground)
+            val roof = o.kind in ROOF_KINDS
+            if (roof && !shown && o.kind != "roof") roofWindowsHidden = true
+            when {
+                roof && shown -> roofKept = true
+                roof -> roofHidden = true
+                shown || o.levelId == null -> Unit
+                o.levelId == ground -> groundHidden = true
+                else -> upperHidden = true
+            }
+        }
+        return Hidden(roofHidden, roofKept, upperHidden, groundHidden, roofWindowsHidden)
+    }
+
     fun visibleObjectIds(scene: ModelScene, mode: VisibilityMode, isolated: String? = null): Set<String> {
         if (isolated != null && scene.objectById(isolated) != null) return setOf(isolated)
         val ground = scene.groundLevelId

@@ -151,7 +151,7 @@ fun TimelineRail(
                     horizontalArrangement = Arrangement.spacedBy(Space.m),
                 ) {
                     header(Modifier.widthIn(max = COMPACT_HEADER_WIDTH).weight(1f, fill = false))
-                    rule(Modifier.weight(1.4f))
+                    rule(Modifier.weight(1.2f))
                     toggleButton()
                 }
             } else {
@@ -368,5 +368,5 @@ private fun nowStateText(unset: Boolean, percent: String?, current: Construction
 /** The stop of a stage on the rule (the rule's stops follow the timeline's). */
 fun stopOf(stage: ConstructionStageKey): Int = ConstructionTimeline.STOPS.indexOf(TimelineCursor.Stage(stage))
 
-/** The header's widest on a short window, where it shares the row with the rule (MARCOWKI-UI). */
-private val COMPACT_HEADER_WIDTH = 280.dp
+/** The header's widest on a short window, where it shares the row with the rule: its title and action on one line at font scale 1.3 (MARCOWKI-UI). */
+private val COMPACT_HEADER_WIDTH = 320.dp

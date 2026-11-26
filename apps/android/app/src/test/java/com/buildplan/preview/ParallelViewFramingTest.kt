@@ -62,6 +62,43 @@ class ParallelViewFramingTest {
     }
 
     @Test
+    fun `a parallel view never puts the eye inside the house, however tight the fit`() {
+        // Audit round 2: on a wide window the box fit of a gable end is shorter than the house is deep; the zoom may
+        // be, the eye may not — else the near plane cuts the front of the house away.
+        for (scene in listOf(showcase, TestScenes.marcowki, TestScenes.demo)) {
+            val camera = OrbitCamera(scene.bounds)
+            val wide = OrbitCamera.FitSpan(3.0, 1.0)
+            for (span in spans.values + wide) for (preset in parallel) {
+                if (!preset.isAvailableIn(scene)) continue
+                val pose = preset.poseIn(camera, scene, camera.home(span), span = span) ?: continue
+                val eye = camera.eye(pose)
+                val (near, far) = camera.clipPlanes(pose)
+                val depths = scene.bounds.corners().map { (it - eye) dot camera.basis(pose).forward }
+                assertTrue("${scene.key} ${preset.label}: a corner behind the near plane (${depths.min()} < $near)", depths.min() > near)
+                assertTrue("${scene.key} ${preset.label}: a corner past the far plane", depths.max() < far)
+            }
+        }
+    }
+
+    @Test
+    fun `a long low house seen end-on keeps the eye outside it`() {
+        // 30 m long, 4 m wide, 3 m high, seen from its gable end in a wide field: the box fit's zoom is far shorter
+        // than the house is deep. Without the eye stepping back, half the house lies behind the eye.
+        val bounds = com.buildplan.preview.math.Bounds(com.buildplan.preview.math.Vec3(-2.0, 0.0, -15.0), com.buildplan.preview.math.Vec3(2.0, 3.0, 15.0))
+        val camera = OrbitCamera(bounds)
+        val start = camera.home(OrbitCamera.FitSpan(3.0, 1.0))
+        val pose = camera.frameBoxOrthographic(start, bounds, 0.0, 0.0, OrbitCamera.FitSpan(3.0, 1.0))
+        assertTrue("the zoom is shorter than the house is deep (${pose.distance})", pose.distance < 15.0)
+        val eye = camera.eye(pose)
+        val (near, far) = camera.clipPlanes(pose)
+        val depths = bounds.corners().map { (it - eye) dot camera.basis(pose).forward }
+        assertTrue("a corner behind the near plane (${depths.min()} < $near)", depths.min() > near)
+        assertTrue("a corner past the far plane", depths.max() < far)
+        // the parallel image is the same: its extent comes from the zoom alone
+        assertEquals(pose.distance * tan(Math.toRadians(camera.fovDeg) / 2.0), camera.orthoHalfHeight(pose), 1e-12)
+    }
+
+    @Test
     fun `without a known free span the parallel views frame as before`() {
         val camera = OrbitCamera(showcase.bounds)
         for (preset in parallel.filter { !it.fitsViewport }) {

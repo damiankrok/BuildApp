@@ -2,6 +2,7 @@ package com.buildplan.preview.ui
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.EnterExitState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.animateIntAsState
 import androidx.compose.foundation.background
@@ -307,7 +308,7 @@ private fun ReadyWorkspace(model: PreviewViewModel, progress: ProgressViewModel,
                     .onSizeChanged { topHeight = it.height }
                     // Like the timeline's, the top inset is the chrome AT REST: a preview's or the details' line
                     // under the name must not move the camera (MARCOWKI-UI audit).
-                    .onGloballyPositioned { c -> if (view?.previewStop == null && !details) topInset = c.boundsInRoot().bottom.roundToInt() },
+                    .onGloballyPositioned { c -> topInset = c.boundsInRoot().bottom.roundToInt() },
             )
 
             // One contextual surface at a time (cycle 3, H-08): while the details stand in the timeline's place
@@ -326,8 +327,16 @@ private fun ReadyWorkspace(model: PreviewViewModel, progress: ProgressViewModel,
                 onPreset = { model.applyPreset(it, System.currentTimeMillis()) },
                 onPresentation = { model.setPresentation(it) },
                 onStyle = { model.setStyle(it) },
-                onVisibility = { model.setVisibility(it) },
-                onIsolate = { model.isolateSelected() },
+                // A layer choice closes the pane where the finger is, and the row at the foot takes over naming the
+                // layer: the rail then moves while no finger is on it (MARCOWKI-UI audit round 2, R2-04).
+                onVisibility = {
+                    model.setVisibility(it)
+                    if (!sidePanel) toolName = null
+                },
+                onIsolate = {
+                    model.isolateSelected()
+                    if (!sidePanel) toolName = null
+                },
                 onShowAll = { model.showAll() },
                 onReset = {
                     model.reset(System.currentTimeMillis())
@@ -382,14 +391,16 @@ private fun ReadyWorkspace(model: PreviewViewModel, progress: ProgressViewModel,
                 // MARCOWKI-UI: what the layers leave out, said where the eye already is, with the one way back to the
                 // whole house — the same "Pokaż wszystko" as the layers pane. A chosen element's row takes the place
                 // first; the rail's label keeps naming the layer either way. Never part of the camera's frame.
-                // Not while a tool pane is open (the pane names the layer and has the same action, and a row unfolding
-                // there would lift the pane under the finger), and not on a short window, where it would stand over
-                // the framed house: there the rail's label names the layer (MARCOWKI-UI audit).
+                // It stays while a pane is open — so opening one never moves the rail under the finger — and a layer
+                // choice closes the Warstwy pane, so it never unfolds under a finger choosing either (audit rounds
+                // 1-2). Not on a short window, where it would stand over the framed house: there the rail's label
+                // names the layer. The words come from what the filter removed, true for any building.
                 val viewer = model.viewer
                 val isolatedName = viewer.isolatedObjectId?.let { scene.objectById(it) }?.let { elementTitle(it) }
+                val hiddenWords = remember(scene, viewer.visibility) { com.buildplan.preview.scene.Visibility.hidden(scene, viewer.visibility).wordsRes() }
                 val layersRow: (@Composable () -> Unit)? =
-                    if (selected == null && tool == null && !sidePanel && (viewer.visibility != VisibilityMode.ALL || viewer.isIsolating)) {
-                        { LayersRow(isolatedName = isolatedName, isolating = viewer.isIsolating, mode = viewer.visibility, onShowAll = { model.showAll() }) }
+                    if (selected == null && !sidePanel && (viewer.visibility != VisibilityMode.ALL || viewer.isIsolating)) {
+                        { LayersRow(isolatedName = isolatedName, isolating = viewer.isIsolating, mode = viewer.visibility, hiddenWords = hiddenWords, onShowAll = { model.showAll() }) }
                     } else {
                         null
                     }
@@ -400,6 +411,17 @@ private fun ReadyWorkspace(model: PreviewViewModel, progress: ProgressViewModel,
                     }
                 } else {
                     AnimatedVisibility(visible = !detailsOpen, enter = motion.sheetEnter(), exit = motion.sheetExit()) {
+                        // Where the rule stands, measured every layout; it frames the model only once the timeline is
+                        // settled at rest — not while it slides away under the details or back from them, and not
+                        // expanded or previewing (MARCOWKI-UI audit, rounds 1-2). Keyed on the transition, so the
+                        // final position is taken when the slide ends, even if the layout did not move again.
+                        var ruleAt by remember { mutableIntStateOf(-1) }
+                        val settled = transition.currentState == EnterExitState.Visible && transition.targetState == EnterExitState.Visible
+                        LaunchedEffect(ruleAt, settled, railExpanded, view.previewStop) {
+                            // The first measurement always counts: a workspace recreated mid-preview (a turned phone)
+                            // must not frame the house as if there were no timeline at all (audit round 2, F2).
+                            if (ruleAt >= 0 && (timelineInset == 0 || (settled && !railExpanded && view.previewStop == null))) timelineInset = ruleAt
+                        }
                         TimelineRail(
                             view = view,
                             expanded = railExpanded,
@@ -411,12 +433,9 @@ private fun ReadyWorkspace(model: PreviewViewModel, progress: ProgressViewModel,
                             top = topRow,
                             // A phone on its side: header and rule share one row, so the foot takes half the height.
                             compact = sidePanel,
-                            ruleModifier = Modifier.onGloballyPositioned { c ->
-                                // Only the rail at rest, showing now, frames the model: expanding it, a taller
-                                // preview header or the chosen element's row must not move the camera — nor its
-                                // slide away when the details take its place (MARCOWKI-UI audit).
-                                if (!railExpanded && view.previewStop == null && !detailsOpen) timelineInset = c.fromBottom()
-                            },
+                            // Only the rail at rest, showing now, frames the model: expanding it, a taller preview
+                            // header or the chosen element's row must not move the camera.
+                            ruleModifier = Modifier.onGloballyPositioned { c -> ruleAt = c.fromBottom() },
                         )
                     }
                 }
@@ -478,16 +497,27 @@ private fun ReadyWorkspace(model: PreviewViewModel, progress: ProgressViewModel,
  */
 @Composable
 private fun TopContext(title: String, view: ProgressView?, timelineShown: Boolean, unsetSaidElsewhere: Boolean, context: Context, modifier: Modifier = Modifier) {
-    // The showcase says what it is beside its name, for as long as it is open: a demonstration model (MARCOWKI-UI).
-    val showcase = context.model.scene?.let { s -> context.model.scenes.firstOrNull { it.key == s.key } }?.showcase == true
-    val kind = if (showcase) stringResource(R.string.house_showcase_kind) else null
+    // What the house is, said under its name at rest (MARCOWKI-UI): the showcase a demonstration model, a gallery scene
+    // working material, an analysed house from a link — never a blank line (audit round 2, F6).
+    val entry = context.model.scene?.let { s -> context.model.scenes.firstOrNull { it.key == s.key } }
+    val showcase = entry?.showcase == true
+    val kind = when {
+        entry == null -> null
+        showcase -> stringResource(R.string.house_showcase_kind)
+        entry.isDevelopment -> stringResource(R.string.house_status_development)
+        else -> stringResource(R.string.house_kind_from_link)
+    }
     // One line, one fact — never two joined, where an ellipsis would eat the actual state (audit A11Y-01). While a
     // preview or the details hide the timeline's "now", the actual state must be said here and wins; at rest the
     // showcase keeps saying what it is (the date of the last save is in the stage sheet), any other house says when
     // its record was saved.
     val line = contextLine(view, timelineShown, unsetSaidElsewhere)
     val actualNeeded = view != null && (view.previewStop != null || !timelineShown)
-    val second = (if (actualNeeded) line ?: kind else kind ?: line).orEmpty()
+    val second = when {
+        actualNeeded -> line ?: kind
+        showcase -> kind
+        else -> line ?: kind
+    }.orEmpty()
     GlassSurface(modifier = modifier) {
         Column {
             Row(Modifier.padding(end = Space.m), verticalAlignment = Alignment.CenterVertically) {
@@ -587,7 +617,7 @@ private fun StatusRow(context: Context) {
                 Status.FAILED -> stringResource(R.string.house_analysis_failed_short)
                 Status.LIMITED -> stringResource(R.string.house_status_limited_short)
                 Status.PARTIAL -> stringResource(R.string.house_status_partial_short)
-                Status.DEVELOPMENT -> showcase?.let { stringResource(R.string.house_status_development_back, it.title) } ?: stringResource(R.string.house_status_development_add)
+                Status.DEVELOPMENT -> showcase?.let { stringResource(R.string.gallery_back_showcase, it.title) } ?: stringResource(R.string.house_status_development_add)
             },
             style = MaterialTheme.typography.bodySmall,
             color = Palette.Ink,
@@ -668,7 +698,7 @@ private fun SelectionRow(name: String, detail: String, onDetails: () -> Unit, on
  * the model's look alone.
  */
 @Composable
-private fun LayersRow(isolatedName: String?, isolating: Boolean, mode: VisibilityMode, onShowAll: () -> Unit) {
+private fun LayersRow(isolatedName: String?, isolating: Boolean, mode: VisibilityMode, @androidx.annotation.StringRes hiddenWords: Int, onShowAll: () -> Unit) {
     val view = androidx.compose.ui.platform.LocalView.current
     val whole = stringResource(R.string.layer_hidden_none)
     Row(
@@ -690,7 +720,7 @@ private fun LayersRow(isolatedName: String?, isolating: Boolean, mode: Visibilit
                 overflow = TextOverflow.Ellipsis,
             )
             Text(
-                stringResource(if (isolating) R.string.layer_hidden_isolated else mode.hiddenRes()),
+                stringResource(if (isolating) R.string.layer_hidden_isolated else hiddenWords),
                 style = MaterialTheme.typography.bodySmall,
                 color = Palette.InkMuted,
                 maxLines = 3,
@@ -704,7 +734,6 @@ private fun LayersRow(isolatedName: String?, isolating: Boolean, mode: Visibilit
                 onShowAll()
                 view.announceForAccessibility(whole)
             },
-            borderColor = Palette.Ink,
         )
     }
 }

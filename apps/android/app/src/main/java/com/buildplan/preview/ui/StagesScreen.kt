@@ -145,7 +145,7 @@ private fun StageList(view: ProgressView, progress: ProgressViewModel, onShowInM
     Box(Modifier.fillMaxSize()) {
         LazyColumn(Modifier.fillMaxSize(), state = list, contentPadding = androidx.compose.foundation.layout.PaddingValues(bottom = Space.xxl)) {
             item { Header(view, drawing) }
-            item { Problems(view) }
+            item { Problems(view, development = progress.developmentOnly) }
             itemsIndexed(view.stages, key = { _, s -> s.stageId }) { index, stage ->
                 StageRow(
                     index = index,
@@ -213,9 +213,10 @@ private fun Header(view: ProgressView, drawing: (@Composable () -> Unit)?) {
 
 /** A problem with the saved record, said once, in words, where the edits are. */
 @Composable
-private fun Problems(view: ProgressView) {
+private fun Problems(view: ProgressView, development: Boolean = false) {
+    val previewOnly = if (development) R.string.progress_development_body else R.string.progress_preview_only_body
     val text = progressProblemText(view.problem)
-        ?: stringResource(R.string.progress_preview_only_body).takeIf { view.summary.availability == ProgressAvailability.PREVIEW_ONLY }
+        ?: stringResource(previewOnly).takeIf { view.summary.availability == ProgressAvailability.PREVIEW_ONLY }
         ?: return
     ProblemLine(text, Modifier.padding(horizontal = Space.l, vertical = Space.s))
 }

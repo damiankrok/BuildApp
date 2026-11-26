@@ -51,6 +51,7 @@
 
     <!-- Postęp: jeden odczyt w przestrzeni domu i w arkuszu etapów -->
     <string name="progress_unset">Postęp nieustawiony</string>
+    <string name="progress_development_body">Scena z galerii deweloperskiej: historię budowy można tu oglądać, ale postępu się tu nie zapisuje. Postęp prowadzisz w swoim domu albo w domu pokazowym.</string>
     <string name="progress_preview_only_body">Ten model nie ma stałego identyfikatora domu, więc postępu nie da się dla niego zapisać. Historia budowy nadal pokazuje dom na każdym etapie.</string>
     <string name="progress_set_action">Ustaw postęp</string>
     <string name="progress_metric_label">Postęp wg etapów</string>
@@ -72,7 +73,7 @@
     <string name="timeline_return_design">Wróć do projektu</string>
     <string name="timeline_expand">Pokaż nazwy etapów</string>
     <string name="timeline_collapse">Ukryj nazwy etapów</string>
-    <string name="progress_unset_scrub">Postęp nieustawiony · przesuń po osi etapów</string>
+    <string name="progress_unset_scrub">Postęp nieustawiony · przesuń po osi</string>
     <string name="timeline_preview_of">Podgląd: %1$s</string>
     <string name="timeline_no_geometry">Na tym etapie model 3D się nie zmienia</string>
     <string name="timeline_stop_position">Stan po etapie: %1$s</string>
@@ -270,6 +271,11 @@
     <string name="layer_hidden_none">Widać cały dom</string>
     <string name="layer_hidden_roof">Ukryto dach i okna dachowe</string>
     <string name="layer_hidden_roof_upper">Ukryto dach i poddasze</string>
+    <string name="layer_hidden_upper">Ukryto poddasze i dach nad nim</string>
+    <string name="layer_hidden_upper_only">Ukryto poddasze</string>
+    <string name="layer_hidden_ground_only">Ukryto parter</string>
+    <string name="layer_hidden_some_roof">Ukryto część dachu</string>
+    <string name="layer_hidden_roof_alone">Ukryto dach</string>
     <string name="layer_hidden_roof_ground">Ukryto dach i parter</string>
     <string name="layer_hidden_isolated">Ukryto resztę domu</string>
     <string name="layer_isolated_named">Tylko: %1$s</string>
@@ -772,8 +778,8 @@
     <string name="live_linked">Odczyty powiązane z elementem: %1$d · bez elementu: %2$d</string>
     <!-- MARCOWKI-UI: the showcase house and the developer gallery -->
     <string name="house_showcase_kind">Model demonstracyjny</string>
+    <string name="house_kind_from_link">Z analizy linku</string>
     <string name="house_status_development">Scena z galerii deweloperskiej</string>
-    <string name="house_status_development_back">Scena z galerii deweloperskiej — wróć do: %1$s</string>
     <string name="house_status_development_add">Scena z galerii deweloperskiej — dodaj swój dom z linku</string>
     <string name="menu_gallery">Galeria deweloperska</string>
     <string name="gallery_title">Galeria deweloperska</string>

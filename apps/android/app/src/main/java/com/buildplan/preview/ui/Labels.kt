@@ -40,13 +40,21 @@ fun VisibilityMode.labelRes(): Int = when (this) {
     VisibilityMode.CUTAWAY -> R.string.layer_cutaway
 }
 
-/** What a layer leaves out, in the owner's words, for the row that says it at the foot of the house (MARCOWKI-UI). */
+/**
+ * What a layer leaves out, in the owner's words, for the row that says it at the foot of the house (MARCOWKI-UI) —
+ * read from what the filter removed ([com.buildplan.preview.scene.Visibility.hidden]), never from the mode's name.
+ */
 @StringRes
-fun VisibilityMode.hiddenRes(): Int = when (this) {
-    VisibilityMode.ALL -> R.string.layer_hidden_none
-    VisibilityMode.ROOF_OFF -> R.string.layer_hidden_roof
-    VisibilityMode.GROUND_ONLY, VisibilityMode.CUTAWAY -> R.string.layer_hidden_roof_upper
-    VisibilityMode.UPPER_ONLY -> R.string.layer_hidden_roof_ground
+fun com.buildplan.preview.scene.Visibility.Hidden.wordsRes(): Int = when {
+    upperHidden && roofHidden && roofKept -> R.string.layer_hidden_upper
+    upperHidden && roofHidden -> R.string.layer_hidden_roof_upper
+    groundHidden && roofHidden -> R.string.layer_hidden_roof_ground
+    upperHidden -> R.string.layer_hidden_upper_only
+    groundHidden -> R.string.layer_hidden_ground_only
+    roofHidden && roofKept -> R.string.layer_hidden_some_roof
+    roofHidden && roofWindowsHidden -> R.string.layer_hidden_roof
+    roofHidden -> R.string.layer_hidden_roof_alone
+    else -> R.string.layer_hidden_none
 }
 
 /** The same choice in the one or two words that fit the rail's 64 dp button at font scale 1.3. */

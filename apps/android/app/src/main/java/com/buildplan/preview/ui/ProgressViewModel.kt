@@ -51,8 +51,16 @@ class ProgressViewModel(application: Application) : AndroidViewModel(application
     private var boundKey: String? = null
     private var boundScene: ModelScene? = null
 
+    /**
+     * True while the open scene is from the developer gallery (MARCOWKI-UI): its history can be looked at, but no
+     * progress is read or written there — several gallery scenes share the showcase's model id, and an experiment in
+     * one of them must never rewrite the owner's record of the house.
+     */
+    var developmentOnly: Boolean by mutableStateOf(false)
+        private set
+
     /** Bind to the open scene; a different scene (or the same key reloaded) starts a new session at `Now`. */
-    fun bind(scene: ModelScene?) {
+    fun bind(scene: ModelScene?, development: Boolean = false) {
         if (scene == null) {
             session = null
             boundKey = null
@@ -61,10 +69,11 @@ class ProgressViewModel(application: Application) : AndroidViewModel(application
             refresh()
             return
         }
-        if (scene === boundScene) return
+        if (scene === boundScene && development == developmentOnly) return
         boundKey = scene.key
         boundScene = scene
-        session = ProgressSession(scene, store)
+        developmentOnly = development
+        session = ProgressSession(scene, if (development) null else store)
         sketch = null
         refresh()
         viewModelScope.launch {

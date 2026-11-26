@@ -151,6 +151,9 @@ class PreviewViewModel(application: Application) : AndroidViewModel(application)
             ?: run { screen = ScreenState.Failed("no scene bundles in this build", null) }
     }
 
+    /** The house last chosen, while the list still has it. */
+    private fun lastChosenIfListed(): String? = prefs.getString(KEY_LAST_CHOSEN, null)?.takeIf { key -> scenes.any { it.key == key } }
+
     /**
      * The house the owner last CHOSE (MARCOWKI-UI). Up to APK 1354 the app remembered every house it opened, its own
      * automatic first one included, so an untouched install remembers the first scene of that build's list — an
@@ -172,8 +175,9 @@ class PreviewViewModel(application: Application) : AndroidViewModel(application)
      */
     fun refreshScenes() {
         scenes = entries()
-        val openKey = scene?.key ?: return
-        if (scenes.none { it.key == openKey }) StartChoice.of(scenes, null)?.let { open(it, chosen = false) }
+        // The house on screen — open, or failed to open — that the list no longer has (deleted): the start rule again.
+        val openKey = scene?.key ?: (screen as? ScreenState.Failed)?.entry?.key ?: return
+        if (scenes.none { it.key == openKey }) StartChoice.of(scenes, lastChosenIfListed())?.let { open(it, chosen = false) }
     }
 
     /** Open the scene with this key, if the list has it: the owner's choice, remembered for the next start. */
@@ -223,6 +227,7 @@ class PreviewViewModel(application: Application) : AndroidViewModel(application)
                 if (chosen) prefs.edit().putString(KEY_LAST_CHOSEN, entry.key).apply()
                 camera = OrbitCamera(model.bounds)
                 pose = camera.home(fitSpan).also { home = it }
+                fitted = null
                 // Selection, isolation and layers name objects of the old
                 // model and start over; the style and the presentation mode
                 // are how the viewer draws, not part of the model, so they
@@ -313,6 +318,7 @@ class PreviewViewModel(application: Application) : AndroidViewModel(application)
     fun reset(nowMs: Long) {
         val model = scene ?: return
         viewer = viewer.showAll().clearSelection()
+        fitted = null
         moveTo(camera.home(fitSpan).also { home = it }, nowMs)
     }
 
@@ -339,10 +345,23 @@ class PreviewViewModel(application: Application) : AndroidViewModel(application)
 
     /** Still at home (never turned, zoomed or framed since): fit home again to the space there is now. */
     private fun refitHome() {
+        if (animation != null) return
+        // A whole-house preset still standing as it was framed (a phone turned with an elevation open) is framed
+        // again for the new space, like home: a box fit for a wide window would crop it upright (audit round 2).
+        fitted?.let { (preset, at) ->
+            val model = scene
+            if (pose == at && model != null) {
+                preset.poseIn(camera, model, pose, fitAspect, fitSpan)?.let { pose = it; fitted = preset to it }
+                return
+            }
+        }
         val at = home ?: return
-        if (animation != null || pose != at) return
+        if (pose != at) return
         pose = camera.home(fitSpan).also { home = it }
     }
+
+    /** The last whole-house preset and the pose it framed, while the camera still stands there. */
+    private var fitted: Pair<ViewPreset, OrbitPose>? = null
 
     fun applyPreset(preset: ViewPreset, nowMs: Long) {
         val model = scene ?: return
@@ -352,6 +371,7 @@ class PreviewViewModel(application: Application) : AndroidViewModel(application)
         // object it framed — otherwise the inspector would still be empty
         // after asking to look at the stairs.
         preset.objectIdIn(model)?.let { if (viewer.isVisible(model, it)) viewer = viewer.select(it) }
+        fitted = if (preset.target == com.buildplan.preview.camera.PresetTarget.WHOLE_MODEL) preset to target else null
         moveTo(target, nowMs)
     }
 

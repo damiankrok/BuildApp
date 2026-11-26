@@ -12,6 +12,26 @@
 
 ## Current summary (read first)
 
+- **MARCOWKI-UI (2026-11-26): research paused, priority Marcówki and the Android UI — APK 1355.** OWNER decision of
+  2026-11-26 (`BuildPlan-MARCOWKI-UI-START.zip`): no new houses, API reads, roof solvers or Anna II work; paid budget
+  0 USD (0 spent). The Master Plan's product catalogue is unchanged; the analyzer campaign can resume from `ebaae1d2`
+  (v3.54.21 recommendations in `stage-reports/README_V35421.md`). Report `stage-reports/MARCOWKI_UI.md`, owner note
+  `stage-reports/README_MARCOWKI_UI.md`. Baseline `ebaae1d2` (APK 1354). The showcase house is marked in the scene
+  registry (`scenes.ts` → `index.json` field `showcase`, one entry): `marcowki-c-v35414` as "Dom w marcówkach",
+  a demonstration model; frozen model a66428c8… / scene file 680a3f4b… / contentHash 3dc4d3bb… unchanged (127 scene
+  files re-export byte-identical). A clean start opens the showcase; only a house the owner chose is remembered
+  (1354's automatic `lastOpenKey` is dropped unless it names a downloaded analysis); the 126 research scenes moved to
+  a developer gallery sheet; the top context says one fact per line; "Postęp nieustawiony" is said once; the unset
+  timeline names "Projekt docelowy"; landscape puts the timeline header beside the rule (free band for the house
+  ~123 → ~261 dp); a foot row names hidden layers with "Pokaż wszystko"; parallel views (elevations, plans, axonometry)
+  frame the house's box in the free span — "Z prawej" was cut on the emulator. Impeccable audit round 1: 13/20,
+  findings verified adversarially and fixed except the named deferrals; round 2 (with the emulator screenshots)
+  confirmed 37 fixes and found 9 more, all fixed — among them a parallel view's eye inside a long low house (the near
+  plane cut its front) and gallery scenes writing the showcase's progress (they share its model id; now preview-only). **On-screen check on an emulator
+  (Android 10 x86_64, 411 × 914 dp, software CPU and GPU), not on a phone**: the brief's §5 run passed, before/after
+  boards delivered privately; Android 14 under software CPU emulation lost system_server to the watchdog, so the
+  phone checklist in the report stays open (`ANDROID_UI_VERIFIED_ON_EMULATOR_ONLY`). Android JVM 492 green + 3 skipped;
+  mobile-scene vitest 135 green.
 - **v3.54.21 (2026-11-25): originals as the reference, one roof system, verification on boards — APK 1354.** Report
   `stage-reports/SOURCE_TO_MODEL_V35421.md`, owner note `stage-reports/README_V35421.md`, ADR
   `docs/ADR-V35421-ROOF-SYSTEM-AND-ORIGINALS.md`, protocol / references / hand-off under `research/source-to-model/v35421/`.
