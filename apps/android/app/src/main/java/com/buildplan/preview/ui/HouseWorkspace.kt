@@ -481,9 +481,13 @@ private fun TopContext(title: String, view: ProgressView?, timelineShown: Boolea
     // The showcase says what it is beside its name, for as long as it is open: a demonstration model (MARCOWKI-UI).
     val showcase = context.model.scene?.let { s -> context.model.scenes.firstOrNull { it.key == s.key } }?.showcase == true
     val kind = if (showcase) stringResource(R.string.house_showcase_kind) else null
-    // One line, one fact: the actual state when there is one to say (a preview, the details, a record), the
-    // model's kind otherwise — never both joined, where an ellipsis would eat the actual state (audit A11Y-01).
-    val second = contextLine(view, timelineShown, unsetSaidElsewhere) ?: kind.orEmpty()
+    // One line, one fact — never two joined, where an ellipsis would eat the actual state (audit A11Y-01). While a
+    // preview or the details hide the timeline's "now", the actual state must be said here and wins; at rest the
+    // showcase keeps saying what it is (the date of the last save is in the stage sheet), any other house says when
+    // its record was saved.
+    val line = contextLine(view, timelineShown, unsetSaidElsewhere)
+    val actualNeeded = view != null && (view.previewStop != null || !timelineShown)
+    val second = (if (actualNeeded) line ?: kind else kind ?: line).orEmpty()
     GlassSurface(modifier = modifier) {
         Column {
             Row(Modifier.padding(end = Space.m), verticalAlignment = Alignment.CenterVertically) {

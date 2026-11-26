@@ -213,6 +213,40 @@ class OrbitCamera(
     }
 
     /**
+     * The orthographic zoom at which the eight corners of `bounds`, seen at [yawDeg] / [pitchDeg], lie inside [span]
+     * with [margin] to spare (MARCOWKI-UI). The orthographic extent is the perspective frustum's at the focus
+     * distance, so the same span reads the same way; there is no depth term. A bounding sphere fitted to a square
+     * cut a long elevation at both sides of a portrait phone, and its off-centre box at one side ("Z prawej").
+     */
+    fun orthographicDistanceToFitBox(bounds: Bounds, yawDeg: Double, pitchDeg: Double, span: FitSpan, margin: Double): Double {
+        val tanHalf = tan(Math.toRadians(fovDeg) / 2.0)
+        val th = tanHalf * max(span.horizontal, 0.05) / margin
+        val tv = tanHalf * max(span.vertical, 0.05) / margin
+        val b = basis(OrbitPose(bounds.center, Vec3.ZERO, yawDeg, pitchDeg, 1.0, Projection.ORTHOGRAPHIC))
+        var distance = 0.0
+        for (corner in bounds.corners()) {
+            val q = corner - bounds.center
+            distance = max(distance, max(kotlin.math.abs(q dot b.right) / th, kotlin.math.abs(q dot b.up) / tv))
+        }
+        return clamp(distance, minDistance, maxDistance)
+    }
+
+    /** Frame the whole of `bounds` by its box, orthographically, at the given angles (elevations, plans, parallel views). */
+    fun frameBoxOrthographic(pose: OrbitPose, bounds: Bounds, yawDeg: Double, pitchDeg: Double, span: FitSpan, margin: Double = BOX_MARGIN): OrbitPose {
+        if (bounds.isEmpty) return pose
+        return clamp(
+            pose.copy(
+                focus = bounds.center,
+                pan = Vec3.ZERO,
+                yawDeg = yawDeg,
+                pitchDeg = pitchDeg,
+                distance = orthographicDistanceToFitBox(bounds, yawDeg, pitchDeg, span, margin),
+                projection = Projection.ORTHOGRAPHIC,
+            ),
+        )
+    }
+
+    /**
      * Whole house: the pose Reset returns to, fitted by the house's box to the
      * [span] the chrome leaves free ([ContentFrame.fitSpan]) — on a portrait
      * phone the horizontal field is the narrower one, and the house fills it

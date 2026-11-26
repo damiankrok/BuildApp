@@ -102,6 +102,12 @@ enum class ViewPreset(
         if (span != null && (this == WHOLE || this == FIT) && proj == Projection.PERSPECTIVE) {
             return camera.frameBox(from, bounds, yaw, pitch, span)
         }
+        // MARCOWKI-UI: a parallel view of the whole house (the four elevations, the plans, the axonometry) frames
+        // the house's box in the space the chrome leaves free, as "Cały dom" does in perspective — a sphere fitted
+        // to a square cut the long sides on a portrait phone, one of them by a whole bay.
+        if (span != null && target == PresetTarget.WHOLE_MODEL && proj == Projection.ORTHOGRAPHIC) {
+            return camera.frameBoxOrthographic(from, bounds, yaw, pitch, span)
+        }
         return camera.frame(from, bounds, yaw, pitch, proj, margin, if (fitsViewport) aspect else 1.0)
     }
 
