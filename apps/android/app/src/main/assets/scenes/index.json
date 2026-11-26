@@ -2,7 +2,7 @@
   {
     "key": "anna-v35421",
     "title": "Anna II (Studio Atrium) — v3.54.21: NEW-H, PO PRÓBIE (DEV): bryła ze źródeł, jeden układ dachów z 4 koszami",
-    "subtitle": "w próbie (B i F@B) płaskie pudła bez dachu — wynik zachowany w raporcie; po poprawce boków elewacji o identycznym podpisie bryła ze źródeł zastępuje LOCAL; dach: układ połaci: 10 połaci, kosze 4, dojścia do ściany 5, naroża 0; ściany wewnętrzne z rzutu: 17, drzwi wewnętrzne: 8; otwory zewnętrzne: 9; UTRACONE wnętrze LOCAL-a (26 → 17 ścian wewnętrznych, 45 → 17 otworów) — bryła ze źródeł nie przenosi wnętrza LOCAL-a; szczyt garażu z kalenicą wzdłuż głębokości (w źródle równoległa do frontu)",
+    "subtitle": "w próbie (B i F@B) płaskie pudła bez dachu — wynik zachowany w raporcie; po poprawce boków elewacji o identycznym podpisie bryła ze źródeł zastępuje LOCAL; dach: układ połaci: 10 połaci, kosze 4, dojścia do ściany 5, naroża 0; ściany wewnętrzne z rzutu: 17, drzwi wewnętrzne: 8; otwory zewnętrzne: 9; UTRACONE wnętrze i okna LOCAL-a: ściany wewnętrzne 26 → 17, otwory elewacji 39 → 9 (okna 28 → 7; drzwi wewnętrzne 6 → 8) — bryła ze źródeł nie przenosi ścian ani otworów LOCAL-a; szczyt garażu z kalenicą wzdłuż głębokości (w źródle równoległa do frontu)",
     "asset": "anna-v35421.scene.json",
     "modelId": "m-analysis-u7a243fda5915",
     "modelSchemaVersion": "1.9.0",
@@ -73,8 +73,8 @@
   },
   {
     "key": "amarylis-v35421",
-    "title": "Amarylis (Studio Atrium) — v3.54.21: kontrpróba audytu: 10 połaci, 4 kosze, szczyt poprzeczny",
-    "subtitle": "dach: układ połaci: 10 połaci, kosze 4, dojścia do ściany 4, naroża 0; ściany wewnętrzne z rzutu: 12, drzwi wewnętrzne: 8; otwory zewnętrzne: 12; 2 z 4 kominów utracone w recenzji na żywo (zmienność recenzji)",
+    "title": "Amarylis (Studio Atrium) — v3.54.21: kontrpróba audytu: 10 połaci, 4 kosze, szczyt frontowy odzyskany",
+    "subtitle": "szczyt frontowy z wiązania opisu po własnych widokach bryły; dach: układ połaci: 10 połaci, kosze 4, dojścia do ściany 4, naroża 0; ściany wewnętrzne z rzutu: 12, drzwi wewnętrzne: 8; otwory zewnętrzne: 12; drugi szczyt poprzeczny (R3) NIEZBUDOWANY (utrata w wiązaniu); 2 z 4 kominów usunięte przez recenzję na żywo mimo pomiaru bramką",
     "asset": "amarylis-v35421.scene.json",
     "modelId": "m-analysis-u3f4703808701",
     "modelSchemaVersion": "1.9.0",
@@ -98,7 +98,7 @@
   {
     "key": "eliza-v35421",
     "title": "Willa Eliza 5 G2 (ARCHON) — v3.54.21: kontrpróba audytu: dachy czterospadowe z połaci",
-    "subtitle": "dach: układ połaci: 12 połaci, kosze 0, dojścia do ściany 0, naroża 0; ściany wewnętrzne z rzutu: 10, drzwi wewnętrzne: 4; otwory zewnętrzne: 15; NIEUDANY UKŁAD brył (podział z rzutu piętra poza zakresem); okno utracone w recenzji na żywo",
+    "subtitle": "dach: układ połaci: 12 połaci, kosze 0, dojścia do ściany 0, naroża 0; ściany wewnętrzne z rzutu: 10, drzwi wewnętrzne: 4; otwory zewnętrzne: 15; NIEUDANY UKŁAD brył (podział z rzutu piętra poza zakresem); jedno okno lewej elewacji odrzucone przez jądro geometrii (strefa złącza ścian)",
     "asset": "eliza-v35421.scene.json",
     "modelId": "m-analysis-ma4a24c40addc8",
     "modelSchemaVersion": "1.9.0",
@@ -362,7 +362,7 @@
   {
     "key": "anna-host-v35421",
     "title": "Anna II (Studio Atrium) — v3.54.21: z hosta na rewizji 1a00654 (świeży bieg na żywo)",
-    "subtitle": "dach: układ połaci: 8 połaci, kosze 4, dojścia do ściany 2, naroża 0; ściany wewnętrzne: 9; otwory zewnętrzne: 13; świeży bieg na żywo przez publiczny punkt wejścia (856 s, 0,87 USD) po poprawce odmowy księgi (w pierwszej sesji to samo zadanie padło INTERNAL_ERROR na pułapie hosta); UTRACONE wnętrze z rzutu (9 ścian wobec 26 w pierwszym wyniku próby); jakość RECOGNIZABLE_PARTIAL: 0 otwartych cech kluczowych, 9 innych (balkony, podcień, taras)",
+    "subtitle": "dach: układ połaci: 8 połaci, kosze 4, dojścia do ściany 2, naroża 0; ściany wewnętrzne: 9; otwory zewnętrzne: 13; świeży bieg na żywo przez publiczny punkt wejścia (856 s, 0,87 USD) po poprawce odmowy księgi (w pierwszej sesji to samo zadanie padło INTERNAL_ERROR na pułapie hosta); UTRACONE wnętrze i okna LOCAL-a (9 ścian wewnętrznych i 13 otworów elewacji wobec 26 i 39 w pierwszym wyniku próby); jakość RECOGNIZABLE_PARTIAL: 0 otwartych cech kluczowych, 9 innych (balkony, podcień, taras)",
     "asset": "anna-host-v35421.scene.json",
     "modelId": "m-analysis-u7a243fda5915",
     "modelSchemaVersion": "1.9.0",

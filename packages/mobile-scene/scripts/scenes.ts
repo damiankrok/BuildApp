@@ -56,7 +56,7 @@ export const SCENES: readonly SceneSpec[] = [
   {
     key: 'anna-v35421',
     title: 'Anna II (Studio Atrium) — v3.54.21: NEW-H, PO PRÓBIE (DEV): bryła ze źródeł, jeden układ dachów z 4 koszami',
-    subtitle: 'w próbie (B i F@B) płaskie pudła bez dachu — wynik zachowany w raporcie; po poprawce boków elewacji o identycznym podpisie bryła ze źródeł zastępuje LOCAL; dach: układ połaci: 10 połaci, kosze 4, dojścia do ściany 5, naroża 0; ściany wewnętrzne z rzutu: 17, drzwi wewnętrzne: 8; otwory zewnętrzne: 9; UTRACONE wnętrze LOCAL-a (26 → 17 ścian wewnętrznych, 45 → 17 otworów) — bryła ze źródeł nie przenosi wnętrza LOCAL-a; szczyt garażu z kalenicą wzdłuż głębokości (w źródle równoległa do frontu)',
+    subtitle: 'w próbie (B i F@B) płaskie pudła bez dachu — wynik zachowany w raporcie; po poprawce boków elewacji o identycznym podpisie bryła ze źródeł zastępuje LOCAL; dach: układ połaci: 10 połaci, kosze 4, dojścia do ściany 5, naroża 0; ściany wewnętrzne z rzutu: 17, drzwi wewnętrzne: 8; otwory zewnętrzne: 9; UTRACONE wnętrze i okna LOCAL-a: ściany wewnętrzne 26 → 17, otwory elewacji 39 → 9 (okna 28 → 7; drzwi wewnętrzne 6 → 8) — bryła ze źródeł nie przenosi ścian ani otworów LOCAL-a; szczyt garażu z kalenicą wzdłuż głębokości (w źródle równoległa do frontu)',
     build: () => sealedOwnerModel('anna-v35421', '864692d14b50db43823b7d3b1626e5eb9d303ea372b01147d725a209ee7409a9', 'owner-v35421'),
   },
   {
@@ -91,8 +91,8 @@ export const SCENES: readonly SceneSpec[] = [
   },
   {
     key: 'amarylis-v35421',
-    title: 'Amarylis (Studio Atrium) — v3.54.21: kontrpróba audytu: 10 połaci, 4 kosze, szczyt poprzeczny',
-    subtitle: 'dach: układ połaci: 10 połaci, kosze 4, dojścia do ściany 4, naroża 0; ściany wewnętrzne z rzutu: 12, drzwi wewnętrzne: 8; otwory zewnętrzne: 12; 2 z 4 kominów utracone w recenzji na żywo (zmienność recenzji)',
+    title: 'Amarylis (Studio Atrium) — v3.54.21: kontrpróba audytu: 10 połaci, 4 kosze, szczyt frontowy odzyskany',
+    subtitle: 'szczyt frontowy z wiązania opisu po własnych widokach bryły; dach: układ połaci: 10 połaci, kosze 4, dojścia do ściany 4, naroża 0; ściany wewnętrzne z rzutu: 12, drzwi wewnętrzne: 8; otwory zewnętrzne: 12; drugi szczyt poprzeczny (R3) NIEZBUDOWANY (utrata w wiązaniu); 2 z 4 kominów usunięte przez recenzję na żywo mimo pomiaru bramką',
     build: () => sealedOwnerModel('amarylis-v35421', 'f45cd8a4b1c6d0f010eab4a19653043b20695cfe3d8c3252ff6e928024da6b78', 'owner-v35421'),
   },
   {
@@ -104,7 +104,7 @@ export const SCENES: readonly SceneSpec[] = [
   {
     key: 'eliza-v35421',
     title: 'Willa Eliza 5 G2 (ARCHON) — v3.54.21: kontrpróba audytu: dachy czterospadowe z połaci',
-    subtitle: 'dach: układ połaci: 12 połaci, kosze 0, dojścia do ściany 0, naroża 0; ściany wewnętrzne z rzutu: 10, drzwi wewnętrzne: 4; otwory zewnętrzne: 15; NIEUDANY UKŁAD brył (podział z rzutu piętra poza zakresem); okno utracone w recenzji na żywo',
+    subtitle: 'dach: układ połaci: 12 połaci, kosze 0, dojścia do ściany 0, naroża 0; ściany wewnętrzne z rzutu: 10, drzwi wewnętrzne: 4; otwory zewnętrzne: 15; NIEUDANY UKŁAD brył (podział z rzutu piętra poza zakresem); jedno okno lewej elewacji odrzucone przez jądro geometrii (strefa złącza ścian)',
     build: () => sealedOwnerModel('eliza-v35421', 'eeeada5e63f6a86a298adf5f00e99ec8f36ad0656bbd53163ab9567703169d94', 'owner-v35421'),
   },
   {
@@ -236,7 +236,7 @@ export const SCENES: readonly SceneSpec[] = [
   {
     key: 'anna-host-v35421',
     title: 'Anna II (Studio Atrium) — v3.54.21: z hosta na rewizji 1a00654 (świeży bieg na żywo)',
-    subtitle: 'dach: układ połaci: 8 połaci, kosze 4, dojścia do ściany 2, naroża 0; ściany wewnętrzne: 9; otwory zewnętrzne: 13; świeży bieg na żywo przez publiczny punkt wejścia (856 s, 0,87 USD) po poprawce odmowy księgi (w pierwszej sesji to samo zadanie padło INTERNAL_ERROR na pułapie hosta); UTRACONE wnętrze z rzutu (9 ścian wobec 26 w pierwszym wyniku próby); jakość RECOGNIZABLE_PARTIAL: 0 otwartych cech kluczowych, 9 innych (balkony, podcień, taras)',
+    subtitle: 'dach: układ połaci: 8 połaci, kosze 4, dojścia do ściany 2, naroża 0; ściany wewnętrzne: 9; otwory zewnętrzne: 13; świeży bieg na żywo przez publiczny punkt wejścia (856 s, 0,87 USD) po poprawce odmowy księgi (w pierwszej sesji to samo zadanie padło INTERNAL_ERROR na pułapie hosta); UTRACONE wnętrze i okna LOCAL-a (9 ścian wewnętrznych i 13 otworów elewacji wobec 26 i 39 w pierwszym wyniku próby); jakość RECOGNIZABLE_PARTIAL: 0 otwartych cech kluczowych, 9 innych (balkony, podcień, taras)',
     build: () => sealedOwnerModel('anna-host-v35421', 'f201da9cdc5a3fa3b6df5d33a204e450aff6c92bc19bb4e91dae6bb488261785', 'owner-v35421'),
   },
   // v3.54.20 (2026-11-25): the delivered code's models — the held-out sample NEW-G first (byte-identical to the first
