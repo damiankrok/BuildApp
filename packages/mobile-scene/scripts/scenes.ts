@@ -42,7 +42,15 @@ export function sealedOwnerModel(key: string, sha256: string, dir = 'owner-005t'
   return model
 }
 
-export type SceneSpec = { key: string; title: string; subtitle: string; build: () => CanonicalBuildingModel }
+/**
+ * MARCOWKI-UI (2026-11-26, OWNER): the one house the app opens on a clean start, under the owner's words. It is
+ * product presentation, not a claim about the model: [title] and [subtitle] are what the house is called on the phone;
+ * the registry's own title and subtitle stay the scene's technical record (versions, outcomes, failures), shown in the
+ * developer gallery and the house's details. At most one scene carries it; a test holds that.
+ */
+export type SceneShowcase = { title: string; subtitle: string }
+
+export type SceneSpec = { key: string; title: string; subtitle: string; showcase?: SceneShowcase; build: () => CanonicalBuildingModel }
 
 /**
  * Presentation order in the app. It has no effect on any bundle's bytes or
@@ -760,6 +768,11 @@ export const SCENES: readonly SceneSpec[] = [
     key: 'marcowki-c-v35414',
     title: 'Marcówki — poprawka v3.54.14 (oddany)',
     subtitle: 'ODDANY: geometria bez zmian; bez jasnej linii na +3,06, drewno i rama ciągłe za balkonem, bez plam za balustradą',
+    // MARCOWKI-UI: the house a clean start opens, frozen at model a66428c8… / scene file 680a3f4b… (owner-v35414)
+    showcase: {
+      title: 'Dom w marcówkach',
+      subtitle: 'Model demonstracyjny — odtworzony z publicznego projektu, nie dokumentacja budowy',
+    },
     build: () => sealedOwnerModel('marcowki-c-v35414', 'a66428c88135d1ad2d30678943acd0ea4746d4d2977b96a9b37d16f48759a0f5', 'owner-v35414'),
   },
   // v3.54.14 (Bakopy, DEV, delivered): LOCAL's geometry with the metric consultant's 13 witnessed readings (sub-cm..3 cm
@@ -922,4 +935,6 @@ export type SceneIndexEntry = {
   meshCount: number
   triangleCount: number
   objectCount: number
+  /** Only on the showcase scene (MARCOWKI-UI); absent everywhere else, so their index bytes are unchanged. */
+  showcase?: SceneShowcase
 }

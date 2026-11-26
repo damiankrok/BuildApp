@@ -40,6 +40,15 @@ fun VisibilityMode.labelRes(): Int = when (this) {
     VisibilityMode.CUTAWAY -> R.string.layer_cutaway
 }
 
+/** What a layer leaves out, in the owner's words, for the row that says it at the foot of the house (MARCOWKI-UI). */
+@StringRes
+fun VisibilityMode.hiddenRes(): Int = when (this) {
+    VisibilityMode.ALL -> R.string.layer_hidden_none
+    VisibilityMode.ROOF_OFF -> R.string.layer_hidden_roof
+    VisibilityMode.GROUND_ONLY, VisibilityMode.CUTAWAY -> R.string.layer_hidden_roof_upper
+    VisibilityMode.UPPER_ONLY -> R.string.layer_hidden_roof_ground
+}
+
 /** The same choice in the one or two words that fit the rail's 64 dp button at font scale 1.3. */
 @StringRes
 fun VisibilityMode.railLabelRes(): Int = when (this) {

@@ -16,6 +16,8 @@ import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AlertDialog
@@ -63,6 +65,12 @@ import com.buildplan.preview.scene.SceneSourceKind
  * its stages, its source, and the named place where the cost workspace
  * will stand. Nothing here pretends to exist: Koszty is a row that says it
  * is not built yet, never a page.
+ *
+ * MARCOWKI-UI: the houses are those of ordinary use — the showcase, then the
+ * analyses made on this phone. The scenes shipped for development and review
+ * (the analyzer's history, failures kept) are one row at the foot, the way to
+ * the developer gallery; a gallery scene that is open is listed here too, so
+ * the owner always sees which house the workspace shows.
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -76,9 +84,11 @@ fun HouseMenuSheet(
 ) {
     HouseSheet(onDismiss) {
         val openKey = preview.scene?.key
-        Column(Modifier.fillMaxWidth().verticalScroll(rememberScrollState()).padding(bottom = Space.xl)) {
+        val menuScroll = rememberScrollState()
+        Column(Modifier.fillMaxWidth().fadeBelowFold(menuScroll, Palette.Sheet).verticalScroll(menuScroll).padding(bottom = Space.xl)) {
             PanelGroupLabel(stringResource(R.string.house_saved_heading))
-            for (entry in preview.scenes) {
+            val openDevelopment = preview.scenes.firstOrNull { it.key == openKey && it.isDevelopment }
+            for (entry in preview.houses + listOfNotNull(openDevelopment)) {
                 val current = entry.key == openKey
                 val download = analyzer.downloads.firstOrNull { it.key == entry.key }
                 val limited = download != null && (download.unresolvedCount > 0 || download.warningsCount > 0)
@@ -97,7 +107,11 @@ fun HouseMenuSheet(
                     Column(Modifier.weight(1f)) {
                         Text(entry.title, style = MaterialTheme.typography.bodyLarge, color = Palette.Ink, maxLines = 2, overflow = TextOverflow.Ellipsis)
                         Text(
-                            stringResource(statusRes(entry.source, limited)),
+                            when {
+                                entry.showcase -> entry.subtitle
+                                entry.isDevelopment -> stringResource(R.string.house_status_development)
+                                else -> stringResource(statusRes(entry.source, limited))
+                            },
                             style = MaterialTheme.typography.bodySmall,
                             color = Palette.InkMuted,
                             maxLines = 2,
@@ -115,6 +129,88 @@ fun HouseMenuSheet(
             // The cost workspace's place, named and closed: a future deep workspace that will keep this
             // house's context and return here — never an empty tab, never a page that says nothing.
             MenuRow(ShellIcons.receipt, stringResource(R.string.menu_costs), onClick = null, supporting = stringResource(R.string.menu_costs_not_built))
+            // The analyzer's history apart from ordinary use: one quiet row, never the house list itself (MARCOWKI-UI).
+            val development = preview.developmentScenes.size
+            if (development > 0) {
+                PanelRule()
+                MenuRow(
+                    ShellIcons.cube,
+                    stringResource(R.string.menu_gallery),
+                    onClick = { onOpenSheet(Sheet.GALLERY) },
+                    supporting = pluralStringResource(R.plurals.menu_gallery_detail, development, development),
+                )
+            }
+        }
+    }
+}
+
+/**
+ * The developer gallery (MARCOWKI-UI): every scene shipped for development and review, in the exporter's order, each
+ * under its technical record — the stage, the outcome, the failure kept. It is working material, said so at its head;
+ * choosing a scene opens it in the workspace (remembered like any choice), and the way back to the showcase stands
+ * above the list while a gallery scene is open.
+ */
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun DevelopmentGallerySheet(preview: PreviewViewModel, onDismiss: () -> Unit, onPick: (SceneEntry) -> Unit) {
+    HouseSheet(onDismiss) {
+        val openKey = preview.scene?.key
+        val scenes = preview.developmentScenes
+        val showcase = preview.showcase
+        val galleryOpen = scenes.any { it.key == openKey }
+        // Reopened on a gallery scene, the list stands on it — not at the top of a hundred rows (audit A11Y-07).
+        val list = rememberLazyListState(initialFirstVisibleItemIndex = scenes.indexOfFirst { it.key == openKey }.coerceAtLeast(0))
+        BoxWithConstraints(Modifier.fillMaxWidth()) {
+            Column(Modifier.fillMaxWidth().heightIn(max = maxHeight * STAGE_SHEET_SHARE)) {
+                // The head and the way back stand outside the scroll: what this list is, and how to leave it.
+                Column(Modifier.fillMaxWidth().padding(horizontal = Space.l).padding(top = Space.l, bottom = Space.s)) {
+                    Text(
+                        stringResource(R.string.gallery_title),
+                        style = MaterialTheme.typography.titleLarge,
+                        color = Palette.Ink,
+                        modifier = Modifier.semantics { heading() },
+                    )
+                    Text(
+                        stringResource(R.string.gallery_body),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = Palette.InkMuted,
+                        modifier = Modifier.padding(top = Space.xs),
+                    )
+                    if (galleryOpen && showcase != null) {
+                        QuietAction(stringResource(R.string.gallery_back_showcase, showcase.title), onClick = { onPick(showcase) }, icon = ShellIcons.house, modifier = Modifier.padding(top = Space.s))
+                    }
+                }
+                PanelRule(inset = 0.dp)
+                androidx.compose.foundation.lazy.LazyColumn(
+                    state = list,
+                    modifier = Modifier.fillMaxWidth().weight(1f, fill = false).fadeBelowFold(list, Palette.Sheet),
+                    contentPadding = androidx.compose.foundation.layout.PaddingValues(bottom = Space.xl),
+                ) {
+                    items(scenes.size, key = { scenes[it].key }) { i ->
+                        val entry = scenes[i]
+                        val current = entry.key == openKey
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(Space.m),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .heightIn(min = 64.dp)
+                                // A radio row: TalkBack says chosen or not by itself, in the phone's own words.
+                                .selectable(selected = current, role = Role.RadioButton, onClick = { onPick(entry) })
+                                .background(if (current) Palette.Well else androidx.compose.ui.graphics.Color.Transparent)
+                                .padding(horizontal = Space.l, vertical = Space.s),
+                        ) {
+                            Column(Modifier.weight(1f)) {
+                                Text(entry.recordTitle, style = MaterialTheme.typography.bodyMedium, color = Palette.Ink, maxLines = 3, overflow = TextOverflow.Ellipsis)
+                                if (entry.recordSubtitle.isNotBlank()) {
+                                    Text(entry.recordSubtitle, style = MaterialTheme.typography.bodySmall, color = Palette.InkMuted, maxLines = 2, overflow = TextOverflow.Ellipsis)
+                                }
+                            }
+                            if (current) Icon(ShellIcons.check, contentDescription = null, tint = Palette.Ink, modifier = Modifier.size(Sizes.icon))
+                        }
+                    }
+                }
+            }
         }
     }
 }
@@ -223,7 +319,7 @@ fun SourceSheet(preview: PreviewViewModel, analyzer: AnalyzerViewModel, progress
                 overflow = TextOverflow.Ellipsis,
                 modifier = Modifier.padding(top = Space.s).semantics { heading() },
             )
-            SourceStatus(entry?.source ?: SceneSourceKind.BUNDLED, download, resultShown)
+            SourceStatus(entry, download, resultShown)
             // N7-P1: a model says beside it what it is, from the record kept with the scene. N7-PATCH-04A: on the same
             // condition as the result screen, headed by the record's own verdict; partial only when it is partial
             download?.preview?.takeIf { it.hasDetails }?.let { outcome ->
@@ -252,6 +348,12 @@ fun SourceSheet(preview: PreviewViewModel, analyzer: AnalyzerViewModel, progress
                         scene.bundle.contentHash.take(8),
                     ),
                 )
+                // MARCOWKI-UI: a shipped scene's technical record — its stage, outcome and kept failures — lives here,
+                // not in its name: the showcase is called "Dom w marcówkach" and this says which scene it is.
+                if (entry != null && entry.source == SceneSourceKind.BUNDLED) {
+                    StatusText(stringResource(R.string.house_diagnostics_record, entry.key, entry.recordTitle), modifier = Modifier.padding(top = Space.xs))
+                    if (entry.recordSubtitle.isNotBlank()) StatusText(entry.recordSubtitle, modifier = Modifier.padding(top = Space.xxs))
+                }
                 QuietAction(stringResource(R.string.house_diagnostics_analyzer), onClick = onAnalyze, icon = ShellIcons.link)
             }
             if (download != null) {
@@ -287,7 +389,8 @@ fun SourceSheet(preview: PreviewViewModel, analyzer: AnalyzerViewModel, progress
 
 /** Where the model came from — limitations said in words, with their counts. */
 @Composable
-private fun SourceStatus(source: SceneSourceKind, download: DownloadedSceneEntry?, resultShown: Boolean) {
+private fun SourceStatus(entry: SceneEntry?, download: DownloadedSceneEntry?, resultShown: Boolean) {
+    val source = entry?.source ?: SceneSourceKind.BUNDLED
     val partial = download?.isPartialPreview == true
     val limited = download != null && (partial || download.unresolvedCount > 0 || download.warningsCount > 0)
     Row(
@@ -297,7 +400,17 @@ private fun SourceStatus(source: SceneSourceKind, download: DownloadedSceneEntry
     ) {
         if (limited) Icon(ShellIcons.caution, contentDescription = null, tint = Palette.InkMuted, modifier = Modifier.size(Sizes.iconSmall))
         Column(Modifier.weight(1f)) {
-            Text(stringResource(if (partial) R.string.house_status_partial else statusRes(source, limited)), style = MaterialTheme.typography.bodyMedium, color = Palette.Ink)
+            Text(
+                when {
+                    partial -> stringResource(R.string.house_status_partial)
+                    // MARCOWKI-UI: the showcase in its own honest words; a gallery scene as working material
+                    entry?.showcase == true -> entry.subtitle
+                    entry?.isDevelopment == true -> stringResource(R.string.house_status_development)
+                    else -> stringResource(statusRes(source, limited))
+                },
+                style = MaterialTheme.typography.bodyMedium,
+                color = Palette.Ink,
+            )
             if (limited && download != null) {
                 val unresolved = pluralStringResource(R.plurals.count_unresolved, download.unresolvedCount, download.unresolvedCount)
                 Text(
@@ -315,8 +428,9 @@ private fun SourceStatus(source: SceneSourceKind, download: DownloadedSceneEntry
     }
 }
 
+/** A downloaded analysis's status words (the showcase and the gallery scenes say their own, above). */
 private fun statusRes(source: SceneSourceKind, limited: Boolean): Int = when {
-    source != SceneSourceKind.DOWNLOADED -> R.string.house_status_bundled
+    source != SceneSourceKind.DOWNLOADED -> R.string.house_status_development
     limited -> R.string.house_status_limited
     else -> R.string.house_status_ready
 }

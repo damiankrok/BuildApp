@@ -269,13 +269,15 @@ class FilamentModelRenderer(
     // Model
     // -----------------------------------------------------------------------
 
-    /** Upload a model. The previous one is fully released first. */
-    fun setModel(scene: ModelScene) {
+    /**
+     * Upload a model. The previous one is fully released first. [prepared] is the scene's presentation when it was
+     * already derived off the main thread for this very scene (MARCOWKI-UI audit PERF-01); otherwise it is derived here.
+     */
+    fun setModel(scene: ModelScene, prepared: ScenePresentation? = null) {
         releaseModel()
         uploadedScene = scene
-        // Derived once, here, from the scene alone; a mode switch never
-        // derives anything again.
-        val presentation = ScenePresentation.of(scene)
+        // Derived once, from the scene alone; a mode switch never derives anything again.
+        val presentation = prepared ?: ScenePresentation.of(scene)
         presentationStats = presentation.stats(scene)
         model = ModelEntities.build(engine, scene, presentation, opaqueMaterial, translucentMaterial, lineMaterial)
         val footprint = GroundFootprint.of(scene.bounds)

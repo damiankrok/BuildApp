@@ -7,9 +7,10 @@ package com.buildplan.preview.ui
  * link, the ways to the other sheets and the named place of the future cost
  * workspace); `STAGES` is the owner's account of the build, the only place
  * it is edited; `SOURCE` is where the model came from, what the analysis
- * left open, and the technical figures.
+ * left open, and the technical figures; `GALLERY` (MARCOWKI-UI) is the developer
+ * gallery, the scenes shipped for development and review, apart from the houses.
  */
-enum class Sheet { MENU, STAGES, SOURCE }
+enum class Sheet { MENU, STAGES, SOURCE, GALLERY }
 
 /**
  * A task the owner leaves the house for, and comes back from to the same
@@ -64,7 +65,7 @@ data class ShellState(
         /**
          * The launch extra that opens a surface directly, used for screenshots
          * and shortcuts: `HOUSE` (or the older `MODEL`) for the workspace,
-         * `STAGES`, `SOURCE` or `MENU` for the workspace with that sheet, and
+         * `STAGES`, `SOURCE`, `MENU` or `GALLERY` for the workspace with that sheet, and
          * `ANALYZER` for the task.
          */
         const val EXTRA_PLACE = "com.buildplan.preview.PLACE"

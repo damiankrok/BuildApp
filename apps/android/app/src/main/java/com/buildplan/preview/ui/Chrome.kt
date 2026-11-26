@@ -292,7 +292,7 @@ fun PanelRule(modifier: Modifier = Modifier, inset: Dp = Space.l) {
 }
 
 /** Darkens the last rows of a list that continues below its edge, so a cut list never looks complete. */
-fun Modifier.fadeBelowFold(scroll: ScrollState, color: Color, height: Dp = 32.dp): Modifier = drawWithContent {
+fun Modifier.fadeBelowFold(scroll: androidx.compose.foundation.gestures.ScrollableState, color: Color, height: Dp = 32.dp): Modifier = drawWithContent {
     drawContent()
     if (scroll.canScrollForward) {
         val h = height.toPx()

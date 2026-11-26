@@ -53,13 +53,28 @@ class PreviewViewModel(application: Application) : AndroidViewModel(application)
     var scenes: List<SceneEntry> by mutableStateOf(repository.entries())
         private set
 
+    /**
+     * MARCOWKI-UI: the one house a clean start opens — the scene the exporter marked as the showcase — or null in a
+     * build without one (then the first scene, as before).
+     */
+    val showcase: SceneEntry? get() = scenes.firstOrNull { it.showcase }
+
+    /**
+     * The houses of ordinary use, for the house menu: the showcase, then the analyses made on this phone. The scenes
+     * shipped for development and review are not among them; they are listed apart, in [developmentScenes].
+     */
+    val houses: List<SceneEntry> get() = scenes.filter { !it.isDevelopment }
+
+    /** The developer gallery: every scene shipped for development and review, in the exporter's order (MARCOWKI-UI). */
+    val developmentScenes: List<SceneEntry> get() = scenes.filter { it.isDevelopment }
+
     /** Hide the scenes shipped in the APK (a launch extra for evidence of the no-house state), and show what is left. */
     fun hideBundled() {
         if (hidingBundled) return
         hidingBundled = true
         scenes = entries()
         loading?.cancel()
-        scenes.firstOrNull()?.let { open(it) } ?: run { screen = ScreenState.Failed("no scene bundles in this build", null) }
+        scenes.firstOrNull()?.let { open(it, chosen = false) } ?: run { screen = ScreenState.Failed("no scene bundles in this build", null) }
     }
 
     private var hidingBundled = false
@@ -132,9 +147,22 @@ class PreviewViewModel(application: Application) : AndroidViewModel(application)
     private val prefs = application.getSharedPreferences(PREFS, android.content.Context.MODE_PRIVATE)
 
     init {
-        val last = prefs.getString(KEY_LAST_OPEN, null)
-        (scenes.firstOrNull { it.key == last } ?: scenes.firstOrNull())?.let { open(it) }
+        (StartChoice.of(scenes, lastChosen()))?.let { open(it, chosen = false) }
             ?: run { screen = ScreenState.Failed("no scene bundles in this build", null) }
+    }
+
+    /**
+     * The house the owner last CHOSE (MARCOWKI-UI). Up to APK 1354 the app remembered every house it opened, its own
+     * automatic first one included, so an untouched install remembers the first scene of that build's list — an
+     * experimental model the owner never picked. That older record is trusted only when it names an analysis made on
+     * this phone, which the owner necessarily chose; any other is dropped, and the showcase opens instead.
+     */
+    private fun lastChosen(): String? {
+        prefs.getString(KEY_LAST_CHOSEN, null)?.let { return it }
+        val legacy = prefs.getString(KEY_LAST_OPEN_LEGACY, null) ?: return null
+        val kept = legacy.takeIf { key -> scenes.any { it.key == key && it.source == com.buildplan.preview.scene.SceneSourceKind.DOWNLOADED } }
+        prefs.edit().remove(KEY_LAST_OPEN_LEGACY).apply { if (kept != null) putString(KEY_LAST_CHOSEN, kept) }.apply()
+        return kept
     }
 
     /**
@@ -145,13 +173,13 @@ class PreviewViewModel(application: Application) : AndroidViewModel(application)
     fun refreshScenes() {
         scenes = entries()
         val openKey = scene?.key ?: return
-        if (scenes.none { it.key == openKey }) scenes.firstOrNull()?.let { open(it) }
+        if (scenes.none { it.key == openKey }) StartChoice.of(scenes, null)?.let { open(it, chosen = false) }
     }
 
-    /** Open the scene with this key, if the list has it. */
+    /** Open the scene with this key, if the list has it: the owner's choice, remembered for the next start. */
     fun openKey(key: String): Boolean {
         val entry = scenes.firstOrNull { it.key == key } ?: return false
-        open(entry)
+        open(entry, chosen = true)
         return true
     }
 
@@ -160,26 +188,39 @@ class PreviewViewModel(application: Application) : AndroidViewModel(application)
      * long enough to freeze a frame, so it runs on a background thread while
      * the screens say "Wczytywanie"; a later open replaces an unfinished one.
      */
-    fun open(entry: SceneEntry) {
+    fun open(entry: SceneEntry, chosen: Boolean = true) {
         loading?.cancel()
         screen = ScreenState.Loading
         loading = viewModelScope.launch {
-            val result = withContext(Dispatchers.Default) { repository.load(entry) }
-            show(result, entry)
+            val result = withContext(Dispatchers.Default) {
+                repository.load(entry).also { loaded ->
+                    // The presentation (feature edges, roof covers) is derived from the scene alone: here, off the main
+                    // thread, so the first frame of a heavy house does not wait for it (MARCOWKI-UI audit PERF-01).
+                    prepared = (loaded as? SceneLoadResult.Ok)?.scene?.let { it to com.buildplan.preview.presentation.ScenePresentation.of(it) }
+                }
+            }
+            show(result, entry, chosen)
         }
     }
+
+    /** The presentation derived while [ModelScene] was loading, for that very scene, or null (then the renderer derives it). */
+    @Volatile private var prepared: Pair<ModelScene, com.buildplan.preview.presentation.ScenePresentation>? = null
+
+    fun preparedPresentation(scene: ModelScene): com.buildplan.preview.presentation.ScenePresentation? =
+        prepared?.takeIf { it.first === scene }?.second
 
     private var loading: Job? = null
 
     private fun entries(): List<SceneEntry> =
         repository.entries().let { all -> if (hidingBundled) all.filter { it.source == com.buildplan.preview.scene.SceneSourceKind.DOWNLOADED } else all }
 
-    private fun show(result: SceneLoadResult, entry: SceneEntry) {
+    private fun show(result: SceneLoadResult, entry: SceneEntry, chosen: Boolean) {
         when (result) {
             is SceneLoadResult.Failed -> screen = ScreenState.Failed(result.message, result.problem, entry)
             is SceneLoadResult.Ok -> {
                 val model = result.scene
-                prefs.edit().putString(KEY_LAST_OPEN, entry.key).apply()
+                // Only a house the owner chose is remembered: the app's own pick at start is not a choice (MARCOWKI-UI).
+                if (chosen) prefs.edit().putString(KEY_LAST_CHOSEN, entry.key).apply()
                 camera = OrbitCamera(model.bounds)
                 pose = camera.home(fitSpan).also { home = it }
                 // Selection, isolation and layers name objects of the old
@@ -403,8 +444,20 @@ class PreviewViewModel(application: Application) : AndroidViewModel(application)
         /** The platform's own double-tap window. */
         const val DOUBLE_TAP_MS = 300L
 
-        /** Where the house last open is remembered (cycle 3, H-03). */
+        /** Where the house last chosen is remembered (cycle 3, H-03; MARCOWKI-UI: chosen, not merely opened). */
         const val PREFS = "preview"
-        const val KEY_LAST_OPEN = "lastOpenKey"
+        const val KEY_LAST_CHOSEN = "lastChosenKey"
+
+        /** Up to APK 1354: the house last OPENED, the app's automatic first pick included. Read once, then removed. */
+        const val KEY_LAST_OPEN_LEGACY = "lastOpenKey"
     }
+}
+
+/**
+ * Which house a start opens (MARCOWKI-UI), as a pure rule: the one the owner last chose, while the list still has it;
+ * otherwise the showcase; otherwise — a build without a showcase — the first scene listed.
+ */
+object StartChoice {
+    fun of(scenes: List<SceneEntry>, lastChosenKey: String?): SceneEntry? =
+        scenes.firstOrNull { it.key == lastChosenKey } ?: scenes.firstOrNull { it.showcase } ?: scenes.firstOrNull()
 }

@@ -141,8 +141,12 @@ fun ToolRail(
         }
 
         GlassSurface(shape = RoundedCornerShape(Radius.panel), modifier = if (railMaxHeight != null) Modifier.heightIn(max = railMaxHeight) else Modifier) {
+            val railScroll = rememberScrollState()
             Column(
-                modifier = Modifier.padding(RailDefaults.Padding).then(if (railMaxHeight != null) Modifier.verticalScroll(rememberScrollState()) else Modifier),
+                // On a short window the rail scrolls; the fade says so, as every cut list in the app does (audit F7).
+                modifier = Modifier
+                    .then(if (railMaxHeight != null) Modifier.fadeBelowFold(railScroll, Palette.Glass).verticalScroll(railScroll) else Modifier)
+                    .padding(RailDefaults.Padding),
                 verticalArrangement = Arrangement.spacedBy(RailDefaults.Gap),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {

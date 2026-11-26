@@ -103,7 +103,9 @@ class ProductFlowDeviceTest {
 
         // 1. A cold start lands on the house: the whole design, "Postęp nieustawiony", one engine, no tabs.
         val first = evidence.awaitRenderer(preview, "cold start")
-        evidence.awaitNode(hasText(evidence.string(R.string.progress_unset)))
+        // MARCOWKI-UI: said once, in the timeline's header under "Projekt docelowy" (what the 3D shows)
+        evidence.awaitNode(hasText(evidence.string(R.string.progress_unset), substring = true))
+        evidence.awaitNode(hasText(evidence.string(R.string.timeline_target)))
         assertNull("unset progress shows the whole design", preview.viewer.construction)
         assertEquals("the workspace is the root", 1, RenderDiagnostics.liveEngines.get())
         evidence.assertHouseInsideFreeArea(preview, evidence.capture("01-house-unset", "visibleObjects" to first.visibleObjects), "01 house, progress unset")
@@ -279,11 +281,13 @@ class ProductFlowDeviceTest {
 
         // 14. The source sheet from the menu: where the model came from, the technical figures folded.
         compose.onAllNodes(hasText(evidence.string(R.string.menu_source)) and hasClickAction())[0].performClick()
-        evidence.awaitNode(hasText(evidence.string(R.string.house_status_bundled)))
+        // MARCOWKI-UI: a clean start opens the showcase, whose source says it is a demonstration model
+        val showcaseNote = checkNotNull(preview.showcase) { "the build marks a showcase house" }.subtitle
+        evidence.awaitNode(hasText(showcaseNote))
         compose.onNode(hasText(evidence.string(R.string.house_diagnostics_show)) and hasClickAction()).assertExists()
         evidence.capture("14-source")
         Espresso.pressBack()
-        compose.waitUntil(5_000) { compose.onAllNodes(hasText(evidence.string(R.string.house_status_bundled))).fetchSemanticsNodes().isEmpty() }
+        compose.waitUntil(5_000) { compose.onAllNodes(hasText(showcaseNote)).fetchSemanticsNodes().isEmpty() }
         assertEquals("sheets never move the camera", poseAtRest, preview.pose)
 
         // 15. The analyzer task from the menu: it takes the screen, and the engine goes with it.

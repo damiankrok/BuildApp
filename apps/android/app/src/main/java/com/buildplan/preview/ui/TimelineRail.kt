@@ -77,6 +77,11 @@ fun TimelineRail(
     ruleModifier: Modifier = Modifier,
     /** A row inside the same glass, above the header (the chosen element): one panel, never two stacked. */
     top: (@Composable () -> Unit)? = null,
+    /**
+     * A short window (a phone on its side, MARCOWKI-UI): the header and the rule share one row instead of standing
+     * one over the other, so the foot of the house takes about half the height. The header keeps its own grammar.
+     */
+    compact: Boolean = false,
 ) {
     val motion = LocalMotionPolicy.current
     val stages = view.stages
@@ -86,6 +91,49 @@ fun TimelineRail(
     val nowStop = view.nowStop
     val stopNames = stopNames(stages)
     val chevron by animateFloatAsState(if (expanded) 180f else 0f, motion.settle(), label = "railChevron")
+    // With nothing recorded, "now" is the whole design: the way back from a preview says so (MARCOWKI-UI audit).
+    val returnLabel = stringResource(if (summary.unset) R.string.timeline_return_design else R.string.timeline_return_now)
+    val toggle = stringResource(if (expanded) R.string.timeline_collapse else R.string.timeline_expand)
+    val header: @Composable (Modifier) -> Unit = { m ->
+        AnimatedContent(
+            targetState = previewStop,
+            transitionSpec = { fadeIn(motion.enterDelayed()) togetherWith fadeOut(motion.exit()) },
+            label = "railHeader",
+            // No live region: the rule speaks its own new state as it moves, once.
+            modifier = m,
+        ) { stop ->
+            if (stop != null) {
+                PreviewHeader(stop, stopNames, frame.stageWithoutGeometry, stages.size, returnLabel, onReturnToNow)
+            } else {
+                NowHeader(
+                    summary.unset, summary.percentText, summary.currentStage, summary.lastDone, summary.currentTask, summary.currentStageCompletionPercent,
+                    problem = progressProblemText(view.problem),
+                    onSetProgress = onSetProgress.takeIf { summary.unset && summary.availability == ProgressAvailability.EDITABLE },
+                    onEdit = onEditProgress.takeIf { !summary.unset },
+                )
+            }
+        }
+    }
+    val toggleButton: @Composable () -> Unit = {
+        IconButton(onClick = onToggle, modifier = Modifier.size(Sizes.touch).semantics { contentDescription = toggle }) {
+            Icon(ShellIcons.chevronUp, contentDescription = null, tint = Palette.InkMuted, modifier = Modifier.size(Sizes.icon).rotate(chevron))
+        }
+    }
+    val rule: @Composable (Modifier) -> Unit = { m ->
+        FoldingRule(
+            stages = stages,
+            nowStop = nowStop,
+            previewStop = previewStop,
+            onScrub = onPreviewStop,
+            onReturnToNow = if (previewStop != null) onReturnToNow else null,
+            returnToNowLabel = returnLabel,
+            description = stringResource(R.string.timeline_rule_description),
+            stateText = previewStop?.let { stringResource(R.string.timeline_preview_of, stopNames[it]) }
+                ?: nowStateText(summary.unset, summary.percentText, summary.currentStage),
+            stopName = { stopNames[it] },
+            modifier = m,
+        )
+    }
 
     GlassSurface(modifier = modifier, shape = RoundedCornerShape(Radius.sheet)) {
         Column(Modifier.padding(bottom = Space.s)) {
@@ -95,54 +143,34 @@ fun TimelineRail(
                     PanelRule()
                 }
             }
-            Column(ruleModifier) {
-                // Header: what the 3D shows, full width, and under it the one action that matters here —
-                // never beside the title, where a longer stage name or a larger font would cut it.
+            if (compact) {
+                // Header on the start side at a readable measure, the rule beside it, the toggle at the end.
                 Row(
-                    verticalAlignment = Alignment.Top,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .heightIn(min = 56.dp)
-                        .padding(start = Space.l, end = Space.xs, top = Space.xs),
+                    ruleModifier.fillMaxWidth().padding(start = Space.l, end = Space.xs, top = Space.xs),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(Space.m),
                 ) {
-                    AnimatedContent(
-                        targetState = previewStop,
-                        transitionSpec = { fadeIn(motion.enterDelayed()) togetherWith fadeOut(motion.exit()) },
-                        label = "railHeader",
-                        // No live region: the rule speaks its own new state as it moves, once.
-                        modifier = Modifier.weight(1f).padding(top = Space.xs),
-                    ) { stop ->
-                        if (stop != null) {
-                            PreviewHeader(stop, stopNames, frame.stageWithoutGeometry, stages.size, onReturnToNow)
-                        } else {
-                            NowHeader(
-                                summary.unset, summary.percentText, summary.currentStage, summary.lastDone, summary.currentTask, summary.currentStageCompletionPercent,
-                                problem = progressProblemText(view.problem),
-                                onSetProgress = onSetProgress.takeIf { summary.unset && summary.availability == ProgressAvailability.EDITABLE },
-                                onEdit = onEditProgress.takeIf { !summary.unset },
-                            )
-                        }
-                    }
-                    val toggle = stringResource(if (expanded) R.string.timeline_collapse else R.string.timeline_expand)
-                    IconButton(onClick = onToggle, modifier = Modifier.size(Sizes.touch).semantics { contentDescription = toggle }) {
-                        Icon(ShellIcons.chevronUp, contentDescription = null, tint = Palette.InkMuted, modifier = Modifier.size(Sizes.icon).rotate(chevron))
-                    }
+                    header(Modifier.widthIn(max = COMPACT_HEADER_WIDTH).weight(1f, fill = false))
+                    rule(Modifier.weight(1.4f))
+                    toggleButton()
                 }
-
-                FoldingRule(
-                    stages = stages,
-                    nowStop = nowStop,
-                    previewStop = previewStop,
-                    onScrub = onPreviewStop,
-                    onReturnToNow = if (previewStop != null) onReturnToNow else null,
-                    returnToNowLabel = stringResource(R.string.timeline_return_now),
-                    description = stringResource(R.string.timeline_rule_description),
-                    stateText = previewStop?.let { stringResource(R.string.timeline_preview_of, stopNames[it]) }
-                        ?: nowStateText(summary.unset, summary.percentText, summary.currentStage),
-                    stopName = { stopNames[it] },
+            } else {
+                Column(ruleModifier) {
+                    // Header: what the 3D shows, full width, and under it the one action that matters here —
+                    // never beside the title, where a longer stage name or a larger font would cut it.
+                    Row(
+                        verticalAlignment = Alignment.Top,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .heightIn(min = 56.dp)
+                            .padding(start = Space.l, end = Space.xs, top = Space.xs),
+                    ) {
+                        header(Modifier.weight(1f).padding(top = Space.xs))
+                        toggleButton()
+                    }
                     // A gap under the header's action, so a low tap on "Wróć do teraz" never scrubs.
-                    modifier = Modifier.padding(horizontal = Space.l).padding(top = Space.s),
-                )
+                    rule(Modifier.padding(horizontal = Space.l).padding(top = Space.s))
+                }
             }
 
             AnimatedVisibility(visible = expanded, enter = motion.unfoldEnter(), exit = motion.unfoldExit()) {
@@ -180,13 +208,18 @@ private fun NowHeader(
         // Why the record is not what the owner left, when it is not (cycle 3, C3-04); the full sentence is in Etapy.
         problem?.let { ProblemLine(it, style = MaterialTheme.typography.bodySmall, maxLines = 3) }
         if (unset || percent == null) {
-            Text(stringResource(R.string.progress_unset), style = MaterialTheme.typography.titleSmall, color = Palette.Ink)
+            // MARCOWKI-UI: with nothing recorded the 3D shows the whole design, so the header names THAT first — the
+            // rule's own end cap — and says once, under it, that progress is not set and how to look at the stages.
+            // One row beside the action instead of a title over a row: the foot of the house stays low while viewing.
+            // The title is the rule's own fixed two words, so it may stand beside the action and wrap; the sentence
+            // under it runs the full width, never squeezed beside the button (MARCOWKI-UI audit A11Y-03).
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(Space.s)) {
-                Text(stringResource(R.string.timeline_hint_scrub), style = MaterialTheme.typography.bodySmall, color = Palette.InkMuted, modifier = Modifier.weight(1f))
+                Text(stringResource(R.string.timeline_target), style = MaterialTheme.typography.titleSmall, color = Palette.Ink, maxLines = 2, overflow = TextOverflow.Ellipsis, modifier = Modifier.weight(1f))
                 if (onSetProgress != null) {
                     LineButton(stringResource(R.string.progress_set_action), onClick = onSetProgress, borderColor = Palette.Ink)
                 }
             }
+            Text(stringResource(R.string.progress_unset_scrub), style = MaterialTheme.typography.bodySmall, color = Palette.InkMuted, maxLines = 3, overflow = TextOverflow.Ellipsis)
         } else {
             Row(verticalAlignment = Alignment.Bottom, horizontalArrangement = Arrangement.spacedBy(Space.s)) {
                 Text(percent, style = Measure.inline, color = Palette.Ink, maxLines = 1, overflow = TextOverflow.Ellipsis)
@@ -208,7 +241,7 @@ private fun NowHeader(
 }
 
 @Composable
-private fun PreviewHeader(stop: Int, names: List<String>, withoutGeometry: Boolean, stageCount: Int, onReturnToNow: () -> Unit) {
+private fun PreviewHeader(stop: Int, names: List<String>, withoutGeometry: Boolean, stageCount: Int, returnLabel: String, onReturnToNow: () -> Unit) {
     Column(verticalArrangement = Arrangement.spacedBy(1.dp)) {
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(Space.s)) {
             PreviewMark()
@@ -222,7 +255,7 @@ private fun PreviewHeader(stop: Int, names: List<String>, withoutGeometry: Boole
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(Space.s)) {
             Text(second, style = MaterialTheme.typography.bodySmall, color = Palette.InkMuted, modifier = Modifier.weight(1f))
             // Back to the actual state: an action like any other, so ink — the yellow belongs to measured progress.
-            LineButton(stringResource(R.string.timeline_return_now), onClick = onReturnToNow, borderColor = Palette.Ink)
+            LineButton(returnLabel, onClick = onReturnToNow, borderColor = Palette.Ink)
         }
     }
 }
@@ -326,10 +359,14 @@ fun stopNames(stages: List<ConstructionStageProgress>): List<String> {
 
 @Composable
 private fun nowStateText(unset: Boolean, percent: String?, current: ConstructionStageKey?): String = when {
-    unset || percent == null -> stringResource(R.string.progress_unset)
+    // The header already says "Postęp nieustawiony"; the rule says what it shows: the whole design (audit BC-13).
+    unset || percent == null -> stringResource(R.string.timeline_target)
     current != null -> stringResource(R.string.progress_state_spoken, percent, stringResource(current.labelRes()))
     else -> percent
 }
 
 /** The stop of a stage on the rule (the rule's stops follow the timeline's). */
 fun stopOf(stage: ConstructionStageKey): Int = ConstructionTimeline.STOPS.indexOf(TimelineCursor.Stage(stage))
+
+/** The header's widest on a short window, where it shares the row with the rule (MARCOWKI-UI). */
+private val COMPACT_HEADER_WIDTH = 280.dp

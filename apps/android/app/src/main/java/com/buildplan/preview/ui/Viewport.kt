@@ -62,7 +62,7 @@ fun Viewport(
     // itself, so opening a different building — or the same one again after a
     // reload — always re-uploads.
     LaunchedEffect(canvas, scene) {
-        canvas.modelRenderer.setModel(scene)
+        canvas.modelRenderer.setModel(scene, model.preparedPresentation(scene))
     }
 
     // The frame callback outlives the composition that installed it, so it may

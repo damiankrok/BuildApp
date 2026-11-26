@@ -8,7 +8,6 @@
     <string name="workspace_open_new_house">Otwórz</string>
     <string name="house_status_limited_short">Model gotowy z ograniczeniami — zobacz, czego brakuje</string>
     <string name="house_analysis_running_short">Analiza linku w toku — zobacz postęp</string>
-    <string name="house_status_sample_add">Przykład wbudowany w aplikację — dodaj swój dom z linku</string>
     <string name="source_delete_action">Usuń ten dom z telefonu</string>
     <string name="house_analysis_failed_short">Analiza linku się nie powiodła — zobacz dlaczego</string>
     <string name="menu_this_house">Ten dom</string>
@@ -18,7 +17,7 @@
     <string name="no_house_title">Na tym telefonie nie ma jeszcze żadnego domu</string>
     <string name="no_house_body">Wklej link do publicznej strony projektu domu. Aplikacja sprawdzi stronę, odczyta rysunki i zbuduje model, który zobaczysz w 3D — a Twój postęp budowy zapiszesz przy nim.</string>
     <string name="timeline_edit_progress">Otwórz etapy budowy</string>
-    <string name="state_not_selected">niewybrane</string>
+    <string name="state_not_selected">Nie wybrano</string>
     <string name="state_expanded">rozwinięte</string>
     <string name="state_collapsed">zwinięte</string>
 
@@ -36,8 +35,7 @@
     <string name="house_analysis_running_detail">Analiza linku w toku · %1$d%%</string>
     <string name="house_analysis_failed">Ostatnia analiza linku się nie powiodła — zobacz dlaczego</string>
     <string name="house_saved_heading">Domy na tym telefonie</string>
-    <string name="house_saved_current">Wybrany</string>
-    <string name="house_status_bundled">Przykład wbudowany w aplikację · model poglądowy</string>
+    <string name="house_saved_current">Wybrano</string>
     <string name="house_status_ready">Z analizy linku · model gotowy</string>
     <string name="house_status_limited">Z analizy linku · gotowy z ograniczeniami</string>
     <string name="house_status_limited_detail">%1$s — zobacz, czego analiza nie rozstrzygnęła</string>
@@ -48,6 +46,7 @@
     <string name="house_diagnostics_show">Dane techniczne</string>
     <string name="house_diagnostics_hide">Ukryj dane techniczne</string>
     <string name="house_diagnostics_rows">Schemat modelu %1$s · %2$s · %3$s · pakiet %4$s</string>
+    <string name="house_diagnostics_record">Scena %1$s: %2$s</string>
     <string name="house_diagnostics_analyzer">Analiza linku i jej diagnostyka</string>
 
     <!-- Postęp: jeden odczyt w przestrzeni domu i w arkuszu etapów -->
@@ -70,9 +69,10 @@
 
     <!-- Historia budowy (3D) -->
     <string name="timeline_return_now">Wróć do teraz</string>
+    <string name="timeline_return_design">Wróć do projektu</string>
     <string name="timeline_expand">Pokaż nazwy etapów</string>
     <string name="timeline_collapse">Ukryj nazwy etapów</string>
-    <string name="timeline_hint_scrub">Przesuń palcem po osi, by zobaczyć dom na każdym etapie</string>
+    <string name="progress_unset_scrub">Postęp nieustawiony · przesuń po osi, by zobaczyć etapy</string>
     <string name="timeline_preview_of">Podgląd: %1$s</string>
     <string name="timeline_no_geometry">Na tym etapie model 3D się nie zmienia</string>
     <string name="timeline_stop_position">Stan po etapie: %1$s</string>
@@ -266,6 +266,13 @@
     <string name="layer_isolated">Tylko zaznaczony</string>
     <string name="layer_isolated_needs_selection">Najpierw dotknij elementu modelu</string>
     <string name="layer_show_all">Pokaż wszystko</string>
+    <!-- MARCOWKI-UI: what the layers hide, said at the foot of the house while it lasts -->
+    <string name="layer_hidden_none">Widać cały dom</string>
+    <string name="layer_hidden_roof">Ukryto dach i okna dachowe</string>
+    <string name="layer_hidden_roof_upper">Ukryto dach i poddasze</string>
+    <string name="layer_hidden_roof_ground">Ukryto dach i parter</string>
+    <string name="layer_hidden_isolated">Ukryto resztę domu</string>
+    <string name="layer_isolated_named">Tylko: %1$s</string>
 
     <string name="view_whole">Cały dom</string>
     <string name="view_isometric">Izometria</string>
@@ -763,4 +770,19 @@
     <string name="sources_openings">Otwory: z rzutów %1$d · odczyty na elewacjach %2$d (kilka odczytów jednego otworu) · w modelu %3$d</string>
     <string name="live_elements">Różne elementy modelu z przyjętych odczytów: %1$d · hipotezy solvera: %2$d</string>
     <string name="live_linked">Odczyty powiązane z elementem: %1$d · bez elementu: %2$d</string>
+    <!-- MARCOWKI-UI: the showcase house and the developer gallery -->
+    <string name="house_showcase_kind">Model demonstracyjny</string>
+    <string name="house_status_development">Scena z galerii deweloperskiej</string>
+    <string name="house_status_development_back">Scena z galerii deweloperskiej — wróć do: %1$s</string>
+    <string name="house_status_development_add">Scena z galerii deweloperskiej — dodaj swój dom z linku</string>
+    <string name="menu_gallery">Galeria deweloperska</string>
+    <string name="gallery_title">Galeria deweloperska</string>
+    <string name="gallery_body">Sceny z kolejnych etapów badań analizatora: wersje, porównania i zachowane porażki, opisane w tytułach. To materiał roboczy, nie model demonstracyjny i nie dom z Twojego linku.</string>
+    <string name="gallery_back_showcase">Wróć do: %1$s</string>
+    <plurals name="menu_gallery_detail">
+        <item quantity="one">%d scena z badań analizatora — wersje, porównania, porażki</item>
+        <item quantity="few">%d sceny z badań analizatora — wersje, porównania, porażki</item>
+        <item quantity="many">%d scen z badań analizatora — wersje, porównania, porażki</item>
+        <item quantity="other">%d sceny z badań analizatora — wersje, porównania, porażki</item>
+    </plurals>
 </resources>

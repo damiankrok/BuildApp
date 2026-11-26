@@ -30,6 +30,7 @@ function main(): void {
       meshCount: bundle.scene.stats.meshCount,
       triangleCount: bundle.scene.stats.triangleCount,
       objectCount: bundle.scene.stats.objectCount,
+      ...(spec.showcase ? { showcase: spec.showcase } : {}),
     })
     const kb = (Buffer.byteLength(text, 'utf8') / 1024).toFixed(0)
     process.stdout.write(

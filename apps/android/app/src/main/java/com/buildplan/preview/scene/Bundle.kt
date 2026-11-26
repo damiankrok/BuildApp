@@ -190,4 +190,16 @@ data class SceneIndexEntry(
     val meshCount: Int = 0,
     val triangleCount: Int = 0,
     val objectCount: Int = 0,
+    /** MARCOWKI-UI: present on the one scene a clean start opens, with the owner's name for it; absent everywhere else. */
+    val showcase: SceneShowcase? = null,
+)
+
+/**
+ * MARCOWKI-UI: how the showcase scene is called on the phone ("Dom w marcówkach", honestly a demonstration model).
+ * The index entry's own title and subtitle stay the scene's technical record, shown in the developer gallery.
+ */
+@Serializable
+data class SceneShowcase(
+    val title: String = "",
+    val subtitle: String = "",
 )

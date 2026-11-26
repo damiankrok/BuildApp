@@ -65,7 +65,7 @@ class ProductShellTest {
 
     @Test
     fun `the state survives being saved, and a launch can name a surface`() {
-        val states = listOf(ShellState(), ShellState().open(Sheet.STAGES), ShellState().open(Sheet.SOURCE), ShellState().openAnalyzer())
+        val states = listOf(ShellState(), ShellState().open(Sheet.STAGES), ShellState().open(Sheet.SOURCE), ShellState().open(Sheet.GALLERY), ShellState().openAnalyzer())
         for (s in states) assertEquals(s, ShellState.decode(s.encode()))
         assertEquals(ShellState(), ShellState.decode("HOUSE"))
         assertEquals("the older launch extra still opens the house", ShellState(), ShellState.decode("model"))

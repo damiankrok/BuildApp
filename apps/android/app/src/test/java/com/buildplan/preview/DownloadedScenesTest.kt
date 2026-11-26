@@ -287,7 +287,9 @@ class DownloadedScenesTest {
         assertEquals(TestScenes.index.map { it.key }, before.map { it.key })
         assertEquals(listOf("marcowki", "marcowki-auto-v3", "marcowki-auto", "marcowki-auto-v2", "demo"), before.map { it.key }.takeLast(5))
         assertTrue(before.all { it.source == SceneSourceKind.BUNDLED })
-        assertEquals(TestScenes.index.map { it.title }, before.map { it.title })
+        // MARCOWKI-UI: each keeps its exported record; the showcase alone is called by its showcase name (ShowcaseCatalogTest)
+        assertEquals(TestScenes.index.map { it.title }, before.map { it.recordTitle })
+        assertEquals(TestScenes.index.map { it.showcase?.title ?: it.title }, before.map { it.title })
 
         now = 10
         val a = saved(store.save(demoBytes, null, record()))

@@ -12,13 +12,25 @@ enum class SceneSourceKind {
     DOWNLOADED,
 }
 
-/** One scene the viewer can open, and which source holds it. */
+/**
+ * One scene the viewer can open, and which source holds it.
+ *
+ * [title] and [subtitle] are what the owner reads. For the showcase (MARCOWKI-UI) they are its showcase name and
+ * note, and [recordTitle] / [recordSubtitle] keep the exporter's technical record — versions, outcomes, failures —
+ * for the developer gallery and the house's details; for every other scene the two pairs are the same.
+ */
 data class SceneEntry(
     val key: String,
     val title: String,
     val subtitle: String,
     val source: SceneSourceKind,
-)
+    val showcase: Boolean = false,
+    val recordTitle: String = title,
+    val recordSubtitle: String = subtitle,
+) {
+    /** A scene shipped for development and review — the history of the analyzer's stages — not a house of the owner's. */
+    val isDevelopment: Boolean get() = source == SceneSourceKind.BUNDLED && !showcase
+}
 
 /** A place scenes come from. */
 interface SceneSource {
@@ -45,14 +57,32 @@ class BundledScenes(private val read: (name: String) -> String) : SceneSource {
     override val kind: SceneSourceKind get() = SceneSourceKind.BUNDLED
 
     /** The scenes this build carries, in the order the exporter listed them. */
-    fun index(): List<SceneIndexEntry> = try {
-        BundleParser.parseIndex(read("index.json"))
-    } catch (e: IOException) {
-        emptyList()
+    fun index(): List<SceneIndexEntry> = parsedIndex
+
+    /** The APK's assets never change while it runs: the index is read and parsed once, not at every list refresh. */
+    private val parsedIndex: List<SceneIndexEntry> by lazy {
+        try {
+            BundleParser.parseIndex(read("index.json"))
+        } catch (e: IOException) {
+            emptyList()
+        }
     }
 
-    override fun catalog(): List<SceneEntry> =
-        index().map { SceneEntry(key = it.key, title = it.title, subtitle = it.subtitle, source = SceneSourceKind.BUNDLED) }
+    override fun catalog(): List<SceneEntry> = index().map { it.toEntry() }
+
+    /** The showcase is called by its showcase name; a blank one (a malformed index) falls back to the record. */
+    private fun SceneIndexEntry.toEntry(): SceneEntry {
+        val show = showcase?.takeIf { it.title.isNotBlank() }
+        return SceneEntry(
+            key = key,
+            title = show?.title ?: title,
+            subtitle = show?.subtitle?.takeIf { it.isNotBlank() } ?: subtitle,
+            source = SceneSourceKind.BUNDLED,
+            showcase = show != null,
+            recordTitle = title,
+            recordSubtitle = subtitle,
+        )
+    }
 
     override fun load(key: String): SceneLoadResult {
         val entry = index().firstOrNull { it.key == key }
@@ -76,7 +106,8 @@ class BundledScenes(private val read: (name: String) -> String) : SceneSource {
                 if (bundle.contentHash != entry.contentHash) {
                     SceneLoadResult.Failed("Scene ${entry.key} does not match the index: the build is inconsistent.", SceneLoadProblem.DAMAGED)
                 } else {
-                    SceneLoadResult.Ok(ModelScene.from(bundle, entry.key, entry.title, entry.subtitle))
+                    val shown = entry.toEntry()
+                    SceneLoadResult.Ok(ModelScene.from(bundle, shown.key, shown.title, shown.subtitle))
                 }
             }
         }
