@@ -21,7 +21,8 @@ wszystkie potwierdzone usterki z obu rund poprawione (oprócz kilku nazwanych w 
   Wersja 1354 zapamiętywała też swój automatyczny wybór (Annę II); ten zapis 1355 pomija.
 - Menu: dom pokazowy, Twoje domy z linku, „Dodaj dom z linku”, Etapy, Źródło, Koszty, a na dole „Galeria
   deweloperska”. Scena otwarta z galerii mówi to u góry i ma „wróć do: Dom w marcówkach”.
-- Warstwy: po wybraniu np. „Tylko parter” u dołu stoi „Tylko parter · Ukryto dach i poddasze · Pokaż wszystko”.
+- Warstwy: po wybraniu np. „Tylko parter” panel się zamyka, a u dołu stoi „Tylko parter · Ukryto poddasze i dach nad
+  nim · Pokaż wszystko” (dach garażu stoi na parterze, więc zostaje; zdejmuje go „Przekrój”).
 - Widoki z boku, z góry i rzuty mieszczą cały dom (wcześniej „Z prawej” ucinał go z lewej — znalezione na emulatorze).
 - Sceny z galerii są tylko do podglądu: postęp zapisujesz w domu pokazowym albo w swoim domu (wcześniej część
   scen Marcówek dzieliła zapis z domem pokazowym).

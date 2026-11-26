@@ -79,8 +79,8 @@ Test JVM ani render komputerowy nie są tu nazywane testem UI.
   Przekrój / Tylko zaznaczony / Pokaż wszystko), Widok (Cały dom, Przybliż/Oddal, cztery elewacje, Dach z góry,
   Rzut parteru/poddasza, aksonometria, izometria, Schody, Wejście, Przywróć widok), Dopasuj.
 - **Co jest ukryte**: gdy warstwa ≠ „Cały dom” i nie ma zaznaczenia ani otwartego panelu, u stopy domu (na szkle osi,
-  jak wiersz zaznaczenia) stoi „Tylko parter · Ukryto dach i poddasze · [Pokaż wszystko]” — to samo „Pokaż wszystko”
-  co w panelu Warstwy. Przy izolacji nazwany element („Tylko: Balkon”). W poziomie wiersza nie ma (zasłoniłby dom) —
+  jak wiersz zaznaczenia) stoi „Tylko parter · Ukryto poddasze i dach nad nim · [Pokaż wszystko]” — to samo „Pokaż
+  wszystko” co w panelu Warstwy; zdanie wyliczone z tego, co filtr zdjął (runda 2, F1). Wybór warstwy zamyka panel. Przy izolacji nazwany element („Tylko: Balkon”). W poziomie wiersza nie ma (zasłoniłby dom) —
   stan mówi etykieta szyny („Parter”, „Bez dachu”). Po „Pokaż wszystko” TalkBack mówi „Widać cały dom”.
 
 ### 3.4 Postęp budowy (brief §4)
