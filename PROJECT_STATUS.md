@@ -12,6 +12,25 @@
 
 ## Current summary (read first)
 
+- **v3.54.21 (2026-11-25): originals as the reference, one roof system, verification on boards — APK 1354.** Report
+  `stage-reports/SOURCE_TO_MODEL_V35421.md`, owner note `stage-reports/README_V35421.md`, ADR
+  `docs/ADR-V35421-ROOF-SYSTEM-AND-ORIGINALS.md`, protocol / references / hand-off under `research/source-to-model/v35421/`.
+  Baseline = APK 1353 code (`108611e`); frozen before the fresh trial `4c1d1a2`; final code `5d5ea2c` (post-trial fixes,
+  the houses they were found on are DEV) + `174e093` (host: a refusal by the books answers BUDGET). One roof system (`reconstruction/v2/roof-system.ts`): roof regions solved
+  together — valleys from plane intersections, abutments kept, separate roofs untouched, cross gables without an outline
+  step — for the body built from the API read (LOCAL's emission unchanged; the solver is a library for it); pitch / eaves / ridge agreed again after the last change. `form-read/3`: the
+  publisher's originals chosen from the package (one elevation per side, plan, section, ≤ 3 perspectives) independently
+  of sketches; separate roofs with their own numbers and joins; every property a fate; readback 1.1.x; feature trace
+  (omissions by cause) per run; the review sees originals + perspectives + model views. Audit counter-trial: Amber,
+  Mindelo, Amarylis get valleys (2 / 4 / 4; Amarylis's second cross gable not built), Eliza's 72° gone (max 22°), Ametyst no longer rotated, Skagen's abutment
+  kept, Aletta's garage roof still too flat. **Fresh trial NEW-H (5 houses, 4 publishers, after the freeze; blind,
+  3 graders): frozen code closer 2 (Debora T with valleys — roof YES 3/3; Morwa), baseline closer 1 (Osika: the fresh
+  read put a side elevation on the wrong side), 2 ties (Anna II, Lyon: both arms wrong).** First results kept; then four
+  general fixes (weak side labels, a measured opening held against WRONG_KIND, a flat plate for a main body without a
+  pitched roof, the spec reader's flat fall). **Loss kept, not fixed:** Anna II's source body drops LOCAL's interior
+  and facade openings (interior walls 26 → 17, exterior openings 39 → 9). Whole app: every code failure fixed at its cause (13 of the inherited 18 vitest
+  failures, 5 Android JVM), web e2e 49/49, Android JVM 476 green + 3 skipped; full vitest matrix 4766 green / 5 red (3 need the system Python, 2 `WorkerExecutor` time out only inside the full parallel matrix). Host on the final revision: fresh runs, a repeat of an accepted link with 0 requests and the same bytes, a run without the token with 0 requests — all checks pass; the host found a defect (a refusal by its books at the ceiling failed the whole job as INTERNAL_ERROR), fixed in `174e093` with a causal test and checked live with books already at the ceiling. Stage spend 8.403456 USD; books 64.693909 USD of the same pool (the OWNER reported about 40 USD
+  at books 60.360809; about 35.7 USD remain on that basis). `ANDROID_UI_NOT_VERIFIED` (no device).
 - **v3.54.20 (2026-11-25): the API's structure description drives the build — APK 1353.** Report
   `stage-reports/SOURCE_TO_MODEL_V35420.md`, owner note `stage-reports/README_V35420.md`, ADR
   `docs/ADR-V35420-STRUCTURE-CONTRACT.md`, protocol / references / hand-off under `research/source-to-model/v35420/`.
