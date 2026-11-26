@@ -172,7 +172,13 @@ na Androidzie 10. Okno ANR „System UI” i pojedyncze białe/czarne klatki zrz
 
 ## 6. APK
 
-§6a.
+`BuildPlan-Model-Preview-1355-arm64-v8a.apk` (dostarczony osobno): versionCode **1355**, versionName `0.1355.0-owner`,
+z commita `96173b3e` (`-PpreviewVersionCode=1355`), 56941637 B, SHA-256 `c14b4c393c6efb41aae20bad6642b197ac2052ee47ec0fc6c517765cba73595b`. Podpis: ten sam
+certyfikat co 1354, SHA-256 `6e48fac4afaa3d70e70de5bc608aa4c4194206a9e6bc993dab56382b921ca0da` (`apksigner verify`),
+więc instaluje się jako aktualizacja. W APK: 127 scen; `assets/scenes/marcowki-c-v35414.scene.json` ma SHA-256
+`680a3f4b…3a3023d47166` (zamrożone bajty), `index.json` = źródło. Wbudowany analizator jak w 1354 (nodejs-mobile 18.20.4).
+Ten sam kod (build x86_64) uruchomiony na emulatorze z czystymi danymi: `final-12-release-build-clean-start`.
+Zapis dostawy: `stage-reports/artifacts/marcowki-ui/DELIVERY.txt`.
 
 ## 7. Czego nie sprawdzono — do próby OWNER-a na telefonie
 
