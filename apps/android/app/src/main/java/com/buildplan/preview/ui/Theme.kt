@@ -233,16 +233,41 @@ private val TechnicalDark = darkColorScheme(
     surfaceContainerHighest = Color(0xFF222932),
 )
 
-/** Material's scale in Roboto, with calmer tracking on the small roles; no role is picked per screen. */
+/**
+ * The words' face (taste pass): Barlow, a low-contrast grotesk drawn from road and site signage — the lettering
+ * of the place this app is about. One family in two widths: Barlow for everything read, Barlow Condensed
+ * ([MeasureFamily]) for measured figures, so a percentage and its label are clearly kin and clearly different.
+ * Until APK 1357 the words were Roboto, the face of every Android app.
+ */
+val WordFamily = FontFamily(
+    Font(R.font.barlow_regular, FontWeight.Normal),
+    Font(R.font.barlow_medium, FontWeight.Medium),
+    Font(R.font.barlow_semibold, FontWeight.SemiBold),
+)
+
+/**
+ * Material's scale set in Barlow. Barlow is a little narrower and rounder than Roboto, so titles take its
+ * Medium/SemiBold with plain tracking and the small roles a touch of tracking; no role is picked per screen.
+ */
 private val BuildPlanTypography = Typography().let { t ->
+    fun TextStyle.words(weight: FontWeight? = fontWeight, tracking: androidx.compose.ui.unit.TextUnit = letterSpacing) =
+        copy(fontFamily = WordFamily, fontWeight = weight, letterSpacing = tracking)
     t.copy(
-        headlineSmall = t.headlineSmall.copy(fontWeight = FontWeight.SemiBold, letterSpacing = (-0.005).em),
-        titleLarge = t.titleLarge.copy(fontWeight = FontWeight.SemiBold),
-        titleMedium = t.titleMedium.copy(fontWeight = FontWeight.SemiBold, letterSpacing = 0.sp),
-        titleSmall = t.titleSmall.copy(fontWeight = FontWeight.SemiBold, letterSpacing = 0.sp),
-        labelLarge = t.labelLarge.copy(letterSpacing = 0.01.em),
-        labelMedium = t.labelMedium.copy(letterSpacing = 0.02.em),
-        labelSmall = t.labelSmall.copy(letterSpacing = 0.02.em),
+        displayLarge = t.displayLarge.words(),
+        displayMedium = t.displayMedium.words(),
+        displaySmall = t.displaySmall.words(),
+        headlineLarge = t.headlineLarge.words(FontWeight.SemiBold),
+        headlineMedium = t.headlineMedium.words(FontWeight.SemiBold),
+        headlineSmall = t.headlineSmall.words(FontWeight.SemiBold, (-0.005).em),
+        titleLarge = t.titleLarge.words(FontWeight.SemiBold, 0.sp),
+        titleMedium = t.titleMedium.words(FontWeight.SemiBold, 0.sp),
+        titleSmall = t.titleSmall.words(FontWeight.SemiBold, 0.sp),
+        bodyLarge = t.bodyLarge.words(FontWeight.Normal, 0.005.em),
+        bodyMedium = t.bodyMedium.words(FontWeight.Normal, 0.01.em),
+        bodySmall = t.bodySmall.words(FontWeight.Normal, 0.015.em),
+        labelLarge = t.labelLarge.words(FontWeight.Medium, 0.01.em),
+        labelMedium = t.labelMedium.words(FontWeight.Medium, 0.02.em),
+        labelSmall = t.labelSmall.words(FontWeight.Medium, 0.02.em),
     )
 }
 

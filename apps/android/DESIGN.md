@@ -255,9 +255,11 @@ Graphite neutrals in tight tonal steps, achromatic ink in three levels, and one 
 
 ## Typography
 
-Roboto (Material's scale, calmer tracking on the small roles) for everything read; Barlow Condensed SemiBold with tabular figures (`Measure`) for measured figures only (the percentage on the Etapy tile and in the stage editor). Labels on glass are titleSmall (tiles, pill), titleMedium (panel titles), bodyMedium (cards), labelLarge (chips).
+Barlow for everything read and Barlow Condensed SemiBold with tabular figures (`Measure`) for measured figures only: one family in two widths (taste pass, APK 1358). Barlow is a low-contrast grotesk drawn from road and site signage — the lettering of a building site, the place this app is about — where Roboto was the face of every Android app. Material's scale is kept; titles take Barlow SemiBold, labels Medium, body Regular with a touch of tracking on the small roles. Labels on glass are titleSmall (tiles, pill), titleMedium (panel titles), bodyMedium (cards), labelLarge (chips). A measured figure stands after its name with no separator — the narrower face says it is a number ("Ściany 40%", the figure in mint).
 
 ### Named Rules
+**The Plain Join Rule.** Facts are joined the way a sentence joins them — a comma, a full stop, a colon — never with a middle dot ("Z tyłu, bez dachu"; "Postęp wg etapów 2%. Zapisano …"). Dense diagnostic lists in the analyzer keep their dots.
+
 **The Every maxLines Has An Ellipsis Rule.** Checked at font scale 1.3: the pill's name, the tile labels and the chips end in an ellipsis rather than wrap into the house.
 
 ## Layout

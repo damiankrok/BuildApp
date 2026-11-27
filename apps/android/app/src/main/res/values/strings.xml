@@ -31,12 +31,12 @@
     <string name="load_problem_details_hide">Ukryj szczegóły techniczne</string>
     <string name="house_open_3d">Otwórz w 3D</string>
     <string name="house_add_action">Dodaj dom z linku</string>
-    <string name="house_analysis_running_detail">Analiza linku w toku · %1$d%%</string>
+    <string name="house_analysis_running_detail">Analizuję link: %1$d%%</string>
     <string name="house_analysis_failed">Ostatnia analiza linku się nie powiodła — zobacz dlaczego</string>
     <string name="house_saved_heading">Domy na tym telefonie</string>
     <string name="house_saved_current">Wybrano</string>
-    <string name="house_status_ready">Z analizy linku · model gotowy</string>
-    <string name="house_status_limited">Z analizy linku · gotowy z ograniczeniami</string>
+    <string name="house_status_ready">Model z linku jest gotowy</string>
+    <string name="house_status_limited">Model z linku gotowy, z ograniczeniami</string>
     <string name="house_status_limited_detail">%1$s — zobacz, czego analiza nie rozstrzygnęła</string>
     <string name="house_status_warnings_detail">Analiza zgłosiła ostrzeżenia — zobacz szczegóły</string>
     <string name="house_status_limited_kept">%1$s. Telefon zachowuje ich liczbę, nie listę: pełną listę pokazuje wynik analizy tuż po jej zakończeniu.</string>
@@ -59,7 +59,7 @@
     <string name="progress_explain">Procent wynika z postępu ustawionych etapów. Nie oznacza procentu wydanych pieniędzy ani wartości robót.</string>
     <string name="progress_last_done">Ostatnio zakończony: %1$s</string>
     <string name="progress_now_task">Teraz: %1$s</string>
-    <string name="progress_stage_in_progress">Etap w toku · %1$d%%</string>
+    <string name="progress_stage_in_progress">Etap w toku, %1$d%%</string>
     <string name="progress_problem_corrupt">Zapis postępu tego domu był uszkodzony. Odłożono go jako kopię na tym telefonie i zaczynasz od nowa.</string>
     <string name="progress_problem_newer">Postęp tego domu zapisała nowsza wersja aplikacji (schemat %1$d). Ta wersja go nie nadpisze — zaktualizuj aplikację.</string>
     <string name="progress_problem_save_failed">Nie udało się zapisać zmiany na tym telefonie. Poprzedni stan został bez zmian.</string>
@@ -96,7 +96,7 @@
     <string name="stage_finishing">Wykończenie</string>
     <string name="stage_garden">Ogród</string>
     <string name="stage_status_done">Zakończony</string>
-    <string name="stage_status_in_progress_percent">W toku · %1$d%%</string>
+    <string name="stage_status_in_progress_percent">W toku: %1$d%%</string>
     <string name="stage_status_not_started">Nierozpoczęty</string>
     <string name="stage_no_geometry">Ten etap nie zmienia bryły w modelu 3D: historia budowy zatrzyma się na nim, ale dom będzie wyglądał tak samo.</string>
     <string name="stage_completion">Ukończenie etapu</string>
@@ -207,7 +207,7 @@
     <string name="a11y_turn_down">Spójrz bardziej z boku</string>
     <string name="a11y_zoom_in">Przybliż</string>
     <string name="a11y_zoom_out">Oddal</string>
-    <string name="viewport_hint">Przeciągnij, aby obrócić · dwa palce: przesuń i przybliż · dotknij elementu</string>
+    <string name="viewport_hint">Przeciągnij, by obrócić. Dwa palce przesuwają i przybliżają.</string>
     <string name="tool_look">Wygląd</string>
     <string name="tool_layers">Warstwy</string>
     <string name="tool_view">Widok</string>
@@ -582,7 +582,7 @@
     <string name="provenance_unknown">VERSION_UNKNOWN — ten wynik zapisano przed wersją aplikacji, która zapamiętuje pochodzenie analizy. Wersja analizatora, który go wykonał, jest nieznana.</string>
     <string name="provenance_copy">Kopiuj pochodzenie</string>
     <string name="provenance_copied">Skopiowano pochodzenie analizy.</string>
-    <string name="house_status_partial">Z analizy linku · model częściowy 3D</string>
+    <string name="house_status_partial">Model z linku: częściowy 3D</string>
     <string name="house_status_partial_short">Model częściowy 3D — zobacz, czego brakuje i dlaczego</string>
     <string name="analyzer_result_found">Odczytano: %1$s · %2$s · %3$s</string>
     <string name="analyzer_result_limited_body">Części elementów analiza nie rozstrzygnęła albo zgłosiła ostrzeżenia. Model pokazuje tylko to, co odczytano z rysunków; brakujących elementów nie dopowiada.</string>
@@ -808,8 +808,8 @@
     <string name="view_perspective">Perspektywa</string>
     <string name="view_custom">Własny kąt</string>
     <string name="stages_panel_title">Etapy budowy</string>
-    <string name="stages_panel_design">Widzisz projekt docelowy. Przesuń po osi, by obejrzeć etap — to tylko podgląd.</string>
-    <string name="stages_panel_preview_note">Tylko podgląd — nic się nie zapisuje.</string>
+    <string name="stages_panel_design">Widzisz projekt docelowy. Przesuń po osi, by obejrzeć etap. Nic się nie zapisze.</string>
+    <string name="stages_panel_preview_note">Tylko podgląd, nic się nie zapisuje.</string>
     <string name="stages_panel_now">Teraz: %1$s</string>
     <string name="stage_completion_less" formatted="false">Mniej o 5 %</string>
     <string name="stage_completion_more" formatted="false">Więcej o 5 %</string>
@@ -819,7 +819,7 @@
 
     <!-- Round D -->
     <string name="dock_view_caption">Widok</string>
-    <string name="dock_view_and_layer">%1$s · %2$s</string>
+    <string name="dock_view_and_layer">%1$s, %2$s</string>
     <string name="dock_stages_unset">Nieustawione</string>
     <string name="dock_stages_last">Ostatni: %1$s</string>
     <string name="layers_what">Co widać</string>

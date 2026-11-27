@@ -12,9 +12,7 @@ import androidx.compose.ui.input.pointer.PointerEventPass
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.semantics.paneTitle
 import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.unit.sp
 import com.buildplan.preview.progress.ProgressAvailability
 import com.buildplan.preview.progress.StageProgressMetric
 import androidx.compose.animation.AnimatedContent
@@ -389,7 +387,7 @@ fun LayersTileContent(state: ViewerState, isolatedName: String?, interactive: Bo
         named == null -> layer
         state.visibility == VisibilityMode.ALL && !state.isIsolating -> stringResource(named.labelRes())
         named.visibility != null -> stringResource(named.labelRes())
-        else -> stringResource(R.string.dock_view_and_layer, stringResource(named.labelRes()), layer)
+        else -> stringResource(R.string.dock_view_and_layer, stringResource(named.labelRes()), layer.replaceFirstChar { it.lowercase() })
     }
     val spoken = stringResource(R.string.tool_state_layers, label)
     val whole = state.visibility == VisibilityMode.ALL && !state.isIsolating
@@ -445,20 +443,17 @@ private fun StagesTileState(view: ProgressView?, interactive: Boolean, onOpen: (
     val current = summary?.currentStage
     val value = when {
         summary == null || summary.unset -> AnnotatedString(stringResource(R.string.dock_stages_unset))
-        // The figure first: on a narrow tile or with large text the ellipsis cuts the stage's name, never the number.
-        current != null -> buildAnnotatedString {
-            summary.currentStageCompletionPercent?.let { percent ->
-                withStyle(SpanStyle(fontFamily = MeasureFamily, color = Palette.Accent)) { append(StageProgressMetric.format(percent)) }
-                append(" · ")
-            }
-            append(stringResource(current.labelRes()))
-        }
+        current != null -> AnnotatedString(stringResource(current.labelRes()))
         summary.lastDone != null -> AnnotatedString(stringResource(R.string.dock_stages_last, stringResource(summary.lastDone.labelRes())))
         else -> AnnotatedString(summary.percentText.orEmpty())
     }
-    TileRow(interactive = interactive, onClick = onOpen, onClickLabel = stringResource(R.string.dock_stages_open), state = value.text) {
+    // The stage's own completion stands after its name as a measured figure — no separator: the face says it is
+    // a number. It is measured first, so the ellipsis cuts the name, never the figure.
+    val figure = if (current != null) summary.currentStageCompletionPercent?.let { StageProgressMetric.format(it) } else null
+    val spoken = listOfNotNull(value.text, figure).joinToString(", ")
+    TileRow(interactive = interactive, onClick = onOpen, onClickLabel = stringResource(R.string.dock_stages_open), state = spoken) {
         Icon(ShellIcons.stages, contentDescription = null, tint = Palette.Ink, modifier = Modifier.size(Sizes.icon))
-        TileWords(caption = stringResource(R.string.dock_stages), value = value, opens = true, modifier = Modifier.weight(1f))
+        TileWords(caption = stringResource(R.string.dock_stages), value = value, figure = figure, opens = true, modifier = Modifier.weight(1f))
     }
 }
 
@@ -468,7 +463,7 @@ private fun StagesTileState(view: ProgressView?, interactive: Boolean, onOpen: (
  * below has the tile's whole width.
  */
 @Composable
-private fun TileWords(caption: String, value: AnnotatedString, modifier: Modifier = Modifier, opens: Boolean = false) {
+private fun TileWords(caption: String, value: AnnotatedString, modifier: Modifier = Modifier, opens: Boolean = false, figure: String? = null) {
     val motion = LocalMotionPolicy.current
     Column(modifier) {
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(Space.xxs)) {
@@ -476,13 +471,18 @@ private fun TileWords(caption: String, value: AnnotatedString, modifier: Modifie
             if (opens) Icon(ShellIcons.chevronUp, contentDescription = null, tint = Palette.InkMutedOnGlass, modifier = Modifier.size(CHEVRON_SIZE))
         }
         AnimatedContent(
-            targetState = value,
+            targetState = value to figure,
             transitionSpec = { (fadeIn(motion.enter()) togetherWith fadeOut(motion.exit())).using(null) },
             contentAlignment = Alignment.CenterStart,
             label = "tileValue",
             modifier = Modifier.fillMaxWidth(),
-        ) { shown ->
-            Text(shown, style = MaterialTheme.typography.titleSmall, color = Palette.Ink, maxLines = 1, overflow = TextOverflow.Ellipsis)
+        ) { (shown, measured) ->
+            Row(verticalAlignment = Alignment.Bottom, horizontalArrangement = Arrangement.spacedBy(Space.s)) {
+                Text(shown, style = MaterialTheme.typography.titleSmall, color = Palette.Ink, maxLines = 1, overflow = TextOverflow.Ellipsis, modifier = Modifier.weight(1f, fill = false))
+                if (measured != null) {
+                    Text(measured, style = Measure.inline.copy(fontSize = 18.sp, lineHeight = 20.sp), color = Palette.Accent, maxLines = 1, softWrap = false)
+                }
+            }
         }
     }
 }
@@ -724,7 +724,7 @@ private fun HiddenLine(scene: ModelScene, state: ViewerState, onShowAll: () -> U
     val buttonAlpha by animateFloatAsState(if (whole) 0f else 1f, motion.settle(), label = "showAll")
     val words = when {
         state.isIsolating -> (isolatedName?.let { stringResource(R.string.layer_isolated_named, it) } ?: stringResource(R.string.layer_isolated)) +
-            " · " + stringResource(R.string.layer_hidden_isolated)
+            ". " + stringResource(R.string.layer_hidden_isolated)
         else -> stringResource(hidden)
     }
     Row(
@@ -902,7 +902,7 @@ private fun savedLine(view: ProgressView): String {
     val percent = summary.percentText
     if (summary.unset || percent == null) return stringResource(R.string.progress_unset)
     val date = summary.savedAtEpochMs?.let { stringResource(R.string.progress_saved_on, savedDate(it)) }
-    return listOfNotNull(stringResource(R.string.stages_weighted, percent), date).joinToString(" · ")
+    return listOfNotNull(stringResource(R.string.stages_weighted, percent), date).joinToString(". ")
 }
 
 /** "Dach · w toku 40 %" or "ostatnio zakończony: Fundamenty": the stage the saved record stands at. */
