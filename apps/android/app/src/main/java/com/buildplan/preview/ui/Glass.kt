@@ -1,7 +1,5 @@
 package com.buildplan.preview.ui
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.gestures.awaitEachGesture
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
@@ -9,28 +7,61 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.draw.drawWithCache
+import androidx.compose.ui.geometry.CornerRadius
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.ClipOp
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.ImageShader
+import androidx.compose.ui.graphics.Outline
+import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.ShaderBrush
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.TileMode
+import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.graphics.drawOutline
+import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.drawscope.clipPath
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import kotlin.random.Random
 
 /**
- * The one material the 3D chrome is made of: a tinted pane over the house.
+ * The one material the 3D chrome is made of: smoky matte glass over the house
+ * (OWNER, variant C "Minimalny dok").
  *
- * A translucent graphite tint with a hairline rim that catches light along
- * its top edge. It does not blur: the model is drawn by Filament on its own
- * surface, which the window cannot sample, so a blur would be faked or cost a
- * second render of the scene. Text on it is always ink or muted ink, never
- * colour, and a pane over another pane takes [Palette.GlassOpaque] instead —
- * glass is a one-layer material, and two tints stacked never reach cover.
+ * What it is, layer by layer, all drawn by Compose in the window above the
+ * model: a soft depth falling outside the shape (concentric low-alpha rings,
+ * never under the glass, so the glass stays clear), a translucent graphite
+ * tint, a sheen across the top half, a fixed fine grain that makes the tint
+ * read as frosted rather than as flat plastic, and a hairline rim brighter
+ * along the top edge.
+ *
+ * What it is NOT: a backdrop blur. The model is drawn by Filament into its own
+ * `SurfaceView`, a separate layer composited by the system under the window;
+ * Compose's `Modifier.blur` blurs only the window's own content (the glass's
+ * children), and the window cannot sample the surface beneath it. A true blur
+ * would need the scene drawn twice or read back from the GPU every frame —
+ * neither is done. The matte look comes from the tint, grain and rim alone,
+ * and every piece of it is drawn only when the glass itself redraws (a static
+ * cached grain, no animation, no per-frame cost at rest).
+ *
+ * Text on it is always ink or muted ink; the tint is dense enough that ink
+ * stays above 7:1 over the palest wall of the model. A pane over another pane
+ * takes [Palette.GlassOpaque] — glass is a one-layer material, and two tints
+ * stacked never reach cover.
  *
  * A pane is solid to the finger. Compose lets a touch fall through any area
  * with no pointer handling of its own, and under every pane is the model,
  * whose handler would orbit the camera or pick a wall from behind a label.
  * The pane therefore takes part in hit testing over its whole area without
  * consuming anything, so its own buttons still work and the model behind it
- * is left alone. (Adapted from the donor viewer's STAGE-013H chrome.)
+ * is left alone.
  */
 @Composable
 fun GlassSurface(
@@ -38,22 +69,103 @@ fun GlassSurface(
     shape: Shape = RoundedCornerShape(Radius.panel),
     tint: Color = Palette.Glass,
     rim: Boolean = true,
+    depth: Dp = Depth.tile,
     content: @Composable BoxScope.() -> Unit,
 ) {
     Box(
         modifier = modifier
             .solidToFinger()
-            .clip(shape)
-            .background(tint)
-            .then(
-                if (rim) {
-                    Modifier.border(1.dp, Brush.verticalGradient(listOf(Palette.GlassRimHigh, Palette.GlassRimLow)), shape)
-                } else {
-                    Modifier
-                },
-            ),
+            .matteGlass(shape, tint, rim, depth),
         content = content,
     )
+}
+
+/**
+ * The glass itself as a modifier, for a surface whose shape changes while it
+ * is drawn (a dock tile growing into its panel): the shape is read at draw
+ * time, so a morphing corner radius needs no new modifier per frame.
+ */
+fun Modifier.matteGlass(shape: Shape, tint: Color = Palette.Glass, rim: Boolean = true, depth: Dp = Depth.tile): Modifier =
+    matteGlass(shape, { tint }, rim, depth)
+
+/** The glass with a tint read at draw time: a tile's light glass thickening as it grows into a panel that carries text. */
+fun Modifier.matteGlass(shape: Shape, tint: () -> Color, rim: Boolean = true, depth: Dp = Depth.tile): Modifier =
+    this
+        .then(if (depth > 0.dp) Modifier.softDepth(shape, depth) else Modifier)
+        .clip(shape)
+        .drawWithCache {
+            val outline = shape.createOutline(size, layoutDirection, this)
+            val sheen = Brush.verticalGradient(0f to Palette.GlassSheen, 0.55f to Color.Transparent, endY = size.height.coerceAtMost(160.dp.toPx()))
+            val rimBrush = Brush.verticalGradient(listOf(Palette.GlassRimHigh, Palette.GlassRimLow))
+            val rimWidth = 1.dp.toPx()
+            onDrawWithContent {
+                drawOutline(outline, tint())
+                drawOutline(outline, sheen)
+                drawOutline(outline, GrainBrush, alpha = GRAIN_ALPHA)
+                drawContent()
+                // The stroke is centred on the clipped edge: half of it shows, a 1 dp rim.
+                if (rim) drawOutline(outline, rimBrush, style = Stroke(width = rimWidth * 2))
+            }
+        }
+
+/**
+ * A soft shadow under the shape, drawn only outside it: rings of falling
+ * alpha, offset a little downwards, so the glass seems to float above the
+ * house without the shadow showing through its own tint.
+ */
+private fun Modifier.softDepth(shape: Shape, depth: Dp): Modifier = drawBehind {
+    val outline = shape.createOutline(size, layoutDirection, this)
+    val inside = Path().apply { addOutline(outline) }
+    val spread = depth.toPx()
+    val drop = spread * 0.35f
+    val corner = when (outline) {
+        is Outline.Rounded -> outline.roundRect.topLeftCornerRadius.x
+        else -> 0f
+    }
+    clipPath(inside, ClipOp.Difference) {
+        for (i in 1..DEPTH_RINGS) {
+            val grow = spread * i / DEPTH_RINGS
+            drawRoundRect(
+                color = Palette.GlassShadow,
+                topLeft = Offset(-grow, -grow + drop),
+                size = Size(size.width + grow * 2, size.height + grow * 2),
+                cornerRadius = CornerRadius(corner + grow),
+                alpha = DEPTH_ALPHA / DEPTH_RINGS * (DEPTH_RINGS - i + 1) / DEPTH_RINGS * 2f,
+            )
+        }
+    }
+}
+
+private fun Path.addOutline(outline: Outline) {
+    when (outline) {
+        is Outline.Rectangle -> addRect(outline.rect)
+        is Outline.Rounded -> addRoundRect(outline.roundRect)
+        is Outline.Generic -> addPath(outline.path)
+    }
+}
+
+/** How many rings the depth is drawn with, and how dark it is at the shape's edge. */
+private const val DEPTH_RINGS = 8
+private const val DEPTH_ALPHA = 0.42f
+
+/** The grain's strength: felt, not seen. */
+private const val GRAIN_ALPHA = 0.05f
+
+/**
+ * A fixed, seeded tile of fine noise, made once per process and repeated
+ * across every piece of glass: the frosting is the same everywhere and never
+ * moves, so it costs one small bitmap and nothing per frame.
+ */
+private val GrainBrush: ShaderBrush by lazy {
+    val side = 96
+    val random = Random(0xB11D)
+    val pixels = IntArray(side * side) {
+        val a = random.nextInt(0, 256)
+        (a shl 24) or 0x00FFFFFF
+    }
+    val bitmap = android.graphics.Bitmap.createBitmap(pixels, side, side, android.graphics.Bitmap.Config.ARGB_8888)
+    val image: ImageBitmap = bitmap.asImageBitmap()
+    ShaderBrush(ImageShader(image, TileMode.Repeated, TileMode.Repeated))
 }
 
 /**

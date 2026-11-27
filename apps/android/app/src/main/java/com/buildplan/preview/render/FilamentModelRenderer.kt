@@ -109,7 +109,13 @@ class FilamentModelRenderer(
      * viewport, not an error anyone would notice.
      */
     private var uploadedScene: ModelScene? = null
+    /** The camera last set, so an unchanged one is not set (or drawn) again. */
+    private var lastCamera: CameraKey? = null
+
+    private data class CameraKey(val orbit: OrbitCamera, val pose: OrbitPose, val insets: ContentInsets, val width: Int, val height: Int)
+
     private var grid: LineEntity? = null
+    private var gridShown = false
     /** The ground sheet: uploaded with the grid, in the scene only in a look that lays it. */
     private var ground: GroundEntity? = null
     private var groundShown = false
@@ -286,7 +292,8 @@ class FilamentModelRenderer(
         ground = GroundEntity.build(engine, opaqueMaterial, footprint)
         groundShown = false
         selectionBox = LineEntity.box(engine, lineMaterial, Selection.OUTLINE)
-        grid?.let { filamentScene.addEntity(it.entity) }
+        // In the scene only while the viewer asks for it (variant C: off at the start).
+        gridShown = false
         currentState = null
         visibleNow = emptySet()
         overlaysNow = emptySet()
@@ -305,12 +312,12 @@ class FilamentModelRenderer(
      * the objects they were derived from: an edge or a tile is in the scene
      * only while its object is, and only in a mode that draws it.
      */
-    fun setState(state: ViewerState) {
-        val entities = model ?: return
-        val scene = uploadedScene ?: return
+    fun setState(state: ViewerState): Boolean {
+        val entities = model ?: return false
+        val scene = uploadedScene ?: return false
         val previous = currentState
         // Called every frame; nothing below is worth doing when nothing moved.
-        if (previous == state) return
+        if (previous == state) return false
 
         val mode = state.presentation
         val look = mode.look(state.style)
@@ -318,6 +325,11 @@ class FilamentModelRenderer(
         if (lookChanged) {
             entities.applyAppearance(engine, scene, mode, state.style, look)
             applyLook(look)
+        }
+
+        if (state.grid != gridShown) {
+            grid?.let { if (state.grid) filamentScene.addEntity(it.entity) else filamentScene.removeEntity(it.entity) }
+            gridShown = state.grid
         }
 
         // Restricted to what was actually uploaded, so the scene can only
@@ -345,6 +357,7 @@ class FilamentModelRenderer(
         }
 
         currentState = state
+        return true
     }
 
     private fun updateSelectionBox(scene: ModelScene, selectedId: String?, visible: Set<String>) {
@@ -363,7 +376,11 @@ class FilamentModelRenderer(
     // Camera
     // -----------------------------------------------------------------------
 
-    fun setCamera(orbit: OrbitCamera, pose: OrbitPose, insets: ContentInsets = ContentInsets.NONE) {
+    fun setCamera(orbit: OrbitCamera, pose: OrbitPose, insets: ContentInsets = ContentInsets.NONE): Boolean {
+        // Called every frame: the same camera in the same viewport changes nothing on screen.
+        val key = CameraKey(orbit, pose, insets, viewportWidth, viewportHeight)
+        if (key == lastCamera) return false
+        lastCamera = key
         val eye = orbit.eye(pose)
         val target = pose.target
         val up = orbit.basis(pose).up
@@ -393,6 +410,7 @@ class FilamentModelRenderer(
         val frame = ContentFrame.of(viewportWidth, viewportHeight, insets)
         camera.setScaling(frame.scale, frame.scale)
         camera.setShift(frame.filamentShiftX, frame.filamentShiftY)
+        return true
     }
 
     fun setViewport(width: Int, height: Int) {
@@ -475,6 +493,7 @@ class FilamentModelRenderer(
         overlaysNow = emptySet()
         grid?.let { filamentScene.removeEntity(it.entity); it.destroy(engine) }
         grid = null
+        gridShown = false
         ground?.let { filamentScene.removeEntity(it.entity); it.destroy(engine) }
         ground = null
         groundShown = false

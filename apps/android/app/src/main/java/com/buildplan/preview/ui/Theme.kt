@@ -15,63 +15,94 @@ import androidx.compose.ui.unit.sp
 import com.buildplan.preview.R
 
 /**
- * The Folding Rule: BuildPlan's visual system, in one place.
+ * Minimalny dok (OWNER, variant C): BuildPlan's visual system, in one place.
  *
- * A graphite night ground under the house, chrome that is tinted graphite
- * rather than opaque slabs, achromatic text, and ONE accent — rule yellow —
- * that means measured construction progress and nothing else: the unfolded
- * segments of the rule, the solid "now" tag, the part of the house the
- * current stage adds. A preview is the same yellow as an outline, never a
- * fill, so a look back can never pass for the state of the build. Every
- * screen takes its colours, spacing, corners and type roles from here.
+ * The house is the screen. A calm graphite ground under it, and only two
+ * kinds of chrome over it: small floating pieces of smoky matte glass (the
+ * house pill, two dock tiles, a fit button and the menu) and the larger
+ * surfaces those pieces grow into. Text on glass is achromatic ink; ONE
+ * accent, mint, marks what is chosen or measured: the chosen layer, the
+ * "Demo" badge, the done part of the construction axis. A chosen thing is
+ * also told by its mark and weight, never by the mint alone. A preview is
+ * the same mint as an outline, never a fill, so a look back can never pass
+ * for the saved state of the build. Every screen takes its colours, spacing,
+ * corners and type roles from here.
  *
- * The 3D ground itself is the renderer's (`PresentationLook`), darker than
- * this one on purpose: the model's backdrop is the darkest thing on screen.
+ * The 3D ground itself is the renderer's (`PresentationLook.MODEL_BACKGROUND`),
+ * a mid graphite a step lighter than this app ground, so the darker glass
+ * reads as a material laid over the scene rather than a hole cut in it.
  */
 object Palette {
-    /** The app's ground: Dom, Etapy, the analyzer, the places without the model. */
+    /** The app's ground: the places without the model, and the opaque sheets' page. */
     val Ground = Color(0xFF101419)
 
-    /** A surface lifted one step: text fields, the navigation bar. */
-    val Raised = Color(0xFF161B21)
+    /** A surface lifted one step: text fields, an open stage row. */
+    val Raised = Color(0xFF181D24)
 
-    /** Opaque sheets carrying dense text: the inspector, the tool pane, the editor. */
+    /** Opaque sheets carrying dense text: the menu, the source, the details. */
     val Sheet = Color(0xFF1B2128)
 
-    /** A control pressed into its rail (the active tool, the selected place). */
-    val Well = Color(0xFF0A0D11)
+    /** A control pressed into its glass (a chosen card, the dock tile whose panel is open). */
+    val Well = Color(0x6610141A)
 
-    val Hairline = Color(0xFF2A313A)
+    val Hairline = Color(0xFF2E3640)
 
     /** Text, and the lines of the built part of the house. */
-    val Ink = Color(0xFFE8EBEF)
+    val Ink = Color(0xFFEEF1F4)
 
     /** Secondary text (8.4:1 on the ground). */
-    val InkMuted = Color(0xFFA7B0BC)
+    val InkMuted = Color(0xFFAEB7C2)
 
     /** Metadata (6:1 on the ground); never for a label a person must read to act. */
-    val InkFaint = Color(0xFF8A94A0)
+    val InkFaint = Color(0xFF8E98A4)
 
     /** Outline of a stage not started, and graduation ticks: 3.9:1, a graphic that must be seen. */
     val RuleEmpty = Color(0xFF6B7581)
 
-    /** THE accent: measured progress. Nothing else is ever this colour. */
-    val Rule = Color(0xFFF2C230)
+    /** THE accent, mint: what is chosen or measured. Always with a mark or a word beside it. */
+    val Accent = Color(0xFF7FE3C4)
 
-    /** Ink on the rule's yellow (11:1). */
-    val OnRule = Color(0xFF15120A)
+    /** The accent laid as a quiet fill under a chosen card (with the mint rim, never alone). */
+    val AccentWash = Color(0x297FE3C4)
+
+    /** Ink on the accent (12:1). */
+    val OnAccent = Color(0xFF0B1F19)
+
+    /** Measured progress on the construction axis: the accent, by name where the rule draws it. */
+    val Rule = Accent
+
+    /** Ink on the rule's fill. */
+    val OnRule = OnAccent
 
     val Error = Color(0xFFEF8A7E)
 
-    /** Chrome over the model: a tint, never a blur (the model is on its own surface). */
-    val Glass = Color(0xE6101419)
+    /**
+     * Matte glass over the model: a smoky translucent tint. Not a blur — the model is drawn
+     * by Filament on its own surface, which the window cannot sample (see [GlassSurface]).
+     */
+    val Glass = Color(0xD01A2027)
 
-    /** A pane over another pane: glass is a one-layer material. */
-    val GlassOpaque = Color(0xFF14181E)
-    val GlassRimHigh = Color(0x24FFFFFF)
-    val GlassRimLow = Color(0x08FFFFFF)
+    /**
+     * The same glass, thicker, for a panel that carries rows of text over the house: the model
+     * still shows through as shape and light, but its edges no longer run behind the words.
+     */
+    val GlassDense = Color(0xEB1A2027)
 
-    /** The shade that settles the model's top edge under the status bar. */
+    /** A card's or chip's resting fill on glass: a breath lighter, so four cards read as four. */
+    val CardFill = Color(0x0FFFFFFF)
+
+    /** The sheen across the top of the glass, fading out by its middle. */
+    val GlassSheen = Color(0x14FFFFFF)
+
+    /** A pane over another pane, or a surface carrying a long list: glass is a one-layer material. */
+    val GlassOpaque = Color(0xF2161B21)
+    val GlassRimHigh = Color(0x38FFFFFF)
+    val GlassRimLow = Color(0x0AFFFFFF)
+
+    /** The soft depth under a piece of glass. */
+    val GlassShadow = Color(0xCC000000)
+
+    /** The shade that settles the model's edges under the system bars, and the vignette. */
     val Scrim = Color(0xFF05060A)
 }
 
@@ -87,12 +118,16 @@ object Space {
     val xxxl = 48.dp
 }
 
-/** Rectilinear: a rule has corners, not pills. */
+/** Soft, rounded glass: a tile, the panel it grows into, a pill. One scale, no per-screen corners. */
 object Radius {
     val tick = 2.dp
-    val control = 6.dp
-    val panel = 8.dp
-    val sheet = 12.dp
+    val control = 12.dp
+    /** A dock tile, a chosen card, a header button. */
+    val tile = 18.dp
+    val panel = 22.dp
+    val sheet = 26.dp
+    /** The house pill and the badges: fully round ends. */
+    val pill = 999.dp
 }
 
 object Sizes {
@@ -101,8 +136,17 @@ object Sizes {
     val icon = 22.dp
     val iconSmall = 18.dp
 
+    /** A dock tile's height: a touch target with room for the glass around its label. */
+    val tile = 56.dp
+
     /** The widest a screen's column grows on a wide window: centred at a readable measure, never stretched. */
     val contentMax = 720.dp
+}
+
+/** The soft depth under glass, by how far the piece floats above the house. */
+object Depth {
+    val tile = 10.dp
+    val panel = 18.dp
 }
 
 /** The rule's own face: condensed, tabular numerals for measured values. */
@@ -140,7 +184,7 @@ object Measure {
 }
 
 private val TechnicalDark = darkColorScheme(
-    // Primary actions are ink, not colour: the accent is reserved for progress.
+    // Primary actions are ink, not colour: the accent is reserved for what is chosen or measured.
     primary = Palette.Ink,
     onPrimary = Palette.Ground,
     primaryContainer = Color(0xFF262D36),
@@ -152,7 +196,7 @@ private val TechnicalDark = darkColorScheme(
     onSecondaryContainer = Palette.Ink,
     tertiary = Palette.Rule,
     onTertiary = Palette.OnRule,
-    tertiaryContainer = Color(0xFF3A3218),
+    tertiaryContainer = Color(0xFF173A30),
     onTertiaryContainer = Palette.Rule,
     background = Palette.Ground,
     onBackground = Palette.Ink,
@@ -172,7 +216,7 @@ private val TechnicalDark = darkColorScheme(
     scrim = Color.Black,
     surfaceBright = Color(0xFF232A33),
     surfaceDim = Palette.Ground,
-    surfaceContainerLowest = Palette.Well,
+    surfaceContainerLowest = Color(0xFF0A0D11),
     surfaceContainerLow = Palette.Raised,
     surfaceContainer = Palette.Raised,
     surfaceContainerHigh = Palette.Sheet,

@@ -50,183 +50,17 @@ import com.buildplan.preview.scene.ViewerState
 import com.buildplan.preview.scene.Visibility
 import com.buildplan.preview.scene.VisibilityMode
 
-/** The rail's tools, grouped by meaning: how it looks, what is shown, where the camera is, fit. */
-enum class Tool { LOOK, LAYERS, VIEW, FIT }
-
 /**
- * The tool rail down the right edge of the 3D, and the one pane that unfolds
- * beside it.
- *
- * Four labelled buttons, never a row of mystery glyphs: Wygląd, Warstwy,
- * Widok, Dopasuj. A button's label names the current choice once it is not
- * the default ("Makieta", "Bez dachu"), so the state is read, not recalled.
- * The pressed button sinks into the rail. Its pane grows out of it, over the
- * model, opaque because it carries a list; switching tools keeps one pane
- * and swaps its contents. Every choice in a pane is a mark and a word.
+ * The full set of the viewer's tools, as the panes of the one sheet the menu
+ * opens (variant C, "Wszystkie widoki, warstwy i wygląd"): every look, every
+ * layer with isolation and the list of elements, every named view with zoom
+ * and reset. The dock offers the everyday four layers and seven views; these
+ * stay one tap away, never as main actions. Every choice is a mark and a word.
+ * (Until APK 1355 they unfolded from a tool rail at the right edge.)
  */
-@Composable
-fun ToolRail(
-    scene: ModelScene,
-    state: ViewerState,
-    open: Tool?,
-    onOpen: (Tool?) -> Unit,
-    onPreset: (ViewPreset) -> Unit,
-    onPresentation: (PresentationMode) -> Unit,
-    onStyle: (RenderStyle) -> Unit,
-    onVisibility: (VisibilityMode) -> Unit,
-    onIsolate: () -> Unit,
-    onShowAll: () -> Unit,
-    onReset: () -> Unit,
-    /** Choose an element without touching the model: for TalkBack, switch access, a gloved hand. */
-    onSelectElement: (String) -> Unit,
-    /** Closer (below 1) or farther (above 1), without a pinch. */
-    onZoom: (Double) -> Unit,
-    paneMaxHeight: Dp,
-    modifier: Modifier = Modifier,
-    /** The rail stands at the foot of the screen: the pane shares its bottom edge and grows upwards. */
-    paneFromFoot: Boolean = false,
-    /** On a short window the rail may not run off the safe area: past this height its buttons scroll. */
-    railMaxHeight: Dp? = null,
-) {
-    val motion = LocalMotionPolicy.current
-    Row(
-        modifier = modifier.semantics { isTraversalGroup = true },
-        horizontalArrangement = Arrangement.spacedBy(Space.s),
-        verticalAlignment = if (paneFromFoot) Alignment.Bottom else Alignment.Top,
-    ) {
-        // The pane grows from the rail's side: rail and pane share the edge the rail stands on.
-        val origin = TransformOrigin(1f, if (paneFromFoot) 0.9f else 0.1f)
-        AnimatedVisibility(
-            visible = open != null && open != Tool.FIT,
-            enter = motion.panelEnter(origin),
-            exit = motion.panelExit(origin),
-        ) {
-            GlassSurface(
-                tint = Palette.GlassOpaque,
-                modifier = Modifier.width(RailDefaults.PaneWidth).heightIn(max = paneMaxHeight),
-            ) {
-                AnimatedContent(
-                    targetState = open,
-                    transitionSpec = {
-                        (fadeIn(motion.enterDelayed()) togetherWith fadeOut(motion.exit()))
-                            .using(SizeTransform(clip = true) { _, _ -> motion.enter() })
-                    },
-                    label = "toolPane",
-                ) { tool ->
-                    Column {
-                        val title = when (tool) {
-                            Tool.LOOK -> R.string.tool_look
-                            Tool.LAYERS -> R.string.tool_layers
-                            Tool.VIEW -> R.string.tool_view
-                            else -> R.string.tool_fit
-                        }
-                        PanelHeader(stringResource(title), stringResource(R.string.pane_close), onClose = { onOpen(null) })
-                        val scroll = rememberScrollState()
-                        Column(
-                            Modifier
-                                .fadeBelowFold(scroll, Palette.GlassOpaque)
-                                .verticalScroll(scroll)
-                                .padding(bottom = Space.s),
-                        ) {
-                            when (tool) {
-                                Tool.LOOK -> LookPane(state, onPresentation, onStyle)
-                                Tool.LAYERS -> LayersPane(scene, state, onVisibility, onIsolate, onShowAll, onSelectElement)
-                                Tool.VIEW -> ViewPane(scene, onPreset, onReset, onZoom)
-                                else -> Unit
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        GlassSurface(shape = RoundedCornerShape(Radius.panel), modifier = if (railMaxHeight != null) Modifier.heightIn(max = railMaxHeight) else Modifier) {
-            val railScroll = rememberScrollState()
-            Column(
-                // On a short window the rail scrolls; the fade says so, as every cut list in the app does (audit F7).
-                modifier = Modifier
-                    .then(if (railMaxHeight != null) Modifier.fadeBelowFold(railScroll, Palette.Glass).verticalScroll(railScroll) else Modifier)
-                    .padding(RailDefaults.Padding),
-                verticalArrangement = Arrangement.spacedBy(RailDefaults.Gap),
-                horizontalAlignment = Alignment.CenterHorizontally,
-            ) {
-                RailButton(
-                    icon = ShellIcons.look,
-                    label = stringResource(state.presentation.railLabelRes()),
-                    state = stringResource(R.string.tool_state_look, stringResource(state.presentation.labelRes())),
-                    pressed = open == Tool.LOOK,
-                    onClick = { onOpen(if (open == Tool.LOOK) null else Tool.LOOK) },
-                )
-                val layer = if (state.isIsolating) stringResource(R.string.layer_isolated) else stringResource(state.visibility.labelRes())
-                // The rail's label is one or two short words that fit a 64 dp button at font scale 1.3 (cycle 3, P-01);
-                // the full name is read in the pane and spoken in the state.
-                val layerShort = if (state.isIsolating) stringResource(R.string.layer_rail_isolated) else stringResource(state.visibility.railLabelRes())
-                RailButton(
-                    icon = ShellIcons.layers,
-                    label = if (state.visibility == VisibilityMode.ALL && !state.isIsolating) stringResource(R.string.tool_layers) else layerShort,
-                    state = stringResource(R.string.tool_state_layers, layer),
-                    pressed = open == Tool.LAYERS,
-                    onClick = { onOpen(if (open == Tool.LAYERS) null else Tool.LAYERS) },
-                )
-                RailButton(
-                    icon = ShellIcons.view,
-                    label = stringResource(R.string.tool_view),
-                    state = null,
-                    pressed = open == Tool.VIEW,
-                    onClick = { onOpen(if (open == Tool.VIEW) null else Tool.VIEW) },
-                )
-                RailButton(
-                    icon = ShellIcons.fit,
-                    label = stringResource(R.string.tool_fit),
-                    state = null,
-                    pressed = false,
-                    onClick = {
-                        onOpen(null)
-                        onPreset(ViewPreset.FIT)
-                    },
-                )
-            }
-        }
-    }
-}
 
 /** One step of "Przybliż" (and its inverse for "Oddal"): a fifth closer. */
 private const val ZOOM_STEP = 0.8
-
-object RailDefaults {
-    val ButtonWidth = 64.dp
-    val ButtonHeight = 60.dp
-    val Padding = 4.dp
-    val Gap = 2.dp
-    val PaneWidth = 236.dp
-}
-
-/** One labelled tool. Pressed, it sinks into the rail — a well, not a colour. */
-@Composable
-private fun RailButton(icon: ImageVector, label: String, state: String?, pressed: Boolean, onClick: () -> Unit) {
-    Column(
-        modifier = Modifier
-            .width(RailDefaults.ButtonWidth)
-            .heightIn(min = RailDefaults.ButtonHeight)
-            .background(if (pressed) Palette.Well else androidx.compose.ui.graphics.Color.Transparent, RoundedCornerShape(Radius.control))
-            .selectable(selected = pressed, onClick = onClick, role = Role.Button)
-            .semantics { if (state != null) stateDescription = state }
-            .padding(vertical = Space.xs, horizontal = Space.xxs),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center,
-    ) {
-        Icon(icon, contentDescription = null, tint = if (pressed) Palette.Ink else Palette.InkMuted, modifier = Modifier.size(Sizes.icon))
-        Text(
-            label,
-            style = MaterialTheme.typography.labelSmall,
-            color = if (pressed) Palette.Ink else Palette.InkMuted,
-            textAlign = TextAlign.Center,
-            maxLines = 2,
-            overflow = TextOverflow.Ellipsis,
-            modifier = Modifier.padding(top = Space.xxs),
-        )
-    }
-}
 
 /**
  * The looks, under the three things a look is for (the house as a home, a
@@ -234,7 +68,7 @@ private fun RailButton(icon: ImageVector, label: String, state: String?, pressed
  * on what it shows. MODEL's own lighting styles follow when MODEL is chosen.
  */
 @Composable
-private fun LookPane(state: ViewerState, onPresentation: (PresentationMode) -> Unit, onStyle: (RenderStyle) -> Unit) {
+internal fun LookPane(state: ViewerState, onPresentation: (PresentationMode) -> Unit, onStyle: (RenderStyle) -> Unit) {
     for (family in LookFamily.entries) {
         PanelGroupLabel(stringResource(family.labelRes()))
         for (mode in PresentationMode.entries.filter { it.family == family }) {
@@ -256,7 +90,7 @@ private fun LookPane(state: ViewerState, onPresentation: (PresentationMode) -> U
 }
 
 @Composable
-private fun LayersPane(
+internal fun LayersPane(
     scene: ModelScene,
     state: ViewerState,
     onVisibility: (VisibilityMode) -> Unit,
@@ -310,7 +144,7 @@ private fun ElementList(scene: ModelScene, state: ViewerState, onSelectElement: 
 }
 
 @Composable
-private fun ViewPane(scene: ModelScene, onPreset: (ViewPreset) -> Unit, onReset: () -> Unit, onZoom: (Double) -> Unit) {
+internal fun ViewPane(scene: ModelScene, onPreset: (ViewPreset) -> Unit, onReset: () -> Unit, onZoom: (Double) -> Unit) {
     val available = ViewPreset.availableIn(scene).toSet()
     fun group(label: Int, presets: List<ViewPreset>) = label to presets.filter { it in available }
     val groups = listOf(

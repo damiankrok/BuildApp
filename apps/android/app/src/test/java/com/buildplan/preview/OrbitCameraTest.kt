@@ -21,9 +21,10 @@ class OrbitCameraTest {
 
     @Test
     fun `home frames the whole model`() {
-        assertEquals(scene.bounds.center.x, home.focus.x, 1e-6)
-        assertEquals(scene.bounds.center.y, home.focus.y, 1e-6)
-        assertEquals(scene.bounds.center.z, home.focus.z, 1e-6)
+        // Since APK 1356 home centres the house's projected extent in the free span, so its focus may stand off the
+        // box's centre — but always inside the house.
+        val b = scene.bounds
+        assertTrue("focus inside the house: ${home.focus}", home.focus.x in b.min.x..b.max.x && home.focus.y in b.min.y..b.max.y && home.focus.z in b.min.z..b.max.z)
         assertEquals(Vec3.ZERO, home.pan)
         assertEquals(Projection.PERSPECTIVE, home.projection)
         assertTrue("the whole house must fit", home.distance >= scene.bounds.radius)

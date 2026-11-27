@@ -47,7 +47,16 @@ class OrbitCamera(
     val sceneBounds: Bounds,
     /** Vertical field of view, degrees. Also sets the orthographic extent. */
     val fovDeg: Double = 45.0,
+    /**
+     * The points "the whole house" is framed by in perspective: the corners of each object's own box
+     * (variant C). An L-shaped house leaves an empty corner in its one big box — over a rear terrace,
+     * behind a garage wing — and fitting that corner framed the house small and off to one side.
+     * Empty: the scene box's corners, as before.
+     */
+    hull: List<Vec3> = emptyList(),
 ) {
+    private val framePoints: List<Vec3> = hull.ifEmpty { sceneBounds.corners() }
+
     private val sceneRadius: Double = max(sceneBounds.radius, 0.5)
 
     /** Close enough to read a window reveal, never inside the walls. */
@@ -213,6 +222,7 @@ class OrbitCamera(
     /** Frame the whole of `bounds` by its box, in perspective, at the given angles (home, "Cały dom", "Dopasuj"). */
     fun frameBox(pose: OrbitPose, bounds: Bounds, yawDeg: Double, pitchDeg: Double, span: FitSpan, margin: Double = BOX_MARGIN): OrbitPose {
         if (bounds.isEmpty) return pose
+        if (bounds == sceneBounds) return frameWhole(pose, yawDeg, pitchDeg, span, margin)
         return clamp(
             pose.copy(
                 focus = bounds.center,
@@ -223,6 +233,58 @@ class OrbitCamera(
                 projection = Projection.PERSPECTIVE,
             ),
         )
+    }
+
+    /**
+     * The whole house in perspective at the given angles, framed by [framePoints] and CENTRED: the
+     * focus moves (within the house) until the points' projected extent is symmetric in the free
+     * span, then the distance is the nearest at which every point lies inside it with [margin] to
+     * spare. A few fixed-point steps settle it; the projection is not linear, so the last distance
+     * is computed again for the final focus.
+     */
+    fun frameWhole(pose: OrbitPose, yawDeg: Double, pitchDeg: Double, span: FitSpan, margin: Double = BOX_MARGIN): OrbitPose {
+        val tanHalf = tan(Math.toRadians(fovDeg) / 2.0)
+        val th = tanHalf * max(span.horizontal, 0.05) / margin
+        val tv = tanHalf * max(span.vertical, 0.05) / margin
+        val b = basis(OrbitPose(sceneBounds.center, Vec3.ZERO, yawDeg, pitchDeg, 1.0, Projection.PERSPECTIVE))
+        var focus = sceneBounds.center
+        var distance = fitDistance(focus, b, th, tv)
+        repeat(CENTRING_STEPS) {
+            var minX = Double.MAX_VALUE
+            var maxX = -Double.MAX_VALUE
+            var minY = Double.MAX_VALUE
+            var maxY = -Double.MAX_VALUE
+            for (p in framePoints) {
+                val q = p - focus
+                val depth = max(distance + (q dot b.forward), 1e-6)
+                val x = (q dot b.right) / depth
+                val y = (q dot b.up) / depth
+                minX = minOf(minX, x); maxX = max(maxX, x)
+                minY = minOf(minY, y); maxY = max(maxY, y)
+            }
+            focus = focus + b.right * ((minX + maxX) / 2.0 * distance) + b.up * ((minY + maxY) / 2.0 * distance)
+            distance = fitDistance(focus, b, th, tv)
+        }
+        return clamp(
+            pose.copy(
+                focus = focus,
+                pan = Vec3.ZERO,
+                yawDeg = yawDeg,
+                pitchDeg = pitchDeg,
+                distance = distance,
+                projection = Projection.PERSPECTIVE,
+            ),
+        )
+    }
+
+    /** The nearest perspective distance from [focus] at which every frame point lies inside the half-fields [th], [tv]. */
+    private fun fitDistance(focus: Vec3, b: Basis, th: Double, tv: Double): Double {
+        var distance = 0.0
+        for (p in framePoints) {
+            val q = p - focus
+            distance = max(distance, max(kotlin.math.abs(q dot b.right) / th, kotlin.math.abs(q dot b.up) / tv) - (q dot b.forward))
+        }
+        return clamp(distance, minDistance, maxDistance)
     }
 
     /**
@@ -265,9 +327,8 @@ class OrbitCamera(
      * phone the horizontal field is the narrower one, and the house fills it
      * up to [BOX_MARGIN], not a bounding sphere's worth less.
      */
-    fun home(span: FitSpan = FitSpan.SQUARE): OrbitPose = frameBox(
+    fun home(span: FitSpan = FitSpan.SQUARE): OrbitPose = frameWhole(
         OrbitPose(sceneBounds.center, Vec3.ZERO, HOME_YAW, HOME_PITCH, sceneRadius * 3, Projection.PERSPECTIVE),
-        sceneBounds,
         HOME_YAW,
         HOME_PITCH,
         span,
@@ -292,5 +353,8 @@ class OrbitCamera(
 
         /** The box's corners stop short of the free half-field's edge: a clear gap to the chrome, and the house large. */
         const val BOX_MARGIN = 1.12
+
+        /** How many times the whole-house fit re-centres its focus: the extent is symmetric to a pixel by then. */
+        private const val CENTRING_STEPS = 4
     }
 }

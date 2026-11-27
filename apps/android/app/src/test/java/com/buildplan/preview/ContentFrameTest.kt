@@ -79,7 +79,9 @@ class ContentFrameTest {
             val b = camera.basis(pose)
             var fill = 0.0
             for (corner in house.corners()) {
-                val q = corner - house.center
+                // Measured from where the camera looks (APK 1356 centres the house's projected extent, so the focus may
+                // move off the box's centre); every corner inside, the free space filled to the margin, as before.
+                val q = corner - pose.target
                 val z = pose.distance + (q dot b.forward)
                 val x = frame.scale * (q dot b.right) / (z * tanHalf * w / h) + frame.shiftX
                 val y = frame.scale * (q dot b.up) / (z * tanHalf) + frame.shiftY

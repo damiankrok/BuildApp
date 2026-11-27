@@ -127,6 +127,14 @@ class PreviewViewModel(application: Application) : AndroidViewModel(application)
     var manipulating by mutableStateOf(false)
         private set
 
+    /**
+     * The named view the camera stands at now — or is moving to — for the Widok row; null once the
+     * camera was turned by hand or framed on an element, so the row never names a view that is not
+     * on screen. Zoom and pan keep the direction, so they keep the name.
+     */
+    var shownView: ViewPreset? by mutableStateOf(ViewPreset.WHOLE)
+        private set
+
     /** The aspect fits use: the free rectangle's, so the fitted house lands between the chrome whole. */
     private val fitAspect: Double get() = ContentFrame.fitAspect(viewportWidthPx, viewportHeightPx, restInsets)
 
@@ -147,6 +155,7 @@ class PreviewViewModel(application: Application) : AndroidViewModel(application)
     private val prefs = application.getSharedPreferences(PREFS, android.content.Context.MODE_PRIVATE)
 
     init {
+        viewer = viewer.copy(grid = prefs.getBoolean(KEY_GRID, false))
         (StartChoice.of(scenes, lastChosen()))?.let { open(it, chosen = false) }
             ?: run { screen = ScreenState.Failed("no scene bundles in this build", null) }
     }
@@ -225,14 +234,15 @@ class PreviewViewModel(application: Application) : AndroidViewModel(application)
                 val model = result.scene
                 // Only a house the owner chose is remembered: the app's own pick at start is not a choice (MARCOWKI-UI).
                 if (chosen) prefs.edit().putString(KEY_LAST_CHOSEN, entry.key).apply()
-                camera = OrbitCamera(model.bounds)
+                camera = OrbitCamera(model.bounds, hull = model.objects.filter { it.hasGeometry && !it.bounds.isEmpty }.flatMap { it.bounds.corners() })
                 pose = camera.home(fitSpan).also { home = it }
                 fitted = null
                 // Selection, isolation and layers name objects of the old
                 // model and start over; the style and the presentation mode
                 // are how the viewer draws, not part of the model, so they
                 // carry across a model switch.
-                viewer = ViewerState(style = viewer.style, presentation = viewer.presentation)
+                viewer = ViewerState(style = viewer.style, presentation = viewer.presentation, grid = viewer.grid)
+                shownView = ViewPreset.WHOLE
                 animation = null
                 screen = ScreenState.Ready(model)
                 // SHAPE-LIVE-01: a reading's "show in the model" opened this scene to select that element
@@ -294,7 +304,10 @@ class PreviewViewModel(application: Application) : AndroidViewModel(application)
     }
 
     fun orbit(deltaYawDeg: Double, deltaPitchDeg: Double) {
-        pose = camera.orbit(pose, deltaYawDeg, deltaPitchDeg)
+        val next = camera.orbit(pose, deltaYawDeg, deltaPitchDeg)
+        // Turned by hand, the camera no longer stands at any named view: the Widok row says so.
+        if (next.yawDeg != pose.yawDeg || next.pitchDeg != pose.pitchDeg) shownView = null
+        pose = next
     }
 
     fun zoom(factor: Double) {
@@ -319,6 +332,7 @@ class PreviewViewModel(application: Application) : AndroidViewModel(application)
         val model = scene ?: return
         viewer = viewer.showAll().clearSelection()
         fitted = null
+        shownView = ViewPreset.WHOLE
         moveTo(camera.home(fitSpan).also { home = it }, nowMs)
     }
 
@@ -372,12 +386,15 @@ class PreviewViewModel(application: Application) : AndroidViewModel(application)
         // after asking to look at the stairs.
         preset.objectIdIn(model)?.let { if (viewer.isVisible(model, it)) viewer = viewer.select(it) }
         fitted = if (preset.target == com.buildplan.preview.camera.PresetTarget.WHOLE_MODEL) preset to target else null
+        // "Dopasuj" keeps the angle, so it keeps the view's name too; every other preset IS the view now.
+        if (!preset.keepsAngles) shownView = preset
         moveTo(target, nowMs)
     }
 
     fun frameSelection(nowMs: Long) {
         val model = scene ?: return
         val target = model.objectById(viewer.selectedObjectId) ?: return
+        shownView = null
         moveTo(camera.frame(pose, target.bounds, margin = 1.7, aspect = fitAspect), nowMs)
     }
 
@@ -406,7 +423,10 @@ class PreviewViewModel(application: Application) : AndroidViewModel(application)
         lastTapObjectId = objectId
         if (isDoubleTap) {
             viewer = viewer.isolateSelected(model)
-            model.objectById(objectId)?.let { moveTo(camera.frame(pose, it.bounds, margin = 1.7, aspect = fitAspect), nowMs) }
+            model.objectById(objectId)?.let {
+                shownView = null
+                moveTo(camera.frame(pose, it.bounds, margin = 1.7, aspect = fitAspect), nowMs)
+            }
             lastTapObjectId = null
         }
         return isDoubleTap
@@ -450,6 +470,13 @@ class PreviewViewModel(application: Application) : AndroidViewModel(application)
         viewer = viewer.clearSelection()
     }
 
+    /** The reference grid under the house (variant C: off unless the owner turns it on), remembered for the next start. */
+    fun setGrid(on: Boolean) {
+        if (viewer.grid == on) return
+        viewer = viewer.copy(grid = on)
+        prefs.edit().putBoolean(KEY_GRID, on).apply()
+    }
+
     /**
      * What the construction timeline shows (`progress.ConstructionTimeline`):
      * the objects standing at the stage looked at, or null for the whole
@@ -467,6 +494,9 @@ class PreviewViewModel(application: Application) : AndroidViewModel(application)
         /** Where the house last chosen is remembered (cycle 3, H-03; MARCOWKI-UI: chosen, not merely opened). */
         const val PREFS = "preview"
         const val KEY_LAST_CHOSEN = "lastChosenKey"
+
+        /** Whether the reference grid is laid under the house (variant C). */
+        const val KEY_GRID = "referenceGrid"
 
         /** Up to APK 1354: the house last OPENED, the app's automatic first pick included. Read once, then removed. */
         const val KEY_LAST_OPEN_LEGACY = "lastOpenKey"

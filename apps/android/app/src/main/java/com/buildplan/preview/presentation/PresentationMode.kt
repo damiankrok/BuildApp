@@ -192,11 +192,16 @@ class PresentationLook(
         private val BASE_SKY = floatArrayOf(0.55f, 0.58f, 0.64f)
         private val BASE_SKY_FROM_ABOVE = floatArrayOf(0.20f, 0.21f, 0.24f)
 
-        /** The ground and backdrop of MODEL, exactly the values the viewer had before modes existed. */
+        /**
+         * The ground and backdrop of MODEL: a calm mid graphite (OWNER, variant C), a step lighter than the
+         * app's own ground, so the smoky glass over it reads as a material and not as a hole. Until APK 1355
+         * it was #12151A, the darkest thing on screen; only the backdrop moved — the house's light, shadows
+         * and materials are exactly as before.
+         */
         val MODEL_BACKGROUND = floatArrayOf(
-            RenderStyle.srgbToLinear(0x12 / 255f),
-            RenderStyle.srgbToLinear(0x15 / 255f),
-            RenderStyle.srgbToLinear(0x1a / 255f),
+            RenderStyle.srgbToLinear(0x1E / 255f),
+            RenderStyle.srgbToLinear(0x23 / 255f),
+            RenderStyle.srgbToLinear(0x29 / 255f),
         )
         val MODEL_GRID = floatArrayOf(
             RenderStyle.srgbToLinear(0.29f),

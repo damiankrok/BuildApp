@@ -9,8 +9,10 @@ package com.buildplan.preview.ui
  * it is edited; `SOURCE` is where the model came from, what the analysis
  * left open, and the technical figures; `GALLERY` (MARCOWKI-UI) is the developer
  * gallery, the scenes shipped for development and review, apart from the houses.
+ * Since variant C (APK 1356) `STAGES` opens the workspace's Etapy panel rather than a sheet,
+ * and `TOOLS` is the full set of views, layers and looks, one tap away in the menu.
  */
-enum class Sheet { MENU, STAGES, SOURCE, GALLERY }
+enum class Sheet { MENU, STAGES, SOURCE, GALLERY, TOOLS }
 
 /**
  * A task the owner leaves the house for, and comes back from to the same

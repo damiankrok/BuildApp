@@ -59,6 +59,9 @@ class RenderDiagnostics(val surfaceKind: RenderSurfaceKind) {
     val framesRendered = AtomicLong()
     val framesSkipped = AtomicLong()
 
+    /** Frame callbacks with nothing new to draw (APK 1356): no frame submitted, the surface keeps the last one. */
+    val framesIdle = AtomicLong()
+
     @Volatile var uiHelperReady: Boolean = false
     @Volatile var modelUploads: Int = 0
 

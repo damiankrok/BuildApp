@@ -27,6 +27,8 @@ data class SceneEntry(
     val showcase: Boolean = false,
     val recordTitle: String = title,
     val recordSubtitle: String = subtitle,
+    /** The name the small house pill over the 3D shows (variant C): the showcase's short name, else the title. */
+    val shortTitle: String = title,
 ) {
     /** A scene shipped for development and review — the history of the analyzer's stages — not a house of the owner's. */
     val isDevelopment: Boolean get() = source == SceneSourceKind.BUNDLED && !showcase
@@ -81,6 +83,7 @@ class BundledScenes(private val read: (name: String) -> String) : SceneSource {
             showcase = show != null,
             recordTitle = title,
             recordSubtitle = subtitle,
+            shortTitle = show?.short?.takeIf { it.isNotBlank() } ?: show?.title ?: title,
         )
     }
 

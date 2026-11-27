@@ -12,6 +12,19 @@
 
 ## Current summary (read first)
 
+- **MARCOWKI-UI-C (2026-11-27): OWNER chose variant C "Minimalny dok" — APK 1356.** Package
+  `BuildPlan-UI-C-START.zip`. Report `stage-reports/MARCOWKI_UI_C.md`, owner note `stage-reports/README_MARCOWKI_UI_C.md`.
+  Baseline `d12d0f6c` (APK 1355); research paused, 0 USD. The workspace is rebuilt as C: house pill ("Marcówki" from the
+  registry's new `showcase.short`, a "Demo" badge), Dopasuj and ⋮ at the top, a dock of two matte-glass tiles ("Cały dom",
+  "Etapy") that morph (`ui/Dock.kt`, `MorphSurface`, interruptible, 280/220 ms, snaps with animations off) into the Warstwy
+  panel (four layer cards, hidden-words line, Widok row with the named views) and the Etapy panel (construction axis,
+  preview never saves, stage list; completion by −5/+5 steps and an explicit "Zapisz", no slider). Side rail and bottom
+  timeline removed; their panes live on in ⋮ → "Wszystkie widoki, warstwy i wygląd". Grid is a view setting, off at start.
+  The whole house is framed by its objects' boxes and centred (`OrbitCamera.frameWhole`): the L-shaped showcase now fills
+  ~90 % of the portrait width. MODEL backdrop #1E2329. The 3D renders on demand (no frames at rest). DESIGN.md and
+  `.impeccable/design.json` describe C as the one system. Model a66428c8… / scene 680a3f4b… unchanged. **Emulator only**
+  (Android 10, TCG): checks in the report §7; phone checklist open. Android JVM 502 green + 3 skipped; mobile-scene 138
+  green; lint: the pre-existing DescribingPanel error only. Device tests target the 1355 UI and need rewriting.
 - **MARCOWKI-UI (2026-11-26): research paused, priority Marcówki and the Android UI — APK 1355.** OWNER decision of
   2026-11-26 (`BuildPlan-MARCOWKI-UI-START.zip`): no new houses, API reads, roof solvers or Anna II work; paid budget
   0 USD (0 spent). The Master Plan's product catalogue is unchanged; the analyzer campaign can resume from `ebaae1d2`

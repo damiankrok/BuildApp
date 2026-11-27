@@ -48,7 +48,8 @@ export function sealedOwnerModel(key: string, sha256: string, dir = 'owner-005t'
  * the registry's own title and subtitle stay the scene's technical record (versions, outcomes, failures), shown in the
  * developer gallery and the house's details. At most one scene carries it; a test holds that.
  */
-export type SceneShowcase = { title: string; subtitle: string }
+/** `short` (variant C): the house's short name for the small house pill over the 3D; `title` stays the full name. */
+export type SceneShowcase = { title: string; subtitle: string; short?: string }
 
 export type SceneSpec = { key: string; title: string; subtitle: string; showcase?: SceneShowcase; build: () => CanonicalBuildingModel }
 
@@ -772,6 +773,7 @@ export const SCENES: readonly SceneSpec[] = [
     showcase: {
       title: 'Dom w marcówkach',
       subtitle: 'Model demonstracyjny — odtworzony z publicznego projektu, nie dokumentacja budowy',
+      short: 'Marcówki',
     },
     build: () => sealedOwnerModel('marcowki-c-v35414', 'a66428c88135d1ad2d30678943acd0ea4746d4d2977b96a9b37d16f48759a0f5', 'owner-v35414'),
   },

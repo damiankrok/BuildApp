@@ -238,33 +238,58 @@ private fun MenuRow(icon: androidx.compose.ui.graphics.vector.ImageVector, label
 }
 
 /**
- * The stages over the house: the 003C editor, unchanged, in a sheet that
- * leaves the house's ridge in view above it. "Pokaż w 3D" closes the sheet
- * and moves the time machine; the house behind has not moved.
+ * Every view, layer and look in one sheet (variant C), one tap away in the
+ * menu and never a main action: the layers with isolation and the list of
+ * elements, the named views with zoom and reset, and the looks. A view, an
+ * element or a reset closes the sheet, so the camera's answer is seen; a
+ * layer or a look is answered in place, under the sheet's own choice.
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun StageSheet(progress: ProgressViewModel, sceneTitle: String?, onDismiss: () -> Unit, onShowInModel: (ConstructionStageKey?) -> Unit) {
+fun ToolsSheet(preview: PreviewViewModel, onDismiss: () -> Unit) {
+    val scene = preview.scene ?: return
     HouseSheet(onDismiss) {
         BoxWithConstraints(Modifier.fillMaxWidth()) {
-            // The house's ridge stays in view above the sheet: the sheet takes at most this much of the window.
-            StagesScreen(
-                progress,
-                onShowInModel,
-                modifier = Modifier.heightIn(max = maxHeight * STAGE_SHEET_SHARE),
-                drawing = {
-                    val view = progress.view
-                    val session = progress.session
-                    HouseDrawing(
-                        sketch = progress.sketch,
-                        built = if (view == null || view.summary.unset) null else session?.actualVisible,
-                        current = view?.summary?.currentStage?.let { session?.introducedAt(it) }.orEmpty(),
-                        description = stringResource(R.string.house_drawing_description, sceneTitle.orEmpty()),
-                        onOpen = onDismiss,
-                        height = DRAWING_HEIGHT,
+            val scroll = rememberScrollState()
+            Column(Modifier.fillMaxWidth().heightIn(max = maxHeight * STAGE_SHEET_SHARE)) {
+                Text(
+                    stringResource(R.string.tools_title),
+                    style = MaterialTheme.typography.titleLarge,
+                    color = Palette.Ink,
+                    modifier = Modifier.padding(horizontal = Space.l).padding(top = Space.l, bottom = Space.s).semantics { heading() },
+                )
+                Column(Modifier.fillMaxWidth().fadeBelowFold(scroll, Palette.Sheet).verticalScroll(scroll).padding(bottom = Space.xl)) {
+                    PanelGroupLabel(stringResource(R.string.layers_panel_title))
+                    LayersPane(
+                        scene = scene,
+                        state = preview.viewer,
+                        onVisibility = { preview.setVisibility(it) },
+                        onIsolate = { preview.isolateSelected() },
+                        onShowAll = { preview.showAll() },
+                        onSelectElement = { id ->
+                            preview.choose(id, System.currentTimeMillis())
+                            onDismiss()
+                        },
                     )
-                },
-            )
+                    PanelRule()
+                    PanelGroupLabel(stringResource(R.string.view_row))
+                    ViewPane(
+                        scene = scene,
+                        onPreset = {
+                            preview.applyPreset(it, System.currentTimeMillis())
+                            onDismiss()
+                        },
+                        onReset = {
+                            preview.reset(System.currentTimeMillis())
+                            onDismiss()
+                        },
+                        onZoom = { preview.zoom(it) },
+                    )
+                    PanelRule()
+                    PanelGroupLabel(stringResource(R.string.tools_look))
+                    LookPane(preview.viewer, onPresentation = { preview.setPresentation(it) }, onStyle = { preview.setStyle(it) })
+                }
+            }
         }
     }
 }

@@ -27,6 +27,12 @@ data class ViewerState(
      * scene; the model, its geometry and the camera stay as they are.
      */
     val construction: Set<String>? = null,
+    /**
+     * The one-metre reference grid under the house (OWNER, variant C): a view setting, off at
+     * the start — the house stands on the calm ground, not on a CAD sheet. Presentation only:
+     * it is not part of the model and never changes what is drawn of it.
+     */
+    val grid: Boolean = false,
 ) {
     val isIsolating: Boolean get() = isolatedObjectId != null
 

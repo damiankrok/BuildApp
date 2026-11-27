@@ -16,7 +16,6 @@
     <string name="menu_costs_not_built">Osobna przestrzeń kosztów jeszcze nie powstała: nic nie jest tu zapisywane ani wyceniane.</string>
     <string name="no_house_title">Na tym telefonie nie ma jeszcze żadnego domu</string>
     <string name="no_house_body">Wklej link do publicznej strony projektu domu. Aplikacja sprawdzi stronę, odczyta rysunki i zbuduje model, który zobaczysz w 3D — a Twój postęp budowy zapiszesz przy nim.</string>
-    <string name="timeline_edit_progress">Otwórz etapy budowy</string>
     <string name="state_not_selected">Nie wybrano</string>
     <string name="state_expanded">rozwinięte</string>
     <string name="state_collapsed">zwinięte</string>
@@ -61,9 +60,6 @@
     <string name="progress_last_done">Ostatnio zakończony: %1$s</string>
     <string name="progress_now_task">Teraz: %1$s</string>
     <string name="progress_stage_in_progress">Etap w toku · %1$d%%</string>
-    <string name="progress_actual_short">%1$s · %2$s</string>
-    <string name="progress_actual_prefix">Aktualnie: %1$s</string>
-    <string name="progress_state_spoken">%1$s, aktualny etap %2$s</string>
     <string name="progress_problem_corrupt">Zapis postępu tego domu był uszkodzony. Odłożono go jako kopię na tym telefonie i zaczynasz od nowa.</string>
     <string name="progress_problem_newer">Postęp tego domu zapisała nowsza wersja aplikacji (schemat %1$d). Ta wersja go nie nadpisze — zaktualizuj aplikację.</string>
     <string name="progress_problem_save_failed">Nie udało się zapisać zmiany na tym telefonie. Poprzedni stan został bez zmian.</string>
@@ -73,15 +69,10 @@
     <string name="timeline_return_design">Wróć do projektu</string>
     <string name="timeline_expand">Pokaż nazwy etapów</string>
     <string name="timeline_collapse">Ukryj nazwy etapów</string>
-    <string name="progress_unset_scrub">Postęp nieustawiony · przesuń po osi</string>
     <string name="timeline_preview_of">Podgląd: %1$s</string>
     <string name="timeline_no_geometry">Na tym etapie model 3D się nie zmienia</string>
-    <string name="timeline_stop_position">Stan po etapie: %1$s</string>
     <string name="timeline_target">Projekt docelowy</string>
-    <string name="timeline_target_detail">Cały dom z projektu, także elementy bez przypisanego etapu</string>
-    <string name="timeline_target_short">Projekt</string>
     <string name="timeline_rule_description">Historia budowy</string>
-    <string name="timeline_state_now">%1$s, teraz</string>
 
     <!-- Etapy -->
     <string name="stages_title">Etapy budowy</string>
@@ -215,7 +206,6 @@
     <string name="tool_layers">Warstwy</string>
     <string name="tool_view">Widok</string>
     <string name="tool_fit">Dopasuj</string>
-    <string name="tool_state_look">Wygląd: %1$s</string>
     <string name="tool_state_layers">Widoczne: %1$s</string>
     <string name="tool_look_light">Oświetlenie i barwy</string>
     <string name="pane_close">Zamknij panel</string>
@@ -791,4 +781,34 @@
         <item quantity="many">%d scen z badań analizatora — wersje, porównania, porażki</item>
         <item quantity="other">%d sceny z badań analizatora — wersje, porównania, porażki</item>
     </plurals>
+
+    <!-- Variant C, "Minimalny dok" (OWNER, APK 1356): the house pill, the dock and the panels its tiles grow into. -->
+    <string name="house_pill_open">Wybierz dom</string>
+    <string name="badge_demo">Demo</string>
+    <string name="badge_gallery">Galeria</string>
+    <string name="header_more">Więcej</string>
+    <string name="menu_grid">Siatka pod domem</string>
+    <string name="menu_grid_on">włączona</string>
+    <string name="menu_grid_off">wyłączona</string>
+    <string name="menu_tools">Wszystkie widoki, warstwy i wygląd</string>
+    <string name="tools_title">Widoki, warstwy i wygląd</string>
+    <string name="tools_look">Wygląd modelu</string>
+    <string name="dock_layers_open">Otwórz warstwy</string>
+    <string name="dock_stages_open">Otwórz etapy</string>
+    <string name="dock_stages">Etapy</string>
+    <string name="dock_preview">Podgląd</string>
+    <string name="layers_panel_title">Warstwy</string>
+    <string name="view_row">Widok</string>
+    <string name="view_perspective">Perspektywa</string>
+    <string name="view_custom">Własny kąt</string>
+    <string name="view_change">Zmień widok</string>
+    <string name="stages_panel_title">Etapy budowy</string>
+    <string name="stages_panel_design">Widzisz projekt docelowy. Przesuń po osi, by obejrzeć etap — to tylko podgląd.</string>
+    <string name="stages_panel_preview_note">Tylko podgląd — nic się nie zapisuje.</string>
+    <string name="stages_panel_now">Teraz: %1$s</string>
+    <string name="stage_completion_less" formatted="false">Mniej o 5 %</string>
+    <string name="stage_completion_more" formatted="false">Więcej o 5 %</string>
+    <string name="stage_completion_save">Zapisz %1$s</string>
+    <string name="stage_completion_cancel">Cofnij</string>
+    <string name="stage_completion_saved_value">Zapisane: %1$s</string>
 </resources>

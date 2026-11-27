@@ -1,24 +1,31 @@
 ---
 name: BuildPlan
-description: The owner's own record of one house under construction, read on a carpenter's folding rule under the house's 3D model.
+description: The owner's own house, large in 3D on a calm graphite ground, with a minimal dock of matte glass tiles that grow into their panels (variant C, "Minimalny dok").
 colors:
   Ground: "#101419"
-  Raised: "#161B21"
+  Raised: "#181D24"
   Sheet: "#1B2128"
-  Well: "#0A0D11"
-  Hairline: "#2A313A"
-  Ink: "#E8EBEF"
-  InkMuted: "#A7B0BC"
-  InkFaint: "#8A94A0"
+  Well: "#10141A66"
+  Hairline: "#2E3640"
+  Ink: "#EEF1F4"
+  InkMuted: "#AEB7C2"
+  InkFaint: "#8E98A4"
   RuleEmpty: "#6B7581"
-  Rule: "#F2C230"
-  OnRule: "#15120A"
+  Accent: "#7FE3C4"
+  AccentWash: "#7FE3C429"
+  OnAccent: "#0B1F19"
+  Rule: "#7FE3C4"
+  OnRule: "#0B1F19"
   Error: "#EF8A7E"
-  Glass: "#101419E6"
-  GlassOpaque: "#14181E"
-  GlassRimHigh: "#FFFFFF24"
-  GlassRimLow: "#FFFFFF08"
+  Glass: "#1A2027D0"
+  GlassDense: "#1A2027EB"
+  GlassSheen: "#FFFFFF14"
+  GlassOpaque: "#161B21F2"
+  GlassRimHigh: "#FFFFFF38"
+  GlassRimLow: "#FFFFFF0A"
+  GlassShadow: "#000000CC"
   Scrim: "#05060A"
+  ModelBackground: "#1E2329"
 typography:
   measureMonumental:
     fontFamily: "Barlow Condensed SemiBold"
@@ -101,9 +108,11 @@ typography:
     letterSpacing: "0.02em"
 rounded:
   tick: "2dp"
-  control: "6dp"
-  panel: "8dp"
-  sheet: "12dp"
+  control: "12dp"
+  tile: "18dp"
+  panel: "22dp"
+  sheet: "26dp"
+  pill: "999dp"
 spacing:
   xxs: "2dp"
   xs: "4dp"
@@ -113,109 +122,77 @@ spacing:
   xl: "24dp"
   xxl: "32dp"
   xxxl: "48dp"
+sizes:
+  touch: "48dp"
+  tile: "56dp"
+  icon: "22dp"
+  iconSmall: "18dp"
+depth:
+  tile: "10dp"
+  panel: "18dp"
+motion:
+  morphOpen: "280ms emphasized-decelerate, scaled by the distance left"
+  morphClose: "220ms standard, scaled by the distance left"
+  enter: "220ms"
+  exit: "150ms"
+  settle: "180ms"
+  recede: "160ms"
 components:
+  house-pill:
+    background: "Glass"
+    shape: "pill"
+    height: "48dp"
+    content: "house icon, short name (titleSmall), Demo/Galeria badge, chevron down"
+  header-button:
+    background: "Glass"
+    shape: "pill"
+    size: "48dp"
+  badge:
+    textColor: "Accent"
+    border: "1dp Accent 70%"
+    shape: "pill"
+    typography: "labelMedium"
+  dock-tile:
+    background: "Glass"
+    shape: "tile"
+    height: "56dp"
+    content: "icon, state label (titleSmall), chevron / percentage / preview mark + return"
+  dock-panel:
+    background: "Glass → GlassDense (follows the morph)"
+    shape: "panel"
+    maxShare: "62% of the workspace height upright; beside the dock on a phone on its side"
+  layer-card:
+    background: "#FFFFFF0F"
+    border: "1dp GlassRimHigh"
+    shape: "control"
+    height: "56dp"
+  layer-card-selected:
+    background: "AccentWash"
+    border: "1.5dp Accent"
+    content: "Accent icon, semibold label, Accent check"
+  view-chip:
+    background: "#FFFFFF0F"
+    border: "1dp GlassRimHigh"
+    shape: "pill"
+    height: "48dp"
+  view-chip-selected:
+    background: "AccentWash"
+    border: "1.5dp Accent"
+    content: "Accent check, semibold label"
+  folding-rule:
+    done: "Rule (mint) fill"
+    inProgress: "Rule outline, filled to completion"
+    notStarted: "RuleEmpty outline"
+    height: "52dp interactive, 40dp static"
   ink-button:
-    backgroundColor: "{colors.Ink}"
-    textColor: "{colors.Ground}"
-    typography: "{typography.labelLarge}"
-    rounded: "{rounded.control}"
-    padding: "8dp 16dp"
+    background: "Ink"
+    textColor: "Ground"
+    shape: "control"
     height: "48dp"
   line-button:
-    backgroundColor: "transparent"
-    textColor: "{colors.Ink}"
-    typography: "{typography.labelLarge}"
-    rounded: "{rounded.control}"
-    padding: "8dp 16dp"
-    height: "48dp"
-  quiet-action:
-    backgroundColor: "transparent"
-    textColor: "{colors.InkMuted}"
-    typography: "{typography.labelLarge}"
-    padding: "4dp 0dp"
-    height: "48dp"
-  glass-surface:
-    backgroundColor: "{colors.Glass}"
-    textColor: "{colors.Ink}"
-    rounded: "{rounded.panel}"
-  glass-surface-over-chrome:
-    backgroundColor: "{colors.GlassOpaque}"
-    textColor: "{colors.Ink}"
-    rounded: "{rounded.panel}"
-  panel-header:
-    textColor: "{colors.Ink}"
-    typography: "{typography.titleSmall}"
-    padding: "4dp 4dp 0dp 16dp"
-    height: "48dp"
-  panel-option:
-    textColor: "{colors.Ink}"
-    typography: "{typography.bodyMedium}"
-    padding: "4dp 16dp"
-    height: "48dp"
-  panel-group-label:
-    textColor: "{colors.InkMuted}"
-    typography: "{typography.labelMedium}"
-    padding: "12dp 16dp 2dp 16dp"
-  section-heading:
-    textColor: "{colors.Ink}"
-    typography: "{typography.titleMedium}"
-    padding: "24dp 0dp 8dp 0dp"
-  folding-rule:
-    backgroundColor: "{colors.Rule}"
-    textColor: "{colors.InkFaint}"
-    typography: "{typography.measureNumeral}"
-    rounded: "{rounded.tick}"
-    height: "52dp"
-  folding-rule-static:
-    height: "40dp"
-  stage-mark:
-    backgroundColor: "{colors.Rule}"
-    width: "18dp"
-    height: "8dp"
-  timeline-rail:
-    backgroundColor: "{colors.Glass}"
-    textColor: "{colors.Ink}"
-    rounded: "{rounded.sheet}"
-  stage-strip-item:
-    backgroundColor: "transparent"
-    textColor: "{colors.Ink}"
-    typography: "{typography.labelLarge}"
-    rounded: "{rounded.control}"
-    padding: "8dp 12dp"
-    height: "56dp"
-  stage-strip-item-selected:
-    backgroundColor: "{colors.Well}"
-  tool-rail-button:
-    backgroundColor: "transparent"
-    textColor: "{colors.InkMuted}"
-    typography: "{typography.labelSmall}"
-    rounded: "{rounded.control}"
-    width: "64dp"
-    height: "60dp"
-  tool-rail-button-pressed:
-    backgroundColor: "{colors.Well}"
-    textColor: "{colors.Ink}"
-  tool-pane:
-    backgroundColor: "{colors.GlassOpaque}"
-    rounded: "{rounded.panel}"
-    width: "236dp"
-  inspector-sheet:
-    backgroundColor: "{colors.Sheet}"
-    textColor: "{colors.Ink}"
-    rounded: "{rounded.sheet}"
-  house-menu-row:
-    backgroundColor: "transparent"
-    textColor: "{colors.Ink}"
-    typography: "{typography.bodyLarge}"
-    padding: "8dp 16dp"
-    height: "56dp"
-  house-menu-row-current:
-    backgroundColor: "{colors.Well}"
-  status-row:
-    backgroundColor: "transparent"
-    textColor: "{colors.Ink}"
-    typography: "{typography.bodySmall}"
-    padding: "0dp 8dp 0dp 12dp"
+    border: "1dp RuleEmpty (Ink when it is the action that matters)"
+    textColor: "Ink"
+    shape: "control"
     height: "48dp"
 ---
 
@@ -223,181 +200,130 @@ components:
 
 ## Overview
 
-**Creative North Star: "The Folding Rule"**
+**Creative North Star: "Minimalny dok" (OWNER's choice, variant C, APK 1356)**
 
-Construction progress is a measure, and the app reads it the way a builder does: on a carpenter's folding rule (miarka składana). The build's stages are its hinged segments, unfolded as far as the build has got, lying under the house. A graphite night ground carries the house; the chrome over the model is a translucent graphite tint rather than an opaque slab; every word is achromatic ink; and a single accent, rule yellow, means measured construction progress and nothing else. A look back in time wears the same yellow as an outline, never a fill, so a preview can never pass for the state of the build.
+The house is the screen. The model stands large and centred on a calm graphite ground, edge to edge, and the only chrome over it is a handful of small floating pieces of smoky matte glass: the house pill at the top start, "Dopasuj" and the menu at the top end, and a dock of two tiles at the foot — a wider "Cały dom" that names the layer shown now, and "Etapy". Each tile grows, as the very same piece of glass, into its own panel (Warstwy, Etapy) and shrinks back into its slot. Nothing else is permanent. Words are achromatic ink; one accent, mint, marks what is chosen or measured, always beside a mark or a word.
 
-The system is dark-first, model-first and technical but calm. Since INTEGRATION-004A the house is the root: the model edge to edge with four compact layers of chrome and one contextual sheet at a time; the stages are a ruled list in a sheet over it; the inked line drawing of the house and the monumental figure live on the source sheet and the stage sheet. Hierarchy is carried by type size, weight and ink level rather than by enclosing cards. Density is modest and every control is a 48 dp target, because the owner checks the build one-handed on the plot as often as at home in the evening. Motion explains continuity (a pane growing from the rail button that opened it, the rule's cursor settling on a stop) and disappears entirely when the system animator scale is zero.
+This direction replaces the former "Folding Rule" system and its bans (no pills, no shadows, a side rail, a bottom timeline panel). The folding rule survives as the construction axis inside the Etapy panel, now in mint; it is no longer the frame of the screen.
 
-Confirmed rejections, from the owner's brief: card-heavy dashboards, a giant rounded model card, stacked rectangular panels around the 3D, a debug-tool feel, and large dead cards for unfinished places.
+Confirmed rejections, from the owner's briefs: a permanent side rail, a permanent large progress panel, a full navigation bar (variant A), a vertical axis (variant B), a permanent CAD grid, card-heavy dashboards, stacked translucent panels, and dead features shown as main actions.
 
 **Key Characteristics:**
-- One accent (rule yellow) with one meaning: measured progress.
-- Actions are ink; a filled button is near-white on graphite, never yellow.
-- State is always a shape and a word as well as a colour.
-- Glass is a one-layer material; chrome over chrome is opaque.
-- Rectilinear corners from a four-step scale (2 / 6 / 8 / 12 dp); no pills.
-- A condensed tabular face for measured figures only; Roboto for everything read.
-- Every colour, space, corner and type role comes from `Theme.kt`.
+- The house fills most of the width upright and stays centred; the camera frames it in what the chrome leaves free AT REST.
+- Two dock tiles; each morphs into its panel. One panel at a time; the other tile stays where it is.
+- Smoky matte glass: tint, sheen, fixed grain, light rim, soft depth outside the shape. No backdrop blur (see Elevation & Depth).
+- One accent, mint, for chosen and measured things, never alone: a check, a filled mark, a heavier label go with it.
+- Rounded, soft shapes from one scale (12 / 18 / 22 / 26 dp and pills).
+- Every colour, space, corner, size, depth and motion comes from `Theme.kt` and `Motion.kt`.
 
 ## Colors
 
-Graphite neutrals in tight tonal steps, achromatic ink in three levels, and one saturated yellow reserved for the measure.
+Graphite neutrals in tight tonal steps, achromatic ink in three levels, and one mint accent.
 
 ### Primary
-- **Rule Yellow** (`Rule`): measured progress and nothing else. The done segments of the folding rule, the filled part of the stage in progress, the solid "now" tag, the hollow preview tag and its hairline, the done/in-progress `StageMark`, the part of the house line drawing the current stage adds, and the completion slider in the stage sheet (which edits that measure). Material's `tertiary` is mapped to it, so no stock component may be left on a tertiary default.
-- **Ink on Rule** (`OnRule`): text or ticks placed on the yellow (11:1).
+- **Mint** (`Accent`, also named `Rule` where the construction axis draws it): what is chosen (the layer card, the view chip on screen, the menu's check) and what is measured (the done segments of the axis, the in-progress fill, the "now" tag, the saved percentage on the Etapy tile, the "Demo" badge). A preview is the mint as an OUTLINE (the hollow preview tag), never a fill.
+- **Mint wash** (`AccentWash`): the quiet fill under a chosen card or chip, always with the 1.5 dp mint rim and a check.
+- **Ink on mint** (`OnAccent` / `OnRule`): ticks and text on the mint (12:1).
 
 ### Neutral
-- **Graphite Ground** (`Ground`): the app's ground on the sheets, the analyzer task and the no-house state. The 3D backdrop is the renderer's own, deliberately darker, so the model's ground is the darkest thing on screen.
-- **Raised Graphite** (`Raised`): one step up; text fields, the open stage row in the stage sheet.
-- **Sheet Graphite** (`Sheet`): opaque sheets that carry dense text: the element inspector, the house switcher, dialogs, the snackbar.
-- **Well** (`Well`): the darkest step, a control pressed into its rail (active tool, selected place, selected strip stop, current house in the switcher).
-- **Hairline** (`Hairline`): 1 dp dividers, the rail and bar edges, the completion and progress tracks.
-- **Ink** (`Ink`): text, icons in the active state, filled action buttons, and the lines of the built part of the house (15.6:1).
-- **Muted Ink** (`InkMuted`): secondary text, idle icons and labels, the design's end cap on the rule (8.4:1).
-- **Faint Ink** (`InkFaint`): metadata only (dates, stage numerals, disabled labels; 6:1). Never a label a person must read to act.
-- **Rule Grey** (`RuleEmpty`): the outline of a stage not started, graduation ticks, unchosen option rings, the idle LineButton border (3.9:1, a graphic that must be seen).
-- **Error Coral** (`Error`): the caution mark of a problem line and failed analysis states; always beside words, never alone.
-- **Glass** (`Glass`, 90 % Ground): the tint of chrome floating over the model. **Glass Opaque** (`GlassOpaque`) is the tint of a pane over another pane. **Glass Rim** (`GlassRimHigh` to `GlassRimLow`): the 1 dp vertical gradient rim that catches light on a pane's top edge.
-- **Scrim** (`Scrim`): the shade settling the model's top edge under the status bar (at 55 %) and behind the navigation bar (60 %).
-
-`Theme.kt` also fills Material's container slots (`primaryContainer` / `secondaryContainer` #262D36, `tertiaryContainer` #3A3218, `surfaceBright` #232A33, `surfaceContainerHighest` #222932, `errorContainer` #3A1D19, `onError` #1C0B08) so stock components never fall back to Material lavender. They are scheme plumbing, not tokens to draw with.
+- **Model background** (`PresentationLook.MODEL_BACKGROUND`, #1E2329): the 3D ground, a calm mid graphite a step lighter than the app's own ground, with a soft Compose vignette at the corners. Until APK 1355 it was #12151A.
+- **Graphite Ground** (`Ground`): the places without the model (the analyzer task, the no-house state).
+- **Raised / Sheet** (`Raised`, `Sheet`): opaque sheets that carry dense text — the house menu, the full tools sheet, the source sheet, the element details, dialogs.
+- **Well** (`Well`): a translucent dark step under an open stage row inside a panel.
+- **Hairline** (`Hairline`): 1 dp dividers.
+- **Ink / Muted Ink / Faint Ink** (`Ink` 15:1, `InkMuted` 8:1, `InkFaint` 6:1 on the ground): text in three levels; Faint is metadata only.
+- **Rule Grey** (`RuleEmpty`): the outline of a stage not started, graduation ticks, an idle LineButton border.
+- **Error** (`Error`): with the caution mark, never alone.
 
 ### Named Rules
-**The One Meaning Rule.** Rule yellow means measured construction progress. It is never an action, a selection, a focus ring, a link or a decoration. "Wróć do teraz" and "Ustaw postęp" are ink outlines because they are actions.
+**The Mint Means Chosen or Measured Rule.** The mint never marks an action, a focus or a link. A chosen thing is also a check, a filled mark or a heavier label.
 
-**The Outline Is a Look Back Rule.** The actual state is solid; a preview is the same yellow hollow. A preview may never be drawn filled, and the actual state is repeated at the top of the screen while previewing, never replaced.
-
-**The Achromatic Text Rule.** Text is Ink, InkMuted or InkFaint. Colour never carries a sentence.
+**The Never Invented Rule.** With nothing saved, the Etapy tile says "Etapy" and nothing else: no percentage, no stage, no date.
 
 ## Typography
 
-**Display Font:** Barlow Condensed SemiBold (bundled, `res/font/barlow_condensed_semibold.ttf`), tabular numerals
-**Body Font:** Roboto (the platform face through Material's type scale)
-
-**Character:** The rule's own face, narrow and engineered, speaks only in measured figures; Roboto carries every word the owner reads, set at Material's scale with semibold titles and calmer tracking on the small roles.
-
-### Hierarchy
-- **Measure / monumental** (600, 64sp, line 64sp, -0.01em, tnum): the one monumental figure in the app, "Postęp wg etapów" (the stage sheet's header, scaled).
-- **Measure / inline** (600, 20sp, line 22sp, tnum): a measured value inside a line of chrome ("43%" in the timeline, stage completion in the stage sheet; the sheet's header scales it by 1.4).
-- **Measure / numeral** (600, 13sp, line 14sp, tnum): stage numbers and the rule's graduation numerals.
-- **Headline** (headlineSmall, 600, 24sp): a screen's title ("Etapy budowy" on the stage sheet, the no-house state).
-- **Title** (titleLarge / titleMedium / titleSmall, 600, 22 / 16 / 14sp, 0 tracking): section headings, the current stage, pane titles and the 3D context title.
-- **Body** (bodyLarge / bodyMedium / bodySmall, 400, 16 / 14 / 12sp): stage names, rows and values; bodySmall is the workhorse for second lines. Content columns stop at 720 dp (`Sizes.contentMax`, 560 dp on empty places).
-- **Label** (labelLarge / labelMedium / labelSmall, 500, 14 / 12 / 11sp, +0.01 to +0.02em, sentence case): button text, group labels, navigation and rail labels.
+Roboto (Material's scale, calmer tracking on the small roles) for everything read; Barlow Condensed SemiBold with tabular figures (`Measure`) for measured figures only (the percentage on the Etapy tile and in the stage editor). Labels on glass are titleSmall (tiles, pill), titleMedium (panel titles), bodyMedium (cards), labelLarge (chips).
 
 ### Named Rules
-**The Measured Face Rule.** Barlow Condensed is for measured figures only (percentages, stage numbers, graduations). A word set in it is a mistake.
-
-**The One Monument Rule.** There is one 64sp figure in the app, and it is progress by stages. No other number competes with it.
-
-**The Sentence Case Rule.** Labels are sentence case and in Polish from `strings.xml`. Group names are muted headings for the rows below them, not uppercase eyebrows above a title.
+**The Every maxLines Has An Ellipsis Rule.** Checked at font scale 1.3: the pill's name, the tile labels and the chips end in an ellipsis rather than wrap into the house.
 
 ## Layout
 
-A single column on the phone, centred at a readable measure (max 720 dp) on wide windows, never stretched. Spacing comes from one scale (2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 dp) with more space above a heading than below it (`SectionHeading`: 24 dp above, 8 dp below). Screen gutters and pane insets are 16 dp.
+The workspace (`HouseWorkspace.kt`) is the root whenever a house exists.
 
-The shell is the house workspace (INTEGRATION-004A, the OWNER's house-first override): no navigation bar, no page beside the house. Its chrome has four layers, each only as large as its job: a compact context top-left (the house menu button, the house name, the actual state, and a status row only when there is something to say), the labelled tool rail on the right edge with its 236 dp pane growing to its left, the timeline at the foot whose header opens the stage sheet, and, one at a time, a contextual surface: with a selection, the element's name above the timeline and its details in a sheet that replaces the timeline (max 460 dp and 55 % of the screen; a 360 dp side panel in landscape); or a modal sheet on a scrim (the house menu, the stages, the source, the developer gallery). The camera frames the house inside what the resting chrome leaves free; sheets and the analyzer task never move it. In landscape the bottom stack ends before the rail — and, while a pane is open, before the pane — instead of running under either; the side rail never runs off the safe area (it scrolls past it), and while the details are open the rail leaves with the timeline. The house the owner last chose opens on a cold start; with none chosen, the showcase does (MARCOWKI-UI: "Dom w marcówkach", said to be a demonstration model). The app's own pick at start is never remembered as a choice. On a short window the timeline's header and its rule share one row. Panels share a budget, not a layer: none may overlap another. Content respects the safe drawing area (status bar, navigation bar, cutout, keyboard).
-
-Adding a house from a link is a task surface that takes the screen and returns to the same house; with no house on the phone the root is `NoHouseScreen`, one paragraph and one filled action.
+- **Header (top, inside the safe area, 8 dp gutter):** the house pill at the start (house icon, the short name — "Marcówki" for the showcase, from the scene registry's `showcase.short`, else the title — a discreet badge "Demo" or "Galeria", a chevron; it opens the house menu), and at the end two 48 dp glass buttons, "Dopasuj" and the menu (⋮). Under the pill, only when there is something to say, one status pill (a new house ready, an analysis running or failed, a limited or partial model, a gallery scene with the way back to the showcase).
+- **Dock (foot):** the layers tile (at least 156 dp, at most 55 % of the row; it names the layer shown now: "Cały dom", "Bez dachu", "Parter", "Poddasze", "Tylko: …") and the Etapy tile ("Etapy", plus the saved percentage only when saved; while a stage is previewed, the hollow preview mark, "Podgląd" over the stage's name, and a 48 dp × that returns to the design or the saved state).
+- **Panels:** upright, a panel opens above the dock across the dock's width (at most 440 dp) and at most 62 % of the workspace's height, so the top of the house stays in view; the tile it came from leaves its slot, the other tile stays. On a phone on its side (under 480 dp tall) a panel opens beside the dock, bottom-aligned, at most 400 dp wide and as tall as the space under the header — never across the short screen.
+- **Context pieces:** the chosen element's pill above the dock (name, storey, the way to its details, ×); the gesture hint once at the first start; the details in a sheet from the foot (a side panel on a phone on its side). While the details sheet stands upright, the dock steps aside under it.
+- **Framing:** the camera frames the house in what the resting chrome leaves free (under the header, above the dock); opening or closing a panel never moves it. The whole house is fitted by the corners of each object's own box, CENTRED by moving the focus until the projected extent is symmetric — an L-shaped house's empty box corner (a rear terrace, a garage wing) no longer pushes it small and aside. The parallel views keep their box fit (identical for axis-aligned views).
+- **Grid:** the one-metre reference grid is a view setting in the menu ("Siatka pod domem"), off at the start, remembered on the phone.
 
 ## Elevation & Depth
 
-Flat. There are no shadows anywhere in the build. Depth is tonal: Well (pressed in) below Ground, then Raised, then Sheet, and over the model a translucent Glass tint with a 1 dp rim gradient that is brighter at the top edge. Glass does not blur: the model is drawn by Filament on its own surface, which the window cannot sample. A dimmed scrim settles the model's top edge under the status bar and fades in behind the navigation bar.
+**Matte glass, honestly.** Every piece of chrome over the 3D is `GlassSurface` / `Modifier.matteGlass`: a soft depth drawn OUTSIDE the shape only (eight rings of falling alpha, offset a little downwards, so the shadow never darkens the glass itself), a translucent graphite tint (`Glass`; a panel thickens to `GlassDense` as it grows, read at draw time from the morph's progress), a sheen across the top half (`GlassSheen`), a fixed seeded grain tile (96 px, 5 % alpha) that makes the tint read as frosted, and a 1 dp rim brighter at the top (`GlassRimHigh` → `GlassRimLow`).
+
+**What it is not: a backdrop blur.** The model is drawn by Filament into its own `SurfaceView`, a separate layer composited by the system below the window. Compose's `Modifier.blur` blurs only the window's own content, and the window cannot sample the surface beneath it; a true blur would need the scene drawn twice or read back from the GPU every frame, and neither is done. The glass is static: its grain is one cached bitmap, and it is redrawn only when the glass itself changes. No animation runs at rest.
 
 ### Named Rules
-**The One Layer Rule.** Glass is a one-layer material. Two tints stacked never reach cover and let the text beneath show through, so a pane over another pane (the tool pane over the rail) takes `GlassOpaque`. The stops of the expanded timeline are not panes: they sit on the timeline's own glass, and only the chosen one is marked out, as a Well.
+**The One Layer Rule.** Glass is a one-layer material: two tints stacked never reach cover. A popup over glass (the ⋮ menu) takes `GlassOpaque`; dense lists live in opaque sheets.
 
-**The Solid to the Finger Rule.** Every surface over the model — glass or the opaque inspector sheet — takes `Modifier.solidToFinger()` first: it takes part in hit testing over its whole area without consuming anything, so a touch on chrome never orbits the camera, picks a wall behind a label or presses a rail button under a sheet.
-
-**The Pressed Not Coloured Rule.** An active control sinks into its rail (a Well behind it), plus a line and full-ink label. It does not light up.
+**The Solid to the Finger Rule.** Every surface over the model takes `Modifier.solidToFinger()` first: it takes part in hit testing over its whole area without consuming anything, so a touch on glass never orbits the camera or picks a wall behind a label. The morphing glass is solid over exactly its current rectangle, and nothing outside it is; the 3D left uncovered stays live.
 
 ## Shapes
 
-Rectilinear: a rule has corners, not pills. Four radii only: `tick` (2 dp) for rule segments, marks and the preview tag box; `control` (6 dp) for buttons, wells, rail buttons and the chosen timeline stop; `panel` (8 dp) for glass panes and the snackbar; `sheet` (12 dp) for the timeline and the inspector sheet (rounded on the edge it rises from only). Borders are 1 dp hairlines; mark outlines are 1.2 to 1.4 dp. The only circles are the 10 dp choice rings of `PanelOption`. The signature silhouettes are drawn, not borrowed: the rule's segments with 2 dp hinge gaps, the downward five-point tag of a marking gauge, and the small house end cap. Icons (`ShellIcons`) are 24 dp outlines at one 1.75 stroke with round caps and joins, tinted by the caller.
+Soft and rounded, from one scale: `tick` 2 dp (axis segments and marks), `control` 12 dp (buttons, layer cards), `tile` 18 dp (dock tiles, status and selection pills), `panel` 22 dp (open panels), `sheet` 26 dp (modal sheets, rounded on the edge they rise from), `pill` (the house pill, header buttons, view chips, badges). The morph interpolates the corner from `tile` to `panel`, never past half the shorter side. Icons (`ShellIcons`) are 24 dp outlines at one 1.75 stroke with round caps, including the layer marks (house, roof off, ground floor, attic), the grid and ⋮.
+
+## Motion
+
+One policy (`MotionPolicy`, read through `LocalMotionPolicy`).
+
+- **The morph.** A dock tile and its panel are one `MorphSurface`: position, size, corner radius and tint interpolate together from the tile's measured slot to the panel's frame, the tile's words fade out by 30 % of the way and the panel's fade in (rising 8 dp) from 30 %, so two texts never share the glass. Open 280 ms, emphasized decelerate; close 220 ms, standard; no overshoot. Each step starts from wherever the glass is and takes only the share of time left, so a second tap mid-way turns it round at once. Switching panels closes the open one into its slot first, then grows the other. The rectangles are re-read on every layout, so a window that turns or changes width mid-morph moves the glass with it. The progress is read only in layout and draw: a frame of the morph re-lays out one node and recomposes nothing.
+- **Elsewhere:** enter 220 ms, exit 150 ms, settle 180 ms, recede 160 ms (the header and resting tiles fade to 18 % while a finger turns the model); `enterDelayed` when one dense line replaces another.
+- **Animations off.** With `ANIMATOR_DURATION_SCALE = 0` every morph snaps and every transition is a cut (Compose ignores the setting by itself, so `rememberSystemMotionPolicy` reads it live).
+- **The 3D at rest draws nothing new.** Since APK 1356 the Filament canvas submits a frame only when the camera, the viewer state, the surface or a pick changed (plus two settle frames for pacing); an idle house keeps its last frame on the surface. The per-vsync callback stays (it is what notices a change), and nothing is faked: any change redraws at once.
 
 ## Components
 
+### House pill
+48 dp glass pill; the short name in titleSmall with an ellipsis; the badge is labelMedium mint in a 1 dp mint outline ("Demo" for the showcase, "Galeria" for a developer-gallery scene, none for a house from a link). The kind ("Model demonstracyjny", …) is its `stateDescription`; the full name stands in the house menu.
+
+### Header buttons
+48 dp round glass buttons: "Dopasuj" (the fit preset; it keeps the angle) and ⋮, a `DropdownMenu` on `GlassOpaque` with 18 dp corners: "Siatka pod domem" (a check when on, the word "wyłączona" when off), "Wszystkie widoki, warstwy i wygląd" (the full tools sheet), "Źródło modelu i analiza".
+
+### Dock tiles
+56 dp glass tiles with `tile` corners; the whole tile is the button (role Button, `onClickLabel`, the state in `stateDescription`). A chevron on the layers tile says it opens; the Etapy tile's percentage is mint Barlow, only when saved. In preview the tile's × is its own 48 dp target.
+
+### Warstwy panel
+Head outside the scroll (layers mark, titleMedium "Warstwy", ×). The four layers as cards in a 2 × 2 grid (one row of four only when the panel itself is at least 520 dp wide): mark and name; chosen = mint wash, 1.5 dp mint rim, mint mark, semibold label and a mint check. Under them, what the chosen layer leaves out, in words taken from the filter itself (true for any building), and "Pokaż wszystko" when anything is left out. Then the Widok row — "Widok · Perspektywa ⌄" — which names the view on screen (or "Własny kąt" once the camera was turned by hand) and unfolds one sideways-scrolling row of view chips (Perspektywa, Z przodu, Z tyłu, Z lewej, Z prawej, Dach z góry, Aksonometria) with a fade at the cut end. A layer choice keeps the panel open (its line is the answer); a view choice closes it, because the answer is the house, which the panel would cover. "Przekrój", isolation, the element list, the plans, the places, zoom, reset and the looks stay in the full tools sheet.
+
+### Etapy panel
+Head outside the scroll (the axis mark, "Etapy budowy", and the saved line: "2% · Zapisano 27 listopada 2026", or "Postęp nieustawiony"), the construction axis (the folding rule, 52 dp, mint), one line that says what the 3D shows (the design with nothing saved; "Teraz: Ściany · Etap w toku · 40%"; or, while previewing, the preview mark, "Podgląd: Fundamenty", "Tylko podgląd — nic się nie zapisuje." and "Wróć do projektu" / "Wróć do teraz"), then the stages list (`StagesScreen(compact = true)`), each stage opening in place. The axis drags sideways and the list scrolls up and down, so scrolling never moves the axis. Completion is edited by −5 / +5 steps against a draft that shows the saved value beside it, saved only by "Zapisz NN%" and put back by "Cofnij" — no slider in a scrolling list. A gallery scene's panel says that no progress is recorded there.
+
+### The construction axis (folding rule)
+Done: solid mint. In progress: mint outline filled to its completion. Not started: RuleEmpty outline. The solid tag marks NOW; a hollow tag with a hairline marks the PREVIEW. Scrubbing snaps stop by stop, moves only the preview and never changes saved progress; TalkBack reads it as an adjustable control.
+
 ### Buttons
-Ink, not colour; rectangular, 48 dp tall at least.
-- **Shape:** gently squared corners (`control`, 6 dp).
-- **InkButton (primary):** filled Ink with Ground text, labelLarge, 16 dp by 8 dp padding, optional 18 dp icon; one per screen ("Otwórz w 3D"). Single line with ellipsis.
-- **LineButton (secondary):** transparent with a 1 dp outline, Ink text; the border is RuleEmpty by default and Ink when the action is the one that matters on that panel ("Wróć do teraz", "Ustaw postęp"). Up to two lines with ellipsis.
-- **Disabled:** InkButton sinks to Raised with an InkFaint label; LineButton keeps an InkFaint label on a Hairline outline — readable (above 4.5:1), never Material's faded default.
-- **QuietAction (tertiary):** no outline, no indent, InkMuted labelLarge at the text margin with an optional icon; the whole row is a 48 dp target ("Co to znaczy?", "Dodaj dom z linku").
-- **Pressed / disabled:** Material's state layer; disabled labels drop to InkFaint. No yellow state anywhere.
-
-### Chips
-Not used. Choices are `PanelOption` rows.
-
-### Cards / Containers
-- **GlassSurface:** Glass tint, `panel` or `sheet` corners, 1 dp rim gradient, no shadow, no blur; `GlassOpaque` when it lies on other chrome.
-- **Opaque sheets:** Sheet colour for the inspector, switcher and dialogs; dense text never sits on translucent glass.
-- **Internal padding:** 16 dp start, 4 to 8 dp vertical per row.
-
-### Inputs / Fields
-- **Style:** Material outlined field, RuleEmpty outline at rest, label in Polish ("Teraz robimy").
-- **Focus:** outline, label and cursor turn Ink.
-- **Completion slider (stage sheet):** the one editable measure, so the only interactive control in yellow, drawn in the rule's grammar rather than as a stock pill: an 8 dp Hairline bar with `tick` corners, filled in Rule to the stage's share, graduated every 5 % (OnRule ticks on the fill, RuleEmpty beyond it), and a 6 × 28 dp Rule marker with `tick` corners for a thumb; the range carries a 1.2 dp RuleEmpty outline, the rule's "not started".
-
-### Navigation
-- **House menu (`HouseMenuSheet`):** a modal Sheet from the top context's menu button: the houses of ordinary use as 64 dp radio rows (the showcase and the analyses made on this phone; the open one on a Well with a check), "Dodaj dom z linku" as a LineButton, then the matters of this house as 56 dp rows with an icon and a chevron (Etapy budowy, Źródło modelu i analiza) and the named cost boundary (Koszty, disabled, InkFaint, with the sentence that it is not built yet), and at the foot one row to the developer gallery with its count. Selection is announced through `stateDescription`, never a `contentDescription` that would erase the label.
-- **Developer gallery (`DevelopmentGallerySheet`):** the scenes shipped for development and review, apart from the houses: a head that says what they are (outside the scroll, with "Wróć do: Dom w marcówkach" while one is open), then a lazy list of radio rows under each scene's technical record, faded below the fold, opened on the scene that is open.
-- **Status row:** one 48 dp row under the top context, only when the house has something to say: a new house ready ("Nowy dom gotowy: … · Otwórz"), a link analysis running or failed, a model kept with limitations, or a scene from the developer gallery (with the way back to the showcase); a mark and a sentence, the way to its matter. The line under the house's name says one fact, and is always laid out: while a preview or the details hide the timeline's "now", the actual state; at rest, the showcase's kind ("Model demonstracyjny"), for any other house the date its record was saved, or else what it is ("Z analizy linku", "Scena z galerii deweloperskiej"). "Postęp nieustawiony" is said once on screen, by the timeline or the details. A scene from the developer gallery is preview-only: its history can be looked at, no progress is recorded there.
-- **PanelHeader:** titleSmall title (and an optional bodySmall line) with a 48 dp close button; it sits outside the pane's scroll.
-
-### The Folding Rule (signature)
-The build's stages as hinged segments with the design's house outline as an end cap. Done: solid Rule. In progress: Rule outline filled to its completion. Not started: RuleEmpty outline. The solid tag above marks NOW; a hollow tag with a hairline through the rule marks the PREVIEW cursor. Graduation ticks under every hinge, a longer tick and a numeral at 1, 5, 10 and 15. Interactive height 52 dp (the whole height is the touch band), static 40 dp, grown to fit numerals at large font scales. Scrubbing snaps stop by stop with a haptic tick, moves only the preview and never changes saved progress; TalkBack reads it as an adjustable control with previous, next and "Wróć do teraz" actions.
-
-### StageMark and PreviewMark
-The rule's grammar in 18 by 8 dp (`StageMark`: filled, part-filled, grey outline, InkMuted outline for the finished design) and an 11 dp hollow Rule box (`PreviewMark`) beside "Podgląd: …". The same marks are used in the timeline, the stage strip, the stage sheet and the inspector.
-
-### TimelineRail
-A `sheet`-cornered GlassSurface at the foot of the 3D. The header (at least 56 dp) states now ("43% · Dach", "Teraz: …") or, while previewing, "Podgląd: …" with "Wróć do teraz" on the line under the title, never beside it. Expanded, a horizontal strip of stops (96 to 132 dp wide, 56 dp tall, directly on the timeline's glass with no box of their own; the chosen stop is a Well with a 1 dp Ink border and `control` corners). names each stop with its mark, numeral, name and state word. A chosen element is named in a row at the top of the same glass (name, storey, "Szczegóły", ×), above a hairline: the foot of the 3D is always one panel. With no element chosen and no pane open, the same place names what the layers hide ("Tylko parter · Ukryto poddasze i dach nad nim", "Pokaż wszystko"); choosing a layer closes the Warstwy pane, so the rail moves while no finger is on it; on a short window the rail's label alone says it. With nothing recorded the header names what the 3D shows, "Projekt docelowy", with "Ustaw postęp" beside it and the one line "Postęp nieustawiony · przesuń po osi" under them; a preview's way back then reads "Wróć do projektu". On a short window the header (at most 320 dp) and the rule share one row. The parallel views (elevations, plans, axonometry) frame the house's box in the free space, re-framed when the window turns, with the eye always outside the scene.
-
-### ToolRail
-Four labelled buttons (Wygląd, Warstwy, Widok, Dopasuj), 64 by 60 dp in a glass rail; a button's label names the current choice once it is not the default, in the one or two words that fit at font scale 1.3 ("Makieta", "Bez dachu", "Parter"); the full name is read in the pane and spoken in the state. Pressed, it sinks into a Well. Its pane (236 dp, GlassOpaque) grows out of it and swaps contents when the tool changes; lists fade below the fold with a 32 dp gradient.
-
-### Panel rows
-`PanelOption`: a 10 dp ring that fills Ink when chosen, the label semibold when chosen, every label full ink. `PanelAction`: a plain action row. `PanelGroupLabel`: labelMedium InkMuted heading. `PanelRule`: a 1 dp Hairline inset 16 dp.
-
-### Inspector
-The chosen element's details in a Sheet rising from the bottom edge in place of the timeline (a side panel in landscape): Polish name and storey first, then its construction stage with a StageMark and whether it stands by the owner's account, then label/value rows (bodySmall InkMuted / bodyMedium Ink), with the export's own English under "Dane techniczne".
-
-### Status and problem lines
-`StatusText` (labelMedium, InkMuted), `ProblemLine` (an 18 dp Error caution icon plus Ink text), and `LoadProblem` (the reason in Polish, the English technical account folded under a QuietAction).
-
-### HouseDrawing
-The source sheet's picture of the house: a derived axonometric line drawing (200 dp tall). Built by the owner's account in Ink (1.1 stroke), the current stage's additions in Rule (1.3), the remaining design as InkMuted at 32 % (0.8). With progress unset the whole design is Ink. Tapping it closes the sheet onto the house.
+`InkButton` (filled Ink, Ground text, 12 dp corners, 48 dp), `LineButton` (1 dp outline, Ink text), `QuietAction` (text only). Actions are ink, never mint.
 
 ### Sheets over the house
-`StageSheet` (the 003C stage editor in a modal Sheet capped at the window's height, the house's ridge in view above it), `SourceSheet` (the house's name, the inked `HouseDrawing`, where the model came from with its limitations named and counted, a link analysis running or failed, what the latest analysis of this house left open, the technical rows folded at the end) and `NoHouseScreen` (top-left headline, one paragraph, one InkButton "Dodaj dom z linku"). No sample rows, zero totals or pretend actions anywhere.
+Opaque `Sheet` with 26 dp top corners on a scrim, no drag pill: the house menu (houses, "Dodaj dom z linku", Etapy budowy — which opens the Etapy panel —, the source, the named cost boundary, the developer gallery), the full tools sheet, the source sheet, the developer gallery.
 
 ## Do's and Don'ts
 
 ### Do:
-- **Do** take every colour, space, corner, size and type role from `Theme.kt` (`Palette`, `Space`, `Radius`, `Sizes`, `Measure`, `MaterialTheme.typography`).
-- **Do** reserve `Rule` for measured progress: segments, the now tag, the preview outline, StageMarks, the current stage's lines in the drawing, the completion slider.
-- **Do** make actions ink: one `InkButton` per screen, `LineButton` for secondary actions, `QuietAction` for the ways on.
-- **Do** say every state as a shape and a word: a mark or well plus text, announced through `stateDescription` so a merged node keeps its label.
-- **Do** give every touch target at least 48 dp (`Sizes.touch`).
-- **Do** pair every `maxLines` limit with `overflow = TextOverflow.Ellipsis`, and check at font scale 1.3 and with `ANIMATOR_DURATION_SCALE = 0`.
-- **Do** take `GlassOpaque` for any pane over another pane, and keep headers and the one way out outside the scroll, with `fadeBelowFold` over a cut list.
-- **Do** read motion from `LocalMotionPolicy` (enter 220 ms, exit 150 ms, settle 180 ms, recede 160 ms) and use `enterDelayed` when one dense panel replaces another.
-- **Do** put every UI label in Polish, in the owner's words, in `strings.xml`; keep code names and routes in English.
-- **Do** keep the house as the root: every matter is a sheet over it or a task that returns to it, and a new permanent surface needs the OWNER's decision.
-- **Do** keep the model's semantic truth where it lives: what is visible comes from the domain's selection rules and one `primitivesOf(elements)` bridge; the UI and renderer only ask.
+- **Do** take every colour, space, corner, size, depth and motion value from `Theme.kt` / `Motion.kt`.
+- **Do** keep the house the screen: frame it by the chrome at rest, centred, and never move the camera when a panel opens.
+- **Do** grow a panel out of the tile that opened it, as one surface, and close it back into the same slot.
+- **Do** say every state as a mark and a word (`stateDescription` on merged nodes), with mint only for chosen or measured things.
+- **Do** keep panel heads and the one way out outside the scroll, and fade a cut list or row.
+- **Do** check at font scale 1.3, with animations off, upright and on the side, and with the 3D uncovered still turning under a finger.
+- **Do** keep every touch target at least 48 dp, and every `maxLines` with an ellipsis.
 
 ### Don't:
-- **Don't** write a hex colour, `Color(0x…)` or a new radius outside `Theme.kt`.
-- **Don't** put yellow on a button, border, selection, focus or link; don't fill the preview tag.
-- **Don't** tell a state by colour alone, and don't set `contentDescription` on a merged node that would erase its text.
-- **Don't** stack two translucent panes, or let one pane overlap another's touch area.
-- **Don't** add shadows, blur, pills or enclosing cards; hierarchy is type, weight and ink.
-- **Don't** set a word in Barlow Condensed, or add a second monumental figure.
-- **Don't** use uppercase eyebrows or kickers above titles.
-- **Don't** let the renderer or the UI own semantic truth: no second decision path for roof, storey or room, no `if` about a frame in the renderer.
-- **Don't** use `!!` where types can express it, and don't hide problems with `@Suppress`, empty `catch` or a lint baseline.
-- **Don't** show invented progress, costs, dates or sample rows; an unset state says "Postęp nieustawiony" and offers to set it.
-- **Don't** add a navigation bar, a tab, or a page that says only that it is not built; the cost boundary is a named row, and nothing else.
+- **Don't** bring back the side rail, the permanent timeline panel, a navigation bar or a vertical axis.
+- **Don't** stack translucent glass, or let a panel cover almost the whole screen on its side.
+- **Don't** claim a backdrop blur, sample the 3D surface or read it back from the GPU.
+- **Don't** run an animation loop at rest, or redraw the 3D when nothing changed — and don't fake it with a static picture.
+- **Don't** show an invented percentage, stage or date when nothing is saved; a preview never saves.
+- **Don't** expose a dead or unfinished feature as a main action; keep the full tools one tap away in the menu.
+- **Don't** let the UI own semantic truth: layers come from the filter, views from the presets, stages from the session.

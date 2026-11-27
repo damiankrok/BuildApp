@@ -63,6 +63,7 @@ fun Viewport(
     // reload — always re-uploads.
     LaunchedEffect(canvas, scene) {
         canvas.modelRenderer.setModel(scene, model.preparedPresentation(scene))
+        canvas.requestRender()
     }
 
     // The frame callback outlives the composition that installed it, so it may
@@ -79,8 +80,10 @@ fun Viewport(
             // clock instead. Mixing the two froze a transition at its first
             // pose, and the next touch then snapped the camera to the end.
             val nowMs = System.currentTimeMillis()
-            canvas.modelRenderer.setState(model.viewer)
-            canvas.modelRenderer.setCamera(model.camera, model.poseAt(nowMs), model.contentInsets)
+            val state = canvas.modelRenderer.setState(model.viewer)
+            val camera = canvas.modelRenderer.setCamera(model.camera, model.poseAt(nowMs), model.contentInsets)
+            // Drawn only when something on screen changed (APK 1356): an idle house costs no GPU frames.
+            state || camera
         }
     }
 

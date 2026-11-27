@@ -303,3 +303,16 @@ fun Modifier.fadeBelowFold(scroll: androidx.compose.foundation.gestures.Scrollab
         )
     }
 }
+
+/** Darkens the end of a row that continues past its edge, so a cut row of choices never looks complete. */
+fun Modifier.fadePastEnd(scroll: androidx.compose.foundation.gestures.ScrollableState, color: Color, width: Dp = 40.dp): Modifier = drawWithContent {
+    drawContent()
+    if (scroll.canScrollForward) {
+        val w = width.toPx()
+        drawRect(
+            brush = Brush.horizontalGradient(listOf(Color.Transparent, color), startX = size.width - w, endX = size.width),
+            topLeft = Offset(size.width - w, 0f),
+            size = Size(w, size.height),
+        )
+    }
+}

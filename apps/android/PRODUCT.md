@@ -48,11 +48,13 @@ maintenance.
 
 - The house is the root (OWNER override, INTEGRATION-004A). Whenever a
   house exists the app launches into the house workspace: the 3D house full
-  screen, a compact top context, restrained edge controls, the construction
-  rail at the foot, and one contextual sheet at a time. There is no
+  screen and large, a small house pill and two header buttons at the top, and
+  a minimal dock of two glass tiles at the foot ("Cały dom" and "Etapy") that
+  grow into their panels (OWNER, variant C "Minimalny dok", APK 1356); one
+  panel or sheet at a time. There is no
   dashboard before the house and no five-place navigation. The former
   places live around the house: Dom is the workspace itself; 3D is its base
-  layer; Etapy is the rail and the stage sheet; Dokumenty is the source
+  layer; Etapy is the Etapy tile and its panel; Dokumenty is the source
   sheet for now; Koszty is a named future boundary (a dedicated cost
   workspace that keeps the house's context and returns to it), never an
   empty tab. Adding a house from a link is a task flow that returns to the
@@ -66,7 +68,7 @@ maintenance.
   stage completion. It is never money spent, labour value, model geometry or
   analyzer confidence.
 - Three concepts are never collapsed: the target design, the actual current
-  progress, and the preview cursor on the timeline. A preview never saves.
+  progress, and the preview cursor on the construction axis. A preview never saves.
 - Stages: NOT_STARTED, IN_PROGRESS, DONE; at most one in progress. The 17
   Master Plan starter stages (Zakup działki … Ogród), equal weights until
   validated weights exist.
@@ -112,7 +114,7 @@ maintenance.
    what the owner has recorded; changing it is always a deliberate act.
 4. The model leads, the chrome recedes: controls exist to serve the view of
    the house and get out of its way. The house, not the rule, is the primary
-   product visual; the rule is the timeline under it.
+   product visual; the construction axis lives in the Etapy panel.
 5. One logical house: progress and history belong to the house, not to an
    analyzer run, a file or a hash.
 
@@ -120,5 +122,5 @@ maintenance.
 
 - Touch targets at least 48 dp; readable at system font scale 1.3 with no
   clipped primary label; stage state never conveyed by colour alone; the
-  timeline scrubber has tap/button alternatives; respects the system animator
+  construction axis has tap/button alternatives; respects the system animator
   scale (reduced motion = immediate transitions).

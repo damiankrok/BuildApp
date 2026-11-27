@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-29T02:08:05+00:00",
+  "generatedAt": "2026-11-27T12:00:00+00:00",
   "title": "Design System: BuildPlan",
   "extensions": {
     "colorMeta": {
@@ -22,7 +22,7 @@
       "Raised": {
         "role": "neutral",
         "displayName": "Raised Graphite",
-        "canonical": "#161B21",
+        "canonical": "#181D24",
         "tonalRamp": [
           "#070C11",
           "#20262C",
@@ -52,7 +52,7 @@
       "Well": {
         "role": "neutral",
         "displayName": "Well",
-        "canonical": "#0A0D11",
+        "canonical": "#10141A66",
         "tonalRamp": [
           "#080B0F",
           "#22252A",
@@ -67,7 +67,7 @@
       "Hairline": {
         "role": "neutral",
         "displayName": "Hairline",
-        "canonical": "#2A313A",
+        "canonical": "#2E3640",
         "tonalRamp": [
           "#060C13",
           "#1F262E",
@@ -82,7 +82,7 @@
       "Ink": {
         "role": "neutral",
         "displayName": "Ink",
-        "canonical": "#E8EBEF",
+        "canonical": "#EEF1F4",
         "tonalRamp": [
           "#090B0E",
           "#232528",
@@ -97,7 +97,7 @@
       "InkMuted": {
         "role": "neutral",
         "displayName": "Muted Ink",
-        "canonical": "#A7B0BC",
+        "canonical": "#AEB7C2",
         "tonalRamp": [
           "#060B13",
           "#1F262F",
@@ -112,7 +112,7 @@
       "InkFaint": {
         "role": "neutral",
         "displayName": "Faint Ink",
-        "canonical": "#8A94A0",
+        "canonical": "#8E98A4",
         "tonalRamp": [
           "#050C14",
           "#1E262F",
@@ -141,8 +141,8 @@
       },
       "Rule": {
         "role": "primary",
-        "displayName": "Rule Yellow",
-        "canonical": "#F2C230",
+        "displayName": "Mint (accent)",
+        "canonical": "#7FE3C4",
         "tonalRamp": [
           "#1E0200",
           "#3C1D00",
@@ -157,7 +157,7 @@
       "OnRule": {
         "role": "primary",
         "displayName": "Ink on Rule",
-        "canonical": "#15120A",
+        "canonical": "#0B1F19",
         "tonalRamp": [
           "#0E0B04",
           "#28251C",
@@ -187,7 +187,7 @@
       "Glass": {
         "role": "neutral",
         "displayName": "Glass",
-        "canonical": "#101419E6",
+        "canonical": "#1A2027D0",
         "tonalRamp": [
           "#080B10",
           "#21252B",
@@ -203,7 +203,7 @@
       "GlassOpaque": {
         "role": "neutral",
         "displayName": "Glass Opaque",
-        "canonical": "#14181E",
+        "canonical": "#161B21F2",
         "tonalRamp": [
           "#080B11",
           "#21252C",
@@ -218,7 +218,7 @@
       "GlassRimHigh": {
         "role": "neutral",
         "displayName": "Glass Rim (high)",
-        "canonical": "#FFFFFF24",
+        "canonical": "#FFFFFF38",
         "tonalRamp": [
           "#0B0B0B",
           "#252525",
@@ -234,7 +234,7 @@
       "GlassRimLow": {
         "role": "neutral",
         "displayName": "Glass Rim (low)",
-        "canonical": "#FFFFFF08",
+        "canonical": "#FFFFFF0A",
         "tonalRamp": [
           "#0B0B0B",
           "#252525",
@@ -261,6 +261,36 @@
           "#C6C9D0",
           "#ECEEF6"
         ]
+      },
+      "Accent": {
+        "role": "primary",
+        "displayName": "Mint",
+        "canonical": "#7FE3C4"
+      },
+      "AccentWash": {
+        "role": "primary",
+        "displayName": "Mint wash",
+        "canonical": "#7FE3C429"
+      },
+      "GlassDense": {
+        "role": "neutral",
+        "displayName": "Dense glass",
+        "canonical": "#1A2027EB"
+      },
+      "GlassSheen": {
+        "role": "neutral",
+        "displayName": "Glass sheen",
+        "canonical": "#FFFFFF14"
+      },
+      "GlassShadow": {
+        "role": "neutral",
+        "displayName": "Glass depth",
+        "canonical": "#000000CC"
+      },
+      "ModelBackground": {
+        "role": "neutral",
+        "displayName": "Model background",
+        "canonical": "#1E2329"
       }
     },
     "typographyMeta": {
@@ -319,21 +349,41 @@
     },
     "shadows": [
       {
-        "name": "none",
-        "value": "none",
-        "purpose": "The build has no shadows; depth is tonal (Well < Ground < Raised < Sheet) plus translucent Glass."
+        "name": "glass-depth",
+        "value": "8 rings outside the shape, falling alpha from #000000CC x 0.42, spread 10dp (tile) / 18dp (menu), offset 35% down",
+        "purpose": "Floating matte glass; drawn only outside the shape so the tint stays clear."
       },
       {
         "name": "glass-rim",
-        "value": "1dp border, vertical gradient #FFFFFF24 -> #FFFFFF08",
-        "purpose": "The light-catching rim of every GlassSurface; not a shadow."
+        "value": "1dp border, vertical gradient #FFFFFF38 -> #FFFFFF0A",
+        "purpose": "The light-catching rim of every piece of glass."
+      },
+      {
+        "name": "glass-sheen",
+        "value": "vertical gradient #FFFFFF14 -> transparent by 55% of the height (max 160dp)",
+        "purpose": "The sheen across the top of the glass."
+      },
+      {
+        "name": "glass-grain",
+        "value": "seeded 96px noise tile, white, 5% alpha, repeated",
+        "purpose": "Frosted, matte read of the tint; static, cached once."
       }
     ],
     "motion": [
       {
+        "name": "morph-open",
+        "value": "280ms cubic-bezier(0.05, 0.7, 0.1, 1), scaled by the distance left (min 60ms)",
+        "purpose": "A dock tile growing into its panel; interruptible and reversible."
+      },
+      {
+        "name": "morph-close",
+        "value": "220ms cubic-bezier(0.2, 0, 0, 1), scaled by the distance left",
+        "purpose": "The panel shrinking back into its slot."
+      },
+      {
         "name": "enter",
         "value": "220ms cubic-bezier(0.05, 0.7, 0.1, 1)",
-        "purpose": "Something arriving (emphasized decelerate)."
+        "purpose": "Something arriving."
       },
       {
         "name": "exit",
@@ -343,27 +393,12 @@
       {
         "name": "settle",
         "value": "180ms cubic-bezier(0.2, 0, 0, 1)",
-        "purpose": "A state changing in place: the rule cursor, a mark filling, a chevron."
-      },
-      {
-        "name": "enterDelayed",
-        "value": "220ms after 150ms, cubic-bezier(0.05, 0.7, 0.1, 1)",
-        "purpose": "A dense panel arriving only after the one it replaces has left."
+        "purpose": "A state changing in place."
       },
       {
         "name": "recede",
-        "value": "160ms cubic-bezier(0.2, 0, 0, 1)",
-        "purpose": "Chrome stepping back while a finger turns the model."
-      },
-      {
-        "name": "panel-rest-scale",
-        "value": "0.92",
-        "purpose": "A pane grows from its rail button from 92 % scale."
-      },
-      {
-        "name": "reduced",
-        "value": "ANIMATOR_DURATION_SCALE = 0 -> snap / no transition",
-        "purpose": "Observed live; every spec becomes a cut."
+        "value": "160ms",
+        "purpose": "Header and resting tiles fade to 18% while a finger turns the model."
       }
     ],
     "breakpoints": [
@@ -449,30 +484,6 @@
       "css": ".ds-quiet{min-height:48px;padding:4px 0;background:none;border:none;color:#A7B0BC;font:500 14px/20px Roboto,sans-serif;letter-spacing:.01em;cursor:pointer}.ds-quiet:hover{color:#E8EBEF}.ds-quiet:focus-visible{outline:2px solid #E8EBEF;outline-offset:2px}"
     },
     {
-      "name": "Folding Rule",
-      "kind": "custom",
-      "refersTo": "folding-rule",
-      "description": "Stages as hinged segments: solid done, part-filled current, grey outline not started, solid NOW tag, hollow PREVIEW tag.",
-      "html": "<div class=\"ds-rule\"><svg viewBox=\"0 0 340 52\" width=\"340\" height=\"52\"><path d=\"M98.5 0h11v3.2L104 7l-5.5-3.8z\" fill=\"#F2C230\"/><path d=\"M71.5 0h11v3.2L77 7l-5.5-3.8z\" fill=\"#101419\" stroke=\"#F2C230\" stroke-width=\"1.4\"/><line x1=\"77\" y1=\"7\" x2=\"77\" y2=\"24\" stroke=\"#F2C230\" stroke-width=\"1.2\"/><rect x=\"0\" y=\"12\" width=\"25\" height=\"10\" rx=\"1.5\" fill=\"#F2C230\"/><rect x=\"27\" y=\"12\" width=\"25\" height=\"10\" rx=\"1.5\" fill=\"#F2C230\"/><rect x=\"54\" y=\"12\" width=\"25\" height=\"10\" rx=\"1.5\" fill=\"#F2C230\"/><rect x=\"81\" y=\"12\" width=\"10\" height=\"10\" rx=\"1.5\" fill=\"#F2C230\"/><rect x=\"81.6\" y=\"12.6\" width=\"23.8\" height=\"8.8\" rx=\"1.5\" fill=\"none\" stroke=\"#F2C230\" stroke-width=\"1.2\"/><rect x=\"108.6\" y=\"12.6\" width=\"23.8\" height=\"8.8\" rx=\"1.5\" fill=\"none\" stroke=\"#6B7581\" stroke-width=\"1.2\"/><rect x=\"135.6\" y=\"12.6\" width=\"23.8\" height=\"8.8\" rx=\"1.5\" fill=\"none\" stroke=\"#6B7581\" stroke-width=\"1.2\"/><path d=\"M167 22v-6.5l6-6 6 6V22z\" fill=\"none\" stroke=\"#A7B0BC\" stroke-width=\"1.2\"/><line x1=\"12.5\" y1=\"25\" x2=\"12.5\" y2=\"29\" stroke=\"#6B7581\"/><text x=\"12.5\" y=\"42\" fill=\"#8A94A0\" font-family=\"Barlow Condensed,sans-serif\" font-weight=\"600\" font-size=\"13\" text-anchor=\"middle\">1</text></svg><p class=\"ds-rule-cap\">Podgląd: Ściany · Aktualnie: 43% · Dach</p></div>",
-      "css": ".ds-rule{background:#101419;padding:16px;display:inline-block}.ds-rule-cap{margin:8px 0 0;color:#A7B0BC;font:400 12px/16px Roboto,sans-serif}"
-    },
-    {
-      "name": "GlassSurface (timeline header)",
-      "kind": "card",
-      "refersTo": "timeline-rail",
-      "description": "Tinted graphite pane over the model with a 1 dp rim gradient; no blur, no shadow.",
-      "html": "<div class=\"ds-glass\"><div class=\"ds-glass-row\"><span class=\"ds-measure\">43%%</span><span class=\"ds-title\">Dach</span></div><div class=\"ds-sub\">Teraz: montaż więźby</div></div>",
-      "css": ".ds-glass{position:relative;padding:12px 16px;border-radius:12px;background:rgba(16,20,25,.9);box-shadow:inset 0 1px 0 rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.05);max-width:340px}.ds-glass-row{display:flex;align-items:baseline;gap:8px}.ds-measure{font:600 20px/22px \"Barlow Condensed\",sans-serif;font-variant-numeric:tabular-nums;color:#E8EBEF}.ds-title{font:600 14px/20px Roboto,sans-serif;color:#E8EBEF}.ds-sub{font:400 12px/16px Roboto,sans-serif;color:#A7B0BC;letter-spacing:.4px}"
-    },
-    {
-      "name": "Tool rail button",
-      "kind": "nav",
-      "refersTo": "tool-rail-button",
-      "description": "Labelled tool; pressed, it sinks into a well rather than lighting up.",
-      "html": "<div class=\"ds-rail\"><button class=\"ds-rail-btn\" aria-pressed=\"true\"><svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 4l8 4-8 4-8-4z M4 12l8 4 8-4 M4 16l8 4 8-4\"/></svg><span>Bez dachu</span></button><button class=\"ds-rail-btn\"><svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 9V4h5 M15 4h5v5 M20 15v5h-5 M9 20H4v-5\"/></svg><span>Dopasuj</span></button></div>",
-      "css": ".ds-rail{display:inline-flex;flex-direction:column;gap:2px;padding:4px;border-radius:8px;background:rgba(16,20,25,.9);border:1px solid rgba(255,255,255,.08)}.ds-rail-btn{width:64px;min-height:60px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;background:transparent;border:none;border-radius:6px;color:#A7B0BC;font:500 11px/16px Roboto,sans-serif;letter-spacing:.02em;cursor:pointer}.ds-rail-btn[aria-pressed=true]{background:#0A0D11;color:#E8EBEF}.ds-rail-btn:hover{color:#E8EBEF}.ds-rail-btn:focus-visible{outline:2px solid #E8EBEF;outline-offset:-2px}"
-    },
-    {
       "name": "PanelOption",
       "kind": "input",
       "refersTo": "panel-option",
@@ -481,104 +492,101 @@
       "css": ".ds-pane{background:#14181E;border-radius:8px;width:236px;padding:4px 0}.ds-opt{display:flex;align-items:center;gap:12px;min-height:48px;padding:4px 16px;color:#E8EBEF;font:400 14px/20px Roboto,sans-serif;cursor:pointer}.ds-opt i{width:10px;height:10px;border-radius:50%;box-sizing:border-box;border:1.2px solid #6B7581}.ds-opt[aria-checked=true] i{background:#E8EBEF;border-color:#E8EBEF}.ds-opt[aria-checked=true] span{font-weight:600}.ds-opt:hover{background:rgba(232,235,239,.06)}.ds-opt:focus-visible{outline:2px solid #E8EBEF;outline-offset:-2px}"
     },
     {
-      "name": "PlacesBar",
-      "kind": "nav",
-      "refersTo": "places-bar",
-      "description": "Five places in equal cells; the chosen one is pressed into a well with a line on its top edge and a full-ink label.",
-      "html": "<nav class=\"ds-bar\"><a class=\"ds-cell\" aria-current=\"page\"><b></b><span class=\"ds-well\"><svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 11l8-7 8 7 M6 9.5V20h12V9.5 M10 20v-6h4v6\"/></svg></span>Dom</a><a class=\"ds-cell\"><b></b><span class=\"ds-well\"><svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 3l8 4.5v9L12 21l-8-4.5v-9z M4 7.5l8 4.5 8-4.5 M12 12v9\"/></svg></span>3D</a><a class=\"ds-cell\"><b></b><span class=\"ds-well\"><svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\"><path d=\"M6 3h12v18H6z M9 8h6 M9 12h6\"/></svg></span>Koszty</a></nav>",
-      "css": ".ds-bar{display:flex;gap:2px;padding:0 4px;background:#161B21;border-top:1px solid #2A313A;width:340px}.ds-cell{flex:1;display:flex;flex-direction:column;align-items:center;min-height:64px;color:#A7B0BC;font:500 11px/16px Roboto,sans-serif;letter-spacing:.02em;cursor:pointer;padding-bottom:8px}.ds-cell b{width:50%;height:2px;border-radius:1px;background:transparent}.ds-well{margin-top:8px;width:48px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:6px}.ds-cell[aria-current=page]{color:#E8EBEF}.ds-cell[aria-current=page] b{background:#E8EBEF}.ds-cell[aria-current=page] .ds-well{background:#0A0D11}.ds-cell:hover{color:#E8EBEF}.ds-cell:focus-visible{outline:2px solid #E8EBEF;outline-offset:-2px}"
+      "name": "House pill",
+      "kind": "navigation",
+      "refersTo": "house-pill",
+      "description": "The house by its short name, a discreet badge, the way to the houses.",
+      "html": "<button class=\"ds-pill\">⌂ Marcówki <span class=\"ds-badge\">Demo</span> ⌄</button>",
+      "css": ".ds-pill{background:rgba(26,32,39,.82);border:1px solid rgba(255,255,255,.14);box-shadow:0 4px 14px rgba(0,0,0,.45);color:#EEF1F4;font:600 14px/20px Roboto,sans-serif;display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 12px;border-radius:999px}.ds-badge{color:#7FE3C4;border:1px solid rgba(127,227,196,.7);border-radius:999px;padding:1px 8px;font:500 12px/16px Roboto,sans-serif}"
     },
     {
-      "name": "Stage strip item",
-      "kind": "stop",
-      "refersTo": "stage-strip-item",
-      "description": "One stop in the expanded timeline: mark, numeral, name, state word, directly on the timeline glass; only the chosen stop is a Well with an Ink border.",
-      "html": "<div class=\"ds-stop\" aria-selected=\"true\"><div class=\"ds-stop-head\"><span class=\"ds-mark\"><span style=\"width:40%%\"></span></span><span class=\"ds-num\">8</span></div><div class=\"ds-stop-name\">Dach</div><div class=\"ds-stop-state\">W toku · 40%%</div></div>",
-      "css": ".ds-stop{display:inline-flex;flex-direction:column;gap:2px;min-width:96px;max-width:132px;min-height:56px;padding:8px 12px;border-radius:6px;background:transparent;border:1px solid transparent}.ds-stop[aria-selected=true]{background:#0A0D11;border-color:#E8EBEF}.ds-stop-head{display:flex;align-items:center;gap:4px}.ds-mark{position:relative;width:18px;height:8px;box-sizing:border-box;border:1.2px solid #F2C230;border-radius:1.5px}.ds-mark span{position:absolute;left:0;top:0;bottom:0;background:#F2C230}.ds-num{font:600 13px/14px \"Barlow Condensed\",sans-serif;font-variant-numeric:tabular-nums;color:#8A94A0}.ds-stop-name{font:500 14px/20px Roboto,sans-serif;color:#E8EBEF}.ds-stop-state{font:500 11px/16px Roboto,sans-serif;color:#A7B0BC}.ds-stop:hover{border-color:#A7B0BC}"
+      "name": "Dock tile",
+      "kind": "button",
+      "refersTo": "dock-tile",
+      "description": "A floating glass tile that names the state and grows into its panel.",
+      "html": "<button class=\"ds-tile\">▱ Cały dom ⌄</button>",
+      "css": ".ds-tile{background:rgba(26,32,39,.82);border:1px solid rgba(255,255,255,.14);box-shadow:0 4px 14px rgba(0,0,0,.45);color:#EEF1F4;font:600 14px/20px Roboto,sans-serif;display:inline-flex;align-items:center;gap:8px;min-height:56px;min-width:156px;padding:0 16px;border-radius:18px}"
+    },
+    {
+      "name": "Layer card (chosen)",
+      "kind": "card",
+      "refersTo": "layer-card-selected",
+      "description": "A chosen layer: mint wash, mint rim, check, heavier label.",
+      "html": "<button class=\"ds-card\">⌂ Cały dom ✓</button>",
+      "css": ".ds-card{display:inline-flex;align-items:center;gap:8px;min-height:56px;padding:8px 12px;border-radius:12px;background:rgba(127,227,196,.16);border:1.5px solid #7FE3C4;color:#EEF1F4;font:600 14px/20px Roboto,sans-serif}"
+    },
+    {
+      "name": "View chip",
+      "kind": "chip",
+      "refersTo": "view-chip",
+      "description": "A named view; the one on screen with a mint rim and a check.",
+      "html": "<button class=\"ds-chip\">Z przodu</button>",
+      "css": ".ds-chip{display:inline-flex;align-items:center;min-height:48px;padding:0 16px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.22);color:#EEF1F4;font:500 14px/20px Roboto,sans-serif}"
+    },
+    {
+      "name": "Construction axis",
+      "kind": "control",
+      "refersTo": "folding-rule",
+      "description": "The folding rule inside the Etapy panel: done mint, in progress outlined, preview a hollow tag.",
+      "html": "<div class=\"ds-rule\"><i class=\"d\"></i><i class=\"d\"></i><i class=\"p\"></i><i></i><i></i></div>",
+      "css": ".ds-rule{display:flex;gap:2px}.ds-rule i{width:28px;height:12px;border:1.2px solid #6B7581;border-radius:2px}.ds-rule i.d{background:#7FE3C4;border-color:#7FE3C4}.ds-rule i.p{border-color:#7FE3C4;background:linear-gradient(90deg,#7FE3C4 40%,transparent 40%)}"
     }
   ],
   "narrative": {
-    "northStar": "The Folding Rule",
-    "overview": "Construction progress is a measure, and the app reads it the way a builder does: on a carpenter's folding rule (miarka składana). The build's stages are its hinged segments, unfolded as far as the build has got, lying under the house. A graphite night ground carries the house; the chrome over the model is a translucent graphite tint rather than an opaque slab; every word is achromatic ink; and a single accent, rule yellow, means measured construction progress and nothing else. A look back in time wears the same yellow as an outline, never a fill, so a preview can never pass for the state of the build.\n\nThe system is dark-first, model-first and technical but calm. Hierarchy is carried by type size, weight and ink level rather than by enclosing cards: Dom leads with an inked line drawing of the house and one monumental figure; 3D is the model edge to edge with four compact layers of chrome; Etapy is a ruled list. Density is modest and every control is a 48 dp target, because the owner checks the build one-handed on the plot as often as at home in the evening. Motion explains continuity (a pane growing from the rail button that opened it, the rule's cursor settling on a stop) and disappears entirely when the system animator scale is zero.\n\nConfirmed rejections, from the owner's brief: card-heavy dashboards, a giant rounded model card, stacked rectangular panels around the 3D, a debug-tool feel, and large dead cards for unfinished places.",
+    "northStar": "Minimalny dok",
+    "overview": "**Creative North Star: \"Minimalny dok\" (OWNER's choice, variant C, APK 1356)**\n\nThe house is the screen. The model stands large and centred on a calm graphite ground, edge to edge, and the only chrome over it is a handful of small floating pieces of smoky matte glass: the house pill at the top start, \"Dopasuj\" and the menu at the top end, and a dock of two tiles at the foot — a wider \"Cały dom\" that names the layer shown now, and \"Etapy\". Each tile grows, as the very same piece of glass, into its own panel (Warstwy, Etapy) and shrinks back into its slot. Nothing else is permanent. Words are achromatic ink; one accent, mint, marks what is chosen or measured, always beside a mark or a word.\n\nThis direction replaces the former \"Folding Rule\" system and its bans (no pills, no shadows, a side rail, a bottom timeline panel). The folding rule survives as the construction axis inside the Etapy panel, now in mint; it is no longer the frame of the screen.\n\nConfirmed rejections, from the owner's briefs: a permanent side rail, a permanent large progress panel, a full navigation bar (variant A), a vertical axis (variant B), a permanent CAD grid, card-heavy dashboards, stacked translucent panels, and dead features shown as main actions.",
     "keyCharacteristics": [
-      "One accent (rule yellow) with one meaning: measured progress.",
-      "Actions are ink; a filled button is near-white on graphite, never yellow.",
-      "State is always a shape and a word as well as a colour.",
-      "Glass is a one-layer material; chrome over chrome is opaque.",
-      "Rectilinear corners from a four-step scale (2 / 6 / 8 / 12 dp); no pills.",
-      "A condensed tabular face for measured figures only; Roboto for everything read.",
-      "Every colour, space, corner and type role comes from `Theme.kt`."
+      "The house fills most of the width upright and stays centred; the camera frames it in what the chrome leaves free AT REST.",
+      "Two dock tiles; each morphs into its panel. One panel at a time; the other tile stays where it is.",
+      "Smoky matte glass: tint, sheen, fixed grain, light rim, soft depth outside the shape. No backdrop blur (see Elevation & Depth).",
+      "One accent, mint, for chosen and measured things, never alone: a check, a filled mark, a heavier label go with it.",
+      "Rounded, soft shapes from one scale (12 / 18 / 22 / 26 dp and pills).",
+      "Every colour, space, corner, size, depth and motion comes from `Theme.kt` and `Motion.kt`."
     ],
     "rules": [
       {
-        "name": "The One Meaning Rule",
-        "body": "Rule yellow means measured construction progress. It is never an action, a selection, a focus ring, a link or a decoration. \"Wróć do teraz\" and \"Ustaw postęp\" are ink outlines because they are actions.",
+        "name": "The Mint Means Chosen or Measured Rule",
+        "body": "The mint never marks an action, a focus or a link. A chosen thing is also a check, a filled mark or a heavier label.",
         "section": "colors"
       },
       {
-        "name": "The Outline Is a Look Back Rule",
-        "body": "The actual state is solid; a preview is the same yellow hollow. A preview may never be drawn filled, and the actual state is repeated at the top of the screen while previewing, never replaced.",
+        "name": "The Never Invented Rule",
+        "body": "With nothing saved, the Etapy tile says \"Etapy\" and nothing else: no percentage, no stage, no date.",
         "section": "colors"
       },
       {
-        "name": "The Achromatic Text Rule",
-        "body": "Text is Ink, InkMuted or InkFaint. Colour never carries a sentence.",
-        "section": "colors"
-      },
-      {
-        "name": "The Measured Face Rule",
-        "body": "Barlow Condensed is for measured figures only (percentages, stage numbers, graduations). A word set in it is a mistake.",
-        "section": "typography"
-      },
-      {
-        "name": "The One Monument Rule",
-        "body": "There is one 64sp figure in the app, and it is progress by stages. No other number competes with it.",
-        "section": "typography"
-      },
-      {
-        "name": "The Sentence Case Rule",
-        "body": "Labels are sentence case and in Polish from `strings.xml`. Group names are muted headings for the rows below them, not uppercase eyebrows above a title.",
+        "name": "The Every maxLines Has An Ellipsis Rule",
+        "body": "Checked at font scale 1.3: the pill's name, the tile labels and the chips end in an ellipsis rather than wrap into the house.",
         "section": "typography"
       },
       {
         "name": "The One Layer Rule",
-        "body": "Glass is a one-layer material. Two tints stacked never reach cover and let the text beneath show through, so a pane over another pane (the tool pane, a stage strip item on the timeline) takes `GlassOpaque`.",
+        "body": "Glass is a one-layer material: two tints stacked never reach cover. A popup over glass (the ⋮ menu) takes `GlassOpaque`; dense lists live in opaque sheets.",
         "section": "elevation"
       },
       {
         "name": "The Solid to the Finger Rule",
-        "body": "A glass pane takes part in hit testing over its whole area without consuming anything, so a touch on chrome never orbits the camera or picks a wall behind a label.",
-        "section": "elevation"
-      },
-      {
-        "name": "The Pressed Not Coloured Rule",
-        "body": "An active control sinks into its rail (a Well behind it), plus a line and full-ink label. It does not light up.",
+        "body": "Every surface over the model takes `Modifier.solidToFinger()` first: it takes part in hit testing over its whole area without consuming anything, so a touch on glass never orbits the camera or picks a wall behind a label. The morphing glass is solid over exactly its current rectangle, and nothing outside it is; the 3D left uncovered stays live.",
         "section": "elevation"
       }
     ],
     "dos": [
-      "**Do** take every colour, space, corner, size and type role from `Theme.kt` (`Palette`, `Space`, `Radius`, `Sizes`, `Measure`, `MaterialTheme.typography`).",
-      "**Do** reserve `Rule` for measured progress: segments, the now tag, the preview outline, StageMarks, the current stage's lines in the drawing, the completion slider.",
-      "**Do** make actions ink: one `InkButton` per screen, `LineButton` for secondary actions, `QuietAction` for the ways on.",
-      "**Do** say every state as a shape and a word: a mark or well plus text, announced through `stateDescription` so a merged node keeps its label.",
-      "**Do** give every touch target at least 48 dp (`Sizes.touch`).",
-      "**Do** pair every `maxLines` limit with `overflow = TextOverflow.Ellipsis`, and check at font scale 1.3 and with `ANIMATOR_DURATION_SCALE = 0`.",
-      "**Do** take `GlassOpaque` for any pane over another pane, and keep headers and the one way out outside the scroll, with `fadeBelowFold` over a cut list.",
-      "**Do** read motion from `LocalMotionPolicy` (enter 220 ms, exit 150 ms, settle 180 ms, recede 160 ms) and use `enterDelayed` when one dense panel replaces another.",
-      "**Do** put every UI label in Polish, in the owner's words, in `strings.xml`; keep code names and routes in English.",
-      "**Do** keep the model's semantic truth where it lives: what is visible comes from the domain's selection rules and one `primitivesOf(elements)` bridge; the UI and renderer only ask."
+      "take every colour, space, corner, size, depth and motion value from `Theme.kt` / `Motion.kt`.",
+      "keep the house the screen: frame it by the chrome at rest, centred, and never move the camera when a panel opens.",
+      "grow a panel out of the tile that opened it, as one surface, and close it back into the same slot.",
+      "say every state as a mark and a word (`stateDescription` on merged nodes), with mint only for chosen or measured things.",
+      "keep panel heads and the one way out outside the scroll, and fade a cut list or row.",
+      "check at font scale 1.3, with animations off, upright and on the side, and with the 3D uncovered still turning under a finger.",
+      "keep every touch target at least 48 dp, and every `maxLines` with an ellipsis."
     ],
     "donts": [
-      "**Don't** write a hex colour, `Color(0x…)` or a new radius outside `Theme.kt`.",
-      "**Don't** put yellow on a button, border, selection, focus or link; don't fill the preview tag.",
-      "**Don't** tell a state by colour alone, and don't set `contentDescription` on a merged node that would erase its text.",
-      "**Don't** stack two translucent panes, or let one pane overlap another's touch area.",
-      "**Don't** add shadows, blur, pills or enclosing cards; hierarchy is type, weight and ink.",
-      "**Don't** set a word in Barlow Condensed, or add a second monumental figure.",
-      "**Don't** use uppercase eyebrows or kickers above titles.",
-      "**Don't** let the renderer or the UI own semantic truth: no second decision path for roof, storey or room, no `if` about a frame in the renderer.",
-      "**Don't** use `!!` where types can express it, and don't hide problems with `@Suppress`, empty `catch` or a lint baseline.",
-      "**Don't** show invented progress, costs, dates or sample rows; an unset state says \"Postęp nieustawiony\" and offers to set it."
+      "bring back the side rail, the permanent timeline panel, a navigation bar or a vertical axis.",
+      "stack translucent glass, or let a panel cover almost the whole screen on its side.",
+      "claim a backdrop blur, sample the 3D surface or read it back from the GPU.",
+      "run an animation loop at rest, or redraw the 3D when nothing changed — and don't fake it with a static picture.",
+      "show an invented percentage, stage or date when nothing is saved; a preview never saves.",
+      "expose a dead or unfinished feature as a main action; keep the full tools one tap away in the menu.",
+      "let the UI own semantic truth: layers come from the filter, views from the presets, stages from the session."
     ]
   }
 }

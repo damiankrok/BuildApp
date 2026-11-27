@@ -18,6 +18,8 @@ describe('the showcase scene', () => {
     const [spec] = marked
     expect(spec.showcase?.title).toBe('Dom w marcówkach')
     expect(spec.showcase?.subtitle).toContain('Model demonstracyjny')
+    // variant C (APK 1356): the short name the small house pill over the 3D shows
+    expect(spec.showcase?.short).toBe('Marcówki')
     // the registry's own record stays the technical one
     expect(spec.title).toBe('Marcówki — poprawka v3.54.14 (oddany)')
   })

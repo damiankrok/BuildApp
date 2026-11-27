@@ -166,4 +166,61 @@ object ShellIcons {
             moveTo(20f, 7.8f); lineTo(20f, 19f); lineTo(15f, 19f)
         }
     }
+
+    val chevronDown: ImageVector by lazy {
+        outline("ChevronDown") {
+            moveTo(6f, 9f); lineTo(12f, 15f); lineTo(18f, 9f)
+        }
+    }
+
+    /** Three dots, upright: more of the house's matters. Each dot a short round-capped stroke. */
+    val more: ImageVector by lazy {
+        ImageVector.Builder(name = "More", defaultWidth = 24.dp, defaultHeight = 24.dp, viewportWidth = 24f, viewportHeight = 24f)
+            .path(stroke = SolidColor(Color.Black), strokeLineWidth = 2.6f, strokeLineCap = StrokeCap.Round) {
+                moveTo(12f, 5.5f); lineTo(12f, 5.6f)
+                moveTo(12f, 12f); lineTo(12f, 12.1f)
+                moveTo(12f, 18.5f); lineTo(12f, 18.6f)
+            }
+            .build()
+    }
+
+    /** The walls of the house standing open to the sky: the roof taken off. */
+    val roofOff: ImageVector by lazy {
+        outline("RoofOff") {
+            moveTo(5f, 10f); lineTo(5f, 20f); lineTo(19f, 20f); lineTo(19f, 10f)
+            moveTo(5f, 10f); lineTo(19f, 10f)
+            moveTo(8f, 6.5f); lineTo(9.5f, 5f)
+            moveTo(12f, 5.5f); lineTo(12f, 3.5f)
+            moveTo(16f, 6.5f); lineTo(14.5f, 5f)
+        }
+    }
+
+    /** One storey on the ground, a floor line over it: the ground floor alone. */
+    val groundFloor: ImageVector by lazy {
+        outline("GroundFloor") {
+            moveTo(4f, 13f); lineTo(20f, 13f); lineTo(20f, 20f); lineTo(4f, 20f); close()
+            moveTo(10f, 20f); lineTo(10f, 16f); lineTo(14f, 16f); lineTo(14f, 20f)
+            moveTo(6f, 9.5f); lineTo(18f, 9.5f)
+        }
+    }
+
+    /** A roof's triangle with the floor under it: the storey under the roof. */
+    val attic: ImageVector by lazy {
+        outline("Attic") {
+            moveTo(3.5f, 15f); lineTo(12f, 5.5f); lineTo(20.5f, 15f); close()
+            moveTo(10.5f, 15f); lineTo(10.5f, 12f); lineTo(13.5f, 12f); lineTo(13.5f, 15f)
+            moveTo(5f, 19f); lineTo(19f, 19f)
+        }
+    }
+
+    /** A square grid: the reference grid under the house. */
+    val grid: ImageVector by lazy {
+        outline("Grid") {
+            moveTo(4f, 4f); lineTo(20f, 4f); lineTo(20f, 20f); lineTo(4f, 20f); close()
+            moveTo(9.33f, 4f); lineTo(9.33f, 20f)
+            moveTo(14.67f, 4f); lineTo(14.67f, 20f)
+            moveTo(4f, 9.33f); lineTo(20f, 9.33f)
+            moveTo(4f, 14.67f); lineTo(20f, 14.67f)
+        }
+    }
 }

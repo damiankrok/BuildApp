@@ -202,4 +202,6 @@ data class SceneIndexEntry(
 data class SceneShowcase(
     val title: String = "",
     val subtitle: String = "",
+    /** Variant C: the short name for the small house pill over the 3D ("Marcówki"); blank falls back to [title]. */
+    val short: String = "",
 )

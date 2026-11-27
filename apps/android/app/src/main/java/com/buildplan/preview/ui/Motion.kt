@@ -89,6 +89,19 @@ class MotionPolicy(val reduced: Boolean) {
     fun sheetExit(): ExitTransition =
         if (reduced) ExitTransition.None else slideOutVertically(exit()) { it / 3 } + fadeOut(exit())
 
+    /**
+     * A dock tile growing into its panel (variant C), from wherever the glass is: the full
+     * [MORPH_OPEN_MS] for the whole way, a share of it for what is left — a second tap mid-way
+     * turns the glass round at once instead of replaying a full transition. Decelerating, no
+     * overshoot: the panel arrives and stops.
+     */
+    fun morphOpen(remaining: Float): FiniteAnimationSpec<Float> = tween(scaled(MORPH_OPEN_MS, remaining), easing = EmphasizedDecelerate)
+
+    /** The panel shrinking back into its tile: quicker than it came, eased out, from wherever it is. */
+    fun morphClose(remaining: Float): FiniteAnimationSpec<Float> = tween(scaled(MORPH_CLOSE_MS, remaining), easing = Standard)
+
+    private fun scaled(ms: Int, remaining: Float): Int = (ms * remaining.coerceIn(0f, 1f)).toInt().coerceAtLeast(MORPH_MIN_MS)
+
     /** Chrome stepping back while a finger turns the model, and coming back after it lifts. */
     fun <T> recede(): FiniteAnimationSpec<T> = spec(RECEDE_MS, Standard)
 
@@ -97,6 +110,11 @@ class MotionPolicy(val reduced: Boolean) {
         const val EXIT_MS = 150
         const val SETTLE_MS = 180
         const val RECEDE_MS = 160
+
+        /** The dock's morph, tile to panel and back: within the 200-300 ms the brief allows. */
+        const val MORPH_OPEN_MS = 280
+        const val MORPH_CLOSE_MS = 220
+        const val MORPH_MIN_MS = 60
 
         /** How far a pane starts short of its size: near enough to read as the same object. */
         const val PANEL_REST_SCALE = 0.92f

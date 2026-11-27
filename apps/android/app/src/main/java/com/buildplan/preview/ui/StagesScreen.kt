@@ -32,8 +32,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
-import androidx.compose.material3.Slider
-import androidx.compose.material3.SliderState
 import androidx.compose.material3.Snackbar
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
@@ -43,7 +41,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -61,6 +59,7 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
@@ -102,6 +101,11 @@ fun StagesScreen(
     modifier: Modifier = Modifier,
     /** The house as a line drawing, inked by the progress, at the head of the list. */
     drawing: (@Composable () -> Unit)? = null,
+    /**
+     * Inside the Etapy panel (variant C): the panel's own head says the title and what is saved, and its axis
+     * stands above the list, so the list starts with the stages themselves.
+     */
+    compact: Boolean = false,
 ) {
     val view = progress.view
     // A wide window centres the list at a readable measure instead of stretching its rows.
@@ -112,20 +116,20 @@ fun StagesScreen(
                 Text(stringResource(R.string.house_loading), style = MaterialTheme.typography.bodyMedium, color = Palette.InkMuted)
             }
         } else {
-            StageList(view, progress, onShowInModel, drawing)
+            StageList(view, progress, onShowInModel, drawing, compact)
         }
     }
 }
 
 @Composable
-private fun StageList(view: ProgressView, progress: ProgressViewModel, onShowInModel: (ConstructionStageKey?) -> Unit, drawing: (@Composable () -> Unit)?) {
+private fun StageList(view: ProgressView, progress: ProgressViewModel, onShowInModel: (ConstructionStageKey?) -> Unit, drawing: (@Composable () -> Unit)?, compact: Boolean) {
     var openStage by rememberSaveable { mutableStateOf(view.summary.currentStage?.let { "stage-${it.key}" }) }
     val editable = view.summary.availability == ProgressAvailability.EDITABLE
     // The sheet opens on the stage the owner tapped the header for: the current one, brought into view once.
     val list = rememberLazyListState()
     LaunchedEffect(Unit) {
         val current = view.stages.indexOfFirst { it.stageId == openStage }
-        if (current > 0) list.scrollToItem(HEADER_ITEMS + current)
+        if (current > 0) list.scrollToItem((if (compact) HEADER_ITEMS - 1 else HEADER_ITEMS) + current)
     }
 
     // A refusal or a failed save is said where the owner is looking — at the foot of the screen,
@@ -144,8 +148,19 @@ private fun StageList(view: ProgressView, progress: ProgressViewModel, onShowInM
 
     Box(Modifier.fillMaxSize()) {
         LazyColumn(Modifier.fillMaxSize(), state = list, contentPadding = androidx.compose.foundation.layout.PaddingValues(bottom = Space.xxl)) {
-            item { Header(view, drawing) }
+            if (!compact) item { Header(view, drawing) }
             item { Problems(view, development = progress.developmentOnly) }
+            if (compact && view.summary.unset && editable) {
+                // The stage sheet's guide, where the panel's list begins: how a record is started, and that nothing is assumed.
+                item {
+                    Text(
+                        stringResource(R.string.stages_unset_guide),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = Palette.Ink,
+                        modifier = Modifier.padding(horizontal = Space.l, vertical = Space.s),
+                    )
+                }
+            }
             itemsIndexed(view.stages, key = { _, s -> s.stageId }) { index, stage ->
                 StageRow(
                     index = index,
@@ -266,7 +281,7 @@ private fun StageRow(
     Column(
         Modifier
             .fillMaxWidth()
-            .background(if (open) Palette.Raised else androidx.compose.ui.graphics.Color.Transparent),
+            .background(if (open) Palette.Well else androidx.compose.ui.graphics.Color.Transparent),
     ) {
         Row(
             modifier = Modifier
@@ -313,37 +328,47 @@ private fun StageRow(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
+/**
+ * The stage's completion, changed by steps of 5 % and saved by its own button
+ * (variant C). A slider in a scrolling list moved under a finger that only
+ * meant to scroll, and saved on release; here nothing is saved until the
+ * owner presses "Zapisz", and "Cofnij" puts the draft back to what is saved.
+ */
 @Composable
 private fun CompletionEditor(stage: ConstructionStageProgress, progress: ProgressViewModel) {
-    var value by remember(stage.stageId, stage.completion) { mutableFloatStateOf(stage.completion.toFloat()) }
-    val percent = (value * 100).roundToInt()
-    Column {
+    val saved = StageProgressMetric.percentOf(stage.completion)
+    var draft by remember(stage.stageId, saved) { mutableIntStateOf(saved) }
+    val changed = draft != saved
+    Column(verticalArrangement = Arrangement.spacedBy(Space.s)) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Text(stringResource(R.string.stage_completion), style = MaterialTheme.typography.labelLarge, color = Palette.Ink, modifier = Modifier.weight(1f))
-            Text(StageProgressMetric.format(percent.coerceIn(0, 100)), style = Measure.inline, color = Palette.Ink)
+            if (changed) {
+                Text(stringResource(R.string.stage_completion_saved_value, StageProgressMetric.format(saved)), style = MaterialTheme.typography.bodySmall, color = Palette.InkMuted, modifier = Modifier.padding(end = Space.s))
+            }
+            Text(StageProgressMetric.format(draft), style = Measure.inline, color = Palette.Ink, modifier = Modifier.semantics { stateDescription = "$draft%" })
         }
-        Slider(
-            value = value,
-            onValueChange = { value = it },
-            onValueChangeFinished = { progress.setCompletion(stage.stageId, (value * 20).roundToInt() / 20.0) },
-            steps = 19,
-            // The rule's grammar, not a stock pill: a square-cornered bar graduated every 5 %,
-            // filled in the progress yellow to the stage's share, and a marker for a thumb.
-            thumb = { Box(Modifier.size(width = 6.dp, height = 28.dp).background(Palette.Rule, RoundedCornerShape(Radius.tick))) },
-            track = { state -> CompletionTrack(state.coercedFraction(), state.steps) },
-            modifier = Modifier.semantics { stateDescription = "$percent%" },
-        )
+        CompletionTrack(draft / 100f, steps = 19)
+        Row(horizontalArrangement = Arrangement.spacedBy(Space.s), verticalAlignment = Alignment.CenterVertically) {
+            val less = stringResource(R.string.stage_completion_less)
+            val more = stringResource(R.string.stage_completion_more)
+            LineButton("−5", onClick = { draft = (draft - STEP).coerceAtLeast(0) }, enabled = draft > 0, modifier = Modifier.semantics { contentDescription = less })
+            LineButton("+5", onClick = { draft = (draft + STEP).coerceAtMost(100) }, enabled = draft < 100, modifier = Modifier.semantics { contentDescription = more })
+            Box(Modifier.weight(1f))
+            if (changed) {
+                TextButton(onClick = { draft = saved }, modifier = Modifier.heightIn(min = Sizes.touch)) {
+                    Text(stringResource(R.string.stage_completion_cancel), color = Palette.InkMuted)
+                }
+            }
+        }
+        if (changed) {
+            InkButton(stringResource(R.string.stage_completion_save, StageProgressMetric.format(draft)), onClick = { progress.setCompletion(stage.stageId, draft / 100.0) })
+        }
         Text(stringResource(R.string.stage_completion_hint), style = MaterialTheme.typography.bodySmall, color = Palette.InkMuted)
     }
 }
 
-/** Where [SliderState.value] sits in its range, 0..1. */
-@OptIn(ExperimentalMaterial3Api::class)
-private fun SliderState.coercedFraction(): Float {
-    val span = valueRange.endInclusive - valueRange.start
-    return if (span <= 0f) 0f else ((value - valueRange.start) / span).coerceIn(0f, 1f)
-}
+/** One step of the completion: 5 %. */
+private const val STEP = 5
 
 /** The completion as a short rule: graduations at every step, the done share in yellow. */
 @Composable

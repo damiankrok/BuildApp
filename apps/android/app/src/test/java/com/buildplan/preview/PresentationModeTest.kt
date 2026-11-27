@@ -79,9 +79,11 @@ class PresentationModeTest {
     fun `MODEL restores exactly the look the viewer had before modes existed`() {
         for (style in RenderStyle.entries) {
             val look = PresentationMode.MODEL.look(style)
-            assertEquals(RenderStyle.srgbToLinear(0x12 / 255f), look.background[0], 0f)
-            assertEquals(RenderStyle.srgbToLinear(0x15 / 255f), look.background[1], 0f)
-            assertEquals(RenderStyle.srgbToLinear(0x1a / 255f), look.background[2], 0f)
+            // The one deliberate change (OWNER, variant C, APK 1356): the backdrop is a calm mid graphite, #1E2329,
+            // instead of #12151A. Everything that lights or shades the house below is pinned as before.
+            assertEquals(RenderStyle.srgbToLinear(0x1E / 255f), look.background[0], 0f)
+            assertEquals(RenderStyle.srgbToLinear(0x23 / 255f), look.background[1], 0f)
+            assertEquals(RenderStyle.srgbToLinear(0x29 / 255f), look.background[2], 0f)
             assertEquals(72_000f, look.sunLux, 0f)
             assertEquals(26_000f, look.ambientIntensity, 0f)
             assertTrue(look.shadows)
