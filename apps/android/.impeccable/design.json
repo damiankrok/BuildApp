@@ -187,7 +187,7 @@
       "Glass": {
         "role": "neutral",
         "displayName": "Glass",
-        "canonical": "#1A2027D0",
+        "canonical": "#2A3038E0",
         "tonalRamp": [
           "#080B10",
           "#21252B",
@@ -275,7 +275,7 @@
       "GlassDense": {
         "role": "neutral",
         "displayName": "Dense glass",
-        "canonical": "#1A2027EB"
+        "canonical": "#1D2329F0"
       },
       "GlassSheen": {
         "role": "neutral",
@@ -290,7 +290,11 @@
       "ModelBackground": {
         "role": "neutral",
         "displayName": "Model background",
-        "canonical": "#1E2329"
+        "canonical": "#222B36"
+      },
+      "InkMutedOnGlass": {
+        "displayName": "Muted ink on glass",
+        "canonical": "#C3CBD4"
       }
     },
     "typographyMeta": {
@@ -372,12 +376,12 @@
     "motion": [
       {
         "name": "morph-open",
-        "value": "280ms cubic-bezier(0.05, 0.7, 0.1, 1), scaled by the distance left (min 60ms)",
+        "value": "spring, critically damped, stiffness 650 (≈450 ms); staged LIFT then GROW; keeps velocity on reversal",
         "purpose": "A dock tile growing into its panel; interruptible and reversible."
       },
       {
         "name": "morph-close",
-        "value": "220ms cubic-bezier(0.2, 0, 0, 1), scaled by the distance left",
+        "value": "spring, critically damped, stiffness 900 (≈350 ms)",
         "purpose": "The panel shrinking back into its slot."
       },
       {
@@ -399,6 +403,14 @@
         "name": "recede",
         "value": "160ms",
         "purpose": "Header and resting tiles fade to 18% while a finger turns the model."
+      },
+      {
+        "name": "turntable",
+        "value": "opt-in idle turn: 6°/s after 5 s, 1.6 s ease in/out, 30 Hz, 5 min max, showroom fade to 20% after 6 s"
+      },
+      {
+        "name": "glide",
+        "value": "after a flick: exponential decay τ 220 ms, 30–360°/s"
       }
     ],
     "breakpoints": [

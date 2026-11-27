@@ -74,13 +74,20 @@ sealed interface CameraGestureAction {
      * The pinch pair's distance grew by [scale] this frame. Above 1 the
      * fingers spread apart, which reads as "bring it closer".
      */
-    data class Zoom(val scale: Double) : CameraGestureAction {
+    /** A pinch step: [scale] of the fingers' spread, about the point between them ([x], [y], viewport pixels). */
+    data class Zoom(val scale: Double, val x: Float = Float.NaN, val y: Float = Float.NaN) : CameraGestureAction {
         /** The camera-distance multiplier `OrbitCamera.zoom` takes. */
         val distanceFactor: Double get() = 1.0 / scale
     }
 
     /** A tap at the point where the finger landed, in viewport pixels. */
     data class Tap(val x: Float, val y: Float) : CameraGestureAction
+
+    /**
+     * A one-finger turn released while still moving (round D): its speed, in the same degrees as [Orbit], per
+     * second. The camera may glide on from it ([OrbitInertia]).
+     */
+    data class Fling(val yawDegPerS: Double, val pitchDegPerS: Double) : CameraGestureAction
 
     /**
      * A second tap soon after and close to the previous one. It stands in for
@@ -206,6 +213,7 @@ class CameraGestureTracker {
         for (p in pressed) positions[p.id] = p.point()
 
         orbitEngaged = false
+        orbitSamples.clear()
         if (pressed.size == 1) {
             // Each one-finger phase starts behind the slop again. When a pinch
             // ends, the finger left behind drifts as the other lifts, and that
@@ -251,12 +259,35 @@ class CameraGestureTracker {
         // under the finger moves right with it. Dragging down raises the eye.
         // (Written as from − now rather than −(now − from), so that no motion
         // gives 0.0 and never −0.0.)
-        return listOf(
-            CameraGestureAction.Orbit(
-                dYawDeg = (from.x - now.x) * degreesPerPx,
-                dPitchDeg = (now.y - from.y) * degreesPerPx,
-            ),
+        val step = CameraGestureAction.Orbit(
+            dYawDeg = (from.x - now.x) * degreesPerPx,
+            dPitchDeg = (now.y - from.y) * degreesPerPx,
         )
+        orbitSamples.addLast(OrbitSample(frame.timeMs, step.dYawDeg, step.dPitchDeg))
+        while (orbitSamples.size > 1 && frame.timeMs - orbitSamples.first().timeMs > FLING_WINDOW_MS * 2) orbitSamples.removeFirst()
+        return listOf(step)
+    }
+
+    private class OrbitSample(val timeMs: Long, val dYaw: Double, val dPitch: Double)
+
+    /** The last moments of a one-finger turn: what a release's speed is read from. */
+    private val orbitSamples = ArrayDeque<OrbitSample>()
+
+    /**
+     * The turn's speed at release, from the steps of the last [FLING_WINDOW_MS]; null when the finger had stopped
+     * before it lifted (a placement, not a flick) or there is too little to measure.
+     */
+    private fun flingAt(releaseMs: Long): CameraGestureAction.Fling? {
+        val last = orbitSamples.lastOrNull() ?: return null
+        if (releaseMs - last.timeMs > FLING_STILL_MS) return null
+        val window = orbitSamples.filter { releaseMs - it.timeMs <= FLING_WINDOW_MS }
+        if (window.size < 2) return null
+        val dt = (window.last().timeMs - window.first().timeMs).toDouble()
+        if (dt <= 0.0) return null
+        // The first step's travel happened before the window began.
+        val yaw = window.drop(1).sumOf { it.dYaw }
+        val pitch = window.drop(1).sumOf { it.dPitch }
+        return CameraGestureAction.Fling(yaw / dt * 1000.0, pitch / dt * 1000.0)
     }
 
     private fun panAndZoom(pressed: List<TouchPointer>, frame: GestureSample.Frame): List<CameraGestureAction> {
@@ -283,7 +314,7 @@ class CameraGestureTracker {
             // Clamped per frame so that one bad sample can move the camera by at
             // most one ordinary step. The bounds are reciprocal, so a pinch that
             // goes out and back still nets to exactly no zoom.
-            actions += CameraGestureAction.Zoom((span / pairSpan).coerceIn(MIN_ZOOM_STEP, MAX_ZOOM_STEP))
+            actions += CameraGestureAction.Zoom((span / pairSpan).coerceIn(MIN_ZOOM_STEP, MAX_ZOOM_STEP), centroid.x.toFloat(), centroid.y.toFloat())
         }
 
         pairCentroid = centroid
@@ -296,12 +327,13 @@ class CameraGestureTracker {
         val isTap = tapPossible && frame.timeMs - startMs <= TAP_TIMEOUT_MS
         val at = landing
         val previousTap = lastTap
+        val fling = if (orbitEngaged && setIds.size == 1) flingAt(frame.timeMs) else null
         endGesture()
 
         if (!isTap) {
             // A drag between two taps means they are not a double tap.
             lastTap = null
-            return emptyList()
+            return listOfNotNull(fling)
         }
         val isDoubleTap = previousTap != null &&
             frame.timeMs - previousTap.upMs in 0..DOUBLE_TAP_TIMEOUT_MS &&
@@ -316,11 +348,20 @@ class CameraGestureTracker {
         }
     }
 
+    /**
+     * Forget the last tap (round D): the touch that only stopped the idle turn is not the first half of a double
+     * tap — a quick second touch is a single tap again.
+     */
+    fun forgetLastTap() {
+        lastTap = null
+    }
+
     private fun endGesture() {
         tracking = false
         tapPossible = false
         cameraGesture = false
         orbitEngaged = false
+        orbitSamples.clear()
         setIds = emptyList()
         pressOrder.clear()
         positions.clear()
@@ -359,6 +400,12 @@ class CameraGestureTracker {
          * 0.32°/px, which was 346° per width on a 1080 px screen.
          */
         const val ORBIT_DEGREES_PER_SHORT_SIDE = 300.0
+
+        /** A release's speed is read from the turn's last this-many milliseconds. */
+        const val FLING_WINDOW_MS = 80L
+
+        /** A finger still for this long before it lifts placed the house: no glide. */
+        const val FLING_STILL_MS = 40L
 
         /**
          * The per-frame limit on the pinch ratio. A real pinch rarely changes

@@ -12,6 +12,23 @@
 
 ## Current summary (read first)
 
+- **MARCOWKI-UI-D (2026-11-27): round D of variant C — audit, motion without displacement, character, idle
+  turntable — APK 1357.** OWNER request after 1356 (audit and keep improving; tiles must transform without moving
+  anything else, smoothly, without flicker; more character, clarity and pleasure; e.g. an opt-in slow rotation; future
+  features). Report `stage-reports/MARCOWKI_UI_D.md`, owner note `stage-reports/README_MARCOWKI_UI_D.md`. Seven audit
+  lenses (115 findings, 80 ideas) → adversarial verification (82 verdicts, none invented) → plan + completeness critic →
+  four-dimension code review with verification. Dock is window arithmetic (`DockLayout.of`); staged LIFT→GROW morph on
+  critically damped springs that never crosses the other tile (JVM sweep test); insets without the keyboard and by
+  arithmetic; two-line tiles ("Widok / Cały dom", "Etapy / 40% · Ściany"); one Widok panel; low Etapy panel with
+  "Odtwórz budowę", "Zakończ i zacznij", quick %; landscape panels in the dock column with the house beside it. 3D:
+  contact shadow rings (`presentation/ContactShadow`), explicit ACES grading, DR off, LiSPSM off, mint selection by the
+  element's own edges, ground line under elevations, pinch toward the fingers, fling glide (`camera/OrbitInertia`),
+  pitch ≥ −10°, TalkBack actions on the 3D view. Opt-in turntable (`camera/Turntable`, ⋮ menu, off by default): 6°/s
+  after 5 s, all-angle fit about the smallest enclosing circle, 30 Hz, 5 min cap, showroom fade; held by panels, menu,
+  finger, glide, reduced motion, TalkBack, battery saver, thermal, parallel view, close-up, empty stage (the menu says
+  why). Model a66428c8… / scene 680a3f4b… unchanged. JVM 518 green + 3 skipped; lint: the pre-existing DescribingPanel
+  error only, 38 warnings. Emulator only (Android 10, TCG); the last review fixes are JVM-tested only (the emulator
+  session hit its 2 h limit). Next: phone check, perspective↔parallel blend, playback as a dock moment, hold to compare.
 - **MARCOWKI-UI-C (2026-11-27): OWNER chose variant C "Minimalny dok" — APK 1356.** Package
   `BuildPlan-UI-C-START.zip`. Report `stage-reports/MARCOWKI_UI_C.md`, owner note `stage-reports/README_MARCOWKI_UI_C.md`.
   Baseline `d12d0f6c` (APK 1355); research paused, 0 USD. The workspace is rebuilt as C: house pill ("Marcówki" from the

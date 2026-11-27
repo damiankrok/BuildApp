@@ -76,7 +76,7 @@
 
     <!-- Etapy -->
     <string name="stages_title">Etapy budowy</string>
-    <string name="stages_unset_guide">Dotknij etapu, na którym jest budowa, i wybierz „Ustaw jako aktualny”. Potem jednym przyciskiem oznaczysz wcześniejsze etapy jako zakończone — aplikacja sama tego nie zakłada.</string>
+    <string name="stages_unset_guide">Dotknij etapu, na którym jest budowa, i wybierz „Ustaw jako aktualny”.</string>
     <string name="stages_footer">To lista startowa dla domu jednorodzinnego i dziś każdy etap waży tyle samo. Własne etapy, kolejność i wagi przyjdą później.</string>
     <string name="stage_plot_purchase">Zakup działki</string>
     <string name="stage_design">Projekt</string>
@@ -201,6 +201,12 @@
     <string name="model_nothing_stands_now">Według Twojego postępu nic z domu jeszcze nie stoi.</string>
     <string name="dock_details">Szczegóły</string>
     <string name="viewport_description">Model 3D domu. Przeciągnij jednym palcem, aby obrócić; dwoma, aby przesunąć; zsuń lub rozsuń palce, aby przybliżyć; dotknij elementu, aby go zaznaczyć.</string>
+    <string name="a11y_turn_left">Obróć w lewo</string>
+    <string name="a11y_turn_right">Obróć w prawo</string>
+    <string name="a11y_turn_up">Spójrz bardziej z góry</string>
+    <string name="a11y_turn_down">Spójrz bardziej z boku</string>
+    <string name="a11y_zoom_in">Przybliż</string>
+    <string name="a11y_zoom_out">Oddal</string>
     <string name="viewport_hint">Przeciągnij, aby obrócić · dwa palce: przesuń i przybliż · dotknij elementu</string>
     <string name="tool_look">Wygląd</string>
     <string name="tool_layers">Warstwy</string>
@@ -790,18 +796,17 @@
     <string name="menu_grid">Siatka pod domem</string>
     <string name="menu_grid_on">włączona</string>
     <string name="menu_grid_off">wyłączona</string>
-    <string name="menu_tools">Wszystkie widoki, warstwy i wygląd</string>
+    <string name="menu_tools">Wszystkie narzędzia</string>
     <string name="tools_title">Widoki, warstwy i wygląd</string>
     <string name="tools_look">Wygląd modelu</string>
-    <string name="dock_layers_open">Otwórz warstwy</string>
+    <string name="dock_layers_open">Otwórz widok</string>
     <string name="dock_stages_open">Otwórz etapy</string>
     <string name="dock_stages">Etapy</string>
     <string name="dock_preview">Podgląd</string>
-    <string name="layers_panel_title">Warstwy</string>
+    <string name="layers_panel_title">Widok</string>
     <string name="view_row">Widok</string>
     <string name="view_perspective">Perspektywa</string>
     <string name="view_custom">Własny kąt</string>
-    <string name="view_change">Zmień widok</string>
     <string name="stages_panel_title">Etapy budowy</string>
     <string name="stages_panel_design">Widzisz projekt docelowy. Przesuń po osi, by obejrzeć etap — to tylko podgląd.</string>
     <string name="stages_panel_preview_note">Tylko podgląd — nic się nie zapisuje.</string>
@@ -809,6 +814,30 @@
     <string name="stage_completion_less" formatted="false">Mniej o 5 %</string>
     <string name="stage_completion_more" formatted="false">Więcej o 5 %</string>
     <string name="stage_completion_save">Zapisz %1$s</string>
-    <string name="stage_completion_cancel">Cofnij</string>
+    <string name="stage_completion_cancel">Anuluj</string>
     <string name="stage_completion_saved_value">Zapisane: %1$s</string>
+
+    <!-- Round D -->
+    <string name="dock_view_caption">Widok</string>
+    <string name="dock_view_and_layer">%1$s · %2$s</string>
+    <string name="dock_stages_unset">Nieustawione</string>
+    <string name="dock_stages_last">Ostatni: %1$s</string>
+    <string name="layers_what">Co widać</string>
+    <string name="layers_from_where">Skąd patrzysz</string>
+    <string name="stages_play">Odtwórz budowę</string>
+    <string name="stages_play_stop">Zatrzymaj</string>
+    <string name="stages_set_where">Ustaw etap budowy</string>
+    <string name="stages_list_open">Lista etapów (%1$d)</string>
+    <string name="stages_weighted">Postęp wg etapów %1$s</string>
+    <string name="fit_home">Wróć do widoku całego domu</string>
+    <string name="menu_state_on">włączone</string>
+    <string name="menu_state_off">wyłączone</string>
+    <string name="menu_turntable">Obracaj dom, gdy go nie dotykam</string>
+    <string name="menu_turntable_held_motion">Wstrzymane: animacje systemu są wyłączone</string>
+    <string name="menu_turntable_held_talkback">Wstrzymane, gdy działa TalkBack</string>
+    <string name="menu_turntable_held_power">Wstrzymane: oszczędzanie baterii</string>
+    <string name="menu_turntable_held_thermal">Wstrzymane: telefon jest ciepły</string>
+    <string name="menu_turntable_held_parallel">Ruszy w perspektywie (Widok → Perspektywa)</string>
+    <string name="menu_turntable_held_close_up">Ruszy z widoku całego domu (Dopasuj)</string>
+    <string name="stage_finish_and_start">Zakończ i zacznij: %1$s</string>
 </resources>

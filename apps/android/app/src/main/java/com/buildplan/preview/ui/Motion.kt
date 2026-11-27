@@ -9,7 +9,9 @@ import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.core.CubicBezierEasing
 import androidx.compose.animation.core.Easing
 import androidx.compose.animation.core.FiniteAnimationSpec
+import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.snap
+import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.fadeIn
@@ -52,6 +54,9 @@ class MotionPolicy(val reduced: Boolean) {
     /** Something leaving, quicker than it came, still eased out: the thing under the finger. */
     fun <T> exit(): FiniteAnimationSpec<T> = spec(EXIT_MS, Standard)
 
+    /** Something stepping aside for what comes next (a pill before a panel grows): gone almost at once. */
+    fun <T> quickExit(): FiniteAnimationSpec<T> = spec(QUICK_EXIT_MS, Standard)
+
     /** A state changing in place: a marker moving to a stage, a mark filling. */
     fun <T> settle(): FiniteAnimationSpec<T> = spec(SETTLE_MS, Standard)
 
@@ -90,17 +95,14 @@ class MotionPolicy(val reduced: Boolean) {
         if (reduced) ExitTransition.None else slideOutVertically(exit()) { it / 3 } + fadeOut(exit())
 
     /**
-     * A dock tile growing into its panel (variant C), from wherever the glass is: the full
-     * [MORPH_OPEN_MS] for the whole way, a share of it for what is left — a second tap mid-way
-     * turns the glass round at once instead of replaying a full transition. Decelerating, no
-     * overshoot: the panel arrives and stops.
+     * A dock tile growing into its panel (round D): a critically damped spring — no overshoot, about 6 % of
+     * the way in the first frame instead of half, 90 % by ~170 ms, settled by ~300 ms. A spring keeps its
+     * velocity when the target flips, so a second tap mid-way turns the glass round smoothly instead of kinking.
      */
-    fun morphOpen(remaining: Float): FiniteAnimationSpec<Float> = tween(scaled(MORPH_OPEN_MS, remaining), easing = EmphasizedDecelerate)
+    fun morphOpen(): FiniteAnimationSpec<Float> = spring(dampingRatio = Spring.DampingRatioNoBouncy, stiffness = MORPH_OPEN_STIFFNESS, visibilityThreshold = MORPH_THRESHOLD)
 
-    /** The panel shrinking back into its tile: quicker than it came, eased out, from wherever it is. */
-    fun morphClose(remaining: Float): FiniteAnimationSpec<Float> = tween(scaled(MORPH_CLOSE_MS, remaining), easing = Standard)
-
-    private fun scaled(ms: Int, remaining: Float): Int = (ms * remaining.coerceIn(0f, 1f)).toInt().coerceAtLeast(MORPH_MIN_MS)
+    /** The panel shrinking back into its tile: the same spring, stiffer — leaving is quicker than arriving. */
+    fun morphClose(): FiniteAnimationSpec<Float> = spring(dampingRatio = Spring.DampingRatioNoBouncy, stiffness = MORPH_CLOSE_STIFFNESS, visibilityThreshold = MORPH_THRESHOLD)
 
     /** Chrome stepping back while a finger turns the model, and coming back after it lifts. */
     fun <T> recede(): FiniteAnimationSpec<T> = spec(RECEDE_MS, Standard)
@@ -108,13 +110,17 @@ class MotionPolicy(val reduced: Boolean) {
     companion object {
         const val ENTER_MS = 220
         const val EXIT_MS = 150
+        const val QUICK_EXIT_MS = 90
         const val SETTLE_MS = 180
         const val RECEDE_MS = 160
 
-        /** The dock's morph, tile to panel and back: within the 200-300 ms the brief allows. */
-        const val MORPH_OPEN_MS = 280
-        const val MORPH_CLOSE_MS = 220
-        const val MORPH_MIN_MS = 60
+        /** The dock's morph springs (critically damped): settled within the ~300 ms the brief allows. */
+        const val MORPH_OPEN_STIFFNESS = 650f
+        const val MORPH_CLOSE_STIFFNESS = 900f
+        const val MORPH_THRESHOLD = 0.001f
+
+        /** When switching panels, the incoming glass starts once the outgoing one is this close to home. */
+        const val MORPH_HANDOVER = 0.06f
 
         /** How far a pane starts short of its size: near enough to read as the same object. */
         const val PANEL_REST_SCALE = 0.92f

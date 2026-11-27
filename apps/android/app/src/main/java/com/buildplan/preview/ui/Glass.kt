@@ -86,25 +86,50 @@ fun GlassSurface(
  * time, so a morphing corner radius needs no new modifier per frame.
  */
 fun Modifier.matteGlass(shape: Shape, tint: Color = Palette.Glass, rim: Boolean = true, depth: Dp = Depth.tile): Modifier =
-    matteGlass(shape, { tint }, rim, depth)
+    matteGlass(shape, { tint }, rim, { depth })
 
-/** The glass with a tint read at draw time: a tile's light glass thickening as it grows into a panel that carries text. */
-fun Modifier.matteGlass(shape: Shape, tint: () -> Color, rim: Boolean = true, depth: Dp = Depth.tile): Modifier =
+/**
+ * The glass with its tint and depth read at draw time: a tile's light glass thickening, and floating higher,
+ * as it grows into a panel that carries text.
+ *
+ * Layers, bottom to top (round D): a soft depth outside the shape; a 1 dp dark contact hairline round the
+ * edge, so the glass stays a separate object over the palest wall; the frosted tint; a diagonal sheen from
+ * the top start; the fixed grain; the content; and a bevel — a light stroke over the top 24 dp only, the edge
+ * catching the light, fading to nothing down the sides.
+ */
+fun Modifier.matteGlass(shape: Shape, tint: () -> Color, rim: Boolean = true, depth: () -> Dp = { Depth.tile }): Modifier =
     this
-        .then(if (depth > 0.dp) Modifier.softDepth(shape, depth) else Modifier)
+        .softDepth(shape, depth)
+        .drawWithCache {
+            val outline = shape.createOutline(size, layoutDirection, this)
+            val hairline = 1.dp.toPx()
+            onDrawBehind {
+                // Outside the clip: half of a 2 dp stroke lands outside the glass, a 1 dp dark line round it.
+                if (rim) drawOutline(outline, Palette.GlassContact, style = Stroke(width = hairline * 2))
+            }
+        }
         .clip(shape)
         .drawWithCache {
             val outline = shape.createOutline(size, layoutDirection, this)
-            val sheen = Brush.verticalGradient(0f to Palette.GlassSheen, 0.55f to Color.Transparent, endY = size.height.coerceAtMost(160.dp.toPx()))
-            val rimBrush = Brush.verticalGradient(listOf(Palette.GlassRimHigh, Palette.GlassRimLow))
+            val sheen = Brush.linearGradient(
+                0f to Palette.GlassSheen,
+                1f to Color.Transparent,
+                start = Offset.Zero,
+                end = Offset(size.width * 0.6f, size.height.coerceAtMost(220.dp.toPx()) * 0.9f),
+            )
+            val bevelHeight = 24.dp.toPx()
+            val bevel = Brush.verticalGradient(0f to Palette.GlassRimHigh, 1f to Color.Transparent, startY = 0f, endY = bevelHeight)
             val rimWidth = 1.dp.toPx()
             onDrawWithContent {
                 drawOutline(outline, tint())
                 drawOutline(outline, sheen)
                 drawOutline(outline, GrainBrush, alpha = GRAIN_ALPHA)
                 drawContent()
-                // The stroke is centred on the clipped edge: half of it shows, a 1 dp rim.
-                if (rim) drawOutline(outline, rimBrush, style = Stroke(width = rimWidth * 2))
+                if (rim) {
+                    // The stroke is centred on the clipped edge: half of it shows, a 1 dp bevel; the faint rest of the rim below.
+                    drawOutline(outline, Palette.GlassRimLow, style = Stroke(width = rimWidth * 2))
+                    drawOutline(outline, bevel, style = Stroke(width = rimWidth * 2))
+                }
             }
         }
 
@@ -113,11 +138,12 @@ fun Modifier.matteGlass(shape: Shape, tint: () -> Color, rim: Boolean = true, de
  * alpha, offset a little downwards, so the glass seems to float above the
  * house without the shadow showing through its own tint.
  */
-private fun Modifier.softDepth(shape: Shape, depth: Dp): Modifier = drawBehind {
+private fun Modifier.softDepth(shape: Shape, depth: () -> Dp): Modifier = drawBehind {
+    val spread = depth().toPx()
+    if (spread <= 0f) return@drawBehind
     val outline = shape.createOutline(size, layoutDirection, this)
     val inside = Path().apply { addOutline(outline) }
-    val spread = depth.toPx()
-    val drop = spread * 0.35f
+    val drop = spread * 0.4f
     val corner = when (outline) {
         is Outline.Rounded -> outline.roundRect.topLeftCornerRadius.x
         else -> 0f
@@ -146,10 +172,10 @@ private fun Path.addOutline(outline: Outline) {
 
 /** How many rings the depth is drawn with, and how dark it is at the shape's edge. */
 private const val DEPTH_RINGS = 8
-private const val DEPTH_ALPHA = 0.42f
+private const val DEPTH_ALPHA = 0.55f
 
 /** The grain's strength: felt, not seen. */
-private const val GRAIN_ALPHA = 0.05f
+private const val GRAIN_ALPHA = 0.07f
 
 /**
  * A fixed, seeded tile of fine noise, made once per process and repeated

@@ -1,13 +1,25 @@
 package com.buildplan.preview.ui
 
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInVertically
+import androidx.compose.runtime.snapshotFlow
+import androidx.compose.ui.semantics.selected
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.animateIntAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.awaitEachGesture
+import androidx.compose.foundation.gestures.awaitFirstDown
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -26,6 +38,10 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.only
+import androidx.compose.foundation.layout.ime
+import androidx.compose.foundation.layout.systemBars
+import androidx.compose.foundation.layout.displayCutout
+import androidx.compose.foundation.layout.union
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.safeDrawingPadding
@@ -50,37 +66,35 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.center
 import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.CompositingStrategy
 import androidx.compose.ui.graphics.TransformOrigin
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.layout.LayoutCoordinates
-import androidx.compose.ui.layout.boundsInRoot
-import androidx.compose.ui.layout.findRootCoordinates
-import androidx.compose.ui.layout.onGloballyPositioned
-import androidx.compose.ui.layout.positionInRoot
+import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
+import androidx.compose.ui.semantics.toggleableState
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.buildplan.preview.R
 import com.buildplan.preview.analyzer.AnalysisState
 import com.buildplan.preview.camera.ContentInsets
-import com.buildplan.preview.camera.ViewPreset
 import com.buildplan.preview.scene.ModelScene
 import com.buildplan.preview.scene.SceneObject
 import kotlin.math.roundToInt
@@ -189,25 +203,44 @@ private fun ReadyWorkspace(model: PreviewViewModel, progress: ProgressViewModel,
         hintShown = false
     }
 
-    // The morph of each tile into its panel: 0 the tile, 1 the panel. One panel at a time — the other first
-    // shrinks back into its slot, then this one grows — so two glasses never lie over each other. Each step
-    // starts from wherever the glass is, so a second tap mid-way turns it round instead of jumping.
+    // The morph of each tile into its panel: 0 the tile, 1 the panel (critically damped springs). One panel at a
+    // time: on a switch the open glass springs home first and the other starts only once it is nearly in its slot,
+    // so two glasses never lie over each other; each spring starts from wherever the glass is and keeps its
+    // velocity, so a second tap mid-way turns it round smoothly.
     val layersMorph = remember { Animatable(if (open == DockPanel.LAYERS) 1f else 0f) }
     val stagesMorph = remember { Animatable(if (open == DockPanel.STAGES) 1f else 0f) }
     fun morphOf(panel: DockPanel) = if (panel == DockPanel.LAYERS) layersMorph else stagesMorph
+    val morphVelocity = remember { FloatArray(2) }
     LaunchedEffect(open, motion.reduced) {
-        for (other in DockPanel.entries) {
-            if (other == open) continue
-            val glass = morphOf(other)
-            if (glass.value > 0f) {
-                if (motion.reduced) glass.snapTo(0f) else glass.animateTo(0f, motion.morphClose(glass.value))
+        val outgoing = DockPanel.entries.filter { it != open }.map { morphOf(it) }.filter { it.value > 0f }
+        if (motion.reduced) {
+            outgoing.forEach { it.snapTo(0f) }
+            open?.let { morphOf(it).snapTo(1f) }
+            return@LaunchedEffect
+        }
+        // A reversal mid-way keeps the glass's speed: a cancelled spring forgets it, so each glass carries its own.
+        fun velocityOf(glass: Animatable<Float, *>) = if (glass === layersMorph) 0 else 1
+        coroutineScope {
+            outgoing.forEach { glass ->
+                launch {
+                    val i = velocityOf(glass)
+                    glass.animateTo(0f, motion.morphClose(), initialVelocity = morphVelocity[i]) { morphVelocity[i] = velocity }
+                    morphVelocity[i] = 0f
+                }
+            }
+            open?.let { panel ->
+                outgoing.forEach { glass -> snapshotFlow { glass.value }.first { it <= MotionPolicy.MORPH_HANDOVER } }
+                val glass = morphOf(panel)
+                val i = velocityOf(glass)
+                // The incoming glass after a hand-over starts from rest; a reversal of the same glass keeps its speed.
+                if (outgoing.isNotEmpty()) morphVelocity[i] = 0f
+                glass.animateTo(1f, motion.morphOpen(), initialVelocity = morphVelocity[i]) { morphVelocity[i] = velocity }
+                morphVelocity[i] = 0f
             }
         }
-        open?.let {
-            val glass = morphOf(it)
-            if (motion.reduced) glass.snapTo(1f) else glass.animateTo(1f, motion.morphOpen(1f - glass.value))
-        }
     }
+    // Every glass at home: only then do the pieces that stand above the dock (selection, hint) come back.
+    val docked by remember { derivedStateOf { layersMorph.value == 0f && stagesMorph.value == 0f } }
     val toggle: (DockPanel) -> Unit = { panel ->
         detailsOpen = false
         openName = if (open == panel) null else panel.name
@@ -216,24 +249,85 @@ private fun ReadyWorkspace(model: PreviewViewModel, progress: ProgressViewModel,
     BackHandler(enabled = open != null) { openName = null }
     BackHandler(enabled = open == null && detailsOpen) { detailsOpen = false }
     BackHandler(enabled = open == null && !detailsOpen && selected != null) { model.clearSelection() }
+    // A look back at a stage is left before the app is: Back returns to the design or the saved state first.
+    BackHandler(enabled = open == null && !detailsOpen && selected == null && view?.previewStop != null) { progress.returnToNow() }
+    // Touching the house means being back on the house: a tap on the model closes an open panel.
+    // Only taps made since this screen was composed: a panel restored after a rotation stays open (round D).
+    val tapsSeen = remember { mutableIntStateOf(model.taps) }
+    LaunchedEffect(model.taps) {
+        if (model.taps > tapsSeen.intValue) openName = null
+        tapsSeen.intValue = model.taps
+    }
 
-    val recede by animateFloatAsState(if (model.manipulating) RECEDED_ALPHA else 1f, motion.recede(), label = "recede")
-    // Each piece of chrome reports its own footprint against the root it is laid out in.
-    var topInset by remember { mutableIntStateOf(0) }
-    var dockInset by remember { mutableIntStateOf(0) }
-    var sheetInset by remember { mutableIntStateOf(0) }
-    var panelInset by remember { mutableIntStateOf(0) }
-    val details = detailsOpen && selected != null
-    val frameBottom by animateIntAsState(if (details) maxOf(dockInset, sheetInset) else dockInset, motion.settle(), label = "frameBottom")
-    val frameRight by animateIntAsState(if (details) panelInset else 0, motion.settle(), label = "frameRight")
-    // The house is framed in what the chrome at REST leaves free: under the header, above the dock. An open
-    // panel is not part of it — opening one never moves the camera. Only an element's details ease in.
-    val rest = ContentInsets(top = topInset, right = 0, bottom = dockInset)
-    val drawn = rest.copy(right = frameRight, bottom = frameBottom)
-    SideEffect { model.onChromeInsets(rest, drawn) }
-
+    // A finger on the house, or the house turning on its own for a while (showroom): the chrome steps back.
+    val recede by animateFloatAsState(
+        targetValue = when {
+            model.manipulating -> RECEDED_ALPHA
+            model.showroom -> SHOWROOM_ALPHA
+            else -> 1f
+        },
+        animationSpec = if (model.showroom && !model.manipulating) tween(SHOWROOM_FADE_MS) else motion.recede(),
+        label = "recede",
+    )
     BoxWithConstraints(Modifier.fillMaxSize()) {
-        val sidePanel = maxHeight < COMPACT_HEIGHT
+        // On its side only when it is also wide: a short, narrow window (split screen) keeps the upright dock.
+        val sidePanel = maxHeight < COMPACT_HEIGHT && maxWidth >= SIDE_MIN_WIDTH
+        val windowDensity = LocalDensity.current
+        // The system's bars and cutout, NOT the keyboard (round D): typing in a panel never moves the dock, refits
+        // the house or shrinks the frame; only the open panel stands clear of the keyboard (below).
+        val chromeInsets = WindowInsets.systemBars.union(WindowInsets.displayCutout)
+        // The chrome's footprint, all by arithmetic (round D) — the header row and the dock are constants, so their
+        // footprint is known in the very first frame and never trails a layout pass: the arrival shot lands on a home
+        // fitted to the real space, and a rotation refits once.
+        val chromeTop = chromeInsets.getTop(windowDensity)
+        val chromeBottom = chromeInsets.getBottom(windowDensity)
+        val chromeLeft = chromeInsets.getLeft(windowDensity, androidx.compose.ui.unit.LayoutDirection.Ltr)
+        val chromeRight = chromeInsets.getRight(windowDensity, androidx.compose.ui.unit.LayoutDirection.Ltr)
+        val margin = with(windowDensity) { Space.m.toPx() }
+        val topInset = (chromeTop + margin + with(windowDensity) { Sizes.touch.toPx() }).roundToInt()
+        val dockInset = (chromeBottom + with(windowDensity) { (Sizes.tile + Space.m).toPx() }).roundToInt()
+        // On its side the dock and its panels are a column at the start: the house is framed beside it, at rest and
+        // with a panel open alike — the column's right edge from the window's, in the viewport's own pixels.
+        val sideColumnPx = if (sidePanel) {
+            val containerW = with(windowDensity) { maxWidth.toPx() } - chromeLeft - chromeRight - 2 * margin
+            val columnW = minOf(containerW, with(windowDensity) { DOCK_SIDE_WIDTH.toPx() })
+            (chromeLeft + margin + columnW + with(windowDensity) { Space.s.toPx() }).roundToInt()
+        } else {
+            0
+        }
+        var sheetInset by remember { mutableIntStateOf(0) }
+        var panelInset by remember { mutableIntStateOf(0) }
+        val details = detailsOpen && selected != null
+        // Read only by the flow below, never by this composition: the details' frame eases in without recomposing
+        // the workspace on every frame of the ease.
+        val frameBottom = animateIntAsState(if (details) maxOf(dockInset, sheetInset) else dockInset, motion.settle(), label = "frameBottom")
+        val frameRight = animateIntAsState(if (details) panelInset else 0, motion.settle(), label = "frameRight")
+        // On its side, details close every panel: the house may use the column's width again, eased, between the
+        // window's start and the details (a column AND the details left it a sliver).
+        val frameLeft = animateIntAsState(if (details) 0 else sideColumnPx, motion.settle(), label = "frameLeft")
+        // The house is framed in what the chrome at REST leaves free: under the header, above the dock (or beside
+        // the column). An open panel is not part of it — opening one never moves the camera. Only details ease in.
+        val rest = if (sidePanel) {
+            ContentInsets(left = sideColumnPx, top = topInset, right = 0, bottom = (chromeBottom + margin).roundToInt())
+        } else {
+            ContentInsets(top = topInset, right = 0, bottom = dockInset)
+        }
+        val restNow by rememberUpdatedState(rest)
+        LaunchedEffect(model) {
+            snapshotFlow {
+                val r = restNow
+                val side = r.left > 0
+                r to r.copy(
+                    left = if (side) frameLeft.value else 0,
+                    right = frameRight.value,
+                    bottom = if (side && frameLeft.value == r.left) r.bottom else frameBottom.value,
+                )
+            }.collect { (r, d) -> model.onChromeInsets(r, d) }
+        }
+        SideEffect {
+            // The house holds still while something is open over it; it may turn again once all is closed.
+            model.turntablePaused = open != null || details || sheet != null
+        }
         val sheetMax = minOf(SHEET_MAX, maxHeight * 0.55f)
         Viewport(scene = scene, model = model, modifier = Modifier.fillMaxSize())
         ModelShades()
@@ -241,28 +335,52 @@ private fun ReadyWorkspace(model: PreviewViewModel, progress: ProgressViewModel,
         BoxWithConstraints(
             Modifier
                 .fillMaxSize()
-                .safeDrawingPadding()
-                .padding(Space.s),
+                .windowInsetsPadding(chromeInsets)
+                .padding(Space.m),
         ) {
             val density = LocalDensity.current
             val gap = with(density) { Space.s.toPx() }
             val containerW = constraints.maxWidth.toFloat()
             val containerH = constraints.maxHeight.toFloat()
-            // Where this box stands in the root, so the dock's slots can be read in its own coordinates.
-            var origin by remember { mutableStateOf(Offset.Zero) }
-            var headerBottom by remember { mutableStateOf(0f) }
-            var dock by remember { mutableStateOf<Rect?>(null) }
-            var layersSlot by remember { mutableStateOf<Rect?>(null) }
-            var stagesSlot by remember { mutableStateOf<Rect?>(null) }
-            Box(Modifier.fillMaxSize().onGloballyPositioned { origin = it.positionInRoot() })
-            fun LayoutCoordinates.local(): Rect = boundsInRoot().translate(-origin)
+            val tileH = with(density) { Sizes.tile.toPx() }
+            val headerBottom = with(density) { Sizes.touch.toPx() }
+
+            // The dock, by arithmetic (DockLayout): a row of two fixed shares, as wide as the window allows (a readable
+            // column on a wide window, at the start on a phone on its side), and where each panel stands open. Its only
+            // inputs are the window's, so nothing a tile or a panel does can move anything else.
+            val dock = DockLayout.of(
+                containerW = containerW,
+                containerH = containerH,
+                sidePanel = sidePanel,
+                gap = gap,
+                tileH = tileH,
+                headerBottom = headerBottom,
+                dockMaxW = with(density) { (if (sidePanel) DOCK_SIDE_WIDTH else PANEL_MAX_WIDTH).toPx() },
+            )
+            val dockLeft = dock.left
+            val dockW = dock.width
+            val layersSlot = dock.layersSlot
+            val stagesSlot = dock.stagesSlot
+            // The keyboard lifts only the open panel: its foot stands above the keyboard's top, its height shrinks to fit.
+            val keyboard = (WindowInsets.ime.getBottom(density) - chromeInsets.getBottom(density) - with(density) { Space.m.toPx() }).coerceAtLeast(0f)
+            fun clearOfKeyboard(f: PanelFrame): PanelFrame {
+                if (keyboard <= 0f) return f
+                val bottom = minOf(f.bottom, containerH - keyboard - gap)
+                return f.copy(bottom = bottom, maxHeight = (f.maxHeight - (f.bottom - bottom)).coerceAtLeast(tileH))
+            }
+            val layersFrame = clearOfKeyboard(dock.layersFrame)
+            val stagesFrame = clearOfKeyboard(dock.stagesFrame)
+
+            // Upright, the details sheet takes the foot of the screen: the dock fades under it rather than vanishing.
+            val dockVisible = !(details && !sidePanel)
+            val dockAlpha by animateFloatAsState(if (dockVisible) 1f else 0f, if (dockVisible) motion.enter() else motion.exit(), label = "dockAlpha")
 
             // Nothing stands at this point of the build: say so where the house would be.
             val empty = view?.frame?.visible?.isEmpty() == true
             AnimatedVisibility(
-                visible = empty && open == null,
-                enter = motion.sheetEnter(),
-                exit = motion.sheetExit(),
+                visible = empty && open == null && docked,
+                enter = fadeIn(motion.enter()),
+                exit = fadeOut(motion.exit()),
                 modifier = Modifier.align(Alignment.Center).padding(horizontal = Space.xl),
             ) {
                 GlassSurface(shape = RoundedCornerShape(Radius.tile)) {
@@ -275,86 +393,60 @@ private fun ReadyWorkspace(model: PreviewViewModel, progress: ProgressViewModel,
                 }
             }
 
-            // The header: the house pill (and, only when there is something to say, a status pill under it) at the
-            // start; "Dopasuj" and the menu at the end. Its foot is the top of the house's frame.
-            val buttons = Sizes.touch * 2 + Space.s * 2
+            // The header: the house pill at the start (its foot is the top of the house's frame), and under it, only
+            // when there is something to say, a status pill that floats over the model and never moves the camera;
+            // "Dopasuj" and the menu in one capsule at the end.
+            val buttons = Sizes.touch * 2 + Space.m
             Column(
                 Modifier
                     .align(Alignment.TopStart)
                     .widthIn(max = maxWidth - buttons)
-                    .graphicsLayer { alpha = recede }
-                    .onGloballyPositioned { c ->
-                        headerBottom = c.local().bottom
-                        topInset = c.boundsInRoot().bottom.roundToInt()
+                    .graphicsLayer {
+                        alpha = recede
+                        // Fade the layer's drawing, not an offscreen copy of it: no extra buffer per frame of a fade.
+                        compositingStrategy = CompositingStrategy.ModulateAlpha
                     },
                 verticalArrangement = Arrangement.spacedBy(Space.s),
             ) {
-                HousePill(scene, context)
-                StatusPill(context)
-            }
-            Row(
-                Modifier.align(Alignment.TopEnd).graphicsLayer { alpha = recede },
-                horizontalArrangement = Arrangement.spacedBy(Space.s),
-            ) {
-                val fit = stringResource(R.string.tool_fit)
-                GlassButton(ShellIcons.fit, fit, onClick = { model.applyPreset(ViewPreset.FIT, System.currentTimeMillis()) })
-                MoreMenu(model, context)
-            }
-
-            // The dock's slots. What is laid out here is an invisible copy of each tile's words, so the slot is
-            // exactly the tile's size; the tile itself is the morphing glass drawn below, at this rectangle.
-            val viewer = model.viewer
-            val layersTileMax = maxWidth * LAYERS_TILE_SHARE
-            val isolatedName = viewer.isolatedObjectId?.let { scene.objectById(it) }?.let { elementTitle(it) }
-            AnimatedVisibility(
-                // Upright, the details sheet takes the foot of the screen; the dock steps aside under it.
-                visible = !(details && !sidePanel),
-                enter = motion.sheetEnter(),
-                exit = motion.sheetExit(),
-                modifier = Modifier.align(Alignment.BottomStart),
-            ) {
-                Row(
-                    Modifier.onGloballyPositioned { c ->
-                        dock = c.local()
-                        dockInset = c.fromBottom()
-                    },
-                    horizontalArrangement = Arrangement.spacedBy(Space.s),
-                ) {
-                    // The layers tile takes what its words need (up to a little over half the row); "Etapy" the rest.
-                    Box(
-                        Modifier
-                            .widthIn(min = LAYERS_TILE_MIN, max = layersTileMax)
-                            .onGloballyPositioned { layersSlot = it.local() }
-                            .graphicsLayer { alpha = 0f }
-                            .clearAndSetSemantics {},
-                    ) { LayersTileContent(viewer, isolatedName, interactive = false, onOpen = {}) }
-                    Box(
-                        Modifier
-                            .weight(1f, fill = false)
-                            .widthIn(min = STAGES_TILE_MIN)
-                            .onGloballyPositioned { stagesSlot = it.local() }
-                            .graphicsLayer { alpha = 0f }
-                            .clearAndSetSemantics {},
-                    ) { StagesTileContent(view, interactive = false, onOpen = {}, onReturn = {}) }
+                Box {
+                    HousePill(scene, context)
                 }
+                // On its side a panel is as tall as the column: the status pill steps aside rather than lie under it.
+                if (!(sidePanel && open != null)) StatusPill(context)
             }
+            HeaderCapsule(
+                model = model,
+                context = context,
+                modifier = Modifier.align(Alignment.TopEnd).graphicsLayer {
+                    alpha = recede
+                    compositingStrategy = CompositingStrategy.ModulateAlpha
+                },
+            )
 
-            // Above the dock, while no panel is open: the chosen element's pill, or the gesture hint at first.
-            val dockHeight = dock?.let { with(density) { (containerH - it.top).toDp() } } ?: (Sizes.tile)
+            val viewer = model.viewer
+            val isolatedName = viewer.isolatedObjectId?.let { scene.objectById(it) }?.let { elementTitle(it) }
+
+            // Above the dock, only while every glass is home: the chosen element's pill, or the gesture hint at first.
+            // They stand on the dock's own column, so the foot of the screen reads as one stack.
+            val dockLeftDp = with(density) { dockLeft.toDp() }
+            val dockWidthDp = with(density) { dockW.toDp() }
             Column(
                 Modifier
-                    .align(Alignment.BottomCenter)
-                    .padding(bottom = dockHeight + Space.s)
-                    .widthIn(max = PANEL_MAX_WIDTH),
-                horizontalAlignment = Alignment.CenterHorizontally,
+                    .align(Alignment.BottomStart)
+                    .padding(start = dockLeftDp, bottom = Sizes.tile + Space.s)
+                    .width(dockWidthDp),
             ) {
-                AnimatedVisibility(visible = hintShown && selected == null && open == null && !details, enter = motion.sheetEnter(), exit = motion.sheetExit()) {
+                // They leave quickly (90 ms): a glass about to grow must not share the foot of the screen with them.
+                AnimatedVisibility(visible = hintShown && !model.touchExploration && selected == null && open == null && docked && !details, enter = fadeIn(motion.enter()), exit = fadeOut(motion.quickExit())) {
                     GestureHint()
                 }
-                AnimatedVisibility(visible = selected != null && open == null && !details, enter = motion.sheetEnter(), exit = motion.sheetExit()) {
-                    val chosen = selected
+                // The last element stays written while the pill fades out, so its exit is a fade, not an empty glass.
+                val lastSelected = remember { mutableStateOf(selected) }
+                if (selected != null) lastSelected.value = selected
+                AnimatedVisibility(visible = selected != null && open == null && docked && !details, enter = fadeIn(motion.enter()) + slideInVertically(motion.enter()) { it / 6 }, exit = fadeOut(motion.quickExit())) {
+                    val chosen = selected ?: lastSelected.value
                     if (chosen != null) {
-                        GlassSurface(shape = RoundedCornerShape(Radius.tile)) {
+                        GlassSurface(modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(Radius.tile)) {
                             SelectionRow(
                                 name = elementTitle(chosen),
                                 detail = storeyOf(scene, chosen)?.let { storeyText(it) }.orEmpty(),
@@ -366,39 +458,21 @@ private fun ReadyWorkspace(model: PreviewViewModel, progress: ProgressViewModel,
                 }
             }
 
-            // Where each panel stands open. Upright: above the dock, as wide as the dock's row may be, leaving the
-            // top of the house in view. On a phone on its side: beside the dock, bottom-aligned, as tall as the
-            // window allows under the header — never across the whole short screen.
-            fun frameFor(slot: Rect?): PanelFrame? {
-                val d = dock ?: return null
-                val tile = slot ?: return null
-                val sideWidth = with(density) { PANEL_SIDE_WIDTH.toPx() }
-                val besideX = d.right + gap
-                if (sidePanel && containerW - besideX >= with(density) { PANEL_SIDE_MIN.toPx() }) {
-                    return PanelFrame(besideX, d.bottom, minOf(sideWidth, containerW - besideX), d.bottom - headerBottom - gap)
-                }
-                val width = minOf(containerW, with(density) { PANEL_MAX_WIDTH.toPx() })
-                val x = tile.left.coerceAtMost(containerW - width).coerceAtLeast(0f)
-                val bottom = d.top - gap
-                return PanelFrame(x, bottom, width, minOf(bottom - headerBottom - gap, containerH * PANEL_MAX_SHARE))
-            }
-
-            val dockShown = !(details && !sidePanel)
+            val restAlpha = { recede * dockAlpha }
             DockGlass(
                 panel = DockPanel.LAYERS,
                 morph = layersMorph,
                 open = open,
-                slot = layersSlot.takeIf { dockShown },
-                frame = frameFor(layersSlot),
-                recede = recede,
-                tile = { LayersTileContent(viewer, isolatedName, interactive = true, onOpen = { toggle(DockPanel.LAYERS) }) },
+                slot = layersSlot,
+                frame = layersFrame,
+                restAlpha = restAlpha,
+                tile = { LayersTileContent(viewer, isolatedName, interactive = dockVisible, onOpen = { toggle(DockPanel.LAYERS) }, view = model.shownView) },
                 content = {
                     LayersPanel(
                         scene = scene,
                         state = viewer,
                         shownView = model.shownView,
-                        // Four cards in a row only where the panel itself is wide enough for four labels.
-                        wide = frameFor(layersSlot)?.let { with(density) { it.width.toDp() } >= WIDE_CARDS } == true,
+                        wide = with(density) { layersFrame.width.toDp() } >= WIDE_CARDS,
                         onVisibility = { model.setVisibility(it) },
                         onShowAll = { model.showAll() },
                         onPreset = {
@@ -413,16 +487,17 @@ private fun ReadyWorkspace(model: PreviewViewModel, progress: ProgressViewModel,
                 panel = DockPanel.STAGES,
                 morph = stagesMorph,
                 open = open,
-                slot = stagesSlot.takeIf { dockShown },
-                frame = frameFor(stagesSlot),
-                recede = recede,
-                tile = { StagesTileContent(view, interactive = true, onOpen = { toggle(DockPanel.STAGES) }, onReturn = { progress.returnToNow() }) },
+                slot = stagesSlot,
+                frame = stagesFrame,
+                restAlpha = restAlpha,
+                tile = { StagesTileContent(view, interactive = dockVisible, onOpen = { toggle(DockPanel.STAGES) }, onReturn = { progress.returnToNow() }) },
                 content = {
                     StagesPanel(
                         progress = progress,
                         // "Pokaż w 3D" previews that stage and keeps the panel: the axis shows where it is.
                         onShowInModel = { stage -> if (stage != null) progress.preview(stage) else progress.returnToNow() },
                         onClose = { openName = null },
+                        active = open == DockPanel.STAGES,
                     )
                 },
             )
@@ -458,19 +533,41 @@ private fun ReadyWorkspace(model: PreviewViewModel, progress: ProgressViewModel,
                     onFrame = { model.frameSelection(System.currentTimeMillis()) },
                     onIsolate = { model.isolateSelected() },
                     onShowAll = { model.showAll() },
+                    // Measured by SIZE, not by where the sliding sheet stands this frame: the house eases once to its
+                    // final frame instead of chasing the sheet as it slides in (round D).
                     modifier = if (sidePanel) {
                         Modifier
+                            .onSizeChanged { panelInset = it.width }
                             .windowInsetsPadding(WindowInsets.safeDrawing.only(WindowInsetsSides.Top + WindowInsetsSides.End + WindowInsetsSides.Bottom))
                             .padding(vertical = Space.s)
                             .width(SIDE_PANEL_WIDTH)
-                            .onGloballyPositioned { c -> panelInset = c.fromRight() }
                     } else {
                         Modifier
+                            .onSizeChanged { sheetInset = it.height }
                             .navigationBarsPadding()
-                            .onGloballyPositioned { c -> sheetInset = c.fromBottom() }
                     },
                 )
             }
+        }
+
+        // Showroom: the first touch anywhere only brings the chrome back (and stops the turn); it does not also
+        // press a half-seen tile or grab the house. The next touch acts as usual.
+        if (model.showroom) {
+            Box(
+                Modifier
+                    .fillMaxSize()
+                    .pointerInput(Unit) {
+                        awaitEachGesture {
+                            awaitFirstDown(requireUnconsumed = false).consume()
+                            // Leaves the composition with this: the rest of the touch goes nowhere.
+                            model.wake(System.currentTimeMillis())
+                            do {
+                                val event = awaitPointerEvent()
+                                event.changes.forEach { it.consume() }
+                            } while (event.changes.any { it.pressed })
+                        }
+                    },
+            )
         }
     }
 }
@@ -486,9 +583,9 @@ private fun DockGlass(
     panel: DockPanel,
     morph: Animatable<Float, *>,
     open: DockPanel?,
-    slot: Rect?,
-    frame: PanelFrame?,
-    recede: Float,
+    slot: Rect,
+    frame: PanelFrame,
+    restAlpha: () -> Float,
     tile: @Composable () -> Unit,
     content: @Composable () -> Unit,
 ) {
@@ -503,8 +600,7 @@ private fun DockGlass(
         panelShown = panelShown,
         tileContent = tile,
         panelContent = content,
-        // While a finger turns the model the resting tile steps back like the header; an open panel stays.
-        modifier = Modifier.graphicsLayer { alpha = if (morph.value == 0f) recede else 1f },
+        restAlpha = restAlpha,
     )
 }
 
@@ -543,7 +639,7 @@ private fun HousePill(scene: ModelScene, context: Context) {
             Icon(ShellIcons.house, contentDescription = null, tint = Palette.Ink, modifier = Modifier.size(Sizes.iconSmall))
             Text(name, style = MaterialTheme.typography.titleSmall, color = Palette.Ink, maxLines = 1, overflow = TextOverflow.Ellipsis, modifier = Modifier.weight(1f, fill = false))
             if (badge != null) Badge(badge)
-            Icon(ShellIcons.chevronDown, contentDescription = null, tint = Palette.InkMuted, modifier = Modifier.size(Sizes.iconSmall))
+            Icon(ShellIcons.chevronDown, contentDescription = null, tint = Palette.InkMutedOnGlass, modifier = Modifier.size(Sizes.iconSmall))
         }
     }
 }
@@ -556,32 +652,99 @@ private fun Badge(text: String) {
         style = MaterialTheme.typography.labelMedium,
         color = Palette.Accent,
         maxLines = 1,
+        // A filled mint wash, not an outline (round D): a small badge, not a second button.
         modifier = Modifier
-            .border(1.dp, Palette.Accent.copy(alpha = 0.7f), RoundedCornerShape(Radius.pill))
+            .clearAndSetSemantics { }
+            .background(Palette.AccentWash, RoundedCornerShape(Radius.pill))
             .padding(horizontal = Space.s, vertical = 1.dp),
     )
 }
 
-/** A round glass button with one mark, named for TalkBack. */
+/**
+ * "Dopasuj" and the menu as one quiet glass capsule at the top end (round D): two 48 dp targets and a faint
+ * divider, one object instead of two heavy circles. "Dopasuj" is two-stage, like a map's location button: the
+ * first tap fits the whole house at the current angle; once it is fitted, the next tap brings back the
+ * whole-house perspective — so there is always a one-tap way home. Its name says which it will do.
+ */
 @Composable
-private fun GlassButton(icon: androidx.compose.ui.graphics.vector.ImageVector, label: String, onClick: () -> Unit) {
-    GlassSurface(shape = RoundedCornerShape(Radius.pill)) {
-        IconButton(onClick = onClick, modifier = Modifier.size(Sizes.touch).semantics { contentDescription = label }) {
-            Icon(icon, contentDescription = null, tint = Palette.Ink, modifier = Modifier.size(Sizes.icon))
+private fun HeaderCapsule(model: PreviewViewModel, context: Context, modifier: Modifier = Modifier) {
+    GlassSurface(modifier = modifier, shape = RoundedCornerShape(Radius.pill)) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            val fitLabel = stringResource(if (model.fittedHere) R.string.fit_home else R.string.tool_fit)
+            IconButton(
+                onClick = { model.fitOrHome(System.currentTimeMillis()) },
+                modifier = Modifier.size(Sizes.touch).semantics { contentDescription = fitLabel },
+            ) {
+                // Its two stages are seen, not only spoken: a frame fits, a house goes home (round D).
+                androidx.compose.animation.Crossfade(targetState = model.fittedHere, animationSpec = LocalMotionPolicy.current.enter(), label = "fitGlyph") { home ->
+                    Icon(if (home) ShellIcons.house else ShellIcons.fit, contentDescription = null, tint = Palette.Ink, modifier = Modifier.size(Sizes.icon))
+                }
+            }
+            Box(Modifier.width(1.dp).height(Sizes.touch - Space.xl).background(Palette.GlassRimHigh.copy(alpha = 0.5f)))
+            MoreMenu(model, context)
         }
     }
 }
 
+/** A menu row whose state is a word as well as a mark: a mint check when on, "wyłączone" when off. */
+@Composable
+private fun ToggleItem(
+    label: String,
+    icon: androidx.compose.ui.graphics.vector.ImageVector,
+    on: Boolean,
+    note: String? = null,
+    /** The state's words, in the label's gender ("Siatka" — "włączona"). */
+    onWord: Int = R.string.menu_state_on,
+    offWord: Int = R.string.menu_state_off,
+    onToggle: () -> Unit,
+) {
+    val word = stringResource(if (on) onWord else offWord)
+    // Chosen but held by the system: said in words under the label, and in the state TalkBack reads.
+    val state = if (note != null) "$word, $note" else word
+    DropdownMenuItem(
+        text = {
+            Column {
+                Text(label, style = MaterialTheme.typography.bodyLarge, maxLines = 2, overflow = TextOverflow.Ellipsis)
+                if (note != null) {
+                    Text(note, style = MaterialTheme.typography.labelMedium, color = Palette.InkMuted, maxLines = 2, overflow = TextOverflow.Ellipsis, modifier = Modifier.clearAndSetSemantics { })
+                }
+            }
+        },
+        leadingIcon = { Icon(icon, contentDescription = null, modifier = Modifier.size(Sizes.icon)) },
+        trailingIcon = {
+            if (on) {
+                Icon(ShellIcons.check, contentDescription = null, modifier = Modifier.size(Sizes.icon))
+            } else {
+                Text(word, style = MaterialTheme.typography.labelMedium, color = Palette.InkMuted, modifier = Modifier.clearAndSetSemantics { })
+            }
+        },
+        onClick = onToggle,
+        colors = MenuDefaults.itemColors(textColor = Palette.Ink, leadingIconColor = Palette.Ink, trailingIconColor = Palette.Accent),
+        modifier = Modifier
+            .heightIn(min = Sizes.touch)
+            .semantics {
+                role = Role.Switch
+                toggleableState = androidx.compose.ui.state.ToggleableState(on)
+                stateDescription = state
+            },
+    )
+}
+
 /**
- * The menu at the top end: the reference grid (a view setting, off at the
- * start), every view, layer and look in one sheet, and the source of the
- * model. The houses themselves are the house pill's.
+ * The menu at the top end (round D), one name per thing: the look (a short list in place, the change seen
+ * behind the menu), the reference grid and the idle turn (view settings, off at the start, remembered), every
+ * element and every view in the tools sheet, and the source of the model. The houses are the house pill's.
  */
 @Composable
 private fun MoreMenu(model: PreviewViewModel, context: Context) {
     var expanded by remember { mutableStateOf(false) }
+    var looks by remember { mutableStateOf(false) }
+    SideEffect { model.menuOpen = expanded }
     Box {
-        GlassButton(ShellIcons.more, stringResource(R.string.header_more), onClick = { expanded = true })
+        val more = stringResource(R.string.header_more)
+        IconButton(onClick = { looks = false; expanded = true }, modifier = Modifier.size(Sizes.touch).semantics { contentDescription = more }) {
+            Icon(ShellIcons.more, contentDescription = null, tint = Palette.Ink, modifier = Modifier.size(Sizes.icon))
+        }
         DropdownMenu(
             expanded = expanded,
             onDismissRequest = { expanded = false },
@@ -590,27 +753,59 @@ private fun MoreMenu(model: PreviewViewModel, context: Context) {
             border = androidx.compose.foundation.BorderStroke(1.dp, Palette.GlassRimHigh),
             shadowElevation = Depth.panel,
         ) {
-            val colors = MenuDefaults.itemColors(textColor = Palette.Ink, leadingIconColor = Palette.Ink, trailingIconColor = Palette.Accent)
-            val gridOn = model.viewer.grid
-            val gridState = stringResource(if (gridOn) R.string.menu_grid_on else R.string.menu_grid_off)
+            val colors = MenuDefaults.itemColors(textColor = Palette.Ink, leadingIconColor = Palette.Ink, trailingIconColor = Palette.InkMuted)
+            if (looks) {
+                // The looks in place: the menu stays open, so the change is seen behind it.
+                for (mode in com.buildplan.preview.presentation.PresentationMode.entries) {
+                    val chosen = model.viewer.presentation == mode
+                    DropdownMenuItem(
+                        text = { Text(stringResource(mode.labelRes()), style = MaterialTheme.typography.bodyLarge, fontWeight = if (chosen) androidx.compose.ui.text.font.FontWeight.SemiBold else null) },
+                        leadingIcon = {
+                            Box(
+                                Modifier
+                                    .size(10.dp)
+                                    .then(if (chosen) Modifier.background(Palette.Accent, androidx.compose.foundation.shape.CircleShape) else Modifier.border(1.2.dp, Palette.RuleEmpty, androidx.compose.foundation.shape.CircleShape)),
+                            )
+                        },
+                        onClick = { model.setPresentation(mode) },
+                        colors = colors,
+                        modifier = Modifier.heightIn(min = Sizes.touch).semantics { selected = chosen },
+                    )
+                }
+                return@DropdownMenu
+            }
             DropdownMenuItem(
-                text = { Text(stringResource(R.string.menu_grid), style = MaterialTheme.typography.bodyLarge) },
-                leadingIcon = { Icon(ShellIcons.grid, contentDescription = null, modifier = Modifier.size(Sizes.icon)) },
-                // The state in a word as well as a mark: "wyłączona" is as readable as the check.
+                text = { Text(stringResource(R.string.tools_look), style = MaterialTheme.typography.bodyLarge) },
+                leadingIcon = { Icon(ShellIcons.look, contentDescription = null, modifier = Modifier.size(Sizes.icon)) },
                 trailingIcon = {
-                    if (gridOn) {
-                        Icon(ShellIcons.check, contentDescription = null, modifier = Modifier.size(Sizes.icon))
-                    } else {
-                        Text(gridState, style = MaterialTheme.typography.labelMedium, color = Palette.InkMuted)
+                    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(Space.xs)) {
+                        Text(stringResource(model.viewer.presentation.labelRes()), style = MaterialTheme.typography.labelMedium, color = Palette.InkMuted)
+                        Icon(ShellIcons.chevronRight, contentDescription = null, modifier = Modifier.size(Sizes.iconSmall))
                     }
                 },
-                onClick = {
-                    model.setGrid(!gridOn)
-                    expanded = false
-                },
+                onClick = { looks = true },
                 colors = colors,
-                modifier = Modifier.heightIn(min = Sizes.touch).semantics { stateDescription = gridState },
+                modifier = Modifier.heightIn(min = Sizes.touch),
             )
+            val hold = model.turntableHeldBy
+            ToggleItem(
+                label = stringResource(R.string.menu_turntable),
+                icon = ShellIcons.turn,
+                on = model.turntableOn,
+                note = hold?.let {
+                    stringResource(
+                        when (it) {
+                            TurntableHold.ANIMATIONS_OFF -> R.string.menu_turntable_held_motion
+                            TurntableHold.TALKBACK -> R.string.menu_turntable_held_talkback
+                            TurntableHold.POWER_SAVE -> R.string.menu_turntable_held_power
+                            TurntableHold.THERMAL -> R.string.menu_turntable_held_thermal
+                            TurntableHold.PARALLEL_VIEW -> R.string.menu_turntable_held_parallel
+                            TurntableHold.CLOSE_UP -> R.string.menu_turntable_held_close_up
+                        },
+                    )
+                },
+            ) { model.setTurntable(!model.turntableOn) }
+            ToggleItem(stringResource(R.string.menu_grid), ShellIcons.grid, model.viewer.grid, onWord = R.string.menu_grid_on, offWord = R.string.menu_grid_off) { model.setGrid(!model.viewer.grid) }
             DropdownMenuItem(
                 text = { Text(stringResource(R.string.menu_tools), style = MaterialTheme.typography.bodyLarge) },
                 leadingIcon = { Icon(ShellIcons.view, contentDescription = null, modifier = Modifier.size(Sizes.icon)) },
@@ -730,6 +925,8 @@ private fun StatusPill(context: Context) {
         development -> Status.DEVELOPMENT
         else -> return
     }
+    // A new status is news: it brings the chrome back from the showroom's whisper, where it would be missed.
+    LaunchedEffect(kind) { context.model.wake(System.currentTimeMillis()) }
     GlassSurface(shape = RoundedCornerShape(Radius.tile)) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -804,18 +1001,20 @@ private fun SelectionRow(name: String, detail: String, onDetails: () -> Unit, on
     Row(Modifier.heightIn(min = 56.dp).padding(end = Space.xs), verticalAlignment = Alignment.CenterVertically) {
         Row(
             Modifier
-                .weight(1f, fill = false)
+                .weight(1f)
                 .heightIn(min = 56.dp)
                 .clickable(role = Role.Button, onClickLabel = detailsLabel, onClick = onDetails)
-                .padding(start = Space.l, end = Space.s, top = Space.s, bottom = Space.s),
+                .padding(start = Space.m, end = Space.s, top = Space.s, bottom = Space.s),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(Space.s),
         ) {
-            Column(Modifier.weight(1f, fill = false)) {
+            // The mint mark of what is chosen: the same accent as the element's outline in the house (round D).
+            Box(Modifier.size(width = 3.dp, height = 28.dp).background(Palette.Accent, RoundedCornerShape(2.dp)))
+            Column(Modifier.weight(1f)) {
                 Text(name, style = MaterialTheme.typography.titleSmall, color = Palette.Ink, maxLines = 1, overflow = TextOverflow.Ellipsis)
-                Text(if (detail.isNotBlank()) detail else detailsLabel, style = MaterialTheme.typography.bodySmall, color = Palette.InkMuted, maxLines = 1, overflow = TextOverflow.Ellipsis)
+                Text(if (detail.isNotBlank()) detail else detailsLabel, style = MaterialTheme.typography.bodySmall, color = Palette.InkMutedOnGlass, maxLines = 1, overflow = TextOverflow.Ellipsis)
             }
-            Icon(ShellIcons.chevronRight, contentDescription = null, tint = Palette.InkMuted, modifier = Modifier.size(Sizes.iconSmall))
+            Icon(ShellIcons.chevronRight, contentDescription = null, tint = Palette.InkMutedOnGlass, modifier = Modifier.size(Sizes.iconSmall))
         }
         val clear = stringResource(R.string.selection_clear)
         IconButton(onClick = onClear, modifier = Modifier.size(Sizes.touch).semantics { contentDescription = clear }) {
@@ -855,11 +1054,6 @@ private fun WorkspaceMessage(title: String, failed: ScreenState.Failed?, context
     }
 }
 
-/** How far this layout's left edge stands from the right of the screen: the width it covers there. */
-private fun LayoutCoordinates.fromRight(): Int = findRootCoordinates().size.width - boundsInRoot().left.roundToInt()
-
-/** How far this layout's top edge stands from the bottom of the screen: the height it covers there. */
-private fun LayoutCoordinates.fromBottom(): Int = findRootCoordinates().size.height - boundsInRoot().top.roundToInt()
 
 /** The storey an element stands on, in the owner's words: the export's label, or the level's position. */
 private fun storeyOf(scene: ModelScene, obj: SceneObject): ElementWords.Storey? =
@@ -867,6 +1061,10 @@ private fun storeyOf(scene: ModelScene, obj: SceneObject): ElementWords.Storey? 
 
 /** How far the header and the resting tiles fade while the model is turned: present, not in the way. */
 private const val RECEDED_ALPHA = 0.18f
+
+/** Showroom: the chrome fades slowly to a whisper, still there for the finger that wants it. */
+private const val SHOWROOM_ALPHA = 0.2f
+private const val SHOWROOM_FADE_MS = 1_400
 
 /** How long the gesture hint stays when nobody touches the model. */
 private const val HINT_MS = 6_000L
@@ -887,15 +1085,13 @@ private val SIDE_PANEL_WIDTH = 360.dp
 /** Below this height (a phone on its side) the details stand at the end edge and the panels beside the dock. */
 private val COMPACT_HEIGHT = 480.dp
 
-/** The dock's tiles at their narrowest: the layers tile the wider, as it names a state; "Etapy" a touch target and a word. */
-private val LAYERS_TILE_MIN = 156.dp
-private val STAGES_TILE_MIN = 112.dp
+/** The side arrangement needs at least this much width for the dock, the panel and the house. */
+private val SIDE_MIN_WIDTH = 600.dp
 
-/** The most of the dock's row the layers tile may take, so "Etapy" always keeps its word. */
-private const val LAYERS_TILE_SHARE = 0.55f
+/** The layers tile's share of the dock's row; "Etapy" takes the rest. Fixed: no label can move a tile. */
 
-/** A panel beside the dock needs at least this much width; else it opens above the dock. */
-private val PANEL_SIDE_MIN = 300.dp
+/** The dock's width on a phone on its side: a readable column at the start, not the whole short screen. */
+private val DOCK_SIDE_WIDTH = 440.dp
 
-/** From this width the four layer cards stand in one row. */
-private val WIDE_CARDS = 520.dp
+/** From this panel width the four layer cards stand side by side with their names beside the marks. */
+private val WIDE_CARDS = 560.dp

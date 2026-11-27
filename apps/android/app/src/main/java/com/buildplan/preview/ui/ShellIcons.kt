@@ -39,16 +39,6 @@ object ShellIcons {
         }
     }
 
-    /** A folding rule, half open: the stages. */
-    val rule: ImageVector by lazy {
-        outline("Rule") {
-            moveTo(3f, 17f); lineTo(9f, 7f); lineTo(12f, 8.8f); lineTo(6f, 18.8f); close()
-            moveTo(12f, 8.8f); lineTo(21f, 8.8f); lineTo(21f, 12.2f); lineTo(10f, 12.2f)
-            moveTo(15f, 8.8f); lineTo(15f, 10.4f)
-            moveTo(18f, 8.8f); lineTo(18f, 10.4f)
-        }
-    }
-
     /** A receipt with a torn foot and two lines. */
     val receipt: ImageVector by lazy {
         outline("Receipt") {
@@ -184,32 +174,56 @@ object ShellIcons {
             .build()
     }
 
-    /** The walls of the house standing open to the sky: the roof taken off. */
-    val roofOff: ImageVector by lazy {
-        outline("RoofOff") {
-            moveTo(5f, 10f); lineTo(5f, 20f); lineTo(19f, 20f); lineTo(19f, 10f)
-            moveTo(5f, 10f); lineTo(19f, 10f)
-            moveTo(8f, 6.5f); lineTo(9.5f, 5f)
-            moveTo(12f, 5.5f); lineTo(12f, 3.5f)
-            moveTo(16f, 6.5f); lineTo(14.5f, 5f)
+    /**
+     * The layers as one family (round D): a sectioned house — roof, walls, a storey line — in which what a layer
+     * SHOWS is drawn solid and what it hides is drawn faint, so each mark says which part stays.
+     */
+    private fun sectioned(name: String, solid: PathBuilder.() -> Unit, faint: PathBuilder.() -> Unit): ImageVector =
+        ImageVector.Builder(name = name, defaultWidth = 24.dp, defaultHeight = 24.dp, viewportWidth = 24f, viewportHeight = 24f)
+            .path(stroke = SolidColor(Color.Black), strokeAlpha = FAINT, strokeLineWidth = 1.75f, strokeLineCap = StrokeCap.Round, strokeLineJoin = StrokeJoin.Round, pathBuilder = faint)
+            .path(stroke = SolidColor(Color.Black), strokeLineWidth = 1.75f, strokeLineCap = StrokeCap.Round, strokeLineJoin = StrokeJoin.Round, pathBuilder = solid)
+            .build()
+
+    private const val FAINT = 0.32f
+    private fun PathBuilder.roof() { moveTo(3.5f, 11f); lineTo(12f, 4f); lineTo(20.5f, 11f) }
+    private fun PathBuilder.upperWalls() { moveTo(5.5f, 9.4f); lineTo(5.5f, 14.5f); moveTo(18.5f, 9.4f); lineTo(18.5f, 14.5f) }
+    private fun PathBuilder.groundWalls() { moveTo(5.5f, 14.5f); lineTo(5.5f, 20f); lineTo(18.5f, 20f); lineTo(18.5f, 14.5f) }
+    private fun PathBuilder.storeyLine() { moveTo(5.5f, 14.5f); lineTo(18.5f, 14.5f) }
+
+    /** Cały dom: all of it. */
+    val layerAll: ImageVector by lazy { sectioned("LayerAll", solid = { roof(); upperWalls(); groundWalls(); storeyLine() }, faint = {}) }
+
+    /** Bez dachu: the walls and floors, the roof faint. */
+    val layerRoofOff: ImageVector by lazy { sectioned("LayerRoofOff", solid = { upperWalls(); groundWalls(); storeyLine() }, faint = { roof() }) }
+
+    /** Parter: the ground storey, everything above it faint. */
+    val layerGround: ImageVector by lazy { sectioned("LayerGround", solid = { groundWalls(); storeyLine() }, faint = { roof(); upperWalls() }) }
+
+    /** Poddasze: the storey under the roof, the ground storey and the roof faint. */
+    val layerUpper: ImageVector by lazy { sectioned("LayerUpper", solid = { upperWalls(); storeyLine() }, faint = { roof(); groundWalls() }) }
+
+    /** Etapy: steps rising along a base line — a build going up stage by stage. */
+    val stages: ImageVector by lazy {
+        outline("Stages") {
+            moveTo(3.5f, 20.5f); lineTo(20.5f, 20.5f)
+            moveTo(4.5f, 17f); lineTo(9f, 17f); lineTo(9f, 12.5f); lineTo(13.5f, 12.5f); lineTo(13.5f, 8f); lineTo(18f, 8f); lineTo(18f, 3.5f)
         }
     }
 
-    /** One storey on the ground, a floor line over it: the ground floor alone. */
-    val groundFloor: ImageVector by lazy {
-        outline("GroundFloor") {
-            moveTo(4f, 13f); lineTo(20f, 13f); lineTo(20f, 20f); lineTo(4f, 20f); close()
-            moveTo(10f, 20f); lineTo(10f, 16f); lineTo(14f, 16f); lineTo(14f, 20f)
-            moveTo(6f, 9.5f); lineTo(18f, 9.5f)
+    /** Play: a triangle. */
+    val play: ImageVector by lazy {
+        outline("Play") {
+            moveTo(8f, 5.5f); lineTo(18.5f, 12f); lineTo(8f, 18.5f); close()
         }
     }
 
-    /** A roof's triangle with the floor under it: the storey under the roof. */
-    val attic: ImageVector by lazy {
-        outline("Attic") {
-            moveTo(3.5f, 15f); lineTo(12f, 5.5f); lineTo(20.5f, 15f); close()
-            moveTo(10.5f, 15f); lineTo(10.5f, 12f); lineTo(13.5f, 12f); lineTo(13.5f, 15f)
-            moveTo(5f, 19f); lineTo(19f, 19f)
+    /** The idle turntable: a small roof inside a circular arrow. */
+    val turn: ImageVector by lazy {
+        outline("Turn") {
+            moveTo(19.6f, 9.2f)
+            arcTo(8.2f, 8.2f, 0f, isMoreThanHalf = true, isPositiveArc = true, x1 = 6.4f, y1 = 18.2f)
+            moveTo(19.8f, 4.8f); lineTo(19.6f, 9.2f); lineTo(15.3f, 8.6f)
+            moveTo(8.8f, 14f); lineTo(12f, 10.8f); lineTo(15.2f, 14f)
         }
     }
 

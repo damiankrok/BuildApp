@@ -30,6 +30,10 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
+import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.window.DialogWindowProvider
+import androidx.core.view.WindowCompat
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -118,13 +122,13 @@ fun HouseMenuSheet(
                             overflow = TextOverflow.Ellipsis,
                         )
                     }
-                    if (current) Icon(ShellIcons.check, contentDescription = null, tint = Palette.Ink, modifier = Modifier.size(Sizes.icon))
+                    if (current) Icon(ShellIcons.check, contentDescription = null, tint = Palette.Accent, modifier = Modifier.size(Sizes.icon))
                 }
             }
             LineButton(stringResource(R.string.house_add_action), onClick = onAnalyze, icon = ShellIcons.link, modifier = Modifier.padding(horizontal = Space.l, vertical = Space.s))
             PanelRule()
             PanelGroupLabel(stringResource(R.string.menu_this_house))
-            MenuRow(ShellIcons.rule, stringResource(R.string.stages_title), onClick = { onOpenSheet(Sheet.STAGES) })
+            MenuRow(ShellIcons.stages, stringResource(R.string.stages_title), onClick = { onOpenSheet(Sheet.STAGES) })
             MenuRow(ShellIcons.page, stringResource(R.string.menu_source), onClick = { onOpenSheet(Sheet.SOURCE) })
             // The cost workspace's place, named and closed: a future deep workspace that will keep this
             // house's context and return here — never an empty tab, never a page that says nothing.
@@ -206,7 +210,7 @@ fun DevelopmentGallerySheet(preview: PreviewViewModel, onDismiss: () -> Unit, on
                                     Text(entry.recordSubtitle, style = MaterialTheme.typography.bodySmall, color = Palette.InkMuted, maxLines = 2, overflow = TextOverflow.Ellipsis)
                                 }
                             }
-                            if (current) Icon(ShellIcons.check, contentDescription = null, tint = Palette.Ink, modifier = Modifier.size(Sizes.icon))
+                            if (current) Icon(ShellIcons.check, contentDescription = null, tint = Palette.Accent, modifier = Modifier.size(Sizes.icon))
                         }
                     }
                 }
@@ -517,6 +521,17 @@ private fun HouseSheet(onDismiss: () -> Unit, content: @Composable () -> Unit) {
         // No pill: the sheet is told by its edge and its scrim, and the system's four radii hold.
         dragHandle = null,
     ) {
+        // The sheet is its own window: give it the app's dark system bars, or its navigation bar shows the
+        // system's light default under a dark sheet (round D).
+        val window = LocalView.current
+        SideEffect {
+            (window.parent as? DialogWindowProvider)?.window?.let { w ->
+                WindowCompat.getInsetsController(w, w.decorView).run {
+                    isAppearanceLightNavigationBars = false
+                    isAppearanceLightStatusBars = false
+                }
+            }
+        }
         content()
     }
 }

@@ -79,11 +79,12 @@ class PresentationModeTest {
     fun `MODEL restores exactly the look the viewer had before modes existed`() {
         for (style in RenderStyle.entries) {
             val look = PresentationMode.MODEL.look(style)
-            // The one deliberate change (OWNER, variant C, APK 1356): the backdrop is a calm mid graphite, #1E2329,
-            // instead of #12151A. Everything that lights or shades the house below is pinned as before.
-            assertEquals(RenderStyle.srgbToLinear(0x1E / 255f), look.background[0], 0f)
-            assertEquals(RenderStyle.srgbToLinear(0x23 / 255f), look.background[1], 0f)
-            assertEquals(RenderStyle.srgbToLinear(0x29 / 255f), look.background[2], 0f)
+            // The one deliberate change (OWNER, variant C; round D, APK 1357): the backdrop is a calm mid graphite —
+            // skybox input #303740, which the ACES (legacy) curve draws as ≈ #222B36 on screen (measured) — instead of
+            // #12151A. Everything that lights or shades the house below is pinned as before.
+            assertEquals(RenderStyle.srgbToLinear(0x30 / 255f), look.background[0], 0f)
+            assertEquals(RenderStyle.srgbToLinear(0x37 / 255f), look.background[1], 0f)
+            assertEquals(RenderStyle.srgbToLinear(0x40 / 255f), look.background[2], 0f)
             assertEquals(72_000f, look.sunLux, 0f)
             assertEquals(26_000f, look.ambientIntensity, 0f)
             assertTrue(look.shadows)

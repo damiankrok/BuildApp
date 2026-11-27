@@ -1,6 +1,11 @@
 package com.buildplan.preview.ui
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.foundation.border
+import androidx.compose.foundation.selection.selectable
+import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -39,6 +44,7 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -67,6 +73,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.buildplan.preview.R
 import com.buildplan.preview.progress.ConstructionProgressState
 import com.buildplan.preview.progress.ConstructionStageKey
@@ -278,17 +285,22 @@ private fun StageRow(
         StageStatus.NOT_STARTED -> stringResource(R.string.stage_status_not_started)
     }
     val openState = stringResource(if (open) R.string.state_expanded else R.string.state_collapsed)
+    val motion = LocalMotionPolicy.current
+    // The row opens like the editor under it: the well and the chevron settle, they do not snap (round D).
+    val well by animateColorAsState(if (open) Palette.Well else androidx.compose.ui.graphics.Color.Transparent, motion.settle(), label = "stageWell")
+    val turn by animateFloatAsState(if (open) 90f else 0f, motion.settle(), label = "stageChevron")
     Column(
         Modifier
             .fillMaxWidth()
-            .background(if (open) Palette.Well else androidx.compose.ui.graphics.Color.Transparent),
+            .background(well),
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .heightIn(min = 56.dp)
                 .clickable(role = Role.Button, onClick = onToggle)
-                .semantics(mergeDescendants = true) { stateDescription = openState }
+                // The status is spoken once: from its visible word where there is one, in the state where there is not.
+                .semantics(mergeDescendants = true) { stateDescription = if (stage.status == StageStatus.NOT_STARTED) "$state, $openState" else openState }
                 .padding(horizontal = Space.l, vertical = Space.s),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(Space.m),
@@ -302,16 +314,19 @@ private fun StageRow(
                     color = Palette.Ink,
                     fontWeight = if (stage.status == StageStatus.IN_PROGRESS) androidx.compose.ui.text.font.FontWeight.SemiBold else null,
                 )
-                Text(state, style = MaterialTheme.typography.bodySmall, color = Palette.InkMuted)
+                // A stage not started says nothing: its empty mark and the spoken state carry it (no wall of
+                // "Nierozpoczęty"); done and in-progress stages say so in words.
+                if (stage.status != StageStatus.NOT_STARTED) {
+                    Text(state, style = MaterialTheme.typography.bodySmall, color = Palette.InkMuted)
+                }
             }
             Icon(
                 ShellIcons.chevronRight,
                 contentDescription = null,
                 tint = Palette.InkMuted,
-                modifier = Modifier.size(Sizes.iconSmall).rotate(if (open) 90f else 0f),
+                modifier = Modifier.size(Sizes.iconSmall).rotate(turn),
             )
         }
-        val motion = LocalMotionPolicy.current
         AnimatedVisibility(visible = open, enter = motion.foldEnter(), exit = motion.foldExit()) {
             Column(Modifier.fillMaxWidth().padding(start = Space.l, end = Space.l, bottom = Space.l), verticalArrangement = Arrangement.spacedBy(Space.m)) {
                 if (!hasGeometry) {
@@ -337,7 +352,8 @@ private fun StageRow(
 @Composable
 private fun CompletionEditor(stage: ConstructionStageProgress, progress: ProgressViewModel) {
     val saved = StageProgressMetric.percentOf(stage.completion)
-    var draft by remember(stage.stageId, saved) { mutableIntStateOf(saved) }
+    // Saveable: an unsaved draft survives a scroll of the list and a turn of the phone (round D).
+    var draft by rememberSaveable(stage.stageId, saved) { mutableIntStateOf(saved) }
     val changed = draft != saved
     Column(verticalArrangement = Arrangement.spacedBy(Space.s)) {
         Row(verticalAlignment = Alignment.CenterVertically) {
@@ -348,6 +364,30 @@ private fun CompletionEditor(stage: ConstructionStageProgress, progress: Progres
             Text(StageProgressMetric.format(draft), style = Measure.inline, color = Palette.Ink, modifier = Modifier.semantics { stateDescription = "$draft%" })
         }
         CompletionTrack(draft / 100f, steps = 19)
+        // A quarter at a tap; the ±5 steps below for the rest. Nothing is saved until "Zapisz".
+        Row(horizontalArrangement = Arrangement.spacedBy(Space.xs), modifier = Modifier.fillMaxWidth().selectableGroup()) {
+            for (quick in listOf(0, 25, 50, 75, 100)) {
+                val chosen = draft == quick
+                val shape = RoundedCornerShape(Radius.pill)
+                Box(
+                    Modifier
+                        .weight(1f)
+                        .heightIn(min = Sizes.touch)
+                        .background(if (chosen) Palette.AccentWash else Palette.CardFill, shape)
+                        .border(if (chosen) 1.5.dp else 1.dp, if (chosen) Palette.Accent else Palette.GlassRimHigh, shape)
+                        .selectable(selected = chosen, onClick = { draft = quick }, role = Role.RadioButton),
+                    contentAlignment = Alignment.Center,
+                ) {
+                    // Chosen is said by more than colour: a heavier figure in the accent ink, and the radio state.
+                    Text(
+                        StageProgressMetric.format(quick),
+                        style = Measure.numeral.copy(fontSize = if (chosen) 17.sp else 15.sp),
+                        color = if (chosen) Palette.Accent else Palette.Ink,
+                        textDecoration = if (chosen) androidx.compose.ui.text.style.TextDecoration.Underline else null,
+                    )
+                }
+            }
+        }
         Row(horizontalArrangement = Arrangement.spacedBy(Space.s), verticalAlignment = Alignment.CenterVertically) {
             val less = stringResource(R.string.stage_completion_less)
             val more = stringResource(R.string.stage_completion_more)
@@ -361,9 +401,11 @@ private fun CompletionEditor(stage: ConstructionStageProgress, progress: Progres
             }
         }
         if (changed) {
-            InkButton(stringResource(R.string.stage_completion_save, StageProgressMetric.format(draft)), onClick = { progress.setCompletion(stage.stageId, draft / 100.0) })
+            val host = LocalView.current
+            InkButton(stringResource(R.string.stage_completion_save, StageProgressMetric.format(draft)), onClick = { progress.setCompletion(stage.stageId, draft / 100.0).confirm(host) })
         }
-        Text(stringResource(R.string.stage_completion_hint), style = MaterialTheme.typography.bodySmall, color = Palette.InkMuted)
+        // Said only where it matters: at 100 %, which does not close the stage by itself.
+        if (draft == 100) Text(stringResource(R.string.stage_completion_hint), style = MaterialTheme.typography.bodySmall, color = Palette.InkMuted)
     }
 }
 
@@ -444,16 +486,28 @@ private fun StageActions(
     onShowInModel: (ConstructionStageKey?) -> Unit,
 ) {
     var confirmReset by remember { mutableStateOf(false) }
+    val host = LocalView.current
     val other = view.stages.firstOrNull { it.status == StageStatus.IN_PROGRESS && it.stageId != stage.stageId }
     FlowRow(horizontalArrangement = Arrangement.spacedBy(Space.s), verticalArrangement = Arrangement.spacedBy(Space.s)) {
         if (editable) {
             when (stage.status) {
                 StageStatus.NOT_STARTED -> {
-                    InkButton(stringResource(R.string.stage_make_current), onClick = { progress.startStage(stage.stageId) }, enabled = other == null)
-                    LineButton(stringResource(R.string.stage_mark_done), onClick = { progress.markDone(stage.stageId) })
+                    InkButton(stringResource(R.string.stage_make_current), onClick = { progress.startStage(stage.stageId).confirm(host) }, enabled = other == null)
+                    LineButton(stringResource(R.string.stage_mark_done), onClick = { progress.markDone(stage.stageId).confirm(host) })
                 }
                 StageStatus.IN_PROGRESS -> {
-                    InkButton(stringResource(R.string.stage_mark_done), onClick = { progress.markDone(stage.stageId) })
+                    // Finishing a stage and starting the next is one deliberate action, the common one (round D);
+                    // finishing alone stays beside it for the last stage or a planned gap.
+                    val next = view.stages.filter { it.order > stage.order && it.status == StageStatus.NOT_STARTED }.minByOrNull { it.order }
+                    if (next != null) {
+                        val nextName = next.stageKey?.let { stringResource(it.labelRes()) } ?: next.definitionKey
+                        InkButton(stringResource(R.string.stage_finish_and_start, nextName), onClick = {
+                            if (progress.markDone(stage.stageId) == EditOutcome.Saved) progress.startStage(next.stageId).confirm(host)
+                        })
+                        LineButton(stringResource(R.string.stage_mark_done), onClick = { progress.markDone(stage.stageId).confirm(host) })
+                    } else {
+                        InkButton(stringResource(R.string.stage_mark_done), onClick = { progress.markDone(stage.stageId).confirm(host) })
+                    }
                     // Everything before the current stage finished, in one deliberate edit that says how many it touches.
                     val earlier = view.stages.count { it.order < stage.order && it.status != StageStatus.DONE }
                     if (earlier > 0) {
@@ -534,3 +588,14 @@ private const val HEADER_ITEMS = 2
 
 /** How many characters before the limit the task field starts counting them. */
 private const val TASK_COUNTER_FROM = 40
+
+/**
+ * One confirm tick when a deliberate edit was kept (round D): the finger feels the save land. Never for browsing,
+ * scrolling or a refused edit.
+ */
+private fun EditOutcome.confirm(host: android.view.View) {
+    if (this != EditOutcome.Saved) return
+    host.performHapticFeedback(
+        if (android.os.Build.VERSION.SDK_INT >= 30) android.view.HapticFeedbackConstants.CONFIRM else android.view.HapticFeedbackConstants.VIRTUAL_KEY,
+    )
+}

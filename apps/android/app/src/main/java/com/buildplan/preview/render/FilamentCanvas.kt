@@ -50,10 +50,12 @@ class FilamentCanvas(context: Context, val surfaceKind: RenderSurfaceKind = Rend
     private var destroyed = false
 
     /**
-     * Called once per frame, before drawing, to advance camera and state; true when anything it set
-     * changed what the next frame would show.
+     * Called once per frame, before drawing, to advance camera and state; returns how many frames it wants
+     * drawn: 0 when nothing it set changed the picture, [SETTLE_FRAMES] after a change that must land, 1 for
+     * a step of a continuous motion that will ask again (the idle turn: settling three frames after every
+     * 30 ms step would draw at the display's full rate after all).
      */
-    var onFrame: ((Long) -> Boolean)? = null
+    var onFrame: ((Long) -> Int)? = null
 
     /**
      * Frames still to draw (APK 1356). Drawing is on demand: a change of camera, viewer state, surface
@@ -62,6 +64,21 @@ class FilamentCanvas(context: Context, val surfaceKind: RenderSurfaceKind = Rend
      * the surface keeps showing its last frame. Until 1355 every vsync drew the whole scene, idle or not.
      */
     private var pendingFrames = SETTLE_FRAMES
+
+    private var slowFrames = false
+
+    /**
+     * While the house turns by itself (round D), ask the display for 30 Hz, the most the turn draws, so a
+     * variable-rate panel can drop its refresh rate; back to the default once it stops. Android 11+, SurfaceView.
+     */
+    fun preferSlowFrames(slow: Boolean) {
+        if (slow == slowFrames) return
+        slowFrames = slow
+        if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.R) return
+        val surface = (view as? SurfaceView)?.holder?.surface ?: return
+        if (!surface.isValid) return
+        surface.setFrameRate(if (slow) SLOW_FRAME_RATE else 0f, android.view.Surface.FRAME_RATE_COMPATIBILITY_DEFAULT)
+    }
 
     /** Ask for the next frames to be drawn: something the picture depends on changed outside [onFrame]. */
     fun requestRender() {
@@ -73,7 +90,8 @@ class FilamentCanvas(context: Context, val surfaceKind: RenderSurfaceKind = Rend
             if (destroyed) return
             choreographer.postFrameCallback(this)
             diagnostics.frameCallbacks.incrementAndGet()
-            if (onFrame?.invoke(frameTimeNanos) == true) pendingFrames = SETTLE_FRAMES
+            val wanted = onFrame?.invoke(frameTimeNanos) ?: 0
+            if (wanted > pendingFrames) pendingFrames = wanted
             if (pendingFrames <= 0) {
                 diagnostics.framesIdle.incrementAndGet()
                 return
@@ -166,11 +184,14 @@ class FilamentCanvas(context: Context, val surfaceKind: RenderSurfaceKind = Rend
         Log.i(RenderDiagnostics.TAG, "canvas destroyed: ${diagnostics.summary()}")
     }
 
-    private companion object {
+    companion object {
         /** How many frames a change draws: one, and two more for a frame skipped by pacing or still queued. */
         const val SETTLE_FRAMES = 3
 
+        /** The frame rate asked for while the house turns by itself. */
+        private const val SLOW_FRAME_RATE = 30f
+
         /** A summary line every few seconds of drawing is enough to follow a session in logcat. */
-        const val LOG_EVERY_FRAMES = 300L
+        private const val LOG_EVERY_FRAMES = 300L
     }
 }

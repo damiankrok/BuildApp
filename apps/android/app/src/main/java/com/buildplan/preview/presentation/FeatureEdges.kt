@@ -450,6 +450,17 @@ class FeatureEdgeSet(
      * take the highlight) its members' own groups stand in, each drawn by the
      * per-object rule. Either way exactly the same lines are on screen.
      */
+    /**
+     * The groups that outline [objectId] alone while [visible] objects are shown, in every tier: the
+     * selection's own outline in a look that inks nothing else (MODEL, round D). The same per-object rule
+     * as [drawn], so a seam against a visible partner stays undrawn.
+     */
+    fun outlineOf(objectId: String, visible: Set<String>): List<Int> {
+        if (objectId !in visible) return emptyList()
+        val own = byObject[objectId] ?: return emptyList()
+        return own.filter { g -> g.partners.none { it in visible } }.map { groupIndex.getValue(it) }
+    }
+
     fun drawn(visible: Set<String>, tiers: Set<EdgeTier>, selected: String?): DrawnEdges {
         val merged = LinkedHashSet<Int>()
         val single = LinkedHashSet<Int>()

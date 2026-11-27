@@ -53,6 +53,12 @@ object Palette {
     /** Secondary text (8.4:1 on the ground). */
     val InkMuted = Color(0xFFAEB7C2)
 
+    /**
+     * Muted words on the light resting glass of a tile or a pill (round D): a step brighter than [InkMuted], so a
+     * caption keeps ≈ 5:1 even where the glass lies over the palest wall of the house.
+     */
+    val InkMutedOnGlass = Color(0xFFC3CBD4)
+
     /** Metadata (6:1 on the ground); never for a label a person must read to act. */
     val InkFaint = Color(0xFF8E98A4)
 
@@ -79,25 +85,29 @@ object Palette {
     /**
      * Matte glass over the model: a smoky translucent tint. Not a blur — the model is drawn
      * by Filament on its own surface, which the window cannot sample (see [GlassSurface]).
+     * Round D: 88 % (was 78 %), so muted words on it keep 4.5:1 over every look's backdrop (HouseLooksTest).
      */
-    val Glass = Color(0xD01A2027)
+    val Glass = Color(0xE02A3038)
 
     /**
      * The same glass, thicker, for a panel that carries rows of text over the house: the model
      * still shows through as shape and light, but its edges no longer run behind the words.
      */
-    val GlassDense = Color(0xEB1A2027)
+    val GlassDense = Color(0xF01D2329)
 
     /** A card's or chip's resting fill on glass: a breath lighter, so four cards read as four. */
     val CardFill = Color(0x0FFFFFFF)
 
     /** The sheen across the top of the glass, fading out by its middle. */
-    val GlassSheen = Color(0x14FFFFFF)
+    val GlassSheen = Color(0x17FFFFFF)
 
     /** A pane over another pane, or a surface carrying a long list: glass is a one-layer material. */
     val GlassOpaque = Color(0xF2161B21)
-    val GlassRimHigh = Color(0x38FFFFFF)
+    val GlassRimHigh = Color(0x4DFFFFFF)
     val GlassRimLow = Color(0x0AFFFFFF)
+
+    /** The 1 dp dark line round every piece of glass: it keeps the glass a separate object over a pale wall. */
+    val GlassContact = Color(0x59000000)
 
     /** The soft depth under a piece of glass. */
     val GlassShadow = Color(0xCC000000)
@@ -145,8 +155,8 @@ object Sizes {
 
 /** The soft depth under glass, by how far the piece floats above the house. */
 object Depth {
-    val tile = 10.dp
-    val panel = 18.dp
+    val tile = 6.dp
+    val panel = 16.dp
 }
 
 /** The rule's own face: condensed, tabular numerals for measured values. */

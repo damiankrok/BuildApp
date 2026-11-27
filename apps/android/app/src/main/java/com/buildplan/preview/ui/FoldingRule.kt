@@ -20,6 +20,7 @@ import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.foundation.systemGestureExclusion
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.semantics.CustomAccessibilityAction
@@ -94,9 +95,12 @@ fun FoldingRule(
         Modifier
     } else {
         Modifier
+            // A drag along the axis at the screen's edge is the axis's, not the system's Back (round D).
+            .systemGestureExclusion()
             .pointerInput(stopCount) {
                 awaitEachGesture {
-                    val down = awaitFirstDown(requireUnconsumed = false)
+                    // A touch something above already took (a panel not yet live) is not a scrub (round D).
+                    val down = awaitFirstDown()
                     down.consume()
                     var last = stopAt(down.position.x, size.width.toFloat(), stopCount, density)
                     haptics.performHapticFeedback(HapticFeedbackType.TextHandleMove)
@@ -104,7 +108,7 @@ fun FoldingRule(
                     while (true) {
                         val event = awaitPointerEvent()
                         val change = event.changes.firstOrNull { it.id == down.id } ?: break
-                        if (!change.pressed) break
+                        if (!change.pressed || change.isConsumed) break
                         change.consume()
                         val at = stopAt(change.position.x, size.width.toFloat(), stopCount, density)
                         if (at != last) {

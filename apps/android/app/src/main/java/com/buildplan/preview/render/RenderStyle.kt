@@ -195,7 +195,8 @@ enum class RenderStyle(val label: String, val description: String) {
             GeometryPart.RAILING_RAIL to Entry(hex(0x3a3d42), roughness = 0.5f, metallic = 0.6f),
             GeometryPart.RAILING_INFILL to Entry(hex(0x9ec7e6), alpha = 0.45f, roughness = 0.2f),
             GeometryPart.CHIMNEY to Entry(hex(0x9c5f4a), roughness = 0.9f, acceptsModelMaterial = true),
-            GeometryPart.ROOM_FLOOR to Entry(hex(0x3fa7a0), alpha = 0.28f, roughness = 1f),
+            // A neutral warm grey (round D): teal read as the mint that marks a chosen element.
+            GeometryPart.ROOM_FLOOR to Entry(hex(0xa7a196), alpha = 0.22f, roughness = 1f),
             GeometryPart.STAIR_PLACEHOLDER to Entry(hex(0xe0a24d), alpha = 0.5f, roughness = 1f),
             GeometryPart.STAIR_STEP to Entry(hex(0xb9b3a8), roughness = 0.9f, acceptsModelMaterial = true),
             GeometryPart.SURFACE_REGION to Entry(hex(0x9a7a4a), roughness = 0.85f, acceptsModelMaterial = true),
@@ -294,10 +295,22 @@ object ArchitecturalPalette {
     }
 }
 
-/** The highlight of the selected object: an unmistakable emissive blue. */
+/**
+ * The highlight of the selected object (round D): the chrome's one accent, mint #7FE3C4, so the 3D and the
+ * chrome speak one language. A low glow tints the element and keeps its light and shade (until APK 1356 an
+ * emissive blue of 0.95 flattened a selected roof into one pale shape); its own feature edges, inked mint,
+ * draw the outline.
+ */
 object Selection {
-    val EMISSIVE = floatArrayOf(0.13f, 0.42f, 0.95f)
+    /** Mint in linear light at about a sixth of its strength: a tint over the element's own light and shade. */
+    val EMISSIVE = floatArrayOf(0.035f, 0.13f, 0.095f)
 
-    /** The colour of the box drawn around the selection. */
-    val OUTLINE = floatArrayOf(0.62f, 0.82f, 1.0f, 0.95f)
+    /** Mint in linear light, premultiplied, opaque: the selected element's own edges in MODEL. */
+    val EDGE_INK = floatArrayOf(0.212f, 0.768f, 0.552f, 1.0f)
+
+    /** The box drawn instead, only around an element with no edges of its own (a pane): mint, premultiplied. */
+    val OUTLINE = floatArrayOf(0.212f * 0.7f, 0.768f * 0.7f, 0.552f * 0.7f, 0.7f)
+
+    /** How far back the selected element's faces are pushed in depth so its own edges draw over them. */
+    const val DEPTH_OFFSET = 1f
 }

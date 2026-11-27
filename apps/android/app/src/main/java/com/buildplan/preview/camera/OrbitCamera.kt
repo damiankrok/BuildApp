@@ -80,6 +80,22 @@ class OrbitCamera(
         clamp(pose.copy(distance = pose.distance * factor))
 
     /**
+     * A pinch toward the fingers (round D): zoom by [factor], then pan so that the point of the focus plane under
+     * the fingers stays under them. [offsetXPx], [offsetYPx]: the fingers' midpoint from the centre of the drawn
+     * frame (screen axes, y down); [frameScale]: the frame's uniform scale ([ContentFrame.scale]). The factor used
+     * is the one the clamp allowed, so a pinch at the distance limit does not slide the house sideways.
+     */
+    fun zoomAt(pose: OrbitPose, factor: Double, offsetXPx: Double, offsetYPx: Double, frameScale: Double, viewportHeightPx: Int): OrbitPose {
+        val zoomed = zoom(pose, factor)
+        val wpp = worldPerPixel(pose, viewportHeightPx)
+        if (wpp <= 0.0 || frameScale <= 0.0 || pose.distance <= 0.0 || offsetXPx.isNaN() || offsetYPx.isNaN()) return zoomed
+        val applied = zoomed.distance / pose.distance
+        val k = (1.0 - applied) * wpp / frameScale
+        val b = basis(pose)
+        return zoomed.copy(pan = zoomed.pan + b.right * (offsetXPx * k) + b.up * (-offsetYPx * k))
+    }
+
+    /**
      * World units covered by one screen pixel at the focus plane.
      *
      * The same in both projections by construction: the orthographic extent is
@@ -343,8 +359,11 @@ class OrbitCamera(
     }
 
     companion object {
-        /** Never let the house turn over; still allows a true plan view. */
-        const val MIN_PITCH = -85.0
+        /**
+         * Never let the house turn over; a little below level at most (round D): far enough to look up at the
+         * eaves, never under the slabs, where the ground and its shadow have no underside.
+         */
+        const val MIN_PITCH = -10.0
         const val MAX_PITCH = 89.0
 
         /** A three-quarter view that reads as a building rather than a facade. */

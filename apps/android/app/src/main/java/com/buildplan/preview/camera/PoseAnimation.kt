@@ -17,10 +17,24 @@ object PoseAnimation {
     /** Short enough never to feel like waiting. */
     const val DURATION_MS = 320L
 
-    /** Smoothstep: no abrupt start, no overshoot. */
+    /** The longest a camera move takes: a half turn to the far side of the house. */
+    const val LONGEST_MS = 600L
+
+    /**
+     * How long a move takes (round D): a small adjustment the short [DURATION_MS], a half turn round the house up to
+     * [LONGEST_MS] — a fixed 320 ms whipped a 180° "Z tyłu" round at over 800°/s.
+     */
+    fun durationFor(from: OrbitPose, to: OrbitPose): Long {
+        val turn = kotlin.math.abs(shortestTurn(from.yawDeg, to.yawDeg)) / 180.0
+        val tilt = kotlin.math.abs(to.pitchDeg - from.pitchDeg) / 90.0
+        val share = kotlin.math.max(turn, tilt).coerceIn(0.0, 1.0)
+        return DURATION_MS + ((LONGEST_MS - DURATION_MS) * share).toLong()
+    }
+
+    /** Ease in and out (cubic): no abrupt start, no overshoot, a gentler middle than smoothstep for long turns. */
     fun ease(t: Double): Double {
         val x = clamp(t, 0.0, 1.0)
-        return x * x * (3.0 - 2.0 * x)
+        return if (x < 0.5) 4.0 * x * x * x else 1.0 - Math.pow(-2.0 * x + 2.0, 3.0) / 2.0
     }
 
     /**

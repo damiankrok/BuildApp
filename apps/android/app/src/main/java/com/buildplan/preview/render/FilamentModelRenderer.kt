@@ -8,6 +8,7 @@ import com.buildplan.preview.camera.OrbitPose
 import com.buildplan.preview.camera.Projection
 import com.buildplan.preview.math.Bounds
 import com.buildplan.preview.math.Vec3
+import com.buildplan.preview.presentation.ContactShadow
 import com.buildplan.preview.presentation.FeatureEdgeSet
 import com.buildplan.preview.presentation.GroundFootprint
 import com.buildplan.preview.presentation.PresentationLook
@@ -21,6 +22,7 @@ import com.buildplan.preview.scene.TangentFrames
 import com.buildplan.preview.scene.ViewerState
 import com.google.android.filament.Box
 import com.google.android.filament.Camera
+import com.google.android.filament.ColorGrading
 import com.google.android.filament.Engine
 import com.google.android.filament.EntityManager
 import com.google.android.filament.Fence
@@ -34,6 +36,7 @@ import com.google.android.filament.Renderer
 import com.google.android.filament.Scene
 import com.google.android.filament.Skybox
 import com.google.android.filament.SwapChain
+import com.google.android.filament.ToneMapper
 import com.google.android.filament.VertexBuffer
 import com.google.android.filament.View
 import com.google.android.filament.Viewport
@@ -90,6 +93,7 @@ class FilamentModelRenderer(
     private val opaqueMaterial: Material = loadMaterial("materials/technical.filamat")
     private val translucentMaterial: Material = loadMaterial("materials/translucent.filamat")
     private val lineMaterial: Material = loadMaterial("materials/line.filamat")
+    private val colorGrading: ColorGrading = ColorGrading.Builder().toneMapper(ToneMapper.ACESLegacy()).build(engine)
 
     private var sunEntity: Int = 0
     private var indirectLight: IndirectLight? = null
@@ -119,6 +123,13 @@ class FilamentModelRenderer(
     /** The ground sheet: uploaded with the grid, in the scene only in a look that lays it. */
     private var ground: GroundEntity? = null
     private var groundShown = false
+    /** The contact shadow (round D): uploaded with the model, in the scene only in MODEL. */
+    private var contact: ContactShadowEntity? = null
+    private var contactShown = false
+    /** The ground line (round D): in the scene only in a parallel view seen level from a side (an elevation). */
+    private var groundLines: List<LineEntity> = emptyList()
+    /** Which of [groundLines] is in the scene, or −1. */
+    private var groundLineShown = -1
     private var selectionBox: LineEntity? = null
 
     private var currentState: ViewerState? = null
@@ -164,10 +175,13 @@ class FilamentModelRenderer(
         }
         setAmbientOcclusion(PresentationLook.model(RenderStyle.CONSTRUCTION))
         view.setShadowingEnabled(true)
-        view.dynamicResolutionOptions = View.DynamicResolutionOptions().apply {
-            enabled = true
-            quality = View.QualityLevel.MEDIUM
-        }
+        // Full resolution, always (round D). Render on demand draws a still house for seconds or minutes
+        // from its last few frames; with dynamic resolution that last frame kept whatever scale the burst
+        // ended at, so the same pose looked crisp once and soft the next time, and the slow turn pulsed.
+        view.dynamicResolutionOptions = View.DynamicResolutionOptions().apply { enabled = false }
+        // The tone curve, named rather than inherited from the engine's default, so the look (and the
+        // measured backdrop) cannot change with a Filament upgrade. The same curve as before: ACES (legacy).
+        view.colorGrading = colorGrading
         view.blendMode = View.BlendMode.OPAQUE
     }
 
@@ -184,6 +198,8 @@ class FilamentModelRenderer(
         view.ambientOcclusionOptions = View.AmbientOcclusionOptions().apply {
             enabled = ao != null
             quality = View.QualityLevel.LOW
+            // Half-resolution occlusion, upsampled edge-aware: no blotches along the reveals (round D).
+            upsampling = View.QualityLevel.HIGH
             intensity = ao?.intensity ?: 0f
             radius = ao?.radius ?: 0.35f
             power = ao?.power ?: 1f
@@ -266,6 +282,13 @@ class FilamentModelRenderer(
             // keeps the front facade lit and still gives the sides relief.
             .direction(sunDirection[0], sunDirection[1], sunDirection[2])
             .castShadows(true)
+            // No perspective warp of the shadow map: it would change with every step of an orbit or the
+            // idle turn and make the chimneys' shadow edges crawl (round D). The map is fitted to the
+            // house, which does not change while it turns.
+            .shadowOptions(LightManager.ShadowOptions().apply {
+                mapSize = 2048
+                lispsm = false
+            })
             .sunAngularRadius(1.2f)
             .build(engine, sunEntity)
         filamentScene.addEntity(sunEntity)
@@ -291,6 +314,11 @@ class FilamentModelRenderer(
         // Uploaded once with the grid; the first state's look decides whether it is in the scene.
         ground = GroundEntity.build(engine, opaqueMaterial, footprint)
         groundShown = false
+        contact = ContactShadow.of(scene)?.let { ContactShadowEntity.build(engine, lineMaterial, it) }
+        contactShown = false
+        groundLines = if (scene.bounds.isEmpty) emptyList() else LineEntity.groundLines(engine, lineMaterial, scene.bounds, footprint.gridY)
+        groundLineShown = -1
+        lastCamera = null
         selectionBox = LineEntity.box(engine, lineMaterial, Selection.OUTLINE)
         // In the scene only while the viewer asks for it (variant C: off at the start).
         gridShown = false
@@ -332,14 +360,25 @@ class FilamentModelRenderer(
             gridShown = state.grid
         }
 
+
         // Restricted to what was actually uploaded, so the scene can only
         // ever be asked to show entities that exist.
         val visible = state.visibleObjectIds(scene) intersect scene.renderableObjectIds
-        if (visible != visibleNow) {
+        // A stage preview can hide the selected element while keeping it selected: its outline must go too.
+        val visibleChanged = visible != visibleNow
+        if (visibleChanged) {
             for (id in visibleNow - visible) entities.byId[id]?.surfaces?.forEach { filamentScene.removeEntity(it) }
             for (id in visible - visibleNow) entities.byId[id]?.surfaces?.forEach { filamentScene.addEntity(it) }
             visibleNow = visible
             diagnostics.visibleObjects = visible.count { entities.byId[it] != null }
+        }
+
+        // The contact shadow: MODEL only, and only while what is shown stands over (nearly) the whole footprint —
+        // never the shadow of hidden parts (an isolated wall, the attic alone, a stage before the foundations).
+        val wantsContact = mode == PresentationMode.MODEL && contact?.shape?.covers(visible) == true
+        if (wantsContact != contactShown) {
+            contact?.let { if (wantsContact) filamentScene.addEntity(it.entity) else filamentScene.removeEntity(it.entity) }
+            contactShown = wantsContact
         }
 
         val overlays = entities.overlaysFor(visible, mode, state.selectedObjectId)
@@ -349,11 +388,15 @@ class FilamentModelRenderer(
             overlaysNow = overlays
         }
 
-        if (previous?.selectedObjectId != state.selectedObjectId || lookChanged) {
+        val selectionChanged = previous?.selectedObjectId != state.selectedObjectId
+        if (selectionChanged || lookChanged) {
             previous?.selectedObjectId?.let { entities.byId[it]?.setSelected(false) }
             state.selectedObjectId?.let { entities.byId[it]?.setSelected(true) }
             entities.inkEdges(look, state.selectedObjectId)
-            updateSelectionBox(scene, state.selectedObjectId, visible)
+        }
+        if (selectionChanged || lookChanged || visibleChanged) {
+            val selected = state.selectedObjectId
+            updateSelectionBox(scene, selected?.takeUnless { entities.outlines(it, overlays) }, visible)
         }
 
         currentState = state
@@ -381,6 +424,27 @@ class FilamentModelRenderer(
         val key = CameraKey(orbit, pose, insets, viewportWidth, viewportHeight)
         if (key == lastCamera) return false
         lastCamera = key
+        // Presentation from the camera alone: the ground line belongs to an elevation, a level parallel view. It
+        // fades in over the last few degrees towards level, so a hand orbit never makes it pop in or out.
+        val level = if (pose.projection == Projection.ORTHOGRAPHIC) {
+            val t = (1.0 - kotlin.math.abs(pose.pitchDeg) / ELEVATION_PITCH_DEG).coerceIn(0.0, 1.0)
+            (t * t * (3.0 - 2.0 * t)).toFloat()
+        } else {
+            0f
+        }
+        if (groundLines.size == GROUND_EDGES) {
+            // Only the stroke along the edge that faces the camera: the near foot of the house, never a second line
+            // behind it a few degrees off level.
+            val d = orbit.direction(pose)
+            val facing = intArrayOf(0, 1, 2, 3).maxByOrNull { i -> GROUND_NORMALS[i * 2] * d.x + GROUND_NORMALS[i * 2 + 1] * d.z } ?: 0
+            val wanted = if (level > 0.01f) facing else -1
+            if (wanted >= 0) groundLines[wanted].setColor(LineEntity.groundInk(level))
+            if (wanted != groundLineShown) {
+                if (groundLineShown >= 0) filamentScene.removeEntity(groundLines[groundLineShown].entity)
+                if (wanted >= 0) filamentScene.addEntity(groundLines[wanted].entity)
+                groundLineShown = wanted
+            }
+        }
         val eye = orbit.eye(pose)
         val target = pose.target
         val up = orbit.basis(pose).up
@@ -497,6 +561,15 @@ class FilamentModelRenderer(
         ground?.let { filamentScene.removeEntity(it.entity); it.destroy(engine) }
         ground = null
         groundShown = false
+        contact?.let { filamentScene.removeEntity(it.entity); it.destroy(engine) }
+        contact = null
+        contactShown = false
+        for (line in groundLines) {
+            filamentScene.removeEntity(line.entity)
+            line.destroy(engine)
+        }
+        groundLines = emptyList()
+        groundLineShown = -1
         selectionBox?.let { filamentScene.removeEntity(it.entity); it.destroy(engine) }
         selectionBox = null
         visibleNow = emptySet()
@@ -516,6 +589,7 @@ class FilamentModelRenderer(
         engine.destroyMaterial(translucentMaterial)
         engine.destroyMaterial(lineMaterial)
         engine.destroyView(view)
+        engine.destroyColorGrading(colorGrading)
         engine.destroyScene(filamentScene)
         engine.destroyRenderer(renderer)
         engine.destroyCameraComponent(cameraEntity)
@@ -527,6 +601,13 @@ class FilamentModelRenderer(
     companion object {
         /** The technical viewport ground of MODEL, in linear space. */
         val BACKGROUND: FloatArray = PresentationLook.MODEL_BACKGROUND
+
+        /** A parallel view within this much of level is an elevation, and gets its ground line. */
+        const val ELEVATION_PITCH_DEG = 5.0
+
+        /** The ground strokes: along the plan box's −Z, +Z, −X and +X edges, with their outward normals (x, z). */
+        const val GROUND_EDGES = 4
+        private val GROUND_NORMALS = doubleArrayOf(0.0, -1.0, 0.0, 1.0, -1.0, 0.0, 1.0, 0.0)
     }
 }
 
@@ -589,6 +670,9 @@ class ObjectEntity(
     /** Per part, the look's own emissive (lit glazing), given back when the selection leaves. */
     private val ownEmissive = FloatArray(instances.size * 3)
 
+    /** Per part, the look's own depth offset (NaN: none is set — glazing), given back when the selection leaves. */
+    private val ownDepthOffset = FloatArray(instances.size) { Float.NaN }
+
     private var selected = false
 
     /**
@@ -614,6 +698,16 @@ class ObjectEntity(
         else target.setParameter("emissive", red, green, blue)
     }
 
+    /**
+     * Record opaque part [i]'s depth offset for the look being applied, and write it — pushed back at least
+     * [Selection.DEPTH_OFFSET] while selected, so the element's own edges draw over its faces.
+     */
+    fun setOwnDepthOffset(i: Int, target: MaterialInstance, offset: Float) {
+        ownDepthOffset[i] = offset
+        val o = if (selected) max(offset, Selection.DEPTH_OFFSET) else offset
+        target.setPolygonOffset(o, o)
+    }
+
     fun setSelected(selected: Boolean) {
         this.selected = selected
         for (i in instances.indices) {
@@ -622,6 +716,11 @@ class ObjectEntity(
             val b = if (selected) Selection.EMISSIVE[2] else ownEmissive[i * 3 + 2]
             instances[i].setParameter("emissive", r, g, b)
             seeThrough[i]?.setParameter("emissive", r, g, b)
+            val own = ownDepthOffset[i]
+            if (!own.isNaN()) {
+                val o = if (selected) max(own, Selection.DEPTH_OFFSET) else own
+                instances[i].setPolygonOffset(o, o)
+            }
         }
         val e = if (selected) Selection.EMISSIVE else ZERO
         cover?.instance?.setParameter("emissive", e[0], e[1], e[2])
@@ -695,8 +794,18 @@ class ModelEntities(
             val drawn = edges.drawn(visible, tiers, selected)
             for (i in drawn.merged) mergedEdges[i]?.let { out.add(it.entity) }
             for (i in drawn.perObject) objectEdges[i]?.let { out.add(it.entity) }
+        } else if (selected != null) {
+            // A look that inks nothing still outlines the selection with its own edges (round D).
+            for (i in edges.outlineOf(selected, visible)) objectEdges[i]?.let { out.add(it.entity) }
         }
         return out
+    }
+
+    /** Whether [overlays] draw any edge of [objectId] itself: then it needs no box around it. */
+    fun outlines(objectId: String, overlays: Set<Int>): Boolean {
+        // A roof under its covering keeps the box: its own edges lie beneath the tiles.
+        if (byId[objectId]?.cover?.entity?.let { it in overlays } == true) return false
+        return edges.groups.indices.any { i -> edges.groups[i].objectId == objectId && objectEdges[i]?.entity?.let { it in overlays } == true }
     }
 
     /** Line ink for a look: the selected object's own groups take the highlight. */
@@ -729,7 +838,7 @@ class ModelEntities(
                 instance.setParameter("metallic", a.metallic)
                 instance.setParameter("reflectance", a.reflectance)
                 entity.setOwnEmissive(i, instance, a.emissiveRed, a.emissiveGreen, a.emissiveBlue)
-                if (opaquePart && !mode.seeThrough) instance.setPolygonOffset(look.surfaceDepthOffset, look.surfaceDepthOffset)
+                if (opaquePart && !mode.seeThrough) entity.setOwnDepthOffset(i, instance, look.surfaceDepthOffset)
             }
             entity.translucent?.let { glass ->
                 val ri = rm.getInstance(glass)
@@ -1014,6 +1123,31 @@ class LineEntity(
             return create(engine, material, points.toFloatArray(), PresentationLook.MODEL_GRID, gridBounds)
         }
 
+        /**
+         * The ground line of the elevations (round D): one long stroke at the floor along each of the four edges
+         * of the house's plan box, three times its extent, each its own renderable. Seen from a side in a parallel
+         * view, the one along the edge facing the camera is the architect's ground line under the house's foot.
+         */
+        fun groundLines(engine: Engine, material: Material, scene: Bounds, y: Double): List<LineEntity> {
+            val c = scene.center
+            val hx = (scene.max.x - scene.min.x) * 1.5
+            val hz = (scene.max.z - scene.min.z) * 1.5
+            val yf = y.toFloat()
+            val strokes = listOf(scene.min.z, scene.max.z).map { z ->
+                floatArrayOf((c.x - hx).toFloat(), yf, z.toFloat(), (c.x + hx).toFloat(), yf, z.toFloat())
+            } + listOf(scene.min.x, scene.max.x).map { x ->
+                floatArrayOf(x.toFloat(), yf, (c.z - hz).toFloat(), x.toFloat(), yf, (c.z + hz).toFloat())
+            }
+            val bounds = Bounds(Vec3(c.x - hx, y - 0.1, c.z - hz), Vec3(c.x + hx, y + 0.1, c.z + hz))
+            return strokes.map { create(engine, material, it, GROUND_LINE_INK, bounds) }
+        }
+
+        /** The ground line's ink: the chrome's faint ink, in linear light, premultiplied at 45 %. */
+        private val GROUND_LINE_INK = floatArrayOf(0.27f * 0.45f, 0.31f * 0.45f, 0.37f * 0.45f, 0.45f)
+
+        /** The ground line's ink at [share] of its strength (premultiplied, so every channel scales). */
+        fun groundInk(share: Float): FloatArray = FloatArray(4) { GROUND_LINE_INK[it] * share }
+
         private fun create(engine: Engine, material: Material, data: FloatArray, color: FloatArray, bounds: Bounds, guide: Boolean = true): LineEntity {
             val vertexCount = data.size / 3
             val vb = VertexBuffer.Builder()
@@ -1051,6 +1185,66 @@ class LineEntity(
             return LineEntity(entity, vb, ib, instance)
         }
 
+    }
+}
+
+/**
+ * The contact shadow (round D, [ContactShadow]): the stacked outlines in one unlit, translucent renderable,
+ * drawn before the glazing and the guides. Presentation, like the grid: not in the pick map, casts and
+ * receives nothing, and only enters the scene in MODEL.
+ */
+class ContactShadowEntity(
+    val entity: Int,
+    /** The shape it was built from: whose shadow it is ([ContactShadow.Shape.covers]). */
+    val shape: ContactShadow.Shape,
+    private val vertexBuffer: VertexBuffer,
+    private val indexBuffer: IndexBuffer,
+    private val instance: MaterialInstance,
+) {
+    fun destroy(engine: Engine) {
+        engine.renderableManager.destroy(entity)
+        engine.destroyVertexBuffer(vertexBuffer)
+        engine.destroyIndexBuffer(indexBuffer)
+        engine.destroyMaterialInstance(instance)
+        EntityManager.get().destroy(entity)
+    }
+
+    companion object {
+        fun build(engine: Engine, material: Material, shape: ContactShadow.Shape): ContactShadowEntity {
+            val positions = shape.positions()
+            val vertexCount = positions.size / 3
+            val vb = VertexBuffer.Builder()
+                .bufferCount(1)
+                .vertexCount(vertexCount)
+                .attribute(VertexBuffer.VertexAttribute.POSITION, 0, VertexBuffer.AttributeType.FLOAT3, 0, 12)
+                .build(engine)
+            vb.setBufferAt(engine, 0, ModelEntities.directFloats(positions))
+            val index = shape.indices()
+            val indices = ByteBuffer.allocateDirect(index.size * 4).order(ByteOrder.nativeOrder())
+            indices.asIntBuffer().put(index)
+            indices.rewind()
+            val ib = IndexBuffer.Builder()
+                .indexCount(index.size)
+                .bufferType(IndexBuffer.Builder.IndexType.UINT)
+                .build(engine)
+            ib.setBuffer(engine, indices)
+
+            val instance = material.createInstance()
+            // Premultiplied black: each outline darkens what is under it by the same share.
+            instance.setParameter("baseColor", 0f, 0f, 0f, ContactShadow.ALPHA_PER_RING)
+
+            val entity = EntityManager.get().create()
+            RenderableManager.Builder(1)
+                .boundingBox(ModelEntities.boxOf(shape.bounds))
+                .geometry(0, RenderableManager.PrimitiveType.TRIANGLES, vb, ib, 0, index.size)
+                .material(0, instance)
+                .castShadows(false)
+                .receiveShadows(false)
+                // Before the glazing (4) and the lines (6, 7): the ground is the farthest thing.
+                .priority(3)
+                .build(engine, entity)
+            return ContactShadowEntity(entity, shape, vb, ib, instance)
+        }
     }
 }
 

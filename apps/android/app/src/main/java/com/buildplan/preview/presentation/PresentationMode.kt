@@ -1,6 +1,7 @@
 package com.buildplan.preview.presentation
 
 import com.buildplan.preview.render.RenderStyle
+import com.buildplan.preview.render.Selection
 import com.buildplan.preview.render.SurfaceAppearance
 import com.buildplan.preview.scene.BundleMaterial
 import com.buildplan.preview.scene.BundleStyling
@@ -194,14 +195,15 @@ class PresentationLook(
 
         /**
          * The ground and backdrop of MODEL: a calm mid graphite (OWNER, variant C), a step lighter than the
-         * app's own ground, so the smoky glass over it reads as a material and not as a hole. Until APK 1355
-         * it was #12151A, the darkest thing on screen; only the backdrop moved — the house's light, shadows
-         * and materials are exactly as before.
+         * app's own ground, so the smoky glass over it reads as a material and not as a hole. This is the skybox
+         * INPUT: the view's tone curve (ACES legacy, named in `FilamentModelRenderer`'s ColorGrading) draws #303740
+         * as ≈ #222B36 on screen (round D, measured; the 1356 input #1E2329 rendered as #0F141A). Until APK 1355 it
+         * was #12151A; only the backdrop moved — the house's light, shadows and materials are exactly as before.
          */
         val MODEL_BACKGROUND = floatArrayOf(
-            RenderStyle.srgbToLinear(0x1E / 255f),
-            RenderStyle.srgbToLinear(0x23 / 255f),
-            RenderStyle.srgbToLinear(0x29 / 255f),
+            RenderStyle.srgbToLinear(0x30 / 255f),
+            RenderStyle.srgbToLinear(0x37 / 255f),
+            RenderStyle.srgbToLinear(0x40 / 255f),
         )
         val MODEL_GRID = floatArrayOf(
             RenderStyle.srgbToLinear(0.29f),
@@ -212,7 +214,7 @@ class PresentationLook(
         const val MODEL_SUN_LUX = 72_000f
         const val MODEL_AMBIENT = 26_000f
 
-        /** MODEL: the pre-existing presentation, per style. Nothing inked, glass as before. */
+        /** MODEL: the pre-existing presentation, per style. Nothing inked but the selection, glass as before. */
         fun model(style: RenderStyle) = PresentationLook(
             background = MODEL_BACKGROUND,
             sunLux = MODEL_SUN_LUX,
@@ -221,7 +223,8 @@ class PresentationLook(
             ambientOcclusion = if (style.ambientOcclusion) AmbientOcclusion(style.ambientOcclusionIntensity, 0.35f, 1.0f) else null,
             fxaa = false,
             edgeInk = floatArrayOf(0f, 0f, 0f, 0f),
-            selectedEdgeInk = floatArrayOf(0f, 0f, 0f, 0f),
+            // Nothing is inked but the selection: its own edges, in the accent (round D).
+            selectedEdgeInk = Selection.EDGE_INK,
             grid = MODEL_GRID,
             surfaceDepthOffset = 0f,
             glassShadows = true,
@@ -241,7 +244,7 @@ class PresentationLook(
             ambientOcclusion = AmbientOcclusion(intensity = 0.9f, radius = 0.45f, power = 1.2f),
             fxaa = true,
             edgeInk = premultiplied(0.05f, 0.055f, 0.06f, 0.70f),
-            selectedEdgeInk = premultiplied(0.13f, 0.42f, 0.95f, 0.95f),
+            selectedEdgeInk = Selection.EDGE_INK,
             grid = premultiplied(0.30f, 0.30f, 0.29f, 0.35f),
             surfaceDepthOffset = 1f,
             glassShadows = false,
@@ -261,7 +264,7 @@ class PresentationLook(
             ambientOcclusion = null,
             fxaa = true,
             edgeInk = premultiplied(0.02f, 0.022f, 0.026f, 0.88f),
-            selectedEdgeInk = premultiplied(0.13f, 0.42f, 0.95f, 1.0f),
+            selectedEdgeInk = Selection.EDGE_INK,
             grid = premultiplied(0.45f, 0.45f, 0.45f, 0.30f),
             surfaceDepthOffset = 1f,
             glassShadows = false,

@@ -90,7 +90,9 @@ fun InkButton(
             Icon(icon, contentDescription = null, modifier = Modifier.size(Sizes.iconSmall))
             Box(Modifier.size(Space.s))
         }
-        Text(text, style = MaterialTheme.typography.labelLarge, maxLines = 1, overflow = TextOverflow.Ellipsis)
+        // Two lines before an ellipsis, like LineButton: "Zakończ i zacznij: Instalacja elektryczna" at large text
+        // must not lose the name it is about (round D).
+        Text(text, style = MaterialTheme.typography.labelLarge, maxLines = 2, overflow = TextOverflow.Ellipsis, textAlign = androidx.compose.ui.text.style.TextAlign.Center)
     }
 }
 
@@ -227,7 +229,7 @@ fun PanelOption(
     enabled: Boolean = true,
 ) {
     val motion = LocalMotionPolicy.current
-    val mark by animateColorAsState(if (selected) Palette.Ink else Palette.RuleEmpty, motion.settle(), label = "optionMark")
+    val mark by animateColorAsState(if (selected) Palette.Accent else Palette.RuleEmpty, motion.settle(), label = "optionMark")
     Row(
         modifier = modifier
             .fillMaxWidth()

@@ -168,7 +168,8 @@ class CameraGestureTest {
         assertTrue(s.tracker.isCameraGesture)
 
         // The up event reports the finger 40 px further on, as a flick often does.
-        assertEquals(none, s.frame(at(1, 700, 1200, pressed = false)))
+        // Neither a tap nor a camera step: at most the speed it was released at (round D's glide).
+        assertTrue(s.frame(at(1, 700, 1200, pressed = false)).all { it is CameraGestureAction.Fling })
         assertFalse(s.tracker.isTracking)
 
         // The next touch starts clean. Landing somewhere else is not a movement.
@@ -397,7 +398,7 @@ class CameraGestureTest {
         }
         assertEquals(-(160.0 - s.slopPx) * s.degreesPerPx, orbit.yaw(), 1e-6)
         assertEquals(0.0, orbit.pitch(), 1e-12)
-        assertEquals(none, s.release())
+        assertTrue(s.release().all { it is CameraGestureAction.Fling })
     }
 
     @Test
@@ -658,5 +659,37 @@ class CameraGestureTest {
         assertEquals(none, step(at(4, 340, 1080))) // 2 → 1
         repeat(10) { k -> step(at(4, 340, 1080 + 5 * (k + 1))) } // orbit: the target stays panned
         assertEquals(panned, pose.target)
+    }
+
+    @Test
+    fun `round D - a flick released while moving reports its speed, a placed release does not`() {
+        val screen = Screen()
+        screen.frame(at(1, 300, 1000))
+        var x = 300
+        for (i in 0 until 12) { x += 40; screen.frame(at(1, x, 1000)) }
+        val flick = screen.release(dtMs = 10).filterIsInstance<CameraGestureAction.Fling>().single()
+        // 40 px every 16 ms, right: the camera's yaw goes the other way at 40 px × degrees/px ÷ 16 ms.
+        assertEquals(-40 * screen.degreesPerPx / 0.016, flick.yawDegPerS, 1e-6)
+        assertEquals(0.0, flick.pitchDegPerS, 0.0)
+
+        val placed = Screen()
+        placed.frame(at(1, 300, 1000))
+        x = 300
+        for (i in 0 until 12) { x += 40; placed.frame(at(1, x, 1000)) }
+        // The finger rests before it lifts: no glide.
+        placed.frame(at(1, x, 1000), dtMs = 120)
+        assertTrue(placed.release().none { it is CameraGestureAction.Fling })
+    }
+
+    @Test
+    fun `round D - a tap or a pinch never flings`() {
+        val tap = Screen()
+        tap.frame(at(1, 300, 1000))
+        assertTrue(tap.release().none { it is CameraGestureAction.Fling })
+        val pinch = Screen()
+        pinch.frame(at(1, 300, 1000), at(2, 700, 1000))
+        var d = 0
+        for (i in 0 until 8) { d += 30; pinch.frame(at(1, 300 - d, 1000), at(2, 700 + d, 1000)) }
+        assertTrue(pinch.release().none { it is CameraGestureAction.Fling })
     }
 }
